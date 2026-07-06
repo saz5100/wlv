@@ -101,7 +101,7 @@
 
 {# ===== PANEL 1: BY TOPIC VIEW ===== #}
 <div id="panel-by-topic" class="view-panel active">
-  <h2 class="section-title">🔧 Component 1 — Computer Systems</h2>
+  <h2 class="section-title">📖 Reading & Writing</h2>
   <div class="topic-grid" id="topic-grid-c1">
   {% for topic in topics %}
     {% if topic.component == 1 %}
@@ -126,7 +126,7 @@
   {% endfor %}
   </div>
 
-  <h2 class="section-title" style="margin-top:32px;">📝 Component 2 — Computational Thinking</h2>
+  <h2 class="section-title" style="margin-top:32px;">📝 SPaG & Language Skills</h2>
   <div class="topic-grid" id="topic-grid-c2">
   {% for topic in topics %}
     {% if topic.component == 2 %}
@@ -157,8 +157,8 @@
   <!-- Component filter pills -->
   <div class="filter-pills">
     <button class="filter-pill active" data-comp="all" onclick="filterLessons('all')">🏴 All Components</button>
-    <button class="filter-pill" data-comp="1" onclick="filterLessons('1')">🔧 Component 1 — Systems</button>
-    <button class="filter-pill" data-comp="2" onclick="filterLessons('2')">📝 Component 2 — Thinking</button>
+    <button class="filter-pill" data-comp="1" onclick="filterLessons('1')">📖 Reading & Writing</button>
+    <button class="filter-pill" data-comp="2" onclick="filterLessons('2')">📝 SPaG & Language</button>
   </div>
   
   {% if all_lessons %}
