@@ -318,14 +318,14 @@ function toggleProgressHelp() {
     {% endif %}
 </div>
 
-{# ─── Component Summary ─── #}
+{# ─── Topic Summary ─── #}
 {% if component_data and component_data|length > 0 %}
-<div class="section-title">&#128202; Component Overview</div>
+<div class="section-title">&#128202; Topic Overview</div>
 <div class="component-grid">
     {% for c in component_data %}
     {% set c_pct = (c.mastered / c.total_questions * 100)|round if c.total_questions > 0 else 0 %}
     <div class="component-card">
-        <div class="comp-header">Component {{ c.component }}</div>
+        <div class="comp-header">Topic {{ c.component }}</div>
         <div class="comp-sub">{{ c.mastered }} / {{ c.total_questions }} mastered</div>
         <div class="progress-bar-track comp-bar">
             <div class="progress-bar-fill {% if c_pct >= 75 %}gold{% elif c_pct >= 50 %}silver{% else %}bronze{% endif %}" style="width:{{ c_pct }}%"></div>
