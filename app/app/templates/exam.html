@@ -278,11 +278,11 @@ function startQF() {
 }
 </script>
 
-        {# Mark My Paper #}
+        {# Writing Practice #}
         <div class="mode-card">
             <div class="mode-icon">📄✏️</div>
-            <div class="mode-title">Mark My Paper</div>
-            <div class="mode-desc">Upload a completed past paper (PDF) — the system marks it, checks your answers, gives you a grade, and flags weak topics.</div>
+            <div class="mode-title">Writing Practice</div>
+            <div class="mode-desc">Write a timed response to a practice question. Choose from language analysis, creative writing, or SPaG tasks.</div>
             <div class="mode-features">✓ Upload PDF · ✓ Automatic marking · ✓ Grade + feedback · ✓ Weak spot analysis</div>
             <a href="/mark-my-paper" class="btn btn-primary">📤 Upload &amp; Mark</a>
         </div>
@@ -303,8 +303,8 @@ function startQF() {
                     <option value="spag">SPaG</option>
                 </select>
                 <select id="esMarks" style="padding:6px 10px;border-radius:8px;border:1px solid var(--c-border);background:var(--c-bg);color:var(--c-text);font-size:13px;">
-                    <option value="6">6-mark Analysis</option>
-                    <option value="8">8-mark Evaluation</option>
+                    <option value="6">Short Answer</option>
+                    <option value="8">Extended Writing</option>
                 </select>
             </div>
             <a href="/exam-style" class="btn btn-primary" id="esStart" onclick="return startExamStyle()">✍️ Start Practice</a>
