@@ -17,6 +17,14 @@ from database import execute_async, query_async, query_one_async, init_db, get_e
 
 router = APIRouter()
 
+VERSION = os.environ.get("WLV_VERSION", "v0.1")
+
+# ─── Version API ───
+
+@router.get("/api/current-version")
+async def current_version():
+    return {"version": VERSION}
+
 # ─── PostgreSQL connection for KB ───
 PG_DSN = os.environ.get("WLV_PG_DSN", "dbname=wlv_kb user=wlv_app password=wlv_kb_2026 host=localhost port=5432 client_encoding=utf8")
 

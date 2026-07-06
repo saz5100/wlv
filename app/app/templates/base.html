@@ -6,28 +6,54 @@
     <title>{% block title %}WLV — University of Wolverhampton{% endblock %}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body { padding-top: 56px; }
-        .navbar-brand { font-weight: 700; letter-spacing: -0.5px; }
-        .topic-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); transition: all 0.2s; }
-        .nav-link { font-weight: 500; }
-        .nav-link:hover { opacity: 0.85; }
-        footer { margin-top: 3rem; padding: 1.5rem 0; background: #f8f9fa; }
+        :root {
+            --wlv-yellow: #FFD100;
+            --wlv-black: #1a1a1a;
+            --wlv-dark: #2d2d2d;
+            --wlv-accent: #e6b800;
+        }
+        body { padding-top: 56px; background: #fafafa; }
+        .navbar-wlv { background: var(--wlv-black) !important; border-bottom: 3px solid var(--wlv-yellow); }
+        .navbar-brand { font-weight: 800; letter-spacing: -0.5px; color: var(--wlv-yellow) !important; }
+        .navbar-brand small { font-weight: 400; font-size: 0.65rem; color: #aaa; display: block; line-height: 1; }
+        .nav-link { font-weight: 500; color: rgba(255,255,255,0.85) !important; }
+        .nav-link:hover, .nav-link.active { color: var(--wlv-yellow) !important; }
+        .topic-card { border-radius: 12px; transition: all 0.2s; cursor: pointer; }
+        .topic-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.12) !important; }
+        .topic-card .card-body { padding: 1.5rem; }
+        .topic-card .card-title { font-weight: 600; font-size: 1rem; }
+        .topic-card .card-text { font-size: 0.85rem; color: #666; }
+        footer { margin-top: 3rem; padding: 1.5rem 0; background: var(--wlv-black); color: rgba(255,255,255,0.6); }
+        footer a { color: var(--wlv-yellow); }
+        .version-badge { background: var(--wlv-yellow); color: var(--wlv-black); font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; margin-left: 8px; vertical-align: middle; }
+        .wlv-section-title { border-left: 4px solid var(--wlv-yellow); padding-left: 12px; margin: 1.5rem 0 1rem; }
+        .card { border-radius: 12px; overflow: hidden; }
+        .btn-wlv { background: var(--wlv-yellow); color: var(--wlv-black); font-weight: 600; border: none; }
+        .btn-wlv:hover { background: var(--wlv-accent); color: var(--wlv-black); }
+        .accordion-button:not(.collapsed) { background: rgba(255,209,0,0.1); color: var(--wlv-black); }
+        .accordion-button:focus { box-shadow: 0 0 0 0.25rem rgba(255,209,0,0.25); }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #dc3545;">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-wlv">
         <div class="container">
-            <a class="navbar-brand" href="/">WLV — University of Wolverhampton</a>
+            <a class="navbar-brand" href="/">
+                WLV <small>University of Wolverhampton</small>
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
-            <li class="nav-item"><a class="nav-link" href="/academic-skills">Academic Skills</a></li>
-            <li class="nav-item"><a class="nav-link" href="/subject-knowledge">Subject Knowledge</a></li>
-            <li class="nav-item"><a class="nav-link" href="/professional-practice">Professional Practice</a></li>
+                    <li class="nav-item"><a class="nav-link {% if active == 'home' %}active{% endif %}" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link {% if active == 'lessons' %}active{% endif %}" href="/lessons">Lessons</a></li>
+                    <li class="nav-item"><a class="nav-link {% if active == 'quiz' %}active{% endif %}" href="/quiz">Quiz</a></li>
+                    <li class="nav-item"><a class="nav-link {% if active == 'tutor' %}active{% endif %}" href="/tutor">Tutor</a></li>
+                    <li class="nav-item"><a class="nav-link {% if active == 'codelab' %}active{% endif %}" href="/codelab">Practice Lab</a></li>
+                    <li class="nav-item"><a class="nav-link {% if active == 'languages' %}active{% endif %}" href="/languages">SPaG Guide</a></li>
+                    <li class="nav-item"><a class="nav-link {% if active == 'trace_tables' %}active{% endif %}" href="/trace_tables">Exam Strategy</a></li>
                 </ul>
-
+                <span class="version-badge" id="version-badge">v0.1</span>
             </div>
         </div>
     </nav>
@@ -37,15 +63,15 @@
     </main>
 
     <footer>
-        <div class="container text-center text-muted">
-            <small>WLV — University of Wolverhampton &mdash; Revision Platform</small>
+        <div class="container text-center">
+            <small>WLV — University of Wolverhampton &mdash; English Equivalency Revision Platform</small>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     {% block scripts %}{% endblock %}
     <script>
-        // Version badge update for toggle projects
+        // Version badge
         if (document.getElementById("version-badge")) {
             fetch("/api/current-version")
                 .then(r => r.json())
