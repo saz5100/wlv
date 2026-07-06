@@ -17,7 +17,7 @@ from database import get_db, query, query_one, execute, query_async, query_one_a
 BASE_DIR = Path(__file__).resolve().parent
 templates = Environment(loader=FileSystemLoader(BASE_DIR / "templates"))
 OWUI_KEY = os.environ.get("OWUI_API_KEY")
-OWUI_MODEL = os.environ.get("OWUI_MODEL", "wlv-computer-science--v3")
+OWUI_MODEL = os.environ.get("OWUI_MODEL", "wlv--v1")
 FALLBACK_SYSTEM_PROMPT = (
     "You are an enthusiastic, technically precise AI tutor for "
     "and terminology. Provide clear, logical explanations suitable "

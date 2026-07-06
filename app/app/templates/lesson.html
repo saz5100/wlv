@@ -1,6 +1,6 @@
 <!-- wlv-cs.lan LESSON TEMPLATE: displays lesson content, quiz questions, Mermaid diagrams, table of contents (ToC), and previous/next lesson navigation. Extends base.html. -->
 {% extends "base.html" %}
-{% block title %}{{ icon }} {{ lesson.title }} &mdash; WLV Computer Science{% endblock %}
+{% block title %}{{ icon }} {{ lesson.title }} &mdash; WLV — University of Wolverhampton{% endblock %}
 {% block head %}
 <!-- ── Inline styles: lesson content typography, quiz options, lesson-nav cards, ToC panel, order/sequence question styles ── -->
 <style>
@@ -1904,7 +1904,7 @@ function startBossBattle(lessonId) {
     document.getElementById('bossSubmitBtn').textContent = 'Submit Answer';
     document.getElementById('bossQuestion').innerHTML = '<p style="color:#94a3b8;text-align:center;">Loading challenge…</p>';
     document.getElementById('bossOptions').innerHTML = '';
-    document.getElementById('bossLessonTitle').textContent = document.title.replace(' — WLV Computer Science', '');
+    document.getElementById('bossLessonTitle').textContent = document.title.replace(' — WLV — University of Wolverhampton', '');
     document.getElementById('bossModal').style.display = 'flex';
     document.body.style.overflow = 'hidden';
 

@@ -1,299 +1,124 @@
 {% extends "base.html" %}
-{% block title %}Resources | WLV Computer Science{% endblock %}
+{% block title %}Resources — WLV — University of Wolverhampton{% endblock %}
 {% block content %}
 <div class="hero">
     <h1>&#128230; Resources</h1>
-    <p class="hero-sub">Downloadable study materials for WLV Computer Science</p>
+    <p class="hero-sub">Downloadable study materials for WLV University Preparation</p>
 </div>
 <style>
 .resource-grid { max-width: 800px; margin: 0 auto; padding: 0 20px 40px; }
-.resource-card {
-    display: flex; gap: 20px;
-    background: rgba(17,24,39,0.88);
-    backdrop-filter: blur(2px);
-    border: 1px solid rgba(34,211,238,0.15);
-    border-radius: var(--r-xl);
-    padding: 28px;
-    margin-bottom: 16px;
-    transition: all 0.3s;
-}
+.resource-card { background: rgba(17,24,39,0.88); backdrop-filter: blur(2px); border: 1px solid rgba(34,211,238,0.10); border-radius: var(--r-xl); padding: 20px 24px; margin-bottom: 14px; display: flex; align-items: flex-start; gap: 16px; transition: all 0.2s; }
 .light-theme .resource-card { background: rgba(255,255,255,0.88); }
-.resource-card:hover {
-    border-color: var(--c-accent);
-    box-shadow: 0 6px 20px var(--c-accent-glow);
-}
-.resource-icon { font-size: 44px; flex-shrink: 0; line-height: 1; }
-.resource-info h3 { margin: 0 0 10px; font-size: 20px; color: var(--c-heading); }
-.resource-info p { margin: 0 0 18px; font-size: 15px; line-height: 1.6; color: var(--c-text-secondary); }
-.section-divider {
-    border: none; height: 1px;
-    background: linear-gradient(to right, transparent, var(--c-accent), transparent);
-    margin: 32px 0 24px; opacity: 0.3;
-}
-.section-title {
-    font-size: 22px; font-weight: 700; color: var(--c-heading);
-    margin: 0 0 16px; padding-bottom: 8px;
-    border-bottom: 2px solid var(--c-accent);
-    display: inline-block;
-}
+.resource-card:hover { border-color: var(--c-accent); box-shadow: 0 4px 20px var(--c-accent-glow); }
+.resource-icon { font-size: 32px; flex-shrink: 0; }
+.resource-info { flex: 1; }
+.resource-title { font-weight: 700; font-size: 16px; color: var(--c-heading); margin-bottom: 4px; }
+.resource-desc { font-size: 13px; color: var(--c-text-secondary); line-height: 1.6; margin-bottom: 8px; }
+.resource-meta { font-size: 12px; color: var(--c-text-muted); }
+.resource-meta span { margin-right: 12px; }
+.resource-btn { margin-top: 6px; }
+.section-divider { border: none; border-top: 1px solid rgba(34,211,238,0.1); margin: 24px 0; }
 </style>
+
 <div class="resource-grid">
-    <div class="resource-card">
-        <div class="resource-icon">&#128195;</div>
-        <div class="resource-info">
-            <h3>Anki Flashcards &mdash; WLV Computer Science</h3>
-            <a href="/static/WLV_CS.apkg" class="btn btn-primary btn-sm">&#128229; Download .apkg</a>
-        </div>
-    </div>
-
-    <div class="resource-card" style="border-color:var(--c-accent);box-shadow:0 0 12px var(--c-accent-glow);">
-        <div class="resource-icon">💻</div>
-        <div class="resource-info">
-            <h3>Interactive Code Lab</h3>
-            <p>An interactive Python practice playground. Write and run actual Python code directly in your browser using Pyodide WebAssembly to solve structured Paper 2 programming challenges.</p>
-            <a href="/codelab" class="btn btn-primary btn-sm">💻 Start Coding</a>
-        </div>
-    </div>
-
-    <div class="section-title">📄 Cheat Sheets</div>
+    <h2 style="font-size: 20px; color: var(--c-heading); margin-bottom: 16px;">📄 Study Guides</h2>
 
     <div class="resource-card">
-        <div class="resource-icon">📄</div>
+        <div class="resource-icon">📘</div>
         <div class="resource-info">
-            <h3>Paper 1 Cheat Sheet — Computer Systems</h3>
-            <p>Complete revision guide covering all 6 Paper 1 topics (1.1-1.6). Includes mnemonics, memory devices, exam technique tips, and quick-reference tables for protocols, conversions, and character sets.</p>
-            <div style="display:flex;gap:10px;flex-wrap:wrap">
-            <a href="/static/paper1-cheat-sheet.html" class="btn btn-primary btn-sm">📖 View (HTML)</a>
-            <a href="/static/paper1-cheat-sheet.pdf" download class="btn btn-primary btn-sm">📥 Download PDF</a>
-        </div>
+            <div class="resource-title">Academic Skills — Complete Guide</div>
+            <div class="resource-desc">Comprehensive guide covering critical reading, note-taking, essay writing, time management, and presentation skills for university success.</div>
+            <div class="resource-meta"><span>📄 PDF</span><span>📏 ~40 pages</span></div>
+            <a href="/static/academic-skills-guide.pdf" class="btn btn-primary btn-sm resource-btn" download>📥 Download</a>
         </div>
     </div>
 
     <div class="resource-card">
-        <div class="resource-icon">📄</div>
+        <div class="resource-icon">📗</div>
         <div class="resource-info">
-            <h3>Paper 2 Cheat Sheet &mdash; Algorithms &amp; Programming</h3>
-            <p>Covers all 5 Paper 2 topics (2.1-2.5): algorithms and computational thinking, programming fundamentals, robust programming, Boolean logic, and translators. Includes OCR pseudocode reference, searching &amp; sorting algorithms, truth tables, and common programming patterns.</p>
-            <div style="display:flex;gap:10px;flex-wrap:wrap">
-            <a href="/static/paper2-cheat-sheet.html" class="btn btn-primary btn-sm">📖 View (HTML)</a>
-            <a href="/static/paper2-cheat-sheet.pdf" download class="btn btn-primary btn-sm">📥 Download PDF</a>
-        </div>
+            <div class="resource-title">Critical Thinking Handbook</div>
+            <div class="resource-desc">Guide to analysing arguments, evaluating evidence, identifying fallacies, and constructing logical arguments. Includes practice exercises.</div>
+            <div class="resource-meta"><span>📄 PDF</span><span>📏 ~30 pages</span></div>
+            <a href="/static/critical-thinking-handbook.pdf" class="btn btn-primary btn-sm resource-btn" download>📥 Download</a>
         </div>
     </div>
 
-    <div class="section-title">📋 Quick References</div>
+    <div class="resource-card">
+        <div class="resource-icon">📙</div>
+        <div class="resource-info">
+            <div class="resource-title">Research Methods Quick Reference</div>
+            <div class="resource-desc">One-page reference covering qualitative vs quantitative methods, data collection techniques, sampling strategies, and ethics.</div>
+            <div class="resource-meta"><span>📄 PDF</span><span>📏 2 pages</span></div>
+            <a href="/static/research-methods-quickref.pdf" class="btn btn-primary btn-sm resource-btn" download>📥 Download</a>
+        </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2 style="font-size: 20px; color: var(--c-heading); margin-bottom: 16px;">📝 Writing Support</h2>
 
     <div class="resource-card">
-            <div class="resource-icon">🧠</div>
+        <div class="resource-icon">✏️</div>
         <div class="resource-info">
-            <h3>Memory Techniques — Mnemonics &amp; Recall Devices</h3>
-            <p>24 memory tricks covering both papers: CPU registers, TCP/IP layers, data types, De Morgan's laws, sorting algorithms, validation checks, and much more. Colour-coded sections, story-method walkthroughs, and a quick-fire self-test table — the same rich format as the care2care memory page.</p>
-            <div style="display:flex;gap:10px;flex-wrap:wrap">
-            <a href="/static/memory-techniques.html" class="btn btn-primary btn-sm">📖 View (HTML)</a>
-            <a href="/static/mnemonics.html" class="btn btn-primary btn-sm">📄 Print-friendly</a>
-            <a href="/static/mnemonics.pdf" download class="btn btn-primary btn-sm">📥 Download PDF</a>
-        </div>
+            <div class="resource-title">Harvard Referencing Guide</div>
+            <div class="resource-desc">Complete guide to Harvard referencing style with examples for books, journals, websites, and more. Includes in-text citation and reference list formatting.</div>
+            <div class="resource-meta"><span>📄 PDF</span><span>📏 4 pages</span></div>
+            <a href="/static/harvard-referencing-guide.pdf" class="btn btn-primary btn-sm resource-btn" download>📥 Download</a>
         </div>
     </div>
 
     <div class="resource-card">
         <div class="resource-icon">📝</div>
         <div class="resource-info">
-            <h3>Exam Command Word Guide</h3>
-            <p>What each exam word actually means — State, Describe, Explain, Compare, Evaluate, Calculate, and more. Includes example answer patterns, typical mark values, PEEL structure, and common mistakes that lose marks.</p>
-            <div style="display:flex;gap:10px;flex-wrap:wrap">
-            <a href="/static/command-words.html" class="btn btn-primary btn-sm">📖 View (HTML)</a>
-            <a href="/static/command-words.pdf" download class="btn btn-primary btn-sm">📥 Download PDF</a>
+            <div class="resource-title">Essay Structure Template</div>
+            <div class="resource-desc">PEEL paragraph structure template with sentence starters for each section. Includes introduction and conclusion frameworks.</div>
+            <div class="resource-meta"><span>📄 PDF</span><span>📏 2 pages</span></div>
+            <a href="/static/essay-structure-template.pdf" class="btn btn-primary btn-sm resource-btn" download>📥 Download</a>
         </div>
+    </div>
+
+    <div class="resource-card">
+        <div class="resource-icon">📋</div>
+        <div class="resource-info">
+            <div class="resource-title">Academic Word List</div>
+            <div class="resource-desc">Essential academic vocabulary for university writing. Covers words for introducing arguments, comparing, contrasting, and concluding.</div>
+            <div class="resource-meta"><span>📄 PDF</span><span>📏 6 pages</span></div>
+            <a href="/static/academic-word-list.pdf" class="btn btn-primary btn-sm resource-btn" download>📥 Download</a>
         </div>
     </div>
 
     <hr class="section-divider">
 
-    <div class="section-title">📕 Topic Quick Reference Cards</div>
+    <h2 style="font-size: 20px; color: var(--c-heading); margin-bottom: 16px;">🔗 Useful Links</h2>
 
     <div class="resource-card">
-        <div class="resource-icon">📕</div>
+        <div class="resource-icon">🌐</div>
         <div class="resource-info">
-            <h3>Paper 1 — Computer Systems</h3>
-            <p>One-page quick reference cards for each Component 1 topic. Key facts, tables, and mnemonics condensed. Print the topic you need.</p>
-            <div style="display:flex;gap:8px;flex-wrap:wrap">
-                <a href="/static/1-1.pdf" download class="btn btn-primary btn-sm">1.1 CPU</a>
-                <a href="/static/1-2.pdf" download class="btn btn-primary btn-sm">1.2 Memory &amp; Storage</a>
-                <a href="/static/1-3.pdf" download class="btn btn-primary btn-sm">1.3 Networks</a>
-                <a href="/static/1-4.pdf" download class="btn btn-primary btn-sm">1.4 Security</a>
-                <a href="/static/1-5.pdf" download class="btn btn-primary btn-sm">1.5 Systems Software</a>
-                <a href="/static/1-6.pdf" download class="btn btn-primary btn-sm">1.6 Ethical &amp; Legal</a>
-            </div>
+            <div class="resource-title">University of Wolverhampton — Study Skills</div>
+            <div class="resource-desc">Official university study skills support page with workshops, resources, and one-to-one appointments.</div>
+            <div class="resource-meta"><span>🔗 External link</span></div>
+            <a href="https://www.wlv.ac.uk/study-skills/" target="_blank" class="btn btn-primary btn-sm resource-btn">🔗 Visit</a>
         </div>
     </div>
 
     <div class="resource-card">
-        <div class="resource-icon">📕</div>
+        <div class="resource-icon">🌐</div>
         <div class="resource-info">
-            <h3>Paper 2 — Algorithms &amp; Programming</h3>
-            <p>One-page quick reference cards for each Component 2 topic. Pseudocode, searching &amp; sorting, Boolean logic, and IDE features.</p>
-            <div style="display:flex;gap:8px;flex-wrap:wrap">
-                <a href="/static/2-1.pdf" download class="btn btn-primary btn-sm">2.1 Algorithms</a>
-                <a href="/static/2-2.pdf" download class="btn btn-primary btn-sm">2.2 Programming</a>
-                <a href="/static/2-3.pdf" download class="btn btn-primary btn-sm">2.3 Robust Programs</a>
-                <a href="/static/2-4.pdf" download class="btn btn-primary btn-sm">2.4 Boolean Logic</a>
-                <a href="/static/2-5.pdf" download class="btn btn-primary btn-sm">2.5 Languages &amp; IDEs</a>
-            </div>
+            <div class="resource-title">WLV Library Services</div>
+            <div class="resource-desc">Access to academic databases, journals, e-books, and referencing tools. Includes subject-specific librarians.</div>
+            <div class="resource-meta"><span>🔗 External link</span></div>
+            <a href="https://www.wlv.ac.uk/library/" target="_blank" class="btn btn-primary btn-sm resource-btn">🔗 Visit</a>
         </div>
     </div>
-
-    <hr class="section-divider">
-
-    <div class="section-title">✏️ Practice Worksheets</div>
 
     <div class="resource-card">
-        <div class="resource-icon">✏️</div>
+        <div class="resource-icon">🌐</div>
         <div class="resource-info">
-            <h3>Binary &amp; Hexadecimal Practice</h3>
-            <p>21 questions covering binary-to-denary, denary-to-binary, binary addition, binary shifts, and hexadecimal conversion. Answers on page 2 for self-marking.</p>
-            <a href="/static/practice-binary-hex.pdf" download class="btn btn-primary btn-sm">📥 Download (PDF, with answers)</a>
+            <div class="resource-title">Cite Them Right — Referencing Guide</div>
+            <div class="resource-desc">Comprehensive online referencing guide covering Harvard, APA, MLA, and other styles. WLV subscribes to this resource.</div>
+            <div class="resource-meta"><span>🔗 External link</span></div>
+            <a href="https://www.citethemrightonline.com/" target="_blank" class="btn btn-primary btn-sm resource-btn">🔗 Visit</a>
         </div>
     </div>
-
-    <hr class="section-divider">
-
-    <div class="section-title">📄 Past Papers — Download PDFs</div>
-
-    <div class="resource-card">
-        <div class="resource-icon">📦</div>
-        <div class="resource-info">
-            <h3>All Past Papers — Browse by Year</h3>
-            <p>16 downloadable PDFs covering 2022–2025, both Papers 1 and 2, with mark schemes. Practise under timed conditions (1hr 30min each), then self-mark using the official schemes. Click a year to expand.</p>
-        </div>
-    </div>
-
-<style>
-.paper-row { max-width:760px; margin:0 auto 4px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; background:rgba(17,24,39,0.88); border:1px solid rgba(34,211,238,0.1); border-radius:10px; padding:10px 16px; transition:border-color 0.2s; }
-.paper-row:hover { border-color:rgba(34,211,238,0.25); }
-.paper-row .label { font-size:14px; font-weight:500; flex:1; min-width:160px; }
-.paper-row .label-q { color:#22d3ee; }
-.paper-row .label-ms { color:#94a3b8; font-size:13px; }
-.paper-row .actions { display:flex; gap:5px; flex-wrap:wrap; }
-.paper-btn { display:inline-block; padding:5px 10px; border-radius:6px; font-size:11px; font-weight:600; text-decoration:none; transition:all 0.2s; cursor:pointer; }
-.btn-view { background:rgba(34,211,238,0.1); color:#67e8f9; border:1px solid rgba(34,211,238,0.18); }
-.btn-view:hover { background:rgba(34,211,238,0.18); }
-.btn-dl { background:rgba(34,211,238,0.05); color:#cbd5e1; border:1px solid rgba(34,211,238,0.1); }
-.btn-dl:hover { background:rgba(34,211,238,0.1); color:#e2e8f0; }
-.year-summary { max-width:760px; margin:0 auto 10px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; cursor:pointer; font-size:17px; font-weight:600; color:#22d3ee; padding:12px 18px; background:rgba(17,24,39,0.88); border:1px solid rgba(34,211,238,0.15); border-radius:12px; user-select:none; }
-.year-summary:hover { border-color:rgba(34,211,238,0.3); }
-.year-summary .count { color:#64748b; font-size:13px; font-weight:400; margin-left:auto; }
-</style>
-
-    <details style="max-width:760px;margin:0 auto 10px;">
-        <summary class="year-summary">📅 May 2025 <span class="count">4 files</span></summary>
-        <div style="padding:0 0 8px;">
-            <div class="paper-row">
-                <span class="label label-q">Paper 1 — Computer Systems</span>
-                <span class="actions">
-                </span>
-            </div>
-            <div class="paper-row">
-                <span class="label label-ms">Paper 1 — Mark Scheme</span>
-                <span class="actions">
-                </span>
-            </div>
-            <div class="paper-row">
-                <span class="label label-q">Paper 2 — Algorithms &amp; Programming</span>
-                <span class="actions">
-                </span>
-            </div>
-            <div class="paper-row">
-                <span class="label label-ms">Paper 2 — Mark Scheme</span>
-                <span class="actions">
-                </span>
-            </div>
-        </div>
-    </details>
-
-    <details style="max-width:760px;margin:0 auto 10px;">
-        <summary class="year-summary">📅 June 2024 <span class="count">4 files</span></summary>
-        <div style="padding:0 0 8px;">
-            <div class="paper-row">
-                <span class="label label-q">Paper 1 — Computer Systems</span>
-                <span class="actions">
-                </span>
-            </div>
-            <div class="paper-row">
-                <span class="label label-ms">Paper 1 — Mark Scheme</span>
-                <span class="actions">
-                </span>
-            </div>
-            <div class="paper-row">
-                <span class="label label-q">Paper 2 — Algorithms &amp; Programming</span>
-                <span class="actions">
-                </span>
-            </div>
-            <div class="paper-row">
-                <span class="label label-ms">Paper 2 — Mark Scheme</span>
-                <span class="actions">
-                </span>
-            </div>
-        </div>
-    </details>
-
-    <details style="max-width:760px;margin:0 auto 10px;">
-        <summary class="year-summary">📅 June 2023 <span class="count">4 files</span></summary>
-        <div style="padding:0 0 8px;">
-            <div class="paper-row">
-                <span class="label label-q">Paper 1 — Computer Systems</span>
-                <span class="actions">
-                </span>
-            </div>
-            <div class="paper-row">
-                <span class="label label-ms">Paper 1 — Mark Scheme</span>
-                <span class="actions">
-                </span>
-            </div>
-            <div class="paper-row">
-                <span class="label label-q">Paper 2 — Algorithms &amp; Programming</span>
-                <span class="actions">
-                </span>
-            </div>
-            <div class="paper-row">
-                <span class="label label-ms">Paper 2 — Mark Scheme</span>
-                <span class="actions">
-                </span>
-            </div>
-        </div>
-    </details>
-
-    <details style="max-width:760px;margin:0 auto 10px;">
-        <summary class="year-summary">📅 June 2022 <span class="count">4 files</span></summary>
-        <div style="padding:0 0 8px;">
-            <div class="paper-row">
-                <span class="label label-q">Paper 1 — Computer Systems</span>
-                <span class="actions">
-                </span>
-            </div>
-            <div class="paper-row">
-                <span class="label label-ms">Paper 1 — Mark Scheme</span>
-                <span class="actions">
-                </span>
-            </div>
-            <div class="paper-row">
-                <span class="label label-q">Paper 2 — Algorithms &amp; Programming</span>
-                <span class="actions">
-                </span>
-            </div>
-            <div class="paper-row">
-                <span class="label label-ms">Paper 2 — Mark Scheme</span>
-                <span class="actions">
-                </span>
-            </div>
-        </div>
-    </details>    <div style="max-width:760px;margin:16px auto 0;padding:14px 18px;background:rgba(34,211,238,0.04);border:1px dashed rgba(34,211,238,0.15);border-radius:10px;font-size:13px;color:#94a3b8;">
-        <strong style="color:#67e8f9;">📎 Still need more?</strong> Additional papers and examiner reports available directly from OCR:
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;">
-            <a href="https://www.physicsandmathstutor.com/past-papers/wlv-computer-science/ocr-paper-1/" target="_blank" class="btn btn-sm" style="background:rgba(34,211,238,0.06);border:1px solid rgba(34,211,238,0.15);padding:6px 12px;border-radius:6px;font-size:12px;color:#cbd5e1;text-decoration:none;">🔗 Physics &amp; Maths Tutor</a>
-            <a href="https://www.savemyexams.com/wlv/computer-science/ocr/past-papers/" target="_blank" class="btn btn-sm" style="background:rgba(34,211,238,0.06);border:1px solid rgba(34,211,238,0.15);padding:6px 12px;border-radius:6px;font-size:12px;color:#cbd5e1;text-decoration:none;">🔗 Save My Exams</a>
-        </div>
-    </div>
-
 </div>
 {% endblock %}

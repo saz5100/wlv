@@ -1,7 +1,7 @@
 {
-  "name": "GCSE Computer Science (OCR J277)",
-  "short_name": "GCSE CS",
-  "description": "Complete OCR J277 revision platform — lessons, quizzes, flashcards, code lab, AI tutor, and past papers",
+  "name": "WLV — University of Wolverhampton",
+  "short_name": "WLV",
+  "description": "University of Wolverhampton preparation platform — academic skills, critical thinking, research methods, and professional practice",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#080b14",
@@ -13,6 +13,9 @@
       "type": "image/png"
     }
   ],
-  "categories": ["education", "reference"],
+  "categories": [
+    "education",
+    "reference"
+  ],
   "lang": "en-GB"
 }

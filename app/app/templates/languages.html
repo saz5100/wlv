@@ -1,628 +1,588 @@
 {% extends "base.html" %}
-{% block title %}Languages & IDEs | WLV Computer Science{% endblock %}
+{% block title %}Academic Writing Guide | WLV — University of Wolverhampton{% endblock %}
 {% block content %}
 <div class="hero" style="padding: 30px 0 15px;">
-    <h1>🔤 Programming Languages & IDEs</h1>
+    <h1>✍️ Academic Writing Guide</h1>
 </div>
 
 <style>
-    .lang-intro {
+    .aw-intro {
         max-width: 960px; margin: 0 auto 20px; padding: 20px 24px;
         background: rgba(17, 24, 39, 0.7); border: 1px solid rgba(34, 211, 238, 0.12);
         border-radius: var(--r-xl); line-height: 1.7; font-size: 14px;
     }
-    .light-theme .lang-intro {
+    .light-theme .aw-intro {
         background: rgba(255, 255, 255, 0.8); border-color: rgba(8, 145, 178, 0.15);
     }
-    .lang-intro h3 { color: var(--c-heading); margin-bottom: 8px; font-size: 17px; }
-    .lang-container { max-width: 960px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+    .aw-intro h3 { color: var(--c-heading); margin-bottom: 8px; font-size: 17px; }
+    .aw-container { max-width: 960px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
 
-    .lang-section {
+    .aw-section {
         background: rgba(17, 24, 39, 0.85); border: 1px solid rgba(34, 211, 238, 0.12);
         border-radius: var(--r-xl); overflow: hidden;
     }
-    .light-theme .lang-section { background: rgba(255, 255, 255, 0.9); border-color: rgba(8, 145, 178, 0.12); }
-    .lang-section-header {
+    .light-theme .aw-section { background: rgba(255, 255, 255, 0.9); border-color: rgba(8, 145, 178, 0.12); }
+    .aw-section-header {
         padding: 14px 20px; background: rgba(8, 11, 20, 0.4);
         border-bottom: 1px solid rgba(34, 211, 238, 0.08);
         font-size: 17px; font-weight: 700; color: var(--c-heading);
         cursor: pointer; user-select: none;
         display: flex; justify-content: space-between; align-items: center;
     }
-    .light-theme .lang-section-header { background: rgba(0, 0, 0, 0.03); }
-    .lang-section-header .toggle-icon { font-size: 14px; color: var(--c-text-secondary); transition: transform 0.2s; }
-    .lang-section-header.open .toggle-icon { transform: rotate(180deg); }
-    .lang-section-body { padding: 20px; display: none; }
-    .lang-section-body.open { display: block; }
+    .light-theme .aw-section-header { background: rgba(0, 0, 0, 0.03); }
+    .aw-section-header .toggle-icon { font-size: 14px; color: var(--c-text-secondary); transition: transform 0.2s; }
+    .aw-section-header.open .toggle-icon { transform: rotate(180deg); }
+    .aw-section-body { padding: 20px; display: none; }
+    .aw-section-body.open { display: block; }
 
-    .lang-table { width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 16px; }
-    .lang-table:last-child { margin-bottom: 0; }
-    .lang-table th {
+    .aw-table { width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 16px; }
+    .aw-table:last-child { margin-bottom: 0; }
+    .aw-table th {
         background: rgba(34, 211, 238, 0.06); color: var(--c-accent);
         padding: 10px 14px; text-align: left; border-bottom: 2px solid var(--c-border); font-weight: 700;
     }
-    .lang-table td {
+    .aw-table td {
         padding: 10px 14px; border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         color: var(--c-text); line-height: 1.5;
     }
-    .light-theme .lang-table td { border-color: rgba(0, 0, 0, 0.04); }
-    .lang-table tr:hover td { background: rgba(34, 211, 238, 0.02); }
-    .lang-table .tag {
+    .light-theme .aw-table td { border-color: rgba(0, 0, 0, 0.04); }
+    .aw-table tr:hover td { background: rgba(34, 211, 238, 0.02); }
+    .aw-table .tag {
         display: inline-block; font-size: 11px; font-weight: 700;
         padding: 2px 8px; border-radius: 99px; margin-right: 4px;
     }
-    .lang-table .tag-green { background: rgba(52, 211, 153, 0.12); color: #34d399; }
-    .lang-table .tag-amber { background: rgba(250, 204, 21, 0.12); color: #facc15; }
-    .lang-table .tag-red { background: rgba(244, 63, 94, 0.12); color: #f43f5e; }
-    .lang-table .tag-purple { background: rgba(168, 85, 247, 0.12); color: #a855f7; }
+    .aw-table .tag-green { background: rgba(52, 211, 153, 0.12); color: #34d399; }
+    .aw-table .tag-amber { background: rgba(250, 204, 21, 0.12); color: #facc15; }
+    .aw-table .tag-red { background: rgba(244, 63, 94, 0.12); color: #f43f5e; }
+    .aw-table .tag-blue { background: rgba(96, 165, 250, 0.12); color: #60a5fa; }
+    .aw-table .tag-purple { background: rgba(168, 85, 247, 0.12); color: #a855f7; }
 
-    .lang-card-grid {
+    .aw-card-grid {
         display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px;
     }
-    .lang-card {
+    .aw-card {
         padding: 16px; border-radius: var(--r-lg);
         border: 1px solid rgba(34, 211, 238, 0.1); background: rgba(8, 11, 20, 0.4);
     }
-    .light-theme .lang-card { background: rgba(0, 0, 0, 0.03); }
-    .lang-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
-    .lang-card p { font-size: 13px; line-height: 1.5; color: var(--c-text-secondary); }
-    .lang-card .card-icon { font-size: 28px; margin-bottom: 6px; display: block; }
+    .light-theme .aw-card { background: rgba(0, 0, 0, 0.03); }
+    .aw-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+    .aw-card p { font-size: 13px; line-height: 1.5; color: var(--c-text-secondary); }
+    .aw-card .card-icon { font-size: 28px; margin-bottom: 6px; display: block; }
 
-    .lang-mnemonic {
+    .aw-tip {
         margin-top: 12px; padding: 10px 14px;
         background: rgba(250, 204, 21, 0.06); border-left: 3px solid #facc15;
         border-radius: 0 var(--r-md) var(--r-md) 0; font-size: 13px; line-height: 1.6;
     }
-    .lang-mnemonic strong { color: #facc15; }
+    .aw-tip strong { color: #facc15; }
 
-    /* ── Quiz Section ── */
-    .lang-quiz-section { margin-top: 40px; padding-top: 32px; border-top: 2px solid var(--c-border); max-width: 960px; margin-left: auto; margin-right: auto; }
-    .lang-quiz-section h2 { font-size: 22px; color: var(--c-heading); margin-bottom: 4px; }
-    .lang-quiz-section .quiz-sub { font-size: 13px; color: var(--c-text-secondary); margin-bottom: 20px; }
-    .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 8px; }
-    .quiz-progress-bar { height: 6px; background: var(--c-border); border-radius: 3px; flex: 1; min-width: 100px; max-width: 400px; }
-    .quiz-progress-fill { height: 100%; background: var(--c-accent); border-radius: 3px; transition: width 0.3s ease; }
-    .quiz-score-running { font-size: 14px; color: var(--c-text-secondary); font-weight: 500; }
-    .quiz-tab { display: none; }
-    .quiz-tab.active { display: block; }
-    .quiz-counter { text-align: center; font-size: 14px; font-weight: 700; color: var(--c-accent); margin: 8px 0 16px; letter-spacing: 1px; }
-    .quiz-nav { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 20px 0 12px; }
-    .quiz-nav-btn { padding: 8px 16px; border-radius: 8px; border: 1px solid var(--c-border); background: rgba(17,24,39,0.88); color: var(--c-text); font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.15s; white-space: nowrap; }
-    .light-theme .quiz-nav-btn { background: rgba(243,244,246,0.88); }
-    .quiz-nav-btn:hover { border-color: var(--c-accent); }
-    .quiz-nav-btn:disabled { opacity: 0.3; cursor: default; }
-    .quiz-dots { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
-    .quiz-dot { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; cursor: pointer; background: rgba(17,24,39,0.6); border: 2px solid var(--c-border); color: var(--c-text-secondary); transition: all 0.15s; }
-    .light-theme .quiz-dot { background: rgba(243,244,246,0.6); }
-    .quiz-dot:hover { border-color: var(--c-accent); color: var(--c-text); }
-    .quiz-dot.active { border-color: var(--c-accent); background: var(--c-accent); color: #000; }
-    .quiz-dot.answered { border-color: var(--c-green); background: rgba(52,211,153,0.15); color: var(--c-green); }
-    .lang-quiz-question { margin-bottom: 20px; padding: 18px 20px; background: rgba(13,18,37,0.8); border-radius: var(--r-xl); border: 1px solid rgba(34,211,238,0.10); }
-    .light-theme .lang-quiz-question { background: rgba(243,244,246,0.8); }
-    .lang-quiz-q { font-weight: 600; font-size: 15px; margin-bottom: 12px; color: var(--c-text); }
-    .lang-quiz-opt { display: block; width: 100%; text-align: left; padding: 10px 14px; margin: 5px 0; background: rgba(17,24,39,0.88); color: var(--c-text); border: 2px solid var(--c-border); border-radius: 10px; font-size: 14px; cursor: pointer; transition: all 0.15s; }
-    .light-theme .lang-quiz-opt { background: rgba(255,255,255,0.88); }
-    .lang-quiz-opt:hover { border-color: var(--c-accent); }
-    .lang-quiz-opt.selected { border-color: var(--c-accent); background: rgba(8,41,73,0.85); }
-    .light-theme .lang-quiz-opt.selected { background: rgba(236,254,255,0.85); }
-    .lang-quiz-opt.correct { border-color: var(--c-green); background: rgba(2,44,34,0.75); color: var(--c-green); }
-    .lang-quiz-opt.incorrect { border-color: var(--c-rose); background: rgba(69,10,10,0.75); color: var(--c-rose); }
-    .lang-quiz-exp { display: none; margin-top: 10px; padding: 10px 14px; background: rgba(8,41,73,0.7); border-radius: 8px; font-size: 13px; border-left: 3px solid var(--c-accent); line-height: 1.5; }
-    .light-theme .lang-quiz-exp { background: rgba(236,254,255,0.7); }
-    .lang-quiz-exp.show { display: block; }
-    .lang-quiz-score { margin-top: 20px; padding: 16px; border-radius: 12px; text-align: center; border: 2px solid var(--c-green); background: rgba(2,44,34,0.3); font-size: 18px; font-weight: 700; display: none; }
-    .light-theme .lang-quiz-score { background: rgba(240,253,244,0.5); }
-    .lang-quiz-score.show { display: block; }
+    .aw-example {
+        margin-top: 10px; padding: 12px 16px;
+        background: rgba(52, 211, 153, 0.06); border-left: 3px solid #34d399;
+        border-radius: 0 var(--r-md) var(--r-md) 0; font-size: 13px; line-height: 1.6;
+    }
+    .aw-example strong { color: #34d399; }
 
-    /* ── Key Terminology ── */
-    .lang-terms-section { margin-top: 40px; padding-top: 32px; border-top: 2px solid var(--c-border); max-width: 960px; margin-left: auto; margin-right: auto; }
-    .lang-terms-section h2 { font-size: 22px; color: var(--c-heading); margin-bottom: 4px; }
-    .lang-terms-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; margin-top: 16px; }
-    .lang-term-card { padding: 14px 16px; border-radius: var(--r-lg); border: 1px solid rgba(34,211,238,0.1); background: rgba(8,11,20,0.4); }
-    .light-theme .lang-term-card { background: rgba(0,0,0,0.03); }
-    .lang-term-card .term-badge { display: inline-block; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 99px; background: rgba(168,85,247,0.12); color: #a855f7; border: 1px solid rgba(168,85,247,0.15); margin-bottom: 6px; }
-    .lang-term-card .term-def { font-size: 13px; color: var(--c-text-secondary); line-height: 1.5; }
+    .aw-warning {
+        margin-top: 10px; padding: 12px 16px;
+        background: rgba(244, 63, 94, 0.06); border-left: 3px solid #f43f5e;
+        border-radius: 0 var(--r-md) var(--r-md) 0; font-size: 13px; line-height: 1.6;
+    }
+    .aw-warning strong { color: #f43f5e; }
 
-    /* ── Podcast ── */
-    .lang-podcast { max-width: 960px; margin: 32px auto 0; padding: 16px 20px; background: rgba(34,211,238,0.04); border: 1px solid rgba(34,211,238,0.12); border-radius: 12px; }
-    .lang-podcast .podcast-header { font-size: 15px; font-weight: 600; color: var(--c-accent); margin-bottom: 10px; }
-    .lang-podcast audio { border-radius: 8px; background: rgba(17,24,39,0.6); width: 100%; }
-    .light-theme .lang-podcast audio { background: rgba(243,244,246,0.6); }
+    .aw-steps {
+        list-style: none; padding: 0; margin: 12px 0;
+    }
+    .aw-steps li {
+        padding: 8px 0 8px 28px; position: relative;
+        font-size: 14px; line-height: 1.5; color: var(--c-text);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+    .light-theme .aw-steps li { border-color: rgba(0, 0, 0, 0.04); }
+    .aw-steps li:last-child { border-bottom: none; }
+    .aw-steps li::before {
+        content: attr(data-step); position: absolute; left: 0;
+        font-weight: 700; color: var(--c-accent); font-size: 13px;
+    }
 
-    /* ── Match Exercise ── */
-    .lang-match-section { margin-top: 40px; padding-top: 32px; border-top: 2px solid var(--c-border); max-width: 960px; margin-left: auto; margin-right: auto; }
-    .lang-match-section h2 { font-size: 22px; color: var(--c-heading); margin-bottom: 4px; }
-    .lang-match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
-    @media (max-width: 600px) { .lang-match-grid { grid-template-columns: 1fr; } }
-    .lang-match-item { padding: 12px 16px; border-radius: var(--r-lg); border: 2px solid var(--c-border); background: rgba(13,18,37,0.8); cursor: pointer; transition: all 0.15s; text-align: center; font-size: 14px; font-weight: 600; }
-    .light-theme .lang-match-item { background: rgba(243,244,246,0.8); }
-    .lang-match-item:hover { border-color: var(--c-accent); }
-    .lang-match-item.selected { border-color: var(--c-accent); background: rgba(8,41,73,0.85); }
-    .lang-match-item.matched { border-color: var(--c-green); background: rgba(2,44,34,0.5); color: var(--c-green); cursor: default; }
-    .lang-match-item.wrong { border-color: var(--c-rose); background: rgba(69,10,10,0.5); color: var(--c-rose); animation: shake 0.3s; }
-    @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
-    .lang-match-desc { font-size: 12px; color: var(--c-text-secondary); margin-top: 4px; font-weight: 400; }
+    .aw-peel-grid {
+        display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; margin: 12px 0;
+    }
+    .aw-peel-item {
+        padding: 14px; border-radius: var(--r-lg);
+        border: 1px solid rgba(34, 211, 238, 0.12); background: rgba(8, 11, 20, 0.4);
+        text-align: center;
+    }
+    .light-theme .aw-peel-item { background: rgba(0, 0, 0, 0.03); }
+    .aw-peel-item .peel-letter {
+        display: inline-block; font-size: 24px; font-weight: 800;
+        width: 44px; height: 44px; line-height: 44px; border-radius: 50%;
+        margin-bottom: 6px;
+    }
+    .aw-peel-item .peel-letter.p { background: rgba(52, 211, 153, 0.15); color: #34d399; }
+    .aw-peel-item .peel-letter.e { background: rgba(96, 165, 250, 0.15); color: #60a5fa; }
+    .aw-peel-item .peel-letter.a { background: rgba(250, 204, 21, 0.15); color: #facc15; }
+    .aw-peel-item .peel-letter.l { background: rgba(168, 85, 247, 0.15); color: #a855f7; }
+    .aw-peel-item h5 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+    .aw-peel-item p { font-size: 12px; color: var(--c-text-secondary); line-height: 1.4; margin: 0; }
+
+    .aw-ref-grid {
+        display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; margin: 12px 0;
+    }
+    .aw-ref-card {
+        padding: 14px 16px; border-radius: var(--r-lg);
+        border: 1px solid rgba(34, 211, 238, 0.1); background: rgba(8, 11, 20, 0.4);
+    }
+    .light-theme .aw-ref-card { background: rgba(0, 0, 0, 0.03); }
+    .aw-ref-card .ref-badge {
+        display: inline-block; font-size: 12px; font-weight: 700;
+        padding: 3px 10px; border-radius: 99px;
+        background: rgba(168, 85, 247, 0.12); color: #a855f7;
+        border: 1px solid rgba(168, 85, 247, 0.15); margin-bottom: 6px;
+    }
+    .aw-ref-card .ref-example {
+        font-size: 13px; color: var(--c-text-secondary); line-height: 1.5;
+        font-family: 'Courier New', monospace;
+    }
+
+    .aw-pitfall-list { margin: 12px 0; }
+    .aw-pitfall-item {
+        padding: 12px 16px; margin-bottom: 8px;
+        border-radius: var(--r-lg);
+        border: 1px solid rgba(244, 63, 94, 0.12); background: rgba(244, 63, 94, 0.04);
+    }
+    .light-theme .aw-pitfall-item { background: rgba(244, 63, 94, 0.03); }
+    .aw-pitfall-item h5 { font-size: 14px; font-weight: 700; color: #f43f5e; margin-bottom: 4px; }
+    .aw-pitfall-item p { font-size: 13px; color: var(--c-text-secondary); line-height: 1.5; margin: 0; }
+    .aw-pitfall-item .fix-label {
+        display: inline-block; font-size: 11px; font-weight: 700;
+        padding: 2px 8px; border-radius: 99px;
+        background: rgba(52, 211, 153, 0.12); color: #34d399; margin-top: 6px;
+    }
+
+    .aw-terms-section { margin-top: 40px; padding-top: 32px; border-top: 2px solid var(--c-border); max-width: 960px; margin-left: auto; margin-right: auto; }
+    .aw-terms-section h2 { font-size: 22px; color: var(--c-heading); margin-bottom: 4px; }
+    .aw-terms-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; margin-top: 16px; }
+    .aw-term-card { padding: 14px 16px; border-radius: var(--r-lg); border: 1px solid rgba(34,211,238,0.1); background: rgba(8,11,20,0.4); }
+    .light-theme .aw-term-card { background: rgba(0,0,0,0.03); }
+    .aw-term-card .term-badge { display: inline-block; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 99px; background: rgba(168,85,247,0.12); color: #a855f7; border: 1px solid rgba(168,85,247,0.15); margin-bottom: 6px; }
+    .aw-term-card .term-def { font-size: 13px; color: var(--c-text-secondary); line-height: 1.5; }
 
     @media (max-width: 768px) {
-        .lang-table { font-size: 12px; }
-        .lang-table th, .lang-table td { padding: 6px 8px; }
+        .aw-table { font-size: 12px; }
+        .aw-table th, .aw-table td { padding: 6px 8px; }
     }
 </style>
 
-<div class="lang-intro">
-    <h3>🔤 Programming Languages and IDEs</h3>
-    <p>Topic 2.5 covers the differences between high-level and low-level languages, how translators (compilers, interpreters, assemblers) work, and the features of Integrated Development Environments (IDEs).</p>
+<div class="aw-intro">
+    <h3>✍️ Academic Writing at University</h3>
+    <p>Strong academic writing is essential for success at university. This guide covers the key skills you need: structuring essays, using Harvard referencing, maintaining an academic tone, building paragraphs with PEEL/TEEL, and avoiding common pitfalls. Whether you are writing your first assignment or polishing your final dissertation, these principles will help you communicate your ideas clearly and professionally.</p>
 </div>
 
-<div class="lang-podcast">
-    <div class="podcast-header">🎧 Audio Revision: Programming Languages & IDEs</div>
-    <audio controls preload="metadata" style="width:100%;">
-        <source src="/static/audio/languages_podcast.ogg" type="audio/ogg">
-    </audio>
-</div>
+<div class="aw-container">
 
-<div class="lang-container">
-
-    <!-- Section 1: High-Level vs Low-Level -->
-    <div class="lang-section">
-        <div class="lang-section-header open" onclick="toggleLangSection(this)">
-            <span>📊 High-Level vs Low-Level Languages</span>
+    <!-- Section 1: Essay Structure -->
+    <div class="aw-section">
+        <div class="aw-section-header open" onclick="toggleLangSection(this)">
+            <span>📋 Essay Structure</span>
             <span class="toggle-icon">▼</span>
         </div>
-        <div class="lang-section-body open">
-            <table class="lang-table">
-                <thead>
-                    <tr>
-                        <th>Feature</th>
-                        <th>High-Level Language</th>
-                        <th>Low-Level Language (Assembly)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Readability</strong></td>
-                        <td><span class="tag tag-green">Easy</span> — English-like syntax (IF, FOR, PRINT)</td>
-                        <td><span class="tag tag-red">Hard</span> — Mnemonics (MOV, ADD, LOAD)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Portability</strong></td>
-                        <td><span class="tag tag-green">Portable</span> — runs on different hardware</td>
-                        <td><span class="tag tag-red">Hardware-specific</span> — tied to one CPU type</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Lines of code</strong></td>
-                        <td>1 line = many machine code instructions</td>
-                        <td>1 line = 1 machine instruction</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Speed</strong></td>
-                        <td><span class="tag tag-amber">Slower</span> — needs translation first</td>
-                        <td><span class="tag tag-green">Faster</span> — closer to machine code</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Ease of debugging</strong></td>
-                        <td><span class="tag tag-green">Easier</span> — meaningful error messages</td>
-                        <td><span class="tag tag-red">Harder</span> — low-level errors</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Examples</strong></td>
-                        <td>Python, Java, C#, JavaScript</td>
-                        <td>Assembly, LMC (Little Man Computer)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Translator needed</strong></td>
-                        <td>Compiler or Interpreter</td>
-                        <td>Assembler</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="lang-mnemonic">
-                <strong>🧠 Mnemonic:</strong> High-level = Human-friendly but needs translation. Low-level = Machine-friendly, hardware-specific, but faster.
+        <div class="aw-section-body open">
+            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:12px;">A well-structured essay guides the reader through your argument logically. Most academic essays follow a three-part structure:</p>
+
+            <div class="aw-card-grid">
+                <div class="aw-card">
+                    <span class="card-icon">📌</span>
+                    <h4>Introduction</h4>
+                    <p>Sets the scene: introduces the topic, provides context, states your thesis or argument, and outlines the structure of the essay. Typically 10–15% of the word count.</p>
+                </div>
+                <div class="aw-card">
+                    <span class="card-icon">📄</span>
+                    <h4>Body Paragraphs</h4>
+                    <p>Develops your argument using PEEL/TEEL paragraphs. Each paragraph should focus on one main point, supported by evidence and analysis. Typically 70–80% of the word count.</p>
+                </div>
+                <div class="aw-card">
+                    <span class="card-icon">🎯</span>
+                    <h4>Conclusion</h4>
+                    <p>Summarises your key arguments, restates your thesis in light of the evidence presented, and offers a final thought or implication. No new information. Typically 10–15% of the word count.</p>
+                </div>
+            </div>
+
+            <h4 style="margin-top:16px;font-size:15px;color:var(--c-heading);">The Introduction — A Closer Look</h4>
+            <p style="font-size:14px;color:var(--c-text-secondary);">A strong introduction should answer three questions for the reader:</p>
+            <ol class="aw-steps">
+                <li data-step="1"><strong>What</strong> is the topic? — Provide background context and define key terms.</li>
+                <li data-step="2"><strong>Why</strong> does it matter? — Explain the significance or debate around the topic.</li>
+                <li data-step="3"><strong>How</strong> will you address it? — State your thesis and signpost the essay structure.</li>
+            </ol>
+
+            <div class="aw-example">
+                <strong>✅ Example Introduction:</strong><br>
+                "The concept of sustainable development has become a central concern for governments worldwide. Whilst economic growth remains a priority, there is growing recognition that environmental degradation poses long-term risks to prosperity. This essay will argue that sustainable development is not merely an environmental ideal but an economic necessity, examining the evidence from three key sectors: energy, agriculture, and urban planning."
+            </div>
+
+            <h4 style="margin-top:16px;font-size:15px;color:var(--c-heading);">The Conclusion — A Closer Look</h4>
+            <p style="font-size:14px;color:var(--c-text-secondary);">An effective conclusion should:</p>
+            <ul style="font-size:14px;color:var(--c-text-secondary);line-height:1.7;padding-left:20px;">
+                <li>Restate your thesis in a fresh way (do not copy the introduction verbatim).</li>
+                <li>Summarise the main points from each body paragraph.</li>
+                <li>Offer a final reflection, implication, or recommendation.</li>
+                <li><strong>Never</strong> introduce new evidence or arguments.</li>
+            </ul>
+
+            <div class="aw-tip">
+                <strong>💡 Tip:</strong> Write your introduction <em>after</em> you have written the body paragraphs. You will have a clearer sense of your argument and can signpost more accurately.
             </div>
         </div>
     </div>
 
-    <!-- Section 2: Translators -->
-    <div class="lang-section">
-        <div class="lang-section-header" onclick="toggleLangSection(this)">
-            <span>🔄 Compiler vs Interpreter vs Assembler</span>
+    <!-- Section 2: PEEL / TEEL Paragraph Structure -->
+    <div class="aw-section">
+        <div class="aw-section-header" onclick="toggleLangSection(this)">
+            <span>🧱 PEEL / TEEL Paragraph Structure</span>
             <span class="toggle-icon">▼</span>
         </div>
-        <div class="lang-section-body">
-            <table class="lang-table">
-                <thead>
-                    <tr>
-                        <th>Feature</th>
-                        <th>Compiler</th>
-                        <th>Interpreter</th>
-                        <th>Assembler</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Input</strong></td>
-                        <td>High-level code (e.g. Python, Java)</td>
-                        <td>High-level code (e.g. Python, JavaScript)</td>
-                        <td>Assembly code</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Method</strong></td>
-                        <td>Translates ALL code at once</td>
-                        <td>Executes code line by line</td>
-                        <td>Translates assembly to machine code</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Output</strong></td>
-                        <td>Executable file (.exe)</td>
-                        <td>No file — runs directly</td>
-                        <td>Object code / machine code</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Error reporting</strong></td>
-                        <td>Shows ALL errors after compilation</td>
-                        <td>Stops at FIRST error</td>
-                        <td>Shows syntax errors</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Execution speed</strong></td>
-                        <td><span class="tag tag-green">Fast</span> — already translated</td>
-                        <td><span class="tag tag-red">Slower</span> — translates each time</td>
-                        <td><span class="tag tag-green">Fast</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Ease of debugging</strong></td>
-                        <td><span class="tag tag-amber">Harder</span> — all errors at once</td>
-                        <td><span class="tag tag-green">Easier</span> — stops at first error</td>
-                        <td><span class="tag tag-red">Hard</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Used for</strong></td>
-                        <td>Production software, apps</td>
-                        <td>Scripting, web development</td>
-                        <td>Hardware drivers, embedded systems</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Examples</strong></td>
-                        <td>GCC (C), javac (Java)</td>
-                        <td>Python, Node.js, browser JS</td>
-                        <td>NASM, MASM</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="lang-mnemonic">
-                <strong>🧠 Mnemonic:</strong> Compiler = converts all at once. Interpreter = interprets line by line. Assembler = assembly to machine code.
+        <div class="aw-section-body">
+            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:12px;">Every body paragraph should follow a clear structure. Two common frameworks are <strong>PEEL</strong> and <strong>TEEL</strong>. Both ensure your paragraphs are focused, evidence-based, and analytical.</p>
+
+            <div class="aw-peel-grid">
+                <div class="aw-peel-item">
+                    <span class="peel-letter p">P</span>
+                    <h5>Point</h5>
+                    <p>The topic sentence — state the main point of this paragraph in one clear sentence.</p>
+                </div>
+                <div class="aw-peel-item">
+                    <span class="peel-letter e">E</span>
+                    <h5>Evidence</h5>
+                    <p>Support your point with evidence: academic sources, data, case studies, or quotations.</p>
+                </div>
+                <div class="aw-peel-item">
+                    <span class="peel-letter a">E / A</span>
+                    <h5>Explanation / Analysis</h5>
+                    <p>Explain how the evidence supports your point. Analyse its significance — do not just describe it.</p>
+                </div>
+                <div class="aw-peel-item">
+                    <span class="peel-letter l">L</span>
+                    <h5>Link</h5>
+                    <p>Link back to the essay question or forward to the next paragraph to maintain flow.</p>
+                </div>
+            </div>
+
+            <p style="font-size:14px;color:var(--c-text-secondary);margin:8px 0;"><strong>TEEL</strong> is identical except the 'T' stands for <strong>Topic sentence</strong> (the same as 'Point' in PEEL). Use whichever framework your tutor prefers.</p>
+
+            <div class="aw-example">
+                <strong>✅ Example PEEL Paragraph:</strong><br>
+                <strong>Point:</strong> The introduction of the National Curriculum in 1988 significantly altered the landscape of English education.<br>
+                <strong>Evidence:</strong> As Baker (1989) argued, the Act established a standardised framework for what children should be taught, replacing the previous system of local authority discretion.<br>
+                <strong>Explanation:</strong> This centralisation of control represented a fundamental shift from a teacher-led to a government-directed model of education, raising important questions about professional autonomy and the politicisation of knowledge.<br>
+                <strong>Link:</strong> Having established the structural changes brought about by the 1988 Act, the following section will examine its impact on classroom practice.
+            </div>
+
+            <div class="aw-tip">
+                <strong>💡 Tip:</strong> The 'Explanation' step is where most students lose marks. Ask yourself: <em>"So what? Why does this evidence matter?"</em> If you cannot answer that question, you need to analyse more deeply.
             </div>
         </div>
     </div>
 
-    <!-- Section 3: IDE Features -->
-    <div class="lang-section">
-        <div class="lang-section-header" onclick="toggleLangSection(this)">
-            <span>🛠️ IDE Features</span>
+    <!-- Section 3: Academic Tone and Style -->
+    <div class="aw-section">
+        <div class="aw-section-header" onclick="toggleLangSection(this)">
+            <span>🎯 Academic Tone and Style</span>
             <span class="toggle-icon">▼</span>
         </div>
-        <div class="lang-section-body">
-            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:12px;">An <strong>Integrated Development Environment (IDE)</strong> combines all the tools a programmer needs in one application. Know these features for the exam:</p>
-            <div class="lang-card-grid">
-                <div class="lang-card">
-                    <span class="card-icon">✏️</span>
-                    <h4>Editor</h4>
-                    <p>Write and edit code with syntax highlighting, line numbers, and auto-indentation to make code easier to read.</p>
-                </div>
-                <div class="lang-card">
-                    <span class="card-icon">🔍</span>
-                    <h4>Error Diagnostics</h4>
-                    <p>Highlights syntax errors as you type — underlines mistakes in red so you can fix them immediately.</p>
-                </div>
-                <div class="lang-card">
-                    <span class="card-icon">🐛</span>
-                    <h4>Debugger</h4>
-                    <p>Step through code line by line, set breakpoints to pause execution, and inspect variable values at any point.</p>
-                </div>
-                <div class="lang-card">
-                    <span class="card-icon">⏸️</span>
-                    <h4>Breakpoints</h4>
-                    <p>Mark specific lines where execution should pause, allowing you to examine the program state at that moment.</p>
-                </div>
-                <div class="lang-card">
-                    <span class="card-icon">👁️</span>
-                    <h4>Variable Watch</h4>
-                    <p>Display the current values of selected variables in real-time as the program executes — essential for finding logic errors.</p>
-                </div>
-                <div class="lang-card">
-                    <span class="card-icon">📚</span>
-                    <h4>Call Stack</h4>
-                    <p>Shows which subprograms (functions/procedures) are currently active and how they were called — useful for tracing program flow.</p>
-                </div>
-                <div class="lang-card">
-                    <span class="card-icon">💡</span>
-                    <h4>Auto-Complete</h4>
-                    <p>Suggests code completions, variable names, and function parameters as you type — speeds up coding and reduces typos.</p>
-                </div>
-                <div class="lang-card">
-                    <span class="card-icon">📁</span>
-                    <h4>File Management</h4>
-                    <p>Browse project files, organise code into folders, and manage multiple source files within the same project.</p>
-                </div>
-            </div>
-        </div>
-    </div>
+        <div class="aw-section-body">
+            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:12px;">Academic writing requires a formal, objective, and precise tone. The table below contrasts academic style with informal writing.</p>
 
-    <!-- Section 4: Knowledge Check -->
-    <div class="lang-section">
-        <div class="lang-section-header" onclick="toggleLangSection(this)">
-            <span>❓ Common Exam Questions</span>
-            <span class="toggle-icon">▼</span>
-        </div>
-        <div class="lang-section-body">
-            <table class="lang-table">
+            <table class="aw-table">
                 <thead>
                     <tr>
-                        <th>Question</th>
-                        <th>Answer</th>
+                        <th style="width:25%;">Feature</th>
+                        <th style="width:37%;">Academic ✅</th>
+                        <th style="width:38%;">Informal ❌</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Why use a high-level language?</td>
-                        <td>Easier to read, write, debug. Portable across different hardware. More productive for complex programs.</td>
+                        <td><strong>Contractions</strong></td>
+                        <td>Write in full: <em>do not, cannot, it is, will not</em></td>
+                        <td><span class="tag tag-red">Avoid</span> <em>don't, can't, it's, won't</em></td>
                     </tr>
                     <tr>
-                        <td>Why use a low-level language?</td>
-                        <td>Faster execution, direct hardware control, smaller memory footprint. Used for device drivers and embedded systems.</td>
+                        <td><strong>Personal pronouns</strong></td>
+                        <td>Use passive or third-person: <em>it can be argued, the evidence suggests</em></td>
+                        <td><span class="tag tag-red">Avoid</span> <em>I think, in my opinion, we believe</em></td>
                     </tr>
                     <tr>
-                        <td>Advantage of a compiler over an interpreter?</td>
-                        <td>Faster execution after compilation, produces standalone executable, source code not needed at runtime.</td>
+                        <td><strong>Vocabulary</strong></td>
+                        <td>Precise, subject-specific terminology</td>
+                        <td><span class="tag tag-red">Avoid</span> vague words: <em>nice, good, bad, things, stuff</em></td>
                     </tr>
                     <tr>
-                        <td>Advantage of an interpreter over a compiler?</td>
-                        <td>Easier to debug (stops at first error), no need to recompile after changes, better for rapid development.</td>
+                        <td><strong>Hedging language</strong></td>
+                        <td><span class="tag tag-green">Use</span> <em>suggests, indicates, may, could, potentially</em></td>
+                        <td><span class="tag tag-red">Avoid</span> absolute claims: <em>proves, always, never, definitely</em></td>
                     </tr>
                     <tr>
-                        <td>What is an assembler used for?</td>
-                        <td>Translating assembly language (low-level) into machine code. One assembly instruction = one machine instruction.</td>
+                        <td><strong>Rhetorical questions</strong></td>
+                        <td>Rarely appropriate — rephrase as a statement</td>
+                        <td><span class="tag tag-red">Avoid</span> <em>How can we solve this problem?</em></td>
                     </tr>
                     <tr>
-                        <td>How does a debugger help?</td>
-                        <td>Lets you step through code, set breakpoints, inspect variable values, and trace the call stack to find logic errors.</td>
+                        <td><strong>Colloquialisms</strong></td>
+                        <td>Formal register throughout</td>
+                        <td><span class="tag tag-red">Avoid</span> <em>a lot of, loads of, basically, sort of</em></td>
                     </tr>
                     <tr>
-                        <td>What is syntax highlighting?</td>
-                        <td>An IDE feature that colours different parts of code (keywords, strings, comments) to make it easier to read and spot errors.</td>
+                        <td><strong>Emotive language</strong></td>
+                        <td>Objective, evidence-based reasoning</td>
+                        <td><span class="tag tag-red">Avoid</span> <em>outrageous, terrible, wonderful, shocking</em></td>
                     </tr>
                 </tbody>
             </table>
+
+            <h4 style="margin-top:16px;font-size:15px;color:var(--c-heading);">Hedging Language</h4>
+            <p style="font-size:14px;color:var(--c-text-secondary);">Academic writing is cautious and precise. Use hedging language to express claims with appropriate certainty:</p>
+            <table class="aw-table">
+                <thead>
+                    <tr>
+                        <th>Too Absolute ❌</th>
+                        <th>Better (Hedged) ✅</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>This proves that...</td><td>This suggests that...</td></tr>
+                    <tr><td>Smith's research shows...</td><td>Smith's research indicates...</td></tr>
+                    <tr><td>This is the only explanation...</td><td>This may be one explanation...</td></tr>
+                    <tr><td>It is obvious that...</td><td>It could be argued that...</td></tr>
+                    <tr><td>This always happens when...</td><td>This often occurs when...</td></tr>
+                </tbody>
+            </table>
+
+            <div class="aw-tip">
+                <strong>💡 Tip:</strong> Read your work aloud. If it sounds like something you would say in a conversation, it is probably too informal. Academic writing should sound considered and precise.
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 4: Harvard Referencing -->
+    <div class="aw-section">
+        <div class="aw-section-header" onclick="toggleLangSection(this)">
+            <span>📚 Harvard Referencing</span>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="aw-section-body">
+            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:12px;">Harvard referencing is the standard citation style at the University of Wolverhampton. It uses an <strong>author-date</strong> system: you cite the author's surname and year of publication in the text, and provide full details in a reference list at the end.</p>
+
+            <h4 style="font-size:15px;color:var(--c-heading);margin-bottom:8px;">In-Text Citations</h4>
+            <table class="aw-table">
+                <thead>
+                    <tr>
+                        <th style="width:30%;">Type</th>
+                        <th style="width:70%;">Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Direct quote</strong></td>
+                        <td>As Smith (2019, p. 45) argues, "education is a fundamental human right."</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Paraphrase</strong></td>
+                        <td>Education has been described as a fundamental human right (Smith, 2019).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Two authors</strong></td>
+                        <td>Recent research supports this view (Jones and Patel, 2020).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Three+ authors</strong></td>
+                        <td>This approach has been widely adopted (Williams et al., 2021).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Multiple sources</strong></td>
+                        <td>Several studies confirm this finding (Brown, 2018; Davies, 2020; Khan, 2022).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>No author</strong></td>
+                        <td>Use the title in italics: (<em>Education Policy Review</em>, 2020).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Organisation as author</strong></td>
+                        <td>The World Health Organization (WHO, 2021) reported that...</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4 style="font-size:15px;color:var(--c-heading);margin:16px 0 8px;">Reference List Format</h4>
+            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:8px;">The reference list appears at the end of your essay, arranged alphabetically by author surname. Key formats:</p>
+
+            <div class="aw-ref-grid">
+                <div class="aw-ref-card">
+                    <span class="ref-badge">📖 Book</span>
+                    <div class="ref-example">Author, S. (Year) <em>Title in Italics</em>. Edition. Place: Publisher.<br><br>Smith, J. (2019) <em>Understanding Education Policy</em>. 2nd edn. London: Routledge.</div>
+                </div>
+                <div class="aw-ref-card">
+                    <span class="ref-badge">📰 Journal Article</span>
+                    <div class="ref-example">Author, S. (Year) 'Article title', <em>Journal Name</em>, Volume(Issue), pp. pages.<br><br>Jones, A. and Patel, R. (2020) 'Inclusive pedagogy in higher education', <em>Journal of Education Studies</em>, 45(3), pp. 210–228.</div>
+                </div>
+                <div class="aw-ref-card">
+                    <span class="ref-badge">🌐 Website</span>
+                    <div class="ref-example">Author, S. (Year) <em>Page Title</em>. Available at: URL (Accessed: date).<br><br>Department for Education (2023) <em>National Curriculum Overview</em>. Available at: https://www.gov.uk/national-curriculum (Accessed: 15 January 2024).</div>
+                </div>
+                <div class="aw-ref-card">
+                    <span class="ref-badge">📄 Chapter in Edited Book</span>
+                    <div class="ref-example">Author, S. (Year) 'Chapter title', in Editor, E. (ed.) <em>Book Title</em>. Place: Publisher, pp. pages.<br><br>Khan, M. (2022) 'Assessment and accountability', in Brown, T. (ed.) <em>Contemporary Issues in Education</em>. London: Palgrave, pp. 88–104.</div>
+                </div>
+            </div>
+
+            <div class="aw-warning">
+                <strong>⚠️ Common Referencing Mistakes:</strong>
+                <ul style="margin:6px 0 0 16px;font-size:13px;color:var(--c-text-secondary);line-height:1.6;">
+                    <li>Forgetting to include page numbers for direct quotations.</li>
+                    <li>Mixing up the order of author names and publication year.</li>
+                    <li>Including sources in the reference list that are not cited in the text (and vice versa).</li>
+                    <li>Using inconsistent formatting — check your university's style guide.</li>
+                </ul>
+            </div>
+
+            <div class="aw-tip">
+                <strong>💡 Tip:</strong> Use a reference manager such as <strong>Zotero</strong>, <strong>Mendeley</strong>, or <strong>EndNote</strong> from the start. They save hours of formatting and reduce errors. The University of Wolverhampton Library provides free access to these tools.
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 5: Common Writing Pitfalls -->
+    <div class="aw-section">
+        <div class="aw-section-header" onclick="toggleLangSection(this)">
+            <span>⚠️ Common Writing Pitfalls</span>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="aw-section-body">
+            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:12px;">Even strong writers fall into these traps. Recognising them is the first step to avoiding them.</p>
+
+            <div class="aw-pitfall-list">
+                <div class="aw-pitfall-item">
+                    <h5>🚫 1. Descriptive Writing Instead of Critical Analysis</h5>
+                    <p>Simply describing what happened or what an author said is not enough. You must evaluate, compare, and question. <em>"Smith argues X, but Jones counters that Y"</em> is stronger than <em>"Smith argues X."</em></p>
+                    <span class="fix-label">✅ Fix: Ask "So what?" after every descriptive sentence.</span>
+                </div>
+
+                <div class="aw-pitfall-item">
+                    <h5>📝 2. Overly Long or Rambling Sentences</h5>
+                    <p>Sentences that run on for several lines lose the reader. If a sentence has more than two clauses, consider splitting it. Aim for clarity over complexity.</p>
+                    <span class="fix-label">✅ Fix: Read each sentence aloud. If you run out of breath, split it.</span>
+                </div>
+
+                <div class="aw-pitfall-item">
+                    <h5>🔁 3. Repetition and Wordiness</h5>
+                    <p>Using the same words or phrases repeatedly weakens your writing. Similarly, padding sentences with unnecessary words (e.g. <em>"in order to"</em> → <em>"to"</em>; <em>"due to the fact that"</em> → <em>"because"</em>) makes your work less concise.</p>
+                    <span class="fix-label">✅ Fix: Use a thesaurus sparingly and cut every word that does not add meaning.</span>
+                </div>
+
+                <div class="aw-pitfall-item">
+                    <h5>📖 4. Over-Quoting</h5>
+                    <p>Quotations should support your argument, not replace it. A string of block quotes with little analysis suggests you have not engaged with the material. Paraphrase where possible and always explain why a quote matters.</p>
+                    <span class="fix-label">✅ Fix: For every quote, write at least two sentences of your own analysis.</span>
+                </div>
+
+                <div class="aw-pitfall-item">
+                    <h5>🔗 5. Weak or Missing Topic Sentences</h5>
+                    <p>Every paragraph should begin with a clear topic sentence that states the main point. Without it, the reader has to guess what the paragraph is about.</p>
+                    <span class="fix-label">✅ Fix: The first sentence of each paragraph should answer: "What is this paragraph about?"</span>
+                </div>
+
+                <div class="aw-pitfall-item">
+                    <h5>📉 6. Lack of Signposting and Transitions</h5>
+                    <p>Essays that jump abruptly from one idea to the next confuse the reader. Use transition words and phrases to guide the reader through your argument.</p>
+                    <span class="fix-label">✅ Fix: Use signposting: <em>however, furthermore, in contrast, consequently, nevertheless, on the other hand.</em></span>
+                </div>
+
+                <div class="aw-pitfall-item">
+                    <h5>📚 7. Poor Referencing and Accidental Plagiarism</h5>
+                    <p>Failing to cite sources properly — even unintentionally — is a serious academic offence. Keep careful notes of where you found each idea, and cite as you write, not at the end.</p>
+                    <span class="fix-label">✅ Fix: Record full citation details the moment you find a source. Never copy-paste without immediately adding the reference.</span>
+                </div>
+
+                <div class="aw-pitfall-item">
+                    <h5>🎯 8. Going Off-Topic</h5>
+                    <p>It is easy to include interesting but irrelevant material. Every paragraph should directly support your thesis or answer the essay question. If it does not, cut it.</p>
+                    <span class="fix-label">✅ Fix: Keep the essay question pinned above your workspace. Check each paragraph against it.</span>
+                </div>
+            </div>
+
+            <div class="aw-tip">
+                <strong>💡 Tip:</strong> After finishing your first draft, step away for a few hours (or overnight). Return to it with fresh eyes — you will spot weaknesses you missed while writing.
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 6: Proofreading and Editing Checklist -->
+    <div class="aw-section">
+        <div class="aw-section-header" onclick="toggleLangSection(this)">
+            <span>✅ Proofreading and Editing Checklist</span>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="aw-section-body">
+            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:12px;">Use this checklist before submitting any assignment:</p>
+
+            <table class="aw-table">
+                <thead>
+                    <tr>
+                        <th style="width:5%;">✓</th>
+                        <th style="width:95%;">Check</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>☐</td><td><strong>Structure:</strong> Does the essay have a clear introduction, body, and conclusion?</td></tr>
+                    <tr><td>☐</td><td><strong>Thesis:</strong> Is the main argument clearly stated in the introduction?</td></tr>
+                    <tr><td>☐</td><td><strong>Paragraphs:</strong> Does each paragraph follow PEEL/TEEL structure?</td></tr>
+                    <tr><td>☐</td><td><strong>Topic sentences:</strong> Does every paragraph begin with a clear topic sentence?</td></tr>
+                    <tr><td>☐</td><td><strong>Evidence:</strong> Is every claim supported by a credible academic source?</td></tr>
+                    <tr><td>☐</td><td><strong>Analysis:</strong> Have you explained <em>why</em> the evidence matters, not just described it?</td></tr>
+                    <tr><td>☐</td><td><strong>Referencing:</strong> Are all in-text citations correctly formatted in Harvard style?</td></tr>
+                    <tr><td>☐</td><td><strong>Reference list:</strong> Does every in-text citation appear in the reference list (and vice versa)?</td></tr>
+                    <tr><td>☐</td><td><strong>Tone:</strong> Is the language formal, objective, and free of contractions?</td></tr>
+                    <tr><td>☐</td><td><strong>Hedging:</strong> Are claims expressed with appropriate caution?</td></tr>
+                    <tr><td>☐</td><td><strong>Spelling:</strong> Have you used UK English spelling (e.g. <em>colour, organise, centre, behaviour</em>)?</td></tr>
+                    <tr><td>☐</td><td><strong>Grammar:</strong> Are sentences complete? No comma splices or sentence fragments?</td></tr>
+                    <tr><td>☐</td><td><strong>Word count:</strong> Does the essay meet the required word count (or fall within the acceptable range)?</td></tr>
+                    <tr><td>☐</td><td><strong>Transitions:</strong> Are there clear links between paragraphs and sections?</td></tr>
+                    <tr><td>☐</td><td><strong>Title page:</strong> Does it include your name, module title, tutor name, and submission date?</td></tr>
+                </tbody>
+            </table>
+
+            <div class="aw-tip">
+                <strong>💡 Tip:</strong> Print your essay and proofread on paper — errors are much easier to spot on a physical page than on a screen. Alternatively, change the font or read it backwards (sentence by sentence) to break the flow and catch mistakes.
+            </div>
         </div>
     </div>
 
 </div>
 
 <!-- ── Key Terminology ── -->
-<div class="lang-terms-section">
-    <h2>📖 Key Terminology for This Topic</h2>
-    <p style="font-size:13px;color:var(--c-text-secondary);margin-bottom:4px;">These are the exam-grade terms for Topic 2.5. Make sure you can define and use each one.</p>
-    <div class="lang-terms-grid">
-        <div class="lang-term-card"><span class="term-badge">High-Level Language</span><div class="term-def">A programming language that uses English-like syntax (IF, FOR, PRINT) and is portable across different hardware. Examples: Python, Java, C#.</div></div>
-        <div class="lang-term-card"><span class="term-badge">Low-Level Language</span><div class="term-def">A programming language that is closer to machine code, using mnemonics (MOV, ADD, LOAD). Hardware-specific and faster. Example: Assembly.</div></div>
-        <div class="lang-term-card"><span class="term-badge">Compiler</span><div class="term-def">Translates ALL high-level source code into machine code at once, producing an executable file. Reports all errors after compilation.</div></div>
-        <div class="lang-term-card"><span class="term-badge">Interpreter</span><div class="term-def">Translates and executes high-level code line by line. Stops at the first error — easier for debugging but slower at runtime.</div></div>
-        <div class="lang-term-card"><span class="term-badge">Assembler</span><div class="term-def">Translates assembly language (low-level) into machine code. One assembly instruction equals one machine instruction.</div></div>
-        <div class="lang-term-card"><span class="term-badge">Machine Code</span><div class="term-def">The lowest-level programming language, consisting of binary (1s and 0s) that the CPU executes directly. Hardware-specific.</div></div>
-        <div class="lang-term-card"><span class="term-badge">Syntax</span><div class="term-def">The set of rules that defines the structure of a programming language. Each language has its own syntax for statements, loops, and conditions.</div></div>
-        <div class="lang-term-card"><span class="term-badge">IDE</span><div class="term-def">Integrated Development Environment — a software application that combines an editor, debugger, and other tools to help programmers write code.</div></div>
-        <div class="lang-term-card"><span class="term-badge">Debugger</span><div class="term-def">An IDE tool that lets you step through code line by line, set breakpoints, and inspect variable values to find logic errors.</div></div>
-        <div class="lang-term-card"><span class="term-badge">Breakpoint</span><div class="term-def">A marker set on a specific line of code where execution will pause, allowing the programmer to examine the program state at that point.</div></div>
-        <div class="lang-term-card"><span class="term-badge">Variable Watch</span><div class="term-def">An IDE feature that displays the current values of selected variables in real-time as the program executes.</div></div>
-        <div class="lang-term-card"><span class="term-badge">Call Stack</span><div class="term-def">Shows which subprograms (functions/procedures) are currently active and how they were called — useful for tracing program flow.</div></div>
+<div class="aw-terms-section">
+    <h2>📖 Key Terminology for Academic Writing</h2>
+    <p style="font-size:13px;color:var(--c-text-secondary);margin-bottom:4px;">These are the essential terms you need to know for university-level writing.</p>
+    <div class="aw-terms-grid">
+        <div class="aw-term-card"><span class="term-badge">Thesis</span><div class="term-def">The central argument or claim of your essay. Every paragraph should support your thesis.</div></div>
+        <div class="aw-term-card"><span class="term-badge">Topic Sentence</span><div class="term-def">The first sentence of a paragraph that states its main point. Guides the reader through your argument.</div></div>
+        <div class="aw-term-card"><span class="term-badge">Signposting</span><div class="term-def">Words and phrases that guide the reader through your essay (e.g. <em>however, furthermore, in contrast</em>).</div></div>
+        <div class="aw-term-card"><span class="term-badge">Hedging</span><div class="term-def">Using cautious language (<em>suggests, may, could</em>) to express claims with appropriate certainty rather than overstating them.</div></div>
+        <div class="aw-term-card"><span class="term-badge">Paraphrasing</span><div class="term-def">Restating someone else's ideas in your own words while still citing the original source. Preferred over direct quotations.</div></div>
+        <div class="aw-term-card"><span class="term-badge">Citation</span><div class="term-def">An in-text reference to a source, using the author-date format in Harvard style (e.g. Smith, 2019).</div></div>
+        <div class="aw-term-card"><span class="term-badge">Reference List</span><div class="term-def">A complete list of all sources cited in your essay, arranged alphabetically by author surname at the end of the document.</div></div>
+        <div class="aw-term-card"><span class="term-badge">Critical Analysis</span><div class="term-def">Evaluating and questioning evidence rather than simply describing it. Involves comparing sources, identifying strengths and weaknesses, and forming your own judgement.</div></div>
+        <div class="aw-term-card"><span class="term-badge">Plagiarism</span><div class="term-def">Presenting someone else's work or ideas as your own without proper attribution. A serious academic offence that can result in failure or expulsion.</div></div>
+        <div class="aw-term-card"><span class="term-badge">Register</span><div class="term-def">The level of formality in language. Academic writing requires a formal register: no contractions, slang, or colloquial expressions.</div></div>
+        <div class="aw-term-card"><span class="term-badge">Cohesion</span><div class="term-def">The logical flow and connection between sentences and paragraphs. Achieved through signposting, transitions, and consistent referencing of the main argument.</div></div>
+        <div class="aw-term-card"><span class="term-badge">Abstract</span><div class="term-def">A concise summary of a research article, thesis, or essay. Usually 150–250 words, covering the purpose, methods, key findings, and conclusions.</div></div>
     </div>
-</div>
-
-<!-- ── Match the Translator ── -->
-<div class="lang-match-section">
-    <h2>🧩 Match the Translator</h2>
-    <p style="font-size:13px;color:var(--c-text-secondary);margin-bottom:4px;">Click a description on the left, then click the correct translator on the right.</p>
-    <div class="lang-match-grid" id="matchGrid">
-        <div class="lang-match-item" data-pair="0" onclick="matchSelect('desc', 0)">Translates ALL code at once, produces an .exe file<div class="lang-match-desc">Click me, then click the matching translator</div></div>
-        <div class="lang-match-item" data-pair="0" onclick="matchSelect('trans', 0)">Compiler<div class="lang-match-desc">Translates high-level to machine code all at once</div></div>
-        <div class="lang-match-item" data-pair="1" onclick="matchSelect('desc', 1)">Executes code line by line, stops at first error<div class="lang-match-desc">Click me, then click the matching translator</div></div>
-        <div class="lang-match-item" data-pair="1" onclick="matchSelect('trans', 1)">Interpreter<div class="lang-match-desc">Translates and runs one line at a time</div></div>
-        <div class="lang-match-item" data-pair="2" onclick="matchSelect('desc', 2)">Converts assembly mnemonics to machine code<div class="lang-match-desc">Click me, then click the matching translator</div></div>
-        <div class="lang-match-item" data-pair="2" onclick="matchSelect('trans', 2)">Assembler<div class="lang-match-desc">Assembly → machine code, 1:1</div></div>
-    </div>
-    <div id="matchFeedback" style="margin-top:12px;font-size:14px;font-weight:600;text-align:center;display:none;"></div>
-</div>
-
-<!-- ── Quiz: Check Your Understanding ── -->
-<div class="lang-quiz-section">
-    <h2>🧠 Check Your Understanding</h2>
-    <p class="quiz-sub">Test your knowledge of programming languages, translators, and IDE features.</p>
-
-    <div class="quiz-header">
-        <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="langProgressFill" style="width:0%"></div></div>
-        <span class="quiz-score-running" id="langRunningScore">❓ 0/6 answered</span>
-    </div>
-
-    <div class="quiz-counter" id="langQuizCounter">1 / 6</div>
-
-    <div id="langQuizQuestions">
-        <div class="lang-quiz-question quiz-tab active" data-qid="1">
-            <div class="lang-quiz-q">1. Which of the following is an advantage of a high-level language over a low-level language?</div>
-            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 1, 0)">Faster execution speed</button>
-            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 1, 1)">Direct hardware control</button>
-            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 1, 2)">Easier to read, write, and debug</button>
-            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 1, 3)">Smaller memory footprint</button>
-            <div class="lang-quiz-exp" id="langExp1">✅ Correct! High-level languages use English-like syntax, making them easier to read, write, and debug. They are also portable across different hardware.</div>
-        </div>
-        <div class="lang-quiz-question quiz-tab" data-qid="2">
-            <div class="lang-quiz-q">2. A compiler translates source code into machine code. How does it differ from an interpreter?</div>
-            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 2, 0)">It translates one line at a time</button>
-            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 2, 1)">It translates ALL code at once, producing an executable</button>
-            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 2, 2)">It only works with low-level languages</button>
-            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 2, 3)">It does not report errors</button>
-            <div class="lang-quiz-exp" id="langExp2">✅ Correct! A compiler translates all the source code at once into machine code and produces a standalone executable file (.exe).</div>
-        </div>
-        <div class="lang-quiz-question quiz-tab" data-qid="3">
-            <div class="lang-quiz-q">3. Which translator is used to convert assembly language into machine code?</div>
-            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 3, 0)">Compiler</button>
-            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 3, 1)">Interpreter</button>
-            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 3, 2)">Assembler</button>
-            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 3, 3)">Linker</button>
-            <div class="lang-quiz-exp" id="langExp3">✅ Correct! An assembler translates assembly language (low-level) into machine code. One assembly instruction equals one machine instruction.</div>
-        </div>
-        <div class="lang-quiz-question quiz-tab" data-qid="4">
-            <div class="lang-quiz-q">4. Which IDE feature lets you pause execution at a specific line to inspect variable values?</div>
-            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 4, 0)">Syntax highlighting</button>
-            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 4, 1)">Auto-complete</button>
-            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 4, 2)">Breakpoint</button>
-            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 4, 3)">File management</button>
-            <div class="lang-quiz-exp" id="langExp4">✅ Correct! A breakpoint marks a specific line where execution pauses, allowing you to inspect variables, the call stack, and program state.</div>
-        </div>
-        <div class="lang-quiz-question quiz-tab" data-qid="5">
-            <div class="lang-quiz-q">5. Why might a programmer choose to use an interpreter instead of a compiler?</div>
-            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 5, 0)">Faster execution speed at runtime</button>
-            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 5, 1)">Easier debugging — stops at the first error</button>
-            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 5, 2)">Produces a standalone executable file</button>
-            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 5, 3)">More secure — source code is hidden</button>
-            <div class="lang-quiz-exp" id="langExp5">✅ Correct! An interpreter stops at the first error, making it easier to debug. It also lets you test changes without recompiling.</div>
-        </div>
-        <div class="lang-quiz-question quiz-tab" data-qid="6">
-            <div class="lang-quiz-q">6. Which of these is NOT a feature of an IDE?</div>
-            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 6, 0)">Debugger with breakpoints</button>
-            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 6, 1)">Syntax highlighting editor</button>
-            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 6, 2)">Automatic code optimisation</button>
-            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 6, 3)">Variable watch and call stack</button>
-            <div class="lang-quiz-exp" id="langExp6">✅ Correct! IDEs provide editors, debuggers, breakpoints, variable watches, and call stacks — but they do not automatically optimise your code.</div>
-        </div>
-    </div>
-
-    <div class="quiz-nav">
-        <button type="button" class="quiz-nav-btn" id="langQuizPrevBtn" onclick="langQuizGoTo(-1)">◀ Previous</button>
-        <div class="quiz-dots" id="langQuizDots">
-            <span class="quiz-dot active" data-idx="0" onclick="langQuizGoTo(0)">1</span>
-            <span class="quiz-dot" data-idx="1" onclick="langQuizGoTo(1)">2</span>
-            <span class="quiz-dot" data-idx="2" onclick="langQuizGoTo(2)">3</span>
-            <span class="quiz-dot" data-idx="3" onclick="langQuizGoTo(3)">4</span>
-            <span class="quiz-dot" data-idx="4" onclick="langQuizGoTo(4)">5</span>
-            <span class="quiz-dot" data-idx="5" onclick="langQuizGoTo(5)">6</span>
-        </div>
-        <button type="button" class="quiz-nav-btn" id="langQuizNextBtn" onclick="langQuizGoTo(1)">Next ▶</button>
-    </div>
-
-    <div style="text-align:center;margin-top:16px;">
-        <button type="button" class="btn btn-primary" id="langSubmitBtn" onclick="langSubmitQuiz()">📊 Show My Score</button>
-    </div>
-    <div class="lang-quiz-score" id="langQuizScore"></div>
 </div>
 
 <script>
 function toggleLangSection(header) {
     header.classList.toggle('open');
     header.nextElementSibling.classList.toggle('open');
-}
-
-// ── Tabbed Quiz ──
-const langAnswers = {1:2, 2:1, 3:2, 4:2, 5:1, 6:2};
-const langSelected = {};
-let langCurrentIdx = 0;
-const langTotal = 6;
-
-function langSelect(btn, qid, idx) {
-    const parent = btn.closest('.lang-quiz-question');
-    parent.querySelectorAll('.lang-quiz-opt').forEach(b => b.classList.remove('selected', 'correct', 'incorrect'));
-    btn.classList.add('selected');
-    langSelected[qid] = idx;
-    document.getElementById('langExp' + qid).classList.remove('show');
-    updateLangDots();
-}
-
-function updateLangDots() {
-    let answered = 0;
-    for (let i = 0; i < langTotal; i++) {
-        const qid = i + 1;
-        const dot = document.querySelectorAll('#langQuizDots .quiz-dot')[i];
-        dot.classList.remove('answered', 'missing');
-        if (langSelected[qid] !== undefined) {
-            dot.classList.add('answered');
-            answered++;
-        }
-    }
-    document.getElementById('langRunningScore').textContent = '❓ ' + answered + '/' + langTotal + ' answered';
-    document.getElementById('langProgressFill').style.width = Math.round(answered / langTotal * 100) + '%';
-}
-
-function langQuizGoTo(target) {
-    const tabs = document.querySelectorAll('#langQuizQuestions .quiz-tab');
-    const dots = document.querySelectorAll('#langQuizDots .quiz-dot');
-    if (typeof target === 'number') {
-        langCurrentIdx = target;
-    } else {
-        langCurrentIdx = Math.max(0, Math.min(langTotal - 1, langCurrentIdx + target));
-    }
-    tabs.forEach((t, i) => t.classList.toggle('active', i === langCurrentIdx));
-    dots.forEach((d, i) => d.classList.toggle('active', i === langCurrentIdx));
-    document.getElementById('langQuizCounter').textContent = (langCurrentIdx + 1) + ' / ' + langTotal;
-    document.getElementById('langQuizPrevBtn').disabled = langCurrentIdx === 0;
-    document.getElementById('langQuizNextBtn').disabled = langCurrentIdx === langTotal - 1;
-}
-
-function langSubmitQuiz() {
-    let correct = 0, total = Object.keys(langAnswers).length;
-    for (let qid in langAnswers) {
-        const exp = document.getElementById('langExp' + qid);
-        const opts = document.querySelectorAll(`.lang-quiz-question[data-qid="${qid}"] .lang-quiz-opt`);
-        opts.forEach(b => b.classList.remove('correct', 'incorrect'));
-        if (langSelected[qid] === undefined) continue;
-        if (langSelected[qid] === langAnswers[qid]) {
-            opts[langAnswers[qid]].classList.add('correct');
-            correct++;
-        } else {
-            opts[langSelected[qid]].classList.add('incorrect');
-            opts[langAnswers[qid]].classList.add('correct');
-        }
-        exp.classList.add('show');
-    }
-    const scoreEl = document.getElementById('langQuizScore');
-    scoreEl.textContent = '🎯 You scored ' + correct + ' / ' + total + ' (' + Math.round(correct/total*100) + '%)';
-    scoreEl.className = 'lang-quiz-score show';
-    if (correct === total) scoreEl.style.borderColor = 'var(--c-green)';
-    else if (correct >= 4) scoreEl.style.borderColor = '#facc15';
-    else scoreEl.style.borderColor = 'var(--c-rose)';
-}
-
-// ── Match Exercise ──
-let matchSelected = null;
-
-function matchSelect(type, pair) {
-    const items = document.querySelectorAll('.lang-match-item');
-    if (matchSelected === null) {
-        items.forEach(i => i.classList.remove('selected', 'wrong'));
-        const el = document.querySelector(`.lang-match-item[data-pair="${pair}"][onclick*="'${type}'"]`);
-        if (el && !el.classList.contains('matched')) {
-            el.classList.add('selected');
-            matchSelected = {type, pair, el};
-        }
-    } else {
-        const el = document.querySelector(`.lang-match-item[data-pair="${pair}"][onclick*="'${type}'"]`);
-        if (!el || el.classList.contains('matched')) { matchSelected = null; return; }
-        if (matchSelected.type === type) { matchSelected.el.classList.remove('selected'); matchSelected = null; return; }
-        if (matchSelected.pair === pair) {
-            matchSelected.el.classList.remove('selected');
-            matchSelected.el.classList.add('matched');
-            el.classList.add('matched');
-            document.getElementById('matchFeedback').textContent = '✅ Correct!';
-            document.getElementById('matchFeedback').style.display = 'block';
-            document.getElementById('matchFeedback').style.color = 'var(--c-green)';
-        } else {
-            el.classList.add('wrong');
-            matchSelected.el.classList.add('wrong');
-            document.getElementById('matchFeedback').textContent = '❌ Not quite — try again!';
-            document.getElementById('matchFeedback').style.display = 'block';
-            document.getElementById('matchFeedback').style.color = 'var(--c-rose)';
-            setTimeout(() => { el.classList.remove('wrong'); matchSelected.el.classList.remove('wrong'); }, 500);
-        }
-        matchSelected = null;
-    }
 }
 </script>
 {% endblock %}

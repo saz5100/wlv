@@ -14,7 +14,7 @@ from routes import lessons, quiz, tutor, activity, misc, mark_my_paper
 BASE_DIR = Path(__file__).resolve().parent
 DEBUG = os.getenv("WLV_DEBUG", "").lower() in ("true", "1", "yes")
 
-app = FastAPI(title="WLV CS Revision")
+app = FastAPI(title="WLV — University of Wolverhampton")
 
 app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="static")
 

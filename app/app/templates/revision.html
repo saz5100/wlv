@@ -1,867 +1,185 @@
 {% extends "base.html" %}
-{% block title %}Revision Notes | WLV Computer Science{% endblock %}
+{% block title %}Revision — WLV — University of Wolverhampton{% endblock %}
 {% block content %}
 <div class="hero">
     <h1>📖 Revision Notes</h1>
+    <p class="hero-sub">Per-topic revision summaries, key facts, and study guides — WLV University Preparation</p>
 </div>
 
 <style>
 .rev-grid { max-width: 840px; margin: 0 auto; padding: 0 20px 40px; }
-
-.rev-paper-header {
-    font-size: 22px; font-weight: 700; color: var(--c-heading);
-    margin: 0 0 6px; padding-bottom: 8px;
-    border-bottom: 2px solid var(--c-accent);
-    display: inline-block;
-}
+.rev-paper-header { font-size: 22px; font-weight: 700; color: var(--c-heading); margin: 0 0 6px; padding-bottom: 8px; border-bottom: 2px solid var(--c-accent); display: inline-block; }
 .rev-paper-sub { font-size: 14px; color: var(--c-text-secondary); margin: 0 0 18px; }
-
-.rev-card {
-    background: rgba(17,24,39,0.88);
-    backdrop-filter: blur(2px);
-    border: 1px solid rgba(34,211,238,0.15);
-    border-radius: 14px;
-    margin-bottom: 14px;
-    overflow: hidden;
-    transition: border-color 0.25s;
-}
+.rev-card { background: rgba(17,24,39,0.88); backdrop-filter: blur(2px); border: 1px solid rgba(34,211,238,0.15); border-radius: 14px; margin-bottom: 14px; overflow: hidden; transition: border-color 0.25s; }
 .light-theme .rev-card { background: rgba(255,255,255,0.88); }
 .rev-card:hover { border-color: rgba(34,211,238,0.3); }
-
-.rev-card summary {
-    cursor: pointer; user-select: none;
-    padding: 16px 22px;
-    font-size: 17px; font-weight: 600;
-    color: var(--c-heading);
-    display: flex; align-items: center; gap: 10px;
-    list-style: none;
-}
+.rev-card summary { cursor: pointer; user-select: none; padding: 16px 22px; font-size: 17px; font-weight: 600; color: var(--c-heading); display: flex; align-items: center; gap: 10px; list-style: none; }
 .rev-card summary::-webkit-details-marker { display: none; }
-.rev-card summary::before {
-    content: "▶"; font-size: 12px; color: var(--c-accent);
-    transition: transform 0.2s;
-}
+.rev-card summary::before { content: "▶"; font-size: 12px; color: var(--c-accent); transition: transform 0.2s; }
 .rev-card[open] summary::before { transform: rotate(90deg); }
-.rev-card summary .topic-code {
-    font-size: 13px; font-weight: 700;
-    color: var(--c-accent); background: rgba(34,211,238,0.1);
-    padding: 2px 10px; border-radius: 6px;
-}
-
+.rev-card summary .topic-code { font-size: 13px; font-weight: 700; color: var(--c-accent); background: rgba(34,211,238,0.1); padding: 2px 10px; border-radius: 6px; }
 .rev-body { padding: 0 22px 20px; }
-
-.rev-body h3 {
-    font-size: 15px; font-weight: 600;
-    color: var(--c-accent);
-    margin: 18px 0 8px; padding-bottom: 4px;
-    border-bottom: 1px solid rgba(34,211,238,0.1);
-}
-.rev-body h3:first-child { margin-top: 4px; }
-
-.rev-body ul, .rev-body ol {
-    margin: 6px 0 10px; padding-left: 22px;
-    font-size: 14px; line-height: 1.7; color: var(--c-text-secondary);
-}
-.rev-body li { margin-bottom: 3px; }
-.rev-body strong { color: var(--c-heading); }
-.rev-body .hl { color: #67e8f9; font-weight: 700; }
-.rev-body em { color: #67e8f9; font-style: normal; font-weight: 600; }
-
-.rev-table {
-  width: 100%%;
-  border-collapse: separate;
-  border-spacing: 0;
-  margin: 12px 0;
-  font-size: 14px;
-  border-radius: 10px;
-  overflow: hidden;
-  outline: 2px solid rgba(34,211,238,0.15);
-  transition: all 0.3s;
-}
-.rev-table:hover {
-  outline-color: var(--c-accent);
-  box-shadow: 0 3px 14px var(--c-accent-glow);
-}
-.rev-table th, .rev-table td {
-  border-bottom: 1px solid rgba(34,211,238,0.08);
-  padding: 10px 14px;
-  text-align: left;
-  line-height: 1.5;
-}
-.rev-table tr:last-child td { border-bottom: none; }
-.rev-table th {
-  background: rgba(34,211,238,0.08);
-  font-weight: 600;
-  color: #67e8f9;
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
-}
-.rev-table td:first-child { white-space: nowrap; }
-.rev-table td:last-child { color: var(--c-text-secondary); font-size: 13px; }
-
-.rev-key {
-    display: grid; grid-template-columns: 160px 1fr; gap: 4px 14px;
-    font-size: 14px; line-height: 1.6; margin: 8px 0;
-}
-.rev-key .label { color: #64748b; font-weight: 600; }
-.rev-key .value { color: var(--c-text-secondary); }
-
-.rev-mnem {
-    background: rgba(251,191,36,0.06);
-    border: 1px solid rgba(251,191,36,0.15);
-    border-radius: 10px; padding: 12px 16px; margin: 10px 0;
-}
-.rev-mnem .mnem-label {
-    font-size: 12px; font-weight: 600; text-transform: uppercase;
-    letter-spacing: 0.3px; color: #fbbf24; margin-bottom: 4px;
-}
-.rev-mnem p { font-size: 14px; color: #cbd5e1; line-height: 1.6; margin: 0; }
-.rev-mnem code {
-    background: rgba(34,211,238,0.08); color: #67e8f9;
-    padding: 1px 6px; border-radius: 4px; font-size: 13px;
-}
-
-.rev-exam-tip {
-    background: rgba(34,211,238,0.05);
-    border-left: 3px solid var(--c-accent);
-    border-radius: 0 8px 8px 0; padding: 10px 14px; margin: 10px 0;
-    font-size: 13px; color: #94a3b8; line-height: 1.5;
-}
-.rev-exam-tip strong { color: #67e8f9; }
-
-.rev-flow { margin: 8px 0; padding: 10px 14px; background: rgba(129,140,248,0.06); border: 1px solid rgba(129,140,248,0.12); border-radius: 8px; }
-.rev-flow .step { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 4px; font-size: 13px; color: #cbd5e1; }
-.rev-flow .step-num { color: #818cf8; font-weight: 700; min-width: 20px; }
-
-/* Topic filter pills */
-.rev-topic-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
-.rev-topic-pill {
-    padding: 6px 12px; border-radius: 999px; border: 1px solid var(--c-border);
-    background: transparent; color: var(--c-text-secondary); font-size: 12px;
-    font-weight: 600; cursor: pointer; transition: all 0.15s;
-}
-.rev-topic-pill:hover { border-color: var(--c-accent); color: var(--c-text); }
-.rev-topic-pill.active { background: var(--c-accent); color: #000; border-color: var(--c-accent); }
-
-/* Print styles */
-@media print {
-    .nav, .nav-backdrop, .nav-links, .nav-hamburger, #navToggle,
-    .nav-theme-toggle, .nav-date, .nav-spacer, .hero, .rev-topic-pills,
-    .rev-toolbar { display: none !important; }
-    body { background: #fff !important; color: #000 !important; padding: 0 !important; }
-    .rev-grid { max-width: 100%; padding: 0; }
-    .rev-card { break-inside: avoid; background: #fff !important; border: 1px solid #ccc; }
-    .rev-card summary { color: #000 !important; }
-    .rev-body h3 { color: #0369a1 !important; }
-    .rev-body ul, .rev-body ol { color: #333 !important; }
-    .rev-mnem { background: #fef9e7 !important; border-color: #fbbf24; }
-    .rev-mnem p { color: #333 !important; }
-    .rev-key .label { color: #666 !important; }
-    .rev-key .value { color: #333 !important; }
-    .rev-exam-tip { border-left-color: #0369a1; }
-    .rev-flow { background: #eef2ff !important; }
-    .rev-flow .step { color: #333 !important; }
-    .rev-body strong { color: #000 !important; }
-    .rev-body .hl { color: #000 !important; font-weight: 700; }
-}
+.rev-body h3 { font-size: 16px; color: var(--c-heading); margin: 18px 0 8px; }
+.rev-body h3:first-child { margin-top: 0; }
+.rev-body p { font-size: 14px; line-height: 1.7; margin-bottom: 8px; }
+.rev-body ul { padding-left: 20px; margin: 6px 0; }
+.rev-body li { font-size: 14px; line-height: 1.6; margin-bottom: 4px; }
+.rev-body strong { color: var(--c-accent); }
+.rev-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 13px; }
+.rev-table th { background: rgba(34,211,238,0.08); color: var(--c-heading); padding: 8px 10px; text-align: left; font-weight: 700; border-bottom: 2px solid rgba(34,211,238,0.2); }
+.rev-table td { padding: 8px 10px; border-bottom: 1px solid rgba(34,211,238,0.06); vertical-align: top; }
+.light-theme .rev-table td { border-color: rgba(8,145,178,0.08); }
+.exam-tip { background: rgba(34,211,238,0.06); border: 1px solid rgba(34,211,238,0.12); border-radius: 8px; padding: 10px 14px; margin: 8px 0; font-size: 13px; }
+.exam-tip strong { color: var(--c-accent); }
 </style>
 
 <div class="rev-grid">
+    <p class="rev-paper-header">📘 WLV — Core Study Areas</p>
+    <p class="rev-paper-sub">Key revision topics for University of Wolverhampton preparation programmes</p>
 
-    <div class="rev-toolbar" style="margin-bottom:12px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
-        <button onclick="expandAll()" class="btn btn-sm" style="background:rgba(34,211,238,0.08);border:1px solid rgba(34,211,238,0.18);">📂 Expand all</button>
-        <button onclick="collapseAll()" class="btn btn-sm" style="background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.12);">📁 Collapse all</button>
-        <button onclick="printSelected()" class="btn btn-sm btn-primary">🖨️ Print Selected</button>
-        <span style="font-size:12px;color:var(--c-text-muted);margin-left:auto;" id="revCount">Showing all 11 topics</span>
-    </div>
-
-    <div class="rev-topic-pills" id="revTopicPills">
-        <button class="rev-topic-pill active" data-topic="all" onclick="filterRevTopic('all')">All</button>
-        <button class="rev-topic-pill active" data-topic="1.1" onclick="filterRevTopic('1.1')">1.1 Architecture</button>
-        <button class="rev-topic-pill active" data-topic="1.2" onclick="filterRevTopic('1.2')">1.2 Memory & Storage</button>
-        <button class="rev-topic-pill active" data-topic="1.3" onclick="filterRevTopic('1.3')">1.3 Networks</button>
-        <button class="rev-topic-pill active" data-topic="1.4" onclick="filterRevTopic('1.4')">1.4 Security</button>
-        <button class="rev-topic-pill active" data-topic="1.5" onclick="filterRevTopic('1.5')">1.5 Systems Software</button>
-        <button class="rev-topic-pill active" data-topic="1.6" onclick="filterRevTopic('1.6')">1.6 Ethical & Legal</button>
-        <button class="rev-topic-pill active" data-topic="2.1" onclick="filterRevTopic('2.1')">2.1 Algorithms</button>
-        <button class="rev-topic-pill active" data-topic="2.2" onclick="filterRevTopic('2.2')">2.2 Programming</button>
-        <button class="rev-topic-pill active" data-topic="2.3" onclick="filterRevTopic('2.3')">2.3 Robust Programs</button>
-        <button class="rev-topic-pill active" data-topic="2.4" onclick="filterRevTopic('2.4')">2.4 Boolean Logic</button>
-        <button class="rev-topic-pill active" data-topic="2.5" onclick="filterRevTopic('2.5')">2.5 Languages & IDEs</button>
-    </div>
-
-    <p class="rev-paper-header">📘 Paper 1 — Computer Systems</p>
-    <p class="rev-paper-sub">Topics 1.1–1.6, worth 50% of total WLV (90 marks, 1hr 30min)</p>
-
-    <!-- 1.1 Systems Architecture -->
-    <details class="rev-card" data-topic="1.1" open>
+    <details class="rev-card" data-topic="1" open>
+        <summary><span class="topic-code">1</span> Academic Skills</summary>
         <div class="rev-body">
+            <h3>📚 Core Academic Skills</h3>
+            <ul>
+                <li><strong>Critical reading:</strong> Previewing, annotating, questioning, and summarising texts. Evaluate sources for credibility, relevance, bias, and currency.</li>
+                <li><strong>Note-taking strategies:</strong> Cornell method, mind mapping, outline method, and digital tools for effective organisation.</li>
+                <li><strong>Essay planning:</strong> Brainstorming, thesis development, outlining arguments, and structuring paragraphs.</li>
+                <li><strong>Time management:</strong> Prioritisation matrices, study schedules, Pomodoro technique, and avoiding procrastination.</li>
+            </ul>
+            <h3>📝 Academic Writing</h3>
+            <ul>
+                <li><strong>Essay structure:</strong> Introduction (thesis + roadmap), body paragraphs (PEEL/TEEL), conclusion (synthesis + implications).</li>
+                <li><strong>Academic tone:</strong> Formal language, third person, evidence-based claims, cautious language (hedging).</li>
+                <li><strong>Referencing:</strong> Harvard style — in-text citations (Author, Year) and reference list. Secondary referencing and paraphrasing.</li>
+            </ul>
+            <div class="exam-tip"><strong>💡 Tip:</strong> University essays are judged on argument and evidence, not just knowledge. Always ask: "So what? Why does this matter?"</div>
+        </div>
+    </details>
 
-            <h3>🏗️ The CPU — Key Components</h3>
+    <details class="rev-card" data-topic="2">
+        <summary><span class="topic-code">2</span> Critical Thinking</summary>
+        <div class="rev-body">
+            <h3>🧠 What is Critical Thinking?</h3>
+            <ul>
+                <li><strong>Analysis:</strong> Breaking down arguments into claims, evidence, and assumptions</li>
+                <li><strong>Evaluation:</strong> Assessing the strength of evidence and reasoning</li>
+                <li><strong>Inference:</strong> Drawing logical conclusions from available evidence</li>
+                <li><strong>Explanation:</strong> Articulating reasoning clearly and coherently</li>
+                <li><strong>Self-regulation:</strong> Reflecting on your own thinking processes and biases</li>
+            </ul>
+            <h3>🔍 Analysing Arguments</h3>
+            <ul>
+                <li><strong>Premise:</strong> A statement offered as evidence or reason</li>
+                <li><strong>Conclusion:</strong> The main claim the argument supports</li>
+                <li><strong>Assumptions:</strong> Unstated beliefs that connect premises to conclusion</li>
+                <li><strong>Fallacies:</strong> Common errors in reasoning (straw man, ad hominem, false dichotomy, slippery slope)</li>
+            </ul>
+            <h3>📊 Evaluation Frameworks</h3>
+            <ul>
+                <li><strong>CRAAP test:</strong> Currency, Relevance, Authority, Accuracy, Purpose — for evaluating sources</li>
+                <li><strong>PROMPT:</strong> Presentation, Relevance, Objectivity, Method, Provenance, Timeliness — another source evaluation framework</li>
+                <li><strong>SWOT analysis:</strong> Strengths, Weaknesses, Opportunities, Threats — for evaluating arguments and positions</li>
+            </ul>
+        </div>
+    </details>
+
+    <details class="rev-card" data-topic="3">
+        <summary><span class="topic-code">3</span> Research Methods</summary>
+        <div class="rev-body">
+            <h3>🔬 Research Approaches</h3>
             <table class="rev-table">
-                <tr><th>Component</th><th>Function</th><th>🔑 Role</th></tr>
-                <tr><td><strong class="hl">ALU</strong> (Arithmetic Logic Unit)</td><td>Performs arithmetic (+, −, ×, ÷) and logical operations (AND, OR, NOT, comparisons)</td><td>🔢 The calculator</td></tr>
-                <tr><td><strong class="hl">CU</strong> (Control Unit)</td><td>Coordinates the CPU — fetches, decodes, and executes instructions; manages the FDE cycle</td><td>🎯 The conductor</td></tr>
-                <tr><td><strong class="hl">Cache</strong></td><td>Small, high-speed on-chip memory storing frequently used data for instant access</td><td>⚡ The fast lane</td></tr>
-                <tr><td><strong class="hl">Registers</strong></td><td>Tiny, ultra-fast memory locations inside the CPU for temporary data during processing</td><td>📋 The sticky notes</td></tr>
-                <tr><td><strong class="hl">MAR</strong> (Memory Address Register)</td><td>Holds the memory address of the next read or write — tells the CPU where to look</td><td>📍 The satnav</td></tr>
-                <tr><td><strong class="hl">MDR</strong> (Memory Data Register)</td><td>Holds the actual data being transferred to or from memory</td><td>📦 The cargo bay</td></tr>
-                <tr><td><strong class="hl">PC</strong> (Program Counter)</td><td>Stores the address of the next instruction to execute — tracks program progress</td><td>📖 The bookmark</td></tr>
-                <tr><td><strong class="hl">ACC</strong> (Accumulator)</td><td>Stores intermediate calculation results from the ALU</td><td>🧮 The notepad</td></tr>
+                <tr><th>Aspect</th><th>Quantitative</th><th>Qualitative</th></tr>
+                <tr><td>Purpose</td><td>Measure and test hypotheses</td><td>Explore meanings and experiences</td></tr>
+                <tr><td>Data</td><td>Numbers, statistics</td><td>Words, images, observations</td></tr>
+                <tr><td>Methods</td><td>Surveys, experiments, structured observations</td><td>Interviews, focus groups, case studies</td></tr>
+                <tr><td>Analysis</td><td>Statistical tests, graphs</td><td>Thematic analysis, coding</td></tr>
+                <tr><td>Sample size</td><td>Large</td><td>Small</td></tr>
             </table>
-
-            <h3>🔄 The Fetch-Decode-Execute Cycle</h3>
-            <ol>
-                <li><strong>Fetch:</strong> CU copies address from <em>PC → MAR</em>. PC increments. Data from that address is copied into <em>MDR</em></li>
-                <li><strong>Decode:</strong> CU decodes the instruction in MDR — works out what to do</li>
-                <li><strong>Execute:</strong> CU sends control signals — ALU calculates, data moves, result stored in ACC</li>
-            </ol>
-
-            <h3>⚡ CPU Performance Factors</h3>
-            <div class="rev-key">
-                <span class="label">Clock speed (GHz)</span>
-                <span class="value">More cycles/second = more instructions/second. Faster speed = better performance (but more heat)</span>
-                <span class="label">Cache size</span>
-                <span class="value">More cache = fewer slow main memory accesses = faster processing</span>
-                <span class="label">Number of cores</span>
-                <span class="value">Each core can run instructions independently. Multi-core = true parallel processing (if software supports it)</span>
-            </div>
-
-            <h3>💡 Embedded Systems</h3>
+            <h3>📋 Data Collection Methods</h3>
             <ul>
-                <li>A computer built into a larger device — <strong>single-purpose</strong> (does one job)</li>
-                <li>Examples: microwave, washing machine, smart TV, car ECU, thermostat</li>
-                <li>Pros: cheap to produce, low power, reliable (fewer components)</li>
-                <li>Cons: limited processing power, hard/expensive to upgrade, usually can't run general software</li>
+                <li><strong>Surveys and questionnaires:</strong> Closed and open questions, Likert scales, sampling strategies</li>
+                <li><strong>Interviews:</strong> Structured, semi-structured, unstructured — each has different strengths</li>
+                <li><strong>Focus groups:</strong> Group discussion for exploring attitudes and perceptions</li>
+                <li><strong>Observations:</strong> Participant vs non-participant, structured vs unstructured</li>
+                <li><strong>Document analysis:</strong> Policy documents, reports, media, historical sources</li>
             </ul>
-
-            <div class="rev-mnem">
-                <div class="mnem-label">🧠 Mnemonic: CPU Registers</div>
-                <p><code>P MAC</code> — <strong>P</strong>rogram Counter, <strong>M</strong>emory Address Register, <strong>A</strong>ccumulator, <strong>C</strong>ache... wait, what about MDR?<br>
-                <code>P MAC-MD</code> — <strong>P</strong>C, <strong>M</strong>AR, <strong>A</strong>CC, <strong>C</strong>ache, <strong>M</strong>emory <strong>D</strong>ata Register</p>
-            </div>
-
-            <div class="rev-exam-tip">
-                <strong>🎯 Exam tip:</strong> A 4-mark "explain how the CPU works" question needs the <strong>FDE cycle</strong> with ALL registers named (PC, MAR, MDR, CU, ALU). Don't just say "the CPU fetches instructions" — name the components.
-            </div>
-
+            <h3>⚖️ Research Ethics</h3>
+            <ul>
+                <li><strong>Informed consent:</strong> Participants must understand what they are agreeing to</li>
+                <li><strong>Confidentiality:</strong> Protecting participants' identities and data</li>
+                <li><strong>Right to withdraw:</strong> Participants can leave the study at any time</li>
+                <li><strong>Avoiding harm:</strong> Physical, psychological, and emotional wellbeing of participants</li>
+                <li><strong>Ethical approval:</strong> Most research requires approval from an ethics committee</li>
+            </ul>
         </div>
     </details>
 
-    <!-- 1.2 Memory and Storage -->
-    <details class="rev-card" data-topic="1.2">
-        <summary><span class="topic-code">1.2</span> Memory and Storage</summary>
+    <details class="rev-card" data-topic="4">
+        <summary><span class="topic-code">4</span> Professional Practice</summary>
         <div class="rev-body">
-
-            <h3>💾 Types of Memory</h3>
-            <table class="rev-table">
-                <tr><th>Memory</th><th>Key Feature</th><th>Volatile?</th><th>🔑 Role</th></tr>
-                <tr><td><strong class="hl">RAM</strong></td><td>Stores currently running programs + data. More RAM = more multitasking</td><td>❌ Yes</td><td>💻 The desk space</td></tr>
-                <tr><td><strong class="hl">ROM</strong></td><td>Stores the <em>bootstrap loader</em> — first code that runs on startup</td><td>✅ No</td><td>📖 The instruction manual</td></tr>
-                <tr><td><strong class="hl">Virtual Memory</strong></td><td>Uses HDD/SSD space as "extra RAM" when physical RAM is full</td><td>❌ Yes (RAM-backed)</td><td>📤 The overflow drawer</td></tr>
-                <tr><td><strong class="hl">Flash Memory</strong></td><td>Solid-state, durable, power-efficient. Used in USB drives, SSDs, SD cards</td><td>✅ No</td><td>💿 The memory stick</td></tr>
-            </table>
-
-            <h3>📊 Data Units</h3>
-            <div class="rev-key">
-                <span class="label">Bit → Nibble</span>
-                <span class="value">1 bit = 0 or 1; 4 bits = 1 nibble</span>
-                <span class="label">Byte → KB</span>
-                <span class="value">1 byte = 8 bits; 1 KB = 1024 bytes (2¹⁰)</span>
-                <span class="label">MB → GB → TB</span>
-                <span class="value">1 MB = 1024 KB; 1 GB = 1024 MB; 1 TB = 1024 GB</span>
-            </div>
-
-            <h3>🔢 Number Conversions</h3>
+            <h3>💼 Workplace Skills</h3>
             <ul>
-                <li><strong>Binary → Denary:</strong> Write column values (128,64,32,16,8,4,2,1), add where bit = 1. E.g. 01100101 = 64+32+4+1 = 101</li>
-                <li><strong>Denary → Binary:</strong> Repeatedly divide by 2, read remainders backwards. Or subtract largest power of two repeatedly</li>
-                <li><strong>Hexadecimal:</strong> Base 16 — digits 0-9, A-F (A=10, B=11, C=12, D=13, E=14, F=15). E.g. A3 = (10×16) + 3 = 163</li>
-                <li><strong>Binary ↔ Hex:</strong> Group binary into nibbles (4 bits), convert each nibble. E.g. 1010 0011 = A3</li>
-                <li><strong>Binary shifts:</strong> Left shift ×2 (add zero at end); right shift ÷2 (remove last bit). Overflow bits are lost</li>
-                <li><strong>Two's complement:</strong> For negative numbers. Flip all bits, add 1. MSB = -128 place. Range: -128 to +127 in 8 bits</li>
+                <li><strong>Communication:</strong> Verbal, written, and digital communication in professional contexts</li>
+                <li><strong>Teamwork:</strong> Collaborative working, group dynamics, conflict resolution</li>
+                <li><strong>Leadership:</strong> Styles of leadership, motivating others, delegation</li>
+                <li><strong>Time management:</strong> Prioritisation, meeting deadlines, work-life balance</li>
             </ul>
-
-            <h3>🖼️ Representing Data</h3>
+            <h3>🔄 Reflective Practice</h3>
             <ul>
-                <li><strong>Characters — ASCII:</strong> 7 bits = 128 characters (A-Z, a-z, 0-9, punctuation, control codes). <strong>Unicode:</strong> Up to 32 bits = 1M+ characters — covers all world languages</li>
-                <li><strong>Images — Bitmap:</strong> Grid of pixels. Each pixel stores a colour. Metadata: width, height, colour depth, DPI, file type. <em>File size = width × height × colour depth</em></li>
-                <li><strong>Sound — Digital sampling:</strong> ADC converts analogue sound to digital. <em>Sample rate</em> = measurements per second (Hz). <em>Bit depth</em> = values per sample. <em>File size = sample rate × bit depth × duration × channels</em></li>
+                <li><strong>Gibbs' Reflective Cycle:</strong> Description → Feelings → Evaluation → Analysis → Conclusion → Action Plan</li>
+                <li><strong>Kolb's Learning Cycle:</strong> Concrete Experience → Reflective Observation → Abstract Conceptualisation → Active Experimentation</li>
+                <li><strong>Schön's reflection-in-action:</strong> Thinking on your feet during professional practice</li>
+                <li>Reflective writing is a key skill for professional portfolios and assignments</li>
             </ul>
-
-            <h3>🗜️ Data Compression</h3>
+            <h3>📊 Personal Development</h3>
             <ul>
-                <li><strong>Lossy:</strong> Permanently removes "unimportant" data. Smaller file, lower quality. E.g. JPEG images, MP3 audio, MP4 video. <em>Not reversible</em></li>
-                <li><strong>Lossless:</strong> Reduces file size without losing any data. Can be reconstructed exactly. E.g. ZIP files, PNG images, FLAC audio. Uses <em>Run-Length Encoding (RLE)</em> or <em>dictionary methods</em> (Huffman coding)</li>
+                <li>Setting SMART goals (Specific, Measurable, Achievable, Relevant, Time-bound)</li>
+                <li>Creating a Personal Development Plan (PDP)</li>
+                <li>Seeking and responding to feedback</li>
+                <li>Building a professional portfolio of evidence</li>
             </ul>
-
-            <div class="rev-mnem">
-                <div class="mnem-label">🧠 Mnemonic: Binary-to-Denary Place Values</div>
-                <p><code>128 64 32 16 8 4 2 1</code> — <strong>1</strong> nerd <strong>2</strong> basement <strong>4</strong> him, <strong>8</strong> or <strong>16</strong> it's <strong>32</strong> cool <strong>64</strong> me <strong>128</strong> them<br>
-                Or remember: each value doubles. Start at 1, double leftwards.</p>
-            </div>
-
-            <div class="rev-mnem">
-                <div class="mnem-label">🧠 Mnemonic: Types of Storage</div>
-                <p><code>Magnetic • Optical • Solid-State</code> — <strong>M.O.S.S.</strong> (a moss-covered drive...)<br>
-                <strong>Magnetic:</strong> HDD — spinning disks, read/write head. Large capacity, cheap, slower, mechanical failure risk<br>
-                <strong>Optical:</strong> CD/DVD/Blu-ray — laser reads pits and lands. Cheap to manufacture, portable, easily scratched<br>
-                <strong>Solid-State:</strong> SSD — flash memory chips. Fast, durable (no moving parts), expensive per GB</p>
-            </div>
-
-            <div class="rev-exam-tip">
-                <strong>🎯 Exam tip:</strong> For "calculate file size" questions (always on Paper 1), write out the formula first: <code>width × height × colour depth</code> (images) or <code>sample rate × bit depth × duration × channels</code> (sound). You get method marks even if the arithmetic is wrong.
-            </div>
-
         </div>
     </details>
 
-    <!-- 1.3 Networks -->
-    <details class="rev-card" data-topic="1.3">
-        <summary><span class="topic-code">1.3</span> Computer Networks, Connections and Protocols</summary>
+    <details class="rev-card" data-topic="5">
+        <summary><span class="topic-code">5</span> Digital Literacy</summary>
         <div class="rev-body">
-
-            <h3>🌐 LAN vs WAN</h3>
-            <div class="rev-key">
-                <span class="label">LAN</span>
-                <span class="value">Local Area Network — small geographical area (school, office). High speed. Usually wired Ethernet + Wi-Fi. <em>Owned and controlled by one organisation</em></span>
-                <span class="label">WAN</span>
-                <span class="value">Wide Area Network — large geographical area (cities, countries). Uses leased telephone lines/satellites. Slower than LAN. The Internet is the largest WAN</span>
-            </div>
-
-            <h3>🔁 Network Topologies</h3>
+            <h3>💻 Digital Skills for University</h3>
             <ul>
-                <li><strong>Star:</strong> All devices connect to a central <em>switch/router</em>. Pros: one cable fails = only that device affected; fast; easy to add devices. Cons: central switch is single point of failure; more cabling</li>
-                <li><strong>Mesh:</strong> Every device connects to many others (wireless mesh) or all others (full mesh). Pros: no single point of failure; data can route around failures. Cons: expensive (more hardware); complex to manage</li>
+                <li><strong>Online research:</strong> Using academic databases (JSTOR, Google Scholar, Scopus), advanced search techniques, evaluating online sources</li>
+                <li><strong>Data analysis:</strong> Spreadsheets for data organisation, basic statistical analysis, creating charts and graphs</li>
+                <li><strong>Presentation skills:</strong> Creating effective presentations, using visual aids, public speaking techniques</li>
+                <li><strong>Digital collaboration:</strong> Using shared documents, project management tools, virtual meeting platforms</li>
             </ul>
-
-            <h3>📡 Network Hardware</h3>
+            <h3>🔐 Digital Safety</h3>
             <ul>
-                <li><strong>Switch:</strong> Connects devices within a LAN. Sends data only to the correct device (uses MAC addresses)</li>
-                <li><strong>Router:</strong> Connects different networks (e.g. LAN to Internet). Routes data packets between networks. Uses IP addresses</li>
-                <li><strong>NIC (Network Interface Card):</strong> Built-in hardware in each device — enables connection to a network (Wired Ethernet port or Wi-Fi antenna)</li>
-                <li><strong>Transmission media:</strong> Copper cables (UTP/STP — cheap, short range), Fibre optic (light pulses — fast, long range, secure), Wireless (radio waves — convenient, less secure, interference)</li>
+                <li>Data protection and GDPR awareness</li>
+                <li>Cyber security basics — passwords, phishing, secure connections</li>
+                <li>Digital footprint management</li>
+                <li>Academic integrity online — avoiding plagiarism, using AI appropriately</li>
             </ul>
-
-            <h3>📶 Wi-Fi</h3>
-            <ul>
-                <li>Uses <em>radio waves</em> (2.4 GHz or 5 GHz)</li>
-                <li>Wireless Access Point (WAP) connects wireless devices to wired network</li>
-                <li>Factors affecting performance: distance from WAP, interference (walls, other devices), number of connected devices, frequency band used</li>
-                <li>Security: WPA2/WPA3 encryption (not WEP — too weak)</li>
-            </ul>
-
-            <h3>📦 The TCP/IP Model (4 Layers)</h3>
-            <div class="rev-flow">
-                <div class="step"><span class="step-num">4</span> <strong>Application</strong> — Your program's data (HTTP, HTTPS, FTP, SMTP, IMAP)</div>
-                <div class="step"><span class="step-num">3</span> <strong>Transport</strong> — Splits data into packets, adds port numbers, error checking (TCP / UDP)</div>
-                <div class="step"><span class="step-num">2</span> <strong>Internet</strong> — Adds source & destination IP addresses. Routes packets across networks (IP)</div>
-                <div class="step"><span class="step-num">1</span> <strong>Link</strong> — Physical transmission over cables/wireless. Adds MAC addresses (Ethernet/Wi-Fi)</div>
-            </div>
-
-            <h3>📜 Key Protocols</h3>
-            <table class="rev-table">
-                <tr><th>Protocol</th><th>Function</th><th>Port</th><th>🔑 Role</th></tr>
-                <tr><td><strong class="hl">HTTP/HTTPS</strong></td><td>Transfers web pages. HTTPS adds encryption (TLS/SSL)</td><td>80 / 443</td><td>🌐 The web browser’s language</td></tr>
-                <tr><td><strong class="hl">FTP</strong></td><td>Uploads and downloads files to/from a server</td><td>21</td><td>📁 The file courier</td></tr>
-                <tr><td><strong class="hl">SMTP</strong></td><td>Sends emails from client to server and between servers</td><td>25</td><td>📨 The postbox</td></tr>
-                <tr><td><strong class="hl">IMAP</strong></td><td>Receives emails — stores on server, keeps synced across devices</td><td>143</td><td>📬 The mailbox</td></tr>
-                <tr><td><strong class="hl">TCP</strong></td><td>Connection-oriented, reliable. Ensures all packets arrive in order</td><td>—</td><td>📦 The signed-for delivery</td></tr>
-                <tr><td><strong class="hl">UDP</strong></td><td>Connectionless, fast. No delivery guarantee. Used for streaming/gaming</td><td>—</td><td>🎮 The fast toss</td></tr>
-                <tr><td><strong class="hl">IP</strong></td><td>Routes data packets across networks using IP addresses</td><td>—</td><td>🧭 The satnav</td></tr>
-            </table>
-
-
-            <h3>🌍 Internet vs WWW</h3>
-                        </ul>
-
-            <div class="rev-mnem">
-                <div class="mnem-label">🧠 Mnemonic: TCP/IP Layers (top to bottom)</div>
-                <p><code>A T I L</code> — <strong>A</strong>pple <strong>T</strong>arts <strong>I</strong>n <strong>L</strong>ondon<br>
-                <strong>A</strong>pplication → <strong>T</strong>ransport → <strong>I</strong>nternet → <strong>L</strong>ink</p>
-            </div>
-
-            <div class="rev-mnem">
-                <div class="mnem-label">🧠 Mnemonic: Star vs Mesh Topology</div>
-                <p><code>⭐ Star = Simple, Single point of failure</code><br>
-                <code>🔗 Mesh = Many connections, More expensive</code><br>
-                “A star is simple, a mesh is messy (but safe)”</p>
-            </div>
-
-            <div class="rev-exam-tip">
-                <strong>🎯 Exam tip:</strong> “Explain how data travels across the Internet” = name the FOUR TCP/IP layers in order and say what each one does. A common 6-mark question. Use the acronym ATIL.
-            </div>
-
         </div>
     </details>
 
-    <!-- 1.4 Network Security -->
-    <details class="rev-card" data-topic="1.4">
-        <summary><span class="topic-code">1.4</span> Network Security</summary>
+    <details class="rev-card" data-topic="6">
+        <summary><span class="topic-code">6</span> Subject Knowledge</summary>
         <div class="rev-body">
-
-            <h3>⚠️ Threats to Networks</h3>
-            <div class="rev-key">
-                <span class="label">Malware</span>
-                <span class="value">Malicious software — virus (self-replicates), worm (spreads across networks without user action), trojan (disguised as legitimate), ransomware (encrypts files, demands payment)</span>
-                <span class="label">Social engineering</span>
-                <span class="value">Tricking people into revealing info. <em>Phishing:</em> fake emails/texts pretending to be a real organisation (bank, HMRC). <em>Shouldering:</em> looking over someone’s shoulder. <em>Baiting:</em> leaving infected USB sticks</span>
-                <span class="label">Brute force attack</span>
-                <span class="value">Trying every possible password combination until one works. Mitigated by: account lockout after N attempts, strong passwords, CAPTCHA</span>
-                <span class="label">DoS/DDoS</span>
-                <span class="value"><em>Denial of Service:</em> flooding server with requests so it can’t serve real users. DDoS = from many computers at once (a botnet)</span>
-                <span class="label">Data interception</span>
-                <span class="value">Eavesdropping on network traffic. <em>Packet sniffing:</em> capturing data packets. Mitigated by: encryption (HTTPS, VPN)</span>
-                <span class="label">SQL injection</span>
-                <span class="value">Entering SQL commands into input fields (login box, search bar). If not sanitised, attacker can read/delete/change database data</span>
-            </div>
-
-            <h3>🛡️ Prevention Methods</h3>
-            <div class="rev-key">
-                <span class="label">Firewall</span>
-                <span class="value">Monitors incoming/outgoing traffic. Blocks data based on rules (IP addresses, ports, protocols). Network level and host level</span>
-                <span class="label">MAC address filtering</span>
-                <span class="value">Only allow specific devices (by MAC address) onto the network. Annoying to manage in large orgs</span>
-                <span class="label">Encryption</span>
-                <span class="value">Scrambles data so only authorised recipient can read it. Uses keys. Essential for Wi-Fi (WPA2/WPA3) and web traffic (HTTPS/TLS)</span>
-                <span class="label">Passwords</span>
-                <span class="value">Strong = long (12+ chars), mix of upper/lower/numbers/symbols. Password policies + MFA</span>
-                <span class="label">Penetration testing</span>
-                <span class="value">Authorised simulated attack to find vulnerabilities. White-box (full knowledge) vs black-box (no knowledge)</span>
-                <span class="label">Anti-malware</span>
-                <span class="value">Scans files, monitors system, quarantines threats. Needs regular updates (signature-based + heuristic detection)</span>
-                <span class="label">User access levels</span>
-                <span class="value">Only give users access to what they need (principle of least privilege). Admin accounts are restricted</span>
-                <span class="label">Validation</span>
-                <span class="value">Check input data is safe — SQL parameterised queries prevent SQL injection. Whitelist allowed characters</span>
-            </div>
-
-            <div class="rev-mnem">
-                <div class="mnem-label">🧠 Mnemonic: Network Threats</div>
-                <p><code>M S B D I S</code> — <strong>M</strong>um <strong>S</strong>aid <strong>B</strong>ig <strong>D</strong>ragons <strong>I</strong>n <strong>S</strong>ydney<br>
-                <strong>M</strong>alware, <strong>S</strong>ocial engineering, <strong>B</strong>rute force, <strong>D</strong>oS, <strong>I</strong>nterception, <strong>S</strong>QL injection</p>
-            </div>
-
-            <div class="rev-exam-tip">
-                <strong>🎯 Exam tip:</strong> A very common 6-mark question: “Explain how a business can protect its network.” You need <strong>4-5 methods</strong> with explanation of HOW each one works, not just naming them. Firewall + encryption + passwords + access levels + anti-malware is a strong combo.
-            </div>
-
+            <h3>📖 Developing Subject Expertise</h3>
+            <ul>
+                <li><strong>Reading lists:</strong> Use your module reading list as a starting point, then expand through database searches</li>
+                <li><strong>Key concepts:</strong> Identify and understand the core concepts and theories in your discipline</li>
+                <li><strong>Academic discourse:</strong> Learn the language and conventions of your subject area</li>
+                <li><strong>Current research:</strong> Stay up to date with recent publications and debates in your field</li>
+            </ul>
+            <h3>📝 Assessment Preparation</h3>
+            <ul>
+                <li>Understand assessment criteria and learning outcomes</li>
+                <li>Use feedback from previous assignments to improve</li>
+                <li>Plan your time across multiple assessments</li>
+                <li>Seek support from tutors, study skills services, and peer groups</li>
+            </ul>
         </div>
     </details>
-
-<!-- 1.5 Systems Software -->
-    <details class="rev-card" data-topic="1.5">
-        <summary><span class="topic-code">1.5</span> Systems Software</summary>
-        <div class="rev-body">
-
-            <h3>💿 Operating System (OS)</h3>
-            <ul>
-                <li><strong>Purpose:</strong> Manages hardware and software resources. Provides a <em>user interface</em> (GUI or CLI) so humans can interact with the computer</li>
-            </ul>
-
-            <h3>🔧 Functions of an OS</h3>
-            <div class="rev-key">
-                <span class="label">Memory management</span>
-                <span class="value">Controls which programs are in RAM. Allocates memory, moves data in/out. Deals with <em>multitasking</em> — switching between open programs so fast it looks simultaneous. Uses <em>virtual memory</em> when RAM is full</span>
-                <span class="label">Process management</span>
-                <span class="value">Schedules CPU time for running programs. Decides which process runs next. Handles <em>interrupts</em> (signals from hardware/software that need immediate attention)</span>
-                <span class="label">User management</span>
-                <span class="value">Controls user accounts, passwords, permissions. Each user has different access rights (admin vs standard). Keeps files and settings separate</span>
-                <span class="label">File management</span>
-                <span class="value">Organises files into directories. Controls read/write/edit/delete permissions. Manages different file systems (NTFS, FAT, ext4)</span>
-                <span class="label">Device management</span>
-                <span class="value">Controls hardware peripherals via <em>drivers</em> (software that translates OS commands into device-specific instructions). Handles plug-and-play, input/output</span>
-                <span class="label">Security</span>
-                <span class="value">Authentication (passwords, biometrics). Permissions. Firewall. Auditing/logging user activity. Encryption</span>
-            </div>
-
-            <h3>🧰 Utility Software</h3>
-            <ul>
-                <li><strong>Encryption software:</strong> Scrambles data so only authorised users can read it (uses encryption keys)</li>
-                <li><strong>Defragmentation (HDD only!):</strong> Rearranges files so they're stored contiguously. Speeds up HDD access. <em>Not needed for SSDs</em> — can actually wear them out faster</li>
-                <li><strong>Backup software:</strong> Creates copies of data in case of loss. Full backup (everything, slow), incremental (changes since last backup, faster)</li>
-                <li><strong>Anti-malware:</strong> Scans for viruses, quarantines threats, provides real-time protection</li>
-            </ul>
-
-            <div class="rev-mnem">
-                <div class="mnem-label">🧠 Mnemonic: OS Functions</div>
-                <p><code>M P U F D S</code> — <strong>M</strong>y <strong>P</strong>ersonal <strong>U</strong>seful <strong>F</strong>ile <strong>D</strong>evice <strong>S</strong>ystem<br>
-                <strong>M</strong>emory, <strong>P</strong>rocess, <strong>U</strong>ser, <strong>F</strong>ile, <strong>D</strong>evice, <strong>S</strong>ecurity management</p>
-            </div>
-
-            <div class="rev-exam-tip">
-                <strong>🎯 Exam tip:</strong> Don't confuse "OS" with "utility software". The OS manages <em>resources</em>, utilities are <em>tools</em> that perform specific maintenance tasks. A common trick question: "Name two utility programs" — don't answer with "memory management" (that's the OS).
-            </div>
-
-        </div>
-    </details>
-
-    <!-- 1.6 Ethical, Legal, Cultural, Environmental -->
-    <details class="rev-card" data-topic="1.6">
-        <summary><span class="topic-code">1.6</span> Ethical, Legal, Cultural and Environmental Impacts</summary>
-        <div class="rev-body">
-
-                        <h3>⚖️ UK Legislation (you MUST know each one)</h3>
-            <table class="rev-table">
-                <tr><th>Law</th><th>What It Covers</th><th>🔑 Role</th></tr>
-                <tr><td><strong class="hl">Computer Misuse Act 1990</strong></td><td>Unauthorised access to computer systems. 3 offences: hacking, hacking with intent, unauthorised modification of data</td><td>🛡️ The cyber police</td></tr>
-                <tr><td><strong class="hl">Data Protection Act 2018</strong></td><td>Controls how personal data is collected, stored, used. 6 principles: fairness, accuracy, security, etc.</td><td>📝 The data guardian</td></tr>
-                <tr><td><strong class="hl">Copyright, Designs & Patents Act 1988</strong></td><td>Protects intellectual property — music, films, software, books. Covers piracy and plagiarism</td><td>🎬 The copyright shield</td></tr>
-                <tr><td><strong class="hl">Freedom of Information Act 2000</strong></td><td>Gives public right to access information held by public authorities (gov, councils, NHS)</td><td>🔍 The transparency lens</td></tr>
-            </table>
-
-
-            <h3>🌍 Ethical & Cultural Issues</h3>
-            <ul>
-                <li><strong>Privacy:</strong> Data collection by social media, targeted ads, surveillance (CCTV). How much data should companies hold?</li>
-                <li><strong>Digital divide:</strong> Not everyone has access to technology — creates inequality in education, jobs, services</li>
-                <li><strong>Automation/AI:</strong> Job displacement vs new job creation. Algorithms making decisions (bias in AI)</li>
-                <li><strong>Health:</strong> Screen time, eye strain, repetitive strain injury, reduced physical activity, gaming addiction</li>
-                <li><strong>Environment:</strong> E-waste (toxic materials in landfills), energy consumption of data centres, rare earth mineral mining for components</li>
-            </ul>
-
-            <h3>📄 Software Licences</h3>
-            <ul>
-                <li><strong>Open source:</strong> Source code freely available. Anyone can view, modify, redistributes (under licence terms). E.g. Linux, Firefox, Python. Often free but may have restrictions on commercial use</li>
-                <li><strong>Proprietary:</strong> Source code is secret. Developer owns all rights. You buy a <em>licence to use</em>, not the software itself. E.g. Windows, Microsoft Office, Adobe Photoshop. Restrictions on copying, modifying, sharing</li>
-            </ul>
-
-            <div class="rev-mnem">
-                <div class="mnem-label">🧠 Mnemonic: The Four Laws</div>
-                <p><code>C • D • C • F</code> — <strong>C</strong>omputer <strong>M</strong>isuse, <strong>D</strong>ata <strong>P</strong>rotection, <strong>C</strong>opyright, <strong>F</strong>reedom of <strong>I</strong>nformation<br>
-                🎵 To the tune of "Y.M.C.A." — Computer Misuse, Data Protection, Copyright Design and Patents, Freedom of Info-oh!</p>
-            </div>
-
-            <div class="rev-exam-tip">
-                <strong>🎯 Exam tip:</strong> For a "discuss ethical issues" question (usually 6-8 marks), give <strong>both sides</strong> — e.g. "AI may replace jobs (short-term negative) BUT also creates new types of jobs and increases productivity (long-term positive)." Balanced arguments get top marks.
-            </div>
-
-        </div>
-    </details>
-
-    <p class="rev-paper-header" style="margin-top:32px;">📗 Paper 2 — Algorithms & Programming</p>
-    <p class="rev-paper-sub">Topics 2.1–2.5, worth 50% of total WLV (90 marks, 1hr 30min)</p>
-
-    <!-- 2.1 Algorithms -->
-    <details class="rev-card" data-topic="2.1">
-        <summary><span class="topic-code">2.1</span> Algorithms</summary>
-        <div class="rev-body">
-
-            <h3>🧠 Computational Thinking</h3>
-            <ul>
-                <li><strong>Abstraction:</strong> Removing unnecessary details, keeping only the important info. E.g. a map of the London Underground shows tube lines but not road names or buildings</li>
-                <li><strong>Decomposition:</strong> Breaking a complex problem into smaller, manageable sub-problems. E.g. building a car → engine, wheels, body, electronics</li>
-                <li><strong>Algorithmic thinking:</strong> Designing step-by-step instructions to solve a problem</li>
-            </ul>
-
-            <h3>📐 Algorithm Design</h3>
-            <ul>
-                <li><strong>Flowcharts:</strong> Visual representation. Terminal (start/end), Process (calculations), Input/Output, Decision (diamond, YES/NO branches)</li>
-                <li><strong>Pseudocode:</strong> Semi-formal English-like code. OCR has a <em>specific</em> pseudocode style you must follow in exams</li>
-            </ul>
-
-            <h3>🔍 Searching Algorithms</h3>
-            <table class="rev-table">
-                <tr><th>Algorithm</th><th>How It Works</th><th>Speed</th><th>🔑 Role</th></tr>
-                <tr><td><strong class="hl">Linear Search</strong></td><td>Checks each item in order. Works on any list (sorted or unsorted)</td><td>O(n) — slow but simple</td><td>📜 The page-by-page reader</td></tr>
-                <tr><td><strong class="hl">Binary Search</strong></td><td>Repeatedly splits a <em>sorted</em> list in half. Discards half each time</td><td>O(log n) — very fast</td><td>📖 The dictionary look-up</td></tr>
-            </table>
-
-
-            <h3>📊 Sorting Algorithms</h3>
-            <table class="rev-table">
-                <tr><th>Algorithm</th><th>How It Works</th><th>Speed</th><th>🔑 Role</th></tr>
-                <tr><td><strong class="hl">Bubble Sort</strong></td><td>Repeatedly passes through list swapping adjacent items. Largest "bubbles" to end</td><td>O(n²) — slow</td><td>💦 The bubble rise</td></tr>
-                <tr><td><strong class="hl">Merge Sort</strong></td><td>Divide and conquer — splits in half repeatedly, then merges back in order</td><td>O(n log n) — fast</td><td>🔀 The divide and conqueror</td></tr>
-                <tr><td><strong class="hl">Insertion Sort</strong></td><td>Builds sorted list one item at a time, inserting each into correct position</td><td>O(n²) — moderate</td><td>🎯 The card sorter</td></tr>
-            </table>
-
-
-            <div class="rev-mnem">
-                <div class="mnem-label">🧠 Mnemonic: Merge Sort Steps</div>
-                <p><code>Split • Split • Split • Merge • Merge • Merge</code><br>
-                Split until you have individual elements, then merge them back in order. "Divide and conquer — split all the way down, merge your way up."</p>
-            </div>
-
-            <div class="rev-mnem">
-                <div class="mnem-label">🧠 Mnemonic: Binary Search vs Linear Search</div>
-                <p><code>📘 Phonebook (Binary) vs 📜 Shopping list (Linear)</code><br>
-                "Binary works on sorted data. Linear works on anything. Binary is fast. Linear is simple."</p>
-            </div>
-
-            <div class="rev-exam-tip">
-                <strong>🎯 Exam tip:</strong> You WILL be asked to do a <strong>trace table</strong> on Paper 2. Write the variable headers, then step through the algorithm line by line, tracking how each variable changes. Common mistakes: skipping lines, not updating all variables per iteration.
-            </div>
-
-        </div>
-    </details>
-
-    <!-- 2.2 Programming Fundamentals -->
-    <details class="rev-card" data-topic="2.2">
-        <summary><span class="topic-code">2.2</span> Programming Fundamentals</summary>
-        <div class="rev-body">
-
-            <h3>📦 Data Types</h3>
-            <table class="rev-table">
-                <tr><th>Type</th><th>Description</th><th>Example</th><th>🔑 Role</th></tr>
-                <tr><td><strong class="hl">Integer</strong></td><td>Whole number, positive or negative (no decimal)</td><td>42, -17, 0</td><td>🔢 The counting bead</td></tr>
-                <tr><td><strong class="hl">Real / Float</strong></td><td>Number with decimal places</td><td>3.14, -0.5, 99.9</td><td>📐 The precision ruler</td></tr>
-                <tr><td><strong class="hl">Boolean</strong></td><td>Only two values: TRUE or FALSE</td><td>True, False</td><td>✅ The yes/no switch</td></tr>
-                <tr><td><strong class="hl">Character</strong></td><td>A single letter, digit, or symbol</td><td>'A', '7', '@'</td><td>🔠 The single tile</td></tr>
-                <tr><td><strong class="hl">String</strong></td><td>A sequence of characters</td><td>"Hello World"</td><td>📝 The sentence</td></tr>
-            </table>
-
-
-            <h3>🔁 Programming Constructs</h3>
-            <ul>
-                <li><strong>Sequence:</strong> Code runs line by line, top to bottom</li>
-                <li><strong>Selection:</strong> Decision making — IF, ELSE IF, ELSE. Uses Boolean conditions</li>
-                <li><strong>Iteration:</strong> Repeating code — <em>count-controlled</em> (FOR — known number of times) and <em>condition-controlled</em> (WHILE — repeat until condition met; DO UNTIL — always runs at least once)</li>
-            </ul>
-
-            <h3>🧵 String Manipulation</h3>
-            <ul>
-                <li><strong>Length:</strong> LEN("Hello") = 5</li>
-                <li><strong>Substring:</strong> MID("Hello", 2, 3) = "ell" — starts at position 2, takes 3 chars</li>
-                <li><strong>Concatenation:</strong> "Hello" & " World" = "Hello World"</li>
-                <li><strong>Upper/Lower:</strong> UCASE("hello") = "HELLO", LCASE("HELLO") = "hello"</li>
-                <li><strong>ASCII conversion:</strong> ASC("A") = 65, CHR(65) = "A"</li>
-            </ul>
-
-            <h3>🔃 Arrays</h3>
-            <ul>
-                <li><strong>One-dimensional (list):</strong> A single row of items. E.g. scores[3] = 5</li>
-                <li><strong>Two-dimensional (table):</strong> Rows and columns. E.g. grid[2][3] = 7. <em>First index = row, second = column</em></li>
-                <li><strong>Indexing:</strong> Usually start at <strong>0</strong> (or 1 — OCR allows either, say which you're using)</li>
-            </ul>
-
-            <h3>📎 Subprograms</h3>
-            <ul>
-                <li><strong>Procedure:</strong> A named block of code that <em>does something</em>. Doesn't return a value. E.g. <code>PROCEDURE greet(name)</code></li>
-                <li><strong>Function:</strong> A named block that <em>returns a value</em>. E.g. <code>FUNCTION add(a, b) RETURNS a + b</code></li>
-                <li><strong>Parameters:</strong> Data passed INTO the subprogram (inputs)</li>
-                <li><strong>Return value:</strong> Data sent back FROM a function (output)</li>
-                <li><strong>Benefits:</strong> Reusability, modularity, easier debugging, avoids repetition, can be tested separately</li>
-            </ul>
-
-            <div class="rev-mnem">
-                <div class="mnem-label">🧠 Mnemonic: Data Types</div>
-                <p><code>I R B C S</code> — <strong>I</strong> <strong>R</strong>eally <strong>B</strong>elieve <strong>C</strong>ode <strong>S</strong>trings<br>
-                <strong>I</strong>nteger, <strong>R</strong>eal, <strong>B</strong>oolean, <strong>C</strong>haracter, <strong>S</strong>tring</p>
-            </div>
-
-            <div class="rev-exam-tip">
-                <strong>🎯 Exam tip:</strong> When writing pseudocode in the exam, always <strong>state your array indexing</strong> — "using 0-based indexing" or "the first element is at index 1". Either is fine, just be consistent. OCR examiners will mark either convention.
-            </div>
-
-        </div>
-    </details>
-
-    <!-- 2.3 Producing Robust Programs -->
-    <details class="rev-card" data-topic="2.3">
-        <summary><span class="topic-code">2.3</span> Producing Robust Programs</summary>
-        <div class="rev-body">
-
-            <h3>🛡️ Defensive Design</h3>
-            <ul>
-                <li><strong>Anticipate misuse:</strong> Think about what users might do wrong — enter letters where numbers expected, leave fields blank</li>
-                <li><strong>Input validation:</strong> Check data before processing. E.g. age > 0 AND age < 130; email contains "@"</li>
-                <li><strong>Authentication:</strong> Verify user identity — passwords, biometrics, two-factor authentication</li>
-                <li><strong>Range checks:</strong> Is value within acceptable min/max?</li>
-                <li><strong>Presence checks:</strong> Has something been entered?</li>
-                <li><strong>Format checks:</strong> Does data match required pattern? E.g. postcode format, phone number</li>
-                <li><strong>Length checks:</strong> Is input between min and max characters?</li>
-                <li><strong>Type checks:</strong> Is the data the right type? E.g. integer expected, not a string</li>
-            </ul>
-
-            <h3>🔬 Testing</h3>
-            <div class="rev-key">
-                <span class="label">Iterative testing</span>
-                <span class="value">Test as you develop — write some code, test it, write more, test again. Done throughout development</span>
-                <span class="label">Final/terminal testing</span>
-                <span class="value">Complete test of finished product. Formal test plan with test data</span>
-            </div>
-
-            <h3>📊 Test Data</h3>
-            <ul>
-                <li><strong>Normal:</strong> Typical valid input. E.g. age = 25 for an 0-130 age field</li>
-                <li><strong>Boundary:</strong> Values at the edge of valid range. E.g. age = 0, age = 130</li>
-                <li><strong>Invalid:</strong> Values outside acceptable range. E.g. age = -5, age = 200</li>
-                <li><strong>Erroneous:</strong> Completely wrong data type. E.g. age = "twenty-five"</li>
-            </ul>
-
-            <h3>🐛 Error Handling</h3>
-            <ul>
-                <li><strong>Syntax errors:</strong> Breaking language rules — missing brackets, wrong spelling. Caught by translator/IDE. Won't run at all</li>
-                <li><strong>Logic errors:</strong> Code runs but produces wrong answer. E.g. using + instead of -, wrong formula. Not caught by computer — need testing</li>
-                <li><strong>Runtime errors:</strong> Crash during execution — division by zero, file not found, out of memory. Handled with <em>exception handling</em> (TRY...EXCEPT/ON ERROR)</li>
-            </ul>
-
-            <div class="rev-mnem">
-                <div class="mnem-label">🧠 Mnemonic: Test Data Types</div>
-                <p><code>N B I E</code> — <strong>N</strong>othing <strong>B</strong>ut <strong>I</strong>nvalid <strong>E</strong>rror<br>
-                <strong>N</strong>ormal, <strong>B</strong>oundary, <strong>I</strong>nvalid, <strong>E</strong>rroneous</p>
-            </div>
-
-            <div class="rev-exam-tip">
-                <strong>🎯 Exam tip:</strong> A common 4-mark question gives you a table and asks you to "complete the test plan." For each test, you must give: (1) the input/test data, (2) the type (normal/boundary/invalid/erroneous), (3) the expected result. All three are needed for each mark.
-            </div>
-
-        </div>
-    </details>
-
-    <!-- 2.4 Boolean Logic -->
-    <details class="rev-card" data-topic="2.4">
-        <summary><span class="topic-code">2.4</span> Boolean Logic</summary>
-        <div class="rev-body">
-
-            <h3>🔘 The Three Basic Gates</h3>
-            <table class="rev-table">
-                <tr><th>Gate</th><th>Behaviour</th><th>Truth (A,B→Q)</th><th>🔑 Role</th></tr>
-                <tr><td><strong class="hl">NOT</strong></td><td>Output is opposite of input</td><td>A=0→1, A=1→0</td><td>🔄 The reverser</td></tr>
-                <tr><td><strong class="hl">AND</strong></td><td>Output is 1 only if ALL inputs are 1</td><td>1&1=1, else 0</td><td>🤝 The handshake (both needed)</td></tr>
-                <tr><td><strong class="hl">OR</strong></td><td>Output is 1 if ANY input is 1</td><td>0&0=0, else 1</td><td>🤜 The buffet (any one will do)</td></tr>
-            </table>
-
-
-            <h3>🧩 Combined Gates</h3>
-            <table class="rev-table">
-                <tr><th>Gate</th><th>Behaviour</th><th>Truth (A,B→Q)</th><th>🔑 Role</th></tr>
-                <tr><td><strong class="hl">NAND</strong></td><td>NOT AND — output is opposite of AND. Only 0 when both inputs are 1</td><td>1&1=0, else 1</td><td>🚫 The bouncer (lets everyone in except the duo)</td></tr>
-                <tr><td><strong class="hl">NOR</strong></td><td>NOT OR — output is opposite of OR. Only 1 when both inputs are 0</td><td>0&0=1, else 0</td><td>🛍️ The hermit (only alone is ok)</td></tr>
-                <tr><td><strong class="hl">XOR</strong></td><td>Exclusive OR — output is 1 when inputs are DIFFERENT</td><td>0&0=0, 0&1=1, 1&0=1, 1&1=0</td><td>🔀 The difference detector</td></tr>
-            </table>
-
-
-            <h3>📋 Tips for Truth Tables</h3>
-            <ul>
-                <li>N inputs = 2ᴺ rows. 2 inputs = 4 rows; 3 inputs = 8 rows</li>
-                <li>Write intermediate columns (one per gate) — don't jump straight to the output</li>
-                <li>Pattern: for column A, alternate 0s and 1s. For column B, alternate 00s and 11s</li>
-                <li><strong>De Morgan's Laws:</strong> <code>NOT(A AND B) = NOT A OR NOT B</code> and <code>NOT(A OR B) = NOT A AND NOT B</code>. Makes complex expressions simpler</li>
-            </ul>
-
-            <h3>🔣 Logic Expressions from Truth Tables</h3>
-            <ul>
-                <li>Look for rows where Q=1</li>
-                <li>Write each as an AND expression (minterm)</li>
-                <li>Combine with OR. E.g. (A AND NOT B) OR (NOT A AND B) = A XOR B</li>
-            </ul>
-
-            <div class="rev-mnem">
-                <div class="mnem-label">🧠 Mnemonic: Truth Table Row Patterns</div>
-                <p><code>A: 0101 • B: 0011</code><br>
-                Column A: 0,1,0,1 (alternate every 1 row). Column B: 0,0,1,1 (alternate every 2 rows). This pattern scales — for 3 inputs, C alternates every 4 rows (0,0,0,0,1,1,1,1).</p>
-            </div>
-
-            <div class="rev-mnem">
-                <div class="mnem-label">🧠 Mnemonic: De Morgan's Laws</div>
-                <p><code>"Break the bar, change the sign"</code><br>
-                When you push a NOT through a bracket:<br>
-                NOT(A AND B) = <strong>break the AND → OR</strong> = NOT A OR NOT B<br>
-                NOT(A OR B) = <strong>break the OR → AND</strong> = NOT A AND NOT B</p>
-            </div>
-
-            <div class="rev-exam-tip">
-                <strong>🎯 Exam tip:</strong> For "draw a logic circuit" questions, <em>always</em> label intermediate points. E.g. if the expression is (A AND B) OR C, label the output of the AND gate as "D" then show D OR C as the final output. This gets you method marks even if you connect wires wrong.
-            </div>
-
-        </div>
-    </details>
-
-    <!-- 2.5 Languages and IDEs -->
-    <details class="rev-card" data-topic="2.5">
-        <summary><span class="topic-code">2.5</span> Programming Languages and IDEs</summary>
-        <div class="rev-body">
-
-            <h3>📊 High-Level vs Low-Level</h3>
-            <div class="rev-key">
-                <span class="label">High-level</span>
-                <span class="value">Closer to human language (English-like). One instruction = many machine code instructions. Easier to read, write, debug. Portable (runs on different hardware). E.g. Python, Java, JavaScript, C#</span>
-                <span class="label">Low-level / Assembly</span>
-                <span class="value">Closer to hardware. One instruction = one machine code instruction. Direct access to CPU registers, memory addresses. Mnenomics (ADD, MOV, JMP) instead of binary. Fast, but hard to write. Not portable</span>
-            </div>
-
-            <h3>🔄 Translators</h3>
-            <table class="rev-table">
-                <tr><th>Translator</th><th>How It Works</th><th>🔑 Role</th></tr>
-                <tr><td><strong class="hl">Compiler</strong></td><td>Translates entire source code into machine code in one go. Produces executable. Faster execution, slower to compile</td><td>📗 The book translator (translates the whole book)</td></tr>
-                <tr><td><strong class="hl">Interpreter</strong></td><td>Translates and executes one line at a time. Stops at first error. Great for development</td><td>🎤 The simultaneous interpreter (translates as you speak)</td></tr>
-                <tr><td><strong class="hl">Assembler</strong></td><td>Translates assembly language (mnemonics) directly into machine code. One-to-one translation</td><td>🔠 The direct translator (word for word)</td></tr>
-            </table>
-
-
-            <h3>🛠️ IDE Features</h3>
-            <ul>
-                <li><strong>Text editor:</strong> Write and edit code. Features: syntax highlighting (colours keywords), line numbers, auto-indentation</li>
-                <li><strong>Debugger:</strong> Helps find errors. Set <em>breakpoints</em> (pause execution at a specific line). Step through code line by line. Inspect variable values at each step</li>
-                <li><strong>Error diagnostics:</strong> Highlights syntax errors as you type (red underlines). Suggests fixes. Shows error messages in a panel</li>
-                <li><strong>Run-time environment:</strong> Execute the program from within the IDE. See output in console/terminal window</li>
-            </ul>
-
-            <div class="rev-mnem">
-                <div class="mnem-label">🧠 Mnemonic: Compiler vs Interpreter</div>
-                <p><code>📝 Whole essay (compiler) vs 🗣️ Simultaneous interpreter</code><br>
-                Compiler = read entire book, then give me the translation once. Interpreter = translate as you read, sentence by sentence.</p>
-            </div>
-
-            <div class="rev-mnem">
-                <div class="mnem-label">🧠 Mnemonic: IDE Features</div>
-                <p><code>T E D R</code> — <strong>T</strong>ed makes <strong>E</strong>very <strong>D</strong>eveloper <strong>R</strong>un<br>
-                <strong>T</strong>ext editor, <strong>E</strong>rror diagnostics, <strong>D</strong>ebugger, <strong>R</strong>un-time environment</p>
-            </div>
-
-            <div class="rev-exam-tip">
-                <strong>🎯 Exam tip:</strong> "Compare a compiler and an interpreter" is a classic 4-mark question. Use comparative language: "A compiler translates all code at once, WHEREAS an interpreter translates line by line. A compiler produces an executable, WHEREAS an interpreter does not." Each "whereas" = +1 mark.
-            </div>
-
-        </div>
-    </details>
-
-    <!-- End of revision cards -->
-
-    <div style="margin-top:24px;padding:16px 20px;background:rgba(34,211,238,0.04);border:1px dashed rgba(34,211,238,0.15);border-radius:10px;font-size:14px;color:#94a3b8;line-height:1.6;">
-        <strong style="color:#67e8f9;">🎓 Need more help?</strong> Use the <a href="/tutor" style="color:#22d3ee;">AI Tutor</a> for personalised explanations, practise with <a href="/exam" style="color:#22d3ee;">Exam mode</a>, or download the <a href="/resources" style="color:#22d3ee;">Cheat Sheets</a> for a condensed overview.
-    </div>
-
 </div>
-
-<script>
-function expandAll() {
-    document.querySelectorAll('.rev-card').forEach(d => d.open = true);
-}
-function collapseAll() {
-    document.querySelectorAll('.rev-card').forEach(d => d.open = false);
-}
-
-function filterRevTopic(topic) {
-    const pills = document.querySelectorAll('#revTopicPills .rev-topic-pill');
-    const cards = document.querySelectorAll('.rev-card');
-    let visible = 0;
-    pills.forEach(p => {
-        if (p.dataset.topic === topic) {
-            p.classList.toggle('active');
-        }
-    });
-    const activeTopics = new Set();
-    document.querySelectorAll('#revTopicPills .rev-topic-pill.active').forEach(p => activeTopics.add(p.dataset.topic));
-    cards.forEach(c => {
-        const t = c.dataset.topic;
-        const show = activeTopics.has('all') || activeTopics.has(t);
-        c.style.display = show ? '' : 'none';
-        if (show) visible++;
-    });
-    document.getElementById('revCount').textContent = 'Showing ' + visible + ' topics';
-}
-
-function printSelected() {
-    const cards = document.querySelectorAll('.rev-card');
-    cards.forEach(c => {
-        if (c.style.display !== 'none') c.open = true;
-    });
-    setTimeout(() => window.print(), 200);
-}
-</script>
-
 {% endblock %}

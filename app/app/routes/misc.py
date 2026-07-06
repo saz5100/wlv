@@ -728,7 +728,7 @@ KEY TERMINOLOGY REQUIRED:
         base_url = os.environ.get("OLLAMA_CLOUD_BASE_URL", "https://ollama.com/v1")
         model = os.environ.get("OLLAMA_CLOUD_MODEL", "deepseek-v4-flash")
 
-        prompt = f"""You are a WLV Computer Science examiner marking a {marks}-mark {command_word} question.
+        prompt = f"""You are a WLV examiner marking a {marks}-mark {command_word} question.
 
 QUESTION:
 {question}
@@ -743,7 +743,7 @@ Mark the answer out of {marks}. Use the real mark scheme above as your primary r
 - "feedback": string (2-3 sentences of overall feedback)
 - "strengths": list of strings (what the student did well)
 - "weaknesses": list of strings (what could be improved)
-- "key_terms_missed": list of strings (important WLV Computer Science terminology the student should have included in their answer but did not. CRITICAL: every question has at least 3-5 key terms that should appear. List the specific terms missing. If the student used all relevant terms, still list 2-3 terms they could have added for a grade 9 answer.)
+- "key_terms_missed": list of strings (important WLV terminology the student should have included in their answer but did not. CRITICAL: every question has at least 3-5 key terms that should appear. List the specific terms missing. If the student used all relevant terms, still list 2-3 terms they could have added for a top-grade answer.)
 - "model_answer": string (a grade 9 model answer for this question)
 - "ao_breakdown": object with "ao1" (knowledge), "ao2" (explanation), "ao3" (evaluation) scores out of the marks available for each AO. For a {marks}-mark {command_word} question: if {command_word} == "Explain" use AO1=~40%, AO2=~60%, AO3=0%. If {command_word} == "Evaluate" use AO1=~25%, AO2=~35%, AO3=~40%. Estimate the student's marks per AO.
 

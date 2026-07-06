@@ -1,1272 +1,144 @@
 {% extends "base.html" %}
-{% block title %}Reference | WLV Computer Science{% endblock %}
+{% block title %}Reference — WLV — University of Wolverhampton{% endblock %}
 {% block content %}
 <div class="hero" style="padding: 30px 0 15px;">
-    <h1>📖 WLV Reference</h1>
-    <p class="hero-sub">Comparison tables, architecture diagrams, and quick-reference guides</p>
+    <h1>📖 Reference</h1>
+    <p class="hero-sub">Quick-reference guides, frameworks, and key information for university study</p>
 </div>
 
 <style>
-.ref-intro {
-    max-width: 960px;
-    margin: 0 auto 20px;
-    padding: 20px 24px;
-    background: rgba(17, 24, 39, 0.7);
-    border: 1px solid rgba(34, 211, 238, 0.12);
-    border-radius: var(--r-xl);
-    line-height: 1.7;
-    font-size: 14px;
-}
-.light-theme .ref-intro {
-    background: rgba(255, 255, 255, 0.8);
-    border-color: rgba(8, 145, 178, 0.15);
-}
-
-.ref-container {
-    max-width: 960px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-}
-
-/* ── Section ── */
-.ref-section {
-    background: rgba(17, 24, 39, 0.85);
-    border: 1px solid rgba(34, 211, 238, 0.12);
-    border-radius: var(--r-xl);
-    overflow: hidden;
-}
-.light-theme .ref-section {
-    background: rgba(255, 255, 255, 0.9);
-    border-color: rgba(8, 145, 178, 0.12);
-}
-.ref-section-header {
-    padding: 14px 20px;
-    background: rgba(8, 11, 20, 0.4);
-    border-bottom: 1px solid rgba(34, 211, 238, 0.08);
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--c-heading);
-    cursor: pointer;
-    user-select: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.light-theme .ref-section-header {
-    background: rgba(0, 0, 0, 0.03);
-}
-.ref-section-header .toggle-icon {
-    font-size: 14px;
-    color: var(--c-text-secondary);
-    transition: transform 0.2s;
-}
-.ref-section-header.open .toggle-icon {
-    transform: rotate(180deg);
-}
-.ref-section-body {
-    padding: 20px;
-    display: none;
-}
-.ref-section-body.open {
-    display: block;
-}
-
-/* ── Comparison Tables ── */
-.ref-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
-    margin-bottom: 16px;
-}
-.ref-table:last-child { margin-bottom: 0; }
-.ref-table th {
-    background: rgba(34, 211, 238, 0.06);
-    color: var(--c-accent);
-    padding: 10px 14px;
-    text-align: left;
-    border-bottom: 2px solid var(--c-border);
-    font-weight: 700;
-}
-.ref-table td {
-    padding: 10px 14px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-    color: var(--c-text);
-    line-height: 1.5;
-}
-.light-theme .ref-table td {
-    border-color: rgba(0, 0, 0, 0.04);
-}
-.ref-table tr:hover td {
-    background: rgba(34, 211, 238, 0.02);
-}
-.ref-table .highlight {
-    color: var(--c-accent);
-    font-weight: 600;
-}
-.ref-table .tag {
-    display: inline-block;
-    font-size: 11px;
-    font-weight: 700;
-    padding: 2px 8px;
-    border-radius: 99px;
-    margin-right: 4px;
-}
-.ref-table .tag-green { background: rgba(52, 211, 153, 0.12); color: #34d399; }
-.ref-table .tag-amber { background: rgba(250, 204, 21, 0.12); color: #facc15; }
-.ref-table .tag-red { background: rgba(244, 63, 94, 0.12); color: #f43f5e; }
-.ref-table .tag-purple { background: rgba(168, 85, 247, 0.12); color: #a855f7; }
-
-/* ── Architecture Diagram ── */
-.ref-diagram {
-    background: #0d1225;
-    border: 1px solid rgba(34, 211, 238, 0.1);
-    border-radius: var(--r-lg);
-    padding: 24px;
-    text-align: center;
-    overflow-x: auto;
-    margin-bottom: 16px;
-}
-.light-theme .ref-diagram {
-    background: #fafafa;
-}
-.ref-diagram svg {
-    max-width: 100%;
-    height: auto;
-}
-.ref-diagram-caption {
-    font-size: 12px;
-    color: var(--c-text-secondary);
-    text-align: center;
-    margin-top: 8px;
-    font-style: italic;
-}
-
-/* ── Key Points ── */
-.ref-key-points {
-    margin-top: 12px;
-    padding: 12px 16px;
-    background: rgba(34, 211, 238, 0.04);
-    border-left: 3px solid var(--c-accent);
-    border-radius: 0 var(--r-md) var(--r-md) 0;
-    font-size: 13px;
-    line-height: 1.6;
-}
-.light-theme .ref-key-points {
-    background: rgba(8, 145, 178, 0.04);
-}
-.ref-key-points strong {
-    color: var(--c-accent);
-}
-
-/* ── Tab Navigation ── */
-.ref-tabs {
-    display: flex;
-    gap: 4px;
-    margin-bottom: 16px;
-    flex-wrap: wrap;
-}
-.ref-tab {
-    padding: 8px 16px;
-    border-radius: var(--r-md);
-    border: 1px solid var(--c-border);
-    background: transparent;
-    color: var(--c-text-secondary);
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.15s;
-}
-.ref-tab:hover {
-    border-color: var(--c-accent);
-    color: var(--c-text);
-}
-.ref-tab.active {
-    background: var(--c-accent);
-    color: #000;
-    border-color: var(--c-accent);
-}
-.ref-tab-content {
-    display: none;
-}
-.ref-tab-content.active {
-    display: block;
-}
-
-    @media (max-width: 768px) {
-        .ref-table { font-size: 12px; }
-        .ref-table th, .ref-table td { padding: 6px 8px; }
-    }
-
-    /* ── Quiz Section ── */
-    .ref-quiz-section { margin-top: 40px; padding-top: 32px; border-top: 2px solid var(--c-border); max-width: 960px; margin-left: auto; margin-right: auto; }
-    .ref-quiz-section h2 { font-size: 22px; color: var(--c-heading); margin-bottom: 4px; }
-    .ref-quiz-section .quiz-sub { font-size: 13px; color: var(--c-text-secondary); margin-bottom: 20px; }
-    .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 8px; }
-    .quiz-progress-bar { height: 6px; background: var(--c-border); border-radius: 3px; flex: 1; min-width: 100px; max-width: 400px; }
-    .quiz-progress-fill { height: 100%; background: var(--c-accent); border-radius: 3px; transition: width 0.3s ease; }
-    .quiz-score-running { font-size: 14px; color: var(--c-text-secondary); font-weight: 500; }
-    .quiz-tab { display: none; }
-    .quiz-tab.active { display: block; }
-    .quiz-counter { text-align: center; font-size: 14px; font-weight: 700; color: var(--c-accent); margin: 8px 0 16px; letter-spacing: 1px; }
-    .quiz-nav { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 20px 0 12px; }
-    .quiz-nav-btn { padding: 8px 16px; border-radius: 8px; border: 1px solid var(--c-border); background: rgba(17,24,39,0.88); color: var(--c-text); font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.15s; white-space: nowrap; }
-    .light-theme .quiz-nav-btn { background: rgba(243,244,246,0.88); }
-    .quiz-nav-btn:hover { border-color: var(--c-accent); }
-    .quiz-nav-btn:disabled { opacity: 0.3; cursor: default; }
-    .quiz-dots { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
-    .quiz-dot { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; cursor: pointer; background: rgba(17,24,39,0.6); border: 2px solid var(--c-border); color: var(--c-text-secondary); transition: all 0.15s; }
-    .light-theme .quiz-dot { background: rgba(243,244,246,0.6); }
-    .quiz-dot:hover { border-color: var(--c-accent); color: var(--c-text); }
-    .quiz-dot.active { border-color: var(--c-accent); background: var(--c-accent); color: #000; }
-    .quiz-dot.answered { border-color: var(--c-green); background: rgba(52,211,153,0.15); color: var(--c-green); }
-    .ref-quiz-q { padding: 18px 20px; background: rgba(13,18,37,0.8); border-radius: var(--r-xl); border: 1px solid rgba(34,211,238,0.10); }
-    .light-theme .ref-quiz-opt { background: rgba(255,255,255,0.88); }
-    .ref-quiz-opt:hover { border-color: var(--c-accent); }
-    .ref-quiz-opt.selected { border-color: var(--c-accent); background: rgba(8,41,73,0.85); }
-    .light-theme .ref-quiz-opt.selected { background: rgba(236,254,255,0.85); }
-    .ref-quiz-opt.correct { border-color: var(--c-green); background: rgba(2,44,34,0.75); color: var(--c-green); }
-    .ref-quiz-opt.incorrect { border-color: var(--c-rose); background: rgba(69,10,10,0.75); color: var(--c-rose); }
-    .ref-quiz-exp { display: none; margin-top: 10px; padding: 10px 14px; background: rgba(8,41,73,0.7); border-radius: 8px; font-size: 13px; border-left: 3px solid var(--c-accent); line-height: 1.5; }
-    .light-theme .ref-quiz-exp { background: rgba(236,254,255,0.7); }
-    .ref-quiz-exp.show { display: block; }
-    .ref-quiz-score { margin-top: 20px; padding: 16px; border-radius: 12px; text-align: center; border: 2px solid var(--c-green); background: rgba(2,44,34,0.3); font-size: 18px; font-weight: 700; display: none; }
-    .light-theme .ref-quiz-score { background: rgba(240,253,244,0.5); }
-    .ref-quiz-score.show { display: block; }
-
-    /* ── Key Terminology ── */
-    .ref-terms-section { margin-top: 40px; padding-top: 32px; border-top: 2px solid var(--c-border); max-width: 960px; margin-left: auto; margin-right: auto; }
-    .ref-terms-section h2 { font-size: 22px; color: var(--c-heading); margin-bottom: 4px; }
-    .ref-terms-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; margin-top: 16px; }
-    .ref-term-card { padding: 14px 16px; border-radius: var(--r-lg); border: 1px solid rgba(34,211,238,0.1); background: rgba(8,11,20,0.4); }
-    .light-theme .ref-term-card { background: rgba(0,0,0,0.03); }
-    .ref-term-card .term-badge { display: inline-block; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 99px; background: rgba(168,85,247,0.12); color: #a855f7; border: 1px solid rgba(168,85,247,0.15); margin-bottom: 6px; }
-    .ref-term-card .term-def { font-size: 13px; color: var(--c-text-secondary); line-height: 1.5; }
-
-    /* ── Sorting Visualizer ── */
-    .ref-sort-section { margin-top: 40px; padding-top: 32px; border-top: 2px solid var(--c-border); max-width: 960px; margin-left: auto; margin-right: auto; }
-    .ref-sort-section h2 { font-size: 22px; color: var(--c-heading); margin-bottom: 4px; }
-    .ref-sort-controls { display: flex; gap: 10px; flex-wrap: wrap; margin: 16px 0; align-items: center; }
-    .ref-sort-controls select, .ref-sort-controls button { padding: 8px 16px; border-radius: 8px; border: 1px solid var(--c-border); background: rgba(17,24,39,0.88); color: var(--c-text); font-size: 13px; font-weight: 600; cursor: pointer; }
-    .light-theme .ref-sort-controls select, .light-theme .ref-sort-controls button { background: rgba(243,244,246,0.88); }
-    .ref-sort-controls button:hover { border-color: var(--c-accent); }
-    .ref-sort-bars { display: flex; gap: 6px; align-items: flex-end; height: 200px; padding: 16px; background: rgba(13,18,37,0.6); border-radius: var(--r-lg); border: 1px solid rgba(34,211,238,0.08); margin-bottom: 12px; }
-    .light-theme .ref-sort-bars { background: rgba(243,244,246,0.6); }
-    .ref-sort-bar { flex: 1; border-radius: 4px 4px 0 0; transition: height 0.15s, background 0.15s; min-width: 20px; display: flex; align-items: flex-end; justify-content: center; font-size: 10px; font-weight: 700; color: #000; padding-bottom: 4px; }
-    .ref-sort-bar.comparing { background: #facc15 !important; }
-    .ref-sort-bar.swapping { background: #f43f5e !important; }
-    .ref-sort-bar.sorted { background: #34d399 !important; }
-    .ref-sort-info { font-size: 13px; color: var(--c-text-secondary); text-align: center; margin-top: 8px; }
-
-    /* ── Match Exercise ── */
-    .ref-match-section { margin-top: 40px; padding-top: 32px; border-top: 2px solid var(--c-border); max-width: 960px; margin-left: auto; margin-right: auto; }
-    .ref-match-section h2 { font-size: 22px; color: var(--c-heading); margin-bottom: 4px; }
-    .ref-match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
-    @media (max-width: 600px) { .ref-match-grid { grid-template-columns: 1fr; } }
-    .ref-match-item { padding: 12px 16px; border-radius: var(--r-lg); border: 2px solid var(--c-border); background: rgba(13,18,37,0.8); cursor: pointer; transition: all 0.15s; text-align: center; font-size: 14px; font-weight: 600; }
-    .light-theme .ref-match-item { background: rgba(243,244,246,0.8); }
-    .ref-match-item:hover { border-color: var(--c-accent); }
-    .ref-match-item.selected { border-color: var(--c-accent); background: rgba(8,41,73,0.85); }
-    .ref-match-item.matched { border-color: var(--c-green); background: rgba(2,44,34,0.5); color: var(--c-green); cursor: default; }
-    .ref-match-item.wrong { border-color: var(--c-rose); background: rgba(69,10,10,0.5); color: var(--c-rose); animation: shake 0.3s; }
-    .ref-match-desc { font-size: 12px; color: var(--c-text-secondary); margin-top: 4px; font-weight: 400; }
+.ref-intro { max-width: 900px; margin: 0 auto 20px; padding: 20px 24px; background: rgba(17, 24, 39, 0.7); border: 1px solid rgba(34, 211, 238, 0.12); border-radius: var(--r-xl); line-height: 1.7; font-size: 14px; }
+.light-theme .ref-intro { background: rgba(255, 255, 255, 0.8); border-color: rgba(8, 145, 178, 0.15); }
+.ref-intro h3 { color: var(--c-heading); margin-bottom: 8px; font-size: 17px; }
+.ref-section { max-width: 900px; margin: 0 auto 16px; background: rgba(17, 24, 39, 0.85); border: 1px solid rgba(34, 211, 238, 0.12); border-radius: var(--r-xl); overflow: hidden; }
+.light-theme .ref-section { background: rgba(255, 255, 255, 0.9); border-color: rgba(8, 145, 178, 0.12); }
+.ref-section summary { padding: 16px 22px; font-size: 17px; font-weight: 700; color: var(--c-heading); cursor: pointer; user-select: none; list-style: none; display: flex; align-items: center; gap: 10px; }
+.ref-section summary::-webkit-details-marker { display: none; }
+.ref-section summary::before { content: "▶"; font-size: 12px; color: var(--c-accent); transition: transform 0.2s; }
+.ref-section[open] summary::before { transform: rotate(90deg); }
+.ref-body { padding: 0 22px 20px; }
+.ref-body h3 { font-size: 16px; color: var(--c-heading); margin: 16px 0 8px; }
+.ref-body h3:first-child { margin-top: 0; }
+.ref-body p { font-size: 14px; line-height: 1.7; margin-bottom: 8px; }
+.ref-body ul { padding-left: 20px; margin: 6px 0; }
+.ref-body li { font-size: 14px; line-height: 1.6; margin-bottom: 4px; }
+.ref-body strong { color: var(--c-accent); }
+.ref-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 13px; }
+.ref-table th { background: rgba(34,211,238,0.08); color: var(--c-heading); padding: 8px 10px; text-align: left; font-weight: 700; border-bottom: 2px solid rgba(34,211,238,0.2); }
+.ref-table td { padding: 8px 10px; border-bottom: 1px solid rgba(34,211,238,0.06); vertical-align: top; }
+.light-theme .ref-table td { border-color: rgba(8,145,178,0.08); }
 </style>
 
 <div class="ref-intro">
-    <h3>📖 WLV Reference</h3>
+    <h3>Quick Reference for University Study</h3>
+    <p>This page brings together key frameworks, referencing guides, and reference information for your university studies. Use it as a quick lookup during assignments or revision.</p>
 </div>
 
-<div class="lang-podcast" style="max-width:960px;margin:0 auto 24px;padding:16px 20px;background:rgba(34,211,238,0.04);border:1px solid rgba(34,211,238,0.12);border-radius:12px;">
-    <div class="podcast-header" style="font-size:15px;font-weight:600;color:var(--c-accent);margin-bottom:10px;">🎧 Audio Revision: WLV Reference Guide</div>
-    <audio controls preload="metadata" style="width:100%;border-radius:8px;">
-        <source src="/static/audio/reference_podcast.ogg" type="audio/ogg">
-    </audio>
-</div>
-
-<div class="ref-container">
-
-    <!-- ── Section 1: Von Neumann Architecture ── -->
-    <div class="ref-section">
-        <div class="ref-section-header open" onclick="toggleRefSection(this)">
-            <span>🏗️ Von Neumann Architecture</span>
-            <span class="toggle-icon">▼</span>
-        </div>
-        <div class="ref-section-body open">
-            <div class="ref-diagram">
-                <svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg" style="max-width:700px;">
-                    <!-- CPU Box -->
-                    <rect x="20" y="20" width="300" height="280" rx="12" fill="rgba(34,211,238,0.06)" stroke="#22d3ee" stroke-width="2"/>
-                    <text x="170" y="50" text-anchor="middle" fill="#22d3ee" font-weight="700" font-size="16">CPU (Central Processing Unit)</text>
-
-                    <!-- Control Unit -->
-                    <rect x="50" y="70" width="120" height="60" rx="8" fill="rgba(34,211,238,0.1)" stroke="#22d3ee" stroke-width="1.5"/>
-                    <text x="110" y="100" text-anchor="middle" fill="#e2e8f0" font-weight="600" font-size="13">Control Unit (CU)</text>
-                    <text x="110" y="118" text-anchor="middle" fill="#94a3b8" font-size="10">Decodes instructions</text>
-
-                    <!-- ALU -->
-                    <rect x="190" y="70" width="100" height="60" rx="8" fill="rgba(168,85,247,0.1)" stroke="#a855f7" stroke-width="1.5"/>
-                    <text x="240" y="100" text-anchor="middle" fill="#e2e8f0" font-weight="600" font-size="13">ALU</text>
-                    <text x="240" y="118" text-anchor="middle" fill="#94a3b8" font-size="10">Calculations</text>
-
-                    <!-- Registers -->
-                    <rect x="50" y="150" width="240" height="50" rx="8" fill="rgba(250,204,21,0.06)" stroke="#facc15" stroke-width="1.5"/>
-                    <text x="170" y="172" text-anchor="middle" fill="#e2e8f0" font-weight="600" font-size="12">Registers: PC · MAR · MDR · CIR · ACC</text>
-                    <text x="170" y="190" text-anchor="middle" fill="#94a3b8" font-size="10">Temporary storage inside CPU</text>
-
-                    <!-- Cache -->
-                    <rect x="50" y="215" width="240" height="35" rx="8" fill="rgba(52,211,153,0.06)" stroke="#34d399" stroke-width="1.5"/>
-                    <text x="170" y="238" text-anchor="middle" fill="#e2e8f0" font-weight="600" font-size="12">Cache (L1/L2/L3)</text>
-
-                    <!-- Memory -->
-                    <rect x="350" y="20" width="150" height="120" rx="12" fill="rgba(52,211,153,0.06)" stroke="#34d399" stroke-width="2"/>
-                    <text x="425" y="50" text-anchor="middle" fill="#34d399" font-weight="700" font-size="14">Main Memory</text>
-                    <text x="425" y="72" text-anchor="middle" fill="#e2e8f0" font-size="12">RAM</text>
-                    <text x="425" y="90" text-anchor="middle" fill="#94a3b8" font-size="10">Stores running</text>
-                    <text x="425" y="105" text-anchor="middle" fill="#94a3b8" font-size="10">programs &amp; data</text>
-                    <text x="425" y="125" text-anchor="middle" fill="#64748b" font-size="9">Volatile</text>
-
-                    <!-- ROM -->
-                    <rect x="350" y="155" width="150" height="60" rx="12" fill="rgba(244,63,94,0.06)" stroke="#f43f5e" stroke-width="2"/>
-                    <text x="425" y="180" text-anchor="middle" fill="#f43f5e" font-weight="700" font-size="14">ROM</text>
-                    <text x="425" y="200" text-anchor="middle" fill="#94a3b8" font-size="10">Boot instructions</text>
-
-                    <!-- Control Bus connection from CPU to Memory -->
-                    <line x1="320" y1="60" x2="350" y2="60" stroke="#facc15" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrowYellow)"/>
-                    <text x="335" y="52" text-anchor="middle" fill="#facc15" font-size="9">Control Bus</text>
-
-                    <!-- Data Bus arrow -->
-                    <line x1="320" y1="80" x2="350" y2="80" stroke="#22d3ee" stroke-width="2" marker-end="url(#arrowBlue)"/>
-                    <text x="335" y="92" text-anchor="middle" fill="#22d3ee" font-size="9">Data Bus</text>
-
-                    <!-- Address Bus arrow -->
-                    <line x1="350" y1="100" x2="320" y2="100" stroke="#a855f7" stroke-width="2" marker-end="url(#arrowPurple)"/>
-                    <text x="335" y="118" text-anchor="middle" fill="#a855f7" font-size="9">Address Bus</text>
-
-                    <!-- I/O -->
-                    <rect x="530" y="20" width="150" height="100" rx="12" fill="rgba(250,204,21,0.06)" stroke="#facc15" stroke-width="2"/>
-                    <text x="605" y="50" text-anchor="middle" fill="#facc15" font-weight="700" font-size="14">I/O Controllers</text>
-                    <text x="605" y="72" text-anchor="middle" fill="#e2e8f0" font-size="11">Keyboard, Mouse</text>
-                    <text x="605" y="90" text-anchor="middle" fill="#e2e8f0" font-size="11">Monitor, Disk</text>
-                    <text x="605" y="108" text-anchor="middle" fill="#94a3b8" font-size="10">Connect peripherals</text>
-
-                    <!-- Storage -->
-                    <rect x="530" y="140" width="150" height="80" rx="12" fill="rgba(168,85,247,0.06)" stroke="#a855f7" stroke-width="2"/>
-                    <text x="605" y="170" text-anchor="middle" fill="#a855f7" font-weight="700" font-size="14">Storage</text>
-                    <text x="605" y="192" text-anchor="middle" fill="#e2e8f0" font-size="11">HDD / SSD</text>
-                    <text x="605" y="208" text-anchor="middle" fill="#94a3b8" font-size="10">Non-volatile</text>
-
-                    <!-- Arrows from memory to I/O -->
-                    <line x1="500" y1="60" x2="530" y2="60" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3"/>
-                    <line x1="500" y1="180" x2="530" y2="180" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3"/>
-
-                    <!-- Arrow markers -->
-                    <defs>
-                        <marker id="arrowBlue" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-                            <path d="M0,0 L8,3 L0,6" fill="#22d3ee"/>
-                        </marker>
-                        <marker id="arrowPurple" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-                            <path d="M0,0 L8,3 L0,6" fill="#a855f7"/>
-                        </marker>
-                        <marker id="arrowYellow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-                            <path d="M0,0 L8,3 L0,6" fill="#facc15"/>
-                        </marker>
-                    </defs>
-                </svg>
-                <div class="ref-diagram-caption">Von Neumann Architecture — CPU, Memory, Buses, and I/O</div>
-            </div>
-
-            <div class="ref-key-points">
-                <strong>Key Points:</strong>
-                <ul style="margin:6px 0 0 16px;padding:0;">
-                    <li>Von Neumann architecture stores <strong>both data and instructions</strong> in the same memory</li>
-                    <li>The <strong>Fetch-Decode-Execute cycle</strong> is the fundamental process by which the CPU processes instructions</li>
-                    <li>Three buses connect CPU to memory: <strong>Data Bus</strong> (carries data), <strong>Address Bus</strong> (carries memory addresses), <strong>Control Bus</strong> (carries control signals)</li>
-                    <li>Registers are <strong>fast, temporary storage locations</strong> inside the CPU</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <!-- ── Section 2: Storage Comparison ── -->
-    <div class="ref-section">
-        <div class="ref-section-header" onclick="toggleRefSection(this)">
-            <span>💾 Storage Comparison: HDD vs SSD vs Optical vs Magnetic Tape</span>
-            <span class="toggle-icon">▼</span>
-        </div>
-        <div class="ref-section-body">
-            <table class="ref-table">
-                <thead>
-                    <tr>
-                        <th>Feature</th>
-                        <th>HDD</th>
-                        <th>SSD</th>
-                        <th>Optical (CD/DVD/BD)</th>
-                        <th>Magnetic Tape</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Technology</strong></td>
-                        <td>Magnetic spinning platters</td>
-                        <td>Flash memory (NAND)</td>
-                        <td>Laser-read pits on disc</td>
-                        <td>Magnetic tape reel</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Speed</strong></td>
-                        <td><span class="tag tag-amber">Medium</span></td>
-                        <td><span class="tag tag-green">Fast</span></td>
-                        <td><span class="tag tag-red">Slow</span></td>
-                        <td><span class="tag tag-red">Very Slow</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Capacity</strong></td>
-                        <td>Up to 20TB+</td>
-                        <td>Up to 8TB</td>
-                        <td>4.7GB–128GB</td>
-                        <td>Up to 20TB+ per cartridge</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Cost per GB</strong></td>
-                        <td><span class="tag tag-green">Low</span></td>
-                        <td><span class="tag tag-amber">Medium</span></td>
-                        <td><span class="tag tag-green">Low</span></td>
-                        <td><span class="tag tag-green">Very Low</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Durability</strong></td>
-                        <td><span class="tag tag-red">Fragile</span> (moving parts)</td>
-                        <td><span class="tag tag-green">Durable</span> (no moving parts)</td>
-                        <td><span class="tag tag-amber">Moderate</span> (scratch risk)</td>
-                        <td><span class="tag tag-amber">Moderate</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Portability</strong></td>
-                        <td>Bulkier, heavier</td>
-                        <td>Lightweight, compact</td>
-                        <td>Lightweight</td>
-                        <td>Bulky drive needed</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Best for</strong></td>
-                        <td>Desktop storage, servers</td>
-                        <td>Laptops, phones, gaming</td>
-                        <td>Media distribution, archiving</td>
-                        <td>Backup, archiving</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Defrag needed?</strong></td>
-                        <td><span class="tag tag-green">Yes</span> — improves speed</td>
-                        <td><span class="tag tag-red">No</span> — reduces lifespan</td>
-                        <td>N/A</td>
-                        <td>N/A</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <!-- ── Section 3: Python vs ERL ── -->
-    <div class="ref-section">
-        <div class="ref-section-header" onclick="toggleRefSection(this)">
-            <span>🐍 Python vs 📝 OCR ERL (Exam Reference Language)</span>
-            <span class="toggle-icon">▼</span>
-        </div>
-        <div class="ref-section-body">
-            <table class="ref-table">
-                <thead>
-                    <tr>
-                        <th>Concept</th>
-                        <th>Python</th>
-                        <th>OCR ERL</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Assignment</strong></td>
-                        <td><code>x = 5</code></td>
-                        <td><code>x ← 5</code></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Output</strong></td>
-                        <td><code>print("Hello")</code></td>
-                        <td><code>OUTPUT "Hello"</code></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Input</strong></td>
-                        <td><code>input()</code></td>
-                        <td><code>INPUT x</code></td>
-                    </tr>
-                    <tr>
-                        <td><strong>IF statement</strong></td>
-                        <td><code>if x > 5:</code></td>
-                        <td><code>IF x > 5 THEN</code></td>
-                    </tr>
-                    <tr>
-                        <td><strong>ELIF</strong></td>
-                        <td><code>elif x > 3:</code></td>
-                        <td><code>ELIF x > 3 THEN</code></td>
-                    </tr>
-                    <tr>
-                        <td><strong>END IF</strong></td>
-                        <td>Indentation</td>
-                        <td><code>ENDIF</code></td>
-                    </tr>
-                    <tr>
-                        <td><strong>FOR loop</strong></td>
-                        <td><code>for i in range(1, 6):</code></td>
-                        <td><code>FOR i ← 1 TO 5</code></td>
-                    </tr>
-                    <tr>
-                        <td><strong>NEXT</strong></td>
-                        <td>Indentation</td>
-                        <td><code>NEXT i</code></td>
-                    </tr>
-                    <tr>
-                        <td><strong>WHILE loop</strong></td>
-                        <td><code>while x > 0:</code></td>
-                        <td><code>WHILE x > 0 DO</code></td>
-                    </tr>
-                    <tr>
-                        <td><strong>ENDWHILE</strong></td>
-                        <td>Indentation</td>
-                        <td><code>ENDWHILE</code></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Array index</strong></td>
-                        <td><code>arr[0]</code> (0-indexed)</td>
-                        <td><code>arr[1]</code> (1-indexed)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Array length</strong></td>
-                        <td><code>len(arr)</code></td>
-                        <td><code>LEN(arr)</code></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Integer division</strong></td>
-                        <td><code>//</code></td>
-                        <td><code>DIV</code></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Modulus</strong></td>
-                        <td><code>%</code></td>
-                        <td><code>MOD</code></td>
-                    </tr>
-                    <tr>
-                        <td><strong>AND</strong></td>
-                        <td><code>and</code></td>
-                        <td><code>AND</code></td>
-                    </tr>
-                    <tr>
-                        <td><strong>OR</strong></td>
-                        <td><code>or</code></td>
-                        <td><code>OR</code></td>
-                    </tr>
-                    <tr>
-                        <td><strong>NOT</strong></td>
-                        <td><code>not</code></td>
-                        <td><code>NOT</code></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Function</strong></td>
-                        <td><code>def name():</code></td>
-                        <td><code>FUNCTION name()</code></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Return</strong></td>
-                        <td><code>return x</code></td>
-                        <td><code>RETURN x</code></td>
-                    </tr>
-                    <tr>
-                        <td><strong>String length</strong></td>
-                        <td><code>len(s)</code></td>
-                        <td><code>len(s)</code></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Substring</strong></td>
-                        <td><code>s[start:end]</code></td>
-                        <td><code>MID(s, start, n)</code></td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="ref-key-points">
-                <strong>Key Difference:</strong> ERL uses <code>←</code> for assignment, explicit <code>THEN</code>/<code>ENDIF</code>/<code>NEXT</code>/<code>ENDWHILE</code> keywords instead of indentation, and arrays are <strong>1-indexed</strong> (not 0-indexed like Python).
-            </div>
-        </div>
-    </div>
-
-    <!-- ── Section 4: RAM vs ROM ── -->
-    <div class="ref-section">
-        <div class="ref-section-header" onclick="toggleRefSection(this)">
-            <span>🧠 RAM vs ROM</span>
-            <span class="toggle-icon">▼</span>
-        </div>
-        <div class="ref-section-body">
-            <table class="ref-table">
-                <thead>
-                    <tr>
-                        <th>Feature</th>
-                        <th>RAM</th>
-                        <th>ROM</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Full name</strong></td>
-                        <td>Random Access Memory</td>
-                        <td>Read Only Memory</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Volatility</strong></td>
-                        <td><span class="tag tag-red">Volatile</span> — loses data when power off</td>
-                        <td><span class="tag tag-green">Non-volatile</span> — retains data</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Read/Write</strong></td>
-                        <td>Read and write</td>
-                        <td>Read only (normally)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Speed</strong></td>
-                        <td><span class="tag tag-green">Fast</span></td>
-                        <td><span class="tag tag-amber">Slower than RAM</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Purpose</strong></td>
-                        <td>Store running programs and data</td>
-                        <td>Store boot instructions (BIOS/UEFI)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Size</strong></td>
-                        <td>Typically 4GB–64GB</td>
-                        <td>Typically 4MB–16MB</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Contents on startup</strong></td>
-                        <td>Empty (loaded from storage)</td>
-                        <td>Contains firmware permanently</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <!-- ── Section 5: Network Types ── -->
-    <div class="ref-section">
-        <div class="ref-section-header" onclick="toggleRefSection(this)">
-            <span>🌐 Network Types: LAN vs WAN vs PAN vs VPN</span>
-            <span class="toggle-icon">▼</span>
-        </div>
-        <div class="ref-section-body">
-            <table class="ref-table">
-                <thead>
-                    <tr>
-                        <th>Feature</th>
-                        <th>LAN</th>
-                        <th>WAN</th>
-                        <th>PAN</th>
-                        <th>VPN</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Full name</strong></td>
-                        <td>Local Area Network</td>
-                        <td>Wide Area Network</td>
-                        <td>Personal Area Network</td>
-                        <td>Virtual Private Network</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Geographic scope</strong></td>
-                        <td>Single building/site</td>
-                        <td>City/country/global</td>
-                        <td>Few metres (personal)</td>
-                        <td>Logical (overlays other networks)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Ownership</strong></td>
-                        <td>Private (organisation)</td>
-                        <td>Public or leased lines</td>
-                        <td>Personal</td>
-                        <td>Subscription service</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Speed</strong></td>
-                        <td><span class="tag tag-green">Very fast</span> (1–10 Gbps)</td>
-                        <td><span class="tag tag-amber">Slower</span> (1–100 Mbps)</td>
-                        <td><span class="tag tag-green">Fast</span> (Bluetooth/WiFi Direct)</td>
-                        <td>Depends on underlying connection</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Example</strong></td>
-                        <td>School network, office network</td>
-                        <td>Internet, bank branch network</td>
-                        <td>Bluetooth headphones, smartwatch</td>
-                        <td>Remote worker accessing company network</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Hardware</strong></td>
-                        <td>Switch, router, cables</td>
-                        <td>Routers, leased lines, satellites</td>
-                        <td>Bluetooth adapter</td>
-                        <td>VPN server + client software</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <!-- ── Section 6: Sorting Algorithms ── -->
-    <div class="ref-section">
-        <div class="ref-section-header" onclick="toggleRefSection(this)">
-            <span>🔀 Sorting Algorithms: Bubble vs Merge vs Insertion</span>
-            <span class="toggle-icon">▼</span>
-        </div>
-        <div class="ref-section-body">
-            <table class="ref-table">
-                <thead>
-                    <tr>
-                        <th>Feature</th>
-                        <th>Bubble Sort</th>
-                        <th>Merge Sort</th>
-                        <th>Insertion Sort</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Method</strong></td>
-                        <td>Compare adjacent, swap if out of order</td>
-                        <td>Divide list in half, sort each half, merge</td>
-                        <td>Build sorted list one item at a time</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Time complexity</strong></td>
-                        <td><span class="tag tag-red">O(n²)</span></td>
-                        <td><span class="tag tag-green">O(n log n)</span></td>
-                        <td><span class="tag tag-amber">O(n²)</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Best case</strong></td>
-                        <td>O(n) (already sorted with flag)</td>
-                        <td>O(n log n)</td>
-                        <td>O(n) (already sorted)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Space</strong></td>
-                        <td><span class="tag tag-green">O(1)</span> — in-place</td>
-                        <td><span class="tag tag-red">O(n)</span> — needs extra memory</td>
-                        <td><span class="tag tag-green">O(1)</span> — in-place</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Stable?</strong></td>
-                        <td>✅ Yes</td>
-                        <td>✅ Yes</td>
-                        <td>✅ Yes</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Ease of coding</strong></td>
-                        <td><span class="tag tag-green">Easy</span></td>
-                        <td><span class="tag tag-red">Hard</span> (recursive)</td>
-                        <td><span class="tag tag-amber">Medium</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Best for</strong></td>
-                        <td>Small lists, teaching</td>
-                        <td>Large lists, guaranteed performance</td>
-                        <td>Small lists, nearly sorted data</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <!-- ── Section 7: Searching Algorithms ── -->
-    <div class="ref-section">
-        <div class="ref-section-header" onclick="toggleRefSection(this)">
-            <span>🔍 Searching Algorithms: Linear vs Binary</span>
-            <span class="toggle-icon">▼</span>
-        </div>
-        <div class="ref-section-body">
-            <table class="ref-table">
-                <thead>
-                    <tr>
-                        <th>Feature</th>
-                        <th>Linear Search</th>
-                        <th>Binary Search</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Data requirement</strong></td>
-                        <td>Works on any list (sorted or unsorted)</td>
-                        <td><span class="tag tag-red">Requires sorted list</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Method</strong></td>
-                        <td>Check each element from start to end</td>
-                        <td>Repeatedly halve the search space</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Time complexity</strong></td>
-                        <td><span class="tag tag-red">O(n)</span></td>
-                        <td><span class="tag tag-green">O(log n)</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Best case</strong></td>
-                        <td>O(1) — first element</td>
-                        <td>O(1) — middle element</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Worst case</strong></td>
-                        <td>O(n) — last element or not found</td>
-                        <td>O(log n)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Ease of coding</strong></td>
-                        <td><span class="tag tag-green">Very easy</span></td>
-                        <td><span class="tag tag-amber">Medium</span> (needs low/high pointers)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Best for</strong></td>
-                        <td>Small lists, unsorted data</td>
-                        <td>Large sorted lists</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <!-- ── Section 8: Network Topologies ── -->
-    <div class="ref-section">
-        <div class="ref-section-header" onclick="toggleRefSection(this)">
-            <span>🔗 Network Topologies: Star vs Mesh vs Bus</span>
-            <span class="toggle-icon">▼</span>
-        </div>
-        <div class="ref-section-body">
-            <table class="ref-table">
-                <thead>
-                    <tr>
-                        <th>Feature</th>
-                        <th>Star</th>
-                        <th>Mesh</th>
-                        <th>Bus</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Structure</strong></td>
-                        <td>All devices connect to central switch</td>
-                        <td>Every device connects to every other</td>
-                        <td>Single backbone cable, devices tap in</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Cost</strong></td>
-                        <td><span class="tag tag-amber">Medium</span></td>
-                        <td><span class="tag tag-red">High</span> (lots of cabling)</td>
-                        <td><span class="tag tag-green">Low</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Reliability</strong></td>
-                        <td><span class="tag tag-green">High</span> (one cable fails, rest works)</td>
-                        <td><span class="tag tag-green">Very high</span> (multiple paths)</td>
-                        <td><span class="tag tag-red">Low</span> (backbone fails = whole network down)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Performance</strong></td>
-                        <td><span class="tag tag-green">Good</span> (switch manages traffic)</td>
-                        <td><span class="tag tag-green">Excellent</span> (no collisions)</td>
-                        <td><span class="tag tag-red">Poor</span> (collisions, data collisions)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Scalability</strong></td>
-                        <td><span class="tag tag-green">Easy</span> (add to switch)</td>
-                        <td><span class="tag tag-red">Hard</span> (N connections per device)</td>
-                        <td><span class="tag tag-amber">Limited</span> (performance degrades)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Exam use</strong></td>
-                        <td>Most common in modern networks</td>
-                        <td>Critical systems (banks, military)</td>
-                        <td>Legacy/small networks</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-</div>
-
-<!-- ── Key Terminology ── -->
-<div class="ref-terms-section">
-    <h2>📖 Key Terminology</h2>
-    <p style="font-size:13px;color:var(--c-text-secondary);margin-bottom:4px;">Exam-grade terms from the reference tables above.</p>
-    <div class="ref-terms-grid">
-        <div class="ref-term-card"><span class="term-badge">Volatile</span><div class="term-def">Memory that loses its contents when power is turned off. RAM is volatile; ROM is non-volatile.</div></div>
-        <div class="ref-term-card"><span class="term-badge">Non-Volatile</span><div class="term-def">Memory that retains data when power is off. ROM, HDD, SSD are non-volatile.</div></div>
-        <div class="ref-term-card"><span class="term-badge">Defragmentation</span><div class="term-def">Reorganising data on an HDD so related data is stored contiguously, improving read speed. Not needed on SSDs.</div></div>
-        <div class="ref-term-card"><span class="term-badge">Time Complexity</span><div class="term-def">A measure of how the runtime of an algorithm grows as input size increases. Expressed as Big O notation (e.g. O(n), O(n²), O(log n)).</div></div>
-        <div class="ref-term-card"><span class="term-badge">Stable Sort</span><div class="term-def">A sorting algorithm that preserves the relative order of equal elements. Bubble, merge, and insertion sorts are stable.</div></div>
-        <div class="ref-term-card"><span class="term-badge">Topology</span><div class="term-def">The physical or logical arrangement of devices in a network. Common topologies: star, mesh, bus.</div></div>
-        <div class="ref-term-card"><span class="term-badge">Backbone</span><div class="term-def">The main cable in a bus topology that connects all devices. If the backbone fails, the entire network goes down.</div></div>
-        <div class="ref-term-card"><span class="term-badge">Firmware</span><div class="term-def">Software permanently stored in ROM, such as BIOS/UEFI. It provides low-level control for hardware.</div></div>
-        <div class="ref-term-card"><span class="term-badge">In-Place Algorithm</span><div class="term-def">An algorithm that sorts data using only a constant amount of extra memory. Bubble and insertion sorts are in-place; merge sort is not.</div></div>
-        <div class="ref-term-card"><span class="term-badge">Recursion</span><div class="term-def">A technique where a function calls itself to solve smaller instances of the same problem. Merge sort uses recursion.</div></div>
+<div class="ref-section">
+    <summary>📝 Harvard Referencing Guide</summary>
+    <div class="ref-body">
+        <table class="ref-table">
+            <tr><th>Source Type</th><th>In-Text Citation</th><th>Reference List Entry</th></tr>
+            <tr><td>Book</td><td>(Author, Year)</td><td>Author, A. (Year) <em>Title</em>. Edition. Place: Publisher.</td></tr>
+            <tr><td>Journal Article</td><td>(Author, Year)</td><td>Author, A. (Year) 'Article title', <em>Journal Name</em>, Volume(Issue), pp. pages.</td></tr>
+            <tr><td>Website</td><td>(Author/Organisation, Year)</td><td>Author/Organisation (Year) <em>Page title</em>. Available at: URL (Accessed: date).</td></tr>
+            <tr><td>Chapter in Edited Book</td><td>(Chapter Author, Year)</td><td>Chapter Author, A. (Year) 'Chapter title', in Editor, B. (ed.) <em>Book title</em>. Place: Publisher, pp. pages.</td></tr>
+            <tr><td>Online Video</td><td>(Uploader, Year)</td><td>Uploader (Year) <em>Video title</em>. Available at: URL (Accessed: date).</td></tr>
+        </table>
+        <h3>Key Rules</h3>
+        <ul>
+            <li>List authors by surname, then initials</li>
+            <li>Use "and" between authors, not "&"</li>
+            <li>Italicise book titles and journal names</li>
+            <li>Use single quotation marks for article/chapter titles</li>
+            <li>Include the date you accessed online sources</li>
+        </ul>
     </div>
 </div>
 
-<!-- ── Match: Algorithm → Time Complexity ── -->
-<div class="ref-match-section">
-    <h2>🧩 Match the Algorithm to Its Time Complexity</h2>
-    <p style="font-size:13px;color:var(--c-text-secondary);margin-bottom:4px;">Click an algorithm on the left, then click its time complexity on the right.</p>
-    <div class="ref-match-grid" id="refMatchGrid">
-        <div class="ref-match-item" data-pair="0" onclick="refMatchSelect('desc', 0)">Bubble Sort (worst case)<div class="ref-match-desc">Click me, then click the matching complexity</div></div>
-        <div class="ref-match-item" data-pair="0" onclick="refMatchSelect('trans', 0)">O(n²)<div class="ref-match-desc">Quadratic time</div></div>
-        <div class="ref-match-item" data-pair="1" onclick="refMatchSelect('desc', 1)">Merge Sort (all cases)<div class="ref-match-desc">Click me, then click the matching complexity</div></div>
-        <div class="ref-match-item" data-pair="1" onclick="refMatchSelect('trans', 1)">O(n log n)<div class="ref-match-desc">Linearithmic time</div></div>
-        <div class="ref-match-item" data-pair="2" onclick="refMatchSelect('desc', 2)">Binary Search (worst case)<div class="ref-match-desc">Click me, then click the matching complexity</div></div>
-        <div class="ref-match-item" data-pair="2" onclick="refMatchSelect('trans', 2)">O(log n)<div class="ref-match-desc">Logarithmic time</div></div>
-        <div class="ref-match-item" data-pair="3" onclick="refMatchSelect('desc', 3)">Linear Search (worst case)<div class="ref-match-desc">Click me, then click the matching complexity</div></div>
-        <div class="ref-match-item" data-pair="3" onclick="refMatchSelect('trans', 3)">O(n)<div class="ref-match-desc">Linear time</div></div>
-        <div class="ref-match-item" data-pair="4" onclick="refMatchSelect('desc', 4)">Insertion Sort (best case)<div class="ref-match-desc">Click me, then click the matching complexity</div></div>
-        <div class="ref-match-item" data-pair="4" onclick="refMatchSelect('trans', 4)">O(n)<div class="ref-match-desc">Linear time (already sorted)</div></div>
+<div class="ref-section">
+    <summary>📊 Essay Structure Framework</summary>
+    <div class="ref-body">
+        <h3>Introduction (10-15% of word count)</h3>
+        <ul>
+            <li><strong>Hook:</strong> Engage the reader with a relevant opening</li>
+            <li><strong>Context:</strong> Provide background information on the topic</li>
+            <li><strong>Thesis statement:</strong> Your main argument or position</li>
+            <li><strong>Roadmap:</strong> Outline the structure of your essay</li>
+        </ul>
+        <h3>Body Paragraphs — PEEL Structure</h3>
+        <ul>
+            <li><strong>P</strong>oint — Make a clear claim or argument</li>
+            <li><strong>E</strong>vidence — Support with academic sources, data, or examples</li>
+            <li><strong>E</strong>xplanation — Explain how the evidence supports your point</li>
+            <li><strong>L</strong>ink — Connect back to the thesis or to the next paragraph</li>
+        </ul>
+        <h3>Conclusion (10-15% of word count)</h3>
+        <ul>
+            <li><strong>Synthesis:</strong> Summarise key arguments without introducing new information</li>
+            <li><strong>Implications:</strong> Discuss the significance of your findings</li>
+            <li><strong>Limitations:</strong> Acknowledge any limitations of your analysis</li>
+            <li><strong>Future research:</strong> Suggest areas for further investigation</li>
+        </ul>
     </div>
-    <div id="refMatchFeedback" style="margin-top:12px;font-size:14px;font-weight:600;text-align:center;display:none;"></div>
 </div>
 
-<!-- ── Sorting Visualizer ── -->
-<div class="ref-sort-section">
-    <h2>🔀 Sorting Algorithm Visualizer</h2>
-    <p style="font-size:13px;color:var(--c-text-secondary);margin-bottom:4px;">Watch how different sorting algorithms rearrange the bars. Each step highlights comparisons (yellow) and swaps (red).</p>
-    <div class="ref-sort-controls">
-        <select id="sortAlgoSelect">
-            <option value="bubble">Bubble Sort</option>
-            <option value="insertion">Insertion Sort</option>
-            <option value="merge">Merge Sort</option>
-        </select>
-        <button onclick="resetSortArray()">🔄 New Array</button>
-        <button class="btn btn-primary" onclick="runSortVisualizer()">▶️ Sort</button>
+<div class="ref-section">
+    <summary>🔍 Critical Thinking Frameworks</summary>
+    <div class="ref-body">
+        <h3>CRAAP Test — Evaluating Sources</h3>
+        <ul>
+            <li><strong>C</strong>urrency — When was it published? Is it up to date?</li>
+            <li><strong>R</strong>elevance — Does it relate to your topic? Is it at the right level?</li>
+            <li><strong>A</strong>uthority — Who wrote it? What are their credentials?</li>
+            <li><strong>A</strong>ccuracy — Is the information reliable? Is it peer-reviewed?</li>
+            <li><strong>P</strong>urpose — Why was it written? Is there bias?</li>
+        </ul>
+        <h3>Common Logical Fallacies</h3>
+        <ul>
+            <li><strong>Ad hominem:</strong> Attacking the person instead of the argument</li>
+            <li><strong>Straw man:</strong> Misrepresenting an argument to make it easier to attack</li>
+            <li><strong>False dichotomy:</strong> Presenting only two options when more exist</li>
+            <li><strong>Slippery slope:</strong> Arguing that one step will inevitably lead to extreme outcomes</li>
+            <li><strong>Circular reasoning:</strong> Using the conclusion as evidence for itself</li>
+            <li><strong>Appeal to authority:</strong> Using an authority figure as evidence without supporting reasoning</li>
+        </ul>
     </div>
-    <div class="ref-sort-bars" id="sortBarsContainer"></div>
-    <div class="ref-sort-info" id="sortInfo">Press "Sort" to begin. Comparisons and swaps are highlighted in real time.</div>
 </div>
 
-<!-- ── Quiz: Check Your Understanding ── -->
-<div class="ref-quiz-section">
-    <h2>🧠 Check Your Understanding</h2>
-    <p class="quiz-sub">Test your knowledge of storage, algorithms, networks, and architecture.</p>
-
-    <div class="quiz-header">
-        <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="refProgressFill" style="width:0%"></div></div>
-        <span class="quiz-score-running" id="refRunningScore">❓ 0/8 answered</span>
+<div class="ref-section">
+    <summary>📋 Research Ethics Principles</summary>
+    <div class="ref-body">
+        <table class="ref-table">
+            <tr><th>Principle</th><th>Description</th><th>Application</th></tr>
+            <tr><td>Informed consent</td><td>Participants understand the research and agree voluntarily</td><td>Information sheets, consent forms, opt-in procedures</td></tr>
+            <tr><td>Confidentiality</td><td>Protecting participants' identities and data</td><td>Anonymisation, secure storage, data management plans</td></tr>
+            <tr><td>Right to withdraw</td><td>Participants can leave at any time without penalty</td><td>Clear communication of withdrawal process</td></tr>
+            <tr><td>Avoiding harm</td><td>Minimising physical, psychological, and emotional risk</td><td>Risk assessment, safeguarding protocols, debriefing</td></tr>
+            <tr><td>Debriefing</td><td>Explaining the research after participation</td><td>Providing full information, support resources</td></tr>
+        </table>
     </div>
-
-    <div class="quiz-counter" id="refQuizCounter">1 / 8</div>
-
-    <div id="refQuizQuestions">
-        <div class="ref-quiz-q quiz-tab active" data-qid="1">
-            <div class="ref-quiz-q-text">1. Which type of memory is volatile and stores running programs and data?</div>
-            <button type="button" class="ref-quiz-opt" onclick="refSelect(this, 1, 0)">ROM</button>
-            <button type="button" class="ref-quiz-opt" onclick="refSelect(this, 1, 1)">RAM</button>
-            <button type="button" class="ref-quiz-opt" onclick="refSelect(this, 1, 2)">HDD</button>
-            <button type="button" class="ref-quiz-opt" onclick="refSelect(this, 1, 3)">Cache</button>
-            <div class="ref-quiz-exp" id="refExp1">✅ Correct! RAM is volatile and holds the programs and data currently in use. It loses its contents when power is turned off.</div>
-        </div>
-        <div class="ref-quiz-q quiz-tab" data-qid="2">
-            <div class="ref-quiz-q-text">2. Which storage device has no moving parts and is the fastest for everyday use?</div>
-            <button type="button" class="ref-quiz-opt" onclick="refSelect(this, 2, 0)">HDD</button>
-            <button type="button" class="ref-quiz-opt" onclick="refSelect(this, 2, 1)">Optical disc</button>
-            <button type="button" class="ref-quiz-opt" onclick="refSelect(this, 2, 2)">SSD</button>
-            <button type="button" class="ref-quiz-opt" onclick="refSelect(this, 2, 3)">Magnetic tape</button>
-            <div class="ref-quiz-exp" id="refExp2">✅ Correct! SSDs use flash memory with no moving parts, making them faster, more durable, and more power-efficient than HDDs.</div>
-        </div>
-        <div class="ref-quiz-q quiz-tab" data-qid="3">
-            <div class="ref-quiz-q-text">3. Which sorting algorithm has a time complexity of O(n log n) in all cases?</div>
-            <button type="button" class="ref-quiz-opt" onclick="refSelect(this, 3, 0)">Bubble Sort</button>
-            <button type="button" class="ref-quiz-opt" onclick="refSelect(this, 3, 1)">Insertion Sort</button>
-            <button type="button" class="ref-quiz-opt" onclick="refSelect(this, 3, 2)">Merge Sort</button>
-            <button type="button" class="ref-quiz-opt" onclick="refSelect(this, 3, 3)">Linear Search</button>
-            <div class="ref-quiz-exp" id="refExp3">✅ Correct! Merge Sort has O(n log n) time complexity in the best, average, and worst cases. It is a divide-and-conquer algorithm.</div>
-        </div>
-        <div class="ref-quiz-q quiz-tab" data-qid="4">
-            <div class="ref-quiz-q-text">4. In a star topology, what happens if the central switch fails?</div>
-            <button type="button" class="ref-quiz-opt" onclick="refSelect(this, 4, 0)">Only one device is affected</button>
-            <button type="button" class="ref-quiz-opt" onclick="refSelect(this, 4, 1)">The entire network goes down</button>
-            <button type="button" class="ref-quiz-opt" onclick="refSelect(this, 4, 2)">Data is rerouted through another path</button>
-            <button type="button" class="ref-quiz-opt" onclick="refSelect(this, 4, 3)">Nothing — the network continues normally</button>
-            <div class="ref-quiz-exp" id="refExp4">✅ Correct! In a star topology, all devices connect through a central switch. If the switch fails, no device can communicate.</div>
-        </div>
-        <div class="ref-quiz-q quiz-tab" data-qid="5">
-            <div class="ref-quiz-q-text">5. Which search algorithm requires the data to be sorted first?</div>
-            <button type="button" class="ref-quiz-opt" onclick="refSelect(this, 5, 0)">Linear Search</button>
-            <button type="button" class="ref-quiz-opt" onclick="refSelect(this, 5, 1)">Binary Search</button>
-            <button type="button" class="ref-quiz-opt" onclick="refSelect(this, 5, 2)">Bubble Sort</button>
-            <button type="button" class="ref-quiz-opt" onclick="refSelect(this, 5, 3)">Insertion Sort</button>
-            <div class="ref-quiz-exp" id="refExp5">✅ Correct! Binary search repeatedly halves the search space, which only works correctly on sorted data.</div>
-        </div>
-        <div class="ref-quiz-q quiz-tab" data-qid="6">
-            <div class="ref-quiz-q-text">6. What does defragmentation do on an HDD?</div>
-            <button type="button" class="ref-quiz-opt" onclick="refSelect(this, 6, 0)">Deletes unnecessary files</button>
-            <button type="button" class="ref-quiz-opt" onclick="refSelect(this, 6, 1)">Reorganises data contiguously for faster access</button>
-            <button type="button" class="ref-quiz-opt" onclick="refSelect(this, 6, 2)">Converts the drive to SSD</button>
-            <button type="button" class="ref-quiz-opt" onclick="refSelect(this, 6, 3)">Encrypts all data on the drive</button>
-            <div class="ref-quiz-exp" id="refExp6">✅ Correct! Defragmentation rearranges fragmented data so related pieces are stored close together, reducing read times on HDDs.</div>
-        </div>
-        <div class="ref-quiz-q quiz-tab" data-qid="7">
-            <div class="ref-quiz-q-text">7. Which network topology has the highest reliability because data can take multiple paths?</div>
-            <button type="button" class="ref-quiz-opt" onclick="refSelect(this, 7, 0)">Star</button>
-            <button type="button" class="ref-quiz-opt" onclick="refSelect(this, 7, 1)">Bus</button>
-            <button type="button" class="ref-quiz-opt" onclick="refSelect(this, 7, 2)">Mesh</button>
-            <button type="button" class="ref-quiz-opt" onclick="refSelect(this, 7, 3)">Ring</button>
-            <div class="ref-quiz-exp" id="refExp7">✅ Correct! In a mesh topology, every device connects to every other device, providing multiple redundant paths.</div>
-        </div>
-        <div class="ref-quiz-q quiz-tab" data-qid="8">
-            <div class="ref-quiz-q-text">8. What is the main difference between RAM and ROM?</div>
-            <button type="button" class="ref-quiz-opt" onclick="refSelect(this, 8, 0)">RAM is faster, ROM is slower</button>
-            <button type="button" class="ref-quiz-opt" onclick="refSelect(this, 8, 1)">RAM is volatile, ROM is non-volatile</button>
-            <button type="button" class="ref-quiz-opt" onclick="refSelect(this, 8, 2)">RAM stores boot instructions, ROM stores programs</button>
-            <button type="button" class="ref-quiz-opt" onclick="refSelect(this, 8, 3)">RAM is read-only, ROM can be written to</button>
-            <div class="ref-quiz-exp" id="refExp8">✅ Correct! RAM is volatile (loses data on power off) and holds running programs. ROM is non-volatile and stores firmware like boot instructions.</div>
-        </div>
-    </div>
-
-    <div class="quiz-nav">
-        <button type="button" class="quiz-nav-btn" id="refQuizPrevBtn" onclick="refQuizGoTo(-1)">◀ Previous</button>
-        <div class="quiz-dots" id="refQuizDots">
-            <span class="quiz-dot active" data-idx="0" onclick="refQuizGoTo(0)">1</span>
-            <span class="quiz-dot" data-idx="1" onclick="refQuizGoTo(1)">2</span>
-            <span class="quiz-dot" data-idx="2" onclick="refQuizGoTo(2)">3</span>
-            <span class="quiz-dot" data-idx="3" onclick="refQuizGoTo(3)">4</span>
-            <span class="quiz-dot" data-idx="4" onclick="refQuizGoTo(4)">5</span>
-            <span class="quiz-dot" data-idx="5" onclick="refQuizGoTo(5)">6</span>
-            <span class="quiz-dot" data-idx="6" onclick="refQuizGoTo(6)">7</span>
-            <span class="quiz-dot" data-idx="7" onclick="refQuizGoTo(7)">8</span>
-        </div>
-        <button type="button" class="quiz-nav-btn" id="refQuizNextBtn" onclick="refQuizGoTo(1)">Next ▶</button>
-    </div>
-
-    <div style="text-align:center;margin-top:16px;">
-        <button type="button" class="btn btn-primary" id="refSubmitBtn" onclick="refSubmitQuiz()">📊 Show My Score</button>
-    </div>
-    <div class="ref-quiz-score" id="refQuizScore"></div>
 </div>
 
-<script>
-function toggleRefSection(header) {
-    header.classList.toggle('open');
-    const body = header.nextElementSibling;
-    body.classList.toggle('open');
-}
-
-// ── Tabbed Quiz ──
-const refAnswers = {1:1, 2:2, 3:2, 4:1, 5:1, 6:1, 7:2, 8:1};
-const refSelected = {};
-let refCurrentIdx = 0;
-const refTotal = 8;
-
-function refSelect(btn, qid, idx) {
-    btn.closest('.ref-quiz-q').querySelectorAll('.ref-quiz-opt').forEach(b => b.classList.remove('selected', 'correct', 'incorrect'));
-    btn.classList.add('selected');
-    refSelected[qid] = idx;
-    document.getElementById('refExp' + qid).classList.remove('show');
-    updateRefDots();
-}
-
-function updateRefDots() {
-    let answered = 0;
-    for (let i = 0; i < refTotal; i++) {
-        const qid = i + 1;
-        const dot = document.querySelectorAll('#refQuizDots .quiz-dot')[i];
-        dot.classList.remove('answered', 'missing');
-        if (refSelected[qid] !== undefined) {
-            dot.classList.add('answered');
-            answered++;
-        }
-    }
-    document.getElementById('refRunningScore').textContent = '❓ ' + answered + '/' + refTotal + ' answered';
-    document.getElementById('refProgressFill').style.width = Math.round(answered / refTotal * 100) + '%';
-}
-
-function refQuizGoTo(target) {
-    const tabs = document.querySelectorAll('#refQuizQuestions .quiz-tab');
-    const dots = document.querySelectorAll('#refQuizDots .quiz-dot');
-    if (typeof target === 'number') {
-        refCurrentIdx = target;
-    } else {
-        refCurrentIdx = Math.max(0, Math.min(refTotal - 1, refCurrentIdx + target));
-    }
-    tabs.forEach((t, i) => t.classList.toggle('active', i === refCurrentIdx));
-    dots.forEach((d, i) => d.classList.toggle('active', i === refCurrentIdx));
-    document.getElementById('refQuizCounter').textContent = (refCurrentIdx + 1) + ' / ' + refTotal;
-    document.getElementById('refQuizPrevBtn').disabled = refCurrentIdx === 0;
-    document.getElementById('refQuizNextBtn').disabled = refCurrentIdx === refTotal - 1;
-}
-
-function refSubmitQuiz() {
-    let correct = 0, total = Object.keys(refAnswers).length;
-    for (let qid in refAnswers) {
-        const exp = document.getElementById('refExp' + qid);
-        const opts = document.querySelectorAll(`.ref-quiz-q[data-qid="${qid}"] .ref-quiz-opt`);
-        opts.forEach(b => b.classList.remove('correct', 'incorrect'));
-        if (refSelected[qid] === undefined) continue;
-        if (refSelected[qid] === refAnswers[qid]) {
-            opts[refAnswers[qid]].classList.add('correct');
-            correct++;
-        } else {
-            opts[refSelected[qid]].classList.add('incorrect');
-            opts[refAnswers[qid]].classList.add('correct');
-        }
-        exp.classList.add('show');
-    }
-    const scoreEl = document.getElementById('refQuizScore');
-    scoreEl.textContent = '🎯 You scored ' + correct + ' / ' + total + ' (' + Math.round(correct/total*100) + '%)';
-    scoreEl.className = 'ref-quiz-score show';
-}
-
-// ── Match Exercise ──
-let refMatchSelected = null;
-
-function refMatchSelect(type, pair) {
-    const items = document.querySelectorAll('.ref-match-item');
-    if (refMatchSelected === null) {
-        items.forEach(i => i.classList.remove('selected', 'wrong'));
-        const el = document.querySelector(`.ref-match-item[data-pair="${pair}"][onclick*="'${type}'"]`);
-        if (el && !el.classList.contains('matched')) {
-            el.classList.add('selected');
-            refMatchSelected = {type, pair, el};
-        }
-    } else {
-        const el = document.querySelector(`.ref-match-item[data-pair="${pair}"][onclick*="'${type}'"]`);
-        if (!el || el.classList.contains('matched')) { refMatchSelected = null; return; }
-        if (refMatchSelected.type === type) { refMatchSelected.el.classList.remove('selected'); refMatchSelected = null; return; }
-        if (refMatchSelected.pair === pair) {
-            refMatchSelected.el.classList.remove('selected');
-            refMatchSelected.el.classList.add('matched');
-            el.classList.add('matched');
-            document.getElementById('refMatchFeedback').textContent = '✅ Correct!';
-            document.getElementById('refMatchFeedback').style.display = 'block';
-            document.getElementById('refMatchFeedback').style.color = 'var(--c-green)';
-        } else {
-            el.classList.add('wrong');
-            refMatchSelected.el.classList.add('wrong');
-            document.getElementById('refMatchFeedback').textContent = '❌ Not quite — try again!';
-            document.getElementById('refMatchFeedback').style.display = 'block';
-            document.getElementById('refMatchFeedback').style.color = 'var(--c-rose)';
-            setTimeout(() => { el.classList.remove('wrong'); refMatchSelected.el.classList.remove('wrong'); }, 500);
-        }
-        refMatchSelected = null;
-    }
-}
-
-// ── Sorting Visualizer ──
-let sortArray = [];
-let sortSteps = [];
-let sortStepIndex = 0;
-let sortTimer = null;
-
-function randomArray() {
-    const arr = [];
-    for (let i = 0; i < 10; i++) arr.push(Math.floor(Math.random() * 150) + 20);
-    return arr;
-}
-
-function resetSortArray() {
-    if (sortTimer) { clearInterval(sortTimer); sortTimer = null; }
-    sortArray = randomArray();
-    sortSteps = [];
-    sortStepIndex = 0;
-    renderSortBars(sortArray, []);
-    document.getElementById('sortInfo').textContent = 'New array generated. Press "Sort" to begin.';
-}
-
-function renderSortBars(arr, highlights) {
-    const container = document.getElementById('sortBarsContainer');
-    const maxVal = Math.max(...arr, 1);
-    container.innerHTML = arr.map((v, i) => {
-        const h = (v / maxVal) * 180;
-        const cls = highlights.includes(i) ? ' comparing' : '';
-        const hue = 200 + (v / maxVal) * 100;
-        return `<div class="ref-sort-bar${cls}" style="height:${h}px;background:hsl(${hue},70%,55%)">${v}</div>`;
-    }).join('');
-}
-
-function generateSortSteps(algo) {
-    const arr = [...sortArray];
-    const steps = [];
-    if (algo === 'bubble') {
-        for (let i = 0; i < arr.length - 1; i++) {
-            for (let j = 0; j < arr.length - 1 - i; j++) {
-                steps.push({arr: [...arr], comparing: [j, j+1], swapping: false});
-                if (arr[j] > arr[j+1]) {
-                    [arr[j], arr[j+1]] = [arr[j+1], arr[j]];
-                    steps.push({arr: [...arr], comparing: [], swapping: [j, j+1]});
-                }
-            }
-        }
-        steps.push({arr: [...arr], comparing: [], swapping: []});
-    } else if (algo === 'insertion') {
-        for (let i = 1; i < arr.length; i++) {
-            let key = arr[i], j = i - 1;
-            steps.push({arr: [...arr], comparing: [i], swapping: false});
-            while (j >= 0 && arr[j] > key) {
-                arr[j+1] = arr[j];
-                steps.push({arr: [...arr], comparing: [], swapping: [j, j+1]});
-                j--;
-            }
-            arr[j+1] = key;
-        }
-        steps.push({arr: [...arr], comparing: [], swapping: []});
-    } else if (algo === 'merge') {
-        function mergeSort(a, start) {
-            if (a.length <= 1) return a;
-            const mid = Math.floor(a.length / 2);
-            const left = mergeSort(a.slice(0, mid), start);
-            const right = mergeSort(a.slice(mid), start + mid);
-            const merged = [];
-            let li = 0, ri = 0;
-            while (li < left.length && ri < right.length) {
-                steps.push({arr: [...arr], comparing: [start + li, start + mid + ri], swapping: false});
-                if (left[li] <= right[ri]) {
-                    merged.push(left[li]); li++;
-                } else {
-                    merged.push(right[ri]); ri++;
-                }
-            }
-            const result = [...merged, ...left.slice(li), ...right.slice(ri)];
-            for (let i = 0; i < result.length; i++) arr[start + i] = result[i];
-            steps.push({arr: [...arr], comparing: [], swapping: []});
-            return result;
-        }
-        mergeSort([...arr], 0);
-    }
-    return steps;
-}
-
-function runSortVisualizer() {
-    if (sortTimer) { clearInterval(sortTimer); sortTimer = null; }
-    const algo = document.getElementById('sortAlgoSelect').value;
-    sortSteps = generateSortSteps(algo);
-    sortStepIndex = 0;
-    const info = document.getElementById('sortInfo');
-    info.textContent = `Running ${algo} sort... ${sortSteps.length} steps.`;
-
-    sortTimer = setInterval(() => {
-        if (sortStepIndex >= sortSteps.length) {
-            clearInterval(sortTimer);
-            sortTimer = null;
-            info.textContent = `${algo} sort complete!`;
-            return;
-        }
-        const step = sortSteps[sortStepIndex];
-        const highlights = step.comparing.length ? step.comparing : step.swapping.length ? step.swapping : [];
-        renderSortBars(step.arr, highlights);
-        if (step.comparing.length) info.textContent = `Comparing positions ${step.comparing[0]+1} and ${step.comparing[1]+1}`;
-        else if (step.swapping.length) info.textContent = `Swapping positions ${step.swapping[0]+1} and ${step.swapping[1]+1}`;
-        sortStepIndex++;
-    }, 300);
-}
-
-// Init
-resetSortArray();
-</script>
+<div class="ref-section">
+    <summary>🔄 Reflective Practice Models</summary>
+    <div class="ref-body">
+        <h3>Gibbs' Reflective Cycle (1988)</h3>
+        <ol>
+            <li><strong>Description:</strong> What happened?</li>
+            <li><strong>Feelings:</strong> What were you thinking and feeling?</li>
+            <li><strong>Evaluation:</strong> What was good and bad about the experience?</li>
+            <li><strong>Analysis:</strong> What sense can you make of the situation?</li>
+            <li><strong>Conclusion:</strong> What else could you have done?</li>
+            <li><strong>Action Plan:</strong> What will you do next time?</li>
+        </ol>
+        <h3>Kolb's Learning Cycle (1984)</h3>
+        <ol>
+            <li><strong>Concrete Experience:</strong> Doing something</li>
+            <li><strong>Reflective Observation:</strong> Reviewing what happened</li>
+            <li><strong>Abstract Conceptualisation:</strong> Learning from the experience</li>
+            <li><strong>Active Experimentation:</strong> Trying out what you learned</li>
+        </ol>
+    </div>
+</div>
 {% endblock %}

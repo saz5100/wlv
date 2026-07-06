@@ -105,8 +105,7 @@ async def call_ai_marker(question_text: str, student_answer: str, mark_scheme: d
     model_ans = mark_scheme.get("model_answer", "")
     key_terms = mark_scheme.get("key_terms", "")
 
-
-Question: {question_text}
+    prompt = f"""Question: {question_text}
 
 Student's answer:
 {student_answer}

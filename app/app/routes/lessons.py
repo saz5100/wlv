@@ -571,13 +571,14 @@ async def search_page(q: str = Query("", max_length=100)):
             results.append(rd)
 
         resources_list = [
-            {"id": 0, "title": "Paper 1 Cheat Sheet — Computer Systems", "desc": "Complete revision guide for all 6 Paper 1 topics (1.1-1.6). Mnemonics, memory devices, exam technique, protocols, conversions.", "url": "/static/paper1-cheat-sheet.html", "tags": "cheat sheet paper 1 revision guide"},
-            {"id": 0, "title": "Paper 2 Cheat Sheet — Algorithms & Programming", "desc": "Covers all 5 Paper 2 topics (2.1-2.5). OCR pseudocode, searching & sorting, Boolean logic, translators, programming patterns.", "url": "/static/paper2-cheat-sheet.html", "tags": "cheat sheet paper 2 algorithms programming"},
-            {"id": 0, "title": "Mnemonic Reference Sheet", "desc": "All 21 memory devices in one printable page. CPU registers, TCP/IP layers, data types, De Morgan's laws, translators.", "url": "/static/mnemonics.html", "tags": "mnemonics memory devices revision"},
-            {"id": 0, "title": "Exam Command Word Guide", "desc": "What each exam word means — State, Describe, Explain, Compare, Evaluate, Calculate. PEEL structure, mark allocation, common mistakes.", "url": "/static/command-words.html", "tags": "command words exam technique peel"},
-            {"id": 0, "title": "Paper 1 Quick Reference Cards", "desc": "One-page cards for each Component 1 topic: CPU, Memory & Storage, Networks, Security, Systems Software, Ethical & Legal.", "url": "/static/1-1.html", "tags": "quick reference cards paper 1 component 1"},
-            {"id": 0, "title": "Paper 2 Quick Reference Cards", "desc": "One-page cards for each Component 2 topic: Algorithms, Programming, Robust Programs, Boolean Logic, Languages & IDEs.", "url": "/static/2-1.html", "tags": "quick reference cards paper 2 component 2"},
-            {"id": 0, "title": "Binary & Hexadecimal Practice Worksheet", "desc": "21 questions — binary to denary, denary to binary, addition, shifts, hex conversion. Answers included for self-marking.", "url": "/static/practice-binary-hex.pdf", "tags": "binary hexadecimal worksheet practice"},
+            {"id": 0, "title": "Academic Skills Guide", "desc": "Core academic skills for higher education — critical reading, note-taking, essay writing, and research methods.", "url": "/static/academic-skills.html", "tags": "academic skills study guide"},
+            {"id": 0, "title": "Professional Practice Guide", "desc": "Professional skills for the workplace — communication, teamwork, time management, and reflective practice.", "url": "/static/professional-practice.html", "tags": "professional practice workplace"},
+            {"id": 0, "title": "Critical Thinking Framework", "desc": "Critical thinking models and techniques — analysis, evaluation, argument construction, and logical reasoning.", "url": "/static/critical-thinking.html", "tags": "critical thinking analysis evaluation"},
+            {"id": 0, "title": "Academic Writing Guide", "desc": "Essay structure, referencing, academic tone, and common writing pitfalls. Harvard referencing guide included.", "url": "/static/academic-writing.html", "tags": "academic writing essay referencing"},
+            {"id": 0, "title": "Research Methods Overview", "desc": "Qualitative and quantitative research methods, data collection, ethics, and dissertation planning.", "url": "/static/research-methods.html", "tags": "research methods dissertation"},
+            {"id": 0, "title": "Digital Literacy Skills", "desc": "Digital tools for learning — online research, data analysis, presentation skills, and digital communication.", "url": "/static/digital-literacy.html", "tags": "digital literacy ict skills"},
+            {"id": 0, "title": "Reflective Practice Models", "desc": "Gibbs' Reflective Cycle, Kolb's Learning Cycle, and Schön's reflection-in-action. Templates for reflective writing.", "url": "/static/reflective-practice.html", "tags": "reflective practice gibbs kolb"},
+            {"id": 0, "title": "Subject Knowledge Resources", "desc": "Discipline-specific study resources, reading lists, and key concepts for your chosen subject area.", "url": "/static/subject-knowledge.html", "tags": "subject knowledge discipline resources"},
         ]
         ql = query_text.lower()
         for res in resources_list:
