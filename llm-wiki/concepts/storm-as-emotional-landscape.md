@@ -59,3 +59,12 @@ When analysing weather as emotional landscape, use terms like: *pathetic fallacy
 # - The writer's use of personification creates tension, which causes the reader to engage with the text.
 # - By employing pathetic fallacy, the writer establishes atmosphere, leading the reader to sympathise with the character.
 # - personification is used to convey contrast, which in turn makes the reader feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: personification, pathetic fallacy, literal
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of personification creates tension, which causes the reader to engage with the text.
+# - By employing pathetic fallacy, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - personification is used to convey contrast, which in turn makes the reader feel engaged.

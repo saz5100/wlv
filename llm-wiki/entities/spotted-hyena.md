@@ -53,3 +53,12 @@ The hyena functions as both a literal threat and a symbolic presence. Pi's descr
 # - The writer's use of language features creates tension, which causes the reader to engage with the text.
 # - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
 # - writing techniques is used to convey suspense, which in turn makes the reader feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: literal
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to engage with the text.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader feel engaged.

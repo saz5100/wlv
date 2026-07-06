@@ -54,3 +54,10 @@ The AQA 8700/1 Sample Mark Scheme (June 2026) introduces a task focus cap for Q5
 # Assessment Objectives: AO5, AO6
 # Causal Links:
 # - The writer's choice of description achieves tension, which causes the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: description, link, pace, ending
+# Assessment Objectives: AO5, AO6
+# Causal Links:
+# - The writer's choice of description achieves tension, which causes the reader to engage with the text.

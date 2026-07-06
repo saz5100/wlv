@@ -43,3 +43,10 @@ To move from Level 3 (Clear) to Level 4 (Perceptive), a student must move beyond
 # Assessment Objectives: AO1, AO2, AO5
 # Causal Links:
 # - The writer's use of simile creates tension, which causes the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: level of response, AO5, AO2, AO1
+# Assessment Objectives: AO1, AO2, AO5
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.

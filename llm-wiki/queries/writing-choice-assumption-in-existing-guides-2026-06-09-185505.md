@@ -36,3 +36,12 @@ Multiple wiki writing guides (e.g., aqa-june-2023-paper-1-writing, aqa-november-
 # - The writer's choice of language features achieves tension, which causes the reader to engage with the text.
 # - By using structural choices, the writer creates atmosphere, leading the reader to sympathise with the character.
 # - writing techniques is employed to produce suspense, which makes the reader feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: link, character, atmosphere, setting
+# Assessment Objectives: AO5, AO6
+# Causal Links:
+# - The writer's choice of language features achieves tension, which causes the reader to engage with the text.
+# - By using structural choices, the writer creates atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is employed to produce suspense, which makes the reader feel engaged.

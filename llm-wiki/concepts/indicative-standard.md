@@ -80,3 +80,12 @@ Level 4 indicative standards demonstrate perceptive evaluation. For example, eva
 # - The writer's use of simile creates tension, which causes the reader to engage with the text.
 # - By employing onomatopoeia, the writer establishes atmosphere, leading the reader to sympathise with the character.
 # - repetition is used to convey suspense, which in turn makes the reader feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: indicative standard, structural analysis, mark scheme, level of response, AO5, AO2, AO1, language analysis, Q3, Q2
+# Assessment Objectives: AO1, AO2, AO5
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.
+# - By employing onomatopoeia, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - repetition is used to convey suspense, which in turn makes the reader feel engaged.

@@ -71,3 +71,10 @@ This page compares the University of Worcester English Equivalency test with the
 # Assessment Objectives: AO1, AO2
 # Causal Links:
 # - The writer's use of simile creates tension, which causes the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, tone
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.

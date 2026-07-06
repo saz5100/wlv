@@ -42,3 +42,11 @@ Ces figures de style sont présentées comme des outils d'analyse pour Paper 1, 
 # Causal Links:
 # - The writer's use of sibilance creates tension, which causes the reader to engage with the text.
 # - By employing sibilance, the writer establishes atmosphere, leading the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: sibilance
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of sibilance creates tension, which causes the reader to engage with the text.
+# - By employing sibilance, the writer establishes atmosphere, leading the reader to sympathise with the character.

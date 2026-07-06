@@ -39,3 +39,11 @@ The extract from *City of the Beasts* opens with a nightmare, using the dream st
 # Causal Links:
 # - The writer's use of metaphor creates tension, which causes the reader to engage with the text.
 # - By employing metaphor, the writer establishes atmosphere, leading the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: metaphor
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of metaphor creates tension, which causes the reader to engage with the text.
+# - By employing metaphor, the writer establishes atmosphere, leading the reader to sympathise with the character.

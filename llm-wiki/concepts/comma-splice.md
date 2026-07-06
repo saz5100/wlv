@@ -48,3 +48,12 @@ There are three primary ways to resolve a comma splice:
 # - Correct use of comma splice ensures tension, which helps the reader to engage with the text.
 # - Errors in semicolon cause atmosphere, leading the reader to sympathise with the character.
 # - Mastery of colon creates suspense, which enables the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: colon, comma splice, semicolon, conjunction, full stop
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of comma splice ensures tension, which helps the reader to engage with the text.
+# - Errors in semicolon cause atmosphere, leading the reader to sympathise with the character.
+# - Mastery of colon creates suspense, which enables the reader to feel engaged.

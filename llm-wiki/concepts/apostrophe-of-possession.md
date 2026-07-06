@@ -37,3 +37,10 @@ Apostrophes are used to indicate ownership or possession.
 # Assessment Objectives: AO1, AO6
 # Causal Links:
 # - Correct use of apostrophe of possession ensures tension, which helps the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: apostrophe, possession
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of apostrophe of possession ensures tension, which helps the reader to engage with the text.

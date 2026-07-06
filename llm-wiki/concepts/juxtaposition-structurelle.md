@@ -30,3 +30,10 @@ Dispositif structurel présenté dans le guide BBC Bitesize pour Paper 1, Questi
 # Assessment Objectives: AO1, AO2
 # Causal Links:
 # - The structural shift from juxtaposition creates tension, which causes the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: tension, shift
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The structural shift from juxtaposition creates tension, which causes the reader to engage with the text.

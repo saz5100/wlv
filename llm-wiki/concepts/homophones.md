@@ -86,3 +86,12 @@ Les homophones sont des mots qui se prononcent de la même manière mais ont des
 # - Correct use of language features ensures tension, which helps the reader to engage with the text.
 # - Errors in structural choices cause atmosphere, leading the reader to sympathise with the character.
 # - Mastery of writing techniques creates suspense, which enables the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: contraction, homophone, spelling
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of language features ensures tension, which helps the reader to engage with the text.
+# - Errors in structural choices cause atmosphere, leading the reader to sympathise with the character.
+# - Mastery of writing techniques creates suspense, which enables the reader to feel engaged.

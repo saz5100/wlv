@@ -268,3 +268,12 @@ A comprehensive reference of structural techniques tested in AQA Paper 1 Q3. Str
 # - The structural shift from flashback creates tension, which causes the reader to engage with the text.
 # - By using time shift, the writer establishes atmosphere, leading the reader to sympathise with the character.
 # - The in medias res at this point in the text creates suspense, which makes the reader feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: shift, tension, paragraph, focus, pace, flashback, climax, zoom, time shift, perspective, pan, limited, establishing shot, cyclical, chronological
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The structural shift from flashback creates tension, which causes the reader to engage with the text.
+# - By using time shift, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - The in medias res at this point in the text creates suspense, which makes the reader feel engaged.

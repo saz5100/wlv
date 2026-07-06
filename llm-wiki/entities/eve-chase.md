@@ -50,3 +50,10 @@ O excerto de *The Glass House* é um recurso valioso para o estudo de [[expectat
 # Assessment Objectives: AO1, AO3
 # Causal Links:
 # - The writer's use of pathetic fallacy creates tension, which causes the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: pathetic fallacy
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of pathetic fallacy creates tension, which causes the reader to engage with the text.

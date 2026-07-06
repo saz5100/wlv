@@ -91,3 +91,12 @@ The extract ends with a cycle of conflict and apology: 'he apologising, blaming 
 # - The writer's use of simile creates tension, which causes the reader to engage with the text.
 # - By employing personification, the writer establishes atmosphere, leading the reader to sympathise with the character.
 # - imagery is used to convey suspense, which in turn makes the reader feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: personification, simile, imagery, sensory language, verb, tone, juxtaposition
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.
+# - By employing personification, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - imagery is used to convey suspense, which in turn makes the reader feel engaged.

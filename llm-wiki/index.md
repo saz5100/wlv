@@ -225,3 +225,12 @@ sources: ["wlv-english-equivalency-blueprint.md", "sbl-total-revision-guide.md",
 # - The writer's use of simile creates tension, which causes the reader to engage with the text.
 # - By employing metaphor, the writer establishes atmosphere, leading the reader to sympathise with the character.
 # - personification is used to convey suspense, which in turn makes the reader feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: metaphor, simile, personification, noun, connotation, connotation, juxtaposition, verb, pathetic fallacy, figurative, tone, pronoun, onomatopoeia, modifier, literal
+# Assessment Objectives: AO1
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.
+# - By employing metaphor, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - personification is used to convey suspense, which in turn makes the reader feel engaged.

@@ -83,3 +83,12 @@ Four-level descriptors:
 # - The writer's choice of ambitious vocabulary achieves tension, which causes the reader to engage with the text.
 # - By using structural features, the writer creates tension, leading the reader to feel engaged.
 # - discourse markers is employed to produce tension, which makes the reader question the narrator's reliability.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: AO6, AO5, Q5, 4 marks, creative writing, AQA Paper 1
+# Assessment Objectives: AO1, AO2, AO5
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to engage with the text.
+# - By employing structural choices, the writer establishes tension, leading the reader to feel engaged.
+# - writing techniques is used to convey tension, which in turn makes the reader question the narrator's reliability.

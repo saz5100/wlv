@@ -120,3 +120,12 @@ Using sophisticated phrases signals to the examiner that you are working at a hi
 # - The writer's use of simile creates tension, which causes the reader to engage with the text.
 # - By employing personification, the writer establishes atmosphere, leading the reader to sympathise with the character.
 # - semantic field is used to convey suspense, which in turn makes the reader feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, personification, connotation, connotation, semantic field
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.
+# - By employing personification, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - semantic field is used to convey suspense, which in turn makes the reader feel engaged.

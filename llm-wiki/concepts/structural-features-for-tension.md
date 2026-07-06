@@ -68,3 +68,12 @@ The indicative standard for Q3 demonstrates analysis of foreshadowing, pivotal p
 # - The structural shift from foreshadowing creates tension, which causes the reader to engage with the text.
 # - By using juxtaposition, the writer establishes atmosphere, leading the reader to sympathise with the character.
 # - The repetition at this point in the text creates suspense, which makes the reader feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: tension, shift, repetition, foreshadowing, perspective, focus, climax, rising action, resolution, exposition
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The structural shift from foreshadowing creates tension, which causes the reader to engage with the text.
+# - By using juxtaposition, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - The repetition at this point in the text creates suspense, which makes the reader feel engaged.

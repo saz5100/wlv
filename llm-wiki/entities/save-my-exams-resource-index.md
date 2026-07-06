@@ -63,3 +63,11 @@ Save My Exams resources are professionally produced and generally aligned with A
 # Causal Links:
 # - The writer's use of imagery creates tension, which causes the reader to engage with the text.
 # - By employing juxtaposition, the writer establishes atmosphere, leading the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: imagery, juxtaposition
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of imagery creates tension, which causes the reader to engage with the text.
+# - By employing juxtaposition, the writer establishes atmosphere, leading the reader to sympathise with the character.

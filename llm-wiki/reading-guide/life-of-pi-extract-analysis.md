@@ -59,3 +59,12 @@ This guide provides a breakdown of the "What, How, and Why" for the June 2023 ex
 # - The writer's use of metaphor creates tension, which causes the reader to engage with the text.
 # - By employing onomatopoeia, the writer establishes atmosphere, leading the reader to sympathise with the character.
 # - imagery is used to convey suspense, which in turn makes the reader feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: onomatopoeia, metaphor, imagery
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of metaphor creates tension, which causes the reader to engage with the text.
+# - By employing onomatopoeia, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - imagery is used to convey suspense, which in turn makes the reader feel engaged.

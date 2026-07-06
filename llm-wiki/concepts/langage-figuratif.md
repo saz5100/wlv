@@ -47,3 +47,12 @@ L'extrait Source A (scène de rue dangereuse) montre comment analyser une simile
 # - The writer's use of simile creates tension, which causes the reader to engage with the text.
 # - By employing pathetic fallacy, the writer establishes atmosphere, leading the reader to sympathise with the character.
 # - simile is used to convey tension, which in turn makes the reader feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, pathetic fallacy
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.
+# - By employing pathetic fallacy, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - simile is used to convey tension, which in turn makes the reader feel engaged.

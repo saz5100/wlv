@@ -62,3 +62,12 @@ AO5 is the assessment objective for Content and Organisation in the AQA GCSE Eng
 # - The writer's choice of figurative language achieves tension, which causes the reader to engage with the text.
 # - By using structural features, the writer creates atmosphere, leading the reader to sympathise with the character.
 # - discourse markers is employed to produce suspense, which makes the reader feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: link, tone, character, atmosphere, style, register, setting
+# Assessment Objectives: AO5, AO6
+# Causal Links:
+# - The writer's choice of figurative language achieves tension, which causes the reader to engage with the text.
+# - By using structural features, the writer creates atmosphere, leading the reader to sympathise with the character.
+# - discourse markers is employed to produce suspense, which makes the reader feel engaged.

@@ -355,3 +355,12 @@ The sample source text is from *Life of Pi* by Yann Martel (hyena extract). This
 # - The writer's use of simile creates tension, which causes the reader to engage with the text.
 # - By employing imagery, the writer establishes atmosphere, leading the reader to sympathise with the character.
 # - juxtaposition is used to convey suspense, which in turn makes the reader feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: tone, register, imagery, verb, noun, juxtaposition, adjective, simile, connotation, connotation, pronoun, hyperbole, motif, declarative, adverb
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.
+# - By employing imagery, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - juxtaposition is used to convey suspense, which in turn makes the reader feel engaged.

@@ -99,3 +99,11 @@ Copyright © 2024 AQA and its licensors. All rights reserved.
 # Causal Links:
 # - The writer's use of personification creates tension, which causes the reader to engage with the text.
 # - By employing imagery, the writer establishes atmosphere, leading the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: personification, imagery, tone, sensory language
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of personification creates tension, which causes the reader to engage with the text.
+# - By employing imagery, the writer establishes atmosphere, leading the reader to sympathise with the character.

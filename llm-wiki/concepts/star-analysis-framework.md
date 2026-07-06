@@ -65,3 +65,12 @@ Da der STAR-Rahmen im Leitfaden nicht definiert wird, basiert diese Interpretati
 # - The writer's use of language features creates tension, which causes the reader to engage with the text.
 # - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
 # - writing techniques is used to convey suspense, which in turn makes the reader feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: verb, figurative
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to engage with the text.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader feel engaged.

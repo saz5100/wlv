@@ -47,3 +47,12 @@ The quality of AO5 is judged on a four-level scale:
 # - The writer's choice of ambitious vocabulary achieves tension, which causes the reader to engage with the text.
 # - By using structural features, the writer creates atmosphere, leading the reader to feel engaged.
 # - discourse markers is employed to produce cohesion, which makes the reader question the narrator's reliability.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: link, ambitious vocabulary, tone, atmosphere, register, character, voice, style, purpose
+# Assessment Objectives: AO5, AO6
+# Causal Links:
+# - The writer's choice of ambitious vocabulary achieves tension, which causes the reader to engage with the text.
+# - By using structural features, the writer creates atmosphere, leading the reader to feel engaged.
+# - discourse markers is employed to produce cohesion, which makes the reader question the narrator's reliability.

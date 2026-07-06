@@ -67,3 +67,10 @@ This paper shares the multiple-choice retrieval format (Q1) with the AQA Q1 form
 # Assessment Objectives: AO1, AO3
 # Causal Links:
 # - The writer's use of simile creates tension, which causes the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, tone, figurative
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.

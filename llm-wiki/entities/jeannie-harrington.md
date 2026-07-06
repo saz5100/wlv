@@ -49,3 +49,10 @@ Jeannie serves as a critical structural device to highlight the gap between expe
 # Assessment Objectives: AO1, AO3
 # Causal Links:
 # - The writer's use of personification creates tension, which causes the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: personification
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of personification creates tension, which causes the reader to engage with the text.

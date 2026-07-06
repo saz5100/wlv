@@ -68,3 +68,10 @@ The wiki is actively maintained and updated as new sources are ingested. All con
 # Assessment Objectives: AO1
 # Causal Links:
 # - The writer's use of simile creates tension, which causes the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: noun, simile, pronoun, tone, sensory language
+# Assessment Objectives: AO1
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.

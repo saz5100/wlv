@@ -48,3 +48,11 @@ Top-tier responses analyse the *effect* of these shifts. For example, explaining
 # Causal Links:
 # - The structural shift from flashback creates tension, which causes the reader to engage with the text.
 # - By using temporal marker, the writer establishes mood, leading the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: shift, flashback, temporal marker, tension, focus, wide shot, perspective, exposition, close-up
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The structural shift from flashback creates tension, which causes the reader to engage with the text.
+# - By using temporal marker, the writer establishes mood, leading the reader to feel engaged.

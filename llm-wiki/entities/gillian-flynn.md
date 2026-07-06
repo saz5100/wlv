@@ -30,3 +30,10 @@ Gillian Flynn est l'auteure de *Gone Girl*, utilisée comme exemple dans le guid
 # Assessment Objectives: AO1, AO3
 # Causal Links:
 # - The writer's use of simile creates tension, which causes the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.

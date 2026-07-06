@@ -84,3 +84,12 @@ These mistakes are drawn from AQA resources but are equally relevant to the WLV 
 # - The writer's use of simile creates tension, which causes the reader to engage with the text.
 # - By employing juxtaposition, the writer establishes atmosphere, leading the reader to sympathise with the character.
 # - listing is used to convey suspense, which in turn makes the reader feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, juxtaposition, connotation, connotation, article
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.
+# - By employing juxtaposition, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - listing is used to convey suspense, which in turn makes the reader feel engaged.

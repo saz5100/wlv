@@ -97,3 +97,12 @@ For AQA reference only: analyse, evaluate, agree/disagree with the given stateme
 # - Correct use of paragraph ensures tension, which helps the reader to engage with the text.
 # - Errors in simile cause atmosphere, leading the reader to sympathise with the character.
 # - Mastery of metaphor creates suspense, which enables the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: paragraph
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of paragraph ensures tension, which helps the reader to engage with the text.
+# - Errors in simile cause atmosphere, leading the reader to sympathise with the character.
+# - Mastery of metaphor creates suspense, which enables the reader to feel engaged.

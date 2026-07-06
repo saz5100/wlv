@@ -542,3 +542,12 @@ Ingested the SBL Total Revision Guide (AQA GCSE English Language & Literature). 
 # - The writer's use of metaphor creates tension, which causes the reader to engage with the text.
 # - By employing juxtaposition, the writer establishes atmosphere, leading the reader to sympathise with the character.
 # - repetition is used to convey suspense, which in turn makes the reader feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: metaphor, juxtaposition, connotation, connotation, verb, register, figurative
+# Assessment Objectives: AO1
+# Causal Links:
+# - The writer's use of metaphor creates tension, which causes the reader to engage with the text.
+# - By employing juxtaposition, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - repetition is used to convey suspense, which in turn makes the reader feel engaged.

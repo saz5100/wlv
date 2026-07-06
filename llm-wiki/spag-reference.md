@@ -104,3 +104,10 @@ Cette page rassemble les règles essentielles de ponctuation et de grammaire iss
 # Assessment Objectives: AO1, AO6
 # Causal Links:
 # - Correct use of dash ensures tension, which helps the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: dash, apostrophe, your/you're, possession, homophone, contraction, affect/effect
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of dash ensures tension, which helps the reader to engage with the text.

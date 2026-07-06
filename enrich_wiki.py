@@ -140,12 +140,12 @@ def detect_topic(filepath, content):
         name = os.path.basename(filepath).lower()
         if any(w in name for w in ["spag", "apostrophe", "comma", "colon", "semicolon", "punctuation", "spelling", "grammar", "homophone", "capitalisation"]):
             return "spag"
+        if any(w in name for w in ["exam", "timing", "marking", "level", "assessment-objective", "aqa-gcse", "wlv-vs-aqa", "indicative"]):
+            return "exam"
         if any(w in name for w in ["structur", "narrative", "opening", "shift", "focus", "tension", "pace", "chronolog", "flashback", "foreshadow"]):
             return "structure"
         if any(w in name for w in ["writing", "creative", "descriptive", "ao5", "content-organisation"]):
             return "writing"
-        if any(w in name for w in ["exam", "timing", "marking", "level", "assessment-objective", "aqa-gcse", "wlv-vs-aqa", "indicative"]):
-            return "exam"
         if any(w in name for w in ["language", "technique", "glossary", "simile", "metaphor", "connotation", "figurative", "word-level", "sentence", "inference", "reiteration"]):
             return "language"
         return "language"  # default for concepts

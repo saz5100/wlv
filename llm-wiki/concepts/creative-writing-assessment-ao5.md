@@ -48,3 +48,12 @@ For the WLV assessment, students must produce a high-quality 400-word piece. The
 # - The writer's choice of ambitious vocabulary achieves tension, which causes the reader to engage with the text.
 # - By using structural features, the writer creates tension, leading the reader to feel engaged.
 # - discourse markers is employed to produce tension, which makes the reader share the character's emotions.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: link, ambitious vocabulary, tone, voice, register, character
+# Assessment Objectives: AO5, AO6
+# Causal Links:
+# - The writer's choice of ambitious vocabulary achieves tension, which causes the reader to engage with the text.
+# - By using structural features, the writer creates tension, leading the reader to feel engaged.
+# - discourse markers is employed to produce tension, which makes the reader share the character's emotions.

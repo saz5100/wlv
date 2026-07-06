@@ -50,3 +50,11 @@ In the June 2024 extract, Mary reflects that in town 'there had been no seasons,
 # Causal Links:
 # - The writer's use of juxtaposition creates tension, which causes the reader to engage with the text.
 # - By employing juxtaposition, the writer establishes atmosphere, leading the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: juxtaposition
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of juxtaposition creates tension, which causes the reader to engage with the text.
+# - By employing juxtaposition, the writer establishes atmosphere, leading the reader to sympathise with the character.

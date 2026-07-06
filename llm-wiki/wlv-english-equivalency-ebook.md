@@ -1308,3 +1308,12 @@ The WLV test is **handwritten on campus**. This introduces challenges that don't
 # - The writer's use of simile creates tension, which causes the reader to engage with the text.
 # - By employing metaphor, the writer establishes atmosphere, leading the reader to sympathise with the character.
 # - personification is used to convey suspense, which in turn makes the reader feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: verb, simile, noun, metaphor, personification, imagery, connotation, connotation, sensory language, conjunction, adverb, adjective, tone, semantic field, preposition
+# Assessment Objectives: AO1
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.
+# - By employing metaphor, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - personification is used to convey suspense, which in turn makes the reader feel engaged.

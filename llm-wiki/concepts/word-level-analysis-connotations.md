@@ -190,3 +190,11 @@ If you can answer YES to all six, you're writing at Level 3-4.
 # Causal Links:
 # - The writer's use of metaphor creates tension, which causes the reader to engage with the text.
 # - By employing semantic field, the writer establishes suspense, leading the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: Q2, extract, AO5, AO2, AO1, AQA Paper 1
+# Assessment Objectives: AO1, AO2, AO5
+# Causal Links:
+# - The writer's use of metaphor creates tension, which causes the reader to engage with the text.
+# - By employing semantic field, the writer establishes suspense, leading the reader to feel engaged.

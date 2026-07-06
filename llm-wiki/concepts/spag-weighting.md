@@ -49,3 +49,12 @@ SPaG weighting refers to the proportion of writing marks allocated to spelling, 
 # - Correct use of apostrophe of possession ensures tension, which helps the reader to engage with the text.
 # - Errors in semicolon cause atmosphere, leading the reader to sympathise with the character.
 # - Mastery of colon creates suspense, which enables the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: colon, semicolon, apostrophe, possession, sentence demarcation, full stop, spelling, question mark, dash, contraction, conjunction, capital letter
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of apostrophe of possession ensures tension, which helps the reader to engage with the text.
+# - Errors in semicolon cause atmosphere, leading the reader to sympathise with the character.
+# - Mastery of colon creates suspense, which enables the reader to feel engaged.

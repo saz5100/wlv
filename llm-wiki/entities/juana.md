@@ -43,3 +43,12 @@ The text highlights the contrast between Juana's and Kino's reactions to the cri
 # - The writer's use of language features creates tension, which causes the reader to engage with the text.
 # - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
 # - writing techniques is used to convey suspense, which in turn makes the reader feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: 
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to engage with the text.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader feel engaged.

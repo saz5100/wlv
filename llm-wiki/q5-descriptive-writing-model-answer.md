@@ -58,3 +58,11 @@ Descriptive writing requires you to describe a scene, often using a picture prom
 # Causal Links:
 # - The writer's use of simile creates tension, which causes the reader to engage with the text.
 # - By employing metaphor, the writer establishes atmosphere, leading the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, metaphor, tone
+# Assessment Objectives: AO1, AO2, AO5, AO6
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.
+# - By employing metaphor, the writer establishes atmosphere, leading the reader to sympathise with the character.

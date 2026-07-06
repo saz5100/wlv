@@ -52,3 +52,10 @@ Students should identify:
 # Assessment Objectives: AO1, AO2
 # Causal Links:
 # - The writer's use of imagery creates tension, which causes the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: imagery, verb, adjective
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of imagery creates tension, which causes the reader to engage with the text.

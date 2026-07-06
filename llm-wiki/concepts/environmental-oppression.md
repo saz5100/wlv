@@ -53,3 +53,12 @@ In the June 2024 extract, the heat is described as 'intolerable' and 'an obsessi
 # - The writer's use of personification creates tension, which causes the reader to engage with the text.
 # - By employing pathetic fallacy, the writer establishes atmosphere, leading the reader to sympathise with the character.
 # - personification is used to convey tension, which in turn makes the reader feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: personification, pathetic fallacy
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of personification creates tension, which causes the reader to engage with the text.
+# - By employing pathetic fallacy, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - personification is used to convey tension, which in turn makes the reader feel engaged.

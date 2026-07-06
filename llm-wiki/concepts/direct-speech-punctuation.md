@@ -57,3 +57,10 @@ Ponctuez correctement le passage suivant :
 # Assessment Objectives: AO1, AO6
 # Causal Links:
 # - Correct use of paragraph ensures tension, which helps the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: paragraph
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of paragraph ensures tension, which helps the reader to engage with the text.

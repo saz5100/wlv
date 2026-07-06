@@ -58,3 +58,10 @@ Lessing employs third-person limited narration, focusing closely on Mary's persp
 # Assessment Objectives: AO1, AO3
 # Causal Links:
 # - The writer's use of imagery creates tension, which causes the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: imagery
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of imagery creates tension, which causes the reader to engage with the text.

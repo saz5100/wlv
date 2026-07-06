@@ -48,3 +48,12 @@ Correct capitalisation is essential for technical accuracy in the WLV writing ta
 # - Correct use of language features ensures tension, which helps the reader to engage with the text.
 # - Errors in structural choices cause atmosphere, leading the reader to sympathise with the character.
 # - Mastery of writing techniques creates suspense, which enables the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: 
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of language features ensures tension, which helps the reader to engage with the text.
+# - Errors in structural choices cause atmosphere, leading the reader to sympathise with the character.
+# - Mastery of writing techniques creates suspense, which enables the reader to feel engaged.

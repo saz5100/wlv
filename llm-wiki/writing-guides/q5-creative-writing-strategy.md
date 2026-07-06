@@ -105,3 +105,12 @@ Question 5 is the **writing task** -- worth **40 marks** (50% of Paper 1 marks).
 # - The writer's choice of sensory detail achieves tension, which causes the reader to engage with the text.
 # - By using dialogue, the writer creates atmosphere, leading the reader to sympathise with the character.
 # - description is employed to produce suspense, which makes the reader feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: sensory detail, atmosphere, opening, dialogue, description, character, pace, variety, setting, link, plot
+# Assessment Objectives: AO5, AO6
+# Causal Links:
+# - The writer's choice of sensory detail achieves tension, which causes the reader to engage with the text.
+# - By using dialogue, the writer creates atmosphere, leading the reader to sympathise with the character.
+# - description is employed to produce suspense, which makes the reader feel engaged.

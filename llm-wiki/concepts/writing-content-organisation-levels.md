@@ -45,3 +45,12 @@ Given the 400-word limit, students should focus on "quality over quantity." A co
 # Causal Links:
 # - The writer's choice of ambitious vocabulary achieves tension, which causes the reader to engage with the text.
 # - By using structural features, the writer creates tension, leading the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: AO5, AO6
+# Assessment Objectives: AO1, AO2, AO5
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to engage with the text.
+# - By employing structural choices, the writer establishes tension, leading the reader to feel engaged.
+# - writing techniques is used to convey tension, which in turn makes the reader share the character's emotions.

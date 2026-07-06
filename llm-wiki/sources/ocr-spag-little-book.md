@@ -43,3 +43,10 @@ This source provides the technical foundation for the [[spag-reference]] and [[w
 # Assessment Objectives: AO1, AO3
 # Causal Links:
 # - The writer's use of metaphor creates tension, which causes the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: metaphor
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of metaphor creates tension, which causes the reader to engage with the text.

@@ -43,3 +43,12 @@ For the WLV English Equivalency test, students must strictly adhere to British E
 # - Correct use of language features ensures tension, which helps the reader to engage with the text.
 # - Errors in structural choices cause atmosphere, leading the reader to sympathise with the character.
 # - Mastery of writing techniques creates suspense, which enables the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: spelling
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of language features ensures tension, which helps the reader to engage with the text.
+# - Errors in structural choices cause atmosphere, leading the reader to sympathise with the character.
+# - Mastery of writing techniques creates suspense, which enables the reader to feel engaged.

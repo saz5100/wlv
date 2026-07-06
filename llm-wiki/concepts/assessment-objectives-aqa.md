@@ -49,3 +49,12 @@ In the WLV Equivalency test, the focus is heavily weighted towards **AO1**, **AO
 # - The writer's use of language features creates tension, which causes the reader to engage with the text.
 # - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
 # - writing techniques is used to convey suspense, which in turn makes the reader feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: AO2, AO1, AO5, AO6, Q3, Q2, Q1
+# Assessment Objectives: AO1, AO2, AO5
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to engage with the text.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader feel engaged.

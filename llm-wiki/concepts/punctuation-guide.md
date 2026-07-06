@@ -161,3 +161,12 @@ Die korrekte Verwendung dieser Satzzeichen ist entscheidend für die SPaG-Bewert
 # - Correct use of semicolon ensures tension, which helps the reader to engage with the text.
 # - Errors in colon cause atmosphere, leading the reader to sympathise with the character.
 # - Mastery of dash creates suspense, which enables the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: colon, semicolon, dash, apostrophe, ellipsis, quotation mark, question mark, full stop, exclamation mark, contraction
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of semicolon ensures tension, which helps the reader to engage with the text.
+# - Errors in colon cause atmosphere, leading the reader to sympathise with the character.
+# - Mastery of dash creates suspense, which enables the reader to feel engaged.

@@ -68,3 +68,10 @@ For the *Life of Pi* extract, the mark scheme identifies the following structura
 # Causal Links:
 # - The structural shift from foreshadowing creates tension, which causes the reader to engage with the text.
 # - By using juxtaposition, the writer establishes atmosphere, leading the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: AO2, AO1, structural analysis, mark scheme, extract, Q3, AQA Paper 1
+# Assessment Objectives: AO1, AO2, AO5
+# Causal Links:
+# - The writer's use of juxtaposition creates tension, which causes the reader to engage with the text.

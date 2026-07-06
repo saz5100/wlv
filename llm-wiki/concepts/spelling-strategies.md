@@ -39,3 +39,10 @@ Mastering difficult spellings requires a combination of phonetic, visual, and mo
 # Assessment Objectives: AO1, AO6
 # Causal Links:
 # - Correct use of dash ensures tension, which helps the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: dash, spelling
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of dash ensures tension, which helps the reader to engage with the text.

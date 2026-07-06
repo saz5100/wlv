@@ -73,3 +73,12 @@ How does the writer use language here to describe the narrator's fear?
 # - The writer's use of simile creates tension, which causes the reader to engage with the text.
 # - By employing listing, the writer establishes atmosphere, leading the reader to sympathise with the character.
 # - semantic field is used to convey tension, which in turn makes the reader feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, semantic field, verb, sensory language, adjective
+# Assessment Objectives: AO1, AO2, AO5, AO6
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.
+# - By employing listing, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - semantic field is used to convey tension, which in turn makes the reader feel engaged.

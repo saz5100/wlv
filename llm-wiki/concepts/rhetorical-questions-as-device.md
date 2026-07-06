@@ -152,3 +152,11 @@ Rhetorical questions often mark **structural pivots**:
 # Causal Links:
 # - The writer's use of rhetorical question creates tension, which causes the reader to engage with the text.
 # - By employing rhetorical question, the writer establishes atmosphere, leading the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: tone, literal
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of rhetorical question creates tension, which causes the reader to engage with the text.
+# - By employing rhetorical question, the writer establishes atmosphere, leading the reader to sympathise with the character.

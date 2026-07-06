@@ -100,3 +100,11 @@ Keep it simple. Just list the facts:
 # Causal Links:
 # - The writer's use of simile creates tension, which causes the reader to engage with the text.
 # - By employing simile, the writer establishes atmosphere, leading the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, connotation, connotation
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.
+# - By employing simile, the writer establishes atmosphere, leading the reader to sympathise with the character.

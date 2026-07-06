@@ -79,3 +79,11 @@ Section B must be handwritten and scanned or photographed for submission. Candid
 # Causal Links:
 # - The writer's use of simile creates tension, which causes the reader to engage with the text.
 # - By employing metaphor, the writer establishes atmosphere, leading the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, metaphor, tone, figurative
+# Assessment Objectives: AO1
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.
+# - By employing metaphor, the writer establishes atmosphere, leading the reader to sympathise with the character.

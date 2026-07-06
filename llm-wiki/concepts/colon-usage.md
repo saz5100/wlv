@@ -43,3 +43,10 @@ A colon **cannot** be used if the preceding clause is not independent.
 # Assessment Objectives: AO1, AO6
 # Causal Links:
 # - Correct use of colon ensures tension, which helps the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: colon
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of colon ensures tension, which helps the reader to engage with the text.

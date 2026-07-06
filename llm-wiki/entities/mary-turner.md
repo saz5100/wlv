@@ -52,3 +52,10 @@ Mary's character embodies themes of environmental oppression, psychological brea
 # Assessment Objectives: AO1, AO3
 # Causal Links:
 # - The writer's use of metaphor creates tension, which causes the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: metaphor, literal
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of metaphor creates tension, which causes the reader to engage with the text.

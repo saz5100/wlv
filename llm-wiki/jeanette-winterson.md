@@ -49,3 +49,10 @@ The Worcester sample paper uses an extract from *Why Be Happy When You Could Be 
 # Assessment Objectives: AO1, AO2
 # Causal Links:
 # - The writer's use of imagery creates tension, which causes the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: imagery, figurative
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of imagery creates tension, which causes the reader to engage with the text.

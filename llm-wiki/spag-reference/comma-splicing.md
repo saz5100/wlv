@@ -50,3 +50,12 @@ To correct a comma splice, a writer can:
 # - Correct use of comma splice ensures tension, which helps the reader to engage with the text.
 # - Errors in colon cause atmosphere, leading the reader to sympathise with the character.
 # - Mastery of full stop creates suspense, which enables the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: full stop, colon, comma splice, conjunction
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of comma splice ensures tension, which helps the reader to engage with the text.
+# - Errors in colon cause atmosphere, leading the reader to sympathise with the character.
+# - Mastery of full stop creates suspense, which enables the reader to feel engaged.

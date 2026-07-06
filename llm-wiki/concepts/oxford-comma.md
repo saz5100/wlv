@@ -40,3 +40,12 @@ While optional in many UK styles, it is often used to prevent ambiguity in compl
 # - Correct use of language features ensures tension, which helps the reader to engage with the text.
 # - Errors in structural choices cause tension, leading the reader to feel engaged.
 # - Mastery of writing techniques creates tension, which enables the reader to share the character's emotions.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: conjunction
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of language features ensures tension, which helps the reader to engage with the text.
+# - Errors in structural choices cause tension, leading the reader to feel engaged.
+# - Mastery of writing techniques creates tension, which enables the reader to share the character's emotions.

@@ -70,3 +70,10 @@ Der Leitfaden ist primär auf die AQA GCSE ausgerichtet und weist erhebliche Unt
 # Assessment Objectives: AO1, AO3
 # Causal Links:
 # - The writer's use of repetition creates tension, which causes the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: verb
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of repetition creates tension, which causes the reader to engage with the text.

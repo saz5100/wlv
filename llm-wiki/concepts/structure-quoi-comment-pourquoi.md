@@ -42,3 +42,12 @@ Cette méthode est utilisée pour structurer les réponses aux questions d'analy
 # - The structural shift from language features creates tension, which causes the reader to engage with the text.
 # - By using structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
 # - The writing techniques at this point in the text creates suspense, which makes the reader feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: tension, shift
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The structural shift from language features creates tension, which causes the reader to engage with the text.
+# - By using structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - The writing techniques at this point in the text creates suspense, which makes the reader feel engaged.
