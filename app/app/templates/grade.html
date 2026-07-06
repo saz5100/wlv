@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Working Grade — WLV — University of Wolverhampton{% endblock %}
+{% block title %}Working Grade — WLV English Equivalency{% endblock %}
 {% block content %}
 <style>
 .grade-hero { max-width: 720px; margin: 0 auto 24px; text-align: center; }
@@ -8,13 +8,13 @@
 .grade-container { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
 
 .grade-card {
-    background: rgba(17,24,39,0.85); border: 1px solid rgba(34,211,238,0.12);
+    background: rgba(26,26,26,0.85); border: 1px solid rgba(255,209,0,0.12);
     border-radius: var(--r-xl); padding: 24px; text-align: center;
 }
 .light-theme .grade-card { background: rgba(255,255,255,0.9); }
 .grade-number {
     font-size: 72px; font-weight: 800; line-height: 1;
-    background: linear-gradient(135deg, var(--c-accent), #a855f7);
+    background: linear-gradient(135deg, var(--c-accent), #FFD100);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     background-clip: text;
 }
@@ -25,14 +25,14 @@
 .grade-attempts { font-size: 13px; color: var(--c-text-muted); margin-top: 8px; }
 
 .grade-progress-track { height: 12px; background: var(--c-border); border-radius: 99px; margin: 16px 0 8px; overflow: hidden; }
-.grade-progress-fill { height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--c-accent), #a855f7); transition: width 0.5s; }
+.grade-progress-fill { height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--c-accent), #FFD100); transition: width 0.5s; }
 
 .section-title { font-size: 18px; font-weight: 700; color: var(--c-heading); margin-bottom: 12px; }
 
 .topic-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
 .topic-card {
-    padding: 16px; border-radius: var(--r-lg); border: 1px solid rgba(34,211,238,0.1);
-    background: rgba(13,18,37,0.6); text-align: center;
+    padding: 16px; border-radius: var(--r-lg); border: 1px solid rgba(255,209,0,0.1);
+    background: rgba(0,0,0,0.6); text-align: center;
 }
 .light-theme .topic-card { background: rgba(243,244,246,0.6); }
 .topic-card .topic-code { font-size: 11px; font-weight: 700; color: var(--c-accent); text-transform: uppercase; }
@@ -58,17 +58,17 @@
 
 <div class="grade-hero">
     <h1>📊 Working Grade</h1>
-    <p>Your current grade based on exam-style question performance</p>
+    <p>Your current performance level based on exam-style question results</p>
 </div>
 
 <div class="grade-container">
 {% if has_data and grade %}
     <div class="grade-card">
         <div class="grade-number">{{ grade.overall_grade }}</div>
-        <div class="grade-label">Current Working Grade</div>
+        <div class="grade-label">Current Performance Level</div>
         <div class="grade-pct">{{ grade.overall_pct }}% average</div>
         {% if grade.next_grade %}
-        <div class="grade-next">Need <strong>{{ grade.marks_to_next }}% more</strong> to reach Grade {{ grade.next_grade }}</div>
+        <div class="grade-next">Need <strong>{{ grade.marks_to_next }}% more</strong> to reach {{ grade.next_grade }}</div>
         {% endif %}
         <div class="grade-attempts">Based on {{ grade.total_attempts }} exam-style question attempts</div>
         <div class="grade-progress-track">
@@ -78,14 +78,14 @@
 
     {% if grade_history and grade_history|length > 1 %}
     <div>
-        <h2 class="section-title">📈 Grade History</h2>
+        <h2 class="section-title">📈 Score History</h2>
         <div class="grade-card">
             <div class="history-chart">
             {% for h in grade_history %}
-                <div class="history-bar" style="height:{{ h.pct }}px;background:hsla(190,70%,55%,{{ 0.3 + loop.index / grade_history|length * 0.5 }});">
+                <div class="history-bar" style="height:{{ h.pct }}px;background:hsla(50,100%,55%,{{ 0.3 + loop.index / grade_history|length * 0.5 }});">
                     <span class="bar-date">{{ h.date }}</span>
                     {{ h.pct }}%
-                    <span class="bar-grade">G{{ h.grade }}</span>
+                    <span class="bar-grade">{{ h.grade }}</span>
                 </div>
             {% endfor %}
             </div>
@@ -98,7 +98,7 @@
         <div class="topic-grid">
         {% for t in grade.topics %}
             <div class="topic-card">
-                <div class="topic-code">Topic {{ t.topic }}</div>
+                <div class="topic-code">{{ t.topic }}</div>
                 <div class="topic-title">{{ t.topic }}</div>
                 <div class="topic-grade">{{ t.grade }}</div>
                 <div class="topic-pct">{{ t.avg_pct }}%</div>
@@ -111,8 +111,8 @@
     <div class="empty-state">
         <div class="empty-icon">📝</div>
         <h3>No grade data yet</h3>
-        <p>Complete some exam-style questions to see your working grade.</p>
-        <a href="/exam-style" class="btn btn-primary" style="margin-top:16px;">✍️ Start Exam-Style Questions</a>
+        <p>Complete some exam-style questions to see your performance level.</p>
+        <a href="/exam-style" class="btn btn-primary" style="margin-top:16px;">✍️ Start Practice Questions</a>
     </div>
 {% endif %}
 </div>

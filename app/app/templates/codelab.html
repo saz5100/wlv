@@ -1,9 +1,9 @@
 {% extends "base.html" %}
-{% block title %}Code Lab | WLV — University of Wolverhampton{% endblock %}
+{% block title %}Writing Lab | WLV — University of Wolverhampton{% endblock %}
 {% block content %}
 <div class="hero" style="padding: 30px 0 15px;">
-    <h1>💻 Code Lab</h1>
-    <p class="hero-sub">Interactive programming challenges and live execution runner</p>
+    <h1>✍️ Writing Lab</h1>
+    <p class="hero-sub">Interactive English writing and analysis exercises</p>
 </div>
 
 <style>
@@ -12,15 +12,15 @@
     max-width: 900px;
     margin: 0 auto 20px;
     padding: 20px 24px;
-    background: rgba(17, 24, 39, 0.7);
-    border: 1px solid rgba(34, 211, 238, 0.12);
+    background: rgba(26, 26, 26, 0.7);
+    border: 1px solid rgba(255, 209, 0, 0.12);
     border-radius: var(--r-xl);
     line-height: 1.7;
     font-size: 14px;
 }
 .light-theme .codelab-intro {
     background: rgba(255, 255, 255, 0.8);
-    border-color: rgba(8, 145, 178, 0.15);
+    border-color: rgba(212, 168, 0, 0.15);
 }
 .codelab-intro h3 {
     color: var(--c-heading);
@@ -37,8 +37,8 @@
     margin-top: 10px;
 }
 .codelab-intro .step-item {
-    background: rgba(8, 11, 20, 0.4);
-    border: 1px solid rgba(34, 211, 238, 0.08);
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 209, 0, 0.08);
     border-radius: var(--r-md);
     padding: 10px 12px;
     font-size: 13px;
@@ -46,7 +46,7 @@
 }
 .light-theme .codelab-intro .step-item {
     background: rgba(0, 0, 0, 0.03);
-    border-color: rgba(8, 145, 178, 0.1);
+    border-color: rgba(212, 168, 0, 0.1);
 }
 .step-item .step-num {
     display: inline-block;
@@ -84,33 +84,33 @@
     background: rgba(255, 255, 255, 0.06);
     border-radius: 99px;
     overflow: hidden;
-    border: 1px solid rgba(34, 211, 238, 0.1);
+    border: 1px solid rgba(255, 209, 0, 0.1);
 }
 .light-theme .progress-track {
     background: rgba(0, 0, 0, 0.06);
 }
 .progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--c-accent), #a855f7);
+    background: linear-gradient(90deg, var(--c-accent), #FFD100);
     border-radius: 99px;
     transition: width 0.4s ease;
     min-width: 0;
 }
 
-/* ── Active Challenge Description (full-width) ── */
+/* ── Active Exercise Description ── */
 .active-challenge-card {
     max-width: 900px;
     margin: 0 auto 16px;
     padding: 18px 22px;
-    background: rgba(17, 24, 39, 0.85);
-    border: 1px solid rgba(34, 211, 238, 0.18);
+    background: rgba(26, 26, 26, 0.85);
+    border: 1px solid rgba(255, 209, 0, 0.18);
     border-left: 4px solid var(--c-accent);
     border-radius: var(--r-xl);
     animation: fadeIn 0.2s ease-out;
 }
 .light-theme .active-challenge-card {
     background: rgba(255, 255, 255, 0.9);
-    border-color: rgba(8, 145, 178, 0.18);
+    border-color: rgba(212, 168, 0, 0.18);
     border-left-color: var(--c-accent);
 }
 .active-challenge-card .chal-header {
@@ -130,8 +130,8 @@
     font-weight: 700;
     padding: 3px 10px;
     border-radius: 99px;
-    background: rgba(168, 85, 247, 0.15);
-    color: #a855f7;
+    background: rgba(255, 209, 0, 0.15);
+    color: var(--c-accent);
     white-space: nowrap;
 }
 .active-challenge-card .chal-scenario {
@@ -169,25 +169,13 @@
 .active-challenge-card .chal-expected strong {
     color: var(--c-green);
 }
-.active-challenge-card .chal-expected code {
-    background: rgba(255, 255, 255, 0.08);
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-family: monospace;
-    font-size: 13px;
-    color: var(--c-green);
-}
-.light-theme .active-challenge-card .chal-expected code {
-    background: rgba(0, 0, 0, 0.06);
-    color: #059669;
-}
 .active-challenge-card .chal-hint {
     font-size: 12px;
     color: var(--c-text-secondary);
     margin-top: 4px;
 }
 .active-challenge-card .chal-hint span {
-    color: #facc15;
+    color: #FFD100;
 }
 
 /* ── Main Container ── */
@@ -202,12 +190,12 @@
     margin-right: auto;
 }
 
-/* ── Challenge Selector Panel ── */
+/* ── Exercise Selector Panel ── */
 .challenge-panel {
     flex: 1 1 260px;
     max-width: 300px;
-    background: rgba(17, 24, 39, 0.85);
-    border: 1px solid rgba(34, 211, 238, 0.15);
+    background: rgba(26, 26, 26, 0.85);
+    border: 1px solid rgba(255, 209, 0, 0.15);
     border-radius: var(--r-xl);
     padding: 16px;
     display: flex;
@@ -216,7 +204,7 @@
 }
 .light-theme .challenge-panel {
     background: rgba(255, 255, 255, 0.85);
-    border-color: rgba(8, 145, 178, 0.15);
+    border-color: rgba(212, 168, 0, 0.15);
 }
 
 .challenge-list {
@@ -234,7 +222,7 @@
     background: transparent;
 }
 .challenge-list::-webkit-scrollbar-thumb {
-    background: rgba(34, 211, 238, 0.2);
+    background: rgba(255, 209, 0, 0.2);
     border-radius: 99px;
 }
 
@@ -260,7 +248,7 @@
 .challenge-btn {
     text-align: left;
     padding: 8px 10px;
-    background: rgba(13, 18, 37, 0.8);
+    background: rgba(0, 0, 0, 0.8);
     border: 2px solid var(--c-border);
     border-radius: var(--r-md);
     color: var(--c-text);
@@ -275,11 +263,11 @@
 }
 .challenge-btn:hover {
     border-color: var(--c-accent);
-    background: rgba(8, 41, 73, 0.4);
+    background: rgba(51, 42, 0, 0.4);
 }
 .challenge-btn.active {
     border-color: var(--c-accent);
-    background: rgba(8, 41, 73, 0.7);
+    background: rgba(51, 42, 0, 0.7);
     box-shadow: 0 0 10px var(--c-accent-glow);
 }
 .challenge-btn.completed {
@@ -299,8 +287,8 @@
 }
 
 .editor-card {
-    background: #0d1225;
-    border: 1px solid rgba(34, 211, 238, 0.15);
+    background: #1a1a1a;
+    border: 1px solid rgba(255, 209, 0, 0.15);
     border-radius: var(--r-xl);
     overflow: hidden;
     display: flex;
@@ -309,13 +297,13 @@
 }
 .light-theme .editor-card {
     background: #fafafa;
-    border-color: rgba(8, 145, 178, 0.15);
+    border-color: rgba(212, 168, 0, 0.15);
 }
 
 .editor-header {
-    background: rgba(17, 24, 39, 0.8);
+    background: rgba(26, 26, 26, 0.8);
     padding: 10px 16px;
-    border-bottom: 1px solid rgba(34, 211, 238, 0.12);
+    border-bottom: 1px solid rgba(255, 209, 0, 0.12);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -330,23 +318,23 @@
     width: 100%;
     height: 250px;
     background: transparent;
-    color: #38bdf8;
+    color: #e8e8e8;
     border: none;
     padding: 16px;
-    font-family: 'Consolas', 'Courier New', Courier, monospace;
+    font-family: 'Georgia', 'Times New Roman', serif;
     font-size: 15px;
     line-height: 1.5;
     resize: none;
     outline: none;
 }
 .light-theme .code-textarea {
-    color: #0369a1;
+    color: #1a1a1a;
 }
 
 .editor-footer {
     padding: 12px 16px;
-    background: rgba(17, 24, 39, 0.6);
-    border-top: 1px solid rgba(34, 211, 238, 0.08);
+    background: rgba(26, 26, 26, 0.6);
+    border-top: 1px solid rgba(255, 209, 0, 0.08);
     display: flex;
     justify-content: space-between;
     gap: 10px;
@@ -354,7 +342,7 @@
 
 /* ── Console Card ── */
 .console-card {
-    background: #090b11;
+    background: #0d0d0d;
     border: 1px solid var(--c-border);
     border-radius: var(--r-xl);
     overflow: hidden;
@@ -368,7 +356,7 @@
 
 .console-header {
     padding: 8px 16px;
-    background: rgba(17, 24, 39, 0.5);
+    background: rgba(26, 26, 26, 0.5);
     border-bottom: 1px solid var(--c-border);
     font-size: 12px;
     font-weight: 600;
@@ -378,40 +366,15 @@
 .console-output {
     height: 140px;
     padding: 12px 16px;
-    font-family: monospace;
+    font-family: 'Georgia', 'Times New Roman', serif;
     font-size: 14px;
-    color: #a855f7;
+    color: var(--c-accent);
     overflow-y: auto;
     white-space: pre-wrap;
     background: transparent;
 }
 .light-theme .console-output {
-    color: #7c3aed;
-}
-
-/* ── Loading Overlay ── */
-.loader-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(8, 11, 20, 0.85);
-    z-index: 9999;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    color: var(--c-accent);
-}
-.loader-spinner {
-    width: 50px;
-    height: 50px;
-    border: 4px dashed var(--c-accent);
-    border-top-color: transparent;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-@keyframes spin {
-    to { transform: rotate(360deg); }
+    color: #b89200;
 }
 
 /* ── Feedback Callouts ── */
@@ -441,101 +404,28 @@
     .challenge-panel { max-width: 100%; }
     .codelab-intro .steps-grid { grid-template-columns: 1fr 1fr; }
 }
-
-/* ── ERL Mode Toggle ── */
-.erl-toggle {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    cursor: pointer;
-    user-select: none;
-    margin-left: auto;
-}
-.erl-toggle-label {
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--c-text-secondary);
-    transition: color 0.2s;
-}
-.erl-toggle input { display: none; }
-.erl-toggle-slider {
-    width: 36px;
-    height: 20px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 99px;
-    position: relative;
-    transition: background 0.2s;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-}
-.erl-toggle-slider::after {
-    content: '';
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: var(--c-accent);
-    top: 1px;
-    left: 1px;
-    transition: transform 0.2s;
-}
-.erl-toggle input:checked + .erl-toggle-slider {
-    background: rgba(168, 85, 247, 0.3);
-    border-color: rgba(168, 85, 247, 0.3);
-}
-.erl-toggle input:checked + .erl-toggle-slider::after {
-    transform: translateX(16px);
-    background: #a855f7;
-}
-.erl-toggle input:checked ~ .erl-toggle-label {
-    color: #a855f7;
-}
-.erl-mode-active .code-textarea {
-    color: #a855f7;
-}
-.light-theme .erl-mode-active .code-textarea {
-    color: #7c3aed;
-}
-.erl-badge {
-    display: inline-block;
-    font-size: 10px;
-    font-weight: 700;
-    padding: 2px 8px;
-    border-radius: 99px;
-    background: rgba(168, 85, 247, 0.15);
-    color: #a855f7;
-    margin-left: 6px;
-    vertical-align: middle;
-}
 </style>
-
-<!-- Pyodide Loader Overlay -->
-<div class="loader-overlay" id="loaderOverlay">
-    <div class="loader-spinner"></div>
-    <div style="font-weight:700;font-size:18px;" id="loaderText">Loading Pyodide WebAssembly Compiler...</div>
-</div>
 
 <!-- ── Intro Section ── -->
 <div class="codelab-intro">
-    <h3>🚀 Welcome to the Code Lab</h3>
-    <p>This is your hands-on coding environment. Practice the programming concepts from your lessons by solving real challenges — your code runs directly in your browser using a WebAssembly Python compiler. <strong>Toggle ERL mode</strong> to practise WLV Reference Language for Paper 2.</p>
+    <h3>✍️ Welcome to the Writing Lab</h3>
+    <p>This is your interactive English writing and analysis environment. Practise language analysis, structural analysis, descriptive writing, and SPaG skills. Write your responses in the editor and check against model answers.</p>
     <div class="steps-grid">
         <div class="step-item">
             <span class="step-num">1</span>
-            <span class="step-label">Pick a challenge</span>
+            <span class="step-label">Pick an exercise</span>
         </div>
         <div class="step-item">
             <span class="step-num">2</span>
-            <span class="step-label">Read the scenario</span>
+            <span class="step-label">Read the passage</span>
         </div>
         <div class="step-item">
             <span class="step-num">3</span>
-            <span class="step-label">Write your code</span>
+            <span class="step-label">Write your analysis</span>
         </div>
         <div class="step-item">
             <span class="step-num">4</span>
-            <span class="step-label">Run &amp; verify</span>
+            <span class="step-label">Check &amp; improve</span>
         </div>
     </div>
 </div>
@@ -546,26 +436,26 @@
     <div class="progress-track">
         <div class="progress-fill" id="progressFill" style="width:0%"></div>
     </div>
-    <span id="progressLabel">0 / 30 completed</span>
+    <span id="progressLabel">0 / 20 completed</span>
 </div>
 
-<!-- ── Active Challenge Description (full-width, always visible) ── -->
+<!-- ── Active Exercise Description ── -->
 <div class="active-challenge-card" id="activeChallengeCard">
     <div class="chal-header">
-        <span class="chal-title" id="chalTitle">Select a Challenge</span>
+        <span class="chal-title" id="chalTitle">Select an Exercise</span>
         <span class="chal-category-badge" id="chalCategoryBadge">—</span>
     </div>
-    <div class="chal-scenario" id="chalScenario">Choose a challenge from the sidebar to get started.</div>
-    <div class="chal-task" id="chalDesc">Each challenge gives you a scenario and a coding task to complete. Write your solution in the editor, click <strong>Run Code</strong> to test, and <strong>Verify &amp; Submit</strong> when you are ready.</div>
-    <div class="chal-expected" id="chalExpected" style="display:none"><strong>Expected output:</strong> <code id="chalExpectedCode"></code></div>
+    <div class="chal-scenario" id="chalScenario">Choose an exercise from the sidebar to get started.</div>
+    <div class="chal-task" id="chalDesc">Each exercise gives you a passage or prompt and a writing task. Write your response in the editor, then click <strong>Check Answer</strong> to see a model answer.</div>
+    <div class="chal-expected" id="chalExpected" style="display:none"><strong>Model answer:</strong> <code id="chalExpectedCode"></code></div>
     <div class="chal-hint" id="chalHint" style="display:none"></div>
 </div>
 
 <div class="codelab-container">
-    <!-- ── Challenge Selector Panel ── -->
+    <!-- ── Exercise Selector Panel ── -->
     <div class="challenge-panel">
-        <h3 style="color:var(--c-heading);font-size:16px;margin-bottom:2px;">🎯 Challenges</h3>
-        <p style="font-size:12px;color:var(--c-text-secondary);margin-bottom:6px;">Select a challenge to solve:</p>
+        <h3 style="color:var(--c-heading);font-size:16px;margin-bottom:2px;">🎯 Exercises</h3>
+        <p style="font-size:12px;color:var(--c-text-secondary);margin-bottom:6px;">Select an exercise to complete:</p>
         
         <div class="challenge-list" id="challengeList">
             <!-- Buttons dynamically generated -->
@@ -576,556 +466,252 @@
     <div class="editor-panel">
         <div class="editor-card">
             <div class="editor-header">
-                <span>📝 Workspace Editor</span>
-                <span class="lang" id="langLabel">🐍 Python 3</span>
-                <label class="erl-toggle" title="Switch between Python and WLV Reference Language">
-                    <span class="erl-toggle-label" id="erlToggleLabel">ERL</span>
-                    <input type="checkbox" id="erlModeToggle" onchange="toggleErlMode()">
-                    <span class="erl-toggle-slider"></span>
-                </label>
+                <span>📝 Your Response</span>
+                <span class="lang" id="langLabel">✍️ Writing</span>
             </div>
-            <textarea class="code-textarea" id="codeEditor" spellcheck="false" placeholder="# Write your Python code here..."></textarea>
+            <textarea class="code-textarea" id="codeEditor" spellcheck="true" placeholder="Write your analysis or response here..."></textarea>
             <div class="editor-footer">
-                <button type="button" class="btn" id="runCodeBtn" onclick="runPythonCode()">⚡ Run Code</button>
-                <button type="button" class="btn btn-primary" onclick="submitSolution()">🏁 Verify &amp; Submit</button>
+                <button type="button" class="btn btn-primary" onclick="submitSolution()">🔍 Check Answer</button>
             </div>
         </div>
 
         <div class="console-card">
-            <div class="console-header">💻 Console Execution Output</div>
-            <div class="console-output" id="consoleOutput">Console ready... Ready to compile.</div>
+            <div class="console-header">💡 Model Answer &amp; Feedback</div>
+            <div class="console-output" id="consoleOutput">Select an exercise and write your response, then click "Check Answer" to see a model answer.</div>
         </div>
 
         <div class="feedback-box" id="feedbackBox"></div>
     </div>
 </div>
 
-<!-- Load Pyodide CDN -->
-<script src="/static/pyodide/pyodide.asm.js"></script>
-<script src="/static/pyodide/pyodide.js?v=1"></script>
 <script>
-// --- Challenge Categories ---
+// --- Exercise Categories ---
 const categories = [
-    { label: "📌 Basics",           ids: [1, 6, 7] },
-    { label: "🔀 Selection",        ids: [2, 8, 9, 10] },
-    { label: "🔁 Loops",            ids: [3, 11, 12] },
-    { label: "📝 Strings",          ids: [4, 13, 14, 15] },
-    { label: "📊 Arrays & Lists",   ids: [5, 16, 17, 18] },
-    { label: "⚙️ Functions",        ids: [19, 20] },
-    { label: "🔍 Algorithms",       ids: [21, 22, 23, 24, 25] },
-    { label: "🛡️ Robust Programs",  ids: [26, 27] },
-    { label: "📁 Data & Operators", ids: [28, 29, 30] },
+    { label: "📖 Language Analysis",   ids: [1, 2, 3, 4, 5] },
+    { label: "🏗️ Structure Analysis",  ids: [6, 7, 8, 9, 10] },
+    { label: "✍️ Descriptive Writing", ids: [11, 12, 13, 14, 15] },
+    { label: "📝 SPaG Practice",       ids: [16, 17, 18, 19, 20] },
 ];
 
-// --- Challenges Data ---
+// --- Exercises Data ---
 const challenges = [
-    // ─── Basics ───
+    // ─── Language Analysis ───
     {
         id: 1,
-        title: "Challenge 1: Print Statement",
-        scenario: "The print() function is one of the most fundamental tools in Python — it sends text to the console so you can see output from your program.",
-        desc: "Write a program that prints exactly the text <code>WLV — University of Wolverhampton</code> to the console.",
-        expectedOutput: "WLV — University of Wolverhampton",
-        hint: "💡 Use the <code>print()</code> function with the exact text inside quotation marks.",
-        placeholder: "# Write your code below\nprint(\"...\")",
-        verify: (output) => output.trim() === "WLV — University of Wolverhampton"
+        title: "Exercise 1: Simile Analysis",
+        scenario: "Read the following sentence: 'The fog crept over the city like a silent grey blanket, smothering every sound until the world held its breath.'",
+        desc: "Identify the simile in this sentence and explain its effect on the reader. What does it suggest about the atmosphere?",
+        expectedOutput: "The simile 'like a silent grey blanket' compares the fog to a blanket, suggesting it covers everything quietly and completely. The word 'silent' emphasises the eerie stillness, while 'grey' creates a dull, colourless image. 'Smothering' personifies the fog as something suffocating, building tension. The effect is to create a sense of unease and suspense — the reader feels the world is holding its breath, waiting for something to happen.",
+        hint: "💡 Look for 'like' or 'as' to find the simile. Think about what the comparison suggests about mood and atmosphere.",
+        placeholder: "The simile in this sentence is...\n\nIt creates the effect of...",
+        verify: (output) => output.trim().length > 20
     },
     {
+        id: 2,
+        title: "Exercise 2: Personification",
+        scenario: "Read: 'The wind howled through the narrow alleyways, its icy fingers clawing at the windows and rattling the old wooden shutters.'",
+        desc: "Explain how the writer uses personification in this sentence. What human qualities are given to the wind, and what effect does this have?",
+        expectedOutput: "The wind is personified through the verbs 'howled' (like an animal or person crying out) and 'clawing' (like a creature attacking). 'Icy fingers' gives the wind hands, making it seem deliberately cruel. This creates a threatening, hostile atmosphere — the wind is not just weather but an active, malevolent force. The reader feels the danger and discomfort of being in such a place.",
+        hint: "💡 Personification gives non-human things human qualities. Look for verbs and nouns usually associated with people or animals.",
+        placeholder: "The writer uses personification by...\n\nThis creates the effect of...",
+        verify: (output) => output.trim().length > 20
+    },
+    {
+        id: 3,
+        title: "Exercise 3: Imagery Analysis",
+        scenario: "Read: 'The sunset was a masterpiece of colour — streaks of crimson and gold bleeding across the canvas of the sky, each cloud edged with fire.'",
+        desc: "Analyse the imagery in this sentence. Identify the metaphor and explain how the writer creates a vivid picture for the reader.",
+        expectedOutput: "The metaphor 'the sunset was a masterpiece of colour' compares the sunset to a painting, suggesting it is beautiful and carefully created. 'Streaks of crimson and gold bleeding across the canvas of the sky' extends the metaphor — 'bleeding' is striking because it suggests both beauty and violence. 'Each cloud edged with fire' uses hyperbole to emphasise brightness. The overall effect is to make the sunset feel dramatic, powerful, and almost overwhelming in its beauty.",
+        hint: "💡 A metaphor is a direct comparison without 'like' or 'as'. Think about why the writer chose each word.",
+        placeholder: "The imagery in this sentence...\n\nThe metaphor of...",
+        verify: (output) => output.trim().length > 20
+    },
+    {
+        id: 4,
+        title: "Exercise 4: Sensory Language",
+        scenario: "Read: 'The market was alive with colour and noise. Brightly striped awnings sheltered stalls piled high with exotic fruits. The air was thick with the smell of spices and the sizzle of cooking meat.'",
+        desc: "Identify the sensory language used in this passage. Which senses does the writer appeal to, and what effect does this have on the reader's experience?",
+        expectedOutput: "The writer appeals to multiple senses: sight ('brightly striped awnings', 'piled high with exotic fruits'), smell ('thick with the smell of spices'), and sound ('sizzle of cooking meat'). The phrase 'alive with colour and noise' uses personification to make the market feel energetic. By engaging several senses, the writer immerses the reader in the scene, making it feel vivid and real. The reader can almost see, smell, and hear the market themselves.",
+        hint: "💡 Sensory language appeals to the five senses: sight, sound, smell, taste, touch. List which senses are used.",
+        placeholder: "The writer uses sensory language to appeal to...\n\nThis makes the reader feel...",
+        verify: (output) => output.trim().length > 20
+    },
+    {
+        id: 5,
+        title: "Exercise 5: Tone and Mood",
+        scenario: "Read: 'The old house stood at the end of the lane, its windows dark and empty like sightless eyes. The gate creaked as it swung on broken hinges, and the garden was a tangle of dead weeds.'",
+        desc: "Analyse the tone and mood of this passage. How does the writer create a sense of foreboding? Refer to specific language choices.",
+        expectedOutput: "The tone is ominous and unsettling. The simile 'windows dark and empty like sightless eyes' compares the windows to blind eyes, suggesting the house is dead or watching. 'Creaked' is an onomatopoeic word that creates an eerie sound. 'Broken hinges' and 'dead weeds' suggest decay and neglect. The cumulative effect is a mood of foreboding — the reader feels something bad has happened or will happen here. The writer creates tension through imagery of emptiness and decay.",
+        hint: "💡 Tone is the writer's attitude; mood is how the reader feels. Look for words with negative connotations.",
+        placeholder: "The tone of this passage is...\n\nThe mood created is...\n\nThis is achieved through...",
+        verify: (output) => output.trim().length > 20
+    },
+
+    // ─── Structure Analysis ───
+    {
         id: 6,
-        title: "Challenge 6: Type Conversion",
-        scenario: "In real programs, data often arrives as text (strings) even when it represents numbers. You need to cast between types to perform arithmetic.",
-        desc: "Given <code>num_str = \"42\"</code>, convert it to an integer, add <code>8</code>, then print the result.",
-        expectedOutput: "50",
-        hint: "💡 Use <code>int()</code> to convert a string to an integer before doing maths.",
-        placeholder: 'num_str = "42"\n# Convert, add, and print\n',
-        verify: (output) => output.trim() === "50"
+        title: "Exercise 6: Opening Analysis",
+        scenario: "Read this opening: 'It began as a whisper. A rumour, barely audible, passed from one person to the next like a secret too dangerous to keep. By the time it reached the town square, it was a roar.'",
+        desc: "Analyse how the writer structures this opening to engage the reader. Consider sentence length, pacing, and the use of contrast.",
+        expectedOutput: "The opening uses a short, punchy sentence: 'It began as a whisper.' This creates intrigue — the reader wants to know what 'it' is. The second sentence is longer, building detail. The contrast between 'whisper' and 'roar' shows how the rumour grows. The structure mirrors the content: the sentences themselves grow from short to long, just as the rumour grows from quiet to loud. This engages the reader by creating mystery and a sense of escalating tension.",
+        hint: "💡 Think about why the writer chose short or long sentences. How does the structure reflect the meaning?",
+        placeholder: "The writer structures the opening by...\n\nThis engages the reader because...",
+        verify: (output) => output.trim().length > 20
     },
     {
         id: 7,
-        title: "Challenge 7: Data Types",
-        scenario: "Python supports several data types: strings for text, integers for whole numbers, and floats for decimals. Knowing which to use is a key skill.",
-        desc: "Define three variables: <code>name = \"Alex\"</code> (string), <code>age = 16</code> (integer), <code>height = 1.75</code> (real/float). Print all three, each on a new line, in that order.",
-        expectedOutput: "Alex\n16\n1.75",
-        hint: "💡 Use three separate <code>print()</code> statements, one per variable.",
-        placeholder: '# Define your variables and print them\n',
-        verify: (output) => {
-            const lines = output.trim().split("\n").map(s => s.trim()).filter(Boolean);
-            return lines.length === 3 && lines[0] === "Alex" && lines[1] === "16" && lines[2] === "1.75";
-        }
-    },
-
-    // ─── Selection ───
-    {
-        id: 2,
-        title: "Challenge 2: Selection Logic (IF)",
-        scenario: "Selection lets your program make decisions. An IF statement checks a condition and runs different code depending on whether it is true or false.",
-        desc: "Write a program that defines a variable <code>score = 75</code>. Check if the score is 50 or more, print <code>Pass</code>; otherwise print <code>Fail</code>.",
-        expectedOutput: "Pass",
-        hint: "💡 Use <code>if score >= 50:</code> followed by an <code>else:</code> block.",
-        placeholder: "score = 75\n# Write your IF statement below\n",
-        verify: (output) => output.trim() === "Pass"
+        title: "Exercise 7: Flashback Structure",
+        scenario: "Read: 'She looked at the photograph and was instantly transported back. The summer of 1998 had been the hottest on record. She remembered the taste of ice cream, the smell of cut grass, the sound of her brother's laughter. Then she looked up, and the memory dissolved like morning mist.'",
+        desc: "Explain how the writer uses a flashback structure. How does the shift between present and past affect the reader's understanding?",
+        expectedOutput: "The writer uses the photograph as a trigger for the flashback — a common structural device. The phrase 'transported back' signals the shift in time. The flashback uses sensory details (taste, smell, sound) to make the memory vivid. The return to the present is marked by 'Then she looked up', and the simile 'dissolved like morning mist' suggests the memory fades gently. This structure allows the reader to understand the character's past and feel the contrast between happy memories and the present reality.",
+        hint: "💡 Look for time markers that signal shifts between past and present. Why does the writer use this structure?",
+        placeholder: "The flashback structure works by...\n\nThe effect on the reader is...",
+        verify: (output) => output.trim().length > 20
     },
     {
         id: 8,
-        title: "Challenge 8: Grade Calculator",
-        scenario: "Schools often convert numeric marks into letter grades. This requires checking multiple conditions in sequence using elif (else-if) chains.",
-        desc: "Given <code>score = 87</code>, print the grade: <code>A</code> (≥80), <code>B</code> (≥70), <code>C</code> (≥50), <code>F</code> (below 50). Use an <code>if/elif/else</code> chain.",
-        expectedOutput: "A",
-        hint: "💡 Check the highest boundary first: <code>if score >= 80</code>, then <code>elif score >= 70</code>, etc.",
-        placeholder: "score = 87\n# Determine and print the grade\n",
-        verify: (output) => output.trim() === "A"
+        title: "Exercise 8: Cyclical Structure",
+        scenario: "Read: 'The journey began at dawn, with the city still asleep. [...] The journey ended at dusk, with the city asleep once more.'",
+        desc: "Analyse the use of cyclical structure in this passage. How does the ending mirror the beginning, and what effect does this create?",
+        expectedOutput: "The cyclical structure is created by the parallel phrases 'began at dawn' and 'ended at dusk', and 'city still asleep' and 'city asleep once more'. This mirroring suggests that nothing has changed — the journey has come full circle. The effect is to create a sense of completeness and inevitability. It may also suggest that the character has not achieved what they set out to do, or that life continues in an endless cycle. Cyclical structures often leave the reader with a feeling of reflection or resignation.",
+        hint: "💡 Cyclical structure means the ending echoes the beginning. Think about what this suggests thematically.",
+        placeholder: "The cyclical structure is created by...\n\nThis creates the effect of...",
+        verify: (output) => output.trim().length > 20
     },
     {
         id: 9,
-        title: "Challenge 9: Boolean Logic",
-        scenario: "Boolean operators (AND, OR, NOT) let you combine multiple conditions. This is essential for access control, form validation, and game logic.",
-        desc: "Given <code>age = 17</code> and <code>has_permission = True</code>, print <code>Access granted</code> if age ≥ 18 <strong>or</strong> has_permission is True. Otherwise print <code>Access denied</code>.",
-        expectedOutput: "Access granted",
-        hint: "💡 Use the <code>or</code> keyword to combine two conditions.",
-        placeholder: "age = 17\nhas_permission = True\n# Check access using OR\n",
-        verify: (output) => output.trim() === "Access granted"
+        title: "Exercise 9: Foreshadowing",
+        scenario: "Read: 'He noticed the crack in the ceiling that morning, a thin dark line like a vein. He meant to fix it, but he was late for work. He never did get around to it.'",
+        desc: "Explain how the writer uses foreshadowing in this passage. What might the crack symbolise, and how does the final sentence create tension?",
+        expectedOutput: "The crack in the ceiling is a symbol of something wrong that will get worse. The simile 'like a vein' suggests it is part of something living — perhaps the house itself is decaying. The detail that 'he never did get around to it' foreshadows a negative outcome: either the crack will cause a collapse, or the character's procrastination will have serious consequences. This creates dramatic irony — the reader senses danger that the character ignores. Foreshadowing builds tension by hinting at future events.",
+        hint: "💡 Foreshadowing gives clues about what will happen later. Look for objects or details that seem significant.",
+        placeholder: "The writer foreshadows...\n\nThis creates tension because...",
+        verify: (output) => output.trim().length > 20
     },
     {
         id: 10,
-        title: "Challenge 10: Nested Conditions",
-        scenario: "Sometimes decisions depend on multiple factors at once. Combining AND with nested IF/ELIF lets you model real-world decision trees.",
-        desc: "Given <code>temp = 30</code> and <code>is_raining = False</code>, print <code>Beach</code> if temp > 25 AND not raining, <code>Park</code> if temp > 15, otherwise <code>Stay home</code>.",
-        expectedOutput: "Beach",
-        hint: "💡 Use <code>if temp > 25 and not is_raining:</code> for the first condition.",
-        placeholder: 'temp = 30\nis_raining = False\n# Use nested/complex conditions\n',
-        verify: (output) => output.trim() === "Beach"
+        title: "Exercise 10: Pace and Rhythm",
+        scenario: "Read: 'He ran. His heart pounded. His lungs burned. The footsteps behind him grew louder, closer, faster. He turned a corner. A dead end. He was trapped.'",
+        desc: "Analyse how the writer uses sentence structure to control pace and create tension. Refer to specific sentences.",
+        expectedOutput: "The writer uses very short sentences at the start: 'He ran. His heart pounded. His lungs burned.' This creates a fast, urgent pace that mirrors the character's panic. The list 'louder, closer, faster' uses a tricolon (three items) to build intensity. The short, blunt sentences 'A dead end. He was trapped.' create a sudden stop — the pace crashes to a halt, mirroring the character's realisation. This contrast between fast movement and sudden stillness heightens the tension and drama.",
+        hint: "💡 Short sentences create fast pace and urgency. Longer sentences slow things down. Look for patterns.",
+        placeholder: "The writer controls pace by...\n\nThe effect on tension is...",
+        verify: (output) => output.trim().length > 20
     },
 
-    // ─── Loops ───
-    {
-        id: 3,
-        title: "Challenge 3: For Loop Iteration",
-        scenario: "Loops let you repeat actions without writing the same code over and over. A for loop with range() is ideal when you know how many times to repeat.",
-        desc: "Write a loop that prints the numbers <code>1</code> to <code>5</code> (inclusive), each on a new line.",
-        expectedOutput: "1\n2\n3\n4\n5",
-        hint: "💡 Use <code>for i in range(1, 6):</code> — remember range() stops before the end value.",
-        placeholder: "# Write your loop below\n",
-        verify: (output) => {
-            const lines = output.trim().split("\n").map(s => s.trim()).filter(Boolean);
-            return lines.length === 5 && lines.join(",") === "1,2,3,4,5";
-        }
-    },
+    // ─── Descriptive Writing ───
     {
         id: 11,
-        title: "Challenge 11: While Loop Countdown",
-        scenario: "A while loop repeats as long as a condition is true. Unlike for loops, you control the loop variable yourself — useful for countdowns and input validation.",
-        desc: "Use a <code>while</code> loop to print the numbers <code>5</code> down to <code>1</code>, each on a new line.",
-        expectedOutput: "5\n4\n3\n2\n1",
-        hint: "💡 Start with <code>count = 5</code> and loop <code>while count >= 1:</code>, decrementing each time.",
-        placeholder: "# Write a while loop\n",
-        verify: (output) => {
-            const lines = output.trim().split("\n").map(s => s.trim()).filter(Boolean);
-            return lines.length === 5 && lines.join(",") === "5,4,3,2,1";
-        }
+        title: "Exercise 11: Describe a Storm",
+        scenario: "Write a descriptive paragraph about a storm approaching a coastal town.",
+        desc: "Use sensory language (sight, sound, smell, touch) to describe the storm approaching. Include at least one simile and one piece of personification.",
+        expectedOutput: "The sky darkened to a bruised purple as the storm marched in from the sea. The wind began as a low moan, then rose to a shriek, tearing at the rooftops like an angry beast. The first fat drops of rain hit the pavement with the sound of tiny explosions. The air smelt of salt and ozone, sharp and electric. The sea, once calm, now thrashed against the harbour wall, spraying white foam into the air like a dragon's breath.",
+        hint: "💡 Use the five senses. Think about what you would see, hear, smell, feel, and even taste in a storm.",
+        placeholder: "Write your descriptive paragraph here...",
+        verify: (output) => output.trim().length > 50
     },
     {
         id: 12,
-        title: "Challenge 12: Accumulator Pattern",
-        scenario: "The accumulator pattern is a classic technique: start with a total of 0, then loop through items adding each one. It appears in many exam questions.",
-        desc: "Given <code>nums = [3, 7, 2, 9, 4]</code>, calculate the sum using a loop (do NOT use the built-in <code>sum()</code> function) and print the result.",
-        expectedOutput: "25",
-        hint: "💡 Create a variable <code>total = 0</code>, then use a for loop to add each number to it.",
-        placeholder: "nums = [3, 7, 2, 9, 4]\n# Sum using a loop\n",
-        verify: (output) => output.trim() === "25"
-    },
-
-    // ─── Strings ───
-    {
-        id: 4,
-        title: "Challenge 4: String Length",
-        scenario: "Strings are sequences of characters. Python's len() function returns how many characters a string contains — useful for validation and text processing.",
-        desc: "Define a string <code>word = \"Algorithms\"</code>. Use the <code>len()</code> function to find its length and print it to the console.",
-        expectedOutput: "10",
-        hint: "💡 Use <code>print(len(word))</code> to output the length.",
-        placeholder: "word = \"Algorithms\"\n# Print the length of the string below\n",
-        verify: (output) => output.trim() === "10"
+        title: "Exercise 12: Describe a Character",
+        scenario: "Write a descriptive paragraph introducing a mysterious character.",
+        desc: "Describe a character who appears mysterious. Use physical description, body language, and the reactions of others to create a sense of mystery. Do not state directly that they are mysterious — show it through description.",
+        expectedOutput: "He stood at the edge of the crowd, a tall figure in a coat that seemed too heavy for the season. His hat was pulled low, casting his face in shadow. When he moved, it was with a deliberate slowness, as if each step was carefully considered. People glanced at him, then quickly looked away, as though afraid to meet his eyes. He carried no bag, spoke to no one, and yet he seemed to be waiting for something — or someone.",
+        hint: "💡 'Show, don't tell.' Instead of saying 'he was mysterious', describe details that suggest mystery.",
+        placeholder: "Write your character description here...",
+        verify: (output) => output.trim().length > 50
     },
     {
         id: 13,
-        title: "Challenge 13: String Concatenation",
-        scenario: "Concatenation means joining strings together. You can use the + operator to combine text — just remember to add spaces manually.",
-        desc: "Given <code>first = \"Ada\"</code> and <code>last = \"Lovelace\"</code>, join them with a space and print the full name <code>Ada Lovelace</code>.",
-        expectedOutput: "Ada Lovelace",
-        hint: "💡 Use <code>first + \" \" + last</code> to join with a space between.",
-        placeholder: 'first = "Ada"\nlast = "Lovelace"\n# Concatenate and print\n',
-        verify: (output) => output.trim() === "Ada Lovelace"
+        title: "Exercise 13: Describe a Place",
+        scenario: "Write a descriptive paragraph about an abandoned amusement park.",
+        desc: "Use vivid imagery to describe the scene. Focus on decay and emptiness. Include a metaphor and use contrast between what the park once was and what it is now.",
+        expectedOutput: "The rollercoaster stood frozen, its tracks rusted and twisted like the skeleton of some great beast. The ticket booth was empty, its glass smashed, a single faded sign still promising 'The Ride of Your Life'. Weeds pushed through the cracked concrete, reclaiming the ground. A gentle creak broke the silence as a broken swing swayed in the breeze — the only movement in a place that had once been full of laughter and screams. Now there was only the wind, and the memory of joy.",
+        hint: "💡 Use contrast between past and present. Describe what is missing as well as what is there.",
+        placeholder: "Write your description of the abandoned amusement park...",
+        verify: (output) => output.trim().length > 50
     },
     {
         id: 14,
-        title: "Challenge 14: Count Vowels",
-        scenario: "Iterating through each character of a string is a common pattern. Combined with a condition, you can count, filter, or transform characters.",
-        desc: "Given <code>text = \"WLV\"</code>, count how many vowels (a, e, i, o, u) it contains (case-insensitive) and print the count.",
-        expectedOutput: "6",
-        hint: "💡 Loop through each character with <code>for char in text:</code> and check <code>if char.lower() in \"aeiou\":</code>.",
-        placeholder: 'text = "WLV"\n# Count vowels and print the result\n',
-        verify: (output) => output.trim() === "6"
+        title: "Exercise 14: Describe a Sound",
+        scenario: "Write a paragraph describing a sound in detail, as if it is the most important thing in the world.",
+        desc: "Choose a sound (e.g. rain on a window, footsteps in an empty corridor, a distant train) and describe it using onomatopoeia, simile, and personification. Make the reader hear the sound through your words.",
+        expectedOutput: "The rain tapped at the window with a gentle, insistent rhythm — tap, tap, tap — like a visitor who would not leave. Each drop was a tiny finger, reaching through the glass, asking to be let in. The sound was a lullaby and a warning all at once, a soft percussion that filled the silence of the room. It grew louder, then softer, then louder again, as if the sky itself was breathing. And beneath it, the steady drip from the broken gutter marked time like a slow, patient clock.",
+        hint: "💡 Onomatopoeia (words that sound like their meaning) is powerful for describing sounds. Use rhythm in your sentences.",
+        placeholder: "Write your description of a sound...",
+        verify: (output) => output.trim().length > 50
     },
     {
         id: 15,
-        title: "Challenge 15: Password Validator",
-        scenario: "Input validation is crucial for robust programs. Passwords typically must meet length and character requirements — exactly the kind of check exams test.",
-        desc: "Given <code>password = \"Hello123\"</code>, print <code>Valid</code> if the password is at least 8 characters long AND contains at least one digit. Otherwise print <code>Invalid</code>.",
-        expectedOutput: "Valid",
-        hint: "💡 Use <code>len(password) >= 8</code> for length and <code>any(c.isdigit() for c in password)</code> for digit check.",
-        placeholder: 'password = "Hello123"\n# Validate and print\n',
-        verify: (output) => {
-            const out = output.trim();
-            return out === "Valid" || out === "valid";
-        }
+        title: "Exercise 15: Describe an Emotion",
+        scenario: "Write a paragraph describing the feeling of anticipation without using the word 'anticipation' or 'excited'.",
+        desc: "Describe the physical sensations, thoughts, and behaviours of someone feeling anticipation. Show the emotion through actions and sensory details, not by naming it.",
+        expectedOutput: "Her hands were clammy, and she wiped them on her jeans for the third time in as many minutes. She checked her phone. Nothing. She checked it again. Still nothing. The clock on the wall seemed to have stopped — each second stretched into an eternity. She paced to the window, then back to the door, then to the window again. Her stomach fluttered with something between hope and dread. Any moment now. Any moment.",
+        hint: "💡 Think about physical signs: clammy hands, fast heartbeat, pacing, checking the time repeatedly.",
+        placeholder: "Write your description of anticipation...",
+        verify: (output) => output.trim().length > 50
     },
 
-    // ─── Arrays & Lists ───
-    {
-        id: 5,
-        title: "Challenge 5: Array Summation",
-        scenario: "Lists (arrays) store multiple values in a single variable. Being able to process all elements — like calculating a total — is a fundamental programming skill.",
-        desc: "Given a list of numbers <code>nums = [5, 12, 8, 20]</code>, write code that calculates the sum of all elements in the list and prints it.",
-        expectedOutput: "45",
-        hint: "💡 You can use <code>sum(nums)</code> or loop through the list and accumulate.",
-        placeholder: "nums = [5, 12, 8, 20]\n# Write code to sum and print below\n",
-        verify: (output) => output.trim() === "45"
-    },
+    // ─── SPaG Practice ───
     {
         id: 16,
-        title: "Challenge 16: Find Maximum",
-        scenario: "Finding the largest value in a list is a classic algorithm. In the exam, you may be asked to do this without built-in functions like max().",
-        desc: "Given <code>nums = [12, 45, 7, 89, 23]</code>, find the largest number without using <code>max()</code> and print it.",
-        expectedOutput: "89",
-        hint: "💡 Set <code>largest = nums[0]</code>, then loop and update if you find a bigger number.",
-        placeholder: "nums = [12, 45, 7, 89, 23]\n# Find and print the max\n",
-        verify: (output) => output.trim() === "89"
+        title: "Exercise 16: Apostrophes",
+        scenario: "Correct the following sentences: 'The dogs bone was buried in the garden. Its been there for weeks. The childrens toys were scattered everywhere.'",
+        desc: "Rewrite the sentences with correct apostrophe usage. Explain the difference between possessive apostrophes and contraction apostrophes.",
+        expectedOutput: "Corrected: 'The dog's bone was buried in the garden. It's been there for weeks. The children's toys were scattered everywhere.'\n\nExplanation: 'Dog's' is a possessive apostrophe — the bone belongs to the dog. 'It's' is a contraction of 'it has' — the apostrophe replaces the missing letters. 'Children's' is a possessive apostrophe — the toys belong to the children. Note that 'children' is an irregular plural that does not end in 's', so the apostrophe goes before the 's'.",
+        hint: "💡 Possessive apostrophes show ownership. Contraction apostrophes show missing letters. They are different!",
+        placeholder: "Corrected sentences:\n\nExplanation:\n",
+        verify: (output) => output.trim().length > 20
     },
     {
         id: 17,
-        title: "Challenge 17: Filter Even Numbers",
-        scenario: "Filtering means selecting only the items that meet a condition. This combines loops with selection — a pattern that appears frequently in Paper 2.",
-        desc: "Given <code>nums = [1, 2, 3, 4, 5, 6]</code>, print only the even numbers, each on a new line.",
-        expectedOutput: "2\n4\n6",
-        hint: "💡 Use <code>if num % 2 == 0:</code> inside a for loop to check for even numbers.",
-        placeholder: "nums = [1, 2, 3, 4, 5, 6]\n# Print even numbers\n",
-        verify: (output) => {
-            const lines = output.trim().split("\n").map(s => s.trim()).filter(Boolean);
-            return lines.length === 3 && lines.join(",") === "2,4,6";
-        }
+        title: "Exercise 17: Comma Splices",
+        scenario: "Correct this passage: 'The sun was shining it was a beautiful day, the birds were singing, the air was warm and fresh. I decided to go for a walk, I took my dog with me.'",
+        desc: "Rewrite the passage, fixing the comma splices and run-on sentences. Use full stops, semicolons, or conjunctions (and, but, because) as appropriate.",
+        expectedOutput: "The sun was shining, and it was a beautiful day. The birds were singing, and the air was warm and fresh. I decided to go for a walk, so I took my dog with me.\n\nAlternatively: The sun was shining; it was a beautiful day. The birds were singing; the air was warm and fresh. I decided to go for a walk and took my dog with me.",
+        hint: "💡 A comma splice is when two complete sentences are joined with only a comma. Use a full stop, semicolon, or add a conjunction.",
+        placeholder: "Corrected passage:\n\n",
+        verify: (output) => output.trim().length > 20
     },
     {
         id: 18,
-        title: "Challenge 18: 2D Array Sum",
-        scenario: "2D arrays (lists of lists) represent grids and tables. To access every element, you need nested loops — an outer loop for rows and an inner loop for columns.",
-        desc: "Given <code>grid = [[1, 2, 3], [4, 5, 6]]</code>, calculate the sum of ALL elements using nested loops and print the result.",
-        expectedOutput: "21",
-        hint: "💡 Use <code>for row in grid:</code> then <code>for item in row:</code> to access each element.",
-        placeholder: "grid = [[1, 2, 3], [4, 5, 6]]\n# Sum all elements\n",
-        verify: (output) => output.trim() === "21"
+        title: "Exercise 18: Subject-Verb Agreement",
+        scenario: "Correct these sentences: 'The group of students are waiting outside. Each of the teachers have a different opinion. Neither the cat nor the dogs is allowed on the sofa.'",
+        desc: "Rewrite the sentences with correct subject-verb agreement. Explain the rule for each correction.",
+        expectedOutput: "Corrected: 'The group of students is waiting outside.' (The subject is 'group', which is singular, so the verb should be 'is'.)\n'Each of the teachers has a different opinion.' ('Each' is always singular, so the verb is 'has'.)\n'Neither the cat nor the dogs are allowed on the sofa.' (With 'neither...nor', the verb agrees with the noun closest to it — 'dogs' is plural, so 'are'.)",
+        hint: "💡 The verb must agree with the subject, not with words that come between them. Watch out for 'each', 'every', and 'neither...nor'.",
+        placeholder: "Corrected sentences:\n\nRule explanations:\n",
+        verify: (output) => output.trim().length > 20
     },
-
-    // ─── Functions ───
     {
         id: 19,
-        title: "Challenge 19: Function — Area",
-        scenario: "Functions (subprograms) let you reuse code. You define a function once with def, then call it whenever needed — making programs modular and maintainable.",
-        desc: "Define a function <code>area(length, width)</code> that returns the area of a rectangle. Call it with <code>length = 5, width = 3</code> and print the result.",
-        expectedOutput: "15",
-        hint: "💡 Use <code>def area(length, width):</code> with a <code>return</code> statement, then <code>print(area(5, 3))</code>.",
-        placeholder: "# Define your function\n# Call it and print\n",
-        verify: (output) => output.trim() === "15"
+        title: "Exercise 19: Sentence Fragments",
+        scenario: "Identify and fix the sentence fragments: 'She walked into the room. A large, empty room with peeling wallpaper. The silence was overwhelming. A silence that seemed to press down on her.'",
+        desc: "Rewrite the passage so that all fragments are corrected. You may combine sentences or add words to make them complete.",
+        expectedOutput: "She walked into the room, which was large and empty with peeling wallpaper. The silence was overwhelming — a silence that seemed to press down on her.\n\nAlternatively: She walked into a large, empty room with peeling wallpaper. The silence was overwhelming; it seemed to press down on her.",
+        hint: "💡 A sentence fragment is an incomplete sentence — it is missing a subject or a verb, or it does not express a complete thought.",
+        placeholder: "Corrected passage:\n\n",
+        verify: (output) => output.trim().length > 20
     },
     {
         id: 20,
-        title: "Challenge 20: Function — Is Even",
-        scenario: "Functions can return Boolean values (True/False), which is useful for validation checks and conditions throughout your program.",
-        desc: "Define a function <code>is_even(n)</code> that returns <code>True</code> if n is even, <code>False</code> otherwise. Call it with <code>n = 7</code> and <code>n = 10</code>, printing each result on a separate line.",
-        expectedOutput: "False\nTrue",
-        hint: "💡 Use <code>return n % 2 == 0</code> in the function body.",
-        placeholder: "# Define is_even(n)\n# Call and print for 7 and 10\n",
-        verify: (output) => {
-            const lines = output.trim().split("\n").map(s => s.trim()).filter(Boolean);
-            return lines.length === 2 && lines[0].toLowerCase() === "false" && lines[1].toLowerCase() === "true";
-        },
-    },
-
-    // ─── Algorithms ───
-    {
-        id: 21,
-        title: "Challenge 21: Linear Search",
-        scenario: "Linear search checks each element one by one from start to finish. It works on any list (sorted or unsorted) and is the simplest search algorithm.",
-        desc: "Given <code>data = [15, 8, 42, 23, 4, 16]</code> and <code>target = 23</code>, implement a linear search that prints the <strong>index</strong> where the target is found. Print <code>-1</code> if not found.",
-        expectedOutput: "3",
-        hint: "💡 Loop with <code>for i in range(len(data)):</code> and check <code>if data[i] == target:</code>.",
-        placeholder: "data = [15, 8, 42, 23, 4, 16]\ntarget = 23\n# Implement linear search\n",
-        verify: (output) => output.trim() === "3"
-    },
-    {
-        id: 22,
-        title: "Challenge 22: Linear Search — Not Found",
-        scenario: "A correct search algorithm must handle the case where the target is not in the list. This tests your understanding of how to detect 'not found' after checking all items.",
-        desc: "Given <code>data = [15, 8, 42, 23, 4, 16]</code> and <code>target = 99</code>, run a linear search and print <code>-1</code> since 99 is not in the list.",
-        expectedOutput: "-1",
-        hint: "💡 Use a flag variable or print -1 after the loop completes without finding the target.",
-        placeholder: "data = [15, 8, 42, 23, 4, 16]\ntarget = 99\n# Linear search -- should print -1\n",
-        verify: (output) => output.trim() === "-1"
-    },
-    {
-        id: 23,
-        title: "Challenge 23: Bubble Sort (One Pass)",
-        scenario: "Bubble sort compares adjacent elements and swaps them if out of order. One complete pass moves the largest unsorted element to its correct position.",
-        desc: "Given <code>nums = [64, 34, 25, 12, 22]</code>, perform <strong>one complete pass</strong> of bubble sort (compare each adjacent pair, swap if out of order). Print the resulting list.",
-        expectedOutput: "[34, 25, 12, 22, 64]",
-        hint: "💡 Loop from 0 to len(nums)-1 and swap <code>nums[i], nums[i+1]</code> when <code>nums[i] > nums[i+1]</code>.",
-        placeholder: "nums = [64, 34, 25, 12, 22]\n# One bubble sort pass\n",
-        verify: (output) => {
-            // After one pass, 64 bubbles to the end: [34, 25, 12, 22, 64]
-            const sanitized = output.replace(/[\[\]\s]/g, "");
-            return sanitized === "34,25,12,22,64";
-        }
-    },
-    {
-        id: 24,
-        title: "Challenge 24: Bubble Sort (Full)",
-        scenario: "A full bubble sort repeats passes until no more swaps are needed. This is a key algorithm you must be able to trace and code for the exam.",
-        desc: "Given <code>nums = [64, 34, 25, 12, 22]</code>, implement <strong>full bubble sort</strong> to sort in ascending order. Print the sorted list.",
-        expectedOutput: "[12, 22, 25, 34, 64]",
-        hint: "💡 Use nested loops: outer loop for passes, inner loop for comparisons. Optionally use a swap flag to exit early.",
-        placeholder: "nums = [64, 34, 25, 12, 22]\n# Full bubble sort\n",
-        verify: (output) => {
-            const sanitized = output.replace(/[\[\]\s]/g, "");
-            return sanitized === "12,22,25,34,64";
-        }
-    },
-    {
-        id: 25,
-        title: "Challenge 25: Binary Search",
-        scenario: "Binary search is much faster than linear search, but only works on sorted data. It repeatedly halves the search space by comparing with the middle element.",
-        desc: "Given a <strong>sorted</strong> list <code>data = [3, 8, 12, 23, 42, 55, 71]</code> and <code>target = 42</code>, implement binary search. Print the index if found, otherwise <code>-1</code>.",
-        expectedOutput: "4",
-        hint: "💡 Use <code>low</code> and <code>high</code> pointers. Calculate <code>mid = (low + high) // 2</code> and narrow the range.",
-        placeholder: "data = [3, 8, 12, 23, 42, 55, 71]\ntarget = 42\n# Binary search implementation\n",
-        verify: (output) => output.trim() === "4"
-    },
-
-    // ─── Robust Programs ───
-    {
-        id: 26,
-        title: "Challenge 26: Range Validation",
-        scenario: "Defensive design means checking that inputs are within acceptable bounds before processing. Range checks prevent invalid data from causing errors.",
-        desc: "Given <code>value = 105</code>, check if it is in the valid range <strong>0 to 100</strong> (inclusive). Print <code>Valid</code> if it is, otherwise <code>Invalid</code>.",
-        expectedOutput: "Invalid",
-        hint: "💡 Use <code>if 0 <= value <= 100:</code> — Python supports chained comparisons.",
-        placeholder: "value = 105\n# Check range 0-100\n",
-        verify: (output) => output.trim() === "Invalid"
-    },
-    {
-        id: 27,
-        title: "Challenge 27: Presence Check",
-        scenario: "A presence check ensures that required data has actually been provided — for example, that a form field is not left blank.",
-        desc: "Given <code>data = \"\"</code> (empty string), check if data has been entered. Print <code>Data present</code> if the string is not empty, otherwise <code>No data</code>.",
-        expectedOutput: "No data",
-        hint: "💡 An empty string is falsy in Python — you can use <code>if data:</code> or <code>if len(data) > 0:</code>.",
-        placeholder: 'data = ""\n# Check if data was entered\n',
-        verify: (output) => output.trim() === "No data"
-    },
-
-    // ─── Data & Operators ───
-    {
-        id: 28,
-        title: "Challenge 28: Records (Dictionaries)",
-        scenario: "Records (represented as dictionaries in Python) store related data together using key-value pairs — like a student's name, grade, and age in one structure.",
-        desc: "Given a dictionary <code>student = {\"name\": \"Alice\", \"grade\": \"A\", \"age\": 16}</code>, print each key-value pair on its own line in the format <code>name: Alice</code>.",
-        expectedOutput: "name: Alice\ngrade: A\nage: 16",
-        hint: "💡 Loop with <code>for key, value in student.items():</code> and use an f-string.",
-        placeholder: 'student = {"name": "Alice", "grade": "A", "age": 16}\n# Print each key: value pair\n',
-        verify: (output) => {
-            const lines = output.trim().split("\n").map(s => s.trim()).filter(Boolean);
-            return lines.length === 3 && lines.includes("name: Alice") && lines.includes("grade: A") && lines.some(l => l.includes("16"));
-        }
-    },
-    {
-        id: 29,
-        title: "Challenge 29: DIV and MOD",
-        scenario: "Integer division (DIV) and modulus (MOD) are essential operators. DIV gives the whole-number result; MOD gives the remainder. Both are frequently tested.",
-        desc: "Given <code>number = 47</code>, calculate <code>number DIV 5</code> and <code>number MOD 5</code>. Print each on a separate line (DIV first, then MOD).",
-        expectedOutput: "9\n2",
-        hint: "💡 In Python, DIV is <code>//</code> and MOD is <code>%</code>.",
-        placeholder: "number = 47\n# Calculate DIV and MOD\n",
-        verify: (output) => {
-            const lines = output.trim().split("\n").map(s => s.trim()).filter(Boolean);
-            return lines.length === 2 && lines[0] === "9" && lines[1] === "2";
-        }
-    },
-    {
-        id: 30,
-        title: "Challenge 30: String Character Loop",
-        scenario: "Iterating through each character of a string is a powerful pattern. It lets you inspect, count, or transform individual characters one at a time.",
-        desc: "Given <code>word = \"Python\"</code>, use a loop to print <strong>each character</strong> on its own line.",
-        expectedOutput: "P\ny\nt\nh\no\nn",
-        hint: "💡 Use <code>for char in word:</code> to iterate character by character.",
-        placeholder: 'word = "Python"\n# Print each character\n',
-        verify: (output) => {
-            const lines = output.trim().split("\n").map(s => s.trim()).filter(Boolean);
-            return lines.length === 6 && lines.join("") === "Python";
-        }
+        title: "Exercise 20: Paragraph Cohesion",
+        scenario: "Rewrite this paragraph to improve cohesion: 'The Industrial Revolution began in Britain. Many people moved to cities. Factories were built. Working conditions were poor. Children worked in factories. Laws were eventually passed to protect workers.'",
+        desc: "Use connectives, pronouns, and varied sentence structures to make the paragraph flow more smoothly. Keep all the same information.",
+        expectedOutput: "When the Industrial Revolution began in Britain, many people moved to cities where factories were being built. However, working conditions in these factories were extremely poor, and even children were forced to work long hours. Eventually, laws were passed to protect these vulnerable workers from the worst abuses.",
+        hint: "💡 Use connectives (however, therefore, because, although), pronouns (they, these, those), and combine short sentences.",
+        placeholder: "Improved paragraph:\n\n",
+        verify: (output) => output.trim().length > 20
     },
 ];
 
-
 let activeChallengeIdx = 0;
-let pyodideInstance = null;
-let erlMode = false;
 const completedChallenges = new Set(JSON.parse(localStorage.getItem('completed_challenges') || '[]'));
-
-// --- ERL equivalents for key challenges (Paper 2 style) ---
-const erlChallenges = {
-    2: {  // Selection (IF)
-        placeholder: `INPUT Score\nScore <- 75\n\nIF Score >= 50 THEN\n    OUTPUT "Pass"\nELSE\n    OUTPUT "Fail"\nENDIF`,
-        hint: "💡 In ERL: IF condition THEN ... ELSE ... ENDIF"
-    },
-    3: {  // For Loop
-        placeholder: `FOR i <- 1 TO 5\n    OUTPUT i\nNEXT i`,
-        hint: "💡 In ERL: FOR counter <- start TO end ... NEXT counter"
-    },
-    8: {  // Grade Calculator
-        placeholder: `Score <- 87\n\nIF Score >= 80 THEN\n    OUTPUT "A"\nELIF Score >= 70 THEN\n    OUTPUT "B"\nELIF Score >= 50 THEN\n    OUTPUT "C"\nELSE\n    OUTPUT "F"\nENDIF`,
-        hint: "💡 In ERL: use ELIF for else-if chains"
-    },
-    11: { // While Loop
-        placeholder: `Count <- 5\n\nWHILE Count >= 1 DO\n    OUTPUT Count\n    Count <- Count - 1\nENDWHILE`,
-        hint: "💡 In ERL: WHILE condition DO ... ENDWHILE"
-    },
-    12: { // Accumulator
-        placeholder: `Nums <- [3, 7, 2, 9, 4]\nTotal <- 0\n\nFOR i <- 1 TO LEN(Nums)\n    Total <- Total + Nums[i]\nNEXT i\n\nOUTPUT Total`,
-        hint: "💡 In ERL: arrays are 1-indexed. LEN() returns array length."
-    },
-    16: { // Find Maximum
-        placeholder: `Nums <- [12, 45, 7, 89, 23]\nLargest <- Nums[1]\n\nFOR i <- 2 TO LEN(Nums)\n    IF Nums[i] > Largest THEN\n        Largest <- Nums[i]\n    ENDIF\nNEXT i\n\nOUTPUT Largest`,
-        hint: "💡 In ERL: arrays start at index 1. Use LEN() for length."
-    },
-    17: { // Filter Even
-        placeholder: `Nums <- [1, 2, 3, 4, 5, 6]\n\nFOR i <- 1 TO LEN(Nums)\n    IF Nums[i] MOD 2 = 0 THEN\n        OUTPUT Nums[i]\n    ENDIF\nNEXT i`,
-        hint: "💡 In ERL: MOD is the modulus operator (not %)"
-    },
-    21: { // Linear Search
-        placeholder: `Data <- [15, 8, 42, 23, 4, 16]\nTarget <- 23\nFound <- FALSE\nIndex <- 1\n\nWHILE Index <= LEN(Data) AND Found = FALSE DO\n    IF Data[Index] = Target THEN\n        OUTPUT Index\n        Found <- TRUE\n    ENDIF\n    Index <- Index + 1\nENDWHILE\n\nIF Found = FALSE THEN\n    OUTPUT -1\nENDIF`,
-        hint: "💡 In ERL: arrays are 1-indexed. Use <- for assignment."
-    },
-    22: { // Linear Search — Not Found
-        placeholder: `Data <- [15, 8, 42, 23, 4, 16]\nTarget <- 99\nFound <- FALSE\nIndex <- 1\n\nWHILE Index <= LEN(Data) AND Found = FALSE DO\n    IF Data[Index] = Target THEN\n        OUTPUT Index\n        Found <- TRUE\n    ENDIF\n    Index <- Index + 1\nENDWHILE\n\nIF Found = FALSE THEN\n    OUTPUT -1\nENDIF`,
-        hint: "💡 Same algorithm, different target — tests 'not found' handling."
-    },
-    23: { // Bubble Sort (One Pass)
-        placeholder: `Nums <- [64, 34, 25, 12, 22]\n\nFOR i <- 1 TO LEN(Nums) - 1\n    IF Nums[i] > Nums[i + 1] THEN\n        Temp <- Nums[i]\n        Nums[i] <- Nums[i + 1]\n        Nums[i + 1] <- Temp\n    ENDIF\nNEXT i\n\nOUTPUT Nums`,
-        hint: "💡 In ERL: swap uses a temporary variable. Arrays are 1-indexed."
-    },
-    24: { // Bubble Sort (Full)
-        placeholder: `Nums <- [64, 34, 25, 12, 22]\nSwapped <- TRUE\n\nWHILE Swapped = TRUE DO\n    Swapped <- FALSE\n    FOR i <- 1 TO LEN(Nums) - 1\n        IF Nums[i] > Nums[i + 1] THEN\n            Temp <- Nums[i]\n            Nums[i] <- Nums[i + 1]\n            Nums[i + 1] <- Temp\n            Swapped <- TRUE\n        ENDIF\n    NEXT i\nENDWHILE\n\nOUTPUT Nums`,
-        hint: "💡 Full bubble sort with early exit flag. ERL uses WHILE ... DO ... ENDWHILE."
-    },
-    25: { // Binary Search
-        placeholder: `Data <- [3, 8, 12, 23, 42, 55, 71]\nTarget <- 42\nLow <- 1\nHigh <- LEN(Data)\nFound <- FALSE\n\nWHILE Low <= High AND Found = FALSE DO\n    Mid <- (Low + High) DIV 2\n    \n    IF Data[Mid] = Target THEN\n        OUTPUT Mid\n        Found <- TRUE\n    ELIF Data[Mid] < Target THEN\n        Low <- Mid + 1\n    ELSE\n        High <- Mid - 1\n    ENDIF\nENDWHILE\n\nIF Found = FALSE THEN\n    OUTPUT -1\nENDIF`,
-        hint: "💡 In ERL: DIV is integer division. Arrays are 1-indexed."
-    },
-    26: { // Range Validation
-        placeholder: `Value <- 105\n\nIF Value >= 0 AND Value <= 100 THEN\n    OUTPUT "Valid"\nELSE\n    OUTPUT "Invalid"\nENDIF`,
-        hint: "💡 In ERL: use AND/OR/NOT for Boolean logic."
-    },
-    29: { // DIV and MOD
-        placeholder: `Number <- 47\n\nOUTPUT Number DIV 5\nOUTPUT Number MOD 5`,
-        hint: "💡 In ERL: DIV is integer division, MOD is remainder."
-    }
-};
 
 // --- Build a lookup: challenge id -> category label ---
 const idToCategory = {};
 categories.forEach(cat => {
     cat.ids.forEach(id => { idToCategory[id] = cat.label; });
 });
-
-// --- Toggle ERL Mode ---
-function toggleErlMode() {
-    erlMode = document.getElementById('erlModeToggle').checked;
-    const langLabel = document.getElementById('langLabel');
-    const runBtn = document.getElementById('runCodeBtn');
-    const editorCard = document.querySelector('.editor-card');
-    
-    if (erlMode) {
-        langLabel.innerHTML = '📝 OCR ERL';
-        runBtn.textContent = '📖 View ERL Reference';
-        runBtn.onclick = showErlReference;
-        editorCard.classList.add('erl-mode-active');
-    } else {
-        langLabel.innerHTML = '🐍 Python 3';
-        runBtn.textContent = '⚡ Run Code';
-        runBtn.onclick = runPythonCode;
-        editorCard.classList.remove('erl-mode-active');
-    }
-    
-    // Reload current challenge with new mode
-    setupChallenge(activeChallengeIdx);
-}
-
-// --- Show ERL Syntax Reference ---
-function showErlReference() {
-    const outputDiv = document.getElementById('consoleOutput');
-    outputDiv.textContent = `📝 WLV Reference Language — Quick Reference
-
-── Assignment ──
-  x <- 5
-  name <- "Alice"
-
-── Input/Output ──
-  INPUT x
-  OUTPUT "Hello"
-  OUTPUT x
-
-── Selection ──
-  IF condition THEN
-      statements
-  ELIF condition THEN
-      statements
-  ELSE
-      statements
-  ENDIF
-
-── Iteration (Count-Controlled) ──
-  FOR i <- 1 TO 10
-      statements
-  NEXT i
-
-── Iteration (Condition-Controlled) ──
-  WHILE condition DO
-      statements
-  ENDWHILE
-
-── Arrays (1-indexed!) ──
-  nums <- [1, 2, 3]
-  nums[1]  ← first element
-  LEN(nums) ← length
-
-── Operators ──
-  +  -  *  /  DIV  MOD  ^
-  =  <>  <  >  <=  >=
-  AND  OR  NOT
-
-── String ──
-  len(str)  ← length
-  left(str, n)  ← first n chars
-  right(str, n)  ← last n chars
-  mid(str, start, n)  ← substring
-
-── Subprograms ──
-  FUNCTION name(param1, param2) RETURNS type
-      statements
-      RETURN value
-  ENDFUNCTION
-
-  PROCEDURE name(param1, param2)
-      statements
-  ENDPROCEDURE`;
-}
 
 // --- Update Progress Bar ---
 function updateProgress() {
@@ -1136,37 +722,17 @@ function updateProgress() {
     document.getElementById('progressLabel').textContent = `${done} / ${total} completed`;
 }
 
-// --- Initialize Pyodide ---
-async function initPyodide() {
-    const overlay = document.getElementById('loaderOverlay');
-    const text = document.getElementById('loaderText');
-    try {
-        pyodideInstance = await loadPyodide({
-            indexURL: "/static/pyodide/"
-        });
-        overlay.style.display = 'none';
-        setupChallenge(0);
-        renderChallengesList();
-        updateProgress();
-    } catch(err) {
-        text.innerHTML = '<span style="color:var(--c-rose)">❌ Failed to load compiler. Check your internet connection.</span>';
-        console.error(err);
-    }
-}
-
-// --- Render Challenges List with Category Headers ---
+// --- Render Exercises List with Category Headers ---
 function renderChallengesList() {
     const list = document.getElementById('challengeList');
     list.innerHTML = '';
     
     categories.forEach(cat => {
-        // Category header
         const header = document.createElement('div');
         header.className = 'challenge-category';
         header.textContent = cat.label;
         list.appendChild(header);
 
-        // Buttons for this category
         cat.ids.forEach(id => {
             const idx = challenges.findIndex(c => c.id === id);
             if (idx === -1) return;
@@ -1180,8 +746,7 @@ function renderChallengesList() {
             
             const isDone = completedChallenges.has(chal.id);
             btn.onclick = () => selectChallenge(idx);
-            // Show shorter title (remove "Challenge N: " prefix for compactness)
-            const shortTitle = chal.title.replace(/^Challenge \d+:\s*/, '');
+            const shortTitle = chal.title.replace(/^Exercise \\d+:\\s*/, '');
             btn.innerHTML = `<span>${chal.id}. ${shortTitle}</span> <span class="status-icon">${isDone ? '✅' : '🔴'}</span>`;
             
             list.appendChild(btn);
@@ -1189,34 +754,30 @@ function renderChallengesList() {
     });
 }
 
-// --- Select Challenge ---
+// --- Select Exercise ---
 function selectChallenge(idx) {
     activeChallengeIdx = idx;
     setupChallenge(idx);
     renderChallengesList();
     
-    // Clear feedback and outputs
     document.getElementById('feedbackBox').style.display = 'none';
-    document.getElementById('consoleOutput').textContent = 'Console ready...';
+    document.getElementById('consoleOutput').textContent = 'Select an exercise and write your response, then click "Check Answer" to see a model answer.';
 }
 
-// --- Load Challenge Details ---
+// --- Load Exercise Details ---
 function setupChallenge(idx) {
     const chal = challenges[idx];
     document.getElementById('chalTitle').innerHTML = chal.title;
     document.getElementById('chalDesc').innerHTML = chal.desc;
     
-    // Scenario
     const scenarioEl = document.getElementById('chalScenario');
     scenarioEl.textContent = chal.scenario || '';
     scenarioEl.style.display = chal.scenario ? 'block' : 'none';
 
-    // Category badge
     const badge = document.getElementById('chalCategoryBadge');
     const catLabel = idToCategory[chal.id] || '—';
     badge.textContent = catLabel;
 
-    // Expected output
     const expectedEl = document.getElementById('chalExpected');
     const expectedCode = document.getElementById('chalExpectedCode');
     if (chal.expectedOutput) {
@@ -1226,134 +787,64 @@ function setupChallenge(idx) {
         expectedEl.style.display = 'none';
     }
 
-    // Hint
     const hintEl = document.getElementById('chalHint');
-    if (erlMode && erlChallenges[chal.id]) {
-        hintEl.innerHTML = erlChallenges[chal.id].hint;
-        hintEl.style.display = 'block';
-    } else if (chal.hint) {
+    if (chal.hint) {
         hintEl.innerHTML = chal.hint;
         hintEl.style.display = 'block';
     } else {
         hintEl.style.display = 'none';
     }
     
-    // Check if there is saved code or use placeholder
-    const savedCode = localStorage.getItem(`codelab_code_${erlMode ? 'erl_' : ''}${chal.id}`);
-    if (erlMode && erlChallenges[chal.id]) {
-        document.getElementById('codeEditor').value = savedCode !== null ? savedCode : erlChallenges[chal.id].placeholder;
-    } else {
-        document.getElementById('codeEditor').value = savedCode !== null ? savedCode : chal.placeholder;
-    }
-    
-    // Show ERL badge on challenge card if ERL version exists
-    if (erlMode && erlChallenges[chal.id]) {
-        badge.innerHTML = badge.textContent + ' <span class="erl-badge">ERL</span>';
-    }
+    const savedCode = localStorage.getItem(`codelab_code_${chal.id}`);
+    document.getElementById('codeEditor').value = savedCode !== null ? savedCode : chal.placeholder;
 }
 
 // --- Save code locally ---
 document.getElementById('codeEditor').addEventListener('input', (e) => {
     const chal = challenges[activeChallengeIdx];
-    const key = `codelab_code_${erlMode ? 'erl_' : ''}${chal.id}`;
+    const key = `codelab_code_${chal.id}`;
     localStorage.setItem(key, e.target.value);
 });
 
-// --- Run Python Code ---
-async function runPythonCode() {
-    const code = document.getElementById('codeEditor').value;
-    const outputDiv = document.getElementById('consoleOutput');
-    outputDiv.textContent = 'Running execution...\n';
-    
-    if (!pyodideInstance) {
-        outputDiv.textContent = 'Compiler error: Pyodide not loaded.';
-        return;
-    }
-    
-    let outputBuffer = '';
-    pyodideInstance.setStdout({
-        batched: (text) => {
-            outputBuffer += text + '\n';
-        }
-    });
-    pyodideInstance.setStderr({
-        batched: (text) => {
-            outputBuffer += text + '\n';
-        }
-    });
-    
-    try {
-        await pyodideInstance.runPythonAsync(code);
-        outputDiv.textContent = outputBuffer || '(Program finished with no printed output)';
-    } catch(err) {
-        outputDiv.textContent = '❌ Run-time Error:\n' + err.message;
-    }
-}
-
-// --- Submit & Verify Solution ---
+// --- Submit & Check Answer ---
 async function submitSolution() {
     const code = document.getElementById('codeEditor').value;
     const outputDiv = document.getElementById('consoleOutput');
     const feedbackBox = document.getElementById('feedbackBox');
     
-    outputDiv.textContent = 'Verifying output requirements...\n';
+    outputDiv.textContent = 'Checking your response...\n';
     feedbackBox.style.display = 'none';
     
-    if (!pyodideInstance) {
-        outputDiv.textContent = 'Compiler error: Pyodide not loaded.';
-        return;
-    }
+    const chal = challenges[activeChallengeIdx];
     
-    let outputBuffer = '';
-    pyodideInstance.setStdout({
-        batched: (text) => {
-            outputBuffer += text + '\n';
-        }
-    });
-    pyodideInstance.setStderr({
-        batched: (text) => {
-            outputBuffer += text + '\n';
-        }
-    });
+    // Show the model answer
+    outputDiv.textContent = '📝 Model Answer:\n\n' + chal.expectedOutput;
     
-    try {
-        await pyodideInstance.runPythonAsync(code);
-        const chal = challenges[activeChallengeIdx];
-        const isCorrect = chal.verify(outputBuffer);
+    // Check if response has sufficient length
+    const isComplete = code.trim().length > 20;
+    
+    if (isComplete) {
+        feedbackBox.className = 'feedback-box success';
+        feedbackBox.innerHTML = '✅ Response submitted! Compare your answer with the model answer above.';
+        feedbackBox.style.display = 'block';
         
-        outputDiv.textContent = outputBuffer || '(No output)';
-        
-        if (isCorrect) {
-            feedbackBox.className = 'feedback-box success';
-            feedbackBox.innerHTML = '🎉 Correct! Challenge completed successfully.';
-            feedbackBox.style.display = 'block';
-            
-            // Mark completed
-            completedChallenges.add(chal.id);
-            localStorage.setItem('completed_challenges', JSON.stringify([...completedChallenges]));
-            renderChallengesList();
-            updateProgress();
-            
-            // Log to server
-            fetch('/api/codelab/complete', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ challenge_id: chal.id })
-            });
-        } else {
-            feedbackBox.className = 'feedback-box error';
-            feedbackBox.innerHTML = '❌ Incorrect output. Verify the program output matches the description requirements.';
-            feedbackBox.style.display = 'block';
-        }
-    } catch(err) {
-        outputDiv.textContent = '❌ Compile/Execution Error:\n' + err.message;
+        // Mark completed
+        completedChallenges.add(chal.id);
+        localStorage.setItem('completed_challenges', JSON.stringify([...completedChallenges]));
+        renderChallengesList();
+        updateProgress();
+    } else {
         feedbackBox.className = 'feedback-box error';
-        feedbackBox.innerHTML = '❌ Execution failed. Fix syntax errors and try again.';
+        feedbackBox.innerHTML = '✍️ Write a more detailed response before checking. Try to write at least a few sentences.';
         feedbackBox.style.display = 'block';
     }
 }
 
 // --- Init on load ---
-document.addEventListener('DOMContentLoaded', initPyodide);
+document.addEventListener('DOMContentLoaded', () => {
+    setupChallenge(0);
+    renderChallengesList();
+    updateProgress();
+});
 </script>
 {% endblock %}

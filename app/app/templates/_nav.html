@@ -51,17 +51,17 @@
         {{ nav_btn("/progress", "📈 Progress", "progress") }}
         {{ nav_btn("/grade", "🎯 Grade", "grade") }}
 
-        {# ── Practise dropdown (Paper 2 — Section A, Section B, tools) ── #}
+        {# ── Practise dropdown (WLV English Equivalency) ── #}
         <div class="nav-dropdown" aria-label="Practise submenu">
           <a href="/exam-style" class="nav-bar-btn{% if active == 'exam' or active == 'exam-history' or active == 'past-papers' or active == 'exam-style' or active == 'section-b' or active == 'trace-tables' or active == 'test-data' %} active{% endif %}">📝 Practise ▾</a>
           <div class="nav-dropdown-content">
-            <a href="/exam" class="{% if active == 'exam' %}active{% endif %}">⚡ Exam Hub</a>
-            <a href="/exam-style" class="{% if active == 'exam-style' %}active{% endif %}">🏛️ Section A — Written</a>
-            <a href="/section-b" class="{% if active == 'section-b' %}active{% endif %}">✏️ Section B — Programming</a>
-            <a href="/past-papers" class="{% if active == 'past-papers' %}active{% endif %}">📄 Past Papers</a>
+            <a href="/exam" class="{% if active == 'exam' %}active{% endif %}">⚡ Practice Hub</a>
+            <a href="/exam-style" class="{% if active == 'exam-style' %}active{% endif %}">📖 Reading Analysis</a>
+            <a href="/section-b" class="{% if active == 'section-b' %}active{% endif %}">✏️ Creative Writing</a>
+            <a href="/past-papers" class="{% if active == 'past-papers' %}active{% endif %}">📄 Practice Papers</a>
             <a href="/exam-history" class="{% if active == 'exam-history' %}active{% endif %}">🕐 History</a>
-            <a href="/trace-tables" class="{% if active == 'trace-tables' %}active{% endif %}">📊 Trace Tables</a>
-            <a href="/test-data" class="{% if active == 'test-data' %}active{% endif %}">🧪 Test Data</a>
+            <a href="/trace-tables" class="{% if active == 'trace-tables' %}active{% endif %}">📝 SPaG Practice</a>
+            <a href="/test-data" class="{% if active == 'test-data' %}active{% endif %}">📖 Vocabulary</a>
           </div>
         </div>
 
@@ -95,13 +95,13 @@
         <span class="nav-section-label">📝 Practise <span class="nav-section-arrow">▾</span></span>
       </li>
       <ul class="nav-section-items" style="display:none;">
-        {{ sub_link("/exam", "⚡ Exam Hub", "exam") }}
-        {{ sub_link("/exam-style", "🏛️ Section A — Written", "exam-style") }}
-        {{ sub_link("/section-b", "✏️ Section B — Programming", "section-b") }}
-        {{ sub_link("/past-papers", "📄 Past Papers", "past-papers") }}
+        {{ sub_link("/exam", "⚡ Practice Hub", "exam") }}
+        {{ sub_link("/exam-style", "📖 Reading Analysis", "exam-style") }}
+        {{ sub_link("/section-b", "✏️ Creative Writing", "section-b") }}
+        {{ sub_link("/past-papers", "📄 Practice Papers", "past-papers") }}
         {{ sub_link("/exam-history", "🕐 History", "exam-history") }}
-        {{ sub_link("/trace-tables", "📊 Trace Tables", "trace-tables") }}
-        {{ sub_link("/test-data", "🧪 Test Data", "test-data") }}
+        {{ sub_link("/trace-tables", "📝 SPaG Practice", "trace-tables") }}
+        {{ sub_link("/test-data", "📖 Vocabulary", "test-data") }}
       </ul>
       {{ menu_link("/codelab", "💻 Code Lab", "codelab") }}
       {{ menu_link("/tutor", "🤖 AI Tutor", "tutor") }}

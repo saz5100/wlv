@@ -1,21 +1,23 @@
-/* GCSE CS Revision — OCR J277 */
-/* ✨ v3.1 — Clean, cohesive, mature ✨ */
+/* WLV English Equivalency — University of Wolverhampton */
+/* ✨ v3.1 — WLV Yellow/Black Theme ✨ */
 /* ════════════════════════════════════════ CSS Custom Properties — Dark Theme ════════════════════════════════════════ */
 :root {
-  --c-accent: #22d3ee;
-  --c-accent-hover: #06b6d4;
-  --c-accent-glow: rgba(34,211,238,0.08);
-  --c-accent-light: #082f49;
-  --c-bg: #080b14;
-  --c-bg-alt: #0d1225;
-  --c-surface: #111827;
-  --c-surface-hover: #1e293b;
-  --c-border: #1e293b;
-  --c-border-light: #334155;
-  --c-text: #e2e8f0;
-  --c-heading: #f1f5f9;
-  --c-text-secondary: #94a3b8;
-  --c-text-muted: #64748b;
+  --wlv-yellow: #FFD100;
+  --wlv-black: #1a1a1a;
+  --c-accent: #FFD100;
+  --c-accent-hover: #e6bc00;
+  --c-accent-glow: rgba(255,209,0,0.12);
+  --c-accent-light: #332a00;
+  --c-bg: #0d0d0d;
+  --c-bg-alt: #1a1a1a;
+  --c-surface: #222222;
+  --c-surface-hover: #2a2a2a;
+  --c-border: #333333;
+  --c-border-light: #444444;
+  --c-text: #e8e8e8;
+  --c-heading: #ffffff;
+  --c-text-secondary: #aaaaaa;
+  --c-text-muted: #777777;
   --c-green: #34d399;
   --c-green-dim: #022c22;
   --c-rose: #fb7185;
@@ -28,30 +30,32 @@
     --shadow-glow-lg: 0 0 20px var(--c-accent-glow);
 
     /* beautiful-mermaid SVG theme variables */
-    --bm-bg: #0f172a;
-    --bm-fg: #e2e8f0;
-    --bm-accent: #22d3ee;
-    --bm-line: #475569;
-    --bm-muted: #64748b;
-    --bm-surface: #1e293b;
-    --bm-border: #334155;
+    --bm-bg: #1a1a1a;
+    --bm-fg: #e8e8e8;
+    --bm-accent: #FFD100;
+    --bm-line: #555555;
+    --bm-muted: #777777;
+    --bm-surface: #222222;
+    --bm-border: #444444;
   }
 /* ═══ CSS Custom Properties — Light Theme Overrides ═══ */
 .light-theme {
-  --c-accent: #0891b2;
-  --c-accent-hover: #0e7490;
-  --c-accent-glow: rgba(8,145,178,0.07);
-  --c-accent-light: #ecfeff;
+  --wlv-yellow: #FFD100;
+  --wlv-black: #1a1a1a;
+  --c-accent: #d4a800;
+  --c-accent-hover: #b89200;
+  --c-accent-glow: rgba(212,168,0,0.10);
+  --c-accent-light: #fff8e0;
   --c-bg: #ffffff;
-  --c-bg-alt: #f3f4f6;
+  --c-bg-alt: #f5f5f5;
   --c-surface: #ffffff;
-  --c-surface-hover: #f1f5f9;
-  --c-border: #cbd5e1;
-  --c-border-light: #e2e8f0;
-  --c-text: #0f172a;
-  --c-heading: #020617;
-  --c-text-secondary: #475569;
-  --c-text-muted: #94a3b8;
+  --c-surface-hover: #f0f0f0;
+  --c-border: #cccccc;
+  --c-border-light: #e0e0e0;
+  --c-text: #1a1a1a;
+  --c-heading: #000000;
+  --c-text-secondary: #555555;
+  --c-text-muted: #999999;
   --c-green: #059669;
   --c-green-dim: #f0fdf4;
   --c-rose: #e11d48;
@@ -62,12 +66,12 @@
 
     /* beautiful-mermaid light theme overrides */
     --bm-bg: #ffffff;
-    --bm-fg: #0f172a;
-    --bm-accent: #0891b2;
-    --bm-line: #94a3b8;
-    --bm-muted: #94a3b8;
-    --bm-surface: #f8fafc;
-    --bm-border: #e2e8f0;
+    --bm-fg: #1a1a1a;
+    --bm-accent: #d4a800;
+    --bm-line: #aaaaaa;
+    --bm-muted: #999999;
+    --bm-surface: #f8f8f8;
+    --bm-border: #e0e0e0;
   }
 /* ═══ Reset & Base Styles ═══ */
 * { box-sizing: border-box; margin: 0; padding: 0; }

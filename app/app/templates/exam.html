@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Practice Exams &mdash; WLV — University of Wolverhampton{% endblock %}
+{% block title %}Practice Exams &mdash; WLV English Equivalency{% endblock %}
 {% block head %}
 <style>
 /* ─── Landing Page ─── */
@@ -203,7 +203,7 @@
 {# ─── LANDING PAGE ─────────────────────────────────────────── #}
 <div class="exam-landing">
     <h1>📝 Practice Exams</h1>
-    <p class="sub">Test your knowledge with random questions from all topics</p>
+    <p class="sub">Test your English language and writing skills with questions from all topic areas</p>
 
     {% if error %}
     <div class="exam-error">{{ error }}</div>
@@ -243,26 +243,19 @@
 </style>
 {% endif %}
 <div class="mode-grid">
-        {# Quick Fire 20 #}
+        {# Quick Practice 20 #}
         <div class="mode-card">
             <div class="mode-icon">⚡</div>
-            <div class="mode-title">Quick Fire 20</div>
-            <div class="mode-desc">20 random questions across all topics. No timer — just pure revision.</div>
+            <div class="mode-title">Quick Practice 20</div>
+            <div class="mode-desc">20 random questions across all English topics. No timer — just pure revision.</div>
             <div class="mode-features">✓ All question types · ✓ Instant results · ✓ Saved to history</div>
             <div class="qf-options" style="display:flex;gap:8px;justify-content:flex-start;margin-bottom:12px;flex-wrap:wrap;">
                 <select id="qfTopic" style="padding:6px 10px;border-radius:8px;border:1px solid var(--c-border);background:var(--c-bg);color:var(--c-text);font-size:13px;">
                     <option value="">All Topics</option>
-                    <option value="1.1">1.1 Systems Architecture</option>
-                    <option value="1.2">1.2 Memory &amp; Storage</option>
-                    <option value="1.3">1.3 Networks</option>
-                    <option value="1.4">1.4 Network Security</option>
-                    <option value="1.5">1.5 Systems Software</option>
-                    <option value="1.6">1.6 Ethical &amp; Legal</option>
-                    <option value="2.1">2.1 Algorithms</option>
-                    <option value="2.2">2.2 Programming</option>
-                    <option value="2.3">2.3 Robust Programs</option>
-                    <option value="2.4">2.4 Boolean Logic</option>
-                    <option value="2.5">2.5 Languages &amp; IDEs</option>
+                    <option value="lang">Language Analysis</option>
+                    <option value="struct">Structure Analysis</option>
+                    <option value="writing">Creative Writing</option>
+                    <option value="spag">SPaG</option>
                 </select>
                 <select id="qfDiff" style="padding:6px 10px;border-radius:8px;border:1px solid var(--c-border);background:var(--c-bg);color:var(--c-text);font-size:13px;">
                     <option value="">All Difficulties</option>
@@ -271,7 +264,7 @@
                     <option value="3">Hard</option>
                 </select>
             </div>
-            <a href="/exam?mode=quickfire" class="btn btn-primary" id="qfStart" onclick="return startQF()">⚡ Start Quick Fire</a>
+            <a href="/exam?mode=quickfire" class="btn btn-primary" id="qfStart" onclick="return startQF()">⚡ Start Quick Practice</a>
         </div>
 <script>
 function startQF() {
@@ -295,30 +288,23 @@ function startQF() {
         </div>
 
 
-        {# Exam-Style Written Questions #}
+        {# Full Assessment Questions #}
         <div class="mode-card">
             <div class="mode-icon">✍️</div>
-            <div class="mode-title">Exam-Style Questions</div>
-            <div class="mode-desc">Practice 6-mark "Explain" and 8-mark "Evaluate" questions. Write a short answer and get AI feedback with a mark and improvement tips.</div>
+            <div class="mode-title">Full Assessment Questions</div>
+            <div class="mode-desc">Practice extended writing questions. Write a short answer and get AI feedback with a mark and improvement tips.</div>
             <div class="mode-features">✓ Real exam command words · ✓ AI marking with feedback · ✓ Mark-scheme aligned · ✓ XP rewards</div>
             <div style="display:flex;gap:8px;justify-content:center;margin-bottom:12px;flex-wrap:wrap;">
                 <select id="esTopic" style="padding:6px 10px;border-radius:8px;border:1px solid var(--c-border);background:var(--c-bg);color:var(--c-text);font-size:13px;">
                     <option value="">All Topics</option>
-                    <option value="1.1">1.1 Systems Architecture</option>
-                    <option value="1.2">1.2 Memory u0026 Storage</option>
-                    <option value="1.3">1.3 Networks</option>
-                    <option value="1.4">1.4 Network Security</option>
-                    <option value="1.5">1.5 Systems Software</option>
-                    <option value="1.6">1.6 Ethical u0026 Legal</option>
-                    <option value="2.1">2.1 Algorithms</option>
-                    <option value="2.2">2.2 Programming</option>
-                    <option value="2.3">2.3 Robust Programs</option>
-                    <option value="2.4">2.4 Boolean Logic</option>
-                    <option value="2.5">2.5 Languages u0026 IDEs</option>
+                    <option value="lang">Language Analysis</option>
+                    <option value="struct">Structure Analysis</option>
+                    <option value="writing">Creative Writing</option>
+                    <option value="spag">SPaG</option>
                 </select>
                 <select id="esMarks" style="padding:6px 10px;border-radius:8px;border:1px solid var(--c-border);background:var(--c-bg);color:var(--c-text);font-size:13px;">
-                    <option value="6">6-mark Explain</option>
-                    <option value="8">8-mark Evaluate</option>
+                    <option value="6">6-mark Analysis</option>
+                    <option value="8">8-mark Evaluation</option>
                 </select>
             </div>
             <a href="/exam-style" class="btn btn-primary" id="esStart" onclick="return startExamStyle()">✍️ Start Practice</a>
@@ -334,10 +320,10 @@ function startQF() {
         }
         </script>
 
-        {# Custom #}
+        {# Topic Focus #}
         <div class="mode-card">
             <div class="mode-icon">🎯</div>
-            <div class="mode-title">Custom Exam</div>
+            <div class="mode-title">Topic Focus</div>
             <div class="mode-desc">Set your own challenge — choose how many questions and whether to time yourself.</div>
             <div class="mode-features">✓ 5–50 questions · ✓ Timed or untimed · ✓ Practice under pressure</div>
             <button class="btn btn-primary" onclick="document.getElementById('customForm').classList.toggle('show'); this.style.display='none';">🎯 Configure</button>
@@ -353,11 +339,13 @@ function startQF() {
                     <input type="hidden" id="cq" value="20">
                 </div>
                 <div class="form-row">
-                    <label for="cp">Paper:</label>
+                    <label for="cp">Focus:</label>
                     <select id="cp">
-                        <option value="0">Both Papers</option>
-                        <option value="1">Paper 1 — Computer Systems</option>
-                        <option value="2">Paper 2 — Computational Thinking</option>
+                        <option value="0">All Topics</option>
+                        <option value="1">Language Analysis</option>
+                        <option value="2">Structure Analysis</option>
+                        <option value="3">Creative Writing</option>
+                        <option value="4">SPaG</option>
                     </select>
                 </div>
                 <div class="form-row">
@@ -376,21 +364,19 @@ function startQF() {
                     </div>
                     <input type="hidden" id="cd" value="15">
                 </div>
-                <button class="btn btn-primary" onclick="startCustom()">🚀 Start Custom Exam</button>
+                <button class="btn btn-primary" onclick="startCustom()">🚀 Start Topic Focus</button>
                 <button class="btn btn-sm" onclick="savePreset()" style="margin-top:8px;">💾 Save Preset</button>
             </div>
     </div>
 
-    {# Past Papers #}
+    {# Practice Papers #}
     <div class="mode-card">
         <div class="mode-icon">📄</div>
-        <div class="mode-title">Past Papers</div>
-        <div class="mode-desc">Download real WLV English Equivalency past papers and mark schemes from exam board and revision sites.</div>
+        <div class="mode-title">Practice Papers</div>
+        <div class="mode-desc">Download real WLV English Equivalency practice papers and mark schemes.</div>
         <div class="mode-features">✓ Real exam questions · ✓ Mark schemes · ✓ Examiner reports</div>
         <div class="past-paper-links" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-start;">
-            <a href="https://ocr.org.uk/qualifications/gcse/computer-science-j277-from-2020/assessment/" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:13px;padding:8px 14px;">🔗 OCR Assessment</a>
-            <a href="https://www.physicsandmathstutor.com/computer-science-gcse/past-papers/" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:13px;padding:8px 14px;">🔗 PMT</a>
-            <a href="https://www.savemyexams.com/gcse/computer-science/ocr/past-papers/" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:13px;padding:8px 14px;">🔗 Save My Exams</a>
+            <a href="https://www.wlv.ac.uk" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:13px;padding:8px 14px;">🔗 WLV Website</a>
         </div>
     </div>
 </div>

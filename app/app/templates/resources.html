@@ -3,15 +3,15 @@
 {% block content %}
 <div class="hero">
     <h1>&#128230; Resources</h1>
-    <p class="hero-sub">Downloadable study materials for WLV — University of Wolverhampton</p>
+    <p class="hero-sub">Downloadable study materials for WLV English Equivalency</p>
 </div>
 <style>
 .resource-grid { max-width: 800px; margin: 0 auto; padding: 0 20px 40px; }
 .resource-card {
     display: flex; gap: 20px;
-    background: rgba(17,24,39,0.88);
+    background: rgba(26,26,26,0.88);
     backdrop-filter: blur(2px);
-    border: 1px solid rgba(34,211,238,0.15);
+    border: 1px solid rgba(255,209,0,0.15);
     border-radius: var(--r-xl);
     padding: 28px;
     margin-bottom: 16px;
@@ -38,61 +38,66 @@
 }
 </style>
 <div class="resource-grid">
+
+    <div class="section-title">📖 Reading List</div>
+
     <div class="resource-card">
-        <div class="resource-icon">&#128195;</div>
+        <div class="resource-icon">📖</div>
         <div class="resource-info">
-            <h3>Anki Flashcards &mdash; WLV — University of Wolverhampton</h3>
-            <p>1,516 cards across 10 sub-decks covering the full WLV English Equivalency specification. Import into Anki (desktop/mobile) for spaced repetition.</p>
-            <a href="/static/WLV.apkg" class="btn btn-primary btn-sm">&#128229; Download .apkg</a>
+            <h3>WLV English Equivalency — Reading List</h3>
+            <p>Curated reading list covering fiction, non-fiction, and literary non-fiction texts commonly used in the WLV English Equivalency exam. Includes 19th-century prose, modern fiction, and transactional writing examples.</p>
+            <a href="/static/wlv-reading-list.pdf" download class="btn btn-primary btn-sm">📥 Download Reading List (PDF)</a>
         </div>
     </div>
 
-    <div class="resource-card" style="border-color:var(--c-accent);box-shadow:0 0 12px var(--c-accent-glow);">
-        <div class="resource-icon">💻</div>
+    <div class="section-title">✍️ Writing Guides</div>
+
+    <div class="resource-card">
+        <div class="resource-icon">✍️</div>
         <div class="resource-info">
-            <h3>Interactive Code Lab</h3>
-            <p>An interactive Python practice playground. Write and run actual Python code directly in your browser using Pyodide WebAssembly to solve structured Paper 2 programming challenges.</p>
-            <a href="/codelab" class="btn btn-primary btn-sm">💻 Start Coding</a>
+            <h3>Language Analysis — Techniques Guide</h3>
+            <p>Complete guide to language techniques tested in the exam: simile, metaphor, personification, imagery, alliteration, onomatopoeia, oxymoron, and more. Includes definitions, examples, and analysis sentence starters.</p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <a href="/static/language-techniques.html" class="btn btn-primary btn-sm">📖 View (HTML)</a>
+            <a href="/static/language-techniques.pdf" download class="btn btn-primary btn-sm">📥 Download PDF</a>
+        </div>
         </div>
     </div>
 
-    <div class="section-title">📄 Cheat Sheets</div>
+    <div class="resource-card">
+        <div class="resource-icon">🏗️</div>
+        <div class="resource-info">
+            <h3>Structure Analysis — Techniques Guide</h3>
+            <p>Covers structural devices: cyclical structure, flashback, foreshadowing, pace, paragraphing, sentence length variation, and more. Includes how to write about structure in exam answers.</p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <a href="/static/structure-techniques.html" class="btn btn-primary btn-sm">📖 View (HTML)</a>
+            <a href="/static/structure-techniques.pdf" download class="btn btn-primary btn-sm">📥 Download PDF</a>
+        </div>
+        </div>
+    </div>
+
+    <div class="resource-card">
+        <div class="resource-icon">📝</div>
+        <div class="resource-info">
+            <h3>Descriptive &amp; Narrative Writing Guide</h3>
+            <p>Step-by-step guide to writing descriptively and narratively for the creative writing section. Covers planning, sensory language, show-don't-tell, sentence variety, and structural frameworks.</p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <a href="/static/creative-writing-guide.html" class="btn btn-primary btn-sm">📖 View (HTML)</a>
+            <a href="/static/creative-writing-guide.pdf" download class="btn btn-primary btn-sm">📥 Download PDF</a>
+        </div>
+        </div>
+    </div>
+
+    <div class="section-title">📝 SPaG Reference</div>
 
     <div class="resource-card">
         <div class="resource-icon">📄</div>
         <div class="resource-info">
-            <h3>Paper 1 Cheat Sheet — Computer Systems</h3>
-            <p>Complete revision guide covering all 6 Paper 1 topics (1.1-1.6). Includes mnemonics, memory devices, exam technique tips, and quick-reference tables for protocols, conversions, and character sets.</p>
+            <h3>SPaG Quick Reference — Punctuation &amp; Grammar</h3>
+            <p>Complete punctuation guide: apostrophes, commas, semicolons, colons, dashes, quotation marks. Grammar rules: subject-verb agreement, tenses, sentence types (simple, compound, complex). Includes common errors to avoid.</p>
             <div style="display:flex;gap:10px;flex-wrap:wrap">
-            <a href="/static/paper1-cheat-sheet.html" class="btn btn-primary btn-sm">📖 View (HTML)</a>
-            <a href="/static/paper1-cheat-sheet.pdf" download class="btn btn-primary btn-sm">📥 Download PDF</a>
-        </div>
-        </div>
-    </div>
-
-    <div class="resource-card">
-        <div class="resource-icon">📄</div>
-        <div class="resource-info">
-            <h3>Paper 2 Cheat Sheet &mdash; Algorithms &amp; Programming</h3>
-            <p>Covers all 5 Paper 2 topics (2.1-2.5): algorithms and computational thinking, programming fundamentals, robust programming, Boolean logic, and translators. Includes OCR pseudocode reference, searching &amp; sorting algorithms, truth tables, and common programming patterns.</p>
-            <div style="display:flex;gap:10px;flex-wrap:wrap">
-            <a href="/static/paper2-cheat-sheet.html" class="btn btn-primary btn-sm">📖 View (HTML)</a>
-            <a href="/static/paper2-cheat-sheet.pdf" download class="btn btn-primary btn-sm">📥 Download PDF</a>
-        </div>
-        </div>
-    </div>
-
-    <div class="section-title">📋 Quick References</div>
-
-    <div class="resource-card">
-            <div class="resource-icon">🧠</div>
-        <div class="resource-info">
-            <h3>Memory Techniques — Mnemonics &amp; Recall Devices</h3>
-            <p>24 memory tricks covering both papers: CPU registers, TCP/IP layers, data types, De Morgan's laws, sorting algorithms, validation checks, and much more. Colour-coded sections, story-method walkthroughs, and a quick-fire self-test table — the same rich format as the care2care memory page.</p>
-            <div style="display:flex;gap:10px;flex-wrap:wrap">
-            <a href="/static/memory-techniques.html" class="btn btn-primary btn-sm">📖 View (HTML)</a>
-            <a href="/static/mnemonics.html" class="btn btn-primary btn-sm">📄 Print-friendly</a>
-            <a href="/static/mnemonics.pdf" download class="btn btn-primary btn-sm">📥 Download PDF</a>
+            <a href="/static/spag-reference.html" class="btn btn-primary btn-sm">📖 View (HTML)</a>
+            <a href="/static/spag-reference.pdf" download class="btn btn-primary btn-sm">📥 Download PDF</a>
         </div>
         </div>
     </div>
@@ -101,7 +106,7 @@
         <div class="resource-icon">📝</div>
         <div class="resource-info">
             <h3>Exam Command Word Guide</h3>
-            <p>What each exam word actually means — State, Describe, Explain, Compare, Evaluate, Calculate, and more. Includes example answer patterns, typical mark values, PEEL structure, and common mistakes that lose marks.</p>
+            <p>What each exam word actually means — State, Describe, Explain, Analyse, Compare, Evaluate, and more. Includes example answer patterns, typical mark values, PEEL structure, and common mistakes that lose marks.</p>
             <div style="display:flex;gap:10px;flex-wrap:wrap">
             <a href="/static/command-words.html" class="btn btn-primary btn-sm">📖 View (HTML)</a>
             <a href="/static/command-words.pdf" download class="btn btn-primary btn-sm">📥 Download PDF</a>
@@ -111,20 +116,19 @@
 
     <hr class="section-divider">
 
-    <div class="section-title">📕 Topic Quick Reference Cards</div>
+    <div class="section-title">📕 Quick Reference Cards</div>
 
     <div class="resource-card">
         <div class="resource-icon">📕</div>
         <div class="resource-info">
-            <h3>Paper 1 — Computer Systems</h3>
-            <p>One-page quick reference cards for each Component 1 topic. Key facts, tables, and mnemonics condensed. Print the topic you need.</p>
+            <h3>Language Techniques — Quick Reference</h3>
+            <p>One-page quick reference cards for each key language technique. Definitions, examples, and analysis phrases condensed. Print the ones you need.</p>
             <div style="display:flex;gap:8px;flex-wrap:wrap">
-                <a href="/static/1-1.pdf" download class="btn btn-primary btn-sm">1.1 CPU</a>
-                <a href="/static/1-2.pdf" download class="btn btn-primary btn-sm">1.2 Memory &amp; Storage</a>
-                <a href="/static/1-3.pdf" download class="btn btn-primary btn-sm">1.3 Networks</a>
-                <a href="/static/1-4.pdf" download class="btn btn-primary btn-sm">1.4 Security</a>
-                <a href="/static/1-5.pdf" download class="btn btn-primary btn-sm">1.5 Systems Software</a>
-                <a href="/static/1-6.pdf" download class="btn btn-primary btn-sm">1.6 Ethical &amp; Legal</a>
+                <a href="/static/lang-simile.pdf" download class="btn btn-primary btn-sm">Simile</a>
+                <a href="/static/lang-metaphor.pdf" download class="btn btn-primary btn-sm">Metaphor</a>
+                <a href="/static/lang-personification.pdf" download class="btn btn-primary btn-sm">Personification</a>
+                <a href="/static/lang-imagery.pdf" download class="btn btn-primary btn-sm">Imagery</a>
+                <a href="/static/lang-alliteration.pdf" download class="btn btn-primary btn-sm">Alliteration</a>
             </div>
         </div>
     </div>
@@ -132,14 +136,13 @@
     <div class="resource-card">
         <div class="resource-icon">📕</div>
         <div class="resource-info">
-            <h3>Paper 2 — Algorithms &amp; Programming</h3>
-            <p>One-page quick reference cards for each Component 2 topic. Pseudocode, searching &amp; sorting, Boolean logic, and IDE features.</p>
+            <h3>Structural Devices — Quick Reference</h3>
+            <p>One-page quick reference cards for structural devices. Cyclical structure, flashback, foreshadowing, pace, and paragraphing techniques.</p>
             <div style="display:flex;gap:8px;flex-wrap:wrap">
-                <a href="/static/2-1.pdf" download class="btn btn-primary btn-sm">2.1 Algorithms</a>
-                <a href="/static/2-2.pdf" download class="btn btn-primary btn-sm">2.2 Programming</a>
-                <a href="/static/2-3.pdf" download class="btn btn-primary btn-sm">2.3 Robust Programs</a>
-                <a href="/static/2-4.pdf" download class="btn btn-primary btn-sm">2.4 Boolean Logic</a>
-                <a href="/static/2-5.pdf" download class="btn btn-primary btn-sm">2.5 Languages &amp; IDEs</a>
+                <a href="/static/struct-cyclical.pdf" download class="btn btn-primary btn-sm">Cyclical</a>
+                <a href="/static/struct-flashback.pdf" download class="btn btn-primary btn-sm">Flashback</a>
+                <a href="/static/struct-foreshadow.pdf" download class="btn btn-primary btn-sm">Foreshadowing</a>
+                <a href="/static/struct-pace.pdf" download class="btn btn-primary btn-sm">Pace</a>
             </div>
         </div>
     </div>
@@ -151,181 +154,94 @@
     <div class="resource-card">
         <div class="resource-icon">✏️</div>
         <div class="resource-info">
-            <h3>Binary &amp; Hexadecimal Practice</h3>
-            <p>21 questions covering binary-to-denary, denary-to-binary, binary addition, binary shifts, and hexadecimal conversion. Answers on page 2 for self-marking.</p>
-            <a href="/static/practice-binary-hex.pdf" download class="btn btn-primary btn-sm">📥 Download (PDF, with answers)</a>
+            <h3>Language Analysis Practice</h3>
+            <p>10 extracts with analysis questions covering simile, metaphor, personification, sensory language, and tone. Model answers included for self-marking.</p>
+            <a href="/static/practice-language-analysis.pdf" download class="btn btn-primary btn-sm">📥 Download (PDF, with answers)</a>
+        </div>
+    </div>
+
+    <div class="resource-card">
+        <div class="resource-icon">✏️</div>
+        <div class="resource-info">
+            <h3>Creative Writing Prompts</h3>
+            <p>15 descriptive and narrative writing prompts with planning frameworks and model paragraphs. Practise writing under timed conditions.</p>
+            <a href="/static/practice-creative-writing.pdf" download class="btn btn-primary btn-sm">📥 Download (PDF)</a>
         </div>
     </div>
 
     <hr class="section-divider">
 
-    <div class="section-title">📄 Past Papers — Download PDFs</div>
+    <div class="section-title">📄 Practice Papers — Download PDFs</div>
 
     <div class="resource-card">
         <div class="resource-icon">📦</div>
         <div class="resource-info">
-            <h3>All Past Papers — Browse by Year</h3>
-            <p>16 downloadable PDFs covering 2022–2025, both Papers 1 and 2, with mark schemes. Practise under timed conditions (1hr 30min each), then self-mark using the official schemes. Click a year to expand.</p>
+            <h3>All Practice Papers — Browse by Year</h3>
+            <p>Downloadable practice papers covering reading and writing sections. Practise under timed conditions, then self-mark using the mark schemes.</p>
         </div>
     </div>
 
 <style>
-.paper-row { max-width:760px; margin:0 auto 4px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; background:rgba(17,24,39,0.88); border:1px solid rgba(34,211,238,0.1); border-radius:10px; padding:10px 16px; transition:border-color 0.2s; }
-.paper-row:hover { border-color:rgba(34,211,238,0.25); }
+.paper-row { max-width:760px; margin:0 auto 4px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; background:rgba(26,26,26,0.88); border:1px solid rgba(255,209,0,0.1); border-radius:10px; padding:10px 16px; transition:border-color 0.2s; }
+.paper-row:hover { border-color:rgba(255,209,0,0.25); }
 .paper-row .label { font-size:14px; font-weight:500; flex:1; min-width:160px; }
-.paper-row .label-q { color:#22d3ee; }
+.paper-row .label-q { color:#FFD100; }
 .paper-row .label-ms { color:#94a3b8; font-size:13px; }
 .paper-row .actions { display:flex; gap:5px; flex-wrap:wrap; }
 .paper-btn { display:inline-block; padding:5px 10px; border-radius:6px; font-size:11px; font-weight:600; text-decoration:none; transition:all 0.2s; cursor:pointer; }
-.btn-view { background:rgba(34,211,238,0.1); color:#67e8f9; border:1px solid rgba(34,211,238,0.18); }
-.btn-view:hover { background:rgba(34,211,238,0.18); }
-.btn-dl { background:rgba(34,211,238,0.05); color:#cbd5e1; border:1px solid rgba(34,211,238,0.1); }
-.btn-dl:hover { background:rgba(34,211,238,0.1); color:#e2e8f0; }
-.year-summary { max-width:760px; margin:0 auto 10px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; cursor:pointer; font-size:17px; font-weight:600; color:#22d3ee; padding:12px 18px; background:rgba(17,24,39,0.88); border:1px solid rgba(34,211,238,0.15); border-radius:12px; user-select:none; }
-.year-summary:hover { border-color:rgba(34,211,238,0.3); }
+.btn-view { background:rgba(255,209,0,0.1); color:#FFD100; border:1px solid rgba(255,209,0,0.18); }
+.btn-view:hover { background:rgba(255,209,0,0.18); }
+.btn-dl { background:rgba(255,209,0,0.05); color:#cbd5e1; border:1px solid rgba(255,209,0,0.1); }
+.btn-dl:hover { background:rgba(255,209,0,0.1); color:#e2e8f0; }
+.year-summary { max-width:760px; margin:0 auto 10px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; cursor:pointer; font-size:17px; font-weight:600; color:#FFD100; padding:12px 18px; background:rgba(26,26,26,0.88); border:1px solid rgba(255,209,0,0.15); border-radius:12px; user-select:none; }
+.year-summary:hover { border-color:rgba(255,209,0,0.3); }
 .year-summary .count { color:#64748b; font-size:13px; font-weight:400; margin-left:auto; }
 </style>
 
     <details style="max-width:760px;margin:0 auto 10px;">
-        <summary class="year-summary">📅 May 2025 <span class="count">4 files</span></summary>
+        <summary class="year-summary">📅 Sample Paper 1 — Reading <span class="count">2 files</span></summary>
         <div style="padding:0 0 8px;">
             <div class="paper-row">
-                <span class="label label-q">Paper 1 — Computer Systems</span>
+                <span class="label label-q">Reading Section — Language &amp; Structure Analysis</span>
                 <span class="actions">
-                    <a href="/static/past-papers/J277-01-2025-QP.pdf" class="paper-btn btn-view" title="Open in browser">👁️ View</a>
-                    <a href="/static/past-papers/J277-01-2025-QP.pdf" download class="paper-btn btn-dl">📥 Download</a>
+                    <a href="/static/past-papers/wlv-reading-sample-1.pdf" class="paper-btn btn-view" title="Open in browser">👁️ View</a>
+                    <a href="/static/past-papers/wlv-reading-sample-1.pdf" download class="paper-btn btn-dl">📥 Download</a>
                 </span>
             </div>
             <div class="paper-row">
-                <span class="label label-ms">Paper 1 — Mark Scheme</span>
+                <span class="label label-ms">Mark Scheme</span>
                 <span class="actions">
-                    <a href="/static/past-papers/J277-01-2025-MS.pdf" class="paper-btn btn-view" title="Open in browser">👁️ View</a>
-                    <a href="/static/past-papers/J277-01-2025-MS.pdf" download class="paper-btn btn-dl">📥 Download</a>
-                </span>
-            </div>
-            <div class="paper-row">
-                <span class="label label-q">Paper 2 — Algorithms &amp; Programming</span>
-                <span class="actions">
-                    <a href="/static/past-papers/J277-02-2025-QP.pdf" class="paper-btn btn-view" title="Open in browser">👁️ View</a>
-                    <a href="/static/past-papers/J277-02-2025-QP.pdf" download class="paper-btn btn-dl">📥 Download</a>
-                </span>
-            </div>
-            <div class="paper-row">
-                <span class="label label-ms">Paper 2 — Mark Scheme</span>
-                <span class="actions">
-                    <a href="/static/past-papers/J277-02-2025-MS.pdf" class="paper-btn btn-view" title="Open in browser">👁️ View</a>
-                    <a href="/static/past-papers/J277-02-2025-MS.pdf" download class="paper-btn btn-dl">📥 Download</a>
+                    <a href="/static/past-papers/wlv-reading-sample-1-ms.pdf" class="paper-btn btn-view" title="Open in browser">👁️ View</a>
+                    <a href="/static/past-papers/wlv-reading-sample-1-ms.pdf" download class="paper-btn btn-dl">📥 Download</a>
                 </span>
             </div>
         </div>
     </details>
 
     <details style="max-width:760px;margin:0 auto 10px;">
-        <summary class="year-summary">📅 June 2024 <span class="count">4 files</span></summary>
+        <summary class="year-summary">📅 Sample Paper 2 — Writing <span class="count">2 files</span></summary>
         <div style="padding:0 0 8px;">
             <div class="paper-row">
-                <span class="label label-q">Paper 1 — Computer Systems</span>
+                <span class="label label-q">Writing Section — Descriptive &amp; Narrative</span>
                 <span class="actions">
-                    <a href="/static/past-papers/J277-01-2024-QP.pdf" class="paper-btn btn-view" title="Open in browser">👁️ View</a>
-                    <a href="/static/past-papers/J277-01-2024-QP.pdf" download class="paper-btn btn-dl">📥 Download</a>
+                    <a href="/static/past-papers/wlv-writing-sample-1.pdf" class="paper-btn btn-view" title="Open in browser">👁️ View</a>
+                    <a href="/static/past-papers/wlv-writing-sample-1.pdf" download class="paper-btn btn-dl">📥 Download</a>
                 </span>
             </div>
             <div class="paper-row">
-                <span class="label label-ms">Paper 1 — Mark Scheme</span>
+                <span class="label label-ms">Mark Scheme</span>
                 <span class="actions">
-                    <a href="/static/past-papers/J277-01-2024-MS.pdf" class="paper-btn btn-view" title="Open in browser">👁️ View</a>
-                    <a href="/static/past-papers/J277-01-2024-MS.pdf" download class="paper-btn btn-dl">📥 Download</a>
-                </span>
-            </div>
-            <div class="paper-row">
-                <span class="label label-q">Paper 2 — Algorithms &amp; Programming</span>
-                <span class="actions">
-                    <a href="/static/past-papers/J277-02-2024-QP.pdf" class="paper-btn btn-view" title="Open in browser">👁️ View</a>
-                    <a href="/static/past-papers/J277-02-2024-QP.pdf" download class="paper-btn btn-dl">📥 Download</a>
-                </span>
-            </div>
-            <div class="paper-row">
-                <span class="label label-ms">Paper 2 — Mark Scheme</span>
-                <span class="actions">
-                    <a href="/static/past-papers/J277-02-2024-MS.pdf" class="paper-btn btn-view" title="Open in browser">👁️ View</a>
-                    <a href="/static/past-papers/J277-02-2024-MS.pdf" download class="paper-btn btn-dl">📥 Download</a>
+                    <a href="/static/past-papers/wlv-writing-sample-1-ms.pdf" class="paper-btn btn-view" title="Open in browser">👁️ View</a>
+                    <a href="/static/past-papers/wlv-writing-sample-1-ms.pdf" download class="paper-btn btn-dl">📥 Download</a>
                 </span>
             </div>
         </div>
     </details>
 
-    <details style="max-width:760px;margin:0 auto 10px;">
-        <summary class="year-summary">📅 June 2023 <span class="count">4 files</span></summary>
-        <div style="padding:0 0 8px;">
-            <div class="paper-row">
-                <span class="label label-q">Paper 1 — Computer Systems</span>
-                <span class="actions">
-                    <a href="/static/past-papers/J277-01-2023-QP.pdf" class="paper-btn btn-view" title="Open in browser">👁️ View</a>
-                    <a href="/static/past-papers/J277-01-2023-QP.pdf" download class="paper-btn btn-dl">📥 Download</a>
-                </span>
-            </div>
-            <div class="paper-row">
-                <span class="label label-ms">Paper 1 — Mark Scheme</span>
-                <span class="actions">
-                    <a href="/static/past-papers/J277-01-2023-MS.pdf" class="paper-btn btn-view" title="Open in browser">👁️ View</a>
-                    <a href="/static/past-papers/J277-01-2023-MS.pdf" download class="paper-btn btn-dl">📥 Download</a>
-                </span>
-            </div>
-            <div class="paper-row">
-                <span class="label label-q">Paper 2 — Algorithms &amp; Programming</span>
-                <span class="actions">
-                    <a href="/static/past-papers/J277-02-2023-QP.pdf" class="paper-btn btn-view" title="Open in browser">👁️ View</a>
-                    <a href="/static/past-papers/J277-02-2023-QP.pdf" download class="paper-btn btn-dl">📥 Download</a>
-                </span>
-            </div>
-            <div class="paper-row">
-                <span class="label label-ms">Paper 2 — Mark Scheme</span>
-                <span class="actions">
-                    <a href="/static/past-papers/J277-02-2023-MS.pdf" class="paper-btn btn-view" title="Open in browser">👁️ View</a>
-                    <a href="/static/past-papers/J277-02-2023-MS.pdf" download class="paper-btn btn-dl">📥 Download</a>
-                </span>
-            </div>
-        </div>
-    </details>
-
-    <details style="max-width:760px;margin:0 auto 10px;">
-        <summary class="year-summary">📅 June 2022 <span class="count">4 files</span></summary>
-        <div style="padding:0 0 8px;">
-            <div class="paper-row">
-                <span class="label label-q">Paper 1 — Computer Systems</span>
-                <span class="actions">
-                    <a href="/static/past-papers/J277-01-2022-QP.pdf" class="paper-btn btn-view" title="Open in browser">👁️ View</a>
-                    <a href="/static/past-papers/J277-01-2022-QP.pdf" download class="paper-btn btn-dl">📥 Download</a>
-                </span>
-            </div>
-            <div class="paper-row">
-                <span class="label label-ms">Paper 1 — Mark Scheme</span>
-                <span class="actions">
-                    <a href="/static/past-papers/J277-01-2022-MS.pdf" class="paper-btn btn-view" title="Open in browser">👁️ View</a>
-                    <a href="/static/past-papers/J277-01-2022-MS.pdf" download class="paper-btn btn-dl">📥 Download</a>
-                </span>
-            </div>
-            <div class="paper-row">
-                <span class="label label-q">Paper 2 — Algorithms &amp; Programming</span>
-                <span class="actions">
-                    <a href="/static/past-papers/J277-02-2022-QP.pdf" class="paper-btn btn-view" title="Open in browser">👁️ View</a>
-                    <a href="/static/past-papers/J277-02-2022-QP.pdf" download class="paper-btn btn-dl">📥 Download</a>
-                </span>
-            </div>
-            <div class="paper-row">
-                <span class="label label-ms">Paper 2 — Mark Scheme</span>
-                <span class="actions">
-                    <a href="/static/past-papers/J277-02-2022-MS.pdf" class="paper-btn btn-view" title="Open in browser">👁️ View</a>
-                    <a href="/static/past-papers/J277-02-2022-MS.pdf" download class="paper-btn btn-dl">📥 Download</a>
-                </span>
-            </div>
-        </div>
-    </details>    <div style="max-width:760px;margin:16px auto 0;padding:14px 18px;background:rgba(34,211,238,0.04);border:1px dashed rgba(34,211,238,0.15);border-radius:10px;font-size:13px;color:#94a3b8;">
-        <strong style="color:#67e8f9;">📎 Still need more?</strong> Additional papers and examiner reports available directly from OCR:
+    <div style="max-width:760px;margin:16px auto 0;padding:14px 18px;background:rgba(255,209,0,0.04);border:1px dashed rgba(255,209,0,0.15);border-radius:10px;font-size:13px;color:#94a3b8;">
+        <strong style="color:#FFD100;">📎 Still need more?</strong> Additional practice materials and examiner reports available from the WLV English Equivalency team.
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;">
-            <a href="https://ocr.org.uk/qualifications/gcse/computer-science-j277-from-2020/assessment/" target="_blank" class="btn btn-sm" style="background:rgba(34,211,238,0.06);border:1px solid rgba(34,211,238,0.15);padding:6px 12px;border-radius:6px;font-size:12px;color:#cbd5e1;text-decoration:none;">🔗 OCR Assessment</a>
-            <a href="https://www.physicsandmathstutor.com/past-papers/gcse-computer-science/ocr-paper-1/" target="_blank" class="btn btn-sm" style="background:rgba(34,211,238,0.06);border:1px solid rgba(34,211,238,0.15);padding:6px 12px;border-radius:6px;font-size:12px;color:#cbd5e1;text-decoration:none;">🔗 Physics &amp; Maths Tutor</a>
-            <a href="https://www.savemyexams.com/gcse/computer-science/ocr/past-papers/" target="_blank" class="btn btn-sm" style="background:rgba(34,211,238,0.06);border:1px solid rgba(34,211,238,0.15);padding:6px 12px;border-radius:6px;font-size:12px;color:#cbd5e1;text-decoration:none;">🔗 Save My Exams</a>
+            <a href="https://www.wlv.ac.uk" target="_blank" class="btn btn-sm" style="background:rgba(255,209,0,0.06);border:1px solid rgba(255,209,0,0.15);padding:6px 12px;border-radius:6px;font-size:12px;color:#cbd5e1;text-decoration:none;">🔗 WLV Website</a>
         </div>
     </div>
 
