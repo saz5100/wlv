@@ -1,0 +1,33 @@
+---
+type: source
+title: AQA Paper 1 June 2022 Insert
+created: 2026-06-11
+updated: 2026-06-11
+tags: [exam-insert, source-material, 20th-century-fiction]
+related: [aqa-8700-1-june-2022-qp, the-pearl-extract-analysis, john-steinbeck]
+sources: ["AQA-8700-1-June-2022-IN.md"]
+---
+# AQA Paper 1 June 2022 Insert
+
+This document is the official reading insert for the GCSE English Language Paper 1 (June 2022) examination: *Explorations in creative reading and writing*. It identifies the source text used for the reading assessment.
+
+## Source Details
+- **Source A**: 20th Century prose-fiction.
+- **Text**: *The Pearl* by [[john-steinbeck]].
+- **Extract Range**: Pages 8–10 (based on the 2009 Macmillan Education edition, ISBN 978-023-003-1135).
+- **Publication Date**: Originally published in 1947.
+
+> [!IMPORTANT]
+> The raw source file contains third-party copyright restrictions and does not include the full text of the extract. Analysis of this text requires the corresponding pages from the novel.
+
+## Context for WLV Equivalency
+This source aligns with the WLV requirement for students to analyse unseen 19th, 20th, or 21st-century literary extracts. As a piece of 20th-century prose-fiction, it provides a basis for practicing:
+- **Explicit Retrieval (Q1)**: Finding specific details about the characters or setting.
+- **Language Analysis (Q2)**: Analysing Steinbeck's use of imagery and vocabulary.
+- **Structural Analysis (Q3)**: Examining how the narrative focus shifts within the opening of the novel.
+
+## Administrative Information
+- **Paper Code**: 8700/1
+- **Insert Reference**: IB/G/Jun22/E7 / IB/G/Jun22/8700/1
+- **Copyright**: © 2022 AQA and its licensors.
+- **Copyright Note**: For confidentiality purposes, all acknowledgements of third-party copyright material are published in a separate booklet available for free download from www.aqa.org.uk.

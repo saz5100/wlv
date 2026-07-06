@@ -1,0 +1,45 @@
+services:
+  db:
+    image: postgres:16
+    container_name: wlvcs-db
+    environment:
+      POSTGRES_DB: wlv_kb
+      POSTGRES_USER: wlv_app
+      POSTGRES_PASSWORD: wlv_kb_2026
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./docker/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh:ro
+      - ./docker/quiz_questions.sql:/docker-entrypoint-initdb.d/02-quiz_questions.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U wlv_app -d wlv_kb"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    image: wlv-cs-website-app-img
+    container_name: wlv-cs-website-app
+    ports:
+      - "8007:8001"
+    env_file: ./app/.env
+    environment:
+      WLV_PG_DSN: "dbname=wlv_kb user=wlv_app password=wlv_kb_2026 host=db port=5432 client_encoding=utf8"
+      WLV_DEBUG: "true"  # Set to "false" for production (disables cache-busting, dev features)
+    volumes:
+      - activity-logs:/var/log/activity
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+    name: wlv-cs-website_pgdata
+    external: true
+  activity-logs:
+    name: wlv-cs-website_activity-logs
+    external: true
