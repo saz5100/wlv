@@ -3,7 +3,7 @@
 {% block content %}
 <div class="hero" style="padding: 30px 0 15px;">
     <h1>🧪 Test Data Generator</h1>
-    <p class="hero-sub">Practise identifying normal, boundary, invalid, and erroneous test data</p>
+    <p class="hero-sub">Practise identifying vocabulary categories — synonyms, antonyms, and word classes</p>
 </div>
 
 <style>
@@ -170,7 +170,7 @@
 <!-- ── Intro ── -->
 <div class="td-intro">
     <h3>🧪 Test Data Generator</h3>
-    <p>For <strong>WLV English Equivalency 2.3 — Producing Robust Programs</strong>, you need to understand four categories of test data. Click each data value to classify it. Try to get all correct!</p>
+    <p>For <strong>WLV English Equivalency — Vocabulary Practice</strong>, you need to understand word categories. Click each word to classify it. Try to get all correct!</p>
 </div>
 
 <div class="td-layout">
@@ -219,7 +219,7 @@
 const tdScenarios = [
     {
         title: "Age Validator",
-        desc: "A program asks the user to enter their age. Valid ages are between <code>1</code> and <code>120</code> (inclusive). Classify each test data value.",
+        desc: "A program asks the user to enter their age. Valid ages are between <code>1</code> and <code>120</code> (inclusive). Classify each vocabulary word.",
         generate: () => {
             const data = [];
             // Normal
@@ -456,7 +456,7 @@ function classifyTd(idx) {
     if (tdRevealed[idx]) return;
     
     const item = tdData[idx];
-    showTdModal('What type of test data is "' + item.value + '"?', function(userCategory) {
+    showTdModal('What type of vocabulary word is ' + item.value + '?', function(userCategory) {
         const validTypes = ['normal', 'boundary', 'invalid', 'erroneous'];
         if (!validTypes.includes(userCategory)) {
             showTdAlert('Please enter one of: normal, boundary, invalid, erroneous');

@@ -31,7 +31,7 @@
 .view-panel { display: none; }
 .view-panel.active { display: block; }
 
-/* Component filter pills */
+/* Topic filter pills */
 .filter-pills {
   display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;
 }
@@ -154,7 +154,7 @@
 
 {# ===== PANEL 2: ALL LESSONS VIEW ===== #}
 <div id="panel-all-lessons" class="view-panel">
-  <!-- Component filter pills -->
+  <!-- Topic filter pills -->
   <div class="filter-pills">
     <button class="filter-pill active" data-comp="all" onclick="filterLessons('all')">🏴 All Topics</button>
     <button class="filter-pill" data-comp="1" onclick="filterLessons('1')">📖 Reading & Writing</button>
@@ -207,7 +207,7 @@
 }
 </style>
 
-<!-- Code Lab banner -->
+<!-- Writing Lab banner -->
 <div class="code-lab-banner" style="margin-top:20px;padding:24px;border-radius:var(--r-xl);background:linear-gradient(135deg,rgba(168,85,247,0.1),rgba(34,211,238,0.1));border:1px solid rgba(34,211,238,0.2);display:flex;align-items:center;gap:20px;justify-content:space-between;flex-wrap:wrap;">
     <div style="flex:1;min-width:280px;">
         <h3 style="font-size:20px;font-weight:700;color:var(--c-heading);margin-bottom:6px;display:flex;align-items:center;gap:8px;">✍️ Writing Lab</h3>

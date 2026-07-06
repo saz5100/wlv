@@ -68,10 +68,10 @@
         <a href="/static/past-papers/{{ pf.ms }}.pdf" class="btn btn-outline" download>📥 Download MS</a>
         {% endif %}
         {% if p.active %}
-        <a href="/mark-my-paper?paper={{ p.id }}" class="btn btn-primary">📤 Mark My Paper</a>
+        <a href="/mark-my-paper?paper={{ p.id }}" class="btn btn-primary">📤 Writing Practice</a>
         <a href="/online-paper/{{ p.id }}" class="btn btn-primary">✏️ Fill Online</a>
         {% else %}
-        <span class="btn btn-disabled">📤 Mark My Paper</span>
+        <span class="btn btn-disabled">📤 Writing Practice</span>
         <span class="btn btn-disabled">✏️ Fill Online</span>
         {% endif %}
       </div>

@@ -1,5 +1,5 @@
 ﻿"""
-Mark My Paper — SEND Certificate L2 grading pipeline.
+Writing Practice — SEND Certificate L2 grading pipeline.
 Upload PDFs, verify extracted text, get AI-marked reports against SEND mark schemes.
 """
 import json, os, re, uuid, tempfile, traceback

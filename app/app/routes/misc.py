@@ -47,7 +47,7 @@ async def wiki_page(request: Request):
                 "id": r[0], "topic": r[1], "marks": r[2],
                 "question": r[3], "mark_scheme": r[4],
                 "model_answer": r[5], "key_terms": r[6],
-                "title": f"{'Evaluate' if r[2]==8 else 'Explain'} — {r[3][:80]}..."
+                "title": f"{r[3][:80]}...",
             })
             topics.add(r[1])
 

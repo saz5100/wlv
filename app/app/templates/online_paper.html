@@ -269,7 +269,7 @@
       {# ─── Diagram ─── #}
       {% elif q.type == "diagram" %}
       <div class="diagram-hint">📐 {{ q.diagram_hint }}</div>
-      <textarea data-qid="{{ q.id }}" data-qnum="{{ q.number }}" data-part="{{ q.part }}" data-marks="{{ q.marks }}" oninput="onTextInput(this, '{{ q.id }}')" placeholder="Describe your diagram here, or upload a photo/scan using the Mark My Paper upload flow..."></textarea>
+      <textarea data-qid="{{ q.id }}" data-qnum="{{ q.number }}" data-part="{{ q.part }}" data-marks="{{ q.marks }}" oninput="onTextInput(this, '{{ q.id }}')" placeholder="Describe your diagram here, or upload a photo/scan using the Writing Practice upload flow..."></textarea>
 
       {# ─── Extended / Written / Short ─── #}
       {% else %}

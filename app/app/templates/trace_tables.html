@@ -3,7 +3,7 @@
 {% block content %}
 <div class="hero" style="padding: 30px 0 15px;">
     <h1>📊 Trace Table Practice</h1>
-    <p class="hero-sub">Step through algorithms and track variable changes — essential for Paper 2</p>
+    <p class="hero-sub">Step through SPaG exercises and track your progress — essential for the Writing Section</p>
 </div>
 
 <style>
@@ -243,7 +243,7 @@
 <!-- ── Intro ── -->
 <div class="tt-intro">
     <h3>📊 Trace Table Practice</h3>
-    <p>Trace tables help you track how variable values change as an algorithm executes. You step through the code line by line, recording each variable's value after every instruction. This is a key skill for <strong>WLV English Equivalency Paper 2</strong> — trace table questions are common in the exam.</p>
+    <p>SPaG exercises help you track how your writing improves as you practise. You work through each exercise line by line, checking spelling, punctuation, and grammar. This is a key skill for <strong>WLV English Equivalency Writing Section</strong> — SPaG questions are common in the exam.</p>
 </div>
 
 <div class="tt-layout">
@@ -388,37 +388,17 @@ const ttExercises = [
     },
     {
         id: 4,
-        title: "Bubble Sort (One Pass)",
-        desc: "One pass of bubble sort on [64, 34, 25, 12].",
-        code: `01  nums <- [64, 34, 25, 12]
-02  FOR i <- 1 TO 3
-03      IF nums[i] > nums[i+1] THEN
-04          temp <- nums[i]
-05          nums[i] <- nums[i+1]
-06          nums[i+1] <- temp
-07      ENDIF
-08  NEXT i`,
-        variables: ["i", "temp", "nums[1]", "nums[2]", "nums[3]", "nums[4]"],
+        title: "SPaG: Comma Splices",
+        desc: "Identify and fix comma splices in a sentence.",
+        code: `01  sentence <- "It was raining, we stayed inside."
+02  # Fix: replace comma with semicolon or add conjunction
+03  # Correct: "It was raining, so we stayed inside."
+04  # Or: "It was raining; we stayed inside."`,
+        variables: ["sentence", "correction"],
         steps: [
-            [1, {i: null, temp: null, "nums[1]": 64, "nums[2]": 34, "nums[3]": 25, "nums[4]": 12}],
-            [2, {i: 1, temp: null, "nums[1]": 64, "nums[2]": 34}],
-            [3, {i: 1, temp: null}],
-            [4, {i: 1, temp: 64}],
-            [5, {i: 1, temp: 64, "nums[1]": 34}],
-            [6, {i: 1, temp: 64, "nums[1]": 34, "nums[2]": 64}],
-            [8, {i: 1, temp: 64, "nums[1]": 34, "nums[2]": 64}],
-            [2, {i: 2, temp: 64, "nums[2]": 64, "nums[3]": 25}],
-            [3, {i: 2, temp: 64}],
-            [4, {i: 2, temp: 64}],
-            [5, {i: 2, temp: 64, "nums[2]": 25}],
-            [6, {i: 2, temp: 64, "nums[2]": 25, "nums[3]": 64}],
-            [8, {i: 2, temp: 64, "nums[2]": 25, "nums[3]": 64}],
-            [2, {i: 3, temp: 64, "nums[3]": 64, "nums[4]": 12}],
-            [3, {i: 3, temp: 64}],
-            [4, {i: 3, temp: 64}],
-            [5, {i: 3, temp: 64, "nums[3]": 12}],
-            [6, {i: 3, temp: 64, "nums[3]": 12, "nums[4]": 64}],
-            [8, {i: 3, temp: 64, "nums[3]": 12, "nums[4]": 64}]
+            [1, {sentence: "It was raining, we stayed inside.", correction: null}],
+            [2, {sentence: "It was raining, we stayed inside.", correction: "It was raining, so we stayed inside."}],
+            [3, {sentence: "It was raining, we stayed inside.", correction: "It was raining; we stayed inside."}]
         ]
     },
     {
