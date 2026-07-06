@@ -87,3 +87,30 @@ Choose one or two changes which you would suggest to improve support for young p
 - **Forgetting persuasion**: 7c requires persuasive language, not just explanation
 - **Ignoring structure**: Plan your response before writing
 - **Poor SPaG**: Career-focused writing still requires good English and clear presentation
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: evidence, point, explanation, form
+# Assessment Objectives: AO5, AO6
+# Causal Links:
+# - The writer's choice of rhetorical question achieves tension, which causes the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: evidence, point, explanation, form, link
+# Assessment Objectives: AO5, AO6
+# Causal Links:
+# - The writer's choice of rhetorical question achieves tension, which causes the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: evidence, point, explanation, link, form
+# Assessment Objectives: AO5, AO6
+# Causal Links:
+# - The writer's choice of rhetorical question achieves tension, which causes the reader to the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: evidence, point, link, explanation, form
+# Assessment Objectives: AO5, AO6
+# Causal Links:
+# - The writer's choice of rhetorical question achieves tension, which causes the reader to engage with the text.

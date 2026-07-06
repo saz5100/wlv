@@ -20,3 +20,29 @@ Martel's prose in *Life of Pi* is characterised by vivid sensory description, ph
 - [[life-of-pi-extract-june-2023]] — Extract from Martel's novel
 - [[pi-patel]] — Protagonist created by Martel
 - [[spotted-hyena]] — Subject of the extract
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: 
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to feel engaged.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: 
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to the reader to engage with the text.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: 
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to engage with the text.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader feel engaged.

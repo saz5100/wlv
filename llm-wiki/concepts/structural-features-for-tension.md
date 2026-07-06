@@ -42,3 +42,29 @@ The indicative standard for Q3 demonstrates analysis of foreshadowing, pivotal p
 - [[juxtaposition]] — Placing contrasting elements side by side
 - [[repetition-as-structural-device]] — Repetition as a structural device
 - [[narrative-perspective-shifts]] — Changes in narrative focus
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: tension, perspective, focus, shift, repetition, foreshadowing, climax, rising action, resolution, exposition
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The structural shift from foreshadowing creates tension, which causes the reader to feel engaged.
+# - By using juxtaposition, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - The repetition at this point in the text creates suspense, which makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: tension, shift, repetition, perspective, foreshadowing, focus, climax, rising action, resolution, exposition
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The structural shift from foreshadowing creates tension, which causes the reader to the reader to engage with the text.
+# - By using juxtaposition, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - The repetition at this point in the text creates suspense, which makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: tension, shift, repetition, foreshadowing, perspective, focus, climax, rising action, resolution, exposition
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The structural shift from foreshadowing creates tension, which causes the reader to engage with the text.
+# - By using juxtaposition, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - The repetition at this point in the text creates suspense, which makes the reader feel engaged.

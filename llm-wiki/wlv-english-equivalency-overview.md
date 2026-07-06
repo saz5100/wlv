@@ -42,3 +42,29 @@ The WLV test explicitly excludes:
 ## Revision Strategy
 
 The recommended approach is to download AQA Paper 1 past papers and practise only Questions 1, 2, 3, and 5, with a strong emphasis on SPaG proofreading. Full mock papers are not necessary given the condensed format.
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: tone, simile, personification, metaphor, literal, imagery
+# Assessment Objectives: AO1
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to feel engaged.
+# - By employing metaphor, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - personification is used to convey suspense, which in turn makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, personification, metaphor, tone, literal, imagery
+# Assessment Objectives: AO1
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to the reader to engage with the text.
+# - By employing metaphor, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - personification is used to convey suspense, which in turn makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, personification, metaphor, tone, literal, imagery
+# Assessment Objectives: AO1
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.
+# - By employing metaphor, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - personification is used to convey suspense, which in turn makes the reader feel engaged.

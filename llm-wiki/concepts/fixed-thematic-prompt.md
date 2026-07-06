@@ -23,3 +23,26 @@ A fixed thematic prompt is a single mandatory writing task with no choice betwee
 - Develop flexibility to adapt to any given theme.
 - Focus on building a persuasive or descriptive arc within a single piece.
 - Use structural devices such as one-word paragraphs, rhetorical questions, and clear paragraph transitions.
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: 
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of rhetorical question creates tension, which causes the reader to feel engaged.
+# - By employing rhetorical question, the writer establishes atmosphere, leading the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: 
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of rhetorical question creates tension, which causes the reader to the reader to engage with the text.
+# - By employing rhetorical question, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: 
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of rhetorical question creates tension, which causes the reader to engage with the text.
+# - By employing rhetorical question, the writer establishes atmosphere, leading the reader to sympathise with the character.

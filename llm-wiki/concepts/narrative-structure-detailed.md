@@ -47,3 +47,29 @@ Für die 400-Wörter-Schreibaufgabe in der WLV English Equivalency empfiehlt es 
 ## Verbindung zu anderen Konzepten
 
 Die narrative Struktur kann mit der descriptive-writing-camera-technique kombiniert werden, um sowohl Handlung als auch Atmosphäre effektiv zu gestalten. Sie ergänzt auch die [[chronological-structure]] und die [[non-linear-structure]] als alternative Erzählweisen.
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: exposition, rising action, pan, climax, non-linear, chronological
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The structural shift from language features creates tension, which causes the reader to feel engaged.
+# - By using structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - The writing techniques at this point in the text creates suspense, which makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: exposition, rising action, pan, climax, non-linear, chronological, tension, shift
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The structural shift from language features creates tension, which causes the reader to the reader to engage with the text.
+# - By using structural choices, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - The writing techniques at this point in the text creates suspense, which makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: exposition, rising action, pan, climax, tension, shift, non-linear, chronological
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The structural shift from language features creates tension, which causes the reader to engage with the text.
+# - By using structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - The writing techniques at this point in the text creates suspense, which makes the reader feel engaged.

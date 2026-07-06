@@ -32,3 +32,27 @@ Dans l'écriture formelle, il est préférable d'écrire les mots en toutes lett
 Ajoutez les apostrophes de contraction nécessaires dans le passage suivant :
 
 *At about ten o clock, we went to Romios for pizzas. Im not sure what Bobs pizza topping was but I had ham and pineapple. I wish I hadnt because later on I was sick in Michaels car. Its brand new and I thought hed be angry but he wasnt. Were not going there again.*
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: contraction, apostrophe
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of apostrophe ensures tension, which helps the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: apostrophe, contraction
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of language features ensures tension, which helps the reader to the reader to engage with the text.
+# - Errors in structural choices cause tension, leading the reader to the reader to feel engaged.
+# - Mastery of writing techniques creates tension, which enables the reader to the reader to share the character's emotions.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: apostrophe, contraction
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of language features ensures tension, which helps the reader to engage with the text.
+# - Errors in structural choices cause tension, leading the reader to feel engaged.
+# - Mastery of writing techniques creates tension, which enables the reader to share the character's emotions.

@@ -65,3 +65,29 @@ The extract ends with a cycle of conflict and apology: 'he apologising, blaming 
 - For **Q2**, focus on the sensory language and personification. Use the [[star-analysis-framework]] to structure your response.
 - For **Q3**, trace the focus shifts and the cyclical pattern. Use the [[structure-quoi-comment-pourquoi]] framework.
 - The extract is an excellent example of [[third-person-limited-narration]] — the reader is confined to Mary's perspective, creating sympathy for her.
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: sensory language, personification, verb, tone, simile, juxtaposition, imagery
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to feel engaged.
+# - By employing personification, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - imagery is used to convey suspense, which in turn makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: personification, simile, sensory language, imagery, verb, tone, juxtaposition
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to the reader to engage with the text.
+# - By employing personification, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - imagery is used to convey suspense, which in turn makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: personification, simile, imagery, sensory language, verb, tone, juxtaposition
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.
+# - By employing personification, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - imagery is used to convey suspense, which in turn makes the reader feel engaged.

@@ -26,3 +26,26 @@ Der Padgate Revision Guide enthält eine Liste mit allgemeinen Revisionstechnike
 ## Anwendung in der WLV-Prüfung
 
 Diese Techniken sind allgemein anwendbar und können für die Vorbereitung auf die WLV English Equivalency genutzt werden. Besonders nützlich sind Flashcards für literarische Fachbegriffe und Post-it Notes für SPaG-Regeln.
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: 
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of repetition creates tension, which causes the reader to feel engaged.
+# - By employing repetition, the writer establishes atmosphere, leading the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: 
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of repetition creates tension, which causes the reader to the reader to engage with the text.
+# - By employing repetition, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: 
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of repetition creates tension, which causes the reader to engage with the text.
+# - By employing repetition, the writer establishes atmosphere, leading the reader to sympathise with the character.

@@ -21,3 +21,30 @@ Correct capitalisation is essential for technical accuracy in the WLV writing ta
 
 ## Common Errors
 - **Common Nouns**: Words like *mum*, *dad*, *dog*, or *cat* should not be capitalised unless they are being used as a proper name (e.g., "I told Mum" vs "My mum is here").
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: 
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of language features ensures tension, which helps the reader to feel engaged.
+# - Errors in structural choices cause atmosphere, leading the reader to sympathise with the character.
+# - Mastery of writing techniques creates suspense, which enables the reader to understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: 
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of language features ensures tension, which helps the reader to the reader to engage with the text.
+# - Errors in structural choices cause atmosphere, leading the reader to the reader to sympathise with the character.
+# - Mastery of writing techniques creates suspense, which enables the reader to the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: 
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of language features ensures tension, which helps the reader to engage with the text.
+# - Errors in structural choices cause atmosphere, leading the reader to sympathise with the character.
+# - Mastery of writing techniques creates suspense, which enables the reader to feel engaged.

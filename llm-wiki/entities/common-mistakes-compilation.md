@@ -58,3 +58,29 @@ These mistakes are drawn from AQA resources but are equally relevant to the WLV 
 - **Q5 SPaG weighting:** 50% of writing marks are allocated to technical accuracy in the WLV test — SPaG mistakes are therefore more costly.
 - **Single-source extraction:** All reading questions use one extract; mistakes in Q1 (not reading line references) are especially important.
 - **Fixed thematic prompt:** There is no writing choice; ignoring the prompt is a critical error.
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, juxtaposition, connotation, connotation, article
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to feel engaged.
+# - By employing juxtaposition, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - listing is used to convey suspense, which in turn makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, juxtaposition, connotation, connotation, article
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to the reader to engage with the text.
+# - By employing juxtaposition, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - listing is used to convey suspense, which in turn makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, juxtaposition, connotation, connotation, article
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.
+# - By employing juxtaposition, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - listing is used to convey suspense, which in turn makes the reader feel engaged.

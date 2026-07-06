@@ -199,3 +199,30 @@ A comprehensive reference of language techniques tested in AQA Paper 1 Q2. For e
 5. **Explain the effect** — don't stop at "this creates tension". Say WHY: "the comparison to a 'trapped animal' emphasises the character's helplessness, making the reader fear for their safety"
 
 > **Model paragraph:** "The writer uses **personification** to create a sense of threat. The wind is described as 'howling in fury', which gives it human aggression and intent. This makes the setting feel actively hostile, forcing the reader to share the character's vulnerability."
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: connotation, connotation, simile, metaphor, semantic field, personification, literal, diction, denotation, tone, sibilance, sensory language, register, pathetic fallacy, oxymoron
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to feel engaged.
+# - By employing metaphor, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - personification is used to convey suspense, which in turn makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: connotation, connotation, simile, metaphor, personification, semantic field, literal, diction, denotation, tone, sibilance, sensory language, register, pathetic fallacy, oxymoron
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to the reader to engage with the text.
+# - By employing metaphor, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - personification is used to convey suspense, which in turn makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: connotation, connotation, simile, metaphor, personification, semantic field, literal, diction, denotation, tone, sibilance, sensory language, register, pathetic fallacy, oxymoron
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.
+# - By employing metaphor, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - personification is used to convey suspense, which in turn makes the reader feel engaged.

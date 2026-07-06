@@ -38,3 +38,23 @@ Lessing employs third-person limited narration, focusing closely on Mary's persp
 - [[aqa-87001-qp-jun24]] — The question paper
 - [[aqa-87001-ins-jun24]] — The insert containing the extract
 - [[aqa-87001-ms-jun24]] — The mark scheme
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: imagery
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of imagery creates tension, which causes the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: imagery
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of imagery creates tension, which causes the reader to the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: imagery
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of imagery creates tension, which causes the reader to engage with the text.

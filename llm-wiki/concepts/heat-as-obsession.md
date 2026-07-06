@@ -40,3 +40,26 @@ When analysing heat as obsession in a text, consider:
 - [[sensory-accumulation]] — Related technique of layering sensory details
 - [[figurative-language-devices]] — Broader category of language techniques
 - [[language-analysis]] — How to analyse language in exam responses
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: personification, figurative
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of personification creates tension, which causes the reader to feel engaged.
+# - By employing personification, the writer establishes atmosphere, leading the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: personification, figurative
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of personification creates tension, which causes the reader to the reader to engage with the text.
+# - By employing personification, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: personification, figurative
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of personification creates tension, which causes the reader to engage with the text.
+# - By employing personification, the writer establishes atmosphere, leading the reader to sympathise with the character.

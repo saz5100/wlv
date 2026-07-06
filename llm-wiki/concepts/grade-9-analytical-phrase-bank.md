@@ -93,3 +93,30 @@ Using sophisticated phrases signals to the examiner that you are working at a hi
 | This means | This signifies, this indicates, this suggests |
 | A feeling of | A sense of, an atmosphere of, an impression of |
 | Good/bad | Powerful, striking, unsettling, evocative, haunting, arresting |
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, semantic field, personification, connotation, connotation
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to feel engaged.
+# - By employing personification, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - simile is used to convey suspense, which in turn makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, personification, connotation, connotation, semantic field
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to the reader to engage with the text.
+# - By employing personification, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - semantic field is used to convey suspense, which in turn makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, personification, connotation, connotation, semantic field
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.
+# - By employing personification, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - semantic field is used to convey suspense, which in turn makes the reader feel engaged.

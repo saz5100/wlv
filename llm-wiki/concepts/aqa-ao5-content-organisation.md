@@ -36,3 +36,29 @@ AO5 is the assessment objective for Content and Organisation in the AQA GCSE Eng
 - [[aqa-ao6-technical-accuracy]] — The companion assessment objective
 - [[creative-writing-success-criteria]] — Success criteria for creative writing
 - [[writing-guide]] — Creative writing structure and devices
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: tone, link, style, register
+# Assessment Objectives: AO5, AO6
+# Causal Links:
+# - The writer's choice of language features achieves tension, which causes the reader to feel engaged.
+# - By using structural choices, the writer creates atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is employed to produce suspense, which makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: tone, link, style, register, setting, character, atmosphere
+# Assessment Objectives: AO5, AO6
+# Causal Links:
+# - The writer's choice of figurative language achieves tension, which causes the reader to the reader to engage with the text.
+# - By using structural features, the writer creates atmosphere, leading the reader to the reader to sympathise with the character.
+# - discourse markers is employed to produce suspense, which makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: tone, link, style, register, character, atmosphere, setting
+# Assessment Objectives: AO5, AO6
+# Causal Links:
+# - The writer's choice of figurative language achieves tension, which causes the reader to engage with the text.
+# - By using structural features, the writer creates atmosphere, leading the reader to sympathise with the character.
+# - discourse markers is employed to produce suspense, which makes the reader feel engaged.

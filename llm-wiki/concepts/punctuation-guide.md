@@ -135,3 +135,29 @@ Die korrekte Verwendung dieser Satzzeichen ist entscheidend für die SPaG-Bewert
 - [[ellipsis]]: Ausführliche Erklärung der Auslassungspunkte.
 - [[apostrophe-of-contraction]]: Vertiefung zur Verwendung des Apostrophs bei Kontraktionen.
 - [[collins-spag-punctuation]]: Zusätzliche Übungen und Beispiele.
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: ellipsis, dash, colon, apostrophe, semicolon, quotation mark, question mark, full stop, exclamation mark, contraction
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of comma ensures tension, which helps the reader to feel engaged.
+# - Errors in apostrophe cause atmosphere, leading the reader to sympathise with the character.
+# - Mastery of semicolon creates suspense, which enables the reader to understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: colon, apostrophe, semicolon, ellipsis, dash, quotation mark, question mark, full stop, exclamation mark, contraction
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of semicolon ensures tension, which helps the reader to the reader to engage with the text.
+# - Errors in colon cause atmosphere, leading the reader to the reader to sympathise with the character.
+# - Mastery of dash creates suspense, which enables the reader to the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: colon, semicolon, dash, apostrophe, ellipsis, quotation mark, question mark, full stop, exclamation mark, contraction
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of semicolon ensures tension, which helps the reader to engage with the text.
+# - Errors in colon cause atmosphere, leading the reader to sympathise with the character.
+# - Mastery of dash creates suspense, which enables the reader to feel engaged.

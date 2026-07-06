@@ -20,3 +20,39 @@ sources: ["ocr-spag-little-book.md"]
 
 ## Rare Exception
 'Effect' can occasionally be used as a verb meaning "to bring about" or "to implement" (e.g., "to effect change"). However, for the purposes of the WLV assessment, the verb/noun distinction is the primary rule to follow.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: verb, noun
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to feel engaged.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: verb, noun
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to feel engaged.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: verb, noun
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to the reader to engage with the text.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: verb, noun
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to engage with the text.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader feel engaged.

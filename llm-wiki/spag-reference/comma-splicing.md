@@ -23,3 +23,30 @@ To correct a comma splice, a writer can:
 2. Replace the comma with a **semi-colon** (linking two closely related independent clauses).
 3. Replace the comma with a **colon** (if the second clause explains or expands upon the first).
 4. Add a **coordinating conjunction** (e.g., 'and', 'but', 'so') after the comma.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: full stop, comma splice, colon, conjunction
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of comma ensures tension, which helps the reader to feel engaged.
+# - Errors in colon cause atmosphere, leading the reader to sympathise with the character.
+# - Mastery of full stop creates suspense, which enables the reader to understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: full stop, colon, comma splice, conjunction
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of comma splice ensures tension, which helps the reader to the reader to engage with the text.
+# - Errors in colon cause atmosphere, leading the reader to the reader to sympathise with the character.
+# - Mastery of full stop creates suspense, which enables the reader to the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: full stop, colon, comma splice, conjunction
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of comma splice ensures tension, which helps the reader to engage with the text.
+# - Errors in colon cause atmosphere, leading the reader to sympathise with the character.
+# - Mastery of full stop creates suspense, which enables the reader to feel engaged.

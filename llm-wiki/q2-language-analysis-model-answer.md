@@ -47,3 +47,29 @@ How does the writer use language here to describe the narrator's fear?
 * Not quoting from the correct lines
 * Describing what happens instead of analysing language
 * Using vague terms like "the word creates an effect"
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, verb, semantic field, sensory language, adjective
+# Assessment Objectives: AO1, AO2, AO5, AO6
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to feel engaged.
+# - By employing listing, the writer establishes atmosphere, leading the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, verb, semantic field, sensory language, adjective
+# Assessment Objectives: AO1, AO2, AO5, AO6
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to the reader to engage with the text.
+# - By employing listing, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - semantic field is used to convey tension, which in turn makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, semantic field, verb, sensory language, adjective
+# Assessment Objectives: AO1, AO2, AO5, AO6
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.
+# - By employing listing, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - semantic field is used to convey tension, which in turn makes the reader feel engaged.

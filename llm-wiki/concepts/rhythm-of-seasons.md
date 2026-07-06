@@ -27,3 +27,26 @@ In the June 2024 extract, Mary reflects that in town 'there had been no seasons,
 - [[environmental-oppression]] — The environment as a dominant force.
 - [[juxtaposition]] — The contrast between town and farm life.
 - [[the-grass-is-singing]] — The novel in which this device is central.
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: juxtaposition
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of juxtaposition creates tension, which causes the reader to feel engaged.
+# - By employing juxtaposition, the writer establishes atmosphere, leading the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: juxtaposition
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of juxtaposition creates tension, which causes the reader to the reader to engage with the text.
+# - By employing juxtaposition, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: juxtaposition
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of juxtaposition creates tension, which causes the reader to engage with the text.
+# - By employing juxtaposition, the writer establishes atmosphere, leading the reader to sympathise with the character.

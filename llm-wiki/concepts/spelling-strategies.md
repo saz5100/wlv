@@ -18,3 +18,24 @@ Mastering difficult spellings requires a combination of phonetic, visual, and mo
 - **Letter Counting**: Remembering how many letters are in a word to avoid omissions.
 - **Prefix and Suffix Rules**: Understanding how adding a prefix or suffix changes the root word.
 - **Morphology**: Studying the origin of the word (e.g., Latin or Greek roots).
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: spelling, dash
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of dash ensures tension, which helps the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: spelling, dash
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of dash ensures tension, which helps the reader to the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: dash, spelling
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of dash ensures tension, which helps the reader to engage with the text.

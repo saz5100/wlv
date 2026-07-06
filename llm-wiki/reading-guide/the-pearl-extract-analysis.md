@@ -31,3 +31,24 @@ Students should identify:
 ## Related Materials
 - **Insert**: [[aqa-8700-1-june-2022-in]]
 - **Question Paper**: [[aqa-8700-1-june-2022-qp]]
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: verb, imagery, adjective
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of imagery creates tension, which causes the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: imagery, verb, adjective
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of imagery creates tension, which causes the reader to the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: imagery, verb, adjective
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of imagery creates tension, which causes the reader to engage with the text.

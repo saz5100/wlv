@@ -60,3 +60,29 @@ Schreiben Sie den folgenden Text um, indem Sie eine Mischung aus einfachen Sätz
 - [[topic-sentences]]: Sätze, die die Hauptidee eines Absatzes einführen.
 - [[punctuation-guide]]: Zeichensetzungsregeln für Satzstrukturen.
 - [[collins-spag-punctuation]]: Vertiefung zu Zeichensetzung und Satztypen.
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: rhythm
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The structural shift from language features creates tension, which causes the reader to feel engaged.
+# - By using structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - The writing techniques at this point in the text creates suspense, which makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: rhythm, tension, shift
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The structural shift from language features creates tension, which causes the reader to the reader to engage with the text.
+# - By using structural choices, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - The writing techniques at this point in the text creates suspense, which makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: rhythm, tension, shift
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The structural shift from language features creates tension, which causes the reader to engage with the text.
+# - By using structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - The writing techniques at this point in the text creates suspense, which makes the reader feel engaged.

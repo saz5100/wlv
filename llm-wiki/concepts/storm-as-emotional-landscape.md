@@ -33,3 +33,29 @@ The storm as emotional landscape is a literary device where a physical storm (wi
 ## Key Terminology
 
 When analysing weather as emotional landscape, use terms like: *pathetic fallacy, personification, turbulence, foreboding, mirroring, externalisation, atmospheric pressure, ominous, chaotic, relentless.*
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: pathetic fallacy, personification, literal
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of personification creates tension, which causes the reader to feel engaged.
+# - By employing personification, the writer establishes atmosphere, leading the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: personification, pathetic fallacy, literal
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of personification creates tension, which causes the reader to the reader to engage with the text.
+# - By employing pathetic fallacy, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - personification is used to convey contrast, which in turn makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: personification, pathetic fallacy, literal
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of personification creates tension, which causes the reader to engage with the text.
+# - By employing pathetic fallacy, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - personification is used to convey contrast, which in turn makes the reader feel engaged.

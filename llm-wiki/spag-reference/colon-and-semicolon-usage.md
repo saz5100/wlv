@@ -24,3 +24,30 @@ The colon creates a pause of anticipation and is used to:
 ## List Punctuation Rules
 - **Short items**: Use commas to separate items of 1-2 words.
 - **Long items**: Use semi-colons to separate items of 3+ words, or in mixed lists where most items are long, to ensure clarity.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: colon, semicolon, full stop
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of comma ensures tension, which helps the reader to feel engaged.
+# - Errors in semicolon cause atmosphere, leading the reader to sympathise with the character.
+# - Mastery of colon creates suspense, which enables the reader to understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: colon, semicolon, full stop
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of semicolon ensures tension, which helps the reader to the reader to engage with the text.
+# - Errors in colon cause atmosphere, leading the reader to the reader to sympathise with the character.
+# - Mastery of full stop creates suspense, which enables the reader to the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: colon, semicolon, full stop
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of semicolon ensures tension, which helps the reader to engage with the text.
+# - Errors in colon cause atmosphere, leading the reader to sympathise with the character.
+# - Mastery of full stop creates suspense, which enables the reader to feel engaged.

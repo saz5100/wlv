@@ -26,3 +26,29 @@ Dick represents the oppressive patriarchal forces within the marriage. His anger
 - [[mary-turner]] — His wife and the protagonist
 - [[aqa-87001-qp-jun24]] — The question paper featuring the extract
 - [[aqa-87001-ins-jun24]] — The insert containing the extract
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: 
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to feel engaged.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: 
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to the reader to engage with the text.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: 
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to engage with the text.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader feel engaged.

@@ -30,3 +30,29 @@ Le guide comprend des pages de compétences (Skills pages) et des pages d'examen
 ## Pertinence pour le test WLV
 
 Ce guide couvre des éléments hors scope pour le test WLV English Equivalency, notamment le Paper 2, le Spoken Language Endorsement et la question 4 d'évaluation du Paper 1. Cependant, les sections sur le Paper 1 (questions 1, 2, 3 et 5) et le SPaG sont directement pertinentes. Les méthodes d'analyse présentées (structure « quoi, comment, pourquoi », analyse des connotations, inférence, langage figuratif, formes de phrases, analyse structurelle) sont applicables au format WLV.
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: connotation, connotation
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to feel engaged.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: connotation, connotation
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to the reader to engage with the text.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: connotation, connotation
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to engage with the text.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader feel engaged.

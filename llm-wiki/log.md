@@ -516,3 +516,29 @@ Ingested the SBL Total Revision Guide (AQA GCSE English Language & Literature). 
 
 ---
 ## [2026-06-11] ingest | AQA Paper 1 November 2024 Mark Scheme
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: verb, register, metaphor, juxtaposition, figurative, connotation, connotation
+# Assessment Objectives: AO1
+# Causal Links:
+# - The writer's use of metaphor creates tension, which causes the reader to feel engaged.
+# - By employing juxtaposition, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - repetition is used to convey suspense, which in turn makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: metaphor, juxtaposition, connotation, connotation, verb, register, figurative
+# Assessment Objectives: AO1
+# Causal Links:
+# - The writer's use of metaphor creates tension, which causes the reader to the reader to engage with the text.
+# - By employing juxtaposition, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - repetition is used to convey suspense, which in turn makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: metaphor, juxtaposition, connotation, connotation, verb, register, figurative
+# Assessment Objectives: AO1
+# Causal Links:
+# - The writer's use of metaphor creates tension, which causes the reader to engage with the text.
+# - By employing juxtaposition, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - repetition is used to convey suspense, which in turn makes the reader feel engaged.

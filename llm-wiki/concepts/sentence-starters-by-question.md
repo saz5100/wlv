@@ -76,3 +76,27 @@ Keep it simple. Just list the facts:
 | Contrasting | However, On the other hand, In contrast, Yet |
 | Concluding | Overall, In conclusion, Ultimately, Therefore |
 | Emphasising | Significantly, Notably, Crucially, Importantly |
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, connotation, connotation
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to feel engaged.
+# - By employing simile, the writer establishes atmosphere, leading the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, connotation, connotation
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to the reader to engage with the text.
+# - By employing simile, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, connotation, connotation
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.
+# - By employing simile, the writer establishes atmosphere, leading the reader to sympathise with the character.

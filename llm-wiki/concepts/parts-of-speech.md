@@ -21,3 +21,30 @@ Parts of speech are classifications of words based on their function within a se
 - **Conjunctions**: Words that link words, phrases, or clauses.
 - **Interjections**: Words expressing strong emotion (e.g., Wow!, Ouch!).
 - **Determiners**: Words that introduce nouns (see [[determiners-and-articles]]).
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: noun, verb, pronoun, determiner, adverb, adjective, preposition, conjunction, article
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to feel engaged.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: noun, verb, pronoun, determiner, adverb, adjective, preposition, conjunction, article
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to the reader to engage with the text.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: noun, verb, pronoun, determiner, adverb, adjective, preposition, conjunction, article
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to engage with the text.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader feel engaged.

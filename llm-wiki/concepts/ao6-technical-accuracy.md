@@ -22,3 +22,30 @@ To achieve the top band (13–16 marks), a student must demonstrate:
 - **Comma Splicing**: Joining two independent clauses with only a comma.
 - **Limited Punctuation**: Relying solely on full stops and commas.
 - **Basic Vocabulary**: Overuse of generic adjectives (e.g., "big", "bad", "nice").
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: adjective
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to feel engaged.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: adjective
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to the reader to engage with the text.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: adjective
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to engage with the text.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader feel engaged.

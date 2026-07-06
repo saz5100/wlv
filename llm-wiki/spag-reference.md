@@ -83,3 +83,24 @@ Cette page rassemble les règles essentielles de ponctuation et de grammaire iss
 - **Phrases simples** : Une seule proposition indépendante. Exemple : *Henry and Eve waited for another ten minutes.*
 - **Phrases composées** : Deux propositions indépendantes reliées par une conjonction de coordination. Exemple : *Joel did not arrive, so they left without him.*
 - **Phrases complexes** : Une proposition principale et au moins une proposition subordonnée. Exemple : *After they had waited for another ten minutes, they left without him.*
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: apostrophe, your/you're, possession, homophone, dash, contraction, affect/effect
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of apostrophe ensures tension, which helps the reader to feel engaged.
+# - Errors in dash cause atmosphere, leading the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: apostrophe, dash, your/you're, possession, homophone, contraction, affect/effect
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of dash ensures tension, which helps the reader to the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: apostrophe, dash, your/you're, possession, homophone, contraction, affect/effect
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of dash ensures tension, which helps the reader to engage with the text.

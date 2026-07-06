@@ -1281,3 +1281,30 @@ The WLV test is **handwritten on campus**. This introduces challenges that don't
 *WLV English Equivalency — Complete Study Guide*
 *Covers Paper 1 only (Q1–Q5) · AQA 8700-aligned · Single source extract*
 *SPaG weighting: 52% of writing marks*
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: verb, noun, simile, metaphor, imagery, sensory language, conjunction, adverb, adjective, personification, tone, semantic field, preposition, connotation, connotation
+# Assessment Objectives: AO1
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to feel engaged.
+# - By employing metaphor, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - personification is used to convey suspense, which in turn makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: verb, noun, simile, metaphor, imagery, sensory language, personification, conjunction, adverb, adjective, connotation, connotation, tone, semantic field, preposition
+# Assessment Objectives: AO1
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to the reader to engage with the text.
+# - By employing metaphor, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - personification is used to convey suspense, which in turn makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: verb, noun, simile, metaphor, personification, imagery, sensory language, connotation, connotation, conjunction, adverb, adjective, tone, semantic field, preposition
+# Assessment Objectives: AO1
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.
+# - By employing metaphor, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - personification is used to convey suspense, which in turn makes the reader feel engaged.

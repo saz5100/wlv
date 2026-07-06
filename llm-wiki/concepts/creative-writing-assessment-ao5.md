@@ -23,3 +23,28 @@ Assessment Objective 5 (AO5) focuses on the "Content and Organisation" of the wr
 
 ## WLV Application
 For the WLV assessment, students must produce a high-quality 400-word piece. The focus is on maintaining a consistent, sophisticated tone within this condensed limit.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: tone, link, voice, register, ambitious vocabulary
+# Assessment Objectives: AO5, AO6
+# Causal Links:
+# - The writer's choice of ambitious vocabulary achieves tension, which causes the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: tone, link, ambitious vocabulary, voice, register
+# Assessment Objectives: AO5, AO6
+# Causal Links:
+# - The writer's choice of ambitious vocabulary achieves tension, which causes the reader to the reader to engage with the text.
+# - By using structural features, the writer creates tension, leading the reader to the reader to feel engaged.
+# - discourse markers is employed to produce tension, which makes the reader the reader to share the character's emotions.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: link, tone, ambitious vocabulary, voice, register, character
+# Assessment Objectives: AO5, AO6
+# Causal Links:
+# - The writer's choice of ambitious vocabulary achieves tension, which causes the reader to engage with the text.
+# - By using structural features, the writer creates tension, leading the reader to feel engaged.
+# - discourse markers is employed to produce tension, which makes the reader share the character's emotions.

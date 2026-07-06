@@ -22,3 +22,24 @@ The guide posits that English is a fluid language and that "correctness" is ofte
 
 ## Application to WLV Assessment
 This source provides the technical foundation for the [[spag-reference]] and [[writing-guide]] pages, offering the specific rules required to achieve high marks in AO6 (Technical Accuracy).
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: metaphor
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of metaphor creates tension, which causes the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: metaphor
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of metaphor creates tension, which causes the reader to the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: metaphor
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of metaphor creates tension, which causes the reader to engage with the text.

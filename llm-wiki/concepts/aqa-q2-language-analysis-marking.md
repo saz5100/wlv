@@ -44,3 +44,26 @@ For the *Life of Pi* extract (lines 10-19), the mark scheme identifies the follo
 - [[language-analysis]] — The skill of analysing language
 - [[aqa-mark-scheme-structure]] — The four-level marking framework
 - [[aqa-gcse-exam-structure]] — AQA GCSE exam structure
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: language analysis, mark scheme, extract, Q2, AQA Paper 1, AO2
+# Assessment Objectives: AO1, AO2, AO5
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to feel engaged.
+# - By employing hyperbole, the writer establishes atmosphere, leading the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: language analysis, AO2, mark scheme, extract, Q2, AQA Paper 1, AO5, AO1
+# Assessment Objectives: AO1, AO2, AO5
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to the reader to engage with the text.
+# - By employing hyperbole, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: AO2, language analysis, mark scheme, extract, Q2, AQA Paper 1, AO5, AO1
+# Assessment Objectives: AO1, AO2, AO5
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.
+# - By employing hyperbole, the writer establishes atmosphere, leading the reader to sympathise with the character.

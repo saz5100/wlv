@@ -22,3 +22,28 @@ Présentation détaillée du langage figuratif dans le guide BBC Bitesize pour l
 ## Exemple travaillé
 
 L'extrait Source A (scène de rue dangereuse) montre comment analyser une simile (« vice-like »), une personnification (« fat lip ») et une métaphore (« bleached bone-white ») pour créer une atmosphère de danger.
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, pathetic fallacy
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to feel engaged.
+# - By employing simile, the writer establishes atmosphere, leading the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, pathetic fallacy
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to the reader to engage with the text.
+# - By employing pathetic fallacy, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - simile is used to convey tension, which in turn makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, pathetic fallacy
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.
+# - By employing pathetic fallacy, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - simile is used to convey tension, which in turn makes the reader feel engaged.

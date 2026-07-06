@@ -241,3 +241,30 @@ A comprehensive reference of structural techniques tested in AQA Paper 1 Q3. Str
 5. **Use structural vocabulary** — "at the beginning", "the focus then shifts", "the pace quickens when", "the cyclical return to..."
 
 > **Model paragraph:** "At the start of the extract, the writer establishes a calm, reflective mood through long, flowing sentences and a wide establishing shot of the landscape. **The focus then shifts** dramatically when the narrator spots the figure in the water. The paragraphs become shorter, the sentences more fragmented, and the pace accelerates. This structural shift **creates a jolt for the reader**, mirroring the character's sudden transition from peace to panic."
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: tension, shift, paragraph, focus, pace, climax, zoom, perspective, pan, limited, flashback, establishing shot, cyclical, chronological, time shift
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The structural shift from flashback creates tension, which causes the reader to feel engaged.
+# - By using time shift, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - The in medias res at this point in the text creates suspense, which makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: shift, tension, paragraph, focus, pace, climax, zoom, perspective, pan, flashback, time shift, limited, establishing shot, cyclical, chronological
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The structural shift from flashback creates tension, which causes the reader to the reader to engage with the text.
+# - By using time shift, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - The in medias res at this point in the text creates suspense, which makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: shift, tension, paragraph, focus, pace, climax, zoom, flashback, time shift, perspective, pan, limited, establishing shot, cyclical, chronological
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The structural shift from flashback creates tension, which causes the reader to engage with the text.
+# - By using time shift, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - The in medias res at this point in the text creates suspense, which makes the reader feel engaged.

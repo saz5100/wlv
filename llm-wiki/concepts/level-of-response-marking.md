@@ -22,3 +22,24 @@ The "Level of Response" system is a tiered marking framework used by AQA to cate
 
 ## Application in Analysis
 To move from Level 3 (Clear) to Level 4 (Perceptive), a student must move beyond identifying *what* a technique is (e.g., "this is a simile") to explaining *why* it was used and *how* it specifically manipulates the reader's perception or reveals a character's internal state.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: level of response
+# Assessment Objectives: AO1, AO2, AO5
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: level of response, AO5, AO2, AO1
+# Assessment Objectives: AO1, AO2, AO5
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: level of response, AO5, AO2, AO1
+# Assessment Objectives: AO1, AO2, AO5
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.

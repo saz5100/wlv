@@ -20,3 +20,30 @@ To **infer** is the act of deducing or concluding something from evidence or sug
 - *Example*: "From the teacher's tone, the students inferred that they were not working hard enough."
 
 In the context of AQA/WLV reading questions, students are asked to **infer** meaning from the writer's **implied** suggestions.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: tone
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to feel engaged.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: tone
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to the reader to engage with the text.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: tone
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to engage with the text.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader feel engaged.

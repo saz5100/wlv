@@ -287,3 +287,26 @@ These exam-style questions are suitable for:
 ## Relevance for the WLV English Equivalency Test
 
 This guide is directly relevant to the SPaG section of the WLV (University of Wolverhampton) English Equivalency test. The punctuation, spelling, and grammar rules covered here are essential for the writing question (Q5) and for overall clarity of expression. Exercises on homophones, irregular plurals, and sentence types are particularly useful for this test.
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: verb, imagery, tone, pronoun, noun, conjunction
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of imagery creates tension, which causes the reader to feel engaged.
+# - By employing rhetorical question, the writer establishes atmosphere, leading the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: imagery, verb, noun, tone, pronoun, conjunction
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of imagery creates tension, which causes the reader to the reader to engage with the text.
+# - By employing rhetorical question, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: imagery, noun, verb, tone, pronoun, conjunction
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of imagery creates tension, which causes the reader to engage with the text.
+# - By employing rhetorical question, the writer establishes atmosphere, leading the reader to sympathise with the character.

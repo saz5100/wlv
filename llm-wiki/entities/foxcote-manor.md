@@ -32,3 +32,26 @@ Foxcote Manor serves as a stark contrast to the "sugar-white walls" of the ideal
 - [[expectation-vs-reality-as-structural-device]] — Foxcote Manor is the personification of the reality that contrasts with Rita's idealization.
 - [[heat-as-obsession]] — The oppressive environment of the forest and the house contributes to Rita's panic.
 - [[camera-metaphor]] — The visual description of the house functions as a cinematic zoom.
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: personification, metaphor
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of metaphor creates tension, which causes the reader to feel engaged.
+# - By employing personification, the writer establishes atmosphere, leading the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: personification, metaphor
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of metaphor creates tension, which causes the reader to the reader to engage with the text.
+# - By employing personification, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: personification, metaphor
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of metaphor creates tension, which causes the reader to engage with the text.
+# - By employing personification, the writer establishes atmosphere, leading the reader to sympathise with the character.

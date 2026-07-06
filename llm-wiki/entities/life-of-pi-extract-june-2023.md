@@ -39,3 +39,26 @@ This extract is excellent practice for **Q1 (explicit retrieval)**, **Q2 (langua
 - [[yann-martel]] — Author
 - [[hyena-description-language-analysis]] — Model Q2 answer
 - humour-vs-threat-evaluation — Q4 evaluation example
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: tone, simile, declarative, adjective
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to feel engaged.
+# - By employing listing, the writer establishes atmosphere, leading the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, tone, declarative, adjective
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to the reader to engage with the text.
+# - By employing listing, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, tone, declarative, adjective
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.
+# - By employing listing, the writer establishes atmosphere, leading the reader to sympathise with the character.

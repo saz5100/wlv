@@ -23,3 +23,29 @@ In the AQA and WLV marking frameworks, the security of sentence demarcation ofte
 - **Comma Splicing**: Joining two independent clauses with only a comma.
 - **Run-on Sentences**: Failing to use any punctuation between independent clauses.
 - **Fragmented Sentences**: Leaving a clause without a subject or verb, creating an incomplete thought (unless used intentionally for stylistic effect).
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: verb
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to feel engaged.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: verb
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to the reader to engage with the text.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: verb
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to engage with the text.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader feel engaged.

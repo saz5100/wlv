@@ -56,3 +56,29 @@ Rita’s expectation of Foxcote Manor is established through the flashback to th
 - foxcote-manor-setting-analysis
 - the-glass-house-source-context
 - structural-analysis
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: flashback, tension, pan, shift, paragraph, cyclical, climax
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The structural shift from flashback creates tension, which causes the reader to feel engaged.
+# - By using paragraph break, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - The imagery at this point in the text creates suspense, which makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: flashback, tension, shift, paragraph, pan, cyclical, climax
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The structural shift from flashback creates tension, which causes the reader to the reader to engage with the text.
+# - By using paragraph break, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - The imagery at this point in the text creates suspense, which makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: flashback, tension, shift, paragraph, pan, cyclical, climax
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The structural shift from flashback creates tension, which causes the reader to engage with the text.
+# - By using paragraph break, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - The imagery at this point in the text creates suspense, which makes the reader feel engaged.

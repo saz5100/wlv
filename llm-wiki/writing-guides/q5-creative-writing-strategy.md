@@ -78,3 +78,30 @@ Question 5 is the **writing task** -- worth **40 marks** (50% of Paper 1 marks).
 * Powerful vocabulary -- precise nouns and vivid verbs
 * Punctuation range -- colons, semicolons, dashes
 * Sentence variety -- simple, compound, complex, fragments
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: opening, pace, variety, sensory detail, atmosphere, setting, plot, dialogue, description, character
+# Assessment Objectives: AO5, AO6
+# Causal Links:
+# - The writer's choice of sensory detail achieves tension, which causes the reader to feel engaged.
+# - By using dialogue, the writer creates atmosphere, leading the reader to sympathise with the character.
+# - description is employed to produce suspense, which makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: opening, sensory detail, pace, atmosphere, variety, setting, dialogue, description, character, plot, link
+# Assessment Objectives: AO5, AO6
+# Causal Links:
+# - The writer's choice of sensory detail achieves tension, which causes the reader to the reader to engage with the text.
+# - By using dialogue, the writer creates atmosphere, leading the reader to the reader to sympathise with the character.
+# - description is employed to produce suspense, which makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: sensory detail, opening, atmosphere, pace, dialogue, description, character, variety, setting, plot, link
+# Assessment Objectives: AO5, AO6
+# Causal Links:
+# - The writer's choice of sensory detail achieves tension, which causes the reader to engage with the text.
+# - By using dialogue, the writer creates atmosphere, leading the reader to sympathise with the character.
+# - description is employed to produce suspense, which makes the reader feel engaged.

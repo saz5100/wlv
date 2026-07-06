@@ -59,3 +59,27 @@ Four-level descriptors:
 - [[creative-writing-success-criteria]] — Success criteria for creative writing
 - [[writing-guide]] — Creative writing structure and devices
 - [[spag-reference]] — Punctuation and grammar rules
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: tone, style, register, link, form, ambitious vocabulary
+# Assessment Objectives: AO5, AO6
+# Causal Links:
+# - The writer's choice of ambitious vocabulary achieves tension, which causes the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: link, ambitious vocabulary, tone, style, register, form
+# Assessment Objectives: AO5, AO6
+# Causal Links:
+# - The writer's choice of ambitious vocabulary achieves tension, which causes the reader to the reader to engage with the text.
+# - By using structural features, the writer creates tension, leading the reader to the reader to feel engaged.
+# - discourse markers is employed to produce tension, which makes the reader the reader to question the narrator's reliability.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: link, ambitious vocabulary, tone, style, register, form
+# Assessment Objectives: AO5, AO6
+# Causal Links:
+# - The writer's choice of ambitious vocabulary achieves tension, which causes the reader to engage with the text.
+# - By using structural features, the writer creates tension, leading the reader to feel engaged.
+# - discourse markers is employed to produce tension, which makes the reader question the narrator's reliability.

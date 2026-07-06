@@ -25,3 +25,26 @@ The June 2024 mark scheme highlights:
 
 ## Success Criteria
 Top-tier responses analyse the *effect* of these shifts. For example, explaining how the absence of specific temporal markers suggests a character's descent into madness or disorientation.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: shift, focus, wide shot, temporal marker, perspective, flashback, exposition, close-up
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The structural shift from flashback creates tension, which causes the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: shift, focus, flashback, wide shot, temporal marker, perspective, exposition, close-up, tension
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The structural shift from flashback creates tension, which causes the reader to the reader to engage with the text.
+# - By using temporal marker, the writer establishes mood, leading the reader to the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: shift, flashback, temporal marker, focus, wide shot, tension, perspective, exposition, close-up
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The structural shift from flashback creates tension, which causes the reader to engage with the text.
+# - By using temporal marker, the writer establishes mood, leading the reader to feel engaged.

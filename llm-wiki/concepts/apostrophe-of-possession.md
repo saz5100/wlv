@@ -16,3 +16,24 @@ Apostrophes are used to indicate ownership or possession.
 - **Plural Nouns ending in 's'**: Add the apostrophe after the 's' (e.g., *"the pupils' uniform"* — multiple pupils).
 - **Plural Nouns NOT ending in 's'**: Add **'s** (e.g., *"the children's toys"*).
 - **Names ending in 's'**: Either **'s** or just the apostrophe is acceptable (e.g., *"James's book"* or *"James' book"*).
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: apostrophe, possession
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of apostrophe ensures tension, which helps the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: apostrophe, possession
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of apostrophe of possession ensures tension, which helps the reader to the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: apostrophe, possession
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of apostrophe of possession ensures tension, which helps the reader to engage with the text.

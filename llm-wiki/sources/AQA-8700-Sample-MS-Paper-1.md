@@ -329,3 +329,29 @@ The sample source text is from *Life of Pi* by Yann Martel (hyena extract). This
 - [[spag-reference]] — Punctuation and grammar rules
 - [[life-of-pi]] — Novel by Yann Martel
 - [[yann-martel]] — Author of *Life of Pi*
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: tone, register, adjective, imagery, verb, pronoun, noun, juxtaposition, hyperbole, simile, motif, declarative, connotation, connotation, adverb
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to feel engaged.
+# - By employing imagery, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - juxtaposition is used to convey suspense, which in turn makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: tone, register, imagery, adjective, verb, noun, pronoun, juxtaposition, simile, hyperbole, connotation, connotation, motif, declarative, adverb
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to the reader to engage with the text.
+# - By employing imagery, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - juxtaposition is used to convey suspense, which in turn makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: tone, register, imagery, verb, noun, adjective, juxtaposition, simile, pronoun, connotation, connotation, hyperbole, motif, declarative, adverb
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.
+# - By employing imagery, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - juxtaposition is used to convey suspense, which in turn makes the reader feel engaged.

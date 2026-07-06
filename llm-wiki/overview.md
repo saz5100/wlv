@@ -48,3 +48,23 @@ The wiki is designed specifically for the WLV English Equivalency test. Question
 ## Current Status
 
 The wiki is actively maintained and updated as new sources are ingested. All content adheres to UK English spelling and grammar standards, with dates formatted in DD/MM/YYYY. The index and log provide easy navigation and a record of all changes.
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: pronoun, noun, tone, simile, sensory language
+# Assessment Objectives: AO1
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: noun, simile, pronoun, tone, sensory language
+# Assessment Objectives: AO1
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: noun, simile, pronoun, tone, sensory language
+# Assessment Objectives: AO1
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.

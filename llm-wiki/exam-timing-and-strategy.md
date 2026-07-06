@@ -76,3 +76,30 @@ When 5 minutes remain:
 * If on Q5 -- write your final sentence and proofread
 * If on earlier questions -- finish your current point and move to Q5 immediately
 * Never leave Q5 blank -- it's 40 marks (67% of the test)
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: Q5, Q3, Q2, Q1, retrieval, 8 marks, mark scheme, language analysis, extract, creative writing, 4 marks
+# Assessment Objectives: AO1, AO2, AO5
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to feel engaged.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: Q5, Q3, Q2, Q1, retrieval, 8 marks, mark scheme, language analysis, extract, creative writing, 4 marks, AO5, AO2, AO1
+# Assessment Objectives: AO1, AO2, AO5
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to the reader to engage with the text.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: Q5, Q3, Q2, Q1, retrieval, 8 marks, mark scheme, language analysis, extract, creative writing, AO5, AO2, AO1, 4 marks
+# Assessment Objectives: AO1, AO2, AO5
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to engage with the text.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader feel engaged.

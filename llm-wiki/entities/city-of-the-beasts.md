@@ -15,3 +15,24 @@ sources: ["AQA-8700-Paper-1-QP-City-of-Beasts.md"]
 - **Illness and Decay:** The physical and mental decline of the mother is contrasted with her former vibrancy.
 - **Familial Tension:** The breakdown of normal routines (e.g., the 'rubber-tyre tortillas' for breakfast) symbolises the family's inability to cope with their crisis.
 - **Psychological Oppression:** The use of weather (the storm) and metaphors (the 'bottom of the sea') to mirror the protagonist's internal depression.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: metaphor
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of metaphor creates tension, which causes the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: metaphor
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of metaphor creates tension, which causes the reader to the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: metaphor
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of metaphor creates tension, which causes the reader to engage with the text.

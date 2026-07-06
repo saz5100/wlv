@@ -103,3 +103,29 @@ All content adheres to UK English spelling and AQA 8700 mark scheme standards.
 3. **Copyright status:** Are model answers from commercial sites (Save My Exams, MME Revise) usable without licensing issues?
 4. **WLV-specific gaps:** Does the wiki now have sufficient coverage for all WLV testable skills?
 5. **Resource currency:** Some URLs reference 2020/2021 papers — are these still aligned with current AQA specifications?
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: article
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to feel engaged.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: article
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to the reader to engage with the text.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: article
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to engage with the text.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader feel engaged.

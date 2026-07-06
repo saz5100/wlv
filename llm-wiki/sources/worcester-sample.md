@@ -47,3 +47,23 @@ Three options are offered:
 ## Connections to Existing Wiki
 
 This paper shares the multiple-choice retrieval format (Q1) with the AQA Q1 format documented in AO1-retrieval-marking. The inference skill tested in Q2 connects to inference. The single-source extraction model aligns with [[single-source-extraction]]. However, the paper's lack of structural and language analysis questions represents a significant departure from the AQA and WLV frameworks documented elsewhere in the wiki.
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, tone, figurative
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, tone, figurative
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, tone, figurative
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.

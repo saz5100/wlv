@@ -167,3 +167,26 @@ Before writing your Q2 paragraph, ask yourself:
 - [ ] Have I connected this word to the **wider theme or feeling** of the extract?
 
 If you can answer YES to all six, you're writing at Level 3-4.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: Q2, extract, AQA Paper 1
+# Assessment Objectives: AO1, AO2, AO5
+# Causal Links:
+# - The writer's use of metaphor creates tension, which causes the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: Q2, extract, AQA Paper 1, AO5, AO2, AO1
+# Assessment Objectives: AO1, AO2, AO5
+# Causal Links:
+# - The writer's use of metaphor creates tension, which causes the reader to the reader to engage with the text.
+# - By employing semantic field, the writer establishes suspense, leading the reader to the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: Q2, extract, AQA Paper 1, AO5, AO2, AO1
+# Assessment Objectives: AO1, AO2, AO5
+# Causal Links:
+# - The writer's use of metaphor creates tension, which causes the reader to engage with the text.
+# - By employing semantic field, the writer establishes suspense, leading the reader to feel engaged.

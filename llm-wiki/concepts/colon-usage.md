@@ -22,3 +22,24 @@ A colon (:) acts as a "gateway," signaling that the information following it exp
 A colon **cannot** be used if the preceding clause is not independent.
 - **Incorrect**: *"I will: try my best."* (The part before the colon is not a complete sentence).
 - **Correct**: *"I have a goal: I will try my best."*
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: colon
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of colon ensures tension, which helps the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: colon
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of colon ensures tension, which helps the reader to the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: colon
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of colon ensures tension, which helps the reader to engage with the text.

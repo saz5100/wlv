@@ -45,3 +45,26 @@ For the *Life of Pi* extract, the mark scheme identifies the following structura
 - [[structural-analysis]] — The skill of analysing structure
 - [[aqa-mark-scheme-structure]] — The four-level marking framework
 - [[aqa-gcse-exam-structure]] — AQA GCSE exam structure
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: climax, tension, shift, rising action, perspective, limited, foreshadowing, focus, first person, exposition
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The structural shift from foreshadowing creates tension, which causes the reader to feel engaged.
+# - By using juxtaposition, the writer establishes atmosphere, leading the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: tension, shift, foreshadowing, climax, rising action, perspective, limited, focus, first person, exposition
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The structural shift from foreshadowing creates tension, which causes the reader to the reader to engage with the text.
+# - By using juxtaposition, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: tension, shift, foreshadowing, climax, rising action, perspective, limited, focus, first person, exposition
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The structural shift from foreshadowing creates tension, which causes the reader to engage with the text.
+# - By using juxtaposition, the writer establishes atmosphere, leading the reader to sympathise with the character.

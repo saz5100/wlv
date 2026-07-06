@@ -43,3 +43,29 @@ This model answer demonstrates the level of detail and technique identification 
 - [[star-analysis-framework]] — Framework for structuring analysis
 - [[figurative-language-devices]] — Similes, metaphors, personification
 - [[sentence-structure-types]] — Simple, compound, complex sentences
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, juxtaposition, declarative, adjective, personification, metaphor, figurative
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to feel engaged.
+# - By employing metaphor, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - personification is used to convey suspense, which in turn makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, personification, metaphor, juxtaposition, declarative, adjective, figurative
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to the reader to engage with the text.
+# - By employing metaphor, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - personification is used to convey suspense, which in turn makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, personification, metaphor, juxtaposition, declarative, adjective, figurative
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.
+# - By employing metaphor, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - personification is used to convey suspense, which in turn makes the reader feel engaged.

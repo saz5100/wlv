@@ -28,3 +28,28 @@ In the June 2024 extract, the heat is described as 'intolerable' and 'an obsessi
 - [[pathetic-fallacy]] — A related but distinct device where the environment reflects human emotion.
 - [[personification]] — Often used to give the environment agency and intent.
 - [[the-grass-is-singing]] — The novel in which this device is central.
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: personification, pathetic fallacy
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of personification creates tension, which causes the reader to feel engaged.
+# - By employing personification, the writer establishes atmosphere, leading the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: personification, pathetic fallacy
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of personification creates tension, which causes the reader to the reader to engage with the text.
+# - By employing pathetic fallacy, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - personification is used to convey tension, which in turn makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: personification, pathetic fallacy
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of personification creates tension, which causes the reader to engage with the text.
+# - By employing pathetic fallacy, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - personification is used to convey tension, which in turn makes the reader feel engaged.

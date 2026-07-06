@@ -27,3 +27,29 @@ The Level 4 indicative standard for Q4 argues that the hyena's behaviour is 'def
 - [[aqa-q2-language-analysis-marking]] — Q2 marking descriptors
 - [[aqa-q3-structural-analysis-marking]] — Q3 marking descriptors
 - aqa-q4-evaluation-marking — Q4 marking descriptors
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: indicative standard, mark scheme, Q3, Q2
+# Assessment Objectives: AO1, AO2, AO5
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to feel engaged.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: indicative standard, mark scheme, Q3, Q2, AO5, AO2, AO1
+# Assessment Objectives: AO1, AO2, AO5
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to the reader to engage with the text.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: indicative standard, mark scheme, Q3, Q2, AO5, AO2, AO1
+# Assessment Objectives: AO1, AO2, AO5
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to engage with the text.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader feel engaged.

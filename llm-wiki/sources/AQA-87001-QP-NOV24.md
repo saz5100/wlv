@@ -208,3 +208,29 @@ The following table highlights the critical differences between the AQA Paper 1 
 - For Question 5, practise responding to a single prompt (choose one of the two options or use a custom WLV prompt) to prepare for the no-choice format.
 - Consult [[wlv-vs-aqa-differences]] for a detailed comparison.
 - The source text (*The Glass House*) and the insert are available separately – see [[AQA-87001-INS-NOV24]].
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: diction
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to feel engaged.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: diction
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to the reader to engage with the text.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: diction
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to engage with the text.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader feel engaged.

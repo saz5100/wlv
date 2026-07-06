@@ -65,3 +65,29 @@ Die folgenden Abschnitte des Leitfadens liegen vollständig ausserhalb des WLV-B
 - Der Leitfaden enthält Q4 (Bewertung, 20 Punkte), die explizit ausserhalb des WLV-Bereichs liegt.
 - Der STAR-Analyse-Rahmen wird im Leitfaden mehrfach referenziert, aber nicht definiert.
 - Die Tabelle der poetischen Mittel (21 Techniken) aus dem Unseen Poetry-Abschnitt könnte für die Sprachanalyse (Q2) in Language Paper 1 nützlich sein, ist aber im Literature-Kontext eingebettet.
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: verb
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to feel engaged.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: verb
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to the reader to engage with the text.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: verb
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to engage with the text.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader feel engaged.

@@ -32,3 +32,30 @@ This guide provides a breakdown of the "What, How, and Why" for the June 2023 ex
 - **"Maniacal beast"**: Suggests madness and lack of control.
 - **"Blank and frank"**: Describes the hyena's gaze, suggesting a lack of empathy or reason.
 - **"Furthest confines of animal anguish"**: High-level vocabulary describing the hyena's state after vomiting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: onomatopoeia, metaphor, imagery
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of metaphor creates tension, which causes the reader to feel engaged.
+# - By employing onomatopoeia, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - imagery is used to convey suspense, which in turn makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: onomatopoeia, metaphor, imagery
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of metaphor creates tension, which causes the reader to the reader to engage with the text.
+# - By employing onomatopoeia, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - imagery is used to convey suspense, which in turn makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: onomatopoeia, metaphor, imagery
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of metaphor creates tension, which causes the reader to engage with the text.
+# - By employing onomatopoeia, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - imagery is used to convey suspense, which in turn makes the reader feel engaged.

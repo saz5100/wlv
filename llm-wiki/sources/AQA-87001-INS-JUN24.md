@@ -76,3 +76,26 @@ Copyright © 2024 AQA and its licensors. All rights reserved.
 ## Related Wiki Pages
 
 [[the-grass-is-singning]], [[doris-lessing]], [[mary-turner]], [[dick-turner]], [[heat-as-obsession]], [[third-person-limited-narration]], [[AQA-87001-QP-JUN24]], [[AQA-87001-MS-JUN24]]
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: tone, sensory language, personification, imagery
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of personification creates tension, which causes the reader to feel engaged.
+# - By employing imagery, the writer establishes atmosphere, leading the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: personification, imagery, tone, sensory language
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of personification creates tension, which causes the reader to the reader to engage with the text.
+# - By employing imagery, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: personification, imagery, tone, sensory language
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of personification creates tension, which causes the reader to engage with the text.
+# - By employing imagery, the writer establishes atmosphere, leading the reader to sympathise with the character.

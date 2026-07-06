@@ -34,3 +34,23 @@ The AQA 8700/1 Sample Mark Scheme (June 2026) introduces a task focus cap for Q5
 - [[aqa-gcse-exam-structure]] — AQA GCSE exam structure
 - [[creative-writing-success-criteria]] — Success criteria for creative writing
 - [[wlv-vs-aqa-differences]] — Comparison of WLV and AQA assessment components
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: pace, ending, description
+# Assessment Objectives: AO5, AO6
+# Causal Links:
+# - The writer's choice of description achieves tension, which causes the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: description, pace, ending, link
+# Assessment Objectives: AO5, AO6
+# Causal Links:
+# - The writer's choice of description achieves tension, which causes the reader to the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: description, pace, link, ending
+# Assessment Objectives: AO5, AO6
+# Causal Links:
+# - The writer's choice of description achieves tension, which causes the reader to engage with the text.

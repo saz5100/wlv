@@ -40,3 +40,26 @@ All Save My Exams resources are designed for the full AQA Paper 1 (1 hour 45 min
 ## Quality Note
 
 Save My Exams resources are professionally produced and generally aligned with AQA mark schemes. However, users should verify alignment with the most current AQA specification and cross-reference with official mark schemes available in this wiki (e.g., aqa-june-2023-paper-1-mark-scheme).
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: imagery, juxtaposition
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of imagery creates tension, which causes the reader to feel engaged.
+# - By employing juxtaposition, the writer establishes atmosphere, leading the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: imagery, juxtaposition
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of imagery creates tension, which causes the reader to the reader to engage with the text.
+# - By employing juxtaposition, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: imagery, juxtaposition
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of imagery creates tension, which causes the reader to engage with the text.
+# - By employing juxtaposition, the writer establishes atmosphere, leading the reader to sympathise with the character.

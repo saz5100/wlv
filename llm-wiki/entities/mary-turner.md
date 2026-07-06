@@ -32,3 +32,23 @@ Mary's character embodies themes of environmental oppression, psychological brea
 - [[dick-turner]] — Her husband
 - [[aqa-87001-qp-jun24]] — The question paper featuring the extract
 - [[aqa-87001-ins-jun24]] — The insert containing the extract
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: metaphor, literal
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of metaphor creates tension, which causes the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: metaphor, literal
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of metaphor creates tension, which causes the reader to the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: metaphor, literal
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of metaphor creates tension, which causes the reader to engage with the text.

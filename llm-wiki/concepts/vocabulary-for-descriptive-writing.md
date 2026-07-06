@@ -86,3 +86,24 @@ A well-chosen word can transform a simple description into a powerful one. Use t
 * **Context is everything** — "blazing sun" works in a desert; "frosty" works in winter
 * **Combine the senses** — describe what you see, hear, smell, and feel
 * **Precise is better than fancy** — "crumbling" is better than "broken and falling apart"
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: setting, description, purpose, form, atmosphere
+# Assessment Objectives: AO5, AO6
+# Causal Links:
+# - The writer's choice of description achieves tension, which causes the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: description, setting, purpose, form, atmosphere, link
+# Assessment Objectives: AO5, AO6
+# Causal Links:
+# - The writer's choice of description achieves tension, which causes the reader to the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: description, setting, purpose, link, form, atmosphere
+# Assessment Objectives: AO5, AO6
+# Causal Links:
+# - The writer's choice of description achieves tension, which causes the reader to engage with the text.

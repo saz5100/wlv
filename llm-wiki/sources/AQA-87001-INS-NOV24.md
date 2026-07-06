@@ -43,3 +43,23 @@ Este excerto é um excelente recurso para praticar:
 - [[non-linear-structure]] — O flashback.
 - [[camera-metaphor]] — A descrição visual de Foxcote Manor.
 - [[figurative-language-devices]] — Metáforas e personificação.
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: metaphor, figurative
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of metaphor creates tension, which causes the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: metaphor, figurative
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of metaphor creates tension, which causes the reader to the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: metaphor, figurative
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of metaphor creates tension, which causes the reader to engage with the text.

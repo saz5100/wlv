@@ -26,3 +26,26 @@ Présentation des techniques d'ouverture et de fin dans le guide BBC Bitesize po
 - Résumé ou conclusion
 
 Les structures cycliques attirent l'attention sur un thème ou un comportement.
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: in medias res
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The structural shift from in medias res creates tension, which causes the reader to feel engaged.
+# - By using cliffhanger, the writer establishes atmosphere, leading the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: in medias res, tension, shift
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The structural shift from in medias res creates tension, which causes the reader to the reader to engage with the text.
+# - By using cliffhanger, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: in medias res, tension, shift
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The structural shift from in medias res creates tension, which causes the reader to engage with the text.
+# - By using cliffhanger, the writer establishes atmosphere, leading the reader to sympathise with the character.

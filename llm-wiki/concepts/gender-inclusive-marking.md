@@ -29,3 +29,29 @@ The AQA 8700/1 Sample Mark Scheme (June 2026) formalises a gender-inclusive mark
 - [[aqa-gcse-exam-structure]] — AQA GCSE exam structure
 - [[marking-procedure]] — AQA marking procedure
 - [[wlv-vs-aqa-differences]] — Comparison of WLV and AQA assessment components
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: mark scheme
+# Assessment Objectives: AO1, AO2, AO5
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to feel engaged.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: mark scheme, AO5, AO2, AO1
+# Assessment Objectives: AO1, AO2, AO5
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to the reader to engage with the text.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: mark scheme, AO5, AO2, AO1
+# Assessment Objectives: AO1, AO2, AO5
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to engage with the text.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader feel engaged.

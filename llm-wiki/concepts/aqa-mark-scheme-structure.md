@@ -44,3 +44,29 @@ The levels are defined by progression keywords that describe increasing sophisti
 - [[aqa-q3-structural-analysis-marking]] — Q3 marking descriptors
 - aqa-q4-evaluation-marking — Q4 marking descriptors
 - [[aqa-q5-writing-marking]] — Q5 marking descriptors
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: limited
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The structural shift from language features creates tension, which causes the reader to feel engaged.
+# - By using structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - The writing techniques at this point in the text creates suspense, which makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: limited, tension, shift
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The structural shift from language features creates tension, which causes the reader to the reader to engage with the text.
+# - By using structural choices, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - The writing techniques at this point in the text creates suspense, which makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: limited, tension, shift
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The structural shift from language features creates tension, which causes the reader to engage with the text.
+# - By using structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - The writing techniques at this point in the text creates suspense, which makes the reader feel engaged.

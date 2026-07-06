@@ -24,3 +24,30 @@ In the June 2024 paper, the focus was on the oppressive nature of heat. High-lev
 
 ## Success Criteria
 A "Perceptive" (Level 4) answer does not simply list these devices but explains how they create a sense of psychological entrapment or physical exhaustion for the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, personification, metaphor, imagery, diction, connotation, connotation, adjective
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to feel engaged.
+# - By employing metaphor, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - personification is used to convey suspense, which in turn makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, personification, metaphor, connotation, connotation, imagery, diction, adjective
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to the reader to engage with the text.
+# - By employing metaphor, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - personification is used to convey suspense, which in turn makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, personification, metaphor, connotation, connotation, imagery, diction, adjective
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.
+# - By employing metaphor, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - personification is used to convey suspense, which in turn makes the reader feel engaged.

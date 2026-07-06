@@ -43,3 +43,29 @@ The mark scheme includes a self-check question: 'Does the response identify expl
 - [[explicit-retrieval]] — The skill of identifying explicit information
 - [[aqa-mark-scheme-structure]] — The four-level marking framework
 - [[aqa-gcse-exam-structure]] — AQA GCSE exam structure
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: retrieval, mark scheme, extract, Q1, AQA Paper 1, 4 marks
+# Assessment Objectives: AO1, AO2, AO5
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to feel engaged.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: retrieval, mark scheme, extract, Q1, AQA Paper 1, 4 marks, AO5, AO2, AO1
+# Assessment Objectives: AO1, AO2, AO5
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to the reader to engage with the text.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: retrieval, mark scheme, extract, Q1, AQA Paper 1, AO5, AO2, AO1, 4 marks
+# Assessment Objectives: AO1, AO2, AO5
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to engage with the text.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader feel engaged.

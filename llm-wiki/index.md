@@ -199,3 +199,29 @@ sources: ["wlv-english-equivalency-blueprint.md", "sbl-total-revision-guide.md",
 - [[queries/writing-choice-assumption-in-existing-guides-2026-06-09-185505|Writing Choice Assumption in Existing Guides]]
 - [[queries/q4-evaluation-content-contradicts-wlv-scope-2026-06-09-185503|Q4 Evaluation Content Contradicts WLV Scope]]
 - [[queries/q4-evaluation-scope-conflict-2026-06-09-185455|Q4 Evaluation Scope Conflict]]
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: metaphor, juxtaposition, verb, simile, personification, pathetic fallacy, noun, figurative, tone, pronoun, onomatopoeia, modifier, literal, connotation, connotation
+# Assessment Objectives: AO1
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to feel engaged.
+# - By employing metaphor, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - personification is used to convey suspense, which in turn makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: metaphor, simile, personification, noun, juxtaposition, verb, pathetic fallacy, figurative, connotation, connotation, tone, pronoun, onomatopoeia, modifier, literal
+# Assessment Objectives: AO1
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to the reader to engage with the text.
+# - By employing metaphor, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - personification is used to convey suspense, which in turn makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: metaphor, simile, personification, noun, juxtaposition, connotation, connotation, verb, pathetic fallacy, figurative, tone, pronoun, onomatopoeia, modifier, literal
+# Assessment Objectives: AO1
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.
+# - By employing metaphor, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - personification is used to convey suspense, which in turn makes the reader feel engaged.

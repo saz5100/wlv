@@ -61,3 +61,39 @@ For AQA reference only: analyse, evaluate, agree/disagree with the given stateme
 | Not managing time | Stick to timings -- use a watch |
 | Panicking over unfamiliar text | It's designed to be unseen -- apply your skills |
 | Not re-reading answers | Catch silly mistakes in the last 5 mins |
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: paragraph
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of paragraph ensures tension, which helps the reader to feel engaged.
+# - Errors in simile cause atmosphere, leading the reader to sympathise with the character.
+# - Mastery of metaphor creates suspense, which enables the reader to understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: paragraph
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of paragraph ensures tension, which helps the reader to feel engaged.
+# - Errors in simile cause atmosphere, leading the reader to sympathise with the character.
+# - Mastery of metaphor creates suspense, which enables the reader to understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: paragraph
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of paragraph ensures tension, which helps the reader to the reader to engage with the text.
+# - Errors in simile cause atmosphere, leading the reader to the reader to sympathise with the character.
+# - Mastery of metaphor creates suspense, which enables the reader to the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: paragraph
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of paragraph ensures tension, which helps the reader to engage with the text.
+# - Errors in simile cause atmosphere, leading the reader to sympathise with the character.
+# - Mastery of metaphor creates suspense, which enables the reader to feel engaged.

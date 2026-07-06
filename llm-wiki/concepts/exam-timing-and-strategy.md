@@ -69,3 +69,29 @@ The WLV Equivalency test is 2 hours (15 minutes longer than AQA Paper 1) but rem
 - Not leaving time for proofreading
 - Spending excessive time planning Q5 (more than 10 minutes)
 - Reading the extract too quickly and missing key details
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: Q5, extract, Q3, Q2, Q1, retrieval, AQA Paper 1, language analysis, creative writing, time management
+# Assessment Objectives: AO1, AO2, AO5
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to feel engaged.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: Q5, extract, Q3, Q2, Q1, retrieval, AQA Paper 1, language analysis, creative writing, time management, AO5, AO2, AO1
+# Assessment Objectives: AO1, AO2, AO5
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to the reader to engage with the text.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: Q5, extract, Q3, Q2, Q1, retrieval, AQA Paper 1, language analysis, creative writing, time management, AO5, AO2, AO1
+# Assessment Objectives: AO1, AO2, AO5
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to engage with the text.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader feel engaged.

@@ -23,3 +23,27 @@ The quality of AO5 is judged on a four-level scale:
 - **Tone and Register**: The ability to adapt the voice of the piece to suit the purpose (e.g., a descriptive piece vs. a narrative story).
 - **Cohesion**: The use of structural features and discourse markers to link ideas and paragraphs.
 - **Vocabulary**: The use of precise and evocative language to create atmosphere or character.
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: tone, register, character, voice, style, purpose, link, atmosphere, ambitious vocabulary
+# Assessment Objectives: AO5, AO6
+# Causal Links:
+# - The writer's choice of ambitious vocabulary achieves tension, which causes the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: tone, register, link, character, ambitious vocabulary, voice, style, purpose, atmosphere
+# Assessment Objectives: AO5, AO6
+# Causal Links:
+# - The writer's choice of ambitious vocabulary achieves tension, which causes the reader to the reader to engage with the text.
+# - By using structural features, the writer creates atmosphere, leading the reader to the reader to feel engaged.
+# - discourse markers is employed to produce cohesion, which makes the reader the reader to question the narrator's reliability.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: tone, link, ambitious vocabulary, register, character, atmosphere, voice, style, purpose
+# Assessment Objectives: AO5, AO6
+# Causal Links:
+# - The writer's choice of ambitious vocabulary achieves tension, which causes the reader to engage with the text.
+# - By using structural features, the writer creates atmosphere, leading the reader to feel engaged.
+# - discourse markers is employed to produce cohesion, which makes the reader question the narrator's reliability.

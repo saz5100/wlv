@@ -18,3 +18,30 @@ For the reading questions (Q2 and Q3), paragraphs must follow a logical internal
    - Analysis of specific words or structural features.
    - Explanation of the effect on the reader.
 3. **Rounding-off Sentence**: A concluding sentence that links the point back to the overall question or transitions to the next paragraph.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: paragraph
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The structural shift from language features creates tension, which causes the reader to feel engaged.
+# - By using structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - The writing techniques at this point in the text creates suspense, which makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: paragraph, tension, shift
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The structural shift from language features creates tension, which causes the reader to the reader to engage with the text.
+# - By using structural choices, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+# - The writing techniques at this point in the text creates suspense, which makes the reader the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: paragraph, tension, shift
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The structural shift from language features creates tension, which causes the reader to engage with the text.
+# - By using structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - The writing techniques at this point in the text creates suspense, which makes the reader feel engaged.

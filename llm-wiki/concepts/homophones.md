@@ -60,3 +60,29 @@ Les homophones sont des mots qui se prononcent de la même manière mais ont des
 - **practice / practise**
     - **practice** (nom) : pratique, entraînement. Exemple : *If you don't go to the practice exams you'll be left out of the team.*
     - **practise** (verbe) : pratiquer, s'entraîner. Exemple : *If you want to improve you will have to practise every day.*
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: contraction, homophone, spelling
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of language features ensures tension, which helps the reader to feel engaged.
+# - Errors in structural choices cause atmosphere, leading the reader to sympathise with the character.
+# - Mastery of writing techniques creates suspense, which enables the reader to understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: contraction, homophone, spelling
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of language features ensures tension, which helps the reader to the reader to engage with the text.
+# - Errors in structural choices cause atmosphere, leading the reader to the reader to sympathise with the character.
+# - Mastery of writing techniques creates suspense, which enables the reader to the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: contraction, homophone, spelling
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of language features ensures tension, which helps the reader to engage with the text.
+# - Errors in structural choices cause atmosphere, leading the reader to sympathise with the character.
+# - Mastery of writing techniques creates suspense, which enables the reader to feel engaged.

@@ -51,3 +51,23 @@ This page compares the University of Worcester English Equivalency test with the
 - **WLV candidates** should focus on language analysis, structural analysis, and descriptive/narrative writing.
 - **AQA candidates** need to prepare for evaluation (Q4) and have writing choice.
 - Candidates taking the Worcester test should **not** spend revision time on structural analysis or language analysis frameworks, as these are not tested.
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: tone, simile
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: tone, simile
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: simile, tone
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.

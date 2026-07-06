@@ -29,3 +29,23 @@ The Worcester sample paper uses an extract from *Why Be Happy When You Could Be 
 - Uses vivid imagery and figurative language
 - Employs short, punchy sentences for impact
 - Often reflective and analytical about her own experiences
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: imagery, figurative
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of imagery creates tension, which causes the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: imagery, figurative
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of imagery creates tension, which causes the reader to the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: imagery, figurative
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of imagery creates tension, which causes the reader to engage with the text.

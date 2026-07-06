@@ -28,3 +28,25 @@ Chase é conhecida pelo seu uso de:
 ## Relevância para o Wiki
 
 O excerto de *The Glass House* é um recurso valioso para o estudo de [[expectation-vs-reality-as-structural-device]], [[heat-as-obsession]], e [[third-person-limited-narration]].
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: pathetic fallacy
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of language features creates tension, which causes the reader to feel engaged.
+# - By employing structural choices, the writer establishes atmosphere, leading the reader to sympathise with the character.
+# - writing techniques is used to convey suspense, which in turn makes the reader understand the setting.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: pathetic fallacy
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of pathetic fallacy creates tension, which causes the reader to the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: pathetic fallacy
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of pathetic fallacy creates tension, which causes the reader to engage with the text.

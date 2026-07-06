@@ -67,3 +67,26 @@ C. Heartbroken
 - Practise identifying tone in newspaper articles, blog posts, and literary extracts
 - Create flashcards with tone words and example sentences
 - Discuss tone with study partners to refine your ear
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: tone, simile, register, metaphor, figurative, declarative, colloquial, article
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to feel engaged.
+# - By employing metaphor, the writer establishes atmosphere, leading the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: tone, simile, metaphor, register, figurative, declarative, colloquial, article
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to the reader to engage with the text.
+# - By employing metaphor, the writer establishes atmosphere, leading the reader to the reader to sympathise with the character.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: tone, simile, metaphor, register, figurative, declarative, colloquial, article
+# Assessment Objectives: AO1, AO2
+# Causal Links:
+# - The writer's use of simile creates tension, which causes the reader to engage with the text.
+# - By employing metaphor, the writer establishes atmosphere, leading the reader to sympathise with the character.

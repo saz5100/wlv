@@ -37,3 +37,23 @@ Ponctuez correctement le passage suivant :
 *dont you think we should wait for him asked Eve*
 *not at all Henry replied he never waits for us*
 *well that's true Eve replied but he doesn't know the way*
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: paragraph
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of paragraph ensures tension, which helps the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: paragraph
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of paragraph ensures tension, which helps the reader to the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: paragraph
+# Assessment Objectives: AO1, AO6
+# Causal Links:
+# - Correct use of paragraph ensures tension, which helps the reader to engage with the text.

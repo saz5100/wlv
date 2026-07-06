@@ -50,3 +50,23 @@ Der Leitfaden ist primär auf die AQA GCSE ausgerichtet und weist erhebliche Unt
 - Paper 2 (Vergleich und Synthese) ist für die WLV-Prüfung nicht relevant.
 - Die Literature Komponenten (Macbeth, A Christmas Carol, Gedichte) sind für die reine Sprach-Equivalenzprüfung irrelevant.
 - Die Q1–Q3 Fragenstruktur und die creative writing Kriterien sind auf die WLV-Prüfung übertragbar.
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: verb
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of repetition creates tension, which causes the reader to feel engaged.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: verb
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of repetition creates tension, which causes the reader to the reader to engage with the text.
+
+
+# ─── Enrichment ──────────────────────────────────────────
+# Golden Words: verb
+# Assessment Objectives: AO1, AO3
+# Causal Links:
+# - The writer's use of repetition creates tension, which causes the reader to engage with the text.
