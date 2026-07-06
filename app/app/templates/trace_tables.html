@@ -1,9 +1,9 @@
 {% extends "base.html" %}
-{% block title %}Research Methods | WLV — University of Wolverhampton{% endblock %}
+{% block title %}Reading and Exam Strategy | WLV — University of Wolverhampton{% endblock %}
 {% block content %}
 <div class="hero" style="padding: 30px 0 15px;">
-    <h1>🔬 Research Methods</h1>
-    <p class="hero-sub">Qualitative and quantitative approaches, data collection, ethics, and dissertation planning — essential for your WLV research project</p>
+    <h1>📖 Reading and Exam Strategy</h1>
+    <p class="hero-sub">Master every question on the WLV English Equivalency paper — Q1 retrieval, Q2 language analysis, Q3 structural analysis, and Q5 creative writing — with proven strategies, timing plans, and mark scheme insights</p>
 </div>
 
 <style>
@@ -107,7 +107,51 @@
 .light-theme .rm-compare td { border-color: rgba(0, 0, 0, 0.04); }
 .rm-compare tr:last-child td { border-bottom: none; }
 
-/* ── Ethics Checklist ── */
+/* ── Strategy Box ── */
+.rm-strategy {
+    background: rgba(34, 211, 238, 0.06);
+    border-left: 4px solid var(--c-accent);
+    border-radius: 0 var(--r-md) var(--r-md) 0;
+    padding: 12px 16px;
+    margin: 10px 0;
+    font-size: 13px;
+}
+.rm-strategy strong { color: var(--c-accent); }
+
+/* ── Mark Scheme Box ── */
+.rm-markscheme {
+    background: rgba(251, 191, 36, 0.06);
+    border-left: 4px solid #fbbf24;
+    border-radius: 0 var(--r-md) var(--r-md) 0;
+    padding: 12px 16px;
+    margin: 10px 0;
+    font-size: 13px;
+}
+.rm-markscheme strong { color: #fbbf24; }
+
+/* ── WLV Difference Box ── */
+.rm-wlv {
+    background: rgba(239, 68, 68, 0.06);
+    border-left: 4px solid #ef4444;
+    border-radius: 0 var(--r-md) var(--r-md) 0;
+    padding: 12px 16px;
+    margin: 10px 0;
+    font-size: 13px;
+}
+.rm-wlv strong { color: #ef4444; }
+
+/* ── Timing Box ── */
+.rm-timing {
+    background: rgba(52, 211, 153, 0.06);
+    border-left: 4px solid #34d399;
+    border-radius: 0 var(--r-md) var(--r-md) 0;
+    padding: 12px 16px;
+    margin: 10px 0;
+    font-size: 13px;
+}
+.rm-timing strong { color: #34d399; }
+
+/* ── Checklist ── */
 .rm-checklist {
     list-style: none;
     padding: 0;
@@ -166,40 +210,28 @@
     color: var(--c-accent);
 }
 
-/* ── Phase Timeline ── */
-.rm-timeline {
-    position: relative;
-    padding-left: 24px;
+/* ── Example Box ── */
+.rm-example {
+    background: rgba(17, 24, 39, 0.5);
+    border: 1px solid rgba(34, 211, 238, 0.08);
+    border-radius: var(--r-md);
+    padding: 12px 16px;
     margin: 10px 0;
+    font-size: 13px;
+    font-style: italic;
 }
-.rm-timeline::before {
-    content: '';
-    position: absolute;
-    left: 6px;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: var(--c-accent);
-    opacity: 0.3;
+.light-theme .rm-example {
+    background: rgba(0, 0, 0, 0.03);
 }
-.rm-timeline-item {
-    position: relative;
-    padding: 6px 0 6px 10px;
-    margin-bottom: 6px;
+.rm-example strong { font-style: normal; color: var(--c-accent); }
+
+/* ── Sub-headings ── */
+.rm-sub {
+    color: var(--c-accent);
+    margin: 14px 0 6px;
+    font-size: 15px;
+    font-weight: 700;
 }
-.rm-timeline-item::before {
-    content: '';
-    position: absolute;
-    left: -20px;
-    top: 12px;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--c-accent);
-    opacity: 0.6;
-}
-.rm-timeline-item strong { display: block; font-size: 14px; }
-.rm-timeline-item span { font-size: 13px; color: var(--c-text-secondary); }
 
 @media (max-width: 768px) {
     .rm-sidebar { max-width: 100%; position: static; }
@@ -208,8 +240,8 @@
 
 <!-- ── Intro ── -->
 <div class="rm-intro">
-    <h3>🔬 Research Methods — WLV</h3>
-    <p>This guide covers the core research methods you will need for your WLV research project and dissertation. Whether you are conducting a small-scale study or a full undergraduate dissertation, understanding the distinction between qualitative and quantitative approaches, selecting appropriate data collection techniques, navigating research ethics, and planning your dissertation structure are all essential skills.</p>
+    <h3>📖 Reading and Exam Strategy — WLV English Equivalency</h3>
+    <p>The WLV English Equivalency assessment is based on <strong>AQA GCSE English Language Paper 1 (8700)</strong> with specific modifications for university-level applicants. You will have <strong>2 hours</strong> to complete the paper, working from a single source extract. This guide covers every question type, the mark schemes that underpin them, recommended timings, and the key differences between the standard GCSE paper and the WLV version.</p>
 </div>
 
 <div class="rm-layout">
@@ -217,344 +249,508 @@
     <div class="rm-sidebar">
         <h3 style="color:var(--c-heading);font-size:16px;margin-bottom:8px;">📑 Sections</h3>
         <div class="rm-nav-list">
-            <button class="rm-nav-btn active" onclick="rmScrollTo('qual-vs-quant')">1. Qualitative vs Quantitative</button>
-            <button class="rm-nav-btn" onclick="rmScrollTo('data-collection')">2. Data Collection</button>
-            <button class="rm-nav-btn" onclick="rmScrollTo('research-ethics')">3. Research Ethics</button>
-            <button class="rm-nav-btn" onclick="rmScrollTo('dissertation-planning')">4. Dissertation Planning</button>
-            <button class="rm-nav-btn" onclick="rmScrollTo('literature-reviews')">5. Literature Reviews</button>
+            <button class="rm-nav-btn active" onclick="rmScrollTo('q1-retrieval')">1. Q1 — Retrieval Strategies</button>
+            <button class="rm-nav-btn" onclick="rmScrollTo('q2-language')">2. Q2 — Language Analysis</button>
+            <button class="rm-nav-btn" onclick="rmScrollTo('q3-structure')">3. Q3 — Structural Analysis</button>
+            <button class="rm-nav-btn" onclick="rmScrollTo('q5-creative')">4. Q5 — Creative Writing</button>
+            <button class="rm-nav-btn" onclick="rmScrollTo('timing-strategy')">5. Timing &amp; WLV Differences</button>
         </div>
     </div>
 
     <!-- ── Main Content ── -->
     <div class="rm-main">
 
-        <!-- 1. Qualitative vs Quantitative -->
-        <div class="rm-card" id="qual-vs-quant">
-            <div class="rm-card-header">📊 1. Qualitative vs Quantitative Research</div>
+        <!-- 1. Q1 Retrieval Strategies -->
+        <div class="rm-card" id="q1-retrieval">
+            <div class="rm-card-header">🔍 1. Q1 — Explicit Retrieval (4 marks)</div>
             <div class="rm-card-body">
-                <p>Research methods in the social sciences and computing disciplines generally fall into two broad categories: <strong>qualitative</strong> and <strong>quantitative</strong>. Many WLV research projects adopt a <strong>mixed-methods</strong> approach, combining elements of both.</p>
+                <p>Question 1 tests your ability to <strong>identify and retrieve explicit information</strong> from the source text. You will be asked to list four things from a specified line range or about a specified topic. This is the most straightforward question on the paper, but it is easy to lose marks through carelessness.</p>
 
-                <table class="rm-compare">
-                    <thead>
-                        <tr>
-                            <th style="width:22%;">Dimension</th>
-                            <th style="width:39%;">Quantitative</th>
-                            <th style="width:39%;">Qualitative</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Purpose</strong></td>
-                            <td>Measure, test hypotheses, identify patterns and relationships</td>
-                            <td>Explore, understand, interpret meanings and experiences</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Data Type</strong></td>
-                            <td>Numerical data — counts, scores, percentages, statistics</td>
-                            <td>Textual or visual data — interviews, observations, documents</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Sample Size</strong></td>
-                            <td>Larger samples (often 30+) for statistical power</td>
-                            <td>Smaller samples (5–30) for depth and richness</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Approach</strong></td>
-                            <td>Deductive — theory first, then data collection to test it</td>
-                            <td>Inductive — data first, then develop themes and theory</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Analysis</strong></td>
-                            <td>Statistical tests (t-tests, ANOVA, regression, chi-square)</td>
-                            <td>Thematic analysis, content analysis, grounded theory</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Generalisability</strong></td>
-                            <td>High — findings can be applied to wider populations</td>
-                            <td>Low — findings are context-specific and transferable</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Common Methods</strong></td>
-                            <td>Surveys, experiments, structured observations, secondary data</td>
-                            <td>Interviews, focus groups, case studies, ethnography</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <p style="margin-top:12px;"><span class="rm-term">Mixed Methods</span> Combining both approaches can provide a more complete picture. For example, a survey (quantitative) might identify a trend, while follow-up interviews (qualitative) explain <em>why</em> that trend exists.</p>
-            </div>
-        </div>
-
-        <!-- 2. Data Collection Techniques -->
-        <div class="rm-card" id="data-collection">
-            <div class="rm-card-header">📋 2. Data Collection Techniques</div>
-            <div class="rm-card-body">
-                <p>Choosing the right data collection method depends on your research question, the type of data you need, and the practical constraints of your project (time, access, resources).</p>
-
-                <h4 style="color:var(--c-accent);margin:12px 0 6px;">📝 Surveys and Questionnaires</h4>
+                <h4 class="rm-sub">🎯 What the Examiner Wants</h4>
                 <ul>
-                    <li>Efficient for collecting data from large numbers of participants</li>
-                    <li>Can include closed questions (quantitative) and open-ended questions (qualitative)</li>
-                    <li>Online tools (e.g. Microsoft Forms, Google Forms, JISC Online Surveys) make distribution and analysis straightforward</li>
-                    <li>Pilot your survey to identify ambiguous or leading questions before full deployment</li>
+                    <li>Four separate, relevant pieces of information drawn <strong>directly</strong> from the text</li>
+                    <li>Each point should be a full, clear statement — not a single word or a copied phrase without context</li>
+                    <li>Answers must be <strong>in your own words</strong> where possible, though short quotations are acceptable</li>
+                    <li>Each point is worth <strong>1 mark</strong> — there is no extra credit for more than four</li>
                 </ul>
 
-                <h4 style="color:var(--c-accent);margin:12px 0 6px;">🎙️ Interviews</h4>
-                <ul>
-                    <li><strong>Structured:</strong> Fixed questions, same order for all participants — easier to compare</li>
-                    <li><strong>Semi-structured:</strong> Key questions with flexibility to probe interesting responses — most common in WLV dissertations</li>
-                    <li><strong>Unstructured:</strong> Open conversation guided by the participant — rich data but harder to analyse</li>
-                    <li>Record and transcribe interviews for accurate analysis; obtain consent beforehand</li>
-                </ul>
-
-                <h4 style="color:var(--c-accent);margin:12px 0 6px;">👥 Focus Groups</h4>
-                <ul>
-                    <li>Small group discussion (typically 6–10 participants) facilitated by the researcher</li>
-                    <li>Useful for exploring shared experiences, attitudes, and group dynamics</li>
-                    <li>Participants may build on each other's ideas, generating richer data than individual interviews</li>
-                    <li>Requires careful moderation to ensure all voices are heard</li>
-                </ul>
-
-                <h4 style="color:var(--c-accent);margin:12px 0 6px;">🔬 Experiments</h4>
-                <ul>
-                    <li>Manipulate an independent variable to observe its effect on a dependent variable</li>
-                    <li>Control groups and random assignment help establish causality</li>
-                    <li>Common in computing, psychology, and health-related research</li>
-                    <li>Laboratory experiments offer high control; field experiments offer greater realism</li>
-                </ul>
-
-                <h4 style="color:var(--c-accent);margin:12px 0 6px;">📄 Secondary Data Analysis</h4>
-                <ul>
-                    <li>Analysing existing datasets (government statistics, organisational records, open data)</li>
-                    <li>Time-efficient and often free from ethical approval delays</li>
-                    <li>Check the data's original purpose, quality, and limitations before use</li>
-                </ul>
-
-                <h4 style="color:var(--c-accent);margin:12px 0 6px;">📚 Document and Content Analysis</h4>
-                <ul>
-                    <li>Systematic analysis of texts, policies, reports, social media, or other documents</li>
-                    <li>Can be quantitative (counting frequencies of words/themes) or qualitative (interpreting meaning)</li>
-                    <li>Useful for historical research, policy analysis, and media studies</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- 3. Research Ethics -->
-        <div class="rm-card" id="research-ethics">
-            <div class="rm-card-header">⚖️ 3. Research Ethics</div>
-            <div class="rm-card-body">
-                <p>All research involving human participants at WLV must be conducted ethically. You will need to submit an ethics application to your supervisor or the university ethics committee before starting data collection.</p>
-
-                <h4 style="color:var(--c-accent);margin:12px 0 6px;">Core Ethical Principles</h4>
-                <ul>
-                    <li><strong>Informed Consent:</strong> Participants must understand what the research involves and voluntarily agree to take part. Provide a participant information sheet and a consent form.</li>
-                    <li><strong>Confidentiality and Anonymity:</strong> Protect participants' identities. Use pseudonyms, store data securely, and do not share identifiable information.</li>
-                    <li><strong>Right to Withdraw:</strong> Participants can leave the study at any time without penalty. Make this clear at the outset.</li>
-                    <li><strong>Avoiding Harm:</strong> Ensure no physical, psychological, or emotional harm comes to participants. Sensitive topics require additional care.</li>
-                    <li><strong>Transparency:</strong> Be honest about the purpose of your research. Deception should only be used when absolutely necessary and must be debriefed afterwards.</li>
-                    <li><strong>Data Protection:</strong> Comply with UK GDPR and the Data Protection Act 2018. Store data securely and delete it after the required retention period.</li>
-                </ul>
-
-                <h4 style="color:var(--c-accent);margin:12px 0 6px;">WLV Ethics Checklist</h4>
-                <ul class="rm-checklist">
-                    <li>Have you completed the WLV ethics self-assessment form?</li>
-                    <li>Have you prepared a participant information sheet in plain English?</li>
-                    <li>Have you designed a consent form with all required sections?</li>
-                    <li>Have you considered how you will store and anonymise your data?</li>
-                    <li>Have you discussed your ethics application with your supervisor?</li>
-                    <li>Have you allowed enough time for ethics approval (2–4 weeks minimum)?</li>
-                    <li>Have you considered the ethical implications of your data collection methods?</li>
-                    <li>Have you planned how to debrief participants after the study?</li>
-                </ul>
-
-                <p style="margin-top:10px;"><span class="rm-term">Remember</span> Ethical approval must be obtained <strong>before</strong> any data collection begins. Retrospective approval is not possible.</p>
-            </div>
-        </div>
-
-        <!-- 4. Dissertation Planning -->
-        <div class="rm-card" id="dissertation-planning">
-            <div class="rm-card-header">📅 4. Dissertation Planning</div>
-            <div class="rm-card-body">
-                <p>A well-structured dissertation is the culmination of your WLV degree. Planning early and breaking the process into manageable phases is key to success.</p>
-
-                <h4 style="color:var(--c-accent);margin:12px 0 6px;">Typical Dissertation Structure</h4>
-                <div class="rm-timeline">
-                    <div class="rm-timeline-item">
-                        <strong>📌 Introduction</strong>
-                        <span>Research question, aims and objectives, rationale, scope, and structure of the dissertation</span>
-                    </div>
-                    <div class="rm-timeline-item">
-                        <strong>📚 Literature Review</strong>
-                        <span>Critical review of existing research, identification of gaps, theoretical framework</span>
-                    </div>
-                    <div class="rm-timeline-item">
-                        <strong>🔧 Methodology</strong>
-                        <span>Research design, data collection methods, sampling strategy, ethical considerations, limitations</span>
-                    </div>
-                    <div class="rm-timeline-item">
-                        <strong>📊 Findings / Results</strong>
-                        <span>Presentation of data collected — tables, charts, themes, without interpretation</span>
-                    </div>
-                    <div class="rm-timeline-item">
-                        <strong>💬 Discussion</strong>
-                        <span>Interpretation of findings, connection to literature, implications, unexpected results</span>
-                    </div>
-                    <div class="rm-timeline-item">
-                        <strong>✅ Conclusion</strong>
-                        <span>Summary of key findings, contribution to knowledge, limitations, recommendations for future research</span>
-                    </div>
-                </div>
-
-                <h4 style="color:var(--c-accent);margin:12px 0 6px;">Planning Timeline (Suggested)</h4>
-                <table class="rm-compare">
-                    <thead>
-                        <tr>
-                            <th>Phase</th>
-                            <th>Weeks</th>
-                            <th>Key Activities</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Topic Selection</td>
-                            <td>1–2</td>
-                            <td>Identify broad area, read around the topic, refine research question</td>
-                        </tr>
-                        <tr>
-                            <td>Proposal</td>
-                            <td>2–3</td>
-                            <td>Write research proposal, get supervisor approval, submit ethics application</td>
-                        </tr>
-                        <tr>
-                            <td>Literature Review</td>
-                            <td>3–6</td>
-                            <td>Systematic search, critical reading, synthesise sources, identify gaps</td>
-                        </tr>
-                        <tr>
-                            <td>Methodology</td>
-                            <td>6–8</td>
-                            <td>Design study, pilot instruments, recruit participants, finalise ethics</td>
-                        </tr>
-                        <tr>
-                            <td>Data Collection</td>
-                            <td>8–12</td>
-                            <td>Gather data, monitor progress, handle issues as they arise</td>
-                        </tr>
-                        <tr>
-                            <td>Data Analysis</td>
-                            <td>12–15</td>
-                            <td>Transcribe, code, run statistical tests, identify themes</td>
-                        </tr>
-                        <tr>
-                            <td>Writing Up</td>
-                            <td>15–20</td>
-                            <td>Draft chapters, revise, get feedback from supervisor</td>
-                        </tr>
-                        <tr>
-                            <td>Final Submission</td>
-                            <td>20–22</td>
-                            <td>Proofread, format, check referencing, submit</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <p style="margin-top:10px;"><span class="rm-term">Top Tip</span> Start writing early — even rough notes and bullet points can be refined later. Leave at least two weeks for proofreading and formatting before the submission deadline.</p>
-            </div>
-        </div>
-
-        <!-- 5. Literature Reviews -->
-        <div class="rm-card" id="literature-reviews">
-            <div class="rm-card-header">📖 5. Literature Reviews</div>
-            <div class="rm-card-body">
-                <p>A literature review is a critical evaluation of existing research on your topic. It is not simply a summary of what others have written — you must <strong>synthesise</strong>, <strong>compare</strong>, and <strong>critique</strong> the literature to establish the context for your own research.</p>
-
-                <h4 style="color:var(--c-accent);margin:12px 0 6px;">Purpose of a Literature Review</h4>
-                <ul>
-                    <li>Demonstrate your knowledge of the field and its key debates</li>
-                    <li>Identify gaps, contradictions, or unanswered questions that justify your research</li>
-                    <li>Position your work within the existing body of knowledge</li>
-                    <li>Identify appropriate theoretical frameworks and methodologies</li>
-                    <li>Avoid reinventing the wheel — build on what is already known</li>
-                </ul>
-
-                <h4 style="color:var(--c-accent);margin:12px 0 6px;">Steps for a Systematic Literature Review</h4>
+                <h4 class="rm-sub">📋 Step-by-Step Strategy</h4>
                 <ol>
-                    <li><strong>Define your research question</strong> — be specific and focused</li>
-                    <li><strong>Identify databases and search terms</strong> — use WLV Library Search, Google Scholar, IEEE Xplore, ACM Digital Library, Scopus, PubMed, etc.</li>
-                    <li><strong>Set inclusion and exclusion criteria</strong> — publication date, peer-reviewed only, specific methodology, etc.</li>
-                    <li><strong>Conduct the search</strong> — record your search terms and the number of results for transparency</li>
-                    <li><strong>Screen results</strong> — review titles and abstracts, then full texts against your criteria</li>
-                    <li><strong>Extract key information</strong> — author, year, methodology, key findings, limitations</li>
-                    <li><strong>Synthesise and critique</strong> — group studies by theme, compare findings, identify strengths and weaknesses</li>
-                    <li><strong>Write the review</strong> — organise thematically, not chronologically, and always link back to your research question</li>
+                    <li><strong>Read the question carefully</strong> — note the line range and the specific topic or focus (e.g. "what the writer says about the setting")</li>
+                    <li><strong>Scan the specified lines</strong> — underline or highlight every piece of information that answers the question</li>
+                    <li><strong>Select your four best points</strong> — choose the clearest, most distinct pieces of information. Avoid repeating the same idea in different words</li>
+                    <li><strong>Write each point as a separate bullet or numbered sentence</strong> — this makes it easy for the examiner to see you have four distinct answers</li>
+                    <li><strong>Check each point against the text</strong> — verify that every claim you make is actually stated in the source</li>
                 </ol>
 
-                <h4 style="color:var(--c-accent);margin:12px 0 6px;">Critical Reading Questions</h4>
-                <p>When reading a source, ask yourself:</p>
+                <div class="rm-strategy">
+                    <strong>💡 Pro Tip</strong> — If you find more than four possible points, pick the four that are most <em>specific</em> and <em>concrete</em>. Vague or general statements are less likely to score the mark. Never invent information — if it is not in the text, it cannot be credited.
+                </div>
+
+                <div class="rm-example">
+                    <strong>Example question:</strong> "List four things you learn about the old man from lines 1–8."<br>
+                    <strong>Good answer:</strong> (1) He lives alone in a cottage by the sea. (2) He has not left his home in over twenty years. (3) His only companion is a grey cat. (4) He spends his days watching the tide from his window.<br>
+                    <strong>Poor answer:</strong> He is old. He lives alone. He has a cat. He watches the sea. (Too vague — lacks the specific detail from the text.)
+                </div>
+
+                <h4 class="rm-sub">⚠️ Common Pitfalls</h4>
                 <ul>
-                    <li>What is the author's main argument or claim?</li>
-                    <li>What evidence do they provide to support it?</li>
-                    <li>Is the methodology appropriate and rigorous?</li>
-                    <li>Are there any biases or limitations in the study?</li>
-                    <li>How does this source relate to other studies in the field?</li>
-                    <li>Does it support, contradict, or extend existing knowledge?</li>
-                    <li>How relevant is it to my own research question?</li>
+                    <li><strong>Inferring rather than retrieving</strong> — Q1 is about what is <em>explicitly stated</em>, not what you can work out. Save inferences for Q2 and Q3</li>
+                    <li><strong>Repeating the same point</strong> — "He is lonely" and "He has no friends" are the same idea. You need four <em>different</em> pieces of information</li>
+                    <li><strong>Writing too much</strong> — a single sentence per point is sufficient. Long paragraphs waste time you need for later questions</li>
+                    <li><strong>Going outside the specified lines</strong> — the question tells you exactly which lines to use. Information from elsewhere in the text will not be credited</li>
                 </ul>
 
-                <h4 style="color:var(--c-accent);margin:12px 0 6px;">Referencing and Citation Management</h4>
-                <ul>
-                    <li>Use a consistent referencing style (WLV typically uses <strong>Harvard (Cite Them Right)</strong> or APA 7th)</li>
-                    <li>Use reference management software such as <strong>Zotero</strong>, <strong>Mendeley</strong>, or <strong>EndNote</strong> to organise your sources</li>
-                    <li>Keep a running bibliography from day one — retroactively adding references is time-consuming and error-prone</li>
-                    <li>Check WLV's referencing guide for specific requirements in your department</li>
-                </ul>
-
-                <p style="margin-top:10px;"><span class="rm-term">Remember</span> A good literature review is <strong>critical</strong>, not descriptive. Do not simply list what each author said — compare, contrast, and evaluate.</p>
+                <div class="rm-markscheme">
+                    <strong>📊 Mark Scheme (4 marks)</strong><br>
+                    Award 1 mark per valid point of information retrieved from the specified lines. The point must be clearly expressed and demonstrably present in the text. No half marks. No credit for inference, evaluation, or analysis at this stage.
+                </div>
             </div>
         </div>
 
-    </div>
-</div>
+        <!-- 2. Q2 Language Analysis -->
+        <div class="rm-card" id="q2-language">
+            <div class="rm-card-header">✍️ 2. Q2 — Language Analysis (8 marks)</div>
+            <div class="rm-card-body">
+                <p>Question 2 asks you to <strong>analyse how the writer uses language</strong> to achieve a particular effect or convey meaning. You will be given a short passage (typically 8–15 lines) and asked to comment on the writer's choice of words, phrases, and language techniques.</p>
+
+                <h4 class="rm-sub">🎯 What the Examiner Wants</h4>
+                <ul>
+                    <li><strong>Subject terminology</strong> — identify specific language techniques (simile, metaphor, personification, alliteration, sensory language, etc.)</li>
+                    <li><strong>Quotations</strong> — embed short, precise quotations from the passage to support each point</li>
+                    <li><strong>Analysis of effect</strong> — explain <em>what</em> the technique suggests and <em>how</em> it affects the reader's interpretation</li>
+                    <li>Aim for <strong>3–4 well-developed points</strong> rather than a long list of superficial observations</li>
+                </ul>
+
+                <h4 class="rm-sub">📋 The PEEL Framework for Q2</h4>
+                <p>Use the <strong>PEEL</strong> structure to build each analytical paragraph:</p>
+                <ul>
+                    <li><strong>P</strong> — <strong>Point</strong>: State the language technique the writer uses (e.g. "The writer uses a simile to describe the storm.")</li>
+                    <li><strong>E</strong> — <strong>Evidence</strong>: Embed a short quotation (e.g. "The waves were 'like furious giants'.")</li>
+                    <li><strong>E</strong> — <strong>Explain</strong>: Analyse the effect — what does this comparison suggest? How does it make the reader feel? (e.g. "This comparison suggests the storm is powerful and uncontrollable, creating a sense of danger and awe.")</li>
+                    <li><strong>L</strong> — <strong>Link</strong>: Link back to the writer's overall purpose or the question focus (e.g. "The writer uses this violent imagery to establish the hostile environment the character must face.")</li>
+                </ul>
+
+                <div class="rm-strategy">
+                    <strong>💡 Pro Tip</strong> — Do not just <em>name</em> the technique. The mark scheme rewards <strong>analysis of effect</strong> above all else. A response that says "The writer uses a metaphor" without explaining its effect will score far fewer marks than one that says "The metaphor of 'a cage of shadows' conveys the character's sense of entrapment and hopelessness."
+                </div>
+
+                <h4 class="rm-sub">📚 Key Language Techniques to Know</h4>
+                <table class="rm-compare">
+                    <thead>
+                        <tr>
+                            <th style="width:25%;">Technique</th>
+                            <th style="width:40%;">Definition</th>
+                            <th style="width:35%;">Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Simile</strong></td>
+                            <td>Comparison using 'like' or 'as'</td>
+                            <td>"The fog clung <em>like</em> a damp shroud"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Metaphor</strong></td>
+                            <td>Direct comparison stating one thing is another</td>
+                            <td>"The city was a <em>concrete jungle</em>"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Personification</strong></td>
+                            <td>Giving human qualities to non-human things</td>
+                            <td>"The wind <em>howled</em> its fury"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sensory Language</strong></td>
+                            <td>Words that appeal to the five senses</td>
+                            <td>"The <em>acrid</em> smell of smoke <em>stung</em> his eyes"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Alliteration</strong></td>
+                            <td>Repetition of initial consonant sounds</td>
+                            <td>"The <em>d</em>ark, <em>d</em>amp <em>d</em>ungeon"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Semantic Field</strong></td>
+                            <td>A cluster of related words creating a theme</td>
+                            <td>Words like "tomb", "coffin", "grave" create a deathly field</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="rm-example">
+                    <strong>Model paragraph (8-mark response):</strong><br>
+                    The writer uses <strong>personification</strong> of the weather to reflect the character's emotional state. The rain is described as 'tapping impatiently at the window', which gives the rain a human quality of restlessness. This <strong>suggests</strong> that the character herself feels trapped and agitated, mirroring her inner turmoil through the external setting. The verb 'tapping' also creates a <strong>sensory, auditory image</strong> that makes the scene feel immediate and oppressive for the reader. The writer's use of personification here <strong>effectively blurs the boundary</strong> between the character's internal world and the physical environment.
+                </div>
+
+                <div class="rm-markscheme">
+                    <strong>📊 Mark Scheme (8 marks)</strong><br>
+                    <strong>7–8 marks:</strong> Detailed, perceptive analysis of language effects. Accurate use of subject terminology. Well-chosen quotations integrated seamlessly.<br>
+                    <strong>5–6 marks:</strong> Clear explanation of language effects. Appropriate terminology. Relevant quotations.<br>
+                    <strong>3–4 marks:</strong> Some explanation of effects. Terminology used but may be inconsistent. Quotations present but not always embedded.<br>
+                    <strong>1–2 marks:</strong> Simple comments on language. Limited or no terminology. Quotations may be missing or irrelevant.
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Q3 Structural Analysis -->
+        <div class="rm-card" id="q3-structure">
+            <div class="rm-card-header">🏗️ 3. Q3 — Structural Analysis (8 marks)</div>
+            <div class="rm-card-body">
+                <p>Question 3 asks you to <strong>analyse how the writer structures the text</strong> to engage the reader. Unlike Q2, which focuses on individual word choices, Q3 is about the <strong>bigger picture</strong> — how the text is organised as a whole, how it begins and ends, and how the reader's attention is guided through the extract.</p>
+
+                <h4 class="rm-sub">🎯 What the Examiner Wants</h4>
+                <ul>
+                    <li>Comment on the <strong>whole text</strong> — not just one paragraph or section</li>
+                    <li>Identify <strong>structural features</strong>: openings, endings, shifts in focus, changes in pace, juxtaposition, repetition, cyclical structure, paragraph length, sentence types</li>
+                    <li>Explain <strong>why</strong> the writer has chosen these structural features and <strong>how</strong> they affect the reader</li>
+                    <li>Use <strong>structural terminology</strong> accurately (e.g. "the writer shifts focus from...", "the pace quickens when...", "the cyclical structure reinforces...")</li>
+                </ul>
+
+                <h4 class="rm-sub">📋 Key Structural Features</h4>
+                <table class="rm-compare">
+                    <thead>
+                        <tr>
+                            <th style="width:25%;">Feature</th>
+                            <th style="width:40%;">What to Look For</th>
+                            <th style="width:35%;">Effect on Reader</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Opening / Ending</strong></td>
+                            <td>How does the text begin? How does it end? Is the ending foreshadowed?</td>
+                            <td>Creates first impressions; provides resolution or leaves the reader questioning</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Shifts in Focus</strong></td>
+                            <td>Changes between characters, settings, time periods, or perspectives</td>
+                            <td>Creates contrast, builds complexity, or reveals new information</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pace and Rhythm</strong></td>
+                            <td>Short sentences for speed; long, complex sentences for reflection; paragraph length</td>
+                            <td>Short sentences create tension or urgency; long sentences slow the reader down</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Juxtaposition</strong></td>
+                            <td>Placing two contrasting ideas, images, or scenes side by side</td>
+                            <td>Highlights differences and forces the reader to compare</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Repetition / Motif</strong></td>
+                            <td>A word, phrase, or image that recurs throughout the text</td>
+                            <td>Creates emphasis, unity, or a sense of obsession or inevitability</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cyclical Structure</strong></td>
+                            <td>The text ends where it began — returning to the same image, idea, or setting</td>
+                            <td>Creates a sense of closure, entrapment, or circularity</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4 class="rm-sub">📋 The PEEZL Framework for Q3</h4>
+                <p>Adapt your approach for structural analysis:</p>
+                <ul>
+                    <li><strong>P</strong> — <strong>Point</strong>: Identify the structural feature (e.g. "The writer opens with a long, descriptive paragraph before shifting to short, staccato sentences.")</li>
+                    <li><strong>E</strong> — <strong>Evidence</strong>: Reference specific parts of the text (e.g. "The opening describes the setting in detail across six lines, then the sentence 'He ran.' stands alone.")</li>
+                    <li><strong>E</strong> — <strong>Explain</strong>: Analyse the effect on the reader (e.g. "The contrast in sentence length creates a dramatic shift from calm description to urgent action.")</li>
+                    <li><strong>Z</strong> — <strong>Zoom out</strong>: Link this structural choice to the text as a whole (e.g. "This structural shift mirrors the character's sudden realisation and the story's turning point.")</li>
+                    <li><strong>L</strong> — <strong>Link</strong>: Connect to the writer's overall purpose (e.g. "The writer uses structure to manipulate the reader's emotional journey, building tension before releasing it.")</li>
+                </ul>
+
+                <div class="rm-strategy">
+                    <strong>💡 Pro Tip</strong> — The biggest mistake students make in Q3 is treating it like Q2. Do not analyse individual word choices (that is Q2's job). Instead, <strong>zoom out</strong> and think about the architecture of the text. Ask yourself: <em>Why did the writer put this paragraph here? Why this sentence length now? Why this shift in focus at this point?</em>
+                </div>
+
+                <div class="rm-example">
+                    <strong>Model paragraph (8-mark response):</strong><br>
+                    The writer <strong>opens</strong> the extract with an extended description of the setting, using long, multi-clause sentences that create a <strong>slow, reflective pace</strong>. This mirrors the character's initial calm before the crisis. The <strong>shift</strong> occurs at the line 'Then everything changed.' — a single, short sentence that acts as a structural pivot. From this point, the sentences become <strong>shorter and more fragmented</strong>, reflecting the character's growing panic. The writer <strong>juxtaposes</strong> the peaceful opening with the chaotic middle section, forcing the reader to experience the same emotional whiplash as the character. This structural choice <strong>emphasises</strong> how quickly and devastatingly a life can be disrupted.
+                </div>
+
+                <div class="rm-markscheme">
+                    <strong>📊 Mark Scheme (8 marks)</strong><br>
+                    <strong>7–8 marks:</strong> Perceptive, detailed analysis of structural features across the text. Accurate structural terminology. Convincing explanation of effects on the reader.<br>
+                    <strong>5–6 marks:</strong> Clear explanation of structural choices. Appropriate terminology. References to different parts of the text.<br>
+                    <strong>3–4 marks:</strong> Some awareness of structure. Terminology may be limited or confused with language features. References to one or two points only.<br>
+                    <strong>1–2 marks:</strong> Simple comments about the text. No structural terminology. May describe rather than analyse.
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Q5 Creative Writing -->
+        <div class="rm-card" id="q5-creative">
+            <div class="rm-card-header">✏️ 4. Q5 — Creative / Descriptive Writing (25 marks)</div>
+            <div class="rm-card-body">
+                <p>Question 5 is the most heavily weighted question on the paper, worth <strong>25 marks</strong> (including 4 marks for SPaG). You will be given a choice of two prompts — one <strong>descriptive</strong> (based on an image) and one <strong>narrative</strong> (a story opening or scenario). You must write <strong>one</strong> response, typically 450–600 words.</p>
+
+                <h4 class="rm-sub">🎯 What the Examiner Wants</h4>
+                <ul>
+                    <li><strong>Content and Organisation (15 marks):</strong> A well-structured piece with a clear beginning, middle, and end. Sophisticated vocabulary. Effective use of language techniques. Controlled paragraphing.</li>
+                    <li><strong>Technical Accuracy (10 marks):</strong> Accurate spelling, punctuation, and grammar. A range of sentence structures for effect. Consistent tense and person.</li>
+                </ul>
+
+                <h4 class="rm-sub">📋 Descriptive vs Narrative — Which to Choose?</h4>
+                <table class="rm-compare">
+                    <thead>
+                        <tr>
+                            <th style="width:20%;">Aspect</th>
+                            <th style="width:40%;">Descriptive (Image-based)</th>
+                            <th style="width:40%;">Narrative (Story-based)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Focus</strong></td>
+                            <td>Painting a vivid picture in words — what can be seen, heard, felt, smelt</td>
+                            <td>Telling a story with characters, plot, and conflict</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Structure</strong></td>
+                            <td>Zoom in / zoom out — move from the big picture to specific details</td>
+                            <td>Beginning → build-up → climax → resolution (or a deliberate twist)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Techniques</strong></td>
+                            <td>Sensory language, simile, metaphor, personification, colour imagery</td>
+                            <td>Dialogue, action, pacing, character development, setting description</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Best for</strong></td>
+                            <td>Students who excel at description and atmospheric writing</td>
+                            <td>Students who enjoy plotting and character-driven writing</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4 class="rm-sub">📋 The DAFOREST Framework for Q5</h4>
+                <p>Use <strong>DAFOREST</strong> as a checklist of persuasive and descriptive techniques to include:</p>
+                <ul>
+                    <li><strong>D</strong> — <strong>Direct address</strong> (narrative only): "You would never guess..."</li>
+                    <li><strong>A</strong> — <strong>Alliteration</strong>: "The bitter, biting wind"</li>
+                    <li><strong>F</strong> — <strong>Facts / Figurative language</strong>: Similes, metaphors, personification</li>
+                    <li><strong>O</strong> — <strong>Opinion / Observation</strong>: The writer's perspective on the scene</li>
+                    <li><strong>R</strong> — <strong>Repetition / Rhetorical questions</strong>: For emphasis or to engage the reader</li>
+                    <li><strong>E</strong> — <strong>Emotive language</strong>: Words chosen to provoke an emotional response</li>
+                    <li><strong>S</strong> — <strong>Sensory language</strong>: Sight, sound, touch, smell, taste</li>
+                    <li><strong>T</strong> — <strong>Triples (rule of three)</strong>: "Dark, damp, and desolate"</li>
+                </ul>
+
+                <div class="rm-strategy">
+                    <strong>💡 Pro Tip</strong> — Spend the first <strong>5 minutes planning</strong>. A well-planned response will always outperform one written off the cuff. For descriptive writing, plan your zoom-in journey. For narrative writing, plan your plot arc. A clear structure is worth more marks than a dazzling but chaotic piece.
+                </div>
+
+                <h4 class="rm-sub">📋 SPaG — The 4 Marks You Cannot Afford to Lose</h4>
+                <ul>
+                    <li><strong>Spelling:</strong> Use UK English spellings throughout (colour, centre, realise, travelled). Watch for common errors: <em>their / there / they're</em>, <em>your / you're</em>, <em>its / it's</em></li>
+                    <li><strong>Punctuation:</strong> Use a range beyond full stops and commas — colons, semicolons, dashes, ellipsis, and exclamation marks all add sophistication</li>
+                    <li><strong>Grammar:</strong> Maintain consistent tense (past or present — do not switch). Ensure subject-verb agreement. Use a mix of simple, compound, and complex sentences</li>
+                    <li><strong>Paragraphing:</strong> Use clear topic sentences. Vary paragraph length for effect. A single-sentence paragraph can be powerful at a key moment</li>
+                </ul>
+
+                <div class="rm-example">
+                    <strong>Descriptive opening (Grade 9 standard):</strong><br>
+                    The market square was a <strong>cacophony of colour and noise</strong>. Beneath a sky the colour of bruised plums, stalls spilled their wares onto the wet cobbles — <strong>crimson</strong> apples piled high beside <strong>amber</strong> jars of honey, their lids sticky with sweetness. The air <strong>thickened</strong> with the mingled scents of fresh bread, diesel fumes, and the <strong>distant, salty tang</strong> of the sea. A child's laugh <strong>pierced</strong> the general hum, sharp and sudden as a gull's cry.
+                </div>
+
+                <div class="rm-markscheme">
+                    <strong>📊 Mark Scheme (25 marks)</strong><br>
+                    <strong>Content and Organisation (AO5) — 15 marks:</strong><br>
+                    <strong>13–15:</strong> Sophisticated ideas, convincingly crafted. Ambitious vocabulary. Coherent, controlled structure. Effective use of techniques.<br>
+                    <strong>9–12:</strong> Clear, developed ideas. Appropriate vocabulary. Logical structure. Good use of techniques.<br>
+                    <strong>5–8:</strong> Some development of ideas. Simple vocabulary. Basic structure. Some techniques used.<br>
+                    <strong>1–4:</strong> Simple ideas. Limited vocabulary. Weak or no structure. Few or no techniques.<br><br>
+                    <strong>Technical Accuracy (AO6) — 10 marks:</strong><br>
+                    <strong>8–10:</strong> Accurate spelling and punctuation. Wide range of sentence structures. Consistent tense and person.<br>
+                    <strong>5–7:</strong> Mostly accurate. Some variety in sentences. Generally consistent.<br>
+                    <strong>1–4:</strong> Frequent errors. Limited sentence variety. Inconsistent control.
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Timing, Mark Schemes & WLV Differences -->
+        <div class="rm-card" id="timing-strategy">
+            <div class="rm-card-header">⏱️ 5. Exam Timing, Mark Schemes &amp; WLV-Specific Differences</div>
+            <div class="rm-card-body">
+                <p>The WLV English Equivalency is a <strong>2-hour</strong> assessment. Effective time management is essential to maximise your total score. Below is the recommended time allocation, along with the key differences between this paper and the standard AQA GCSE English Language Paper 1.</p>
+
+                <h4 class="rm-sub">⏱️ Recommended Timings (2 hours = 120 minutes)</h4>
+                <table class="rm-compare">
+                    <thead>
+                        <tr>
+                            <th style="width:18%;">Question</th>
+                            <th style="width:12%;">Marks</th>
+                            <th style="width:20%;">Recommended Time</th>
+                            <th style="width:50%;">Strategy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Q1</strong></td>
+                            <td>4</td>
+                            <td><strong>10 minutes</strong></td>
+                            <td>5 min reading + scanning, 5 min writing four clear points. Do not overthink this one — it is the easiest marks on the paper</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Q2</strong></td>
+                            <td>8</td>
+                            <td><strong>20 minutes</strong></td>
+                            <td>5 min reading and annotating, 12 min writing 3–4 PEEL paragraphs, 3 min reviewing</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Q3</strong></td>
+                            <td>8</td>
+                            <td><strong>20 minutes</strong></td>
+                            <td>5 min reading the whole text for structure, 12 min writing 3–4 PEEZL paragraphs, 3 min reviewing</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Q5</strong></td>
+                            <td>25</td>
+                            <td><strong>55 minutes</strong></td>
+                            <td>5 min planning, 40 min writing, 10 min proofreading for SPaG errors. This is worth over a third of your total marks — give it the time it deserves</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Buffer</strong></td>
+                            <td>—</td>
+                            <td><strong>15 minutes</strong></td>
+                            <td>Use for final checks, finishing Q5, or revisiting Q2/Q3 to add detail. Do not leave early</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="rm-timing">
+                    <strong>⏱️ Timing Tip</strong> — If you get stuck on Q2 or Q3, <strong>move on</strong>. It is better to write a solid but shorter response and have time for Q5 than to spend 40 minutes perfecting Q2 and then rush the 25-mark question. Remember: Q5 alone is worth more than Q1, Q2, and Q3 combined.
+                </div>
+
+                <h4 class="rm-sub">🔴 WLV-Specific Differences from AQA GCSE English Language Paper 1</h4>
+                <p>The WLV English Equivalency is <strong>based on</strong> AQA Paper 1 but has several important modifications. Understanding these differences is crucial for effective preparation.</p>
+
+                <table class="rm-compare">
+                    <thead>
+                        <tr>
+                            <th style="width:30%;">Feature</th>
+                            <th style="width:35%;">AQA GCSE Paper 1</th>
+                            <th style="width:35%;">WLV English Equivalency</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Q4 — Evaluation</strong></td>
+                            <td>Present — 20-mark evaluation question (AO4)</td>
+                            <td><strong>Removed entirely</strong> — the paper has only Q1, Q2, Q3, and Q5</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Paper 2</strong></td>
+                            <td>Present — non-fiction and comparison paper</td>
+                            <td><strong>Removed entirely</strong> — there is only one paper</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Spoken Language</strong></td>
+                            <td>Separate endorsement (pass/fail)</td>
+                            <td><strong>Not assessed</strong> — no presentation or speech component</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Source Material</strong></td>
+                            <td>One literary fiction extract (20th or 21st century)</td>
+                            <td><strong>Single source extract</strong> — same format, but the extract may be drawn from a wider range of texts appropriate for university-level applicants</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Q5 Prompt</strong></td>
+                            <td>Choice of descriptive (image) or narrative (story)</td>
+                            <td><strong>Fixed thematic prompt</strong> — the topic is predetermined, though you may still have a choice between descriptive and narrative approaches within that theme</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Total Marks</strong></td>
+                            <td>80 (Paper 1) + 80 (Paper 2) = 160</td>
+                            <td><strong>45 marks total</strong> — Q1 (4) + Q2 (8) + Q3 (8) + Q5 (25)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Duration</strong></td>
+                            <td>1 hour 45 minutes (Paper 1)</td>
+                            <td><strong>2 hours</strong> — slightly longer to account for the single-paper format and the heavier weighting of Q5</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Assessment Focus</strong></td>
+                            <td>GCSE-level reading and writing skills</td>
+                            <td><strong>University-level readiness</strong> — the standard is benchmarked to the level required for successful academic writing at degree level</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="rm-wlv">
+                    <strong>🔴 Key Takeaway</strong> — Because Q4 and Paper 2 are removed, your entire grade rests on just four questions. There is <strong>no second chance</strong> from a second paper. This makes preparation for Q5 (25 marks = 56% of the total) absolutely critical. Focus your revision time accordingly.
+                </div>
+
+                <h4 class="rm-sub">📊 Mark Allocation Overview</h4>
+                <table class="rm-compare">
+                    <thead>
+                        <tr>
+                            <th style="width:18%;">Question</th>
+                            <th style="width:12%;">Marks</th>
+                            <th style="width:20%;">% of Total</th>
+                            <th style="width:50%;">Skill Assessed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Q1</strong></td>
+                            <td>4</td>
+                            <td>9%</td>
+                            <td>AO1 — Identify and retrieve explicit information</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Q2</strong></td>
+                            <td>8</td>
+                            <td>18%</td>
+                            <td>AO2 — Explain, comment on, and analyse how writers use language</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Q3</strong></td>
+                            <td>8</td>
+                            <td>18%</td>
+                            <td>AO2 — Explain, comment on, and analyse how writers use structure</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Q5</strong></td>
+                            <td>25</td>
+                            <td>56%</td>
+                            <td>AO5 (15) — Communicate clearly and imaginatively<br>AO6 (10) — Use accurate spelling, punctuation, and grammar</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4 class="rm-sub">📋 Final Exam-Day Checklist</h4>
+                <ul class="rm-checklist">
+                    <li>Read the source extract through once before attempting any questions</li>
+                    <li>Annotate the extract as you read — underline key words, techniques, and structural shifts</li>
+                    <li>Start with Q1 (quick wins build confidence) and finish with Q5 (most marks)</li>
+                    <li>Use PEEL for Q2 and PEEZL for Q3 — the structure guarantees you hit the mark scheme criteria</li>
+                    <li>Plan Q5 before you write — 5 minutes of planning saves 15 minutes of rewriting</li>
+                    <li>Leave 10 minutes at the end to proofread Q5 for SPaG errors</li>
+                    <li>Write in UK English throughout — colour, centre, realise, travelled, defence</li>
+                    <li>If you run out of time on Q5, write a complete but shorter piece rather than an unfinished long one</li>
+                    <li>Stay calm and trust your preparation — you have practised this</li>
+                </ul>
+
+                <div class="rm-strategy">
+                    <strong>💡 Final Word</strong> — The WLV English Equivalency is designed to assess your readiness for university-level reading and writing. The examiners are not looking for GCSE-style formulaic responses; they want to see that you can <strong>think critically</strong> about a text and <strong>communicate effectively</strong> in your own writing. Show them what you can do.
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /rm-main -->
+</div><!-- /rm-layout -->
 
 <script>
-// ─── Smooth Scroll Navigation ───
 function rmScrollTo(id) {
-    const el = document.getElementById(id);
+    var el = document.getElementById(id);
     if (el) {
         el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Update active button
+        document.querySelectorAll('.rm-nav-btn').forEach(function(b) { b.classList.remove('active'); });
+        event.target.classList.add('active');
     }
-    // Update active button
-    document.querySelectorAll('.rm-nav-btn').forEach(btn => btn.classList.remove('active'));
-    document.querySelectorAll('.rm-nav-btn').forEach(btn => {
-        if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(id)) {
-            btn.classList.add('active');
-        }
-    });
 }
-
-// ─── Highlight active nav on scroll ───
-document.addEventListener('DOMContentLoaded', () => {
-    const sections = ['qual-vs-quant', 'data-collection', 'research-ethics', 'dissertation-planning', 'literature-reviews'];
-    const navBtns = document.querySelectorAll('.rm-nav-btn');
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const id = entry.target.id;
-                navBtns.forEach(btn => {
-                    btn.classList.remove('active');
-                    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(id)) {
-                        btn.classList.add('active');
-                    }
-                });
-            }
-        });
-    }, { rootMargin: '-80px 0px -60% 0px' });
-
-    sections.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) observer.observe(el);
-    });
-});
 </script>
 {% endblock %}

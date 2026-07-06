@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Study Skills Lab | WLV — University of Wolverhampton{% endblock %}
+{% block title %}English Language Practice Lab | WLV — University of Wolverhampton{% endblock %}
 {% block head %}
 <style>
 /* ── Hero Section ── */
@@ -510,14 +510,14 @@
 
 <!-- ── Hero ── -->
 <div class="skills-hero">
-    <h1>📚 Study Skills Lab</h1>
-    <p class="hero-sub">Build the essential academic skills you need for university success. Work through interactive scenarios covering critical reading, note-taking, essay planning, time management, and research skills.</p>
+    <h1>📝 English Language Practice Lab</h1>
+    <p class="hero-sub">Sharpen your English Language skills for the WLV English Equivalency exam. Work through 20 interactive scenarios covering language analysis, structural analysis, creative writing, reading comprehension, and SPaG — all based on AQA GCSE English Language Paper 1.</p>
 </div>
 
 <!-- ── Intro ── -->
 <div class="skills-intro">
     <h3>🎯 How It Works</h3>
-    <p>Each scenario places you in a realistic university situation. Read the context, complete the task, and reflect on your approach. There are no wrong answers — the goal is to practise and improve your academic toolkit.</p>
+    <p>The WLV English Equivalency exam tests your ability to analyse a fiction extract and produce your own creative writing. Each scenario below mirrors a real exam-style task. Read the source extract, complete the question, and check your understanding against the model approach.</p>
     <div class="steps-grid">
         <div class="step-item">
             <span class="step-num">1</span>
@@ -525,7 +525,7 @@
         </div>
         <div class="step-item">
             <span class="step-num">2</span>
-            <span class="step-label">Read the context</span>
+            <span class="step-label">Read the extract</span>
         </div>
         <div class="step-item">
             <span class="step-num">3</span>
@@ -554,7 +554,7 @@
         <span class="scenario-badge" id="scenarioBadge">—</span>
     </div>
     <div class="scenario-context" id="scenarioContext">Choose a scenario from the grid below to get started.</div>
-    <div class="scenario-task" id="scenarioTask">Each scenario presents a realistic university situation. Read carefully, then follow the instructions to practise the skill.</div>
+    <div class="scenario-task" id="scenarioTask">Each scenario presents a realistic exam-style English Language task. Read the extract carefully, then follow the instructions to practise the skill.</div>
     <div class="scenario-hint" id="scenarioHint" style="display:none;"></div>
     <div class="scenario-checklist" id="scenarioChecklist" style="display:none;"></div>
     <textarea class="reflection-area" id="reflectionArea" placeholder="Write your response, notes, or reflection here..." style="display:none;"></textarea>
@@ -574,331 +574,331 @@
 
 <!-- ── Tips Panel ── -->
 <div class="tips-panel" id="tipsPanel" style="display:none;">
-    <h3>💡 Study Skills Tips</h3>
+    <h3>💡 English Language Tips</h3>
     <div id="tipsContent"></div>
 </div>
 
 <script>
 // ── Scenario Data ──
 const scenarios = [
-    // ── Critical Reading ──
+    // ── Language Analysis (Q2) ──
     {
         id: 1,
-        title: "Identifying Arguments",
-        skill: "Critical Reading",
-        icon: "🔍",
-        context: "You are reading a journal article for your first assignment. The author claims that 'social media has a detrimental effect on young people's mental health' and supports this with three studies, two of which are from the same research group.",
-        task: "<strong>Your task:</strong> Identify the author's main argument. Then note: (a) what evidence is used to support it, (b) any potential bias you can spot, and (c) one question you would want to ask before accepting the conclusion.",
-        hint: "💡 Look for the claim (what the author wants you to believe), the evidence (data or studies cited), and any assumptions (things taken for granted without proof).",
-        checklist: "<h4>✅ Self-check</h4><ul><li>Did I identify the main claim?</li><li>Did I note the type and source of evidence?</li><li>Did I spot any potential bias or limitation?</li><li>Did I formulate a critical question?</li></ul>",
+        title: "Analysing Sensory Language",
+        skill: "Language Analysis (Q2)",
+        icon: "👁️",
+        context: "Extract: 'The rain lashed against the grimy windows, each droplet a tiny fist hammering to be let in. The smell of damp wool and stale tea hung in the air like a ghost that refused to leave.'",
+        task: "<strong>Your task:</strong> Analyse how the writer uses language to create atmosphere. Identify at least two language features (e.g. simile, personification, sensory imagery) and explain their effect on the reader. Aim for 3–4 detailed points, as you would in a Q2 response.",
+        hint: "💡 Look for: personification ('tiny fist hammering'), simile ('like a ghost'), sensory details (sight, smell, sound). Ask: what feeling does each word create?",
+        checklist: "<h4>✅ Self-check</h4><ul><li>Did I identify specific language features?</li><li>Did I quote key words and phrases?</li><li>Did I explain the effect on the reader?</li><li>Did I use subject terminology accurately?</li></ul>",
         tips: [
-            { icon: "📌", text: "<strong>Arguments</strong> have three parts: a claim, evidence, and a warrant (the reasoning linking evidence to claim)." },
-            { icon: "⚠️", text: "<strong>Bias</strong> can come from funding sources, sample size, researcher assumptions, or publication date." },
-            { icon: "❓", text: "<strong>Critical questions</strong> to ask: Who produced this? Why? What is missing? Could there be another explanation?" }
+            { icon: "📝", text: "<strong>Subject terminology:</strong> use terms like 'simile', 'personification', 'metaphor', 'sensory imagery', 'pathetic fallacy' — but always explain the <em>effect</em>, not just name the device." },
+            { icon: "🔍", text: "<strong>Zoom in:</strong> pick single words or short phrases. 'Lashed' suggests violence and aggression; 'grimy' implies neglect and decay." },
+            { icon: "🎯", text: "<strong>Effect on reader:</strong> every language choice creates a feeling. Ask: does this make the reader feel uneasy, sympathetic, curious, or tense?" }
         ]
     },
     {
         id: 2,
-        title: "Evaluating Sources",
-        skill: "Critical Reading",
-        icon: "📰",
-        context: "You are researching the impact of remote learning on student attainment. You find four sources: a peer-reviewed journal article (2024), a government report (2023), a blog post by a university lecturer (2025), and a comment thread on a student forum (2024).",
-        task: "<strong>Your task:</strong> Rank these four sources in order of reliability for an academic assignment. For each source, explain why you placed it where you did. What criteria did you use to judge reliability?",
-        hint: "💡 Consider: peer review, author credentials, publication date, intended audience, and whether claims are supported by evidence.",
-        checklist: "<h4>✅ Self-check</h4><ul><li>Did I consider peer review status?</li><li>Did I check author expertise and affiliation?</li><li>Did I think about publication date and relevance?</li><li>Did I distinguish between primary and secondary sources?</li></ul>",
+        title: "Word Choice and Connotation",
+        skill: "Language Analysis (Q2)",
+        icon: "📖",
+        context: "Extract: 'The old house loomed at the end of the lane, its windows dark and hollow like the eye sockets of a skull. A broken gate hung from a single hinge, creaking a mournful song in the wind.'",
+        task: "<strong>Your task:</strong> Analyse the writer's choice of words and their connotations. Pick three words or phrases and explain what they suggest to the reader. Consider how the writer builds a sense of unease through specific lexical choices.",
+        hint: "💡 Connotation = the associations a word carries beyond its literal meaning. 'Loomed' suggests threat and dominance; 'hollow' suggests emptiness and death; 'mournful' suggests sadness and loss.",
+        checklist: "<h4>✅ Self-check</h4><ul><li>Did I select specific, powerful words to analyse?</li><li>Did I explain the connotations of each word?</li><li>Did I link word choices to the overall atmosphere?</li><li>Did I use accurate terminology?</li></ul>",
         tips: [
-            { icon: "📖", text: "<strong>Peer-reviewed</strong> sources have been checked by other experts — they are generally the gold standard for academic work." },
-            { icon: "🏛️", text: "<strong>Government and institutional</strong> reports are usually well-researched but may carry political or policy agendas." },
-            { icon: "💬", text: "<strong>Blogs and forums</strong> can be useful for current opinion but are not reliable as sole evidence for academic arguments." }
+            { icon: "📚", text: "<strong>Connotation vs denotation:</strong> denotation is the dictionary meaning; connotation is the emotional or cultural association. 'Skull' denotes a bone structure but connotes death, danger, fear." },
+            { icon: "🎨", text: "<strong>Semantic fields:</strong> groups of related words. Here, 'loomed', 'dark', 'hollow', 'skull', 'broken', 'mournful' all belong to a semantic field of decay and menace." },
+            { icon: "💡", text: "<strong>Build layers:</strong> one word can carry multiple connotations. 'Creaking' suggests age, neglect, and an unsettling sound — all at once." }
         ]
     },
     {
         id: 3,
-        title: "Spotting Logical Fallacies",
-        skill: "Critical Reading",
-        icon: "🧠",
-        context: "In a discussion forum for your module, a student posts: 'We should not invest in renewable energy because electric cars are too expensive and the technology is not ready yet. My uncle tried a solar panel and it broke after a year.'",
-        task: "<strong>Your task:</strong> Identify the logical fallacies in this argument. There are at least two. Explain why each is a fallacy and suggest how the argument could be made more logically sound.",
-        hint: "💡 Look for: hasty generalisation (one example = whole picture), straw man (oversimplifying the opposing view), false cause, or anecdotal evidence used as proof.",
-        checklist: "<h4>✅ Self-check</h4><ul><li>Did I spot the anecdotal fallacy?</li><li>Did I spot the hasty generalisation?</li><li>Did I explain why each is problematic?</li><li>Did I suggest a stronger way to argue?</li></ul>",
+        title: "Imagery and Figurative Language",
+        skill: "Language Analysis (Q2)",
+        icon: "🎭",
+        context: "Extract: 'The fog rolled in from the sea like a great grey blanket, smothering the town in silence. Street lamps became fuzzy orange halos, and the shouts of children playing were swallowed whole, as if the fog had teeth.'",
+        task: "<strong>Your task:</strong> Analyse the use of imagery and figurative language in this extract. Identify the simile and the metaphor/personification, and explain how each one shapes the reader's impression of the fog. What does the fog seem to 'do' in this passage?",
+        hint: "💡 'Like a great grey blanket' = simile (comfort turned sinister). 'Smothering' = personification (suggests violence). 'As if the fog had teeth' = simile (turns fog into a predator).",
+        checklist: "<h4>✅ Self-check</h4><ul><li>Did I identify the simile and explain its effect?</li><li>Did I identify the personification?</li><li>Did I explain how the fog is characterised as threatening?</li><li>Did I comment on the contrast between comfort and danger?</li></ul>",
         tips: [
-            { icon: "📉", text: "<strong>Anecdotal fallacy:</strong> using one personal story as if it proves a general rule. One broken solar panel does not mean all renewable energy is flawed." },
-            { icon: "🎯", text: "<strong>Hasty generalisation:</strong> drawing a broad conclusion from too little evidence. Electric car cost is only one small aspect of renewable energy." },
-            { icon: "🔄", text: "<strong>Straw man:</strong> misrepresenting an argument to make it easier to attack. The original claim was about investment, not about all technology being perfect." }
+            { icon: "🔄", text: "<strong>Simile vs metaphor:</strong> a simile uses 'like' or 'as'; a metaphor states something <em>is</em> something else. Both create comparisons but work slightly differently." },
+            { icon: "🎯", text: "<strong>Extended imagery:</strong> the writer builds the fog as a character — it 'smothers', 'swallows', has 'teeth'. This extended personification makes the setting feel alive and hostile." },
+            { icon: "📝", text: "<strong>Juxtaposition:</strong> 'great grey blanket' is comforting, but 'smothering' and 'teeth' are violent. This contrast creates unease." }
         ]
     },
     {
         id: 4,
-        title: "Reading with Purpose",
-        skill: "Critical Reading",
-        icon: "🎯",
-        context: "You have a 3,000-word essay due in two weeks on 'The causes of urbanisation in nineteenth-century Britain'. Your reading list contains 12 items — three journal articles, two book chapters, one government census report, and six textbook sections.",
-        task: "<strong>Your task:</strong> Plan your reading strategy. Which sources would you read first, and why? Which would you skim, and which would you read in full? How would you take notes differently for each type of source?",
-        hint: "💡 Not all reading needs to be done the same way. Use the SQ3R method: Survey, Question, Read, Recall, Review. Prioritise sources that directly address your essay question.",
-        checklist: "<h4>✅ Self-check</h4><ul><li>Did I prioritise sources by relevance to my question?</li><li>Did I plan different reading speeds for different sources?</li><li>Did I think about note-taking strategy in advance?</li><li>Did I set a realistic reading schedule?</li></ul>",
+        title: "Building Tension Through Language",
+        skill: "Language Analysis (Q2)",
+        icon: "⚡",
+        context: "Extract: 'The footsteps grew louder. Closer. Each one a measured, deliberate beat against the wooden floorboards. She pressed herself against the wall, holding her breath until her lungs burned. The door handle turned — slowly, slowly — with a metallic groan.'",
+        task: "<strong>Your task:</strong> Analyse how the writer uses language to build tension and suspense. Focus on: sentence structure (short sentences, repetition), sound imagery (onomatopoeia), and pacing. Explain how each technique contributes to the reader's sense of fear.",
+        hint: "💡 Short sentences = urgency. 'Closer.' as a one-word sentence creates a punchy, dramatic effect. Repetition of 'slowly' slows the reader down. 'Groan' = onomatopoeia, suggesting the door is reluctant or sinister.",
+        checklist: "<h4>✅ Self-check</h4><ul><li>Did I comment on sentence length and structure?</li><li>Did I identify onomatopoeia and its effect?</li><li>Did I analyse the use of repetition?</li><li>Did I explain how tension builds across the passage?</li></ul>",
         tips: [
-            { icon: "📋", text: "<strong>SQ3R method:</strong> Survey the headings, turn them into Questions, Read actively, Recall without looking, then Review what you missed." },
-            { icon: "⏱️", text: "<strong>Skim first:</strong> read abstracts, introductions, conclusions, and headings before deciding whether to read the full text." },
-            { icon: "📝", text: "<strong>Active reading:</strong> take notes in your own words, not copied. Ask yourself: How does this relate to my essay question?" }
+            { icon: "📏", text: "<strong>Sentence structures:</strong> short, abrupt sentences create pace and urgency. Longer, complex sentences slow the reader down. Mixing them controls the rhythm of tension." },
+            { icon: "🔊", text: "<strong>Onomatopoeia:</strong> words that sound like what they describe. 'Groan' sounds creaky and metallic — it makes the reader <em>hear</em> the tension." },
+            { icon: "🔄", text: "<strong>Repetition:</strong> 'slowly, slowly' forces the reader to dwell on the moment, stretching out the suspense. It mimics the character's perception of time slowing down." }
         ]
     },
 
-    // ── Note-Taking ──
+    // ── Structural Analysis (Q3) ──
     {
         id: 5,
-        title: "Cornell Notes",
-        skill: "Note-Taking",
-        icon: "📓",
-        context: "You are attending a lecture on 'The principles of cognitive load theory in instructional design'. The lecturer speaks quickly and covers: working memory limits (7±2 items), intrinsic vs extraneous load, the split-attention effect, and worked-example principles.",
-        task: "<strong>Your task:</strong> Using the Cornell method, organise these lecture notes into three sections: (1) Cue column — key questions and prompts, (2) Notes column — your main notes from the lecture, (3) Summary — a 2–3 sentence summary of the main takeaway.",
-        hint: "💡 Cornell method: draw a vertical line 1/3 from the left. Left column = cues/questions. Right column = notes. Bottom 5cm = summary after the lecture.",
-        checklist: "<h4>✅ Self-check</h4><ul><li>Did I separate cues from notes clearly?</li><li>Are my notes in my own words, not verbatim?</li><li>Did I write questions in the cue column?</li><li>Did I write a concise summary at the bottom?</li></ul>",
+        title: "Opening and Establishing Setting",
+        skill: "Structural Analysis (Q3)",
+        icon: "🏠",
+        context: "Extract (opening of a story): 'The train pulled into the station at exactly 7:14 pm. Martha stepped onto the platform and stopped. The station was empty — not a soul in sight. A single lamp flickered overhead, casting long, dancing shadows across the concrete. In the distance, a dog barked once and fell silent.'",
+        task: "<strong>Your task:</strong> Analyse how the writer structures the opening of this story to establish setting and atmosphere. Consider: what information does the writer give first? How does the focus shift? What effect does the final sentence have? How does the structure prepare the reader for what might come next?",
+        hint: "💡 Think about: the order of information (time → arrival → emptiness → sound), the narrowing focus (wide shot → close-up), and the final detail (the dog bark) which creates a sense of isolation.",
+        checklist: "<h4>✅ Self-check</h4><ul><li>Did I comment on the order of information?</li><li>Did I analyse the shift in focus?</li><li>Did I explain the effect of the final sentence?</li><li>Did I discuss how the opening prepares the reader?</li></ul>",
         tips: [
-            { icon: "📐", text: "<strong>Cornell layout:</strong> 2.5-inch cue column on the left, 6-inch notes column on the right, 2-inch summary strip at the bottom." },
-            { icon: "✍️", text: "<strong>Paraphrase, don't transcribe.</strong> Writing in your own words forces understanding. Aim for key ideas, not every word." },
-            { icon: "🔄", text: "<strong>Review within 24 hours.</strong> Cover the notes column and use the cue column to test yourself on the material." }
+            { icon: "🎬", text: "<strong>Opening structure:</strong> writers often start with a wide 'establishing shot' (the station) then zoom in (Martha's perspective, the lamp, the dog). This mimics film technique." },
+            { icon: "📉", text: "<strong>Narrowing focus:</strong> the passage moves from the general (train, time) to the specific (lamp, dog). This draws the reader deeper into the scene." },
+            { icon: "🔚", text: "<strong>Ending the opening:</strong> the final image (dog barking then silence) creates a cliffhanger effect — something is wrong, and the reader wants to know what." }
         ]
     },
     {
         id: 6,
-        title: "Mind Mapping",
-        skill: "Note-Taking",
-        icon: "🗺️",
-        context: "You need to understand the topic 'Factors influencing consumer behaviour' for a marketing module. The factors include: cultural (culture, subculture, social class), social (family, reference groups, roles), personal (age, occupation, lifestyle, personality), and psychological (motivation, perception, beliefs, attitudes).",
-        task: "<strong>Your task:</strong> Sketch a mind map for this topic. Start with the central concept 'Consumer Behaviour' and branch out to the four main categories, then add sub-branches for each factor. Think about how you would use colour, images, and connections to show relationships.",
-        hint: "💡 Mind maps work best when: the central idea is in the middle, main branches radiate out, use one keyword per branch, add colours and images to aid memory.",
-        checklist: "<h4>✅ Self-check</h4><ul><li>Is the central topic in the middle?</li><li>Are main branches clearly labelled?</li><li>Did I use one keyword per branch?</li><li>Did I show connections between related factors?</li></ul>",
+        title: "Shifts in Time and Perspective",
+        skill: "Structural Analysis (Q3)",
+        icon: "⏰",
+        context: "Extract: 'He remembered the beach as it had been that summer — golden sand, the shriek of gulls, his brother's hand in his as they ran towards the waves. Now, standing on the same shore twenty years later, the sand was grey, the sea flat and silent, and his brother was a name on a memorial bench.'",
+        task: "<strong>Your task:</strong> Analyse how the writer uses a shift in time to create contrast and emotional impact. How does the structure of the sentence (past vs present) mirror the character's experience? What is the effect of placing the two time periods side by side?",
+        hint: "💡 The shift is sudden — no warning, just 'Now'. The contrast is structural: past (warm, active, sensory) vs present (cold, flat, silent). The final detail ('a name on a memorial bench') delivers the emotional punch.",
+        checklist: "<h4>✅ Self-check</h4><ul><li>Did I identify the time shift and how it is signalled?</li><li>Did I compare the language of past vs present?</li><li>Did I explain the emotional effect of the contrast?</li><li>Did I comment on the structural placement of the final detail?</li></ul>",
         tips: [
-            { icon: "🎨", text: "<strong>Use colour</strong> to group related ideas — one colour per main branch helps your brain organise information visually." },
-            { icon: "🔗", text: "<strong>Cross-links</strong> between branches show relationships. For example, 'social class' (cultural) connects to 'lifestyle' (personal)." },
-            { icon: "📝", text: "<strong>Keep it simple.</strong> One keyword or short phrase per branch. Too much text defeats the purpose of a mind map." }
+            { icon: "🔄", text: "<strong>Structural contrast:</strong> placing two time periods side by side forces the reader to compare them. The gap between 'then' and 'now' <em>is</em> the story." },
+            { icon: "🎯", text: "<strong>Delayed revelation:</strong> the writer withholds the key information (the brother's death) until the very end of the sentence. This creates a slow reveal." },
+            { icon: "📝", text: "<strong>Structural mirroring:</strong> the sentence structure mirrors the character's mind — first dwelling in memory, then crashing back to the present." }
         ]
     },
     {
         id: 7,
-        title: "Lecture Note-Taking",
-        skill: "Note-Taking",
-        icon: "🎓",
-        context: "You are in a 50-minute lecture on 'The UK constitution'. The lecturer uses slides, gives examples, and occasionally asks questions. You find yourself trying to write everything down and falling behind.",
-        task: "<strong>Your task:</strong> Describe your note-taking strategy for this situation. What would you capture verbatim? What would you summarise? How would you handle the moments when the lecturer speaks faster than you can write? What would you do after the lecture to fill gaps?",
-        hint: "💡 You cannot write everything. Focus on: key definitions, important dates/names, the lecturer's structure (signposts like 'firstly', 'importantly'), and your own questions in the margin.",
-        checklist: "<h4>✅ Self-check</h4><ul><li>Did I plan a strategy before the lecture?</li><li>Did I identify what to capture vs what to summarise?</li><li>Did I leave space for gaps to fill later?</li><li>Did I plan a post-lecture review routine?</li></ul>",
+        title: "Pacing and Paragraph Length",
+        skill: "Structural Analysis (Q3)",
+        icon: "📏",
+        context: "Extract: 'She ran.\n\nThe corridor stretched endlessly before her, a tunnel of flickering lights and slamming doors. Her breath came in ragged gasps.\n\nBehind her, the footsteps.\n\nCloser now.\n\nA door. Locked.\n\nAnother. Locked.\n\nThe last door at the end — she threw herself at it. It gave way.'",
+        task: "<strong>Your task:</strong> Analyse how the writer uses paragraph length and structure to control pacing and build tension. Why are some paragraphs a single word or phrase? How does the rhythm of the paragraphs change from the beginning to the end? What effect does this have on the reader?",
+        hint: "💡 Short paragraphs = fast pace, urgency. Single-word paragraphs ('Locked.') create dramatic emphasis. Longer paragraphs slow the reader down. The pattern of short-long-short-short creates a breathless, panicked rhythm.",
+        checklist: "<h4>✅ Self-check</h4><ul><li>Did I comment on paragraph length variation?</li><li>Did I explain the effect of very short paragraphs?</li><li>Did I analyse how pacing changes across the extract?</li><li>Did I link structure to the reader's experience?</li></ul>",
         tips: [
-            { icon: "📌", text: "<strong>Listen for signposts:</strong> 'There are three key reasons...', 'The most important point is...', 'In contrast...' — these tell you what matters." },
-            { icon: "⏭️", text: "<strong>Leave gaps</strong> if you fall behind. Put a '?' in the margin and move on. Fill gaps after the lecture using the recording, a friend, or the slides." },
-            { icon: "🔄", text: "<strong>Review and revise</strong> your notes within 24 hours. This is when real learning happens — clarify, condense, and connect." }
+            { icon: "📊", text: "<strong>Paragraph length = pace:</strong> short paragraphs create speed and urgency. Longer paragraphs suggest reflection or description. The writer controls how fast we read." },
+            { icon: "⏸️", text: "<strong>White space:</strong> the gaps between short paragraphs create pauses that heighten tension. Each pause is a moment for the reader to feel the character's fear." },
+            { icon: "📈", text: "<strong>Crescendo structure:</strong> the paragraphs get shorter and more urgent as the chase intensifies, then the final longer paragraph ('She threw herself at it') releases the tension." }
         ]
     },
     {
         id: 8,
-        title: "Digital vs Handwritten Notes",
-        skill: "Note-Taking",
-        icon: "📱",
-        context: "You are deciding whether to take notes on a laptop/tablet or by hand for your modules. Research suggests handwriting leads to better conceptual understanding, but digital notes are faster and more searchable.",
-        task: "<strong>Your task:</strong> For each of the following scenarios, decide which method you would use and why: (a) a fast-paced lecture with lots of data, (b) a seminar focused on discussion and debate, (c) reading a dense journal article at home, (d) a group project brainstorming session.",
-        hint: "💡 The best method depends on the context. Consider: speed needed, type of content, whether you need to search later, and how you will use the notes afterwards.",
-        checklist: "<h4>✅ Self-check</h4><ul><li>Did I consider the type of content for each scenario?</li><li>Did I think about how I will use the notes later?</li><li>Did I consider the trade-off between speed and understanding?</li><li>Did I justify each choice with a reason?</li></ul>",
+        title: "Focus and Perspective Shifts",
+        skill: "Structural Analysis (Q3)",
+        icon: "🎥",
+        context: "Extract: 'The market square was heaving. Stallholders shouted their prices, children wove between legs, and the smell of fresh bread and fried onions filled the air. Mrs Kapoor watched from her window above the bakery. She saw the young man first — the one who did not belong, who stood too still, whose eyes scanned the crowd not with curiosity but with purpose.'",
+        task: "<strong>Your task:</strong> Analyse how the writer shifts focus from the general to the specific. How does the structure move from the crowd to one person? Why does the writer establish the busy market scene before zooming in on the young man? What is the effect of the final clause ('not with curiosity but with purpose')?",
+        hint: "💡 The structure moves: wide shot (market) → sensory details (sounds, smells) → a specific character (Mrs Kapoor) → her perspective → a specific detail (the young man). This narrowing creates suspense.",
+        checklist: "<h4>✅ Self-check</h4><ul><li>Did I identify the shift from general to specific?</li><li>Did I explain why the writer establishes the setting first?</li><li>Did I analyse the effect of the perspective shift?</li><li>Did I comment on the structural placement of key details?</li></ul>",
         tips: [
-            { icon: "✏️", text: "<strong>Handwriting</strong> forces you to process and summarise — better for understanding concepts and remembering material long-term." },
-            { icon: "💻", text: "<strong>Digital notes</strong> are better for data-heavy lectures, searching later, and sharing with study groups." },
-            { icon: "🔄", text: "<strong>Hybrid approach:</strong> handwrite during lectures for understanding, then type up and organise digitally afterwards for revision." }
+            { icon: "🎬", text: "<strong>Zoom structure:</strong> wide shot (the whole market) → medium shot (Mrs Kapoor's window) → close-up (the young man). Each level narrows the reader's focus." },
+            { icon: "👁️", text: "<strong>Perspective shift:</strong> the writer moves from an omniscient view to Mrs Kapoor's specific point of view. This makes the reader share her suspicion." },
+            { icon: "🎯", text: "<strong>Delayed detail:</strong> the final clause ('not with curiosity but with purpose') redefines everything the reader has just visualised. The structure forces us to re-evaluate." }
         ]
     },
 
-    // ── Essay Planning ──
+    // ── Creative Writing (Q5) ──
     {
         id: 9,
-        title: "Analysing the Question",
-        skill: "Essay Planning",
-        icon: "❓",
-        context: "Your assignment title is: 'Evaluate the view that the primary purpose of the criminal justice system is rehabilitation rather than punishment.'",
-        task: "<strong>Your task:</strong> Break down this essay question. Identify: (a) the instruction word and what it requires, (b) the key concepts you need to define, (c) the scope (what is included and excluded), and (d) the position you might argue. Then write a one-sentence thesis statement.",
-        hint: "💡 Instruction words matter: 'Evaluate' means weigh up strengths and weaknesses and reach a judgement. 'Discuss' means explore different perspectives. 'Analyse' means break into parts and examine relationships.",
-        checklist: "<h4>✅ Self-check</h4><ul><li>Did I identify the instruction word correctly?</li><li>Did I define the key concepts?</li><li>Did I consider the scope of the question?</li><li>Did I write a clear thesis statement?</li></ul>",
+        title: "Writing a Descriptive Opening",
+        skill: "Creative Writing (Q5)",
+        icon: "✍️",
+        context: "Prompt: 'Write the opening of a story set in a busy city market at dawn.' You have 10 minutes to plan and write the first paragraph.",
+        task: "<strong>Your task:</strong> Write a descriptive opening paragraph (150–200 words) for this prompt. Focus on: sensory details (sights, sounds, smells), varied sentence openings, and at least one simile or metaphor. Use the reflection box below to draft your response.",
+        hint: "💡 Start with atmosphere, not action. Use the senses: what does dawn look like? What sounds are just beginning? What smells are in the air? Vary your sentence openings — don't start every sentence with 'The'.",
+        checklist: "<h4>✅ Self-check</h4><ul><li>Did I use sensory details (at least 3 senses)?</li><li>Did I vary my sentence openings?</li><li>Did I include at least one simile or metaphor?</li><li>Did I create a clear atmosphere?</li></ul>",
         tips: [
-            { icon: "📖", text: "<strong>Instruction words:</strong> Evaluate = judge the merits. Critically analyse = examine strengths and weaknesses. To what extent = how far do you agree?" },
-            { icon: "🎯", text: "<strong>Thesis statement</strong> is your answer in one sentence. It should state your position and hint at your main reasons." },
-            { icon: "📏", text: "<strong>Scope</strong> defines boundaries. Does 'criminal justice system' include courts, prisons, probation, and policing? Be precise." }
+            { icon: "🌅", text: "<strong>Show, don't tell:</strong> instead of 'it was early morning', write 'the first pale light crept over the rooftops, painting the cobbles in shades of grey and gold.'" },
+            { icon: "📝", text: "<strong>Vary sentence openings:</strong> try starting with an adverb ('Slowly, the stalls began to appear'), a preposition ('Beneath the awnings, shadows stirred'), or a verb ('Crates were stacked, awnings unfurled, the day began.')." },
+            { icon: "🎨", text: "<strong>Sensory layering:</strong> build the scene one sense at a time. Sight first (what can be seen), then sound (the first voices), then smell (fresh bread, coffee, diesel)." }
         ]
     },
     {
         id: 10,
-        title: "Building an Outline",
-        skill: "Essay Planning",
-        icon: "📋",
-        context: "You have analysed the question and your thesis is: 'While rehabilitation is an important ideal, the criminal justice system in practice prioritises punishment due to political pressures, public opinion, and resource constraints.'",
-        task: "<strong>Your task:</strong> Create a detailed essay outline with: (a) an introduction structure, (b) 3–4 main body paragraphs each with a topic sentence, evidence you would use, and how it links to your thesis, (c) a conclusion structure. Use bullet points.",
-        hint: "💡 A strong paragraph: Topic sentence (claim) → Evidence (source) → Explanation (how it supports) → Link (back to thesis). PEEL structure: Point, Evidence, Explanation, Link.",
-        checklist: "<h4>✅ Self-check</h4><ul><li>Does each paragraph have a clear topic sentence?</li><li>Have I planned specific evidence for each point?</li><li>Does each paragraph link back to my thesis?</li><li>Does my conclusion do more than summarise?</li></ul>",
+        title: "Building Character Through Description",
+        skill: "Creative Writing (Q5)",
+        icon: "👤",
+        context: "Prompt: 'Describe a character who is waiting for someone who never arrives.' You have 10 minutes to write a focused character description.",
+        task: "<strong>Your task:</strong> Write a descriptive paragraph (150–200 words) that reveals the character's emotions through their appearance, actions, and surroundings. Do not state the emotion directly — show it through detail. Use the reflection box below to draft your response.",
+        hint: "💡 Show emotion through: physical details (fidgeting, staring at a watch), the environment (a coffee growing cold, a phone screen dimming), and small actions (re-reading the same message, sighing).",
+        checklist: "<h4>✅ Self-check</h4><ul><li>Did I show emotion rather than tell it?</li><li>Did I use physical details to reveal character?</li><li>Did I use the setting to reflect the character's mood?</li><li>Did I avoid stating feelings directly?</li></ul>",
         tips: [
-            { icon: "📝", text: "<strong>PEEL paragraphs:</strong> Point (your claim), Evidence (source citation), Explanation (analyse the evidence), Link (connect back to the question)." },
-            { icon: "🔗", text: "<strong>Signposting</strong> helps the reader follow your argument: 'Having established X, this essay will now turn to Y...'" },
-            { icon: "🏁", text: "<strong>Conclusions</strong> should synthesise, not just summarise. Restate your thesis in light of the evidence presented and suggest wider implications." }
+            { icon: "🎭", text: "<strong>Show, don't tell:</strong> 'She was sad' → 'She traced the rim of her coffee cup, watching the steam curl and disappear. The third time she checked her phone, the screen stayed dark.'" },
+            { icon: "🪞", text: "<strong>Pathetic fallacy:</strong> use the weather or environment to reflect emotion. A grey, drizzly day can mirror disappointment; a bright, sunny room can contrast with inner sadness." },
+            { icon: "✂️", text: "<strong>Specific details:</strong> 'a coffee growing cold' is more powerful than 'she was waiting'. Specific, concrete details create vivid characters." }
         ]
     },
     {
         id: 11,
-        title: "Using Evidence Effectively",
-        skill: "Essay Planning",
-        icon: "📚",
-        context: "You are writing a paragraph arguing that 'social media algorithms contribute to political polarisation'. You have three sources: a 2023 peer-reviewed study of 5,000 users, a 2025 opinion piece in a major newspaper, and a 2022 government select committee report.",
-        task: "<strong>Your task:</strong> Write a sample paragraph using the PEEL structure. Use the peer-reviewed study as your primary evidence, the government report as supporting context, and note why you would not rely on the opinion piece as evidence. Include proper citation references.",
-        hint: "💡 Prioritise evidence by strength: peer-reviewed research > official reports > expert commentary > news articles > opinion pieces. Always cite the strongest source first.",
-        checklist: "<h4>✅ Self-check</h4><ul><li>Did I use the strongest source as primary evidence?</li><li>Did I explain how the evidence supports my point?</li><li>Did I integrate multiple sources effectively?</li><li>Did I explain why weaker sources were excluded?</li></ul>",
+        title: "Using the Five Senses",
+        skill: "Creative Writing (Q5)",
+        icon: "👃",
+        context: "Prompt: 'Describe a place that feels abandoned and forgotten.' You have 10 minutes to write a sensory-rich description.",
+        task: "<strong>Your task:</strong> Write a descriptive paragraph (150–200 words) that uses all five senses to bring this abandoned place to life. Think about: what would you see, hear, smell, feel (touch), and even taste (dust, damp, stale air)? Use the reflection box below to draft your response.",
+        hint: "💡 Most writers only use sight and sound. Using smell, touch, and taste makes your writing stand out. 'The air tasted of rust and decay.' 'The floorboards felt spongy beneath her feet.'",
+        checklist: "<h4>✅ Self-check</h4><ul><li>Did I use at least 4 of the 5 senses?</li><li>Did I avoid clichés (e.g. 'eerie silence')?</li><li>Did I use specific, original imagery?</li><li>Did I create a consistent atmosphere?</li></ul>",
         tips: [
-            { icon: "📊", text: "<strong>Primary evidence</strong> should be peer-reviewed research or official data. Use it to make your main point." },
-            { icon: "🔗", text: "<strong>Supporting evidence</strong> adds context. A government report can show real-world relevance of academic findings." },
-            { icon: "⚠️", text: "<strong>Opinion pieces</strong> are not evidence for academic arguments. They can illustrate a debate but not prove a claim." }
+            { icon: "👃", text: "<strong>Smell is powerful:</strong> it triggers memory and emotion more strongly than any other sense. 'The air was thick with the smell of damp plaster and mouse droppings.'" },
+            { icon: "✋", text: "<strong>Touch (tactile imagery):</strong> describe textures — rough, slimy, sticky, cold, sharp. 'Her fingers left trails in the dust on the windowsill.'" },
+            { icon: "👅", text: "<strong>Taste:</strong> even if no one is eating, the air can have a taste. 'The fog tasted of salt and diesel.' 'The dust coated her tongue like chalk.'" }
         ]
     },
     {
         id: 12,
-        title: "Writing a Thesis Statement",
-        skill: "Essay Planning",
-        icon: "🎯",
-        context: "Your essay question is: 'Discuss the impact of the Industrial Revolution on working-class living conditions in urban Britain (1750–1850).'",
-        task: "<strong>Your task:</strong> Write three different thesis statements for this question: (a) one arguing that conditions worsened, (b) one arguing that conditions improved, (c) one taking a balanced 'it depends on the period and location' position. For each, explain what kind of evidence you would need.",
-        hint: "💡 A strong thesis is: specific (not vague), arguable (not a fact), and focused (covers what you can manage in the word count). Avoid 'This essay will discuss...' — state your position directly.",
-        checklist: "<h4>✅ Self-check</h4><ul><li>Is each thesis arguable, not just descriptive?</li><li>Is each thesis specific enough to guide the essay?</li><li>Did I consider what evidence each position requires?</li><li>Did I avoid vague language like 'very' or 'important'?</li></ul>",
+        title: "Narrative Voice and Perspective",
+        skill: "Creative Writing (Q5)",
+        icon: "🎙️",
+        context: "Prompt: 'Write about a time someone had to make a difficult decision.' You have 10 minutes to write a short narrative from the first-person perspective.",
+        task: "<strong>Your task:</strong> Write a first-person narrative paragraph (150–200 words) about making a difficult decision. Focus on: the character's internal thoughts, sensory details of the moment, and the weight of the choice. Use the first person ('I') throughout. Use the reflection box below to draft your response.",
+        hint: "💡 First-person narrative gives direct access to thoughts and feelings. Use short, fragmented sentences for anxiety. Use questions ('What if I'm wrong?') to show internal conflict. Show the physical sensations of stress (sweating, racing heart).",
+        checklist: "<h4>✅ Self-check</h4><ul><li>Did I maintain first-person perspective throughout?</li><li>Did I include internal thoughts and feelings?</li><li>Did I show physical reactions to stress?</li><li>Did I create a sense of the decision's weight?</li></ul>",
         tips: [
-            { icon: "✍️", text: "<strong>Bad thesis:</strong> 'The Industrial Revolution had an impact on living conditions.' <strong>Good thesis:</strong> 'While urban sanitation initially deteriorated, by 1840 public health reforms had begun to improve working-class living conditions in northern industrial towns.'" },
-            { icon: "📏", text: "<strong>Scope control:</strong> a thesis that tries to cover everything will end up covering nothing well. Be precise about time, place, and aspect." },
-            { icon: "🔄", text: "<strong>Your thesis can evolve</strong> as you research. It is a working statement, not set in stone. Revise it as your understanding deepens." }
+            { icon: "💭", text: "<strong>Interior monologue:</strong> first person lets the reader hear the character's unspoken thoughts. 'My hand hovered over the letter. Sign it, and everything changes. Don't sign, and nothing does.'" },
+            { icon: "💓", text: "<strong>Physical sensations:</strong> 'My heart hammered against my ribs. My palms were slick with sweat. The pen felt heavy, impossibly heavy.'" },
+            { icon: "❓", text: "<strong>Rhetorical questions:</strong> 'Was I doing the right thing? Could I live with the consequences either way?' These show the character weighing options." }
         ]
     },
 
-    // ── Time Management ──
+    // ── Reading Comprehension (Q1) ──
     {
         id: 13,
-        title: "Weekly Planning",
-        skill: "Time Management",
-        icon: "📅",
-        context: "It is Week 5 of your first semester. This week you have: a 2,000-word essay draft due Friday, two lectures (Monday and Wednesday), a seminar with required reading (Tuesday), a group project meeting (Thursday), and a part-time job on Saturday (6 hours). You also need to eat, sleep, and exercise.",
-        task: "<strong>Your task:</strong> Create a realistic weekly schedule. Block out: fixed commitments (lectures, work), study blocks for the essay (break it into smaller tasks), reading time, and breaks. Be honest about when you work best. Identify one potential time-wasting trap and how you will avoid it.",
-        hint: "💡 Use the Eisenhower Matrix: urgent + important (do first), important but not urgent (schedule), urgent but not important (delegate), neither (eliminate). Break big tasks into 25-minute Pomodoro sessions.",
-        checklist: "<h4>✅ Self-check</h4><ul><li>Did I include fixed commitments first?</li><li>Did I break the essay into smaller tasks?</li><li>Did I schedule breaks and downtime?</li><li>Did I plan for my most productive hours?</li></ul>",
+        title: "Explicit Information Retrieval",
+        skill: "Reading Comprehension (Q1)",
+        icon: "🔎",
+        context: "Extract: 'The library was silent except for the ticking of the grandfather clock. An old man sat in the corner, his head bowed over a newspaper. A young woman in a blue coat walked slowly between the shelves, trailing her fingers along the spines of the books. She stopped at a section marked 'Travel' and pulled out a worn volume with a faded cover.'",
+        task: "<strong>Your task:</strong> List four things you learn from this extract. Each point should be a specific piece of information stated directly in the text. This is exactly what Q1 asks you to do — retrieve explicit details, not infer or interpret.",
+        hint: "💡 Q1 only tests retrieval — do not analyse or infer. Look for facts: who, what, where, when. 'The library was silent' = one point. 'An old man sat in the corner' = another. Keep each point brief and precise.",
+        checklist: "<h4>✅ Self-check</h4><ul><li>Did I find four separate pieces of information?</li><li>Is each point stated directly in the text?</li><li>Did I avoid adding my own interpretation?</li><li>Did I keep each point brief and precise?</li></ul>",
         tips: [
-            { icon: "🍅", text: "<strong>Pomodoro Technique:</strong> 25 minutes focused work, 5 minutes break. After 4 cycles, take a longer 15–30 minute break." },
-            { icon: "📊", text: "<strong>Eisenhower Matrix:</strong> Quadrant 1 (urgent + important) = do now. Quadrant 2 (important, not urgent) = schedule. Quadrant 3 (urgent, not important) = delegate. Quadrant 4 (neither) = eliminate." },
-            { icon: "🚫", text: "<strong>Identify your time traps:</strong> social media, perfectionism, over-planning, saying yes too often. Plan one specific strategy to counter yours." }
+            { icon: "📋", text: "<strong>Q1 format:</strong> 'List four things...' (4 marks). Each mark is a separate, explicit detail from the text. No analysis needed — just accurate retrieval." },
+            { icon: "✂️", text: "<strong>Be precise:</strong> use the text's own words or a close paraphrase. 'A young woman in a blue coat' is better than 'a woman was there'." },
+            { icon: "⚠️", text: "<strong>Common mistake:</strong> students often infer or analyse in Q1. 'The library is quiet and peaceful' is an interpretation. 'The library was silent except for the ticking of the grandfather clock' is a direct quote." }
         ]
     },
     {
         id: 14,
-        title: "Overcoming Procrastination",
-        skill: "Time Management",
-        icon: "🐢",
-        context: "You have a 3,000-word essay due in 10 days. You have done the reading but keep putting off the actual writing. Every time you sit down, you check your phone, tidy your desk, or 'just quickly' check emails. The deadline is approaching and the anxiety is growing.",
-        task: "<strong>Your task:</strong> Identify three specific strategies you would use to overcome this procrastination. For each strategy, explain: (a) what it involves, (b) why it works psychologically, and (c) how you would implement it starting today.",
-        hint: "💡 Procrastination is often about emotional regulation, not laziness. Strategies include: the 2-minute rule, implementation intentions, reducing friction, and the Pomodoro Technique.",
-        checklist: "<h4>✅ Self-check</h4><ul><li>Did I identify the emotional cause of procrastination?</li><li>Did I suggest actionable, specific strategies?</li><li>Did I explain why each strategy works?</li><li>Did I plan to start today, not tomorrow?</li></ul>",
+        title: "Selecting Relevant Details",
+        skill: "Reading Comprehension (Q1)",
+        icon: "🎯",
+        context: "Extract: 'The carnival arrived on a Tuesday, though no one could agree how. One morning it was simply there — a sprawl of striped tents and creaking rides on the common. A man with a megaphone announced the attractions in a language no one understood. Children pressed their faces against the fence, mesmerised. The smell of candyfloss and diesel hung in the air. By Friday, it was gone.'",
+        task: "<strong>Your task:</strong> List four things you learn about the carnival from this extract. Remember: Q1 asks for explicit information only. Select the clearest, most specific details. Avoid adding any commentary or analysis.",
+        hint: "💡 Scan for facts: 'arrived on a Tuesday', 'striped tents and creaking rides', 'a man with a megaphone', 'children pressed their faces against the fence', 'by Friday, it was gone'. Pick the four most concrete details.",
+        checklist: "<h4>✅ Self-check</h4><ul><li>Did I select four explicit details?</li><li>Are my points clearly linked to the text?</li><li>Did I avoid adding my own interpretation?</li><li>Did I use precise language from the extract?</li></ul>",
         tips: [
-            { icon: "⏱️", text: "<strong>The 2-minute rule:</strong> if a task takes less than 2 minutes, do it now. If it takes longer, commit to just 2 minutes of it — starting is the hardest part." },
-            { icon: "📝", text: "<strong>Implementation intentions:</strong> 'When I sit at my desk at 10am, I will write for 25 minutes without interruption.' Specific plans beat vague intentions." },
-            { icon: "🔗", text: "<strong>Reduce friction:</strong> put your phone in another room, close unnecessary tabs, have your outline ready. Make the desired behaviour easy and the undesired behaviour hard." }
+            { icon: "📝", text: "<strong>Bullet points are fine:</strong> in the exam, you can use bullet points or short sentences for Q1. The examiner just needs to see four clear, accurate points." },
+            { icon: "🔍", text: "<strong>Scanning technique:</strong> read the question first, then scan the text for facts. Underline or note each piece of information as you find it." },
+            { icon: "⏱️", text: "<strong>Time management:</strong> Q1 should take about 5 minutes. Do not spend longer — the marks are for retrieval, not analysis." }
         ]
     },
     {
         id: 15,
-        title: "Prioritising Tasks",
-        skill: "Time Management",
-        icon: "⚡",
-        context: "You have four tasks due this week: (1) a 10% quiz for one module (closes Friday), (2) a 500-word reading response (due Wednesday), (3) start research for a 40% essay (due in 4 weeks), (4) a group presentation rehearsal (Thursday evening). You also need to prepare for a tutorial on Friday.",
-        task: "<strong>Your task:</strong> Prioritise these tasks using the Eisenhower Matrix. For each task, state which quadrant it falls into and why. Then order them from 'do first' to 'do last' with a brief justification for your order.",
-        hint: "💡 Urgent = imminent deadline. Important = contributes to your long-term goals or grade. A task can be urgent without being important (e.g. a low-stakes admin task due tomorrow).",
-        checklist: "<h4>✅ Self-check</h4><ul><li>Did I correctly distinguish urgent from important?</li><li>Did I justify each quadrant placement?</li><li>Did I consider long-term impact, not just deadlines?</li><li>Is my final order realistic and actionable?</li></ul>",
+        title: "Distinguishing Fact from Inference",
+        skill: "Reading Comprehension (Q1)",
+        icon: "🧩",
+        context: "Extract: 'The letter lay on the doormat, its envelope smudged and crumpled. Sarah picked it up with trembling hands. She had not expected to hear from him again. The postmark was dated three weeks ago — it must have been lost, forwarded, redirected. She tore it open and read the first line. Then she sat down, very slowly, as if the air had gone out of the room.'",
+        task: "<strong>Your task:</strong> Identify which of the following are explicit facts (stated directly in the text) and which are inferences (not directly stated): (a) The letter was from a man Sarah used to know. (b) The envelope was smudged and crumpled. (c) Sarah was nervous. (d) The postmark was dated three weeks ago. (e) The letter contained bad news. Explain your reasoning for each.",
+        hint: "💡 Explicit = stated in the text. 'The envelope was smudged and crumpled' is explicit. 'Sarah was nervous' is an inference — the text says 'trembling hands' but does not say 'nervous'.",
+        checklist: "<h4>✅ Self-check</h4><ul><li>Did I correctly identify each as fact or inference?</li><li>Did I explain my reasoning for each?</li><li>Did I understand the difference between 'stated' and 'suggested'?</li><li>Did I avoid over-reading into the text?</li></ul>",
         tips: [
-            { icon: "📊", text: "<strong>Quadrant 1 (urgent + important):</strong> do these first — the quiz and reading response." },
-            { icon: "📈", text: "<strong>Quadrant 2 (important, not urgent):</strong> schedule these — the essay research and tutorial prep. This is where real progress happens." },
-            { icon: "📉", text: "<strong>Quadrant 3 (urgent, not important):</strong> delegate or minimise — the group rehearsal if others can lead. <strong>Quadrant 4 (neither):</strong> eliminate." }
+            { icon: "📖", text: "<strong>Fact vs inference:</strong> a fact is something the text explicitly states. An inference is something you work out from clues. Q1 only tests facts." },
+            { icon: "⚠️", text: "<strong>Watch for 'showing':</strong> 'trembling hands' shows anxiety but does not state 'she was anxious'. That is an inference, not a fact for Q1." },
+            { icon: "💡", text: "<strong>Test yourself:</strong> ask 'does the text literally say this?' If the answer is 'no, but it suggests it', then it is an inference." }
         ]
     },
     {
         id: 16,
-        title: "Managing Multiple Deadlines",
-        skill: "Time Management",
-        icon: "📚",
-        context: "You have three assignments due in the same week: a 1,500-word report (Monday), a group presentation (Wednesday), and a 2,500-word essay (Friday). You also have two part-time shifts that week (Tuesday and Thursday evenings).",
-        task: "<strong>Your task:</strong> Plan your approach to this week. How would you allocate your time across the three assignments? Would you work on them sequentially or in parallel? How would you handle the group presentation (coordinating with others)? What would you do in Week 1 to prevent this situation from being so stressful?",
-        hint: "💡 Work backwards from each deadline. Break each assignment into stages. Consider: can you submit the report early to free up Wednesday? Can you prepare your presentation section in advance?",
-        checklist: "<h4>✅ Self-check</h4><ul><li>Did I work backwards from deadlines?</li><li>Did I break each assignment into stages?</li><li>Did I plan for group coordination?</li><li>Did I think about prevention for next time?</li></ul>",
+        title: "Precise Quotation Skills",
+        skill: "Reading Comprehension (Q1)",
+        icon: "📌",
+        context: "Extract: 'The classroom was stuffy and too warm. Miss Horton stood at the front, her glasses perched on the end of her nose, tapping a ruler against the palm of her hand. A boy in the back row yawned loudly. Someone dropped a textbook with a thud that echoed off the walls. Through the window, the playing fields shimmered in the June heat.'",
+        task: "<strong>Your task:</strong> List four things you learn from this extract. For each point, include a short quotation from the text to support your answer. Practise using quotation marks correctly and keeping your quotes brief — just the key words.",
+        hint: "💡 Each point should be: 'The text says [point] — for example, "[quote]".' Keep quotes short — a few words, not whole sentences. 'The classroom was stuffy' is a point; 'stuffy and too warm' is the quote.",
+        checklist: "<h4>✅ Self-check</h4><ul><li>Did I find four explicit details?</li><li>Did I include a short quotation for each?</li><li>Are my quotation marks correct?</li><li>Did I keep quotes brief and precise?</li></ul>",
         tips: [
-            { icon: "📅", text: "<strong>Backwards planning:</strong> start with the final deadline, then add milestones backwards. 'Essay due Friday → draft by Wednesday → outline by Monday → research this weekend.'" },
-            { icon: "👥", text: "<strong>Group work:</strong> agree roles and deadlines early. Use shared documents and set internal deadlines 2 days before the actual deadline." },
-            { icon: "🛡️", text: "<strong>Prevention:</strong> at the start of the semester, map all deadlines onto a calendar. Start the hardest assignment first when you have the most energy." }
+            { icon: "📝", text: "<strong>Embedding quotes:</strong> 'The classroom is described as \"stuffy and too warm\", suggesting an uncomfortable environment.' For Q1, you can simply state the fact and quote it." },
+            { icon: "✂️", text: "<strong>Short quotes:</strong> 'tapping a ruler against the palm of her hand' is a full phrase. 'tapping a ruler' is enough to support the point that Miss Horton was impatient." },
+            { icon: "🎯", text: "<strong>Quote integration:</strong> 'The weather was hot — the text mentions \"the playing fields shimmered in the June heat\".' This is clear, precise, and well-supported." }
         ]
     },
 
-    // ── Research Skills ──
+    // ── SPaG Practice ──
     {
         id: 17,
-        title: "Database Search Strategies",
-        skill: "Research Skills",
-        icon: "🔎",
-        context: "You need to find academic sources for an essay on 'The effectiveness of mindfulness-based interventions for treating anxiety disorders in adolescents.'",
-        task: "<strong>Your task:</strong> Develop a search strategy. Write: (a) your main search terms and alternative keywords, (b) Boolean operators you would use, (c) limiters/filters you would apply (date range, peer review, age group, etc.), (d) which databases you would search and why.",
-        hint: "💡 Use Boolean operators: AND narrows (mindfulness AND anxiety), OR broadens (adolescents OR teenagers OR youth), NOT excludes (NOT adults). Use truncation: mindful* finds mindfulness, mindful, mindfully.",
-        checklist: "<h4>✅ Self-check</h4><ul><li>Did I identify alternative keywords?</li><li>Did I use Boolean operators correctly?</li><li>Did I choose appropriate limiters?</li><li>Did I select relevant databases?</li></ul>",
+        title: "Apostrophes: Possession vs Contraction",
+        skill: "SPaG Practice",
+        icon: "🔤",
+        context: "Sentences to correct: (1) 'The dogs bowl was empty.' (2) 'Its been a long day.' (3) 'The students essays were excellent.' (4) 'Whos coming to the party?' (5) 'The childrens toys were scattered everywhere.'",
+        task: "<strong>Your task:</strong> Correct each sentence by adding or removing apostrophes as needed. For each correction, explain whether the apostrophe indicates possession or contraction. Remember: 'its' (possessive) vs 'it's' (it is); 'whose' (possessive) vs 'who's' (who is).",
+        hint: "💡 Possession: the dog's bowl (the bowl belongs to the dog). Contraction: it's = it is. Plural possession: students' essays (essays belonging to multiple students). Irregular plural: children's toys (children is already plural, so add 's).",
+        checklist: "<h4>✅ Self-check</h4><ul><li>Did I correctly identify possession vs contraction?</li><li>Did I handle plural possession correctly?</li><li>Did I remember 'its' vs 'it's'?</li><li>Did I handle irregular plurals (children, men, women)?</li></ul>",
         tips: [
-            { icon: "🔤", text: "<strong>Boolean basics:</strong> 'mindfulness AND anxiety AND adolescents' narrows. 'adolescents OR teenagers OR youth' broadens. Use parentheses: (mindfulness OR meditation) AND (anxiety OR stress)." },
-            { icon: "📚", text: "<strong>Key databases:</strong> PsycINFO (psychology), PubMed (medical/health), Web of Science (multidisciplinary), Google Scholar (broad but less filtered)." },
-            { icon: "✂️", text: "<strong>Truncation:</strong> therap* finds therapy, therapies, therapist, therapeutic. adolescen* finds adolescent, adolescents, adolescence." }
+            { icon: "📖", text: "<strong>Possession rule:</strong> singular noun = add 's (the dog's bowl). Plural noun ending in s = add ' (the students' essays). Plural noun not ending in s = add 's (the children's toys)." },
+            { icon: "⚠️", text: "<strong>Its vs It's:</strong> 'it's' always means 'it is' or 'it has'. 'Its' is possessive (belonging to it). If you can replace it with 'it is', use an apostrophe." },
+            { icon: "❌", text: "<strong>Common error:</strong> 'who's' = who is / who has. 'Whose' = belonging to whom. 'Whose coat is this?' is correct. 'Who's coming?' is correct (who is)." }
         ]
     },
     {
         id: 18,
-        title: "Referencing and Citation",
-        skill: "Research Skills",
-        icon: "📖",
-        context: "You have written a paragraph that draws on: a book by Smith (2020, p. 45), a journal article by Jones and Patel (2022), a website from the NHS (2024, no author), and an idea you heard in a lecture but cannot find the original source for.",
-        task: "<strong>Your task:</strong> For each source, write the correct in-text citation and full reference in Harvard style (the style used by the University of Wolverhampton). For the lecture idea, explain the ethical approach — can you use it, and if so, how should you cite it?",
-        hint: "💡 Harvard style: (Author, Year) in text. Full reference: Author, I. (Year) Title. Edition. Place: Publisher. For websites: (Organisation, Year) and include the URL and access date.",
-        checklist: "<h4>✅ Self-check</h4><ul><li>Are all in-text citations correctly formatted?</li><li>Are all full references complete and consistent?</li><li>Did I handle the no-author source correctly?</li><li>Did I address the ethical issue with the lecture idea?</li></ul>",
+        title: "Commas: Lists, Clauses, and Clarity",
+        skill: "SPaG Practice",
+        icon: "📝",
+        context: "Sentences to punctuate: (1) 'She bought apples pears bananas and grapes.' (2) 'After the rain stopped we went for a walk.' (3) 'The man who was wearing a red hat waved at us.' (4) 'I enjoy cooking my family and my dog.' (5) 'Although he was tired he kept working.'",
+        task: "<strong>Your task:</strong> Add commas where needed in each sentence. For each correction, explain the rule you applied: listing commas, subordinate clause commas, or commas for clarity (avoiding ambiguity).",
+        hint: "💡 Listing commas: 'apples, pears, bananas, and grapes' (Oxford comma optional). Subordinate clause first: 'After the rain stopped, we went for a walk.' Main clause first: no comma needed before 'although'. Ambiguity: 'I enjoy cooking, my family, and my dog' (three items) vs 'I enjoy cooking my family and my dog' (very different meaning!).",
+        checklist: "<h4>✅ Self-check</h4><ul><li>Did I add commas in lists correctly?</li><li>Did I use commas after subordinate clauses?</li><li>Did I avoid unnecessary commas?</li><li>Did I use commas to prevent ambiguity?</li></ul>",
         tips: [
-            { icon: "📘", text: "<strong>Book:</strong> Smith, J. (2020) <em>Title in italics</em>. Edition. London: Publisher. In text: (Smith, 2020, p. 45)." },
-            { icon: "📰", text: "<strong>Journal article:</strong> Jones, A. and Patel, R. (2022) 'Article title in single quotes', <em>Journal Name in italics</em>, Volume(Issue), pp. pages. doi:xxxx." },
-            { icon: "⚠️", text: "<strong>Lecture ideas:</strong> cite as 'personal communication' or find the original source. Never use an idea without attribution — that is plagiarism." }
+            { icon: "📋", text: "<strong>Listing commas:</strong> use commas between three or more items. The Oxford comma (before 'and') is optional but recommended for clarity." },
+            { icon: "🔗", text: "<strong>Subordinate clauses:</strong> if the subordinate clause comes first, use a comma: 'Although he was tired, he kept working.' If it comes second, no comma: 'He kept working although he was tired.'" },
+            { icon: "⚠️", text: "<strong>Ambiguity:</strong> 'I enjoy cooking my family and my dog' is hilarious but wrong. Commas save lives (and family pets)." }
         ]
     },
     {
         id: 19,
-        title: "Evaluating Online Sources",
-        skill: "Research Skills",
-        icon: "🌐",
-        context: "You find a website claiming that 'vaccines cause autism'. The site looks professional with charts and references, but the domain is .org, there is no publication date, the 'about us' page mentions a single author with no academic affiliation, and the references link to retracted studies and blog posts.",
-        task: "<strong>Your task:</strong> Use the CRAAP test to evaluate this source. For each CRAAP criterion (Currency, Relevance, Authority, Accuracy, Purpose), write a brief assessment. Then decide: would you use this source in an academic essay? Why or why not?",
-        hint: "💡 CRAAP test: Currency (when was it published?), Relevance (does it relate to your topic?), Authority (who wrote it and what are their credentials?), Accuracy (is the information supported by evidence?), Purpose (why was it created — to inform, persuade, or sell?).",
-        checklist: "<h4>✅ Self-check</h4><ul><li>Did I assess all five CRAAP criteria?</li><li>Did I check the author's credentials?</li><li>Did I verify the references?</li><li>Did I make a clear decision with justification?</li></ul>",
+        title: "Subject-Verb Agreement",
+        skill: "SPaG Practice",
+        icon: "⚖️",
+        context: "Sentences to correct: (1) 'The group of students were late.' (2) 'Neither the teacher nor the students knows the answer.' (3) 'Everyone in the class have completed the assignment.' (4) 'The collection of old books were donated to the library.' (5) 'Either the manager or the assistants is responsible.'",
+        task: "<strong>Your task:</strong> Correct the subject-verb agreement errors in each sentence. For each correction, explain the rule: collective nouns (group, collection), indefinite pronouns (everyone, each), and 'either/or' and 'neither/nor' agreement.",
+        hint: "💡 Collective nouns (group, team, collection) are singular in UK English: 'the group <em>is</em>'. 'Everyone', 'each', 'everybody' are always singular. With 'neither/nor' and 'either/or', the verb agrees with the nearest subject.",
+        checklist: "<h4>✅ Self-check</h4><ul><li>Did I treat collective nouns as singular?</li><li>Did I use singular verbs with 'everyone' and 'each'?</li><li>Did I apply the nearest-subject rule for 'either/or'?</li><li>Did I explain each rule clearly?</li></ul>",
         tips: [
-            { icon: "📅", text: "<strong>Currency:</strong> no date = red flag. Academic research should be current (last 5–10 years) unless it is a seminal work." },
-            { icon: "👤", text: "<strong>Authority:</strong> check the author's institutional affiliation, qualifications, and other publications. A single name with no academic home is a warning sign." },
-            { icon: "🎯", text: "<strong>Purpose:</strong> is the site trying to inform, persuade, sell, or mislead? .org does not automatically mean trustworthy — anyone can register a .org domain." }
+            { icon: "👥", text: "<strong>Collective nouns:</strong> in UK English, 'the team is', 'the group is', 'the committee is'. In US English, they can be plural. Stick with UK convention for WLV." },
+            { icon: "🔢", text: "<strong>Indefinite pronouns:</strong> everyone, each, anybody, nobody, somebody, either, neither — all take singular verbs. 'Everyone <em>has</em> completed the assignment.'" },
+            { icon: "📏", text: "<strong>Either/or, neither/nor:</strong> the verb agrees with the subject closest to it. 'Neither the teacher nor the students <em>know</em> the answer.' (students = plural). 'Either the assistants or the manager <em>is</em> responsible.' (manager = singular)." }
         ]
     },
     {
         id: 20,
-        title: "Synthesising Multiple Sources",
-        skill: "Research Skills",
-        icon: "🧩",
-        context: "You have three sources on the same topic: Source A (2023) argues that remote work increases productivity by 15%. Source B (2024) finds no significant difference between remote and office productivity. Source C (2022) argues that productivity depends on the type of task — creative work benefits from remote, collaborative work suffers.",
-        task: "<strong>Your task:</strong> Synthesise these three sources into a coherent paragraph. Do not simply list them one after another ('Smith says X, Jones says Y, Patel says Z'). Instead, group them by theme, identify areas of agreement and disagreement, and suggest a conclusion that accounts for all three findings.",
-        hint: "💡 Synthesis = grouping sources by theme or argument, not by source. 'While some studies find productivity gains from remote work (Source A), others find no effect (Source B). Source C resolves this tension by showing the effect depends on task type.'",
-        checklist: "<h4>✅ Self-check</h4><ul><li>Did I group sources by theme, not by source?</li><li>Did I identify areas of agreement and disagreement?</li><li>Did I explain how the sources relate to each other?</li><li>Did I reach a conclusion that accounts for all evidence?</li></ul>",
+        title: "Paragraphing and Discourse Markers",
+        skill: "SPaG Practice",
+        icon: "📄",
+        context: "Unparagraphed text: 'The old house had been empty for years. The windows were boarded up and the garden was overgrown with weeds. However the inside told a different story. The furniture was covered in dust sheets but the rooms were surprisingly tidy. Furthermore there were fresh flowers in a vase on the kitchen table. Someone had been here recently. Consequently the question was not whether the house was abandoned but who was still living in it.'",
+        task: "<strong>Your task:</strong> (a) Divide this text into paragraphs at the most logical points. (b) Identify the discourse markers (e.g. 'however', 'furthermore', 'consequently') and explain how each one signals a shift in the argument. (c) Add any missing commas after the discourse markers.",
+        hint: "💡 Paragraphs should group related ideas. Discourse markers signal: contrast (however, on the other hand), addition (furthermore, moreover, in addition), consequence (consequently, therefore, as a result). Always put a comma after a discourse marker at the start of a sentence.",
+        checklist: "<h4>✅ Self-check</h4><ul><li>Did I divide the text into logical paragraphs?</li><li>Did I identify all discourse markers?</li><li>Did I explain the function of each marker?</li><li>Did I add commas where needed?</li></ul>",
         tips: [
-            { icon: "🔄", text: "<strong>Instead of:</strong> 'Smith (2023) found X. Jones (2024) found Y.' <strong>Write:</strong> 'The evidence on remote work productivity is mixed. While Smith (2023) reports a 15% gain, Jones (2024) finds no significant difference.'" },
-            { icon: "🔗", text: "<strong>Use synthesis language:</strong> 'similarly', 'in contrast', 'however', 'this aligns with', 'this complicates the picture', 'a possible explanation is'." },
-            { icon: "🏗️", text: "<strong>Build a conversation:</strong> your paragraph should read like sources are in dialogue with each other, not like a list of isolated facts." }
+            { icon: "📑", text: "<strong>Paragraph structure:</strong> each paragraph should contain one main idea. Start a new paragraph when you shift topic, time, or perspective." },
+            { icon: "🔗", text: "<strong>Discourse markers:</strong> 'however' signals contrast, 'furthermore' adds information, 'consequently' shows result. They guide the reader through your argument." },
+            { icon: "📝", text: "<strong>Punctuation after markers:</strong> when a discourse marker starts a sentence, follow it with a comma. 'However, the inside told a different story.' 'Furthermore, there were fresh flowers.'" }
         ]
     }
 ];
 
 // ── Skill Categories ──
 const skillCategories = [
-    { label: "🔍 Critical Reading", ids: [1, 2, 3, 4] },
-    { label: "📓 Note-Taking",      ids: [5, 6, 7, 8] },
-    { label: "📋 Essay Planning",   ids: [9, 10, 11, 12] },
-    { label: "📅 Time Management",  ids: [13, 14, 15, 16] },
-    { label: "🔎 Research Skills",  ids: [17, 18, 19, 20] }
+    { label: "👁️ Language Analysis (Q2)", ids: [1, 2, 3, 4] },
+    { label: "🏗️ Structural Analysis (Q3)", ids: [5, 6, 7, 8] },
+    { label: "✍️ Creative Writing (Q5)",   ids: [9, 10, 11, 12] },
+    { label: "🔎 Reading Comprehension (Q1)", ids: [13, 14, 15, 16] },
+    { label: "🔤 SPaG Practice",           ids: [17, 18, 19, 20] }
 ];
 
 // ── State ──
@@ -996,7 +996,6 @@ function selectScenario(id) {
 // ── Mark Complete ──
 function markComplete() {
     if (!activeScenarioId) return;
-    const s = scenarios.find(x => x.id === id);
     completedScenarios.add(activeScenarioId);
     localStorage.setItem('wlv_skills_completed', JSON.stringify([...completedScenarios]));
     renderGrid();
@@ -1004,7 +1003,7 @@ function markComplete() {
 
     const fb = document.getElementById('feedbackBox');
     fb.className = 'feedback-box success visible';
-    fb.innerHTML = '🎉 Well done! You have completed this scenario. Keep practising to build your academic skills.';
+    fb.innerHTML = '🎉 Well done! You have completed this scenario. Keep practising to build your English Language skills.';
     setTimeout(() => { fb.classList.remove('visible'); }, 4000);
 }
 
@@ -1040,5 +1039,4 @@ document.addEventListener('DOMContentLoaded', function() {
     updateProgress();
 });
 </script>
-
 {% endblock %}

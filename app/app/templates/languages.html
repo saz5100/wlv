@@ -1,8 +1,8 @@
 {% extends "base.html" %}
-{% block title %}Academic Writing Guide | WLV — University of Wolverhampton{% endblock %}
+{% block title %}SPaG and Writing Guide | WLV — University of Wolverhampton{% endblock %}
 {% block content %}
 <div class="hero" style="padding: 30px 0 15px;">
-    <h1>✍️ Academic Writing Guide</h1>
+    <h1>✍️ SPaG and Writing Guide</h1>
 </div>
 
 <style>
@@ -105,46 +105,6 @@
         font-weight: 700; color: var(--c-accent); font-size: 13px;
     }
 
-    .aw-peel-grid {
-        display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; margin: 12px 0;
-    }
-    .aw-peel-item {
-        padding: 14px; border-radius: var(--r-lg);
-        border: 1px solid rgba(34, 211, 238, 0.12); background: rgba(8, 11, 20, 0.4);
-        text-align: center;
-    }
-    .light-theme .aw-peel-item { background: rgba(0, 0, 0, 0.03); }
-    .aw-peel-item .peel-letter {
-        display: inline-block; font-size: 24px; font-weight: 800;
-        width: 44px; height: 44px; line-height: 44px; border-radius: 50%;
-        margin-bottom: 6px;
-    }
-    .aw-peel-item .peel-letter.p { background: rgba(52, 211, 153, 0.15); color: #34d399; }
-    .aw-peel-item .peel-letter.e { background: rgba(96, 165, 250, 0.15); color: #60a5fa; }
-    .aw-peel-item .peel-letter.a { background: rgba(250, 204, 21, 0.15); color: #facc15; }
-    .aw-peel-item .peel-letter.l { background: rgba(168, 85, 247, 0.15); color: #a855f7; }
-    .aw-peel-item h5 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
-    .aw-peel-item p { font-size: 12px; color: var(--c-text-secondary); line-height: 1.4; margin: 0; }
-
-    .aw-ref-grid {
-        display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; margin: 12px 0;
-    }
-    .aw-ref-card {
-        padding: 14px 16px; border-radius: var(--r-lg);
-        border: 1px solid rgba(34, 211, 238, 0.1); background: rgba(8, 11, 20, 0.4);
-    }
-    .light-theme .aw-ref-card { background: rgba(0, 0, 0, 0.03); }
-    .aw-ref-card .ref-badge {
-        display: inline-block; font-size: 12px; font-weight: 700;
-        padding: 3px 10px; border-radius: 99px;
-        background: rgba(168, 85, 247, 0.12); color: #a855f7;
-        border: 1px solid rgba(168, 85, 247, 0.15); margin-bottom: 6px;
-    }
-    .aw-ref-card .ref-example {
-        font-size: 13px; color: var(--c-text-secondary); line-height: 1.5;
-        font-family: 'Courier New', monospace;
-    }
-
     .aw-pitfall-list { margin: 12px 0; }
     .aw-pitfall-item {
         padding: 12px 16px; margin-bottom: 8px;
@@ -175,356 +135,544 @@
 </style>
 
 <div class="aw-intro">
-    <h3>✍️ Academic Writing at University</h3>
-    <p>Strong academic writing is essential for success at university. This guide covers the key skills you need: structuring essays, using Harvard referencing, maintaining an academic tone, building paragraphs with PEEL/TEEL, and avoiding common pitfalls. Whether you are writing your first assignment or polishing your final dissertation, these principles will help you communicate your ideas clearly and professionally.</p>
+    <h3>✍️ SPaG — Spelling, Punctuation and Grammar</h3>
+    <p>SPaG stands for <strong>Spelling, Punctuation and Grammar</strong>. In the WLV English Equivalency exam, SPaG is assessed as part of Question 5 (creative or descriptive writing), where it contributes to your overall marks. Strong SPaG makes your writing clear, credible, and easy to read. This guide covers the essential rules, strategies, and techniques you need to maximise your SPaG marks.</p>
 </div>
 
 <div class="aw-container">
 
-    <!-- Section 1: Essay Structure -->
+    <!-- Section 1: Punctuation Rules -->
     <div class="aw-section">
         <div class="aw-section-header open" onclick="toggleLangSection(this)">
-            <span>📋 Essay Structure</span>
+            <span>🔤 Punctuation Rules</span>
             <span class="toggle-icon">▼</span>
         </div>
         <div class="aw-section-body open">
-            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:12px;">A well-structured essay guides the reader through your argument logically. Most academic essays follow a three-part structure:</p>
+            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:12px;">Punctuation gives structure to your writing. Using a range of punctuation accurately signals control of written English and improves the clarity of your ideas.</p>
 
-            <div class="aw-card-grid">
-                <div class="aw-card">
-                    <span class="card-icon">📌</span>
-                    <h4>Introduction</h4>
-                    <p>Sets the scene: introduces the topic, provides context, states your thesis or argument, and outlines the structure of the essay. Typically 10–15% of the word count.</p>
-                </div>
-                <div class="aw-card">
-                    <span class="card-icon">📄</span>
-                    <h4>Body Paragraphs</h4>
-                    <p>Develops your argument using PEEL/TEEL paragraphs. Each paragraph should focus on one main point, supported by evidence and analysis. Typically 70–80% of the word count.</p>
-                </div>
-                <div class="aw-card">
-                    <span class="card-icon">🎯</span>
-                    <h4>Conclusion</h4>
-                    <p>Summarises your key arguments, restates your thesis in light of the evidence presented, and offers a final thought or implication. No new information. Typically 10–15% of the word count.</p>
-                </div>
+            <table class="aw-table">
+                <thead>
+                    <tr>
+                        <th style="width:18%;">Mark</th>
+                        <th style="width:32%;">Rule</th>
+                        <th style="width:50%;">Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>.</strong> Full stop</td>
+                        <td>Ends a sentence. Use one sentence per complete idea.</td>
+                        <td><em>The rain fell steadily against the windowpane.</em></td>
+                    </tr>
+                    <tr>
+                        <td><strong>,</strong> Comma</td>
+                        <td>Separates items in a list, clauses, or introductory phrases. Do <strong>not</strong> join two complete sentences with only a comma (comma splice).</td>
+                        <td><em>She walked slowly, carefully, and deliberately across the room.</em><br><span class="tag tag-red">Avoid:</span> <em>She walked slowly, she was tired.</em></td>
+                    </tr>
+                    <tr>
+                        <td><strong>?</strong> Question mark</td>
+                        <td>Ends a direct question. Do not use a full stop after a question.</td>
+                        <td><em>What could he possibly be thinking?</em></td>
+                    </tr>
+                    <tr>
+                        <td><strong>!</strong> Exclamation mark</td>
+                        <td>Shows strong emotion or emphasis. Use sparingly — one per paragraph at most. Overuse weakens the effect.</td>
+                        <td><em>\"Stop!\" she cried, her voice trembling.</em></td>
+                    </tr>
+                    <tr>
+                        <td><strong>:</strong> Colon</td>
+                        <td>Introduces a list, a quotation, or an explanation. What follows the colon explains or expands on what came before.</td>
+                        <td><em>He had only one goal: survival.</em></td>
+                    </tr>
+                    <tr>
+                        <td><strong>;</strong> Semicolon</td>
+                        <td>Links two closely related independent clauses without a conjunction. Also separates complex list items.</td>
+                        <td><em>The sky was dark; the storm had arrived.</em></td>
+                    </tr>
+                    <tr>
+                        <td><strong>'</strong> Apostrophe</td>
+                        <td><strong>Possession:</strong> shows ownership. Singular = <em>'s</em>; plural ending in <em>s</em> = <em>s'</em>.<br><strong>Contraction:</strong> shows omitted letters. <em>It's</em> = <em>it is</em>; <em>its</em> = belonging to it.</td>
+                        <td><em>The student's book</em> (one student)<br><em>The students' books</em> (many students)<br><span class="tag tag-red">Common error:</span> <em>it's</em> vs <em>its</em></td>
+                    </tr>
+                    <tr>
+                        <td><strong>\"</strong> Speech marks</td>
+                        <td>Enclose direct speech or quotations. Punctuation goes inside the closing quotation mark in UK English.</td>
+                        <td><em>\"I can't believe it,\" she whispered.</em></td>
+                    </tr>
+                    <tr>
+                        <td><strong>—</strong> Dash</td>
+                        <td>Creates a strong break or interruption in a sentence. More dramatic than a comma. Use sparingly for effect.</td>
+                        <td><em>He was — there was no other word for it — terrified.</em></td>
+                    </tr>
+                    <tr>
+                        <td><strong>( )</strong> Brackets</td>
+                        <td>Enclose additional information that is not essential to the main sentence. The sentence should still make sense without the bracketed content.</td>
+                        <td><em>The results (see appendix A) confirmed the hypothesis.</em></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4 style="margin-top:16px;font-size:15px;color:var(--c-heading);">Punctuation for Effect</h4>
+            <p style="font-size:14px;color:var(--c-text-secondary);">In creative writing, punctuation can create pace and mood:</p>
+            <table class="aw-table">
+                <thead>
+                    <tr>
+                        <th style="width:25%;">Effect</th>
+                        <th style="width:75%;">Technique</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="tag tag-blue">Fast pace</span></td>
+                        <td>Short sentences separated by full stops. <em>He ran. He stumbled. He fell.</em></td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag tag-purple">Slow pace</span></td>
+                        <td>Longer sentences with commas, colons, and semicolons. <em>The mist crept slowly, silently, inexorably across the moor.</em></td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag tag-amber">Tension</span></td>
+                        <td>Dashes for abrupt interruptions. <em>She turned the key — the door creaked — something was wrong.</em></td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag tag-green">Clarity</span></td>
+                        <td>Colons to introduce explanations. <em>The reason was simple: he had never been taught.</em></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="aw-tip">
+                <strong>💡 Tip:</strong> In the WLV exam, aim to use at least <strong>four different punctuation marks</strong> in your Question 5 response. A mix of full stops, commas, colons/semicolons, and dashes or speech marks shows the examiner you have control.
             </div>
+        </div>
+    </div>
 
-            <h4 style="margin-top:16px;font-size:15px;color:var(--c-heading);">The Introduction — A Closer Look</h4>
-            <p style="font-size:14px;color:var(--c-text-secondary);">A strong introduction should answer three questions for the reader:</p>
+    <!-- Section 2: Grammar Rules -->
+    <div class="aw-section">
+        <div class="aw-section-header" onclick="toggleLangSection(this)">
+            <span>📐 Grammar Rules</span>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="aw-section-body">
+            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:12px;">Grammar is the system that governs how words combine to form sentences. Getting the basics right is essential for clear communication and higher SPaG marks.</p>
+
+            <h4 style="font-size:15px;color:var(--c-heading);margin-bottom:8px;">Subject–Verb Agreement</h4>
+            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:8px;">The subject and verb must agree in number (singular or plural).</p>
+            <table class="aw-table">
+                <thead>
+                    <tr>
+                        <th style="width:50%;">Correct ✅</th>
+                        <th style="width:50%;">Incorrect ❌</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><em>The dog runs</em> (singular subject + singular verb)</td><td><em>The dog run</em></td></tr>
+                    <tr><td><em>The dogs run</em> (plural subject + plural verb)</td><td><em>The dogs runs</em></td></tr>
+                    <tr><td><em>Everyone is here</em> (indefinite pronoun = singular)</td><td><em>Everyone are here</em></td></tr>
+                    <tr><td><em>Neither of the answers is correct</em></td><td><em>Neither of the answers are correct</em></td></tr>
+                </tbody>
+            </table>
+
+            <h4 style="font-size:15px;color:var(--c-heading);margin:16px 0 8px;">Sentence Types</h4>
+            <table class="aw-table">
+                <thead>
+                    <tr>
+                        <th style="width:18%;">Type</th>
+                        <th style="width:32%;">Definition</th>
+                        <th style="width:50%;">Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="tag tag-green">Simple</span></td>
+                        <td>One independent clause. One main idea.</td>
+                        <td><em>The sun set over the hills.</em></td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag tag-blue">Compound</span></td>
+                        <td>Two independent clauses joined by a conjunction (<em>and, but, or, so</em>).</td>
+                        <td><em>The sun set, and the stars appeared.</em></td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag tag-purple">Complex</span></td>
+                        <td>One independent clause + one or more subordinate clauses.</td>
+                        <td><em>Although the sun had set, the sky remained bright.</em></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4 style="font-size:15px;color:var(--c-heading);margin:16px 0 8px;">Tense Consistency</h4>
+            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:8px;">Once you establish a tense, stick with it unless there is a clear reason to shift. Shifting tenses mid-paragraph confuses the reader.</p>
+            <table class="aw-table">
+                <thead>
+                    <tr>
+                        <th style="width:50%;">Consistent ✅</th>
+                        <th style="width:50%;">Inconsistent ❌</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><em>She walked to the door and opened it. The room was empty.</em> (past tense)</td><td><em>She walked to the door and opens it. The room is empty.</em></td></tr>
+                    <tr><td><em>He runs every morning and feels energised.</em> (present tense)</td><td><em>He runs every morning and felt energised.</em></td></tr>
+                </tbody>
+            </table>
+
+            <h4 style="font-size:15px;color:var(--c-heading);margin:16px 0 8px;">Common Grammar Traps</h4>
+            <table class="aw-table">
+                <thead>
+                    <tr>
+                        <th style="width:25%;">Trap</th>
+                        <th style="width:35%;">Explanation</th>
+                        <th style="width:40%;">Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Comma splice</strong></td>
+                        <td>Joining two complete sentences with only a comma.</td>
+                        <td><span class="tag tag-red">Wrong:</span> <em>It was raining, we stayed inside.</em><br><span class="tag tag-green">Fix:</span> <em>It was raining, so we stayed inside.</em></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Run-on sentence</strong></td>
+                        <td>Two or more sentences joined without any punctuation.</td>
+                        <td><span class="tag tag-red">Wrong:</span> <em>She arrived late the train had already left.</em><br><span class="tag tag-green">Fix:</span> <em>She arrived late. The train had already left.</em></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sentence fragment</strong></td>
+                        <td>An incomplete sentence that lacks a main verb or subject.</td>
+                        <td><span class="tag tag-red">Wrong:</span> <em>Although she was tired.</em><br><span class="tag tag-green">Fix:</span> <em>Although she was tired, she continued working.</em></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Misplaced modifier</strong></td>
+                        <td>A word or phrase placed too far from the word it modifies.</td>
+                        <td><span class="tag tag-red">Wrong:</span> <em>Walking down the street, the house looked abandoned.</em><br><span class="tag tag-green">Fix:</span> <em>Walking down the street, she noticed the house looked abandoned.</em></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="aw-tip">
+                <strong>💡 Tip:</strong> Vary your sentence types in Question 5. A paragraph of only simple sentences sounds choppy; a paragraph of only complex sentences sounds dense. Mix short, medium, and long sentences for rhythm and impact.
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 3: Spelling Strategies -->
+    <div class="aw-section">
+        <div class="aw-section-header" onclick="toggleLangSection(this)">
+            <span>📝 Spelling Strategies</span>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="aw-section-body">
+            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:12px;">Spelling errors can cost you marks even when your ideas are strong. Use these strategies to improve your spelling and avoid common mistakes.</p>
+
+            <h4 style="font-size:15px;color:var(--c-heading);margin-bottom:8px;">UK English Spelling</h4>
+            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:8px;">The WLV exam uses <strong>UK English</strong> spelling conventions. These differ from US English in several key patterns:</p>
+            <table class="aw-table">
+                <thead>
+                    <tr>
+                        <th style="width:25%;">Pattern</th>
+                        <th style="width:37%;">UK English ✅</th>
+                        <th style="width:38%;">US English (avoid)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>-our / -or</strong></td>
+                        <td><em>colour, honour, behaviour, flavour, neighbour</em></td>
+                        <td><span class="tag tag-red">color, honor, behavior, flavor, neighbor</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>-re / -er</strong></td>
+                        <td><em>centre, theatre, metre, litre</em></td>
+                        <td><span class="tag tag-red">center, theater, meter, liter</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>-ise / -ize</strong></td>
+                        <td><em>organise, realise, recognise, emphasise</em></td>
+                        <td><span class="tag tag-red">organize, realize, recognize, emphasize</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>-yse / -yze</strong></td>
+                        <td><em>analyse, catalyse, paralyse</em></td>
+                        <td><span class="tag tag-red">analyze, catalyze, paralyze</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>-ence / -ense</strong></td>
+                        <td><em>defence, licence, offence, pretence</em></td>
+                        <td><span class="tag tag-red">defense, license, offense, pretense</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>-ll- / -l-</strong></td>
+                        <td><em>travelled, labelled, cancelled, marvellous</em></td>
+                        <td><span class="tag tag-red">traveled, labeled, canceled, marvelous</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>-ogue / -og</strong></td>
+                        <td><em>catalogue, dialogue, monologue, analogue</em></td>
+                        <td><span class="tag tag-red">catalog, dialog, monolog, analog</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4 style="font-size:15px;color:var(--c-heading);margin:16px 0 8px;">Commonly Misspelled Words</h4>
+            <table class="aw-table">
+                <thead>
+                    <tr>
+                        <th style="width:50%;">Correct ✅</th>
+                        <th style="width:50%;">Common Mistake ❌</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><em>accommodation</em> (double c, double m)</td><td><em>accomodation, acommodation</em></td></tr>
+                    <tr><td><em>embarrassed</em> (double r, double s)</td><td><em>embarassed, embarrassed</em></td></tr>
+                    <tr><td><em>necessary</em> (one c, double s)</td><td><em>neccessary, neccesary</em></td></tr>
+                    <tr><td><em>separate</em> (a in the middle, not e)</td><td><em>seperate</em></td></tr>
+                    <tr><td><em>definitely</em> (finite + ly)</td><td><em>definately, definately</em></td></tr>
+                    <tr><td><em>occurrence</em> (double c, double r)</td><td><em>occurance, occurence</em></td></tr>
+                    <tr><td><em>privilege</em> (i before lege)</td><td><em>privelege, priviledge</em></td></tr>
+                    <tr><td><em>rhythm</em> (h after r, no vowels in second syllable)</td><td><em>rythm, rythym</em></td></tr>
+                    <tr><td><em>conscious</em> (science + ous)</td><td><em>concious, consious</em></td></tr>
+                    <tr><td><em>government</em> (n before m)</td><td><em>goverment, goverment</em></td></tr>
+                </tbody>
+            </table>
+
+            <h4 style="font-size:15px;color:var(--c-heading);margin:16px 0 8px;">Spelling Strategies</h4>
             <ol class="aw-steps">
-                <li data-step="1"><strong>What</strong> is the topic? — Provide background context and define key terms.</li>
-                <li data-step="2"><strong>Why</strong> does it matter? — Explain the significance or debate around the topic.</li>
-                <li data-step="3"><strong>How</strong> will you address it? — State your thesis and signpost the essay structure.</li>
+                <li data-step="1"><strong>Look, Say, Cover, Write, Check:</strong> Look at the word, say it aloud, cover it, write it from memory, then check. Repeat until correct.</li>
+                <li data-step="2"><strong>Break it down:</strong> Split long words into syllables. <em>Un-for-tun-ate-ly</em> is easier to spell than <em>unfortunately</em>.</li>
+                <li data-step="3"><strong>Use mnemonics:</strong> Create memorable phrases. <em>Big Elephants Can't Always Use Small Exits</em> = <strong>because</strong>.</li>
+                <li data-step="4"><strong>Know the rules:</strong> <em>i before e except after c</em> — but watch for exceptions (<em>weird, science, sufficient</em>).</li>
+                <li data-step="5"><strong>Keep a personal spelling log:</strong> Write down words you commonly misspell and review them regularly.</li>
+                <li data-step="6"><strong>Proofread specifically for spelling:</strong> Read your work backwards (last word to first) to focus on individual words rather than meaning.</li>
             </ol>
 
+            <div class="aw-tip">
+                <strong>💡 Tip:</strong> In the exam, if you are unsure of a spelling, try a different word that means the same thing. It is better to use a simpler word correctly than a complex word incorrectly.
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 4: Writing Techniques -->
+    <div class="aw-section">
+        <div class="aw-section-header" onclick="toggleLangSection(this)">
+            <span>🎨 Writing Techniques — Imagery, Tone and Vocabulary</span>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="aw-section-body">
+            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:12px;">Question 5 in the WLV exam tests your ability to write creatively and descriptively. Using a range of writing techniques will help you achieve higher marks for content, organisation, and SPaG.</p>
+
+            <h4 style="font-size:15px;color:var(--c-heading);margin-bottom:8px;">Imagery and Figurative Language</h4>
+            <table class="aw-table">
+                <thead>
+                    <tr>
+                        <th style="width:18%;">Technique</th>
+                        <th style="width:32%;">Definition</th>
+                        <th style="width:50%;">Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="tag tag-green">Simile</span></td>
+                        <td>Comparing two things using <em>like</em> or <em>as</em>.</td>
+                        <td><em>The fog hung over the city like a grey blanket.</em></td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag tag-blue">Metaphor</span></td>
+                        <td>Describing one thing as if it were another (direct comparison).</td>
+                        <td><em>The classroom was a prison, its walls closing in on him.</em></td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag tag-purple">Personification</span></td>
+                        <td>Giving human qualities to non-human things.</td>
+                        <td><em>The wind whispered through the trees.</em></td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag tag-amber">Pathetic fallacy</span></td>
+                        <td>Using weather to reflect mood or emotion.</td>
+                        <td><em>The storm raged as his anger boiled over.</em></td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag tag-red">Sensory imagery</span></td>
+                        <td>Describing what can be seen, heard, smelt, tasted, or touched.</td>
+                        <td><em>The sharp tang of salt hung in the air; the crash of waves echoed in the distance.</em></td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag tag-green">Onomatopoeia</span></td>
+                        <td>Words that sound like the noise they describe.</td>
+                        <td><em>The branches snapped and crackled underfoot.</em></td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag tag-blue">Alliteration</span></td>
+                        <td>Repeating the same initial sound in nearby words.</td>
+                        <td><em>The silent, silver snow settled on the street.</em></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4 style="font-size:15px;color:var(--c-heading);margin:16px 0 8px;">Tone and Atmosphere</h4>
+            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:8px;">Tone is the overall mood or feeling of your writing. Choose vocabulary and sentence structures that match the tone you want to create.</p>
+            <table class="aw-table">
+                <thead>
+                    <tr>
+                        <th style="width:18%;">Tone</th>
+                        <th style="width:37%;">Vocabulary and Techniques</th>
+                        <th style="width:45%;">Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="tag tag-purple">Sinister / Menacing</span></td>
+                        <td>Dark, shadowy, lurking, ominous, creeping, suffocating. Short sentences. Personification of darkness.</td>
+                        <td><em>Shadows crept along the walls. The silence was suffocating. Something was watching.</em></td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag tag-amber">Joyful / Peaceful</span></td>
+                        <td>Warm, golden, gentle, soft, glowing, serene. Sensory imagery of light and warmth. Longer, flowing sentences.</td>
+                        <td><em>Golden sunlight filtered through the leaves, dappling the grass with warmth.</em></td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag tag-blue">Chaotic / Urgent</span></td>
+                        <td>Frantic, pounding, crashing, screaming, racing. Short, sharp sentences. Onomatopoeia. Exclamation marks.</td>
+                        <td><em>Bang! The door flew open. Chaos erupted. People screamed and scattered.</em></td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag tag-green">Melancholy / Reflective</span></td>
+                        <td>Fading, grey, distant, hollow, forgotten, weary. Slow pace. Semicolons and colons for thoughtful pauses.</td>
+                        <td><em>The house stood empty; its windows like hollow eyes staring at nothing.</em></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4 style="font-size:15px;color:var(--c-heading);margin:16px 0 8px;">Vocabulary — Choosing the Right Words</h4>
+            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:8px;">Precise vocabulary makes your writing vivid and engaging. Replace weak, vague words with stronger, more specific alternatives.</p>
+            <table class="aw-table">
+                <thead>
+                    <tr>
+                        <th style="width:25%;">Weak Word ❌</th>
+                        <th style="width:35%;">Stronger Alternatives ✅</th>
+                        <th style="width:40%;">Context</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><em>good</em></td><td>superb, excellent, remarkable, outstanding</td><td>Describing quality</td></tr>
+                    <tr><td><em>bad</em></td><td>appalling, dreadful, atrocious, terrible</td><td>Describing quality</td></tr>
+                    <tr><td><em>big</em></td><td>enormous, vast, colossal, immense</td><td>Describing size</td></tr>
+                    <tr><td><em>small</em></td><td>minute, tiny, minuscule, compact</td><td>Describing size</td></tr>
+                    <tr><td><em>walked</em></td><td>strode, crept, marched, wandered, stumbled</td><td>Describing movement</td></tr>
+                    <tr><td><em>said</em></td><td>whispered, shouted, murmured, exclaimed, muttered</td><td>Describing speech</td></tr>
+                    <tr><td><em>looked</em></td><td>gazed, glared, peered, glanced, stared</td><td>Describing looking</td></tr>
+                    <tr><td><em>nice</em></td><td>pleasant, delightful, charming, exquisite</td><td>Describing impression</td></tr>
+                    <tr><td><em>sad</em></td><td>melancholy, sorrowful, desolate, mournful</td><td>Describing emotion</td></tr>
+                    <tr><td><em>happy</em></td><td>elated, joyful, ecstatic, content</td><td>Describing emotion</td></tr>
+                </tbody>
+            </table>
+
             <div class="aw-example">
-                <strong>✅ Example Introduction:</strong><br>
-                "The concept of sustainable development has become a central concern for governments worldwide. Whilst economic growth remains a priority, there is growing recognition that environmental degradation poses long-term risks to prosperity. This essay will argue that sustainable development is not merely an environmental ideal but an economic necessity, examining the evidence from three key sectors: energy, agriculture, and urban planning."
+                <strong>✅ Before and After — Vocabulary Upgrade:</strong><br>
+                <strong>Weak:</strong> <em>The big house looked old and scary. A bad smell came from inside. A man walked to the door and said something.</em><br>
+                <strong>Strong:</strong> <em>The vast mansion loomed, its crumbling facade shrouded in shadow. A foul, musty stench seeped from within. A figure crept towards the door and muttered a single, chilling word.</em>
             </div>
 
-            <h4 style="margin-top:16px;font-size:15px;color:var(--c-heading);">The Conclusion — A Closer Look</h4>
-            <p style="font-size:14px;color:var(--c-text-secondary);">An effective conclusion should:</p>
-            <ul style="font-size:14px;color:var(--c-text-secondary);line-height:1.7;padding-left:20px;">
-                <li>Restate your thesis in a fresh way (do not copy the introduction verbatim).</li>
-                <li>Summarise the main points from each body paragraph.</li>
-                <li>Offer a final reflection, implication, or recommendation.</li>
-                <li><strong>Never</strong> introduce new evidence or arguments.</li>
-            </ul>
-
             <div class="aw-tip">
-                <strong>💡 Tip:</strong> Write your introduction <em>after</em> you have written the body paragraphs. You will have a clearer sense of your argument and can signpost more accurately.
+                <strong>💡 Tip:</strong> Do not try to use every technique in one paragraph. Choose <strong>two or three</strong> techniques and use them well. A single well-crafted metaphor is worth more than a paragraph full of forced similes.
             </div>
         </div>
     </div>
 
-    <!-- Section 2: PEEL / TEEL Paragraph Structure -->
+    <!-- Section 5: Common Mistakes -->
     <div class="aw-section">
         <div class="aw-section-header" onclick="toggleLangSection(this)">
-            <span>🧱 PEEL / TEEL Paragraph Structure</span>
+            <span>⚠️ Common SPaG Mistakes</span>
             <span class="toggle-icon">▼</span>
         </div>
         <div class="aw-section-body">
-            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:12px;">Every body paragraph should follow a clear structure. Two common frameworks are <strong>PEEL</strong> and <strong>TEEL</strong>. Both ensure your paragraphs are focused, evidence-based, and analytical.</p>
-
-            <div class="aw-peel-grid">
-                <div class="aw-peel-item">
-                    <span class="peel-letter p">P</span>
-                    <h5>Point</h5>
-                    <p>The topic sentence — state the main point of this paragraph in one clear sentence.</p>
-                </div>
-                <div class="aw-peel-item">
-                    <span class="peel-letter e">E</span>
-                    <h5>Evidence</h5>
-                    <p>Support your point with evidence: academic sources, data, case studies, or quotations.</p>
-                </div>
-                <div class="aw-peel-item">
-                    <span class="peel-letter a">E / A</span>
-                    <h5>Explanation / Analysis</h5>
-                    <p>Explain how the evidence supports your point. Analyse its significance — do not just describe it.</p>
-                </div>
-                <div class="aw-peel-item">
-                    <span class="peel-letter l">L</span>
-                    <h5>Link</h5>
-                    <p>Link back to the essay question or forward to the next paragraph to maintain flow.</p>
-                </div>
-            </div>
-
-            <p style="font-size:14px;color:var(--c-text-secondary);margin:8px 0;"><strong>TEEL</strong> is identical except the 'T' stands for <strong>Topic sentence</strong> (the same as 'Point' in PEEL). Use whichever framework your tutor prefers.</p>
-
-            <div class="aw-example">
-                <strong>✅ Example PEEL Paragraph:</strong><br>
-                <strong>Point:</strong> The introduction of the National Curriculum in 1988 significantly altered the landscape of English education.<br>
-                <strong>Evidence:</strong> As Baker (1989) argued, the Act established a standardised framework for what children should be taught, replacing the previous system of local authority discretion.<br>
-                <strong>Explanation:</strong> This centralisation of control represented a fundamental shift from a teacher-led to a government-directed model of education, raising important questions about professional autonomy and the politicisation of knowledge.<br>
-                <strong>Link:</strong> Having established the structural changes brought about by the 1988 Act, the following section will examine its impact on classroom practice.
-            </div>
-
-            <div class="aw-tip">
-                <strong>💡 Tip:</strong> The 'Explanation' step is where most students lose marks. Ask yourself: <em>"So what? Why does this evidence matter?"</em> If you cannot answer that question, you need to analyse more deeply.
-            </div>
-        </div>
-    </div>
-
-    <!-- Section 3: Academic Tone and Style -->
-    <div class="aw-section">
-        <div class="aw-section-header" onclick="toggleLangSection(this)">
-            <span>🎯 Academic Tone and Style</span>
-            <span class="toggle-icon">▼</span>
-        </div>
-        <div class="aw-section-body">
-            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:12px;">Academic writing requires a formal, objective, and precise tone. The table below contrasts academic style with informal writing.</p>
-
-            <table class="aw-table">
-                <thead>
-                    <tr>
-                        <th style="width:25%;">Feature</th>
-                        <th style="width:37%;">Academic ✅</th>
-                        <th style="width:38%;">Informal ❌</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Contractions</strong></td>
-                        <td>Write in full: <em>do not, cannot, it is, will not</em></td>
-                        <td><span class="tag tag-red">Avoid</span> <em>don't, can't, it's, won't</em></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Personal pronouns</strong></td>
-                        <td>Use passive or third-person: <em>it can be argued, the evidence suggests</em></td>
-                        <td><span class="tag tag-red">Avoid</span> <em>I think, in my opinion, we believe</em></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Vocabulary</strong></td>
-                        <td>Precise, subject-specific terminology</td>
-                        <td><span class="tag tag-red">Avoid</span> vague words: <em>nice, good, bad, things, stuff</em></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Hedging language</strong></td>
-                        <td><span class="tag tag-green">Use</span> <em>suggests, indicates, may, could, potentially</em></td>
-                        <td><span class="tag tag-red">Avoid</span> absolute claims: <em>proves, always, never, definitely</em></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Rhetorical questions</strong></td>
-                        <td>Rarely appropriate — rephrase as a statement</td>
-                        <td><span class="tag tag-red">Avoid</span> <em>How can we solve this problem?</em></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Colloquialisms</strong></td>
-                        <td>Formal register throughout</td>
-                        <td><span class="tag tag-red">Avoid</span> <em>a lot of, loads of, basically, sort of</em></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Emotive language</strong></td>
-                        <td>Objective, evidence-based reasoning</td>
-                        <td><span class="tag tag-red">Avoid</span> <em>outrageous, terrible, wonderful, shocking</em></td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <h4 style="margin-top:16px;font-size:15px;color:var(--c-heading);">Hedging Language</h4>
-            <p style="font-size:14px;color:var(--c-text-secondary);">Academic writing is cautious and precise. Use hedging language to express claims with appropriate certainty:</p>
-            <table class="aw-table">
-                <thead>
-                    <tr>
-                        <th>Too Absolute ❌</th>
-                        <th>Better (Hedged) ✅</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>This proves that...</td><td>This suggests that...</td></tr>
-                    <tr><td>Smith's research shows...</td><td>Smith's research indicates...</td></tr>
-                    <tr><td>This is the only explanation...</td><td>This may be one explanation...</td></tr>
-                    <tr><td>It is obvious that...</td><td>It could be argued that...</td></tr>
-                    <tr><td>This always happens when...</td><td>This often occurs when...</td></tr>
-                </tbody>
-            </table>
-
-            <div class="aw-tip">
-                <strong>💡 Tip:</strong> Read your work aloud. If it sounds like something you would say in a conversation, it is probably too informal. Academic writing should sound considered and precise.
-            </div>
-        </div>
-    </div>
-
-    <!-- Section 4: Harvard Referencing -->
-    <div class="aw-section">
-        <div class="aw-section-header" onclick="toggleLangSection(this)">
-            <span>📚 Harvard Referencing</span>
-            <span class="toggle-icon">▼</span>
-        </div>
-        <div class="aw-section-body">
-            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:12px;">Harvard referencing is the standard citation style at the University of Wolverhampton. It uses an <strong>author-date</strong> system: you cite the author's surname and year of publication in the text, and provide full details in a reference list at the end.</p>
-
-            <h4 style="font-size:15px;color:var(--c-heading);margin-bottom:8px;">In-Text Citations</h4>
-            <table class="aw-table">
-                <thead>
-                    <tr>
-                        <th style="width:30%;">Type</th>
-                        <th style="width:70%;">Example</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Direct quote</strong></td>
-                        <td>As Smith (2019, p. 45) argues, "education is a fundamental human right."</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Paraphrase</strong></td>
-                        <td>Education has been described as a fundamental human right (Smith, 2019).</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Two authors</strong></td>
-                        <td>Recent research supports this view (Jones and Patel, 2020).</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Three+ authors</strong></td>
-                        <td>This approach has been widely adopted (Williams et al., 2021).</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Multiple sources</strong></td>
-                        <td>Several studies confirm this finding (Brown, 2018; Davies, 2020; Khan, 2022).</td>
-                    </tr>
-                    <tr>
-                        <td><strong>No author</strong></td>
-                        <td>Use the title in italics: (<em>Education Policy Review</em>, 2020).</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Organisation as author</strong></td>
-                        <td>The World Health Organization (WHO, 2021) reported that...</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <h4 style="font-size:15px;color:var(--c-heading);margin:16px 0 8px;">Reference List Format</h4>
-            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:8px;">The reference list appears at the end of your essay, arranged alphabetically by author surname. Key formats:</p>
-
-            <div class="aw-ref-grid">
-                <div class="aw-ref-card">
-                    <span class="ref-badge">📖 Book</span>
-                    <div class="ref-example">Author, S. (Year) <em>Title in Italics</em>. Edition. Place: Publisher.<br><br>Smith, J. (2019) <em>Understanding Education Policy</em>. 2nd edn. London: Routledge.</div>
-                </div>
-                <div class="aw-ref-card">
-                    <span class="ref-badge">📰 Journal Article</span>
-                    <div class="ref-example">Author, S. (Year) 'Article title', <em>Journal Name</em>, Volume(Issue), pp. pages.<br><br>Jones, A. and Patel, R. (2020) 'Inclusive pedagogy in higher education', <em>Journal of Education Studies</em>, 45(3), pp. 210–228.</div>
-                </div>
-                <div class="aw-ref-card">
-                    <span class="ref-badge">🌐 Website</span>
-                    <div class="ref-example">Author, S. (Year) <em>Page Title</em>. Available at: URL (Accessed: date).<br><br>Department for Education (2023) <em>National Curriculum Overview</em>. Available at: https://www.gov.uk/national-curriculum (Accessed: 15 January 2024).</div>
-                </div>
-                <div class="aw-ref-card">
-                    <span class="ref-badge">📄 Chapter in Edited Book</span>
-                    <div class="ref-example">Author, S. (Year) 'Chapter title', in Editor, E. (ed.) <em>Book Title</em>. Place: Publisher, pp. pages.<br><br>Khan, M. (2022) 'Assessment and accountability', in Brown, T. (ed.) <em>Contemporary Issues in Education</em>. London: Palgrave, pp. 88–104.</div>
-                </div>
-            </div>
-
-            <div class="aw-warning">
-                <strong>⚠️ Common Referencing Mistakes:</strong>
-                <ul style="margin:6px 0 0 16px;font-size:13px;color:var(--c-text-secondary);line-height:1.6;">
-                    <li>Forgetting to include page numbers for direct quotations.</li>
-                    <li>Mixing up the order of author names and publication year.</li>
-                    <li>Including sources in the reference list that are not cited in the text (and vice versa).</li>
-                    <li>Using inconsistent formatting — check your university's style guide.</li>
-                </ul>
-            </div>
-
-            <div class="aw-tip">
-                <strong>💡 Tip:</strong> Use a reference manager such as <strong>Zotero</strong>, <strong>Mendeley</strong>, or <strong>EndNote</strong> from the start. They save hours of formatting and reduce errors. The University of Wolverhampton Library provides free access to these tools.
-            </div>
-        </div>
-    </div>
-
-    <!-- Section 5: Common Writing Pitfalls -->
-    <div class="aw-section">
-        <div class="aw-section-header" onclick="toggleLangSection(this)">
-            <span>⚠️ Common Writing Pitfalls</span>
-            <span class="toggle-icon">▼</span>
-        </div>
-        <div class="aw-section-body">
-            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:12px;">Even strong writers fall into these traps. Recognising them is the first step to avoiding them.</p>
+            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:12px;">These are the most frequent SPaG errors that cost students marks in the WLV exam. Learn to spot and fix them.</p>
 
             <div class="aw-pitfall-list">
                 <div class="aw-pitfall-item">
-                    <h5>🚫 1. Descriptive Writing Instead of Critical Analysis</h5>
-                    <p>Simply describing what happened or what an author said is not enough. You must evaluate, compare, and question. <em>"Smith argues X, but Jones counters that Y"</em> is stronger than <em>"Smith argues X."</em></p>
-                    <span class="fix-label">✅ Fix: Ask "So what?" after every descriptive sentence.</span>
+                    <h5>🔤 1. Its vs It's</h5>
+                    <p><strong>Its</strong> = possessive (belonging to it). <strong>It's</strong> = contraction of <em>it is</em> or <em>it has</em>. If you can replace it with <em>it is</em>, use an apostrophe. If not, do not.</p>
+                    <span class="fix-label">✅ Fix: <em>The dog wagged its tail.</em> / <em>It's raining outside.</em></span>
                 </div>
 
                 <div class="aw-pitfall-item">
-                    <h5>📝 2. Overly Long or Rambling Sentences</h5>
-                    <p>Sentences that run on for several lines lose the reader. If a sentence has more than two clauses, consider splitting it. Aim for clarity over complexity.</p>
-                    <span class="fix-label">✅ Fix: Read each sentence aloud. If you run out of breath, split it.</span>
+                    <h5>📝 2. There / Their / They're</h5>
+                    <p><strong>There</strong> = a place or existence. <strong>Their</strong> = belonging to them. <strong>They're</strong> = <em>they are</em>.</p>
+                    <span class="fix-label">✅ Fix: <em>They're putting their coats over there.</em></span>
                 </div>
 
                 <div class="aw-pitfall-item">
-                    <h5>🔁 3. Repetition and Wordiness</h5>
-                    <p>Using the same words or phrases repeatedly weakens your writing. Similarly, padding sentences with unnecessary words (e.g. <em>"in order to"</em> → <em>"to"</em>; <em>"due to the fact that"</em> → <em>"because"</em>) makes your work less concise.</p>
-                    <span class="fix-label">✅ Fix: Use a thesaurus sparingly and cut every word that does not add meaning.</span>
+                    <h5>📐 3. Your / You're</h5>
+                    <p><strong>Your</strong> = belonging to you. <strong>You're</strong> = <em>you are</em>.</p>
+                    <span class="fix-label">✅ Fix: <em>You're going to love your new course.</em></span>
                 </div>
 
                 <div class="aw-pitfall-item">
-                    <h5>📖 4. Over-Quoting</h5>
-                    <p>Quotations should support your argument, not replace it. A string of block quotes with little analysis suggests you have not engaged with the material. Paraphrase where possible and always explain why a quote matters.</p>
-                    <span class="fix-label">✅ Fix: For every quote, write at least two sentences of your own analysis.</span>
+                    <h5>🔗 4. To / Too / Two</h5>
+                    <p><strong>To</strong> = direction or infinitive. <strong>Too</strong> = also or excessively. <strong>Two</strong> = the number 2.</p>
+                    <span class="fix-label">✅ Fix: <em>I need to buy two tickets too.</em></span>
                 </div>
 
                 <div class="aw-pitfall-item">
-                    <h5>🔗 5. Weak or Missing Topic Sentences</h5>
-                    <p>Every paragraph should begin with a clear topic sentence that states the main point. Without it, the reader has to guess what the paragraph is about.</p>
-                    <span class="fix-label">✅ Fix: The first sentence of each paragraph should answer: "What is this paragraph about?"</span>
+                    <h5>📖 5. Then vs Than</h5>
+                    <p><strong>Then</strong> = next in time or sequence. <strong>Than</strong> = used for comparisons.</p>
+                    <span class="fix-label">✅ Fix: <em>First we studied, then we ate. She is taller than him.</em></span>
                 </div>
 
                 <div class="aw-pitfall-item">
-                    <h5>📉 6. Lack of Signposting and Transitions</h5>
-                    <p>Essays that jump abruptly from one idea to the next confuse the reader. Use transition words and phrases to guide the reader through your argument.</p>
-                    <span class="fix-label">✅ Fix: Use signposting: <em>however, furthermore, in contrast, consequently, nevertheless, on the other hand.</em></span>
+                    <h5>🎯 6. Affect vs Effect</h5>
+                    <p><strong>Affect</strong> = verb (to influence). <strong>Effect</strong> = noun (the result).</p>
+                    <span class="fix-label">✅ Fix: <em>The weather affected the crops. The effect was devastating.</em></span>
                 </div>
 
                 <div class="aw-pitfall-item">
-                    <h5>📚 7. Poor Referencing and Accidental Plagiarism</h5>
-                    <p>Failing to cite sources properly — even unintentionally — is a serious academic offence. Keep careful notes of where you found each idea, and cite as you write, not at the end.</p>
-                    <span class="fix-label">✅ Fix: Record full citation details the moment you find a source. Never copy-paste without immediately adding the reference.</span>
+                    <h5>✂️ 7. Comma Splices</h5>
+                    <p>Using a comma to join two complete sentences without a conjunction. This is one of the most common grammar errors in student writing.</p>
+                    <span class="fix-label">✅ Fix: Use a full stop, a semicolon, or add a conjunction (<em>and, but, so, because</em>).</span>
                 </div>
 
                 <div class="aw-pitfall-item">
-                    <h5>🎯 8. Going Off-Topic</h5>
-                    <p>It is easy to include interesting but irrelevant material. Every paragraph should directly support your thesis or answer the essay question. If it does not, cut it.</p>
-                    <span class="fix-label">✅ Fix: Keep the essay question pinned above your workspace. Check each paragraph against it.</span>
+                    <h5>🔁 8. Apostrophes in Plurals</h5>
+                    <p>Do <strong>not</strong> use an apostrophe to form a plural. Apostrophes are for possession and contractions only.</p>
+                    <span class="fix-label">✅ Fix: <em>Apple's 50p</em> ❌ → <em>Apples 50p</em> ✅. <em>The 1990's</em> ❌ → <em>The 1990s</em> ✅.</span>
+                </div>
+
+                <div class="aw-pitfall-item">
+                    <h5>📏 9. Double Negatives</h5>
+                    <p>Using two negatives in the same clause creates a positive (or confusion). Avoid them in formal writing.</p>
+                    <span class="fix-label">✅ Fix: <em>I don't have nothing</em> ❌ → <em>I have nothing</em> ✅ or <em>I don't have anything</em> ✅.</span>
+                </div>
+
+                <div class="aw-pitfall-item">
+                    <h5>📚 10. Confusing Homophones</h5>
+                    <p>Words that sound the same but have different spellings and meanings are easy to mix up under exam pressure.</p>
+                    <span class="fix-label">✅ Watch for: <em>accept/except, advice/advise, practice/practise, licence/license, stationary/stationery, principal/principle, weather/whether, whose/who's.</em></span>
                 </div>
             </div>
 
             <div class="aw-tip">
-                <strong>💡 Tip:</strong> After finishing your first draft, step away for a few hours (or overnight). Return to it with fresh eyes — you will spot weaknesses you missed while writing.
+                <strong>💡 Tip:</strong> Create a personal checklist of the three SPaG errors you make most often. In the exam, save the last two minutes to check specifically for those errors.
             </div>
         </div>
     </div>
 
-    <!-- Section 6: Proofreading and Editing Checklist -->
+    <!-- Section 6: Exam Tips -->
     <div class="aw-section">
         <div class="aw-section-header" onclick="toggleLangSection(this)">
-            <span>✅ Proofreading and Editing Checklist</span>
+            <span>🎯 Exam Tips for SPaG and Writing</span>
             <span class="toggle-icon">▼</span>
         </div>
         <div class="aw-section-body">
-            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:12px;">Use this checklist before submitting any assignment:</p>
+            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:12px;">These strategies will help you maximise your SPaG marks in the WLV English Equivalency exam, particularly in Question 5 (creative/descriptive writing).</p>
 
+            <h4 style="font-size:15px;color:var(--c-heading);margin-bottom:8px;">Before You Write — Planning (5 minutes)</h4>
+            <ol class="aw-steps">
+                <li data-step="1"><strong>Read the prompt carefully:</strong> Identify whether it is a <strong>descriptive</strong> (describe a scene) or <strong>narrative</strong> (tell a story) task. Each requires a different approach.</li>
+                <li data-step="2"><strong>Brainstorm vocabulary:</strong> Jot down 5–10 ambitious words and phrases you want to use. Think about sensory details, figurative language, and precise verbs.</li>
+                <li data-step="3"><strong>Plan your structure:</strong> Opening (set the scene) → Build (develop the atmosphere or action) → Ending (resolution or final image). A clear structure helps the examiner follow your writing.</li>
+                <li data-step="4"><strong>Decide on your tone:</strong> Will it be sinister, joyful, tense, or reflective? Choose vocabulary and sentence structures that match.</li>
+            </ol>
+
+            <h4 style="font-size:15px;color:var(--c-heading);margin:16px 0 8px;">While You Write (30–35 minutes)</h4>
             <table class="aw-table">
                 <thead>
                     <tr>
@@ -533,26 +681,62 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td>☐</td><td><strong>Structure:</strong> Does the essay have a clear introduction, body, and conclusion?</td></tr>
-                    <tr><td>☐</td><td><strong>Thesis:</strong> Is the main argument clearly stated in the introduction?</td></tr>
-                    <tr><td>☐</td><td><strong>Paragraphs:</strong> Does each paragraph follow PEEL/TEEL structure?</td></tr>
-                    <tr><td>☐</td><td><strong>Topic sentences:</strong> Does every paragraph begin with a clear topic sentence?</td></tr>
-                    <tr><td>☐</td><td><strong>Evidence:</strong> Is every claim supported by a credible academic source?</td></tr>
-                    <tr><td>☐</td><td><strong>Analysis:</strong> Have you explained <em>why</em> the evidence matters, not just described it?</td></tr>
-                    <tr><td>☐</td><td><strong>Referencing:</strong> Are all in-text citations correctly formatted in Harvard style?</td></tr>
-                    <tr><td>☐</td><td><strong>Reference list:</strong> Does every in-text citation appear in the reference list (and vice versa)?</td></tr>
-                    <tr><td>☐</td><td><strong>Tone:</strong> Is the language formal, objective, and free of contractions?</td></tr>
-                    <tr><td>☐</td><td><strong>Hedging:</strong> Are claims expressed with appropriate caution?</td></tr>
-                    <tr><td>☐</td><td><strong>Spelling:</strong> Have you used UK English spelling (e.g. <em>colour, organise, centre, behaviour</em>)?</td></tr>
-                    <tr><td>☐</td><td><strong>Grammar:</strong> Are sentences complete? No comma splices or sentence fragments?</td></tr>
-                    <tr><td>☐</td><td><strong>Word count:</strong> Does the essay meet the required word count (or fall within the acceptable range)?</td></tr>
-                    <tr><td>☐</td><td><strong>Transitions:</strong> Are there clear links between paragraphs and sections?</td></tr>
-                    <tr><td>☐</td><td><strong>Title page:</strong> Does it include your name, module title, tutor name, and submission date?</td></tr>
+                    <tr><td>☐</td><td><strong>Start strong:</strong> Your opening sentence should hook the reader. Use imagery, a striking detail, or an unusual perspective.</td></tr>
+                    <tr><td>☐</td><td><strong>Show, don't tell:</strong> Instead of <em>"He was scared"</em>, describe what fear looks like: <em>"His hands trembled; cold sweat beaded on his forehead."</em></td></tr>
+                    <tr><td>☐</td><td><strong>Vary sentence length:</strong> Mix short, punchy sentences with longer, flowing ones to create rhythm.</td></tr>
+                    <tr><td>☐</td><td><strong>Use a range of punctuation:</strong> Aim for at least four different punctuation marks (full stops, commas, colons, dashes, semicolons, speech marks).</td></tr>
+                    <tr><td>☐</td><td><strong>Stay in one tense:</strong> If you start in the past tense, stay in the past tense. Only shift tense for a deliberate effect (e.g. a flashback).</td></tr>
+                    <tr><td>☐</td><td><strong>Keep paragraphs focused:</strong> Start a new paragraph when you move to a new idea, time, or place. Each paragraph should have one main focus.</td></tr>
+                    <tr><td>☐</td><td><strong>Use dialogue sparingly:</strong> If you include speech, punctuate it correctly with speech marks and new lines for each speaker.</td></tr>
                 </tbody>
             </table>
 
+            <h4 style="font-size:15px;color:var(--c-heading);margin:16px 0 8px;">After You Write — Proofreading (5 minutes)</h4>
+            <ol class="aw-steps">
+                <li data-step="1"><strong>Read your work aloud</strong> — you will hear errors that your eyes skip over.</li>
+                <li data-step="2"><strong>Check for capital letters:</strong> Start of sentences, proper nouns (names, places, titles), and the pronoun <em>I</em>.</li>
+                <li data-step="3"><strong>Check apostrophes:</strong> Are they in the right place? Is it <em>its</em> or <em>it's</em>? Is it <em>student's</em> or <em>students'</em>?</li>
+                <li data-step="4"><strong>Check for full stops:</strong> Does every sentence end with a full stop, question mark, or exclamation mark? No run-on sentences?</li>
+                <li data-step="5"><strong>Check UK spelling:</strong> <em>colour</em> not <em>color</em>, <em>organise</em> not <em>organize</em>, <em>centre</em> not <em>center</em>.</li>
+                <li data-step="6"><strong>Check your personal error list:</strong> Look specifically for the three mistakes you know you make most often.</li>
+            </ol>
+
+            <h4 style="font-size:15px;color:var(--c-heading);margin:16px 0 8px;">Quick Reference — SPaG Mark Scheme</h4>
+            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:8px;">In the WLV exam, SPaG is marked across three levels. Understanding what the examiner is looking for helps you target your efforts.</p>
+            <table class="aw-table">
+                <thead>
+                    <tr>
+                        <th style="width:15%;">Level</th>
+                        <th style="width:40%;">What the Examiner Sees</th>
+                        <th style="width:45%;">How to Achieve It</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="tag tag-green">High</span></td>
+                        <td>Consistently accurate spelling and punctuation. Wide range of punctuation used effectively. Grammatical control throughout. Precise, ambitious vocabulary.</td>
+                        <td>Use 4+ punctuation marks. Vary sentence types. Use figurative language. No spelling errors. UK English throughout.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag tag-amber">Middle</span></td>
+                        <td>Generally accurate spelling and punctuation. Some range of punctuation. Occasional grammatical errors that do not impede meaning. Some ambitious vocabulary.</td>
+                        <td>Use 2–3 punctuation marks. Mostly correct sentences. A few spelling errors but not in key words. Some attempt at ambitious vocabulary.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag tag-red">Low</span></td>
+                        <td>Frequent spelling and punctuation errors. Limited range of punctuation. Grammatical errors that sometimes impede meaning. Simple vocabulary.</td>
+                        <td>Focus on getting the basics right: full stops, capital letters, simple sentences. Use words you can spell confidently.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="aw-example">
+                <strong>✅ Model Opening — High Level:</strong><br>
+                <em>The market square was a symphony of chaos. Stalls overflowed with vibrant produce — crimson tomatoes, emerald peppers, golden lemons piled high. The air hummed with the chatter of vendors, the clatter of crates, and the rich, earthy aroma of fresh bread. An old woman, her face weathered like ancient leather, beckoned me closer with a gnarled finger. \"Taste this,\" she whispered, pressing a sun-warmed fig into my palm.</em>
+            </div>
+
             <div class="aw-tip">
-                <strong>💡 Tip:</strong> Print your essay and proofread on paper — errors are much easier to spot on a physical page than on a screen. Alternatively, change the font or read it backwards (sentence by sentence) to break the flow and catch mistakes.
+                <strong>💡 Key Advice:</strong> The WLV exam rewards <strong>quality over quantity</strong>. A well-crafted, carefully proofread response of two sides will score higher than a rushed, error-filled response of three sides. Take the time to plan, write with care, and proofread thoroughly.
             </div>
         </div>
     </div>
@@ -561,21 +745,21 @@
 
 <!-- ── Key Terminology ── -->
 <div class="aw-terms-section">
-    <h2>📖 Key Terminology for Academic Writing</h2>
-    <p style="font-size:13px;color:var(--c-text-secondary);margin-bottom:4px;">These are the essential terms you need to know for university-level writing.</p>
+    <h2>📖 Key SPaG Terminology</h2>
+    <p style="font-size:13px;color:var(--c-text-secondary);margin-bottom:4px;">Essential terms you need to know for the WLV English Equivalency exam.</p>
     <div class="aw-terms-grid">
-        <div class="aw-term-card"><span class="term-badge">Thesis</span><div class="term-def">The central argument or claim of your essay. Every paragraph should support your thesis.</div></div>
-        <div class="aw-term-card"><span class="term-badge">Topic Sentence</span><div class="term-def">The first sentence of a paragraph that states its main point. Guides the reader through your argument.</div></div>
-        <div class="aw-term-card"><span class="term-badge">Signposting</span><div class="term-def">Words and phrases that guide the reader through your essay (e.g. <em>however, furthermore, in contrast</em>).</div></div>
-        <div class="aw-term-card"><span class="term-badge">Hedging</span><div class="term-def">Using cautious language (<em>suggests, may, could</em>) to express claims with appropriate certainty rather than overstating them.</div></div>
-        <div class="aw-term-card"><span class="term-badge">Paraphrasing</span><div class="term-def">Restating someone else's ideas in your own words while still citing the original source. Preferred over direct quotations.</div></div>
-        <div class="aw-term-card"><span class="term-badge">Citation</span><div class="term-def">An in-text reference to a source, using the author-date format in Harvard style (e.g. Smith, 2019).</div></div>
-        <div class="aw-term-card"><span class="term-badge">Reference List</span><div class="term-def">A complete list of all sources cited in your essay, arranged alphabetically by author surname at the end of the document.</div></div>
-        <div class="aw-term-card"><span class="term-badge">Critical Analysis</span><div class="term-def">Evaluating and questioning evidence rather than simply describing it. Involves comparing sources, identifying strengths and weaknesses, and forming your own judgement.</div></div>
-        <div class="aw-term-card"><span class="term-badge">Plagiarism</span><div class="term-def">Presenting someone else's work or ideas as your own without proper attribution. A serious academic offence that can result in failure or expulsion.</div></div>
-        <div class="aw-term-card"><span class="term-badge">Register</span><div class="term-def">The level of formality in language. Academic writing requires a formal register: no contractions, slang, or colloquial expressions.</div></div>
-        <div class="aw-term-card"><span class="term-badge">Cohesion</span><div class="term-def">The logical flow and connection between sentences and paragraphs. Achieved through signposting, transitions, and consistent referencing of the main argument.</div></div>
-        <div class="aw-term-card"><span class="term-badge">Abstract</span><div class="term-def">A concise summary of a research article, thesis, or essay. Usually 150–250 words, covering the purpose, methods, key findings, and conclusions.</div></div>
+        <div class="aw-term-card"><span class="term-badge">Noun</span><div class="term-def">A naming word for a person, place, thing, or idea (e.g. <em>student, city, courage, book</em>).</div></div>
+        <div class="aw-term-card"><span class="term-badge">Verb</span><div class="term-def">A doing or being word (e.g. <em>run, exist, think, become</em>). Every sentence needs at least one.</div></div>
+        <div class="aw-term-card"><span class="term-badge">Adjective</span><div class="term-def">A word that describes a noun (e.g. <em>dark, enormous, fragile, silent</em>).</div></div>
+        <div class="aw-term-card"><span class="term-badge">Adverb</span><div class="term-def">A word that describes a verb, adjective, or another adverb (e.g. <em>slowly, very, carefully, almost</em>).</div></div>
+        <div class="aw-term-card"><span class="term-badge">Conjunction</span><div class="term-def">A word that joins clauses or sentences (e.g. <em>and, but, because, although, so</em>).</div></div>
+        <div class="aw-term-card"><span class="term-badge">Preposition</span><div class="term-def">A word that shows position, time, or direction (e.g. <em>in, on, at, under, between, through</em>).</div></div>
+        <div class="aw-term-card"><span class="term-badge">Clause</span><div class="term-def">A group of words containing a subject and a verb. An independent clause can stand alone as a sentence.</div></div>
+        <div class="aw-term-card"><span class="term-badge">Homophone</span><div class="term-def">Words that sound the same but have different spellings and meanings (e.g. <em>there/their/they're, to/too/two</em>).</div></div>
+        <div class="aw-term-card"><span class="term-badge">Register</span><div class="term-def">The level of formality in language. Exam writing requires a formal or semi-formal register.</div></div>
+        <div class="aw-term-card"><span class="term-badge">Tense</span><div class="term-def">The time of the action or state of being — past, present, or future. Keep tense consistent within your writing.</div></div>
+        <div class="aw-term-card"><span class="term-badge">Figurative Language</span><div class="term-def">Language that uses comparison or association for effect — similes, metaphors, personification, and symbolism.</div></div>
+        <div class="aw-term-card"><span class="term-badge">Syntax</span><div class="term-def">The arrangement of words and phrases to create well-formed sentences. Good syntax makes your meaning clear.</div></div>
     </div>
 </div>
 
