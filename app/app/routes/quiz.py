@@ -22,6 +22,9 @@ class ExamSubmitRequest(BaseModel):
     time_taken: int = Field(default=0, ge=0)
     question_times: dict = Field(default_factory=dict)
     timestamps: dict = Field(default_factory=dict)
+    exam_mode: str = Field(default="quickfire")
+    question_count: int = Field(default=0, ge=0)
+    duration_seconds: int | None = Field(default=None)
 
 
 router = APIRouter()

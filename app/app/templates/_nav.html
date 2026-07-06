@@ -44,6 +44,7 @@
             <a href="/search" class="{% if active == 'search' %}active{% endif %}">🔍 Search</a>
             <a href="/languages" class="{% if active == 'languages' %}active{% endif %}">🔤 Languages & IDEs</a>
             <a href="/reference" class="{% if active == 'reference' %}active{% endif %}">📖 Reference</a>
+            <a href="/wiki" class="{% if active == 'wiki' %}active{% endif %}">📖 Model Answer Wiki</a>
           </div>
         </div>
 
@@ -86,6 +87,7 @@
         {{ sub_link("/search", "🔍 Search", "search") }}
         {{ sub_link("/languages", "🔤 Languages & IDEs", "languages") }}
         {{ sub_link("/reference", "📖 Reference", "reference") }}
+        {{ sub_link("/wiki", "📖 Model Answer Wiki", "wiki") }}
       </ul>
       {{ menu_link("/progress", "📈 Progress", "progress") }}
       {{ menu_link("/grade", "🎯 Grade", "grade") }}

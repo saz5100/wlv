@@ -1,13 +1,13 @@
 {% extends "base.html" %}
-{% block title %}Reading and Exam Strategy | WLV — University of Wolverhampton{% endblock %}
+{% block title %}Trace Tables | WLV — University of Wolverhampton{% endblock %}
 {% block content %}
 <div class="hero" style="padding: 30px 0 15px;">
-    <h1>📖 Reading and Exam Strategy</h1>
-    <p class="hero-sub">Master every question on the WLV English Equivalency paper — Q1 retrieval, Q2 language analysis, Q3 structural analysis, and Q5 creative writing — with proven strategies, timing plans, and mark scheme insights</p>
+    <h1>📊 Trace Table Practice</h1>
+    <p class="hero-sub">Step through algorithms and track variable changes — essential for Paper 2</p>
 </div>
 
 <style>
-.rm-intro {
+.tt-intro {
     max-width: 960px;
     margin: 0 auto 20px;
     padding: 20px 24px;
@@ -17,166 +17,176 @@
     line-height: 1.7;
     font-size: 14px;
 }
-.light-theme .rm-intro {
+.light-theme .tt-intro {
     background: rgba(255, 255, 255, 0.8);
     border-color: rgba(8, 145, 178, 0.15);
 }
-.rm-intro h3 { color: var(--c-heading); margin-bottom: 8px; font-size: 17px; }
+.tt-intro h3 { color: var(--c-heading); margin-bottom: 8px; font-size: 17px; }
 
-.rm-layout {
+.tt-layout {
     max-width: 960px;
     margin: 0 auto;
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
 }
-.rm-sidebar {
+.tt-sidebar {
     flex: 1 1 220px;
     max-width: 260px;
     background: rgba(17, 24, 39, 0.85);
     border: 1px solid rgba(34, 211, 238, 0.15);
     border-radius: var(--r-xl);
     padding: 16px;
-    position: sticky;
-    top: 20px;
-    align-self: flex-start;
 }
-.light-theme .rm-sidebar {
+.light-theme .tt-sidebar {
     background: rgba(255, 255, 255, 0.85);
     border-color: rgba(8, 145, 178, 0.15);
 }
-.rm-main {
+.tt-main {
     flex: 2 1 650px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
 }
 
-/* ── Section Cards ── */
-.rm-card {
-    background: rgba(17, 24, 39, 0.7);
-    border: 1px solid rgba(34, 211, 238, 0.12);
+/* ── Algorithm Display ── */
+.tt-algo-card {
+    background: #0d1225;
+    border: 1px solid rgba(34, 211, 238, 0.15);
     border-radius: var(--r-xl);
     overflow: hidden;
 }
-.light-theme .rm-card {
-    background: rgba(255, 255, 255, 0.8);
+.light-theme .tt-algo-card {
+    background: #fafafa;
     border-color: rgba(8, 145, 178, 0.15);
 }
-.rm-card-header {
+.tt-algo-header {
     background: rgba(17, 24, 39, 0.8);
-    padding: 12px 20px;
+    padding: 10px 16px;
     border-bottom: 1px solid rgba(34, 211, 238, 0.12);
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--c-accent);
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
 }
-.rm-card-body {
-    padding: 16px 20px;
-    line-height: 1.7;
+.tt-algo-code {
+    padding: 16px;
+    font-family: 'Consolas', 'Courier New', monospace;
     font-size: 14px;
+    line-height: 1.7;
+    color: #e2e8f0;
+    white-space: pre-wrap;
+    min-height: 120px;
 }
-.rm-card-body p { margin-bottom: 10px; }
-.rm-card-body ul, .rm-card-body ol { margin: 6px 0 10px 18px; }
-.rm-card-body li { margin-bottom: 4px; }
-.rm-card-body strong { color: var(--c-accent); }
+.light-theme .tt-algo-code { color: #1e293b; }
+.tt-algo-code .highlight-line {
+    background: rgba(34, 211, 238, 0.15);
+    border-left: 3px solid var(--c-accent);
+    padding-left: 8px;
+    display: block;
+}
+.tt-algo-code .line-num {
+    display: inline-block;
+    width: 28px;
+    color: #64748b;
+    user-select: none;
+}
 
-/* ── Comparison Table ── */
-.rm-compare {
+/* ── Trace Table ── */
+.tt-table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-lg);
+}
+.tt-table {
     width: 100%;
     border-collapse: collapse;
+    font-family: 'Consolas', 'Courier New', monospace;
     font-size: 13px;
-    margin: 10px 0;
 }
-.rm-compare th {
-    background: rgba(34, 211, 238, 0.1);
+.tt-table th {
+    background: rgba(17, 24, 39, 0.8);
     color: var(--c-accent);
-    padding: 10px 14px;
+    padding: 8px 12px;
     text-align: left;
     border-bottom: 2px solid var(--c-border);
+    white-space: nowrap;
     font-weight: 700;
 }
-.rm-compare td {
-    padding: 8px 14px;
+.light-theme .tt-table th { background: rgba(0, 0, 0, 0.05); }
+.tt-table td {
+    padding: 6px 12px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-    vertical-align: top;
+    color: var(--c-text);
+    white-space: nowrap;
 }
-.light-theme .rm-compare td { border-color: rgba(0, 0, 0, 0.04); }
-.rm-compare tr:last-child td { border-bottom: none; }
+.light-theme .tt-table td { border-color: rgba(0, 0, 0, 0.04); }
+.tt-table tr.current-step td {
+    background: rgba(34, 211, 238, 0.08);
+}
+.tt-table td.new-value {
+    color: #34d399;
+    font-weight: 700;
+}
+.tt-table td.output-cell {
+    color: #a855f7;
+    font-style: italic;
+}
 
-/* ── Strategy Box ── */
-.rm-strategy {
-    background: rgba(34, 211, 238, 0.06);
-    border-left: 4px solid var(--c-accent);
-    border-radius: 0 var(--r-md) var(--r-md) 0;
-    padding: 12px 16px;
-    margin: 10px 0;
+/* ── Controls ── */
+.tt-controls {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.tt-controls button {
+    padding: 8px 16px;
+    border-radius: var(--r-md);
+    border: 1px solid var(--c-border);
+    background: rgba(8, 11, 20, 0.6);
+    color: var(--c-text);
     font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
 }
-.rm-strategy strong { color: var(--c-accent); }
-
-/* ── Mark Scheme Box ── */
-.rm-markscheme {
-    background: rgba(251, 191, 36, 0.06);
-    border-left: 4px solid #fbbf24;
-    border-radius: 0 var(--r-md) var(--r-md) 0;
-    padding: 12px 16px;
-    margin: 10px 0;
+.tt-controls button:hover {
+    border-color: var(--c-accent);
+    background: rgba(8, 41, 73, 0.4);
+}
+.tt-controls button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+.tt-controls button.btn-primary {
+    background: var(--c-accent);
+    color: #000;
+    border-color: var(--c-accent);
+}
+.tt-controls button.btn-primary:hover {
+    background: var(--c-accent-hover);
+}
+.tt-step-info {
     font-size: 13px;
-}
-.rm-markscheme strong { color: #fbbf24; }
-
-/* ── WLV Difference Box ── */
-.rm-wlv {
-    background: rgba(239, 68, 68, 0.06);
-    border-left: 4px solid #ef4444;
-    border-radius: 0 var(--r-md) var(--r-md) 0;
-    padding: 12px 16px;
-    margin: 10px 0;
-    font-size: 13px;
-}
-.rm-wlv strong { color: #ef4444; }
-
-/* ── Timing Box ── */
-.rm-timing {
-    background: rgba(52, 211, 153, 0.06);
-    border-left: 4px solid #34d399;
-    border-radius: 0 var(--r-md) var(--r-md) 0;
-    padding: 12px 16px;
-    margin: 10px 0;
-    font-size: 13px;
-}
-.rm-timing strong { color: #34d399; }
-
-/* ── Checklist ── */
-.rm-checklist {
-    list-style: none;
-    padding: 0;
-    margin: 8px 0;
-}
-.rm-checklist li {
-    padding: 6px 0 6px 28px;
-    position: relative;
-    line-height: 1.6;
-}
-.rm-checklist li::before {
-    content: "✅";
-    position: absolute;
-    left: 0;
-    top: 6px;
-    font-size: 14px;
+    color: var(--c-text-secondary);
+    margin-left: auto;
 }
 
-/* ── Sidebar Nav ── */
-.rm-nav-list {
+/* ── Exercise List ── */
+.tt-exercise-list {
     display: flex;
     flex-direction: column;
     gap: 4px;
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: 4px;
 }
-.rm-nav-btn {
+.tt-exercise-list::-webkit-scrollbar { width: 5px; }
+.tt-exercise-list::-webkit-scrollbar-track { background: transparent; }
+.tt-exercise-list::-webkit-scrollbar-thumb { background: rgba(34, 211, 238, 0.2); border-radius: 99px; }
+.tt-exercise-btn {
     text-align: left;
     padding: 8px 10px;
     background: rgba(13, 18, 37, 0.8);
@@ -188,569 +198,555 @@
     cursor: pointer;
     transition: all 0.15s;
 }
-.rm-nav-btn:hover {
+.tt-exercise-btn:hover {
     border-color: var(--c-accent);
     background: rgba(8, 41, 73, 0.4);
 }
-.rm-nav-btn.active {
+.tt-exercise-btn.active {
     border-color: var(--c-accent);
     background: rgba(8, 41, 73, 0.7);
     box-shadow: 0 0 10px var(--c-accent-glow);
 }
+.tt-exercise-btn .status-icon { float: right; font-size: 12px; }
 
-/* ── Key Terms ── */
-.rm-term {
-    display: inline-block;
-    background: rgba(34, 211, 238, 0.1);
-    border: 1px solid rgba(34, 211, 238, 0.2);
-    border-radius: 4px;
-    padding: 1px 8px;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--c-accent);
+/* ── Output ── */
+.tt-output-card {
+    background: #090b11;
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-xl);
+    overflow: hidden;
 }
-
-/* ── Example Box ── */
-.rm-example {
+.light-theme .tt-output-card { background: #f3f4f6; }
+.tt-output-header {
+    padding: 8px 16px;
     background: rgba(17, 24, 39, 0.5);
-    border: 1px solid rgba(34, 211, 238, 0.08);
-    border-radius: var(--r-md);
+    border-bottom: 1px solid var(--c-border);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--c-text-secondary);
+}
+.tt-output-body {
     padding: 12px 16px;
-    margin: 10px 0;
-    font-size: 13px;
-    font-style: italic;
+    font-family: monospace;
+    font-size: 14px;
+    color: #a855f7;
+    min-height: 40px;
+    white-space: pre-wrap;
 }
-.light-theme .rm-example {
-    background: rgba(0, 0, 0, 0.03);
-}
-.rm-example strong { font-style: normal; color: var(--c-accent); }
-
-/* ── Sub-headings ── */
-.rm-sub {
-    color: var(--c-accent);
-    margin: 14px 0 6px;
-    font-size: 15px;
-    font-weight: 700;
-}
+.light-theme .tt-output-body { color: #7c3aed; }
 
 @media (max-width: 768px) {
-    .rm-sidebar { max-width: 100%; position: static; }
+    .tt-sidebar { max-width: 100%; }
 }
 </style>
 
 <!-- ── Intro ── -->
-<div class="rm-intro">
-    <h3>📖 Reading and Exam Strategy — WLV English Equivalency</h3>
-    <p>The WLV English Equivalency assessment is based on <strong>AQA GCSE English Language Paper 1 (8700)</strong> with specific modifications for university-level applicants. You will have <strong>2 hours</strong> to complete the paper, working from a single source extract. This guide covers every question type, the mark schemes that underpin them, recommended timings, and the key differences between the standard GCSE paper and the WLV version.</p>
+<div class="tt-intro">
+    <h3>📊 Trace Table Practice</h3>
+    <p>Trace tables help you track how variable values change as an algorithm executes. You step through the code line by line, recording each variable's value after every instruction. This is a key skill for <strong>WLV English Equivalency Paper 2</strong> — trace table questions are common in the exam.</p>
 </div>
 
-<div class="rm-layout">
-    <!-- ── Sidebar Navigation ── -->
-    <div class="rm-sidebar">
-        <h3 style="color:var(--c-heading);font-size:16px;margin-bottom:8px;">📑 Sections</h3>
-        <div class="rm-nav-list">
-            <button class="rm-nav-btn active" onclick="rmScrollTo('q1-retrieval')">1. Q1 — Retrieval Strategies</button>
-            <button class="rm-nav-btn" onclick="rmScrollTo('q2-language')">2. Q2 — Language Analysis</button>
-            <button class="rm-nav-btn" onclick="rmScrollTo('q3-structure')">3. Q3 — Structural Analysis</button>
-            <button class="rm-nav-btn" onclick="rmScrollTo('q5-creative')">4. Q5 — Creative Writing</button>
-            <button class="rm-nav-btn" onclick="rmScrollTo('timing-strategy')">5. Timing &amp; WLV Differences</button>
-        </div>
+<div class="tt-layout">
+    <!-- ── Sidebar ── -->
+    <div class="tt-sidebar">
+        <h3 style="color:var(--c-heading);font-size:16px;margin-bottom:8px;">🎯 Algorithms</h3>
+        <div class="tt-exercise-list" id="ttExerciseList"></div>
     </div>
 
-    <!-- ── Main Content ── -->
-    <div class="rm-main">
-
-        <!-- 1. Q1 Retrieval Strategies -->
-        <div class="rm-card" id="q1-retrieval">
-            <div class="rm-card-header">🔍 1. Q1 — Explicit Retrieval (4 marks)</div>
-            <div class="rm-card-body">
-                <p>Question 1 tests your ability to <strong>identify and retrieve explicit information</strong> from the source text. You will be asked to list four things from a specified line range or about a specified topic. This is the most straightforward question on the paper, but it is easy to lose marks through carelessness.</p>
-
-                <h4 class="rm-sub">🎯 What the Examiner Wants</h4>
-                <ul>
-                    <li>Four separate, relevant pieces of information drawn <strong>directly</strong> from the text</li>
-                    <li>Each point should be a full, clear statement — not a single word or a copied phrase without context</li>
-                    <li>Answers must be <strong>in your own words</strong> where possible, though short quotations are acceptable</li>
-                    <li>Each point is worth <strong>1 mark</strong> — there is no extra credit for more than four</li>
-                </ul>
-
-                <h4 class="rm-sub">📋 Step-by-Step Strategy</h4>
-                <ol>
-                    <li><strong>Read the question carefully</strong> — note the line range and the specific topic or focus (e.g. "what the writer says about the setting")</li>
-                    <li><strong>Scan the specified lines</strong> — underline or highlight every piece of information that answers the question</li>
-                    <li><strong>Select your four best points</strong> — choose the clearest, most distinct pieces of information. Avoid repeating the same idea in different words</li>
-                    <li><strong>Write each point as a separate bullet or numbered sentence</strong> — this makes it easy for the examiner to see you have four distinct answers</li>
-                    <li><strong>Check each point against the text</strong> — verify that every claim you make is actually stated in the source</li>
-                </ol>
-
-                <div class="rm-strategy">
-                    <strong>💡 Pro Tip</strong> — If you find more than four possible points, pick the four that are most <em>specific</em> and <em>concrete</em>. Vague or general statements are less likely to score the mark. Never invent information — if it is not in the text, it cannot be credited.
-                </div>
-
-                <div class="rm-example">
-                    <strong>Example question:</strong> "List four things you learn about the old man from lines 1–8."<br>
-                    <strong>Good answer:</strong> (1) He lives alone in a cottage by the sea. (2) He has not left his home in over twenty years. (3) His only companion is a grey cat. (4) He spends his days watching the tide from his window.<br>
-                    <strong>Poor answer:</strong> He is old. He lives alone. He has a cat. He watches the sea. (Too vague — lacks the specific detail from the text.)
-                </div>
-
-                <h4 class="rm-sub">⚠️ Common Pitfalls</h4>
-                <ul>
-                    <li><strong>Inferring rather than retrieving</strong> — Q1 is about what is <em>explicitly stated</em>, not what you can work out. Save inferences for Q2 and Q3</li>
-                    <li><strong>Repeating the same point</strong> — "He is lonely" and "He has no friends" are the same idea. You need four <em>different</em> pieces of information</li>
-                    <li><strong>Writing too much</strong> — a single sentence per point is sufficient. Long paragraphs waste time you need for later questions</li>
-                    <li><strong>Going outside the specified lines</strong> — the question tells you exactly which lines to use. Information from elsewhere in the text will not be credited</li>
-                </ul>
-
-                <div class="rm-markscheme">
-                    <strong>📊 Mark Scheme (4 marks)</strong><br>
-                    Award 1 mark per valid point of information retrieved from the specified lines. The point must be clearly expressed and demonstrably present in the text. No half marks. No credit for inference, evaluation, or analysis at this stage.
-                </div>
+    <!-- ── Main ── -->
+    <div class="tt-main">
+        <!-- Algorithm Display -->
+        <div class="tt-algo-card">
+            <div class="tt-algo-header">
+                <span id="ttAlgoTitle">Select an Algorithm</span>
+                <span id="ttAlgoMeta" style="font-size:12px;color:var(--c-text-secondary);"></span>
             </div>
+            <div class="tt-algo-code" id="ttAlgoCode"></div>
         </div>
 
-        <!-- 2. Q2 Language Analysis -->
-        <div class="rm-card" id="q2-language">
-            <div class="rm-card-header">✍️ 2. Q2 — Language Analysis (8 marks)</div>
-            <div class="rm-card-body">
-                <p>Question 2 asks you to <strong>analyse how the writer uses language</strong> to achieve a particular effect or convey meaning. You will be given a short passage (typically 8–15 lines) and asked to comment on the writer's choice of words, phrases, and language techniques.</p>
-
-                <h4 class="rm-sub">🎯 What the Examiner Wants</h4>
-                <ul>
-                    <li><strong>Subject terminology</strong> — identify specific language techniques (simile, metaphor, personification, alliteration, sensory language, etc.)</li>
-                    <li><strong>Quotations</strong> — embed short, precise quotations from the passage to support each point</li>
-                    <li><strong>Analysis of effect</strong> — explain <em>what</em> the technique suggests and <em>how</em> it affects the reader's interpretation</li>
-                    <li>Aim for <strong>3–4 well-developed points</strong> rather than a long list of superficial observations</li>
-                </ul>
-
-                <h4 class="rm-sub">📋 The PEEL Framework for Q2</h4>
-                <p>Use the <strong>PEEL</strong> structure to build each analytical paragraph:</p>
-                <ul>
-                    <li><strong>P</strong> — <strong>Point</strong>: State the language technique the writer uses (e.g. "The writer uses a simile to describe the storm.")</li>
-                    <li><strong>E</strong> — <strong>Evidence</strong>: Embed a short quotation (e.g. "The waves were 'like furious giants'.")</li>
-                    <li><strong>E</strong> — <strong>Explain</strong>: Analyse the effect — what does this comparison suggest? How does it make the reader feel? (e.g. "This comparison suggests the storm is powerful and uncontrollable, creating a sense of danger and awe.")</li>
-                    <li><strong>L</strong> — <strong>Link</strong>: Link back to the writer's overall purpose or the question focus (e.g. "The writer uses this violent imagery to establish the hostile environment the character must face.")</li>
-                </ul>
-
-                <div class="rm-strategy">
-                    <strong>💡 Pro Tip</strong> — Do not just <em>name</em> the technique. The mark scheme rewards <strong>analysis of effect</strong> above all else. A response that says "The writer uses a metaphor" without explaining its effect will score far fewer marks than one that says "The metaphor of 'a cage of shadows' conveys the character's sense of entrapment and hopelessness."
-                </div>
-
-                <h4 class="rm-sub">📚 Key Language Techniques to Know</h4>
-                <table class="rm-compare">
-                    <thead>
-                        <tr>
-                            <th style="width:25%;">Technique</th>
-                            <th style="width:40%;">Definition</th>
-                            <th style="width:35%;">Example</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Simile</strong></td>
-                            <td>Comparison using 'like' or 'as'</td>
-                            <td>"The fog clung <em>like</em> a damp shroud"</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Metaphor</strong></td>
-                            <td>Direct comparison stating one thing is another</td>
-                            <td>"The city was a <em>concrete jungle</em>"</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Personification</strong></td>
-                            <td>Giving human qualities to non-human things</td>
-                            <td>"The wind <em>howled</em> its fury"</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Sensory Language</strong></td>
-                            <td>Words that appeal to the five senses</td>
-                            <td>"The <em>acrid</em> smell of smoke <em>stung</em> his eyes"</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Alliteration</strong></td>
-                            <td>Repetition of initial consonant sounds</td>
-                            <td>"The <em>d</em>ark, <em>d</em>amp <em>d</em>ungeon"</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Semantic Field</strong></td>
-                            <td>A cluster of related words creating a theme</td>
-                            <td>Words like "tomb", "coffin", "grave" create a deathly field</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div class="rm-example">
-                    <strong>Model paragraph (8-mark response):</strong><br>
-                    The writer uses <strong>personification</strong> of the weather to reflect the character's emotional state. The rain is described as 'tapping impatiently at the window', which gives the rain a human quality of restlessness. This <strong>suggests</strong> that the character herself feels trapped and agitated, mirroring her inner turmoil through the external setting. The verb 'tapping' also creates a <strong>sensory, auditory image</strong> that makes the scene feel immediate and oppressive for the reader. The writer's use of personification here <strong>effectively blurs the boundary</strong> between the character's internal world and the physical environment.
-                </div>
-
-                <div class="rm-markscheme">
-                    <strong>📊 Mark Scheme (8 marks)</strong><br>
-                    <strong>7–8 marks:</strong> Detailed, perceptive analysis of language effects. Accurate use of subject terminology. Well-chosen quotations integrated seamlessly.<br>
-                    <strong>5–6 marks:</strong> Clear explanation of language effects. Appropriate terminology. Relevant quotations.<br>
-                    <strong>3–4 marks:</strong> Some explanation of effects. Terminology used but may be inconsistent. Quotations present but not always embedded.<br>
-                    <strong>1–2 marks:</strong> Simple comments on language. Limited or no terminology. Quotations may be missing or irrelevant.
-                </div>
-            </div>
+        <!-- Controls -->
+        <div class="tt-controls">
+            <button class="btn-primary" id="ttBtnStart" onclick="ttStart()">▶️ Start Trace</button>
+            <button id="ttBtnStep" onclick="ttStep()" disabled>⏭️ Step</button>
+            <button id="ttBtnReset" onclick="ttReset()" disabled>🔄 Reset</button>
+            <button id="ttBtnAuto" onclick="ttAutoRun()" disabled>⚡ Auto-Run</button>
+            <span class="tt-step-info" id="ttStepInfo">Ready</span>
         </div>
 
-        <!-- 3. Q3 Structural Analysis -->
-        <div class="rm-card" id="q3-structure">
-            <div class="rm-card-header">🏗️ 3. Q3 — Structural Analysis (8 marks)</div>
-            <div class="rm-card-body">
-                <p>Question 3 asks you to <strong>analyse how the writer structures the text</strong> to engage the reader. Unlike Q2, which focuses on individual word choices, Q3 is about the <strong>bigger picture</strong> — how the text is organised as a whole, how it begins and ends, and how the reader's attention is guided through the extract.</p>
-
-                <h4 class="rm-sub">🎯 What the Examiner Wants</h4>
-                <ul>
-                    <li>Comment on the <strong>whole text</strong> — not just one paragraph or section</li>
-                    <li>Identify <strong>structural features</strong>: openings, endings, shifts in focus, changes in pace, juxtaposition, repetition, cyclical structure, paragraph length, sentence types</li>
-                    <li>Explain <strong>why</strong> the writer has chosen these structural features and <strong>how</strong> they affect the reader</li>
-                    <li>Use <strong>structural terminology</strong> accurately (e.g. "the writer shifts focus from...", "the pace quickens when...", "the cyclical structure reinforces...")</li>
-                </ul>
-
-                <h4 class="rm-sub">📋 Key Structural Features</h4>
-                <table class="rm-compare">
-                    <thead>
-                        <tr>
-                            <th style="width:25%;">Feature</th>
-                            <th style="width:40%;">What to Look For</th>
-                            <th style="width:35%;">Effect on Reader</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Opening / Ending</strong></td>
-                            <td>How does the text begin? How does it end? Is the ending foreshadowed?</td>
-                            <td>Creates first impressions; provides resolution or leaves the reader questioning</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Shifts in Focus</strong></td>
-                            <td>Changes between characters, settings, time periods, or perspectives</td>
-                            <td>Creates contrast, builds complexity, or reveals new information</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Pace and Rhythm</strong></td>
-                            <td>Short sentences for speed; long, complex sentences for reflection; paragraph length</td>
-                            <td>Short sentences create tension or urgency; long sentences slow the reader down</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Juxtaposition</strong></td>
-                            <td>Placing two contrasting ideas, images, or scenes side by side</td>
-                            <td>Highlights differences and forces the reader to compare</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Repetition / Motif</strong></td>
-                            <td>A word, phrase, or image that recurs throughout the text</td>
-                            <td>Creates emphasis, unity, or a sense of obsession or inevitability</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Cyclical Structure</strong></td>
-                            <td>The text ends where it began — returning to the same image, idea, or setting</td>
-                            <td>Creates a sense of closure, entrapment, or circularity</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h4 class="rm-sub">📋 The PEEZL Framework for Q3</h4>
-                <p>Adapt your approach for structural analysis:</p>
-                <ul>
-                    <li><strong>P</strong> — <strong>Point</strong>: Identify the structural feature (e.g. "The writer opens with a long, descriptive paragraph before shifting to short, staccato sentences.")</li>
-                    <li><strong>E</strong> — <strong>Evidence</strong>: Reference specific parts of the text (e.g. "The opening describes the setting in detail across six lines, then the sentence 'He ran.' stands alone.")</li>
-                    <li><strong>E</strong> — <strong>Explain</strong>: Analyse the effect on the reader (e.g. "The contrast in sentence length creates a dramatic shift from calm description to urgent action.")</li>
-                    <li><strong>Z</strong> — <strong>Zoom out</strong>: Link this structural choice to the text as a whole (e.g. "This structural shift mirrors the character's sudden realisation and the story's turning point.")</li>
-                    <li><strong>L</strong> — <strong>Link</strong>: Connect to the writer's overall purpose (e.g. "The writer uses structure to manipulate the reader's emotional journey, building tension before releasing it.")</li>
-                </ul>
-
-                <div class="rm-strategy">
-                    <strong>💡 Pro Tip</strong> — The biggest mistake students make in Q3 is treating it like Q2. Do not analyse individual word choices (that is Q2's job). Instead, <strong>zoom out</strong> and think about the architecture of the text. Ask yourself: <em>Why did the writer put this paragraph here? Why this sentence length now? Why this shift in focus at this point?</em>
-                </div>
-
-                <div class="rm-example">
-                    <strong>Model paragraph (8-mark response):</strong><br>
-                    The writer <strong>opens</strong> the extract with an extended description of the setting, using long, multi-clause sentences that create a <strong>slow, reflective pace</strong>. This mirrors the character's initial calm before the crisis. The <strong>shift</strong> occurs at the line 'Then everything changed.' — a single, short sentence that acts as a structural pivot. From this point, the sentences become <strong>shorter and more fragmented</strong>, reflecting the character's growing panic. The writer <strong>juxtaposes</strong> the peaceful opening with the chaotic middle section, forcing the reader to experience the same emotional whiplash as the character. This structural choice <strong>emphasises</strong> how quickly and devastatingly a life can be disrupted.
-                </div>
-
-                <div class="rm-markscheme">
-                    <strong>📊 Mark Scheme (8 marks)</strong><br>
-                    <strong>7–8 marks:</strong> Perceptive, detailed analysis of structural features across the text. Accurate structural terminology. Convincing explanation of effects on the reader.<br>
-                    <strong>5–6 marks:</strong> Clear explanation of structural choices. Appropriate terminology. References to different parts of the text.<br>
-                    <strong>3–4 marks:</strong> Some awareness of structure. Terminology may be limited or confused with language features. References to one or two points only.<br>
-                    <strong>1–2 marks:</strong> Simple comments about the text. No structural terminology. May describe rather than analyse.
-                </div>
-            </div>
+        <!-- Trace Table -->
+        <div class="tt-table-wrap">
+            <table class="tt-table" id="ttTable">
+                <thead id="ttTableHead"></thead>
+                <tbody id="ttTableBody"></tbody>
+            </table>
         </div>
 
-        <!-- 4. Q5 Creative Writing -->
-        <div class="rm-card" id="q5-creative">
-            <div class="rm-card-header">✏️ 4. Q5 — Creative / Descriptive Writing (25 marks)</div>
-            <div class="rm-card-body">
-                <p>Question 5 is the most heavily weighted question on the paper, worth <strong>25 marks</strong> (including 4 marks for SPaG). You will be given a choice of two prompts — one <strong>descriptive</strong> (based on an image) and one <strong>narrative</strong> (a story opening or scenario). You must write <strong>one</strong> response, typically 450–600 words.</p>
-
-                <h4 class="rm-sub">🎯 What the Examiner Wants</h4>
-                <ul>
-                    <li><strong>Content and Organisation (15 marks):</strong> A well-structured piece with a clear beginning, middle, and end. Sophisticated vocabulary. Effective use of language techniques. Controlled paragraphing.</li>
-                    <li><strong>Technical Accuracy (10 marks):</strong> Accurate spelling, punctuation, and grammar. A range of sentence structures for effect. Consistent tense and person.</li>
-                </ul>
-
-                <h4 class="rm-sub">📋 Descriptive vs Narrative — Which to Choose?</h4>
-                <table class="rm-compare">
-                    <thead>
-                        <tr>
-                            <th style="width:20%;">Aspect</th>
-                            <th style="width:40%;">Descriptive (Image-based)</th>
-                            <th style="width:40%;">Narrative (Story-based)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Focus</strong></td>
-                            <td>Painting a vivid picture in words — what can be seen, heard, felt, smelt</td>
-                            <td>Telling a story with characters, plot, and conflict</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Structure</strong></td>
-                            <td>Zoom in / zoom out — move from the big picture to specific details</td>
-                            <td>Beginning → build-up → climax → resolution (or a deliberate twist)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Techniques</strong></td>
-                            <td>Sensory language, simile, metaphor, personification, colour imagery</td>
-                            <td>Dialogue, action, pacing, character development, setting description</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Best for</strong></td>
-                            <td>Students who excel at description and atmospheric writing</td>
-                            <td>Students who enjoy plotting and character-driven writing</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h4 class="rm-sub">📋 The DAFOREST Framework for Q5</h4>
-                <p>Use <strong>DAFOREST</strong> as a checklist of persuasive and descriptive techniques to include:</p>
-                <ul>
-                    <li><strong>D</strong> — <strong>Direct address</strong> (narrative only): "You would never guess..."</li>
-                    <li><strong>A</strong> — <strong>Alliteration</strong>: "The bitter, biting wind"</li>
-                    <li><strong>F</strong> — <strong>Facts / Figurative language</strong>: Similes, metaphors, personification</li>
-                    <li><strong>O</strong> — <strong>Opinion / Observation</strong>: The writer's perspective on the scene</li>
-                    <li><strong>R</strong> — <strong>Repetition / Rhetorical questions</strong>: For emphasis or to engage the reader</li>
-                    <li><strong>E</strong> — <strong>Emotive language</strong>: Words chosen to provoke an emotional response</li>
-                    <li><strong>S</strong> — <strong>Sensory language</strong>: Sight, sound, touch, smell, taste</li>
-                    <li><strong>T</strong> — <strong>Triples (rule of three)</strong>: "Dark, damp, and desolate"</li>
-                </ul>
-
-                <div class="rm-strategy">
-                    <strong>💡 Pro Tip</strong> — Spend the first <strong>5 minutes planning</strong>. A well-planned response will always outperform one written off the cuff. For descriptive writing, plan your zoom-in journey. For narrative writing, plan your plot arc. A clear structure is worth more marks than a dazzling but chaotic piece.
-                </div>
-
-                <h4 class="rm-sub">📋 SPaG — The 4 Marks You Cannot Afford to Lose</h4>
-                <ul>
-                    <li><strong>Spelling:</strong> Use UK English spellings throughout (colour, centre, realise, travelled). Watch for common errors: <em>their / there / they're</em>, <em>your / you're</em>, <em>its / it's</em></li>
-                    <li><strong>Punctuation:</strong> Use a range beyond full stops and commas — colons, semicolons, dashes, ellipsis, and exclamation marks all add sophistication</li>
-                    <li><strong>Grammar:</strong> Maintain consistent tense (past or present — do not switch). Ensure subject-verb agreement. Use a mix of simple, compound, and complex sentences</li>
-                    <li><strong>Paragraphing:</strong> Use clear topic sentences. Vary paragraph length for effect. A single-sentence paragraph can be powerful at a key moment</li>
-                </ul>
-
-                <div class="rm-example">
-                    <strong>Descriptive opening (Grade 9 standard):</strong><br>
-                    The market square was a <strong>cacophony of colour and noise</strong>. Beneath a sky the colour of bruised plums, stalls spilled their wares onto the wet cobbles — <strong>crimson</strong> apples piled high beside <strong>amber</strong> jars of honey, their lids sticky with sweetness. The air <strong>thickened</strong> with the mingled scents of fresh bread, diesel fumes, and the <strong>distant, salty tang</strong> of the sea. A child's laugh <strong>pierced</strong> the general hum, sharp and sudden as a gull's cry.
-                </div>
-
-                <div class="rm-markscheme">
-                    <strong>📊 Mark Scheme (25 marks)</strong><br>
-                    <strong>Content and Organisation (AO5) — 15 marks:</strong><br>
-                    <strong>13–15:</strong> Sophisticated ideas, convincingly crafted. Ambitious vocabulary. Coherent, controlled structure. Effective use of techniques.<br>
-                    <strong>9–12:</strong> Clear, developed ideas. Appropriate vocabulary. Logical structure. Good use of techniques.<br>
-                    <strong>5–8:</strong> Some development of ideas. Simple vocabulary. Basic structure. Some techniques used.<br>
-                    <strong>1–4:</strong> Simple ideas. Limited vocabulary. Weak or no structure. Few or no techniques.<br><br>
-                    <strong>Technical Accuracy (AO6) — 10 marks:</strong><br>
-                    <strong>8–10:</strong> Accurate spelling and punctuation. Wide range of sentence structures. Consistent tense and person.<br>
-                    <strong>5–7:</strong> Mostly accurate. Some variety in sentences. Generally consistent.<br>
-                    <strong>1–4:</strong> Frequent errors. Limited sentence variety. Inconsistent control.
-                </div>
-            </div>
+        <!-- Output -->
+        <div class="tt-output-card">
+            <div class="tt-output-header">📤 Program Output</div>
+            <div class="tt-output-body" id="ttOutput">—</div>
         </div>
-
-        <!-- 5. Timing, Mark Schemes & WLV Differences -->
-        <div class="rm-card" id="timing-strategy">
-            <div class="rm-card-header">⏱️ 5. Exam Timing, Mark Schemes &amp; WLV-Specific Differences</div>
-            <div class="rm-card-body">
-                <p>The WLV English Equivalency is a <strong>2-hour</strong> assessment. Effective time management is essential to maximise your total score. Below is the recommended time allocation, along with the key differences between this paper and the standard AQA GCSE English Language Paper 1.</p>
-
-                <h4 class="rm-sub">⏱️ Recommended Timings (2 hours = 120 minutes)</h4>
-                <table class="rm-compare">
-                    <thead>
-                        <tr>
-                            <th style="width:18%;">Question</th>
-                            <th style="width:12%;">Marks</th>
-                            <th style="width:20%;">Recommended Time</th>
-                            <th style="width:50%;">Strategy</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Q1</strong></td>
-                            <td>4</td>
-                            <td><strong>10 minutes</strong></td>
-                            <td>5 min reading + scanning, 5 min writing four clear points. Do not overthink this one — it is the easiest marks on the paper</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Q2</strong></td>
-                            <td>8</td>
-                            <td><strong>20 minutes</strong></td>
-                            <td>5 min reading and annotating, 12 min writing 3–4 PEEL paragraphs, 3 min reviewing</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Q3</strong></td>
-                            <td>8</td>
-                            <td><strong>20 minutes</strong></td>
-                            <td>5 min reading the whole text for structure, 12 min writing 3–4 PEEZL paragraphs, 3 min reviewing</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Q5</strong></td>
-                            <td>25</td>
-                            <td><strong>55 minutes</strong></td>
-                            <td>5 min planning, 40 min writing, 10 min proofreading for SPaG errors. This is worth over a third of your total marks — give it the time it deserves</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Buffer</strong></td>
-                            <td>—</td>
-                            <td><strong>15 minutes</strong></td>
-                            <td>Use for final checks, finishing Q5, or revisiting Q2/Q3 to add detail. Do not leave early</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div class="rm-timing">
-                    <strong>⏱️ Timing Tip</strong> — If you get stuck on Q2 or Q3, <strong>move on</strong>. It is better to write a solid but shorter response and have time for Q5 than to spend 40 minutes perfecting Q2 and then rush the 25-mark question. Remember: Q5 alone is worth more than Q1, Q2, and Q3 combined.
-                </div>
-
-                <h4 class="rm-sub">🔴 WLV-Specific Differences from AQA GCSE English Language Paper 1</h4>
-                <p>The WLV English Equivalency is <strong>based on</strong> AQA Paper 1 but has several important modifications. Understanding these differences is crucial for effective preparation.</p>
-
-                <table class="rm-compare">
-                    <thead>
-                        <tr>
-                            <th style="width:30%;">Feature</th>
-                            <th style="width:35%;">AQA GCSE Paper 1</th>
-                            <th style="width:35%;">WLV English Equivalency</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Q4 — Evaluation</strong></td>
-                            <td>Present — 20-mark evaluation question (AO4)</td>
-                            <td><strong>Removed entirely</strong> — the paper has only Q1, Q2, Q3, and Q5</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Paper 2</strong></td>
-                            <td>Present — non-fiction and comparison paper</td>
-                            <td><strong>Removed entirely</strong> — there is only one paper</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Spoken Language</strong></td>
-                            <td>Separate endorsement (pass/fail)</td>
-                            <td><strong>Not assessed</strong> — no presentation or speech component</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Source Material</strong></td>
-                            <td>One literary fiction extract (20th or 21st century)</td>
-                            <td><strong>Single source extract</strong> — same format, but the extract may be drawn from a wider range of texts appropriate for university-level applicants</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Q5 Prompt</strong></td>
-                            <td>Choice of descriptive (image) or narrative (story)</td>
-                            <td><strong>Fixed thematic prompt</strong> — the topic is predetermined, though you may still have a choice between descriptive and narrative approaches within that theme</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Total Marks</strong></td>
-                            <td>80 (Paper 1) + 80 (Paper 2) = 160</td>
-                            <td><strong>45 marks total</strong> — Q1 (4) + Q2 (8) + Q3 (8) + Q5 (25)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Duration</strong></td>
-                            <td>1 hour 45 minutes (Paper 1)</td>
-                            <td><strong>2 hours</strong> — slightly longer to account for the single-paper format and the heavier weighting of Q5</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Assessment Focus</strong></td>
-                            <td>GCSE-level reading and writing skills</td>
-                            <td><strong>University-level readiness</strong> — the standard is benchmarked to the level required for successful academic writing at degree level</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div class="rm-wlv">
-                    <strong>🔴 Key Takeaway</strong> — Because Q4 and Paper 2 are removed, your entire grade rests on just four questions. There is <strong>no second chance</strong> from a second paper. This makes preparation for Q5 (25 marks = 56% of the total) absolutely critical. Focus your revision time accordingly.
-                </div>
-
-                <h4 class="rm-sub">📊 Mark Allocation Overview</h4>
-                <table class="rm-compare">
-                    <thead>
-                        <tr>
-                            <th style="width:18%;">Question</th>
-                            <th style="width:12%;">Marks</th>
-                            <th style="width:20%;">% of Total</th>
-                            <th style="width:50%;">Skill Assessed</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Q1</strong></td>
-                            <td>4</td>
-                            <td>9%</td>
-                            <td>AO1 — Identify and retrieve explicit information</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Q2</strong></td>
-                            <td>8</td>
-                            <td>18%</td>
-                            <td>AO2 — Explain, comment on, and analyse how writers use language</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Q3</strong></td>
-                            <td>8</td>
-                            <td>18%</td>
-                            <td>AO2 — Explain, comment on, and analyse how writers use structure</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Q5</strong></td>
-                            <td>25</td>
-                            <td>56%</td>
-                            <td>AO5 (15) — Communicate clearly and imaginatively<br>AO6 (10) — Use accurate spelling, punctuation, and grammar</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h4 class="rm-sub">📋 Final Exam-Day Checklist</h4>
-                <ul class="rm-checklist">
-                    <li>Read the source extract through once before attempting any questions</li>
-                    <li>Annotate the extract as you read — underline key words, techniques, and structural shifts</li>
-                    <li>Start with Q1 (quick wins build confidence) and finish with Q5 (most marks)</li>
-                    <li>Use PEEL for Q2 and PEEZL for Q3 — the structure guarantees you hit the mark scheme criteria</li>
-                    <li>Plan Q5 before you write — 5 minutes of planning saves 15 minutes of rewriting</li>
-                    <li>Leave 10 minutes at the end to proofread Q5 for SPaG errors</li>
-                    <li>Write in UK English throughout — colour, centre, realise, travelled, defence</li>
-                    <li>If you run out of time on Q5, write a complete but shorter piece rather than an unfinished long one</li>
-                    <li>Stay calm and trust your preparation — you have practised this</li>
-                </ul>
-
-                <div class="rm-strategy">
-                    <strong>💡 Final Word</strong> — The WLV English Equivalency is designed to assess your readiness for university-level reading and writing. The examiners are not looking for GCSE-style formulaic responses; they want to see that you can <strong>think critically</strong> about a text and <strong>communicate effectively</strong> in your own writing. Show them what you can do.
-                </div>
-            </div>
-        </div>
-
-    </div><!-- /rm-main -->
-</div><!-- /rm-layout -->
+    </div>
+</div>
 
 <script>
-function rmScrollTo(id) {
-    var el = document.getElementById(id);
-    if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        // Update active button
-        document.querySelectorAll('.rm-nav-btn').forEach(function(b) { b.classList.remove('active'); });
-        event.target.classList.add('active');
+// ─── Trace Table Exercises ───
+const ttExercises = [
+    {
+        id: 1,
+        title: "Simple Counter",
+        desc: "A FOR loop that counts from 1 to 3.",
+        code: `01  total <- 0
+02  FOR i <- 1 TO 3
+03      total <- total + i
+04  NEXT i
+05  OUTPUT total`,
+        variables: ["i", "total"],
+        steps: [
+            // [line, {var: val, ...}, output?]
+            [1, {total: 0}],
+            [2, {i: 1, total: 0}],
+            [3, {i: 1, total: 1}],
+            [2, {i: 2, total: 1}],
+            [3, {i: 2, total: 3}],
+            [2, {i: 3, total: 3}],
+            [3, {i: 3, total: 6}],
+            [5, {i: 3, total: 6}, "6"]
+        ]
+    },
+    {
+        id: 2,
+        title: "Countdown",
+        desc: "A WHILE loop that counts down from 5.",
+        code: `01  count <- 5
+02  WHILE count >= 1 DO
+03      OUTPUT count
+04      count <- count - 1
+05  ENDWHILE`,
+        variables: ["count"],
+        steps: [
+            [1, {count: 5}],
+            [2, {count: 5}],
+            [3, {count: 5}, "5"],
+            [4, {count: 4}],
+            [2, {count: 4}],
+            [3, {count: 4}, "4"],
+            [4, {count: 3}],
+            [2, {count: 3}],
+            [3, {count: 3}, "3"],
+            [4, {count: 2}],
+            [2, {count: 2}],
+            [3, {count: 2}, "2"],
+            [4, {count: 1}],
+            [2, {count: 1}],
+            [3, {count: 1}, "1"],
+            [4, {count: 0}],
+            [2, {count: 0}]
+        ]
+    },
+    {
+        id: 3,
+        title: "Linear Search",
+        desc: "Search for value 23 in [15, 8, 42, 23, 4].",
+        code: `01  data <- [15, 8, 42, 23, 4]
+02  target <- 23
+03  found <- FALSE
+04  index <- 1
+05  WHILE index <= 5 AND found = FALSE DO
+06      IF data[index] = target THEN
+07          found <- TRUE
+08      ENDIF
+09      index <- index + 1
+10  ENDWHILE
+11  IF found = TRUE THEN
+12      OUTPUT index - 1
+13  ELSE
+14      OUTPUT -1
+15  ENDIF`,
+        variables: ["index", "found", "data[1]", "data[2]", "data[3]", "data[4]", "data[5]"],
+        steps: [
+            [1, {index: null, found: null, "data[1]": 15, "data[2]": 8, "data[3]": 42, "data[4]": 23, "data[5]": 4}],
+            [3, {index: null, found: false}],
+            [4, {index: 1, found: false}],
+            [5, {index: 1, found: false}],
+            [6, {index: 1, found: false}],
+            [9, {index: 2, found: false}],
+            [5, {index: 2, found: false}],
+            [6, {index: 2, found: false}],
+            [9, {index: 3, found: false}],
+            [5, {index: 3, found: false}],
+            [6, {index: 3, found: false}],
+            [9, {index: 4, found: false}],
+            [5, {index: 4, found: false}],
+            [6, {index: 4, found: false}],
+            [7, {index: 4, found: true}],
+            [10, {index: 4, found: true}],
+            [5, {index: 4, found: true}],
+            [11, {index: 4, found: true}],
+            [12, {index: 4, found: true}, "3"]
+        ]
+    },
+    {
+        id: 4,
+        title: "Bubble Sort (One Pass)",
+        desc: "One pass of bubble sort on [64, 34, 25, 12].",
+        code: `01  nums <- [64, 34, 25, 12]
+02  FOR i <- 1 TO 3
+03      IF nums[i] > nums[i+1] THEN
+04          temp <- nums[i]
+05          nums[i] <- nums[i+1]
+06          nums[i+1] <- temp
+07      ENDIF
+08  NEXT i`,
+        variables: ["i", "temp", "nums[1]", "nums[2]", "nums[3]", "nums[4]"],
+        steps: [
+            [1, {i: null, temp: null, "nums[1]": 64, "nums[2]": 34, "nums[3]": 25, "nums[4]": 12}],
+            [2, {i: 1, temp: null, "nums[1]": 64, "nums[2]": 34}],
+            [3, {i: 1, temp: null}],
+            [4, {i: 1, temp: 64}],
+            [5, {i: 1, temp: 64, "nums[1]": 34}],
+            [6, {i: 1, temp: 64, "nums[1]": 34, "nums[2]": 64}],
+            [8, {i: 1, temp: 64, "nums[1]": 34, "nums[2]": 64}],
+            [2, {i: 2, temp: 64, "nums[2]": 64, "nums[3]": 25}],
+            [3, {i: 2, temp: 64}],
+            [4, {i: 2, temp: 64}],
+            [5, {i: 2, temp: 64, "nums[2]": 25}],
+            [6, {i: 2, temp: 64, "nums[2]": 25, "nums[3]": 64}],
+            [8, {i: 2, temp: 64, "nums[2]": 25, "nums[3]": 64}],
+            [2, {i: 3, temp: 64, "nums[3]": 64, "nums[4]": 12}],
+            [3, {i: 3, temp: 64}],
+            [4, {i: 3, temp: 64}],
+            [5, {i: 3, temp: 64, "nums[3]": 12}],
+            [6, {i: 3, temp: 64, "nums[3]": 12, "nums[4]": 64}],
+            [8, {i: 3, temp: 64, "nums[3]": 12, "nums[4]": 64}]
+        ]
+    },
+    {
+        id: 5,
+        title: "Find Maximum",
+        desc: "Find the largest number in [12, 45, 7, 89].",
+        code: `01  nums <- [12, 45, 7, 89]
+02  largest <- nums[1]
+03  FOR i <- 2 TO 4
+04      IF nums[i] > largest THEN
+05          largest <- nums[i]
+06      ENDIF
+07  NEXT i
+08  OUTPUT largest`,
+        variables: ["i", "largest", "nums[1]", "nums[2]", "nums[3]", "nums[4]"],
+        steps: [
+            [1, {i: null, largest: null, "nums[1]": 12, "nums[2]": 45, "nums[3]": 7, "nums[4]": 89}],
+            [2, {i: null, largest: 12}],
+            [3, {i: 2, largest: 12}],
+            [4, {i: 2, largest: 12}],
+            [5, {i: 2, largest: 45}],
+            [7, {i: 2, largest: 45}],
+            [3, {i: 3, largest: 45}],
+            [4, {i: 3, largest: 45}],
+            [7, {i: 3, largest: 45}],
+            [3, {i: 4, largest: 45}],
+            [4, {i: 4, largest: 45}],
+            [5, {i: 4, largest: 89}],
+            [7, {i: 4, largest: 89}],
+            [8, {i: 4, largest: 89}, "89"]
+        ]
+    },
+    {
+        id: 6,
+        title: "Accumulator Pattern",
+        desc: "Sum the numbers [3, 7, 2, 9] using a loop.",
+        code: `01  nums <- [3, 7, 2, 9]
+02  total <- 0
+03  FOR i <- 1 TO 4
+04      total <- total + nums[i]
+05  NEXT i
+06  OUTPUT total`,
+        variables: ["i", "total", "nums[1]", "nums[2]", "nums[3]", "nums[4]"],
+        steps: [
+            [1, {i: null, total: null, "nums[1]": 3, "nums[2]": 7, "nums[3]": 2, "nums[4]": 9}],
+            [2, {i: null, total: 0}],
+            [3, {i: 1, total: 0}],
+            [4, {i: 1, total: 3}],
+            [5, {i: 1, total: 3}],
+            [3, {i: 2, total: 3}],
+            [4, {i: 2, total: 10}],
+            [5, {i: 2, total: 10}],
+            [3, {i: 3, total: 10}],
+            [4, {i: 3, total: 12}],
+            [5, {i: 3, total: 12}],
+            [3, {i: 4, total: 12}],
+            [4, {i: 4, total: 21}],
+            [5, {i: 4, total: 21}],
+            [6, {i: 4, total: 21}, "21"]
+        ]
+    },
+    {
+        id: 7,
+        title: "Count Even Numbers",
+        desc: "Count how many even numbers are in [2, 5, 8, 3].",
+        code: `01  nums <- [2, 5, 8, 3]
+02  count <- 0
+03  FOR i <- 1 TO 4
+04      IF nums[i] MOD 2 = 0 THEN
+05          count <- count + 1
+06      ENDIF
+07  NEXT i
+08  OUTPUT count`,
+        variables: ["i", "count", "nums[1]", "nums[2]", "nums[3]", "nums[4]"],
+        steps: [
+            [1, {i: null, count: null, "nums[1]": 2, "nums[2]": 5, "nums[3]": 8, "nums[4]": 3}],
+            [2, {i: null, count: 0}],
+            [3, {i: 1, count: 0}],
+            [4, {i: 1, count: 0}],
+            [5, {i: 1, count: 1}],
+            [7, {i: 1, count: 1}],
+            [3, {i: 2, count: 1}],
+            [4, {i: 2, count: 1}],
+            [7, {i: 2, count: 1}],
+            [3, {i: 3, count: 1}],
+            [4, {i: 3, count: 1}],
+            [5, {i: 3, count: 2}],
+            [7, {i: 3, count: 2}],
+            [3, {i: 4, count: 2}],
+            [4, {i: 4, count: 2}],
+            [7, {i: 4, count: 2}],
+            [8, {i: 4, count: 2}, "2"]
+        ]
+    },
+    {
+        id: 8,
+        title: "Binary Search (Found)",
+        desc: "Binary search for 42 in [3, 8, 12, 23, 42, 55, 71].",
+        code: `01  data <- [3, 8, 12, 23, 42, 55, 71]
+02  target <- 42
+03  low <- 1
+04  high <- 7
+05  found <- FALSE
+06  WHILE low <= high AND found = FALSE DO
+07      mid <- (low + high) DIV 2
+08      IF data[mid] = target THEN
+09          found <- TRUE
+10      ELIF data[mid] < target THEN
+11          low <- mid + 1
+12      ELSE
+13          high <- mid - 1
+14      ENDIF
+15  ENDWHILE
+16  IF found = TRUE THEN
+17      OUTPUT mid
+18  ELSE
+19      OUTPUT -1
+20  ENDIF`,
+        variables: ["low", "high", "mid", "found"],
+        steps: [
+            [3, {low: 1, high: null, mid: null, found: null}],
+            [4, {low: 1, high: 7, mid: null, found: null}],
+            [5, {low: 1, high: 7, mid: null, found: false}],
+            [6, {low: 1, high: 7, mid: null, found: false}],
+            [7, {low: 1, high: 7, mid: 4, found: false}],
+            [8, {low: 1, high: 7, mid: 4, found: false}],
+            [10, {low: 1, high: 7, mid: 4, found: false}],
+            [11, {low: 5, high: 7, mid: 4, found: false}],
+            [15, {low: 5, high: 7, mid: 4, found: false}],
+            [6, {low: 5, high: 7, mid: 4, found: false}],
+            [7, {low: 5, high: 7, mid: 6, found: false}],
+            [8, {low: 5, high: 7, mid: 6, found: false}],
+            [10, {low: 5, high: 7, mid: 6, found: false}],
+            [12, {low: 5, high: 7, mid: 6, found: false}],
+            [13, {low: 5, high: 5, mid: 6, found: false}],
+            [15, {low: 5, high: 5, mid: 6, found: false}],
+            [6, {low: 5, high: 5, mid: 6, found: false}],
+            [7, {low: 5, high: 5, mid: 5, found: false}],
+            [8, {low: 5, high: 5, mid: 5, found: false}],
+            [9, {low: 5, high: 5, mid: 5, found: true}],
+            [15, {low: 5, high: 5, mid: 5, found: true}],
+            [6, {low: 5, high: 5, mid: 5, found: true}],
+            [16, {low: 5, high: 5, mid: 5, found: true}],
+            [17, {low: 5, high: 5, mid: 5, found: true}, "5"]
+        ]
+    }
+];
+
+let currentTtIdx = 0;
+let currentStep = -1;
+let autoRunning = false;
+let autoTimer = null;
+
+// ─── Render Exercise List ───
+function renderTtExercises() {
+    const list = document.getElementById('ttExerciseList');
+    list.innerHTML = '';
+    ttExercises.forEach((ex, i) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'tt-exercise-btn';
+        if (i === currentTtIdx) btn.classList.add('active');
+        btn.onclick = () => selectTtExercise(i);
+        btn.innerHTML = `<span>${ex.id}. ${ex.title}</span>`;
+        list.appendChild(btn);
+    });
+}
+
+// ─── Select Exercise ───
+function selectTtExercise(idx) {
+    currentTtIdx = idx;
+    currentStep = -1;
+    autoRunning = false;
+    if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+    renderTtExercises();
+    renderTtCode();
+    renderTtTable();
+    document.getElementById('ttOutput').textContent = '—';
+    document.getElementById('ttStepInfo').textContent = 'Ready';
+    document.getElementById('ttBtnStart').disabled = false;
+    document.getElementById('ttBtnStep').disabled = true;
+    document.getElementById('ttBtnReset').disabled = true;
+    document.getElementById('ttBtnAuto').disabled = true;
+}
+
+// ─── Render Code with Highlighting ───
+function renderTtCode() {
+    const ex = ttExercises[currentTtIdx];
+    document.getElementById('ttAlgoTitle').textContent = `${ex.id}. ${ex.title}`;
+    document.getElementById('ttAlgoMeta').textContent = ex.desc;
+    
+    const codeEl = document.getElementById('ttAlgoCode');
+    const lines = ex.code.split('\n');
+    let html = '';
+    lines.forEach((line, i) => {
+        const lineNum = line.match(/^(\d+)/)?.[1] || '';
+        const code = line.replace(/^\d+\s+/, '');
+        const isHighlight = currentStep >= 0 && parseInt(lineNum) === ttExercises[currentTtIdx].steps[currentStep][0];
+        html += `<span class="${isHighlight ? 'highlight-line' : ''}"><span class="line-num">${lineNum}</span>${code}</span>\n`;
+    });
+    codeEl.innerHTML = html;
+}
+
+// ─── Render Trace Table ───
+function renderTtTable() {
+    const ex = ttExercises[currentTtIdx];
+    const head = document.getElementById('ttTableHead');
+    const body = document.getElementById('ttTableBody');
+    
+    // Header
+    let hHtml = '<tr><th>Step</th><th>Line</th>';
+    ex.variables.forEach(v => { hHtml += `<th>${v}</th>`; });
+    hHtml += '<th>Output</th></tr>';
+    head.innerHTML = hHtml;
+    
+    // Body
+    let bHtml = '';
+    for (let s = 0; s <= currentStep; s++) {
+        const step = ex.steps[s];
+        const isCurrent = s === currentStep;
+        bHtml += `<tr class="${isCurrent ? 'current-step' : ''}">`;
+        bHtml += `<td>${s + 1}</td>`;
+        bHtml += `<td>${step[0]}</td>`;
+        
+        ex.variables.forEach(v => {
+            const val = step[1][v] !== undefined ? step[1][v] : '';
+            // Check if this value changed from previous step
+            const prevVal = s > 0 ? ex.steps[s-1][1][v] : undefined;
+            const isNew = prevVal !== undefined && val !== '' && val !== prevVal;
+            bHtml += `<td class="${isNew ? 'new-value' : ''}">${val !== null ? val : ''}</td>`;
+        });
+        
+        bHtml += `<td class="output-cell">${step[2] || ''}</td>`;
+        bHtml += '</tr>';
+    }
+    body.innerHTML = bHtml;
+    
+    // Scroll to bottom
+    const wrap = document.querySelector('.tt-table-wrap');
+    if (wrap) wrap.scrollTop = wrap.scrollHeight;
+}
+
+// ─── Start Trace ───
+function ttStart() {
+    currentStep = 0;
+    document.getElementById('ttBtnStart').disabled = true;
+    document.getElementById('ttBtnStep').disabled = false;
+    document.getElementById('ttBtnReset').disabled = false;
+    document.getElementById('ttBtnAuto').disabled = false;
+    document.getElementById('ttStepInfo').textContent = `Step 1 of ${ttExercises[currentTtIdx].steps.length}`;
+    renderTtCode();
+    renderTtTable();
+    updateOutput();
+}
+
+// ─── Step Forward ───
+function ttStep() {
+    const ex = ttExercises[currentTtIdx];
+    if (currentStep < ex.steps.length - 1) {
+        currentStep++;
+        document.getElementById('ttStepInfo').textContent = `Step ${currentStep + 1} of ${ex.steps.length}`;
+        renderTtCode();
+        renderTtTable();
+        updateOutput();
+        
+        if (currentStep >= ex.steps.length - 1) {
+            document.getElementById('ttBtnStep').disabled = true;
+            document.getElementById('ttBtnAuto').disabled = true;
+            document.getElementById('ttStepInfo').textContent += ' ✅ Complete';
+        }
     }
 }
+
+// ─── Reset ───
+function ttReset() {
+    currentStep = -1;
+    autoRunning = false;
+    if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+    document.getElementById('ttBtnStart').disabled = false;
+    document.getElementById('ttBtnStep').disabled = true;
+    document.getElementById('ttBtnReset').disabled = true;
+    document.getElementById('ttBtnAuto').disabled = true;
+    document.getElementById('ttStepInfo').textContent = 'Ready';
+    document.getElementById('ttOutput').textContent = '—';
+    renderTtCode();
+    renderTtTable();
+}
+
+// ─── Auto-Run ───
+function ttAutoRun() {
+    if (autoRunning) {
+        autoRunning = false;
+        if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+        document.getElementById('ttBtnAuto').textContent = '⚡ Auto-Run';
+        return;
+    }
+    
+    autoRunning = true;
+    document.getElementById('ttBtnAuto').textContent = '⏸️ Pause';
+    autoTimer = setInterval(() => {
+        const ex = ttExercises[currentTtIdx];
+        if (currentStep < ex.steps.length - 1) {
+            ttStep();
+        } else {
+            autoRunning = false;
+            clearInterval(autoTimer);
+            autoTimer = null;
+            document.getElementById('ttBtnAuto').textContent = '⚡ Auto-Run';
+        }
+    }, 600);
+}
+
+// ─── Update Output ───
+function updateOutput() {
+    const ex = ttExercises[currentTtIdx];
+    const outputs = [];
+    for (let s = 0; s <= currentStep; s++) {
+        if (ex.steps[s][2]) {
+            outputs.push(ex.steps[s][2]);
+        }
+    }
+    document.getElementById('ttOutput').textContent = outputs.length ? outputs.join('\n') : '(no output yet)';
+}
+
+// ─── Init ───
+document.addEventListener('DOMContentLoaded', () => {
+    renderTtExercises();
+    selectTtExercise(0);
+});
 </script>
 {% endblock %}

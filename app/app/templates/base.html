@@ -1,83 +1,504 @@
+<!-- This is the BASE template for wlv.lan. All pages extend this. Define the overall page structure: nav bar, slide-in menu, theme toggle, date display, search, settings panel, modal dialog, footer, and bottom action bar. -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#080b14" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
     <title>{% block title %}WLV — University of Wolverhampton{% endblock %}</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        :root {
-            --wlv-yellow: #FFD100;
-            --wlv-black: #1a1a1a;
-            --wlv-dark: #2d2d2d;
-            --wlv-accent: #e6b800;
+    <link rel="stylesheet" href="/static/css/style.css?v=98&amp;_cb={{ CACHE_BUST }}">
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <link rel="icon" type="image/png" sizes="64x64" href="/static/favicon.png">
+    <link rel="manifest" href="/static/manifest.json">
+    <script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/static/sw.js');
+    }
+    </script>
+    <script>
+    // ── Console error capture for error feedback ──
+    (function() {
+        var _errors = [];
+        var _origOnError = window.onerror;
+        window.onerror = function(msg, url, line, col, err) {
+            _errors.push({msg: msg, url: url, line: line, col: col, time: new Date().toISOString()});
+            if (_origOnError) return _origOnError.apply(this, arguments);
+        };
+        var _origConsoleError = console.error;
+        console.error = function() {
+            _errors.push({msg: Array.prototype.slice.call(arguments).join(' '), time: new Date().toISOString()});
+            _origConsoleError.apply(console, arguments);
+        };
+        window.__capturedErrors = _errors;
+        window.__getCapturedErrors = function() {
+            return _errors.map(function(e) { return e.msg + (e.line ? ' (' + e.url + ':' + e.line + ')' : ''); }).join('\n');
+        };
+    })();
+    </script>
+    {% if WLV_DEBUG %}
+    <!-- DEBUG: Disable all caching -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    {% endif %}
+    <script>
+    // DEBUG cache-buster: rewrites all /static/ URLs with a timestamp
+    // This bypasses nginx's "Cache-Control: immutable" and browser caches
+    {% if WLV_DEBUG %}
+    (function(){
+        var _t = Date.now();
+        // Rewrite CSS links
+        document.querySelectorAll('link[href*="/static/"]').forEach(function(el){
+            var url = new URL(el.href, location.origin);
+            url.searchParams.set('_t', _t);
+            el.href = url.toString();
+        });
+        // Rewrite script srcs
+        document.querySelectorAll('script[src*="/static/"]').forEach(function(el){
+            var url = new URL(el.src, location.origin);
+            url.searchParams.set('_t', _t);
+            el.src = url.toString();
+        });
+        // Register Service Worker for future navigations
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/static/sw-debug.js?_t=' + _t)
+                .catch(function(){}); // Silently fail if SW not supported
         }
-        body { padding-top: 56px; background: #fafafa; }
-        .navbar-wlv { background: var(--wlv-black) !important; border-bottom: 3px solid var(--wlv-yellow); }
-        .navbar-brand { font-weight: 800; letter-spacing: -0.5px; color: var(--wlv-yellow) !important; }
-        .navbar-brand small { font-weight: 400; font-size: 0.65rem; color: #aaa; display: block; line-height: 1; }
-        .nav-link { font-weight: 500; color: rgba(255,255,255,0.85) !important; }
-        .nav-link:hover, .nav-link.active { color: var(--wlv-yellow) !important; }
-        .topic-card { border-radius: 12px; transition: all 0.2s; cursor: pointer; }
-        .topic-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.12) !important; }
-        .topic-card .card-body { padding: 1.5rem; }
-        .topic-card .card-title { font-weight: 600; font-size: 1rem; }
-        .topic-card .card-text { font-size: 0.85rem; color: #666; }
-        footer { margin-top: 3rem; padding: 1.5rem 0; background: var(--wlv-black); color: rgba(255,255,255,0.6); }
-        footer a { color: var(--wlv-yellow); }
-        .version-badge { background: var(--wlv-yellow); color: var(--wlv-black); font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; margin-left: 8px; vertical-align: middle; }
-        .wlv-section-title { border-left: 4px solid var(--wlv-yellow); padding-left: 12px; margin: 1.5rem 0 1rem; }
-        .card { border-radius: 12px; overflow: hidden; }
-        .btn-wlv { background: var(--wlv-yellow); color: var(--wlv-black); font-weight: 600; border: none; }
-        .btn-wlv:hover { background: var(--wlv-accent); color: var(--wlv-black); }
-        .accordion-button:not(.collapsed) { background: rgba(255,209,0,0.1); color: var(--wlv-black); }
-        .accordion-button:focus { box-shadow: 0 0 0 0.25rem rgba(255,209,0,0.25); }
-    </style>
+    })();
+    {% endif %}
+    (function() {
+        let did = localStorage.getItem('wlv_device');
+        if (!did) {
+            did = 'device_' + (crypto.randomUUID ? crypto.randomUUID() : (Math.random().toString(36).substring(2,15) + Math.random().toString(36).substring(2,15)));
+            localStorage.setItem('wlv_device', did);
+        }
+        document.cookie = 'wlv_device=' + did + ';path=/;max-age=31536000';
+    })();
+    </script>
+    {% block head %}{% endblock %}
+<style>
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  z-index: 10000;
+  padding: 8px 16px;
+  background: var(--c-accent, #22d3ee);
+  color: #000;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 0 0 8px 0;
+  text-decoration: none;
+  transition: top 0.15s ease;
+}
+.skip-link:focus {
+  top: 0;
+  outline: 2px solid var(--c-accent);
+  outline-offset: 0;
+}
+/* ── Mobile font size bump: ensure no text below 16px on screens <1000px ── */
+@media (max-width: 1000px) {
+  html { font-size: 22px !important; }
+  /* Reset headings to proper sizes */
+  h1 { font-size: 28px !important; }
+  h2 { font-size: 24px !important; }
+  h3 { font-size: 20px !important; }
+  h4 { font-size: 18px !important; }
+}
+</style>
+
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-wlv">
-        <div class="container">
-            <a class="navbar-brand" href="/">
-                WLV <small>University of Wolverhampton</small>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link {% if active == 'home' %}active{% endif %}" href="/">Home</a></li>
-                    <li class="nav-item"><a class="nav-link {% if active == 'lessons' %}active{% endif %}" href="/lessons">Lessons</a></li>
-                    <li class="nav-item"><a class="nav-link {% if active == 'quiz' %}active{% endif %}" href="/quiz">Quiz</a></li>
-                    <li class="nav-item"><a class="nav-link {% if active == 'tutor' %}active{% endif %}" href="/tutor">Tutor</a></li>
-                    <li class="nav-item"><a class="nav-link {% if active == 'codelab' %}active{% endif %}" href="/codelab">Practice Lab</a></li>
-                    <li class="nav-item"><a class="nav-link {% if active == 'languages' %}active{% endif %}" href="/languages">SPaG Guide</a></li>
-                    <li class="nav-item"><a class="nav-link {% if active == 'trace_tables' %}active{% endif %}" href="/trace_tables">Exam Strategy</a></li>
-                </ul>
-                <span class="version-badge" id="version-badge">v0.1</span>
-            </div>
-        </div>
-    </nav>
+<a href="#content" class="skip-link">Skip to content</a>
 
-    <main class="container mt-4">
-        {% block content %}{% endblock %}
-    </main>
+<!-- ── Top Nav Bar: Logo, date, theme toggle, search -->
+    {# ── TOP NAV: Logo + Search Bar + Hamburger ── #}
+        {% include "_nav.html" %}
 
-    <footer>
-        <div class="container text-center">
-            <small>WLV — University of Wolverhampton &mdash; English Equivalency Revision Platform</small>
-        </div>
-    </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    {% block scripts %}{% endblock %}
-    <script>
-        // Version badge
-        if (document.getElementById("version-badge")) {
-            fetch("/api/current-version")
-                .then(r => r.json())
-                .then(d => { document.getElementById("version-badge").textContent = d.version; })
-                .catch(() => {});
+{# ── Floating Hamburger Button ── #}
+<button class="nav-float-hamburger" id="navFloatToggle" aria-label="Menu">☰</button>
+
+{# ── Settings Panel ── #}
+<!-- ── Settings panel: theme toggle, question mode (random/weighted/soft/strict), reset buttons. Positioned fixed, right side on desktop, full-width bottom on mobile. -->
+<div id="settingsPanel" class="settings-panel" role="dialog" aria-label="Question settings" style="display:none;">
+  <div class="settings-panel-header">⚙️ Settings</div>
+  <div class="settings-panel-body">
+    <div class="settings-theme-row" onclick="toggleThemeBase()">
+      <span id="settingsThemeLabel">🌙 Dark Mode</span>
+      <span class="settings-theme-toggle" id="settingsThemeToggle">◉</span>
+    </div>
+    <hr class="settings-divider">
+    <div class="settings-subhead">Question Mode</div>
+    <p class="settings-desc">Controls which questions you see during lessons and review sessions.</p>
+    <label class="settings-option"><input type="radio" name="qmode" value="random" onchange="setMode('random')"> <span>Random — equal chance for all questions</span></label>
+    <label class="settings-option"><input type="radio" name="qmode" value="weighted" onchange="setMode('weighted')"> <span>Weighted — gradual reduction after correct answers</span></label>
+    <label class="settings-option"><input type="radio" name="qmode" value="soft" onchange="setMode('soft')"> <span>Soft Retire — 3+ correct = almost never, but possible</span></label>
+    <label class="settings-option"><input type="radio" name="qmode" value="strict" onchange="setMode('strict')"> <span>Strict Retire — 3+ correct = eliminated completely</span></label>
+    <hr class="settings-divider">
+    <button class="btn btn-sm settings-reset-btn" onclick="resetLessons()">📖 Reset Lessons</button>
+    <p class="settings-hint">Clears streaks, quiz attempts, and review schedule. Keeps exam history.</p>
+    <button class="btn btn-sm settings-reset-btn" onclick="resetExams()" style="margin-top:8px;">📊 Reset Exams</button>
+    <p class="settings-hint">Deletes all exam results and grades. Keeps lesson progress.</p>
+  </div>
+</div>
+
+    <main class="container" id="content" role="main">{% block content %}{% endblock %}</main>
+    <footer class="footer" role="contentinfo">
+
+</footer>
+
+</body>
+{# ── Custom Modal Dialog ── #}
+<!-- ── Custom modal dialog: replaces native alert() and confirm(). Used for confirmations and notifications. -->
+<div id="modalOverlay" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Alert dialog" style="display:none;">
+  <div class="modal-box" id="modalBox">
+    <div class="modal-header" id="modalHeader">&#9888;</div>
+    <div class="modal-body" id="modalBody">Message</div>
+    <div class="modal-actions" id="modalActions">
+      <button class="btn btn-sm" id="modalCancel">Cancel</button>
+      <button class="btn btn-primary btn-sm" id="modalConfirm">OK</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Error Feedback Modal ── -->
+<div id="errorFeedbackOverlay" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Report an issue" style="display:none;">
+  <div class="modal-box" style="max-width:500px;">
+    <div class="modal-header">🚩 Report an Issue</div>
+    <div class="modal-body">
+      <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:12px;">Found something wrong? Describe what you saw and any errors will be attached automatically.</p>
+      <textarea id="errorFeedbackDesc" placeholder="What went wrong? (e.g. widget values not updating, broken layout, wrong answer...)" style="width:100%;min-height:100px;padding:10px;border-radius:8px;border:1px solid var(--c-border);background:var(--c-bg-alt);color:var(--c-text);font-size:14px;font-family:inherit;resize:vertical;"></textarea>
+      <div id="errorFeedbackStatus" style="font-size:13px;color:var(--c-text-muted);margin-top:8px;"></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-sm" onclick="closeErrorFeedback()">Cancel</button>
+      <button class="btn btn-primary btn-sm" onclick="submitErrorFeedback()">🚩 Submit Report</button>
+    </div>
+  </div>
+</div>
+
+<style>
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: modalFadeIn 0.2s ease;
+}
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.modal-box {
+  background: rgba(17,24,39,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(34,211,238,0.2);
+  border-radius: var(--r-xl);
+  padding: 28px;
+  max-width: 420px;
+  width: 90%;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 24px var(--c-accent-glow);
+  animation: modalSlideIn 0.25s ease-out;
+}
+.light-theme .modal-box {
+  background: rgba(255,255,255,0.92);
+}
+@keyframes modalSlideIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.modal-header {
+  font-size: 32px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+.modal-body {
+  font-size: 17px;
+  line-height: 1.6;
+  text-align: center;
+  color: var(--c-text);
+  margin-bottom: 24px;
+}
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+.modal-actions .btn {
+  min-width: 100px;
+}
+</style>
+
+<script>
+function showAlert(msg, icon) {
+  return new Promise(function(resolve) {
+    var ov = document.getElementById('modalOverlay');
+    document.getElementById('modalHeader').innerHTML = icon || '&#9888;';
+    document.getElementById('modalBody').textContent = msg;
+    var actions = document.getElementById('modalActions');
+    // Single OK button for alerts
+    actions.innerHTML = '<button class="btn btn-primary btn-sm" id="modalConfirm">OK</button>';
+    ov.style.display = 'flex';
+    document.getElementById('modalConfirm').onclick = function() {
+      ov.style.display = 'none';
+      resolve();
+    };
+    ov.onclick = function(e) {
+      if (e.target === ov) { ov.style.display = 'none'; resolve(); }
+    };
+  });
+}
+
+function showConfirm(msg) {
+  return new Promise(function(resolve) {
+    var ov = document.getElementById('modalOverlay');
+    document.getElementById('modalHeader').innerHTML = '&#10067;';
+    document.getElementById('modalBody').textContent = msg;
+    var actions = document.getElementById('modalActions');
+    actions.innerHTML = '<button class="btn btn-sm" id="modalCancel">Cancel</button><button class="btn btn-primary btn-sm" id="modalConfirm">OK</button>';
+    ov.style.display = 'flex';
+    document.getElementById('modalConfirm').onclick = function() {
+      ov.style.display = 'none';
+      resolve(true);
+    };
+    document.getElementById('modalCancel').onclick = function() {
+      ov.style.display = 'none';
+      resolve(false);
+    };
+    ov.onclick = function(e) {
+      if (e.target === ov) { ov.style.display = 'none'; resolve(false); }
+    };
+  });
+}
+
+// Patch native alert/confirm to use custom dialogs
+window._nativeAlert = window.alert;
+window.alert = function(msg) { showAlert(msg, '&#9888;'); };
+window._nativeConfirm = window.confirm;
+window.confirm = function(msg) { return showConfirm(msg); };
+
+</script>
+
+{% block scripts %}{% endblock %}
+
+{# ── Floating Bottom Action Bar ── #}
+<!-- ── Bottom action bar: appears on scroll, contains scroll-to-top button. -->
+<div class="bottom-bar" id="bottomBar">
+    <button class="bottom-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Scroll to top">⬆️ Top</button>
+</div>
+<!-- ── JavaScript: Device ID generation, swipe-to-close nav, modal dialogs, theme sync, date fill, nav float toggle. -->
+<script>
+// ── Error Feedback ──
+function openErrorFeedback() {
+    document.getElementById('errorFeedbackDesc').value = '';
+    document.getElementById('errorFeedbackStatus').textContent = '';
+    document.getElementById('errorFeedbackOverlay').style.display = 'flex';
+}
+function closeErrorFeedback() {
+    document.getElementById('errorFeedbackOverlay').style.display = 'none';
+}
+async function submitErrorFeedback() {
+    var desc = document.getElementById('errorFeedbackDesc').value.trim();
+    if (!desc) { document.getElementById('errorFeedbackStatus').textContent = '⚠️ Please describe the issue first.'; return; }
+    var status = document.getElementById('errorFeedbackStatus');
+    status.textContent = '⏳ Submitting...';
+    try {
+        var resp = await fetch('/api/error-feedback', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                page_url: window.location.href,
+                description: desc,
+                console_errors: (window.__getCapturedErrors ? window.__getCapturedErrors() : ''),
+                browser_info: [
+                    navigator.userAgent,
+                    window.innerWidth + 'x' + window.innerHeight + ' (viewport)',
+                    screen.width + 'x' + screen.height + ' (screen)',
+                    'DPR: ' + (window.devicePixelRatio || 1),
+                    'theme: ' + (document.documentElement.getAttribute('data-theme') || (document.body.classList.contains('light-theme') ? 'light' : 'dark')),
+                    'lang: ' + navigator.language
+                ].join(' | ')
+            })
+        });
+        var data = await resp.json();
+        if (data.status === 'ok') {
+            status.textContent = '✅ Report submitted — thank you!';
+            setTimeout(closeErrorFeedback, 1500);
+        } else {
+            status.textContent = '❌ Failed to submit. Please try again.';
         }
-    </script>
+    } catch(e) {
+        status.textContent = '❌ Network error. Please try again.';
+    }
+}
+// ── Swipe-to-close on mobile nav ──
+(function() {
+    var startX = 0, startY = 0;
+    document.addEventListener('touchstart', function(e) {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+    }, {passive: true});
+    document.addEventListener('touchmove', function(e) {
+        if (!document.body.classList.contains('nav-open')) return;
+        var dx = e.touches[0].clientX - startX;
+        var dy = e.touches[0].clientY - startY;
+        // Swipe left on nav overlay (at least 80px left, more horizontal than vertical)
+        if (dx < -80 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+            closeNav();
+        }
+    }, {passive: true});
+})();
+</script>
+<script src="/static/js/app.js?v=42" defer></script>
+<!-- ── Date formatting: fills #navDate with 'Monday 22 June' format -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+  // Fill today's date
+  var d = new Date();
+  var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  var dateEl = document.getElementById("navDate");
+  if (dateEl) dateEl.textContent = days[d.getDay()] + " " + d.getDate() + " " + months[d.getMonth()];
+
+  // Sync nav theme icon on page load
+      var nt = document.getElementById("navThemeToggle");
+      if (nt) nt.textContent = document.body.classList.contains("light-theme") ? "☀️" : "🌙";
+
+    // Floating hamburger click handler
+    var floatBtn = document.getElementById("navFloatToggle");
+    if (floatBtn) {
+      floatBtn.addEventListener("click", function() {
+        if (document.body.classList.contains("nav-open")) {
+          closeNav();
+        } else {
+          openNav();
+        }
+      });
+    }
+  });
+
+// ── Function key navigation (site-wide) ──
+document.addEventListener('keydown', function(e) {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) return;
+  var key = e.key;
+  if (key === 'F1') { e.preventDefault(); toggleKbHelp(); return; }
+  else if (key === 'F2') { e.preventDefault(); navToPrevLesson(); }
+  else if (key === 'F3') { e.preventDefault(); navToNextLesson(); }
+  else if (key === 'F4') { e.preventDefault(); window.location.href = '/lessons'; }
+  else if (key === 'F5') { return; } // browser default (refresh)
+  else if (key === 'F6') { e.preventDefault(); window.location.href = '/'; }
+  else if (key === 'F7') { e.preventDefault(); window.location.href = '/review'; }
+  else if (key === 'F8') { e.preventDefault(); window.location.href = '/progress'; }
+});
+
+function navToPrevLesson() {
+  var links = document.querySelectorAll('.lesson-nav a[href^="/lesson/"]');
+  if (links.length > 0) window.location.href = links[0].getAttribute('href');
+}
+
+function navToNextLesson() {
+  var navRight = document.querySelector('.nav-primary.nav-right');
+  if (navRight) { window.location.href = navRight.getAttribute('href'); return; }
+  var allLinks = document.querySelectorAll('.lesson-nav a[href^="/lesson/"]');
+  if (allLinks.length > 0) window.location.href = allLinks[allLinks.length - 1].getAttribute('href');
+}
+
+function toggleKbHelp() {
+  var existing = document.getElementById('kb-overlay');
+  if (existing) { existing.remove(); return; }
+  var isLesson = document.querySelector('.lesson-nav') !== null || document.querySelector('.nav-primary') !== null;
+  var ov = document.createElement('div');
+  ov.id = 'kb-overlay';
+  ov.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#1e1e2e;border:1px solid #4a4a5e;border-radius:16px;padding:24px 28px;z-index:9999;min-width:320px;box-shadow:0 20px 60px rgba(0,0,0,0.6);';
+  var html = '<div style="color:#fff;font-size:1.2em;font-weight:700;margin-bottom:16px;">Keyboard Shortcuts</div>'
+    + '<div style="display:grid;grid-template-columns:auto 1fr;gap:8px 16px;font-size:0.9em;">'
+    + '<span style="background:#2a2a3e;padding:3px 8px;border-radius:4px;font-family:monospace;color:#22c55e;text-align:center;">F1</span><span style="color:#c0c0e0;">Toggle this help overlay</span>';
+  if (isLesson) {
+    html += '<span style="background:#2a2a3e;padding:3px 8px;border-radius:4px;font-family:monospace;color:#22c55e;text-align:center;">F2</span><span style="color:#c0c0e0;">Previous lesson</span>'
+      + '<span style="background:#2a2a3e;padding:3px 8px;border-radius:4px;font-family:monospace;color:#22c55e;text-align:center;">F3</span><span style="color:#c0c0e0;">Next lesson</span>';
+  }
+  html += '<span style="background:#2a2a3e;padding:3px 8px;border-radius:4px;font-family:monospace;color:#22c55e;text-align:center;">F4</span><span style="color:#c0c0e0;">All lessons</span>'
+    + '<span style="background:#2a2a3e;padding:3px 8px;border-radius:4px;font-family:monospace;color:#22c55e;text-align:center;">F5</span><span style="color:#c0c0e0;">Browser refresh (default)</span>'
+    + '<span style="background:#2a2a3e;padding:3px 8px;border-radius:4px;font-family:monospace;color:#22c55e;text-align:center;">F6</span><span style="color:#c0c0e0;">Home</span>'
+    + '<span style="background:#2a2a3e;padding:3px 8px;border-radius:4px;font-family:monospace;color:#22c55e;text-align:center;">F7</span><span style="color:#c0c0e0;">Review</span>'
+    + '<span style="background:#2a2a3e;padding:3px 8px;border-radius:4px;font-family:monospace;color:#22c55e;text-align:center;">F8</span><span style="color:#c0c0e0;">Progress</span>'
+    + '<span style="background:#2a2a3e;padding:3px 8px;border-radius:4px;font-family:monospace;color:#22c55e;text-align:center;">1-4</span><span style="color:#c0c0e0;">Select quiz option (current Q)</span>'
+    + '<span style="background:#2a2a3e;padding:3px 8px;border-radius:4px;font-family:monospace;color:#22c55e;text-align:center;">T / F</span><span style="color:#c0c0e0;">True / False answer</span>'
+    + '<span style="background:#2a2a3e;padding:3px 8px;border-radius:4px;font-family:monospace;color:#22c55e;text-align:center;">← →</span><span style="color:#c0c0e0;">Navigate quiz questions</span>'
+    + '<span style="background:#2a2a3e;padding:3px 8px;border-radius:4px;font-family:monospace;color:#22c55e;text-align:center;">Enter</span><span style="color:#c0c0e0;">Submit quiz</span>'
+    + '</div>'
+    + '<div style="margin-top:16px;text-align:center;"><button id="kb-close" style="padding:6px 20px;background:#6366f1;color:#fff;border:none;border-radius:6px;cursor:pointer;">Close</button></div>';
+  ov.innerHTML = html;
+  document.body.appendChild(ov);
+  document.getElementById('kb-close').addEventListener('click', function() { ov.remove(); });
+  setTimeout(function() {
+    document.addEventListener('click', dismissKb);
+  }, 0);
+  function dismissKb(e) {
+    if (!document.getElementById('kb-overlay')) { document.removeEventListener('click', dismissKb); return; }
+    if (!ov.contains(e.target)) { ov.remove(); document.removeEventListener('click', dismissKb); }
+  }
+}
+// ── Mobile font size bump: ensure no text below 16px on screens <1000px ──
+(function() {
+  if (window.innerWidth > 1000) return;
+  var els = document.querySelectorAll('[style*="font-size:1"][style*="0"],[style*="font-size:1"][style*="1"],[style*="font-size:1"][style*="2"],[style*="font-size:1"][style*="3"],[style*="font-size:1"][style*="4"],[style*="font-size:1"][style*="5"]');
+  for (var i = 0; i < els.length; i++) {
+    els[i].style.setProperty('font-size', '16px', 'important');
+  }
+  // Also bump rem-based elements that inherit from html
+  var all = document.querySelectorAll('*');
+  for (var j = 0; j < all.length; j++) {
+    var fs = window.getComputedStyle(all[j]).fontSize;
+    if (fs && parseInt(fs) < 16) {
+      all[j].style.setProperty('font-size', '16px', 'important');
+    }
+  }
+})();
+</script>
+
+<script>
+/* ── Wrap lesson-content tables in scrollable wrappers and label cells for responsive card layout ── */
+(function() {
+  var tables = document.querySelectorAll('.lesson-content table');
+  for (var i = 0; i < tables.length; i++) {
+    var t = tables[i];
+    if (t.parentNode.classList.contains('table-wrapper')) continue;
+    var wrapper = document.createElement('div');
+    wrapper.className = 'table-wrapper';
+    t.parentNode.insertBefore(wrapper, t);
+    wrapper.appendChild(t);
+  }
+  /* Label each cell with its column header text for responsive card layout */
+  var i, j, k;
+  for (i = 0; i < tables.length; i++) {
+    var headers = [];
+    var firstRow = tables[i].rows[0];
+    if (!firstRow) continue;
+    for (j = 0; j < firstRow.cells.length; j++) {
+      headers[j] = firstRow.cells[j].textContent.trim();
+    }
+    for (j = 1; j < tables[i].rows.length; j++) {
+      var row = tables[i].rows[j];
+      for (k = 0; k < row.cells.length; k++) {
+        if (headers[k]) {
+          row.cells[k].setAttribute('data-label', headers[k]);
+        }
+      }
+    }
+  }
+})();
+</script>
+
 </body>
 </html>
+[H[2J[3J

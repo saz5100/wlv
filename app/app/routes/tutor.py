@@ -39,7 +39,7 @@ OLLAMA_BASE = os.environ.get("OLLAMA_BASE", "https://ollama.com/v1")
 OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "deepseek-v4-flash")
 LLM_MODEL = os.environ.get("LLM_MODEL", "deepseek-v4-flash")
 OWUI_BASE = os.environ.get("OWUI_BASE", "http://chat.lan")
-OWUI_MODEL = os.environ.get("OWUI_MODEL", "wlv--v1")
+OWUI_MODEL = os.environ.get("OWUI_MODEL", "wlv-computer-science--v3")
 MAX_TOKENS = 4096
 
 # --- LLM Tool Definitions ---
@@ -48,7 +48,7 @@ TOOL_DEFINITIONS = [
         "type": "function",
         "function": {
             "name": "get_topic_breakdown",
-            "description": "Get student's mastery percentage and score stats across all WLV topics",
+            "description": "Get student's mastery percentage and score stats across all topics",
             "parameters": {"type": "object", "properties": {}}
         }
     },
@@ -105,7 +105,7 @@ TOOL_DEFINITIONS = [
         "type": "function",
         "function": {
             "name": "get_knowledge_context",
-            "description": "Search the WLV CS knowledge base for relevant concepts, definitions, and explanations. Automatically routes to curated OKF concepts (exact, high-stakes) or RAG vector search (exploratory, open-ended).",
+            "description": "Search the WLV knowledge base for relevant concepts, definitions, and explanations. Automatically routes to curated OKF concepts (exact, high-stakes) or RAG vector search (exploratory, open-ended).",
             "parameters": {
                 "type": "object",
                 "properties": {
@@ -337,7 +337,7 @@ async def tutor_start_session(request: Request, theme: str = ""):
         return {"chat_id": None, "error": "no_user"}
 
     user_id = user["id"]
-    profile_parts = ["You are a WLV tutor with access to this student's study data. Tailor your responses to their level."]
+    profile_parts = ["You are a WLV — University of Wolverhampton tutor with access to this student's study data. Tailor your responses to their level."]
 
     total = await query_one_async("SELECT COUNT(*) as cnt FROM quiz_attempts WHERE user_id = %s", (user_id,))
     cnt = total["cnt"] if total else 0
@@ -404,7 +404,7 @@ async def tutor_start_session(request: Request, theme: str = ""):
                 },
                 json={
                     "chat": {
-                        "title": "WLV CS Tutor",
+                        "title": "WLV Tutor",
                         "model": OWUI_MODEL,
                         "messages": [
                             {"role": "system", "content": system_content},
@@ -603,7 +603,7 @@ async def advise_me(request: Request):
     system_msg = {
         "role": "system",
         "content": (
-            "You are a supportive WLV tutor giving personalised study advice. "
+            "You are a supportive WLV — University of Wolverhampton tutor giving personalised study advice. "
             "You will receive a student's study data. Write 2-4 short, encouraging advice items. "
             "Each item must have: an emoji icon, a short bold title (under 50 chars), a friendly explanation in 1-2 sentences, "
             "and an action link path (like /topic/1.1). "

@@ -1,11 +1,11 @@
 // ═══════════════════════════════════════════════════════════════
-// WLV CS Revision Site — Client-Side JavaScript
+// GCSE CS Revision Site — Client-Side JavaScript
 // Handles: theme toggle (dark/light), slide-in navigation,
 // device ID generation, settings panel, quiz question modes,
 // lesson/exam data reset, modal dialogs
 // ═══════════════════════════════════════════════════════════════
 
-// WLV CS Revision — Shared App Scripts
+// GCSE CS Revision — Shared App Scripts
 // Cacheable external JS (loaded at end of body)
 
 // ── Device ID: generate + persist via cookie (no login system)
@@ -83,12 +83,12 @@ document.addEventListener('DOMContentLoaded', function() {
 // ── Question mode ──
 // ── getMode(): reads current question mode
 function getMode() {
-    var m = document.cookie.match(/(?:^|;\\s*)wlvcs_qmode=([^;]*)/);
+    var m = document.cookie.match(/(?:^|;\\s*)gcsecs_qmode=([^;]*)/);
     return m ? m[1] : 'soft';
 }
 // ── setMode(mode): saves quiz question mode (random/weighted/soft/strict) to localStorage
 function setMode(mode) {
-    document.cookie = 'wlvcs_qmode=' + mode + '; domain=.wlv-cs.lan; path=/; max-age=31536000; SameSite=Lax';
+    document.cookie = 'gcsecs_qmode=' + mode + '; domain=.gcse-cs.lan; path=/; max-age=31536000; SameSite=Lax';
     showAlert('Question mode changed.', '\u2705');
 }
 
@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // ── Theme ──
 // ── Theme: read from localStorage/cookie, default to 'dark'
 function getThemeBase() {
-    return localStorage.getItem('wlvcs_theme') || 'dark';
+    return localStorage.getItem('gcsecs_theme') || 'dark';
 }
 // ── setThemeBase(theme): applies .light-theme class, updates all UI elements, syncs nav icon, persists to localStorage + cookie
 function setThemeBase(theme) {
@@ -184,8 +184,8 @@ function setThemeBase(theme) {
     if (label) label.innerHTML = theme === 'light' ? '\u2600\ufe0f Light Mode' : '\ud83c\udf19 Dark Mode';
     var toggle = document.getElementById('settingsThemeToggle');
     if (toggle) toggle.textContent = theme === 'light' ? '\u25cf' : '\u25cb';
-    localStorage.setItem('wlvcs_theme', theme);
-    document.cookie = 'wlvcs_theme=' + theme + '; domain=.wlv-cs.lan; path=/; max-age=31536000; SameSite=Lax';
+    localStorage.setItem('gcsecs_theme', theme);
+    document.cookie = 'gcsecs_theme=' + theme + '; domain=.gcse-cs.lan; path=/; max-age=31536000; SameSite=Lax';
     // Switch D2 diagrams for dark/light theme
     document.querySelectorAll('.d2-diagram').forEach(function(img) {
         var src = img.getAttribute('data-src-' + theme);

@@ -8,8 +8,7 @@ services:
       POSTGRES_PASSWORD: wlv_kb_2026
     volumes:
       - pgdata:/var/lib/postgresql/data
-      - ./docker/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh:ro
-      - ./docker/quiz_questions.sql:/docker-entrypoint-initdb.d/02-quiz_questions.sql:ro
+
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U wlv_app -d wlv_kb"]
       interval: 5s
@@ -25,7 +24,7 @@ services:
     container_name: wlv-cs-website-app
     ports:
       - "8007:8001"
-    env_file: ./app/.env
+    env_file: ./.env
     environment:
       WLV_PG_DSN: "dbname=wlv_kb user=wlv_app password=wlv_kb_2026 host=db port=5432 client_encoding=utf8"
       WLV_DEBUG: "true"  # Set to "false" for production (disables cache-busting, dev features)

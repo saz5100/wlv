@@ -1,5 +1,6 @@
-"""
-Mark My Paper — WLV CS past paper grading pipeline.
+﻿"""
+Mark My Paper — SEND Certificate L2 grading pipeline.
+Upload PDFs, verify extracted text, get AI-marked reports against SEND mark schemes.
 """
 import json, os, re, uuid, tempfile, traceback
 from pathlib import Path
@@ -105,7 +106,9 @@ async def call_ai_marker(question_text: str, student_answer: str, mark_scheme: d
     model_ans = mark_scheme.get("model_answer", "")
     key_terms = mark_scheme.get("key_terms", "")
 
-    prompt = f"""Question: {question_text}
+    prompt = f"""You are an expert SEND Certificate L2 examiner for SEND.
+
+Question: {question_text}
 
 Student's answer:
 {student_answer}
@@ -161,6 +164,8 @@ async def past_papers_list(request: Request):
     """List all past papers with download/mark/online options."""
     static_dir = BASE_DIR / "static" / "past-papers"
     # Build mapping: paper_id -> has_qp, has_ms
+    # Filenames on disk: J277-01-2024-QP.pdf
+    # Paper IDs: j277-01-jun2024
     # Map: paper_id -> {qp: filename, ms: filename}
     paper_files = {}
     if static_dir.exists():
@@ -171,6 +176,7 @@ async def past_papers_list(request: Request):
                     paper_num = parts[1].lower()  # 01
                     year_str = parts[2]            # 2024
                     suffix = parts[-1]             # QP or MS
+                    # Detect month from filename (e.g., "J277-01-2024-QP" = jun, "J277-01-2024-nov-QP" = nov)
                     filename_lower = f.stem.lower()
                     if "nov" in filename_lower.split("-") or "november" in filename_lower:
                         month_prefix = "nov"
@@ -178,6 +184,7 @@ async def past_papers_list(request: Request):
                         month_prefix = "jun"
                     try:
                         year = int(year_str)
+                        paper_id = f"j277-{paper_num}-{month_prefix}{year_str}"
                         if paper_id not in paper_files:
                             paper_files[paper_id] = {"qp": None, "ms": None}
                         if suffix == "QP":

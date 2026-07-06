@@ -252,12 +252,17 @@
             <div class="qf-options" style="display:flex;gap:8px;justify-content:flex-start;margin-bottom:12px;flex-wrap:wrap;">
                 <select id="qfTopic" style="padding:6px 10px;border-radius:8px;border:1px solid var(--c-border);background:var(--c-bg);color:var(--c-text);font-size:13px;">
                     <option value="">All Topics</option>
-                    <option value="1">Academic Skills</option>
-                    <option value="2">Critical Thinking</option>
-                    <option value="3">Research Methods</option>
-                    <option value="4">Professional Practice</option>
-                    <option value="5">Digital Literacy</option>
-                    <option value="6">Subject Knowledge</option>
+                    <option value="1.1">1.1 Systems Architecture</option>
+                    <option value="1.2">1.2 Memory &amp; Storage</option>
+                    <option value="1.3">1.3 Networks</option>
+                    <option value="1.4">1.4 Network Security</option>
+                    <option value="1.5">1.5 Systems Software</option>
+                    <option value="1.6">1.6 Ethical &amp; Legal</option>
+                    <option value="2.1">2.1 Algorithms</option>
+                    <option value="2.2">2.2 Programming</option>
+                    <option value="2.3">2.3 Robust Programs</option>
+                    <option value="2.4">2.4 Boolean Logic</option>
+                    <option value="2.5">2.5 Languages &amp; IDEs</option>
                 </select>
                 <select id="qfDiff" style="padding:6px 10px;border-radius:8px;border:1px solid var(--c-border);background:var(--c-bg);color:var(--c-text);font-size:13px;">
                     <option value="">All Difficulties</option>
@@ -380,10 +385,12 @@ function startQF() {
     <div class="mode-card">
         <div class="mode-icon">📄</div>
         <div class="mode-title">Past Papers</div>
+        <div class="mode-desc">Download real WLV English Equivalency past papers and mark schemes from exam board and revision sites.</div>
         <div class="mode-features">✓ Real exam questions · ✓ Mark schemes · ✓ Examiner reports</div>
         <div class="past-paper-links" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-start;">
-            <a href="https://www.wlv.ac.uk/study-skills/" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:13px;padding:8px 14px;">🔗 WLV Study Skills</a>
-            <a href="https://www.wlv.ac.uk/library/" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:13px;padding:8px 14px;">🔗 WLV Library</a>
+            <a href="https://ocr.org.uk/qualifications/gcse/computer-science-j277-from-2020/assessment/" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:13px;padding:8px 14px;">🔗 OCR Assessment</a>
+            <a href="https://www.physicsandmathstutor.com/computer-science-gcse/past-papers/" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:13px;padding:8px 14px;">🔗 PMT</a>
+            <a href="https://www.savemyexams.com/gcse/computer-science/ocr/past-papers/" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:13px;padding:8px 14px;">🔗 Save My Exams</a>
         </div>
     </div>
 </div>
@@ -418,23 +425,23 @@ function startCustom() {
 }
 function savePreset() {
     var cfg = getCustomConfig();
-    var presets = JSON.parse(localStorage.getItem('wlvcs_exam_presets') || '[]');
+    var presets = JSON.parse(localStorage.getItem('wlv_exam_presets') || '[]');
     var name = prompt('Name this preset:', cfg.count + ' Q' + (cfg.paper !== '0' ? ' P' + cfg.paper : '') + (cfg.timed ? ' ' + cfg.dur + 'min' : ''));
     if (!name) return;
     presets.push({name: name, count: cfg.count, paper: cfg.paper, timed: cfg.timed, dur: cfg.dur});
     if (presets.length > 10) presets.shift();
-    localStorage.setItem('wlvcs_exam_presets', JSON.stringify(presets));
+    localStorage.setItem('wlv_exam_presets', JSON.stringify(presets));
     renderPresets();
     showAlert('Preset saved: ' + name, '💾');
 }
 function deletePreset(idx) {
-    var presets = JSON.parse(localStorage.getItem('wlvcs_exam_presets') || '[]');
+    var presets = JSON.parse(localStorage.getItem('wlv_exam_presets') || '[]');
     presets.splice(idx, 1);
-    localStorage.setItem('wlvcs_exam_presets', JSON.stringify(presets));
+    localStorage.setItem('wlv_exam_presets', JSON.stringify(presets));
     renderPresets();
 }
 function loadPreset(idx) {
-    var presets = JSON.parse(localStorage.getItem('wlvcs_exam_presets') || '[]');
+    var presets = JSON.parse(localStorage.getItem('wlv_exam_presets') || '[]');
     var p = presets[idx];
     if (!p) return;
     document.getElementById('cq').value = p.count;
@@ -447,7 +454,7 @@ function loadPreset(idx) {
     document.getElementById('customForm').classList.add('show');
 }
 function renderPresets() {
-    var presets = JSON.parse(localStorage.getItem('wlvcs_exam_presets') || '[]');
+    var presets = JSON.parse(localStorage.getItem('wlv_exam_presets') || '[]');
     var container = document.getElementById('presetList');
     var section = document.getElementById('savedPresets');
     if (!container) return;

@@ -1,3 +1,4 @@
+/* GCSE CS Revision — OCR J277 */
 /* ✨ v3.1 — Clean, cohesive, mature ✨ */
 /* ════════════════════════════════════════ CSS Custom Properties — Dark Theme ════════════════════════════════════════ */
 :root {
@@ -1427,38 +1428,38 @@ h1, h2, h3, h4, .section-title, .hero h1, .topic-header h1, .topic-title {
 
 /* ── Narrow phones: iPhone SE, Galaxy S8+ (≤375px) ── */
 @media (max-width: 375px) {
-  #wlv-cs-widget-clean .wc-cpu { width: 170px !important; }
-  #wlv-cs-widget-clean .wc-ram { width: 150px !important; }
-  #wlv-cs-widget-clean .wc-arrow-area { width: 40px !important; min-width: 40px !important; }
-  #wlv-cs-widget-clean .wc-reg-val { width: 60px !important; }
-  #wlv-cs-widget-clean .wc-ram-cell { font-size: 6px !important; }
-  #wlv-cs-widget-clean .wc-arrow { font-size: 12px !important; }
-  #wlv-cs-widget-clean .wc-arrow-label { font-size: 9px !important; }
+  #gcse-cs-widget-clean .wc-cpu { width: 170px !important; }
+  #gcse-cs-widget-clean .wc-ram { width: 150px !important; }
+  #gcse-cs-widget-clean .wc-arrow-area { width: 40px !important; min-width: 40px !important; }
+  #gcse-cs-widget-clean .wc-reg-val { width: 60px !important; }
+  #gcse-cs-widget-clean .wc-ram-cell { font-size: 6px !important; }
+  #gcse-cs-widget-clean .wc-arrow { font-size: 12px !important; }
+  #gcse-cs-widget-clean .wc-arrow-label { font-size: 9px !important; }
 }
 
 /* ── Short narrow phones: iPhone SE (375x667) ── */
 @media (max-width: 375px) and (max-height: 700px) {
-  #wlv-cs-widget-clean { padding: 0.2rem !important; min-height: 100px !important; }
-  #wlv-cs-widget-clean .wc-header { margin-bottom: 0.1rem !important; }
-  #wlv-cs-widget-clean #wc-header h2 { font-size: 0.9rem !important; }
-  #wlv-cs-widget-clean #wc-step-label { font-size: 0.7rem !important; }
-  #wlv-cs-widget-clean .wc-stepper { gap: 2px !important; margin-bottom: 0.2rem !important; }
-  #wlv-cs-widget-clean .wc-dot { width: 20px !important; height: 20px !important; font-size: 0.55rem !important; }
-  #wlv-cs-widget-clean .wc-diagram { padding: 0.15rem !important; min-height: 30px !important; margin-bottom: 0.15rem !important; }
-  #wlv-cs-widget-clean .wc-flow { gap: 3px !important; min-height: 60px !important; }
-  #wlv-cs-widget-clean .wc-cpu { padding: 0.2rem 0.3rem !important; min-width: 90px !important; }
-  #wlv-cs-widget-clean .wc-cpu-regs { gap: 1px !important; margin-top: 2px !important; }
-  #wlv-cs-widget-clean .wc-reg { padding: 1px 2px !important; font-size: 0.55rem !important; }
-  #wlv-cs-widget-clean .wc-reg-val { font-size: 0.5rem !important; }
-  #wlv-cs-widget-clean .wc-part { padding: 1px 2px !important; font-size: 0.55rem !important; }
-  #wlv-cs-widget-clean .wc-desc { min-height: 2.5rem !important; padding: 0.15rem 0.25rem !important; font-size: 0.65rem !important; height: auto !important; margin-top: 0.2rem !important; }
-  #wlv-cs-widget-clean .wc-controls { flex-wrap: wrap !important; gap: 2px !important; margin-top: 0.15rem !important; }
-  #wlv-cs-widget-clean .wc-btn { flex: 1 1 45% !important; padding: 0.3rem 0.6rem !important; font-size: 13px !important; }
-  #wlv-cs-widget-clean .wc-speed-row { gap: 2px !important; margin-top: 0.15rem !important; }
-  #wlv-cs-widget-clean .wc-speed-btn { padding: 3px 8px !important; font-size: 11px !important; }
-  #wlv-cs-widget-clean .wc-arrow { font-size: 11px !important; }
-  #wlv-cs-widget-clean .wc-arrow-label { font-size: 8px !important; }
-  #wlv-cs-widget-clean .wc-flow { margin-bottom: 0 !important; }
+  #gcse-cs-widget-clean { padding: 0.2rem !important; min-height: 100px !important; }
+  #gcse-cs-widget-clean .wc-header { margin-bottom: 0.1rem !important; }
+  #gcse-cs-widget-clean #wc-header h2 { font-size: 0.9rem !important; }
+  #gcse-cs-widget-clean #wc-step-label { font-size: 0.7rem !important; }
+  #gcse-cs-widget-clean .wc-stepper { gap: 2px !important; margin-bottom: 0.2rem !important; }
+  #gcse-cs-widget-clean .wc-dot { width: 20px !important; height: 20px !important; font-size: 0.55rem !important; }
+  #gcse-cs-widget-clean .wc-diagram { padding: 0.15rem !important; min-height: 30px !important; margin-bottom: 0.15rem !important; }
+  #gcse-cs-widget-clean .wc-flow { gap: 3px !important; min-height: 60px !important; }
+  #gcse-cs-widget-clean .wc-cpu { padding: 0.2rem 0.3rem !important; min-width: 90px !important; }
+  #gcse-cs-widget-clean .wc-cpu-regs { gap: 1px !important; margin-top: 2px !important; }
+  #gcse-cs-widget-clean .wc-reg { padding: 1px 2px !important; font-size: 0.55rem !important; }
+  #gcse-cs-widget-clean .wc-reg-val { font-size: 0.5rem !important; }
+  #gcse-cs-widget-clean .wc-part { padding: 1px 2px !important; font-size: 0.55rem !important; }
+  #gcse-cs-widget-clean .wc-desc { min-height: 2.5rem !important; padding: 0.15rem 0.25rem !important; font-size: 0.65rem !important; height: auto !important; margin-top: 0.2rem !important; }
+  #gcse-cs-widget-clean .wc-controls { flex-wrap: wrap !important; gap: 2px !important; margin-top: 0.15rem !important; }
+  #gcse-cs-widget-clean .wc-btn { flex: 1 1 45% !important; padding: 0.3rem 0.6rem !important; font-size: 13px !important; }
+  #gcse-cs-widget-clean .wc-speed-row { gap: 2px !important; margin-top: 0.15rem !important; }
+  #gcse-cs-widget-clean .wc-speed-btn { padding: 3px 8px !important; font-size: 11px !important; }
+  #gcse-cs-widget-clean .wc-arrow { font-size: 11px !important; }
+  #gcse-cs-widget-clean .wc-arrow-label { font-size: 8px !important; }
+  #gcse-cs-widget-clean .wc-flow { margin-bottom: 0 !important; }
 }
 
 @media (max-width: 1024px) and (min-width: 769px) {
@@ -2792,39 +2793,39 @@ h1, h2, h3, h4, .section-title, .hero h1, .topic-header h1, .topic-title {
 
 /* ── Fetch-Execute Widget: compact vertical layout on mobile ── */
 @media (max-width: 600px) {
-  #wlv-cs-widget-clean { padding: 0.3rem !important; min-height: auto !important; max-height: none !important; overflow: visible !important; }
+  #gcse-cs-widget-clean { padding: 0.3rem !important; min-height: auto !important; max-height: none !important; overflow: visible !important; }
   /* ── Shrink widget to fit vertically on all phones ── */
-  #wlv-cs-widget-clean { transform-origin: top center; transform: scale(0.88) !important; }
-  #wlv-cs-widget-clean #wc-header { margin-bottom: 0.15rem !important; }
-  #wlv-cs-widget-clean #wc-header h2 { font-size: 0.85rem !important; }
-  #wlv-cs-widget-clean #wc-step-label { font-size: 0.6rem !important; }
-  #wlv-cs-widget-clean #wc-stepper { gap: 2px !important; margin-bottom: 0.15rem !important; }
-  #wlv-cs-widget-clean .wc-dot { width: 16px !important; height: 16px !important; font-size: 0.45rem !important; }
-  #wlv-cs-widget-clean #wc-diagram { padding: 0.25rem !important; min-height: 70px !important; margin-bottom: 0.15rem !important; }
-  #wlv-cs-widget-clean #wc-flow { gap: 2px !important; min-height: 50px !important; flex-direction: column !important; align-items: center !important; }
-  #wlv-cs-widget-clean #wc-arrow-area { flex-direction: column !important; }
-  #wlv-cs-widget-clean #wc-arrow { transform: rotate(90deg) !important; display: inline-block !important; font-size: 1.4rem !important; }
-  #wlv-cs-widget-clean #wc-arrow-label { font-size: 0.6rem !important; }
-  #wlv-cs-widget-clean #wc-cpu { padding: 0.15rem 0.3rem !important; min-width: 200px !important; width: 200px !important; }
-  #wlv-cs-widget-clean #wc-cpu-regs { gap: 1px !important; margin-top: 2px !important; }
-  #wlv-cs-widget-clean .wc-reg { padding: 1px 2px !important; font-size: 0.5rem !important; }
-  #wlv-cs-widget-clean .wc-reg-val {
+  #gcse-cs-widget-clean { transform-origin: top center; transform: scale(0.88) !important; }
+  #gcse-cs-widget-clean #wc-header { margin-bottom: 0.15rem !important; }
+  #gcse-cs-widget-clean #wc-header h2 { font-size: 0.85rem !important; }
+  #gcse-cs-widget-clean #wc-step-label { font-size: 0.6rem !important; }
+  #gcse-cs-widget-clean #wc-stepper { gap: 2px !important; margin-bottom: 0.15rem !important; }
+  #gcse-cs-widget-clean .wc-dot { width: 16px !important; height: 16px !important; font-size: 0.45rem !important; }
+  #gcse-cs-widget-clean #wc-diagram { padding: 0.25rem !important; min-height: 70px !important; margin-bottom: 0.15rem !important; }
+  #gcse-cs-widget-clean #wc-flow { gap: 2px !important; min-height: 50px !important; flex-direction: column !important; align-items: center !important; }
+  #gcse-cs-widget-clean #wc-arrow-area { flex-direction: column !important; }
+  #gcse-cs-widget-clean #wc-arrow { transform: rotate(90deg) !important; display: inline-block !important; font-size: 1.4rem !important; }
+  #gcse-cs-widget-clean #wc-arrow-label { font-size: 0.6rem !important; }
+  #gcse-cs-widget-clean #wc-cpu { padding: 0.15rem 0.3rem !important; min-width: 200px !important; width: 200px !important; }
+  #gcse-cs-widget-clean #wc-cpu-regs { gap: 1px !important; margin-top: 2px !important; }
+  #gcse-cs-widget-clean .wc-reg { padding: 1px 2px !important; font-size: 0.5rem !important; }
+  #gcse-cs-widget-clean .wc-reg-val {
     font-size: 0.45rem !important;
     min-width: 80px !important;
     display: inline-block !important;
   }
-  #wlv-cs-widget-clean .wc-part { padding: 1px 2px !important; font-size: 0.45rem !important; }
-  #wlv-cs-widget-clean #wc-cpu-parts { gap: 2px !important; margin-top: 2px !important; }
-  #wlv-cs-widget-clean #wc-desc { min-height: 100px !important; padding: 0.1rem 0.2rem !important; font-size: 0.5rem !important; margin-top: 0.1rem !important; height: auto !important; max-height: none !important; }
-  #wlv-cs-widget-clean #wc-step-title { font-size: 0.7rem !important; margin-bottom: 1px !important; }
-  #wlv-cs-widget-clean #wc-step-text { font-size: 0.6rem !important; line-height: 1.3 !important; }
-  #wlv-cs-widget-clean #wc-controls { flex-wrap: wrap !important; gap: 2px !important; margin-top: 0.1rem !important; }
-  #wlv-cs-widget-clean .wc-btn { font-size: 11px !important; padding: 0.2rem 0.5rem !important; flex: 1 1 auto !important; }
-  #wlv-cs-widget-clean .wc-speed-btn { font-size: 12px !important; padding: 4px 10px !important; }
-  #wlv-cs-widget-clean #wc-ram { padding: 0.15rem 0.3rem !important; min-width: 200px !important; width: 200px !important; }
-  #wlv-cs-widget-clean #wc-ram-cells { gap: 2px !important; }
-  #wlv-cs-widget-clean .wc-ram-cell { padding: 3px 6px !important; font-size: 0.55rem !important; }
-  #wlv-cs-widget-clean .wc-speed-row { margin-top: 0.1rem !important; }
+  #gcse-cs-widget-clean .wc-part { padding: 1px 2px !important; font-size: 0.45rem !important; }
+  #gcse-cs-widget-clean #wc-cpu-parts { gap: 2px !important; margin-top: 2px !important; }
+  #gcse-cs-widget-clean #wc-desc { min-height: 100px !important; padding: 0.1rem 0.2rem !important; font-size: 0.5rem !important; margin-top: 0.1rem !important; height: auto !important; max-height: none !important; }
+  #gcse-cs-widget-clean #wc-step-title { font-size: 0.7rem !important; margin-bottom: 1px !important; }
+  #gcse-cs-widget-clean #wc-step-text { font-size: 0.6rem !important; line-height: 1.3 !important; }
+  #gcse-cs-widget-clean #wc-controls { flex-wrap: wrap !important; gap: 2px !important; margin-top: 0.1rem !important; }
+  #gcse-cs-widget-clean .wc-btn { font-size: 11px !important; padding: 0.2rem 0.5rem !important; flex: 1 1 auto !important; }
+  #gcse-cs-widget-clean .wc-speed-btn { font-size: 12px !important; padding: 4px 10px !important; }
+  #gcse-cs-widget-clean #wc-ram { padding: 0.15rem 0.3rem !important; min-width: 200px !important; width: 200px !important; }
+  #gcse-cs-widget-clean #wc-ram-cells { gap: 2px !important; }
+  #gcse-cs-widget-clean .wc-ram-cell { padding: 3px 6px !important; font-size: 0.55rem !important; }
+  #gcse-cs-widget-clean .wc-speed-row { margin-top: 0.1rem !important; }
   /* ── Mermaid diagram node sizing on mobile ── */
   .lesson-content pre.mermaid svg .node .label,
   .mermaid-rendered svg .node .label { font-size: 13px !important; padding: 6px 10px !important; }
@@ -2834,32 +2835,32 @@ h1, h2, h3, h4, .section-title, .hero h1, .topic-header h1, .topic-title {
 
 /* ── iPhone SE and narrow short screens (375x667 max) ── */
 @media (max-width: 375px) and (max-height: 700px) {
-  #wlv-cs-widget-clean { padding: 0.15rem !important; margin: 0.5rem auto !important; transform-origin: top center; transform: scale(0.82) !important; }
-  #wlv-cs-widget-clean #wc-header { margin-bottom: 8px; }
-  #wlv-cs-widget-clean #wc-header h2 { font-size: 0.7rem !important; }
-  #wlv-cs-widget-clean #wc-step-label { font-size: 0.45rem !important; }
-  #wlv-cs-widget-clean #wc-stepper { gap: 1px !important; margin-bottom: 0.1rem !important; }
-  #wlv-cs-widget-clean .wc-dot { width: 12px !important; height: 12px !important; font-size: 0.35rem !important; }
-  #wlv-cs-widget-clean #wc-diagram { padding: 0.1rem !important; min-height: 20px !important; margin-bottom: 0.05rem !important; }
-  #wlv-cs-widget-clean #wc-flow { gap: 1px !important; min-height: 20px !important; }
-  #wlv-cs-widget-clean #wc-arrow { font-size: 0.85rem !important; line-height: 1 !important; }
-  #wlv-cs-widget-clean #wc-arrow-label { font-size: 0.45rem !important; }
-  #wlv-cs-widget-clean #wc-cpu { padding: 0.08rem 0.15rem !important; min-width: 160px !important; width: 160px !important; }
-  #wlv-cs-widget-clean #wc-cpu-regs { gap: 1px !important; margin-top: 1px !important; }
-  #wlv-cs-widget-clean .wc-reg { padding: 1px 1px !important; font-size: 0.4rem !important; }
-  #wlv-cs-widget-clean .wc-reg-val { font-size: 0.35rem !important; min-width: 50px !important; }
-  #wlv-cs-widget-clean .wc-part { padding: 1px 1px !important; font-size: 0.35rem !important; }
-  #wlv-cs-widget-clean #wc-cpu-parts { gap: 1px !important; margin-top: 1px !important; }
-  #wlv-cs-widget-clean #wc-desc { min-height: 35px !important; padding: 0.03rem 0.08rem !important; font-size: 0.38rem !important; margin-top: 0.03rem !important; }
-  #wlv-cs-widget-clean #wc-step-title { font-size: 0.5rem !important; margin-bottom: 0 !important; }
-  #wlv-cs-widget-clean #wc-step-text { font-size: 0.4rem !important; line-height: 1.1 !important; }
-  #wlv-cs-widget-clean #wc-controls { gap: 1px !important; margin-top: 0.02rem !important; }
-  #wlv-cs-widget-clean .wc-btn { font-size: 8px !important; padding: 0.05rem 0.2rem !important; }
-  #wlv-cs-widget-clean .wc-speed-btn { font-size: 8px !important; padding: 1px 4px !important; }
-  #wlv-cs-widget-clean #wc-ram { padding: 0.08rem 0.15rem !important; min-width: 160px !important; width: 160px !important; }
-  #wlv-cs-widget-clean #wc-ram-cells { gap: 1px !important; }
-  #wlv-cs-widget-clean .wc-ram-cell { padding: 1px 3px !important; font-size: 0.4rem !important; }
-  #wlv-cs-widget-clean .wc-speed-row { margin-top: 0.02rem !important; }
+  #gcse-cs-widget-clean { padding: 0.15rem !important; margin: 0.5rem auto !important; transform-origin: top center; transform: scale(0.82) !important; }
+  #gcse-cs-widget-clean #wc-header { margin-bottom: 8px; }
+  #gcse-cs-widget-clean #wc-header h2 { font-size: 0.7rem !important; }
+  #gcse-cs-widget-clean #wc-step-label { font-size: 0.45rem !important; }
+  #gcse-cs-widget-clean #wc-stepper { gap: 1px !important; margin-bottom: 0.1rem !important; }
+  #gcse-cs-widget-clean .wc-dot { width: 12px !important; height: 12px !important; font-size: 0.35rem !important; }
+  #gcse-cs-widget-clean #wc-diagram { padding: 0.1rem !important; min-height: 20px !important; margin-bottom: 0.05rem !important; }
+  #gcse-cs-widget-clean #wc-flow { gap: 1px !important; min-height: 20px !important; }
+  #gcse-cs-widget-clean #wc-arrow { font-size: 0.85rem !important; line-height: 1 !important; }
+  #gcse-cs-widget-clean #wc-arrow-label { font-size: 0.45rem !important; }
+  #gcse-cs-widget-clean #wc-cpu { padding: 0.08rem 0.15rem !important; min-width: 160px !important; width: 160px !important; }
+  #gcse-cs-widget-clean #wc-cpu-regs { gap: 1px !important; margin-top: 1px !important; }
+  #gcse-cs-widget-clean .wc-reg { padding: 1px 1px !important; font-size: 0.4rem !important; }
+  #gcse-cs-widget-clean .wc-reg-val { font-size: 0.35rem !important; min-width: 50px !important; }
+  #gcse-cs-widget-clean .wc-part { padding: 1px 1px !important; font-size: 0.35rem !important; }
+  #gcse-cs-widget-clean #wc-cpu-parts { gap: 1px !important; margin-top: 1px !important; }
+  #gcse-cs-widget-clean #wc-desc { min-height: 35px !important; padding: 0.03rem 0.08rem !important; font-size: 0.38rem !important; margin-top: 0.03rem !important; }
+  #gcse-cs-widget-clean #wc-step-title { font-size: 0.5rem !important; margin-bottom: 0 !important; }
+  #gcse-cs-widget-clean #wc-step-text { font-size: 0.4rem !important; line-height: 1.1 !important; }
+  #gcse-cs-widget-clean #wc-controls { gap: 1px !important; margin-top: 0.02rem !important; }
+  #gcse-cs-widget-clean .wc-btn { font-size: 8px !important; padding: 0.05rem 0.2rem !important; }
+  #gcse-cs-widget-clean .wc-speed-btn { font-size: 8px !important; padding: 1px 4px !important; }
+  #gcse-cs-widget-clean #wc-ram { padding: 0.08rem 0.15rem !important; min-width: 160px !important; width: 160px !important; }
+  #gcse-cs-widget-clean #wc-ram-cells { gap: 1px !important; }
+  #gcse-cs-widget-clean .wc-ram-cell { padding: 1px 3px !important; font-size: 0.4rem !important; }
+  #gcse-cs-widget-clean .wc-speed-row { margin-top: 0.02rem !important; }
   /* ── Mermaid on iPhone SE ── */
   .lesson-content pre.mermaid svg .node .label,
   .mermaid-rendered svg .node .label { font-size: 11px !important; padding: 4px 6px !important; }
@@ -2883,7 +2884,7 @@ h1, h2, h3, h4, .section-title, .hero h1, .topic-header h1, .topic-title {
   .lesson-content pre.mermaid, .mermaid-rendered,
   .wc-widget, .cpup-widget, .util-widget, .elc-widget, .ct-widget, .algo-widget, .dd-widget,
   .d2-diagram, .match-diagram,
-  #wlv-cs-widget-clean, .lesson-widget,
+  #gcse-cs-widget-clean, .lesson-widget,
   .bottom-bar, .nav-streak-badge,
   .settings-panel, #settingsPanel,
   .modal-overlay, #modalOverlay,

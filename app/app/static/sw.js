@@ -1,6 +1,6 @@
-// WLV CS Revision — Service Worker
+// GCSE CS Revision — Service Worker
 // Provides offline fallback and installable PWA support
-const CACHE_NAME = 'wlvcs-v1';
+const CACHE_NAME = 'gcsecs-v1';
 const STATIC_ASSETS = [
   '/static/css/style.css',
   '/static/js/app.js',

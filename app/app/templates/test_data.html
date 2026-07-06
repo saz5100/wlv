@@ -170,6 +170,7 @@
 <!-- ── Intro ── -->
 <div class="td-intro">
     <h3>🧪 Test Data Generator</h3>
+    <p>For <strong>WLV English Equivalency 2.3 — Producing Robust Programs</strong>, you need to understand four categories of test data. Click each data value to classify it. Try to get all correct!</p>
 </div>
 
 <div class="td-layout">
@@ -374,34 +375,110 @@ function renderTdGrid() {
     });
 }
 
+// ─── Themed Modal ───
+function showTdModal(message, callback) {
+    // Remove existing modal if any
+    var old = document.getElementById('tdModalOverlay');
+    if (old) old.remove();
+
+    var overlay = document.createElement('div');
+    overlay.id = 'tdModalOverlay';
+    overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:99999;display:flex;align-items:center;justify-content:center;';
+
+    var box = document.createElement('div');
+    box.style.cssText = 'background:var(--c-surface,#1e293b);border:1px solid var(--c-border,#334155);border-radius:12px;padding:24px;max-width:420px;width:90%;box-shadow:0 8px 32px rgba(0,0,0,0.4);';
+
+    var label = document.createElement('p');
+    label.textContent = message;
+    label.style.cssText = 'color:var(--c-text,#e2e8f0);font-size:14px;line-height:1.6;margin:0 0 16px;';
+
+    var input = document.createElement('input');
+    input.type = 'text';
+    input.placeholder = 'normal, boundary, invalid, erroneous';
+    input.style.cssText = 'width:100%;padding:10px 14px;border-radius:8px;border:1px solid var(--c-border,#334155);background:var(--c-bg-alt,#0d1225);color:var(--c-text,#e2e8f0);font-size:14px;box-sizing:border-box;outline:none;';
+    input.addEventListener('keydown', function(e) { if (e.key === 'Enter') { confirm(); } });
+
+    var btnRow = document.createElement('div');
+    btnRow.style.cssText = 'display:flex;gap:8px;justify-content:flex-end;margin-top:16px;';
+
+    var okBtn = document.createElement('button');
+    okBtn.textContent = 'Submit';
+    okBtn.style.cssText = 'padding:8px 16px;border-radius:8px;border:none;background:var(--c-accent,#06b6d4);color:#000;font-size:14px;font-weight:600;cursor:pointer;';
+    okBtn.addEventListener('click', function() { confirm(); });
+
+    var cancelBtn = document.createElement('button');
+    cancelBtn.textContent = 'Cancel';
+    cancelBtn.style.cssText = 'padding:8px 16px;border-radius:8px;border:1px solid var(--c-border,#334155);background:transparent;color:var(--c-text-secondary,#94a3b8);font-size:14px;cursor:pointer;';
+    cancelBtn.addEventListener('click', function() { overlay.remove(); });
+
+    function confirm() {
+        var val = input.value.trim().toLowerCase();
+        if (!val) return;
+        overlay.remove();
+        callback(val);
+    }
+
+    btnRow.appendChild(cancelBtn);
+    btnRow.appendChild(okBtn);
+    box.appendChild(label);
+    box.appendChild(input);
+    box.appendChild(btnRow);
+    overlay.appendChild(box);
+    document.body.appendChild(overlay);
+    setTimeout(function() { input.focus(); }, 50);
+}
+
+// ─── Themed Alert ───
+function showTdAlert(message) {
+    var overlay = document.createElement('div');
+    overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:99999;display:flex;align-items:center;justify-content:center;';
+
+    var box = document.createElement('div');
+    box.style.cssText = 'background:var(--c-surface,#1e293b);border:1px solid var(--c-border,#334155);border-radius:12px;padding:24px;max-width:380px;width:90%;box-shadow:0 8px 32px rgba(0,0,0,0.4);text-align:center;';
+
+    var label = document.createElement('p');
+    label.textContent = message;
+    label.style.cssText = 'color:var(--c-text,#e2e8f0);font-size:14px;line-height:1.6;margin:0 0 16px;';
+
+    var okBtn = document.createElement('button');
+    okBtn.textContent = 'OK';
+    okBtn.style.cssText = 'padding:8px 20px;border-radius:8px;border:none;background:var(--c-accent,#06b6d4);color:#000;font-size:14px;font-weight:600;cursor:pointer;';
+    okBtn.addEventListener('click', function() { overlay.remove(); });
+
+    box.appendChild(label);
+    box.appendChild(okBtn);
+    overlay.appendChild(box);
+    document.body.appendChild(overlay);
+}
+
 // ─── Classify ───
 function classifyTd(idx) {
     if (tdRevealed[idx]) return;
     
     const item = tdData[idx];
-    const userCategory = prompt(`What type of test data is "${item.value}"?\n\nTypes: normal, boundary, invalid, erroneous`).toLowerCase().trim();
-    
-    const validTypes = ['normal', 'boundary', 'invalid', 'erroneous'];
-    if (!validTypes.includes(userCategory)) {
-        alert('Please enter one of: normal, boundary, invalid, erroneous');
-        return;
-    }
-    
-    tdRevealed[idx] = true;
-    if (userCategory === item.category) {
-        tdCorrect[idx] = true;
-        tdScore++;
-    }
-    
-    renderTdGrid();
-    
-    // Check if all revealed
-    if (tdRevealed.every(r => r)) {
-        const pct = Math.round((tdScore / tdData.length) * 100);
-        const explanation = document.getElementById('tdExplanation');
-        explanation.innerHTML = `<strong>${pct >= 80 ? '🎉 Great job!' : '📚 Keep practising!'}</strong> ${tdScenarios[parseInt(document.getElementById('tdScenarioSelect').value)].explanation}`;
-        explanation.classList.add('show');
-    }
+    showTdModal('What type of test data is "' + item.value + '"?', function(userCategory) {
+        const validTypes = ['normal', 'boundary', 'invalid', 'erroneous'];
+        if (!validTypes.includes(userCategory)) {
+            showTdAlert('Please enter one of: normal, boundary, invalid, erroneous');
+            return;
+        }
+        
+        tdRevealed[idx] = true;
+        if (userCategory === item.category) {
+            tdCorrect[idx] = true;
+            tdScore++;
+        }
+        
+        renderTdGrid();
+        
+        // Check if all revealed
+        if (tdRevealed.every(function(r) { return r; })) {
+            const pct = Math.round((tdScore / tdData.length) * 100);
+            const explanation = document.getElementById('tdExplanation');
+            explanation.innerHTML = '<strong>' + (pct >= 80 ? '🎉 Great job!' : '📚 Keep practising!') + '</strong> ' + tdScenarios[parseInt(document.getElementById('tdScenarioSelect').value)].explanation;
+            explanation.classList.add('show');
+        }
+    });
 }
 
 // ─── Reveal All ───

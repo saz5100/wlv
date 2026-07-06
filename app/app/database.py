@@ -12,7 +12,7 @@ import asyncio
 # Retrieve DSN from env variables or fallback to dev VM DSN
 PG_DSN = os.environ.get(
     "WLV_PG_DSN", 
-    "dbname=wlv_kb user=wlv_app password=wlv_kb_2026 host=localhost port=5432 client_encoding=utf8"
+    "dbname=wlv_kb user=wlv_app password=wlv_kb_2026 host=db port=5432 client_encoding=utf8"
 )
 
 # Initialize connection pool: minimum 2, maximum 20 connections

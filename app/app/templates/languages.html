@@ -1,772 +1,629 @@
 {% extends "base.html" %}
-{% block title %}SPaG and Writing Guide | WLV — University of Wolverhampton{% endblock %}
+{% block title %}Languages & IDEs | WLV — University of Wolverhampton{% endblock %}
 {% block content %}
 <div class="hero" style="padding: 30px 0 15px;">
-    <h1>✍️ SPaG and Writing Guide</h1>
+    <h1>🔤 Programming Languages & IDEs</h1>
+    <p class="hero-sub">WLV English Equivalency 2.5 — High-level vs low-level, translators, and IDE features</p>
 </div>
 
 <style>
-    .aw-intro {
+    .lang-intro {
         max-width: 960px; margin: 0 auto 20px; padding: 20px 24px;
         background: rgba(17, 24, 39, 0.7); border: 1px solid rgba(34, 211, 238, 0.12);
         border-radius: var(--r-xl); line-height: 1.7; font-size: 14px;
     }
-    .light-theme .aw-intro {
+    .light-theme .lang-intro {
         background: rgba(255, 255, 255, 0.8); border-color: rgba(8, 145, 178, 0.15);
     }
-    .aw-intro h3 { color: var(--c-heading); margin-bottom: 8px; font-size: 17px; }
-    .aw-container { max-width: 960px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+    .lang-intro h3 { color: var(--c-heading); margin-bottom: 8px; font-size: 17px; }
+    .lang-container { max-width: 960px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
 
-    .aw-section {
+    .lang-section {
         background: rgba(17, 24, 39, 0.85); border: 1px solid rgba(34, 211, 238, 0.12);
         border-radius: var(--r-xl); overflow: hidden;
     }
-    .light-theme .aw-section { background: rgba(255, 255, 255, 0.9); border-color: rgba(8, 145, 178, 0.12); }
-    .aw-section-header {
+    .light-theme .lang-section { background: rgba(255, 255, 255, 0.9); border-color: rgba(8, 145, 178, 0.12); }
+    .lang-section-header {
         padding: 14px 20px; background: rgba(8, 11, 20, 0.4);
         border-bottom: 1px solid rgba(34, 211, 238, 0.08);
         font-size: 17px; font-weight: 700; color: var(--c-heading);
         cursor: pointer; user-select: none;
         display: flex; justify-content: space-between; align-items: center;
     }
-    .light-theme .aw-section-header { background: rgba(0, 0, 0, 0.03); }
-    .aw-section-header .toggle-icon { font-size: 14px; color: var(--c-text-secondary); transition: transform 0.2s; }
-    .aw-section-header.open .toggle-icon { transform: rotate(180deg); }
-    .aw-section-body { padding: 20px; display: none; }
-    .aw-section-body.open { display: block; }
+    .light-theme .lang-section-header { background: rgba(0, 0, 0, 0.03); }
+    .lang-section-header .toggle-icon { font-size: 14px; color: var(--c-text-secondary); transition: transform 0.2s; }
+    .lang-section-header.open .toggle-icon { transform: rotate(180deg); }
+    .lang-section-body { padding: 20px; display: none; }
+    .lang-section-body.open { display: block; }
 
-    .aw-table { width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 16px; }
-    .aw-table:last-child { margin-bottom: 0; }
-    .aw-table th {
+    .lang-table { width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 16px; }
+    .lang-table:last-child { margin-bottom: 0; }
+    .lang-table th {
         background: rgba(34, 211, 238, 0.06); color: var(--c-accent);
         padding: 10px 14px; text-align: left; border-bottom: 2px solid var(--c-border); font-weight: 700;
     }
-    .aw-table td {
+    .lang-table td {
         padding: 10px 14px; border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         color: var(--c-text); line-height: 1.5;
     }
-    .light-theme .aw-table td { border-color: rgba(0, 0, 0, 0.04); }
-    .aw-table tr:hover td { background: rgba(34, 211, 238, 0.02); }
-    .aw-table .tag {
+    .light-theme .lang-table td { border-color: rgba(0, 0, 0, 0.04); }
+    .lang-table tr:hover td { background: rgba(34, 211, 238, 0.02); }
+    .lang-table .tag {
         display: inline-block; font-size: 11px; font-weight: 700;
         padding: 2px 8px; border-radius: 99px; margin-right: 4px;
     }
-    .aw-table .tag-green { background: rgba(52, 211, 153, 0.12); color: #34d399; }
-    .aw-table .tag-amber { background: rgba(250, 204, 21, 0.12); color: #facc15; }
-    .aw-table .tag-red { background: rgba(244, 63, 94, 0.12); color: #f43f5e; }
-    .aw-table .tag-blue { background: rgba(96, 165, 250, 0.12); color: #60a5fa; }
-    .aw-table .tag-purple { background: rgba(168, 85, 247, 0.12); color: #a855f7; }
+    .lang-table .tag-green { background: rgba(52, 211, 153, 0.12); color: #34d399; }
+    .lang-table .tag-amber { background: rgba(250, 204, 21, 0.12); color: #facc15; }
+    .lang-table .tag-red { background: rgba(244, 63, 94, 0.12); color: #f43f5e; }
+    .lang-table .tag-purple { background: rgba(168, 85, 247, 0.12); color: #a855f7; }
 
-    .aw-card-grid {
+    .lang-card-grid {
         display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px;
     }
-    .aw-card {
+    .lang-card {
         padding: 16px; border-radius: var(--r-lg);
         border: 1px solid rgba(34, 211, 238, 0.1); background: rgba(8, 11, 20, 0.4);
     }
-    .light-theme .aw-card { background: rgba(0, 0, 0, 0.03); }
-    .aw-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
-    .aw-card p { font-size: 13px; line-height: 1.5; color: var(--c-text-secondary); }
-    .aw-card .card-icon { font-size: 28px; margin-bottom: 6px; display: block; }
+    .light-theme .lang-card { background: rgba(0, 0, 0, 0.03); }
+    .lang-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+    .lang-card p { font-size: 13px; line-height: 1.5; color: var(--c-text-secondary); }
+    .lang-card .card-icon { font-size: 28px; margin-bottom: 6px; display: block; }
 
-    .aw-tip {
+    .lang-mnemonic {
         margin-top: 12px; padding: 10px 14px;
         background: rgba(250, 204, 21, 0.06); border-left: 3px solid #facc15;
         border-radius: 0 var(--r-md) var(--r-md) 0; font-size: 13px; line-height: 1.6;
     }
-    .aw-tip strong { color: #facc15; }
+    .lang-mnemonic strong { color: #facc15; }
 
-    .aw-example {
-        margin-top: 10px; padding: 12px 16px;
-        background: rgba(52, 211, 153, 0.06); border-left: 3px solid #34d399;
-        border-radius: 0 var(--r-md) var(--r-md) 0; font-size: 13px; line-height: 1.6;
-    }
-    .aw-example strong { color: #34d399; }
+    /* ── Quiz Section ── */
+    .lang-quiz-section { margin-top: 40px; padding-top: 32px; border-top: 2px solid var(--c-border); max-width: 960px; margin-left: auto; margin-right: auto; }
+    .lang-quiz-section h2 { font-size: 22px; color: var(--c-heading); margin-bottom: 4px; }
+    .lang-quiz-section .quiz-sub { font-size: 13px; color: var(--c-text-secondary); margin-bottom: 20px; }
+    .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 8px; }
+    .quiz-progress-bar { height: 6px; background: var(--c-border); border-radius: 3px; flex: 1; min-width: 100px; max-width: 400px; }
+    .quiz-progress-fill { height: 100%; background: var(--c-accent); border-radius: 3px; transition: width 0.3s ease; }
+    .quiz-score-running { font-size: 14px; color: var(--c-text-secondary); font-weight: 500; }
+    .quiz-tab { display: none; }
+    .quiz-tab.active { display: block; }
+    .quiz-counter { text-align: center; font-size: 14px; font-weight: 700; color: var(--c-accent); margin: 8px 0 16px; letter-spacing: 1px; }
+    .quiz-nav { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 20px 0 12px; }
+    .quiz-nav-btn { padding: 8px 16px; border-radius: 8px; border: 1px solid var(--c-border); background: rgba(17,24,39,0.88); color: var(--c-text); font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.15s; white-space: nowrap; }
+    .light-theme .quiz-nav-btn { background: rgba(243,244,246,0.88); }
+    .quiz-nav-btn:hover { border-color: var(--c-accent); }
+    .quiz-nav-btn:disabled { opacity: 0.3; cursor: default; }
+    .quiz-dots { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+    .quiz-dot { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; cursor: pointer; background: rgba(17,24,39,0.6); border: 2px solid var(--c-border); color: var(--c-text-secondary); transition: all 0.15s; }
+    .light-theme .quiz-dot { background: rgba(243,244,246,0.6); }
+    .quiz-dot:hover { border-color: var(--c-accent); color: var(--c-text); }
+    .quiz-dot.active { border-color: var(--c-accent); background: var(--c-accent); color: #000; }
+    .quiz-dot.answered { border-color: var(--c-green); background: rgba(52,211,153,0.15); color: var(--c-green); }
+    .lang-quiz-question { margin-bottom: 20px; padding: 18px 20px; background: rgba(13,18,37,0.8); border-radius: var(--r-xl); border: 1px solid rgba(34,211,238,0.10); }
+    .light-theme .lang-quiz-question { background: rgba(243,244,246,0.8); }
+    .lang-quiz-q { font-weight: 600; font-size: 15px; margin-bottom: 12px; color: var(--c-text); }
+    .lang-quiz-opt { display: block; width: 100%; text-align: left; padding: 10px 14px; margin: 5px 0; background: rgba(17,24,39,0.88); color: var(--c-text); border: 2px solid var(--c-border); border-radius: 10px; font-size: 14px; cursor: pointer; transition: all 0.15s; }
+    .light-theme .lang-quiz-opt { background: rgba(255,255,255,0.88); }
+    .lang-quiz-opt:hover { border-color: var(--c-accent); }
+    .lang-quiz-opt.selected { border-color: var(--c-accent); background: rgba(8,41,73,0.85); }
+    .light-theme .lang-quiz-opt.selected { background: rgba(236,254,255,0.85); }
+    .lang-quiz-opt.correct { border-color: var(--c-green); background: rgba(2,44,34,0.75); color: var(--c-green); }
+    .lang-quiz-opt.incorrect { border-color: var(--c-rose); background: rgba(69,10,10,0.75); color: var(--c-rose); }
+    .lang-quiz-exp { display: none; margin-top: 10px; padding: 10px 14px; background: rgba(8,41,73,0.7); border-radius: 8px; font-size: 13px; border-left: 3px solid var(--c-accent); line-height: 1.5; }
+    .light-theme .lang-quiz-exp { background: rgba(236,254,255,0.7); }
+    .lang-quiz-exp.show { display: block; }
+    .lang-quiz-score { margin-top: 20px; padding: 16px; border-radius: 12px; text-align: center; border: 2px solid var(--c-green); background: rgba(2,44,34,0.3); font-size: 18px; font-weight: 700; display: none; }
+    .light-theme .lang-quiz-score { background: rgba(240,253,244,0.5); }
+    .lang-quiz-score.show { display: block; }
 
-    .aw-warning {
-        margin-top: 10px; padding: 12px 16px;
-        background: rgba(244, 63, 94, 0.06); border-left: 3px solid #f43f5e;
-        border-radius: 0 var(--r-md) var(--r-md) 0; font-size: 13px; line-height: 1.6;
-    }
-    .aw-warning strong { color: #f43f5e; }
+    /* ── Key Terminology ── */
+    .lang-terms-section { margin-top: 40px; padding-top: 32px; border-top: 2px solid var(--c-border); max-width: 960px; margin-left: auto; margin-right: auto; }
+    .lang-terms-section h2 { font-size: 22px; color: var(--c-heading); margin-bottom: 4px; }
+    .lang-terms-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; margin-top: 16px; }
+    .lang-term-card { padding: 14px 16px; border-radius: var(--r-lg); border: 1px solid rgba(34,211,238,0.1); background: rgba(8,11,20,0.4); }
+    .light-theme .lang-term-card { background: rgba(0,0,0,0.03); }
+    .lang-term-card .term-badge { display: inline-block; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 99px; background: rgba(168,85,247,0.12); color: #a855f7; border: 1px solid rgba(168,85,247,0.15); margin-bottom: 6px; }
+    .lang-term-card .term-def { font-size: 13px; color: var(--c-text-secondary); line-height: 1.5; }
 
-    .aw-steps {
-        list-style: none; padding: 0; margin: 12px 0;
-    }
-    .aw-steps li {
-        padding: 8px 0 8px 28px; position: relative;
-        font-size: 14px; line-height: 1.5; color: var(--c-text);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-    }
-    .light-theme .aw-steps li { border-color: rgba(0, 0, 0, 0.04); }
-    .aw-steps li:last-child { border-bottom: none; }
-    .aw-steps li::before {
-        content: attr(data-step); position: absolute; left: 0;
-        font-weight: 700; color: var(--c-accent); font-size: 13px;
-    }
+    /* ── Podcast ── */
+    .lang-podcast { max-width: 960px; margin: 32px auto 0; padding: 16px 20px; background: rgba(34,211,238,0.04); border: 1px solid rgba(34,211,238,0.12); border-radius: 12px; }
+    .lang-podcast .podcast-header { font-size: 15px; font-weight: 600; color: var(--c-accent); margin-bottom: 10px; }
+    .lang-podcast audio { border-radius: 8px; background: rgba(17,24,39,0.6); width: 100%; }
+    .light-theme .lang-podcast audio { background: rgba(243,244,246,0.6); }
 
-    .aw-pitfall-list { margin: 12px 0; }
-    .aw-pitfall-item {
-        padding: 12px 16px; margin-bottom: 8px;
-        border-radius: var(--r-lg);
-        border: 1px solid rgba(244, 63, 94, 0.12); background: rgba(244, 63, 94, 0.04);
-    }
-    .light-theme .aw-pitfall-item { background: rgba(244, 63, 94, 0.03); }
-    .aw-pitfall-item h5 { font-size: 14px; font-weight: 700; color: #f43f5e; margin-bottom: 4px; }
-    .aw-pitfall-item p { font-size: 13px; color: var(--c-text-secondary); line-height: 1.5; margin: 0; }
-    .aw-pitfall-item .fix-label {
-        display: inline-block; font-size: 11px; font-weight: 700;
-        padding: 2px 8px; border-radius: 99px;
-        background: rgba(52, 211, 153, 0.12); color: #34d399; margin-top: 6px;
-    }
-
-    .aw-terms-section { margin-top: 40px; padding-top: 32px; border-top: 2px solid var(--c-border); max-width: 960px; margin-left: auto; margin-right: auto; }
-    .aw-terms-section h2 { font-size: 22px; color: var(--c-heading); margin-bottom: 4px; }
-    .aw-terms-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; margin-top: 16px; }
-    .aw-term-card { padding: 14px 16px; border-radius: var(--r-lg); border: 1px solid rgba(34,211,238,0.1); background: rgba(8,11,20,0.4); }
-    .light-theme .aw-term-card { background: rgba(0,0,0,0.03); }
-    .aw-term-card .term-badge { display: inline-block; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 99px; background: rgba(168,85,247,0.12); color: #a855f7; border: 1px solid rgba(168,85,247,0.15); margin-bottom: 6px; }
-    .aw-term-card .term-def { font-size: 13px; color: var(--c-text-secondary); line-height: 1.5; }
+    /* ── Match Exercise ── */
+    .lang-match-section { margin-top: 40px; padding-top: 32px; border-top: 2px solid var(--c-border); max-width: 960px; margin-left: auto; margin-right: auto; }
+    .lang-match-section h2 { font-size: 22px; color: var(--c-heading); margin-bottom: 4px; }
+    .lang-match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+    @media (max-width: 600px) { .lang-match-grid { grid-template-columns: 1fr; } }
+    .lang-match-item { padding: 12px 16px; border-radius: var(--r-lg); border: 2px solid var(--c-border); background: rgba(13,18,37,0.8); cursor: pointer; transition: all 0.15s; text-align: center; font-size: 14px; font-weight: 600; }
+    .light-theme .lang-match-item { background: rgba(243,244,246,0.8); }
+    .lang-match-item:hover { border-color: var(--c-accent); }
+    .lang-match-item.selected { border-color: var(--c-accent); background: rgba(8,41,73,0.85); }
+    .lang-match-item.matched { border-color: var(--c-green); background: rgba(2,44,34,0.5); color: var(--c-green); cursor: default; }
+    .lang-match-item.wrong { border-color: var(--c-rose); background: rgba(69,10,10,0.5); color: var(--c-rose); animation: shake 0.3s; }
+    @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
+    .lang-match-desc { font-size: 12px; color: var(--c-text-secondary); margin-top: 4px; font-weight: 400; }
 
     @media (max-width: 768px) {
-        .aw-table { font-size: 12px; }
-        .aw-table th, .aw-table td { padding: 6px 8px; }
+        .lang-table { font-size: 12px; }
+        .lang-table th, .lang-table td { padding: 6px 8px; }
     }
 </style>
 
-<div class="aw-intro">
-    <h3>✍️ SPaG — Spelling, Punctuation and Grammar</h3>
-    <p>SPaG stands for <strong>Spelling, Punctuation and Grammar</strong>. In the WLV English Equivalency exam, SPaG is assessed as part of Question 5 (creative or descriptive writing), where it contributes to your overall marks. Strong SPaG makes your writing clear, credible, and easy to read. This guide covers the essential rules, strategies, and techniques you need to maximise your SPaG marks.</p>
+<div class="lang-intro">
+    <h3>🔤 Programming Languages and IDEs</h3>
+    <p>Topic 2.5 covers the differences between high-level and low-level languages, how translators (compilers, interpreters, assemblers) work, and the features of Integrated Development Environments (IDEs).</p>
 </div>
 
-<div class="aw-container">
+<div class="lang-podcast">
+    <div class="podcast-header">🎧 Audio Revision: Programming Languages & IDEs</div>
+    <audio controls preload="metadata" style="width:100%;">
+        <source src="/static/audio/languages_podcast.ogg" type="audio/ogg">
+    </audio>
+</div>
 
-    <!-- Section 1: Punctuation Rules -->
-    <div class="aw-section">
-        <div class="aw-section-header open" onclick="toggleLangSection(this)">
-            <span>🔤 Punctuation Rules</span>
+<div class="lang-container">
+
+    <!-- Section 1: High-Level vs Low-Level -->
+    <div class="lang-section">
+        <div class="lang-section-header open" onclick="toggleLangSection(this)">
+            <span>📊 High-Level vs Low-Level Languages</span>
             <span class="toggle-icon">▼</span>
         </div>
-        <div class="aw-section-body open">
-            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:12px;">Punctuation gives structure to your writing. Using a range of punctuation accurately signals control of written English and improves the clarity of your ideas.</p>
-
-            <table class="aw-table">
+        <div class="lang-section-body open">
+            <table class="lang-table">
                 <thead>
                     <tr>
-                        <th style="width:18%;">Mark</th>
-                        <th style="width:32%;">Rule</th>
-                        <th style="width:50%;">Example</th>
+                        <th>Feature</th>
+                        <th>High-Level Language</th>
+                        <th>Low-Level Language (Assembly)</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>.</strong> Full stop</td>
-                        <td>Ends a sentence. Use one sentence per complete idea.</td>
-                        <td><em>The rain fell steadily against the windowpane.</em></td>
+                        <td><strong>Readability</strong></td>
+                        <td><span class="tag tag-green">Easy</span> — English-like syntax (IF, FOR, PRINT)</td>
+                        <td><span class="tag tag-red">Hard</span> — Mnemonics (MOV, ADD, LOAD)</td>
                     </tr>
                     <tr>
-                        <td><strong>,</strong> Comma</td>
-                        <td>Separates items in a list, clauses, or introductory phrases. Do <strong>not</strong> join two complete sentences with only a comma (comma splice).</td>
-                        <td><em>She walked slowly, carefully, and deliberately across the room.</em><br><span class="tag tag-red">Avoid:</span> <em>She walked slowly, she was tired.</em></td>
+                        <td><strong>Portability</strong></td>
+                        <td><span class="tag tag-green">Portable</span> — runs on different hardware</td>
+                        <td><span class="tag tag-red">Hardware-specific</span> — tied to one CPU type</td>
                     </tr>
                     <tr>
-                        <td><strong>?</strong> Question mark</td>
-                        <td>Ends a direct question. Do not use a full stop after a question.</td>
-                        <td><em>What could he possibly be thinking?</em></td>
+                        <td><strong>Lines of code</strong></td>
+                        <td>1 line = many machine code instructions</td>
+                        <td>1 line = 1 machine instruction</td>
                     </tr>
                     <tr>
-                        <td><strong>!</strong> Exclamation mark</td>
-                        <td>Shows strong emotion or emphasis. Use sparingly — one per paragraph at most. Overuse weakens the effect.</td>
-                        <td><em>\"Stop!\" she cried, her voice trembling.</em></td>
+                        <td><strong>Speed</strong></td>
+                        <td><span class="tag tag-amber">Slower</span> — needs translation first</td>
+                        <td><span class="tag tag-green">Faster</span> — closer to machine code</td>
                     </tr>
                     <tr>
-                        <td><strong>:</strong> Colon</td>
-                        <td>Introduces a list, a quotation, or an explanation. What follows the colon explains or expands on what came before.</td>
-                        <td><em>He had only one goal: survival.</em></td>
+                        <td><strong>Ease of debugging</strong></td>
+                        <td><span class="tag tag-green">Easier</span> — meaningful error messages</td>
+                        <td><span class="tag tag-red">Harder</span> — low-level errors</td>
                     </tr>
                     <tr>
-                        <td><strong>;</strong> Semicolon</td>
-                        <td>Links two closely related independent clauses without a conjunction. Also separates complex list items.</td>
-                        <td><em>The sky was dark; the storm had arrived.</em></td>
+                        <td><strong>Examples</strong></td>
+                        <td>Python, Java, C#, JavaScript</td>
+                        <td>Assembly, LMC (Little Man Computer)</td>
                     </tr>
                     <tr>
-                        <td><strong>'</strong> Apostrophe</td>
-                        <td><strong>Possession:</strong> shows ownership. Singular = <em>'s</em>; plural ending in <em>s</em> = <em>s'</em>.<br><strong>Contraction:</strong> shows omitted letters. <em>It's</em> = <em>it is</em>; <em>its</em> = belonging to it.</td>
-                        <td><em>The student's book</em> (one student)<br><em>The students' books</em> (many students)<br><span class="tag tag-red">Common error:</span> <em>it's</em> vs <em>its</em></td>
-                    </tr>
-                    <tr>
-                        <td><strong>\"</strong> Speech marks</td>
-                        <td>Enclose direct speech or quotations. Punctuation goes inside the closing quotation mark in UK English.</td>
-                        <td><em>\"I can't believe it,\" she whispered.</em></td>
-                    </tr>
-                    <tr>
-                        <td><strong>—</strong> Dash</td>
-                        <td>Creates a strong break or interruption in a sentence. More dramatic than a comma. Use sparingly for effect.</td>
-                        <td><em>He was — there was no other word for it — terrified.</em></td>
-                    </tr>
-                    <tr>
-                        <td><strong>( )</strong> Brackets</td>
-                        <td>Enclose additional information that is not essential to the main sentence. The sentence should still make sense without the bracketed content.</td>
-                        <td><em>The results (see appendix A) confirmed the hypothesis.</em></td>
+                        <td><strong>Translator needed</strong></td>
+                        <td>Compiler or Interpreter</td>
+                        <td>Assembler</td>
                     </tr>
                 </tbody>
             </table>
-
-            <h4 style="margin-top:16px;font-size:15px;color:var(--c-heading);">Punctuation for Effect</h4>
-            <p style="font-size:14px;color:var(--c-text-secondary);">In creative writing, punctuation can create pace and mood:</p>
-            <table class="aw-table">
-                <thead>
-                    <tr>
-                        <th style="width:25%;">Effect</th>
-                        <th style="width:75%;">Technique</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><span class="tag tag-blue">Fast pace</span></td>
-                        <td>Short sentences separated by full stops. <em>He ran. He stumbled. He fell.</em></td>
-                    </tr>
-                    <tr>
-                        <td><span class="tag tag-purple">Slow pace</span></td>
-                        <td>Longer sentences with commas, colons, and semicolons. <em>The mist crept slowly, silently, inexorably across the moor.</em></td>
-                    </tr>
-                    <tr>
-                        <td><span class="tag tag-amber">Tension</span></td>
-                        <td>Dashes for abrupt interruptions. <em>She turned the key — the door creaked — something was wrong.</em></td>
-                    </tr>
-                    <tr>
-                        <td><span class="tag tag-green">Clarity</span></td>
-                        <td>Colons to introduce explanations. <em>The reason was simple: he had never been taught.</em></td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="aw-tip">
-                <strong>💡 Tip:</strong> In the WLV exam, aim to use at least <strong>four different punctuation marks</strong> in your Question 5 response. A mix of full stops, commas, colons/semicolons, and dashes or speech marks shows the examiner you have control.
+            <div class="lang-mnemonic">
+                <strong>🧠 Mnemonic:</strong> High-level = Human-friendly but needs translation. Low-level = Machine-friendly, hardware-specific, but faster.
             </div>
         </div>
     </div>
 
-    <!-- Section 2: Grammar Rules -->
-    <div class="aw-section">
-        <div class="aw-section-header" onclick="toggleLangSection(this)">
-            <span>📐 Grammar Rules</span>
+    <!-- Section 2: Translators -->
+    <div class="lang-section">
+        <div class="lang-section-header" onclick="toggleLangSection(this)">
+            <span>🔄 Compiler vs Interpreter vs Assembler</span>
             <span class="toggle-icon">▼</span>
         </div>
-        <div class="aw-section-body">
-            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:12px;">Grammar is the system that governs how words combine to form sentences. Getting the basics right is essential for clear communication and higher SPaG marks.</p>
-
-            <h4 style="font-size:15px;color:var(--c-heading);margin-bottom:8px;">Subject–Verb Agreement</h4>
-            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:8px;">The subject and verb must agree in number (singular or plural).</p>
-            <table class="aw-table">
+        <div class="lang-section-body">
+            <table class="lang-table">
                 <thead>
                     <tr>
-                        <th style="width:50%;">Correct ✅</th>
-                        <th style="width:50%;">Incorrect ❌</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td><em>The dog runs</em> (singular subject + singular verb)</td><td><em>The dog run</em></td></tr>
-                    <tr><td><em>The dogs run</em> (plural subject + plural verb)</td><td><em>The dogs runs</em></td></tr>
-                    <tr><td><em>Everyone is here</em> (indefinite pronoun = singular)</td><td><em>Everyone are here</em></td></tr>
-                    <tr><td><em>Neither of the answers is correct</em></td><td><em>Neither of the answers are correct</em></td></tr>
-                </tbody>
-            </table>
-
-            <h4 style="font-size:15px;color:var(--c-heading);margin:16px 0 8px;">Sentence Types</h4>
-            <table class="aw-table">
-                <thead>
-                    <tr>
-                        <th style="width:18%;">Type</th>
-                        <th style="width:32%;">Definition</th>
-                        <th style="width:50%;">Example</th>
+                        <th>Feature</th>
+                        <th>Compiler</th>
+                        <th>Interpreter</th>
+                        <th>Assembler</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><span class="tag tag-green">Simple</span></td>
-                        <td>One independent clause. One main idea.</td>
-                        <td><em>The sun set over the hills.</em></td>
+                        <td><strong>Input</strong></td>
+                        <td>High-level code (e.g. Python, Java)</td>
+                        <td>High-level code (e.g. Python, JavaScript)</td>
+                        <td>Assembly code</td>
                     </tr>
                     <tr>
-                        <td><span class="tag tag-blue">Compound</span></td>
-                        <td>Two independent clauses joined by a conjunction (<em>and, but, or, so</em>).</td>
-                        <td><em>The sun set, and the stars appeared.</em></td>
+                        <td><strong>Method</strong></td>
+                        <td>Translates ALL code at once</td>
+                        <td>Executes code line by line</td>
+                        <td>Translates assembly to machine code</td>
                     </tr>
                     <tr>
-                        <td><span class="tag tag-purple">Complex</span></td>
-                        <td>One independent clause + one or more subordinate clauses.</td>
-                        <td><em>Although the sun had set, the sky remained bright.</em></td>
+                        <td><strong>Output</strong></td>
+                        <td>Executable file (.exe)</td>
+                        <td>No file — runs directly</td>
+                        <td>Object code / machine code</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Error reporting</strong></td>
+                        <td>Shows ALL errors after compilation</td>
+                        <td>Stops at FIRST error</td>
+                        <td>Shows syntax errors</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Execution speed</strong></td>
+                        <td><span class="tag tag-green">Fast</span> — already translated</td>
+                        <td><span class="tag tag-red">Slower</span> — translates each time</td>
+                        <td><span class="tag tag-green">Fast</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ease of debugging</strong></td>
+                        <td><span class="tag tag-amber">Harder</span> — all errors at once</td>
+                        <td><span class="tag tag-green">Easier</span> — stops at first error</td>
+                        <td><span class="tag tag-red">Hard</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Used for</strong></td>
+                        <td>Production software, apps</td>
+                        <td>Scripting, web development</td>
+                        <td>Hardware drivers, embedded systems</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Examples</strong></td>
+                        <td>GCC (C), javac (Java)</td>
+                        <td>Python, Node.js, browser JS</td>
+                        <td>NASM, MASM</td>
                     </tr>
                 </tbody>
             </table>
-
-            <h4 style="font-size:15px;color:var(--c-heading);margin:16px 0 8px;">Tense Consistency</h4>
-            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:8px;">Once you establish a tense, stick with it unless there is a clear reason to shift. Shifting tenses mid-paragraph confuses the reader.</p>
-            <table class="aw-table">
-                <thead>
-                    <tr>
-                        <th style="width:50%;">Consistent ✅</th>
-                        <th style="width:50%;">Inconsistent ❌</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td><em>She walked to the door and opened it. The room was empty.</em> (past tense)</td><td><em>She walked to the door and opens it. The room is empty.</em></td></tr>
-                    <tr><td><em>He runs every morning and feels energised.</em> (present tense)</td><td><em>He runs every morning and felt energised.</em></td></tr>
-                </tbody>
-            </table>
-
-            <h4 style="font-size:15px;color:var(--c-heading);margin:16px 0 8px;">Common Grammar Traps</h4>
-            <table class="aw-table">
-                <thead>
-                    <tr>
-                        <th style="width:25%;">Trap</th>
-                        <th style="width:35%;">Explanation</th>
-                        <th style="width:40%;">Example</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Comma splice</strong></td>
-                        <td>Joining two complete sentences with only a comma.</td>
-                        <td><span class="tag tag-red">Wrong:</span> <em>It was raining, we stayed inside.</em><br><span class="tag tag-green">Fix:</span> <em>It was raining, so we stayed inside.</em></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Run-on sentence</strong></td>
-                        <td>Two or more sentences joined without any punctuation.</td>
-                        <td><span class="tag tag-red">Wrong:</span> <em>She arrived late the train had already left.</em><br><span class="tag tag-green">Fix:</span> <em>She arrived late. The train had already left.</em></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Sentence fragment</strong></td>
-                        <td>An incomplete sentence that lacks a main verb or subject.</td>
-                        <td><span class="tag tag-red">Wrong:</span> <em>Although she was tired.</em><br><span class="tag tag-green">Fix:</span> <em>Although she was tired, she continued working.</em></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Misplaced modifier</strong></td>
-                        <td>A word or phrase placed too far from the word it modifies.</td>
-                        <td><span class="tag tag-red">Wrong:</span> <em>Walking down the street, the house looked abandoned.</em><br><span class="tag tag-green">Fix:</span> <em>Walking down the street, she noticed the house looked abandoned.</em></td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="aw-tip">
-                <strong>💡 Tip:</strong> Vary your sentence types in Question 5. A paragraph of only simple sentences sounds choppy; a paragraph of only complex sentences sounds dense. Mix short, medium, and long sentences for rhythm and impact.
+            <div class="lang-mnemonic">
+                <strong>🧠 Mnemonic:</strong> Compiler = converts all at once. Interpreter = interprets line by line. Assembler = assembly to machine code.
             </div>
         </div>
     </div>
 
-    <!-- Section 3: Spelling Strategies -->
-    <div class="aw-section">
-        <div class="aw-section-header" onclick="toggleLangSection(this)">
-            <span>📝 Spelling Strategies</span>
+    <!-- Section 3: IDE Features -->
+    <div class="lang-section">
+        <div class="lang-section-header" onclick="toggleLangSection(this)">
+            <span>🛠️ IDE Features</span>
             <span class="toggle-icon">▼</span>
         </div>
-        <div class="aw-section-body">
-            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:12px;">Spelling errors can cost you marks even when your ideas are strong. Use these strategies to improve your spelling and avoid common mistakes.</p>
-
-            <h4 style="font-size:15px;color:var(--c-heading);margin-bottom:8px;">UK English Spelling</h4>
-            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:8px;">The WLV exam uses <strong>UK English</strong> spelling conventions. These differ from US English in several key patterns:</p>
-            <table class="aw-table">
-                <thead>
-                    <tr>
-                        <th style="width:25%;">Pattern</th>
-                        <th style="width:37%;">UK English ✅</th>
-                        <th style="width:38%;">US English (avoid)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>-our / -or</strong></td>
-                        <td><em>colour, honour, behaviour, flavour, neighbour</em></td>
-                        <td><span class="tag tag-red">color, honor, behavior, flavor, neighbor</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>-re / -er</strong></td>
-                        <td><em>centre, theatre, metre, litre</em></td>
-                        <td><span class="tag tag-red">center, theater, meter, liter</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>-ise / -ize</strong></td>
-                        <td><em>organise, realise, recognise, emphasise</em></td>
-                        <td><span class="tag tag-red">organize, realize, recognize, emphasize</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>-yse / -yze</strong></td>
-                        <td><em>analyse, catalyse, paralyse</em></td>
-                        <td><span class="tag tag-red">analyze, catalyze, paralyze</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>-ence / -ense</strong></td>
-                        <td><em>defence, licence, offence, pretence</em></td>
-                        <td><span class="tag tag-red">defense, license, offense, pretense</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>-ll- / -l-</strong></td>
-                        <td><em>travelled, labelled, cancelled, marvellous</em></td>
-                        <td><span class="tag tag-red">traveled, labeled, canceled, marvelous</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>-ogue / -og</strong></td>
-                        <td><em>catalogue, dialogue, monologue, analogue</em></td>
-                        <td><span class="tag tag-red">catalog, dialog, monolog, analog</span></td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <h4 style="font-size:15px;color:var(--c-heading);margin:16px 0 8px;">Commonly Misspelled Words</h4>
-            <table class="aw-table">
-                <thead>
-                    <tr>
-                        <th style="width:50%;">Correct ✅</th>
-                        <th style="width:50%;">Common Mistake ❌</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td><em>accommodation</em> (double c, double m)</td><td><em>accomodation, acommodation</em></td></tr>
-                    <tr><td><em>embarrassed</em> (double r, double s)</td><td><em>embarassed, embarrassed</em></td></tr>
-                    <tr><td><em>necessary</em> (one c, double s)</td><td><em>neccessary, neccesary</em></td></tr>
-                    <tr><td><em>separate</em> (a in the middle, not e)</td><td><em>seperate</em></td></tr>
-                    <tr><td><em>definitely</em> (finite + ly)</td><td><em>definately, definately</em></td></tr>
-                    <tr><td><em>occurrence</em> (double c, double r)</td><td><em>occurance, occurence</em></td></tr>
-                    <tr><td><em>privilege</em> (i before lege)</td><td><em>privelege, priviledge</em></td></tr>
-                    <tr><td><em>rhythm</em> (h after r, no vowels in second syllable)</td><td><em>rythm, rythym</em></td></tr>
-                    <tr><td><em>conscious</em> (science + ous)</td><td><em>concious, consious</em></td></tr>
-                    <tr><td><em>government</em> (n before m)</td><td><em>goverment, goverment</em></td></tr>
-                </tbody>
-            </table>
-
-            <h4 style="font-size:15px;color:var(--c-heading);margin:16px 0 8px;">Spelling Strategies</h4>
-            <ol class="aw-steps">
-                <li data-step="1"><strong>Look, Say, Cover, Write, Check:</strong> Look at the word, say it aloud, cover it, write it from memory, then check. Repeat until correct.</li>
-                <li data-step="2"><strong>Break it down:</strong> Split long words into syllables. <em>Un-for-tun-ate-ly</em> is easier to spell than <em>unfortunately</em>.</li>
-                <li data-step="3"><strong>Use mnemonics:</strong> Create memorable phrases. <em>Big Elephants Can't Always Use Small Exits</em> = <strong>because</strong>.</li>
-                <li data-step="4"><strong>Know the rules:</strong> <em>i before e except after c</em> — but watch for exceptions (<em>weird, science, sufficient</em>).</li>
-                <li data-step="5"><strong>Keep a personal spelling log:</strong> Write down words you commonly misspell and review them regularly.</li>
-                <li data-step="6"><strong>Proofread specifically for spelling:</strong> Read your work backwards (last word to first) to focus on individual words rather than meaning.</li>
-            </ol>
-
-            <div class="aw-tip">
-                <strong>💡 Tip:</strong> In the exam, if you are unsure of a spelling, try a different word that means the same thing. It is better to use a simpler word correctly than a complex word incorrectly.
+        <div class="lang-section-body">
+            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:12px;">An <strong>Integrated Development Environment (IDE)</strong> combines all the tools a programmer needs in one application. Know these features for the exam:</p>
+            <div class="lang-card-grid">
+                <div class="lang-card">
+                    <span class="card-icon">✏️</span>
+                    <h4>Editor</h4>
+                    <p>Write and edit code with syntax highlighting, line numbers, and auto-indentation to make code easier to read.</p>
+                </div>
+                <div class="lang-card">
+                    <span class="card-icon">🔍</span>
+                    <h4>Error Diagnostics</h4>
+                    <p>Highlights syntax errors as you type — underlines mistakes in red so you can fix them immediately.</p>
+                </div>
+                <div class="lang-card">
+                    <span class="card-icon">🐛</span>
+                    <h4>Debugger</h4>
+                    <p>Step through code line by line, set breakpoints to pause execution, and inspect variable values at any point.</p>
+                </div>
+                <div class="lang-card">
+                    <span class="card-icon">⏸️</span>
+                    <h4>Breakpoints</h4>
+                    <p>Mark specific lines where execution should pause, allowing you to examine the program state at that moment.</p>
+                </div>
+                <div class="lang-card">
+                    <span class="card-icon">👁️</span>
+                    <h4>Variable Watch</h4>
+                    <p>Display the current values of selected variables in real-time as the program executes — essential for finding logic errors.</p>
+                </div>
+                <div class="lang-card">
+                    <span class="card-icon">📚</span>
+                    <h4>Call Stack</h4>
+                    <p>Shows which subprograms (functions/procedures) are currently active and how they were called — useful for tracing program flow.</p>
+                </div>
+                <div class="lang-card">
+                    <span class="card-icon">💡</span>
+                    <h4>Auto-Complete</h4>
+                    <p>Suggests code completions, variable names, and function parameters as you type — speeds up coding and reduces typos.</p>
+                </div>
+                <div class="lang-card">
+                    <span class="card-icon">📁</span>
+                    <h4>File Management</h4>
+                    <p>Browse project files, organise code into folders, and manage multiple source files within the same project.</p>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Section 4: Writing Techniques -->
-    <div class="aw-section">
-        <div class="aw-section-header" onclick="toggleLangSection(this)">
-            <span>🎨 Writing Techniques — Imagery, Tone and Vocabulary</span>
+    <!-- Section 4: Knowledge Check -->
+    <div class="lang-section">
+        <div class="lang-section-header" onclick="toggleLangSection(this)">
+            <span>❓ Common Exam Questions</span>
             <span class="toggle-icon">▼</span>
         </div>
-        <div class="aw-section-body">
-            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:12px;">Question 5 in the WLV exam tests your ability to write creatively and descriptively. Using a range of writing techniques will help you achieve higher marks for content, organisation, and SPaG.</p>
-
-            <h4 style="font-size:15px;color:var(--c-heading);margin-bottom:8px;">Imagery and Figurative Language</h4>
-            <table class="aw-table">
+        <div class="lang-section-body">
+            <table class="lang-table">
                 <thead>
                     <tr>
-                        <th style="width:18%;">Technique</th>
-                        <th style="width:32%;">Definition</th>
-                        <th style="width:50%;">Example</th>
+                        <th>Question</th>
+                        <th>Answer</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><span class="tag tag-green">Simile</span></td>
-                        <td>Comparing two things using <em>like</em> or <em>as</em>.</td>
-                        <td><em>The fog hung over the city like a grey blanket.</em></td>
+                        <td>Why use a high-level language?</td>
+                        <td>Easier to read, write, debug. Portable across different hardware. More productive for complex programs.</td>
                     </tr>
                     <tr>
-                        <td><span class="tag tag-blue">Metaphor</span></td>
-                        <td>Describing one thing as if it were another (direct comparison).</td>
-                        <td><em>The classroom was a prison, its walls closing in on him.</em></td>
+                        <td>Why use a low-level language?</td>
+                        <td>Faster execution, direct hardware control, smaller memory footprint. Used for device drivers and embedded systems.</td>
                     </tr>
                     <tr>
-                        <td><span class="tag tag-purple">Personification</span></td>
-                        <td>Giving human qualities to non-human things.</td>
-                        <td><em>The wind whispered through the trees.</em></td>
+                        <td>Advantage of a compiler over an interpreter?</td>
+                        <td>Faster execution after compilation, produces standalone executable, source code not needed at runtime.</td>
                     </tr>
                     <tr>
-                        <td><span class="tag tag-amber">Pathetic fallacy</span></td>
-                        <td>Using weather to reflect mood or emotion.</td>
-                        <td><em>The storm raged as his anger boiled over.</em></td>
+                        <td>Advantage of an interpreter over a compiler?</td>
+                        <td>Easier to debug (stops at first error), no need to recompile after changes, better for rapid development.</td>
                     </tr>
                     <tr>
-                        <td><span class="tag tag-red">Sensory imagery</span></td>
-                        <td>Describing what can be seen, heard, smelt, tasted, or touched.</td>
-                        <td><em>The sharp tang of salt hung in the air; the crash of waves echoed in the distance.</em></td>
+                        <td>What is an assembler used for?</td>
+                        <td>Translating assembly language (low-level) into machine code. One assembly instruction = one machine instruction.</td>
                     </tr>
                     <tr>
-                        <td><span class="tag tag-green">Onomatopoeia</span></td>
-                        <td>Words that sound like the noise they describe.</td>
-                        <td><em>The branches snapped and crackled underfoot.</em></td>
+                        <td>How does a debugger help?</td>
+                        <td>Lets you step through code, set breakpoints, inspect variable values, and trace the call stack to find logic errors.</td>
                     </tr>
                     <tr>
-                        <td><span class="tag tag-blue">Alliteration</span></td>
-                        <td>Repeating the same initial sound in nearby words.</td>
-                        <td><em>The silent, silver snow settled on the street.</em></td>
+                        <td>What is syntax highlighting?</td>
+                        <td>An IDE feature that colours different parts of code (keywords, strings, comments) to make it easier to read and spot errors.</td>
                     </tr>
                 </tbody>
             </table>
-
-            <h4 style="font-size:15px;color:var(--c-heading);margin:16px 0 8px;">Tone and Atmosphere</h4>
-            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:8px;">Tone is the overall mood or feeling of your writing. Choose vocabulary and sentence structures that match the tone you want to create.</p>
-            <table class="aw-table">
-                <thead>
-                    <tr>
-                        <th style="width:18%;">Tone</th>
-                        <th style="width:37%;">Vocabulary and Techniques</th>
-                        <th style="width:45%;">Example</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><span class="tag tag-purple">Sinister / Menacing</span></td>
-                        <td>Dark, shadowy, lurking, ominous, creeping, suffocating. Short sentences. Personification of darkness.</td>
-                        <td><em>Shadows crept along the walls. The silence was suffocating. Something was watching.</em></td>
-                    </tr>
-                    <tr>
-                        <td><span class="tag tag-amber">Joyful / Peaceful</span></td>
-                        <td>Warm, golden, gentle, soft, glowing, serene. Sensory imagery of light and warmth. Longer, flowing sentences.</td>
-                        <td><em>Golden sunlight filtered through the leaves, dappling the grass with warmth.</em></td>
-                    </tr>
-                    <tr>
-                        <td><span class="tag tag-blue">Chaotic / Urgent</span></td>
-                        <td>Frantic, pounding, crashing, screaming, racing. Short, sharp sentences. Onomatopoeia. Exclamation marks.</td>
-                        <td><em>Bang! The door flew open. Chaos erupted. People screamed and scattered.</em></td>
-                    </tr>
-                    <tr>
-                        <td><span class="tag tag-green">Melancholy / Reflective</span></td>
-                        <td>Fading, grey, distant, hollow, forgotten, weary. Slow pace. Semicolons and colons for thoughtful pauses.</td>
-                        <td><em>The house stood empty; its windows like hollow eyes staring at nothing.</em></td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <h4 style="font-size:15px;color:var(--c-heading);margin:16px 0 8px;">Vocabulary — Choosing the Right Words</h4>
-            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:8px;">Precise vocabulary makes your writing vivid and engaging. Replace weak, vague words with stronger, more specific alternatives.</p>
-            <table class="aw-table">
-                <thead>
-                    <tr>
-                        <th style="width:25%;">Weak Word ❌</th>
-                        <th style="width:35%;">Stronger Alternatives ✅</th>
-                        <th style="width:40%;">Context</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td><em>good</em></td><td>superb, excellent, remarkable, outstanding</td><td>Describing quality</td></tr>
-                    <tr><td><em>bad</em></td><td>appalling, dreadful, atrocious, terrible</td><td>Describing quality</td></tr>
-                    <tr><td><em>big</em></td><td>enormous, vast, colossal, immense</td><td>Describing size</td></tr>
-                    <tr><td><em>small</em></td><td>minute, tiny, minuscule, compact</td><td>Describing size</td></tr>
-                    <tr><td><em>walked</em></td><td>strode, crept, marched, wandered, stumbled</td><td>Describing movement</td></tr>
-                    <tr><td><em>said</em></td><td>whispered, shouted, murmured, exclaimed, muttered</td><td>Describing speech</td></tr>
-                    <tr><td><em>looked</em></td><td>gazed, glared, peered, glanced, stared</td><td>Describing looking</td></tr>
-                    <tr><td><em>nice</em></td><td>pleasant, delightful, charming, exquisite</td><td>Describing impression</td></tr>
-                    <tr><td><em>sad</em></td><td>melancholy, sorrowful, desolate, mournful</td><td>Describing emotion</td></tr>
-                    <tr><td><em>happy</em></td><td>elated, joyful, ecstatic, content</td><td>Describing emotion</td></tr>
-                </tbody>
-            </table>
-
-            <div class="aw-example">
-                <strong>✅ Before and After — Vocabulary Upgrade:</strong><br>
-                <strong>Weak:</strong> <em>The big house looked old and scary. A bad smell came from inside. A man walked to the door and said something.</em><br>
-                <strong>Strong:</strong> <em>The vast mansion loomed, its crumbling facade shrouded in shadow. A foul, musty stench seeped from within. A figure crept towards the door and muttered a single, chilling word.</em>
-            </div>
-
-            <div class="aw-tip">
-                <strong>💡 Tip:</strong> Do not try to use every technique in one paragraph. Choose <strong>two or three</strong> techniques and use them well. A single well-crafted metaphor is worth more than a paragraph full of forced similes.
-            </div>
-        </div>
-    </div>
-
-    <!-- Section 5: Common Mistakes -->
-    <div class="aw-section">
-        <div class="aw-section-header" onclick="toggleLangSection(this)">
-            <span>⚠️ Common SPaG Mistakes</span>
-            <span class="toggle-icon">▼</span>
-        </div>
-        <div class="aw-section-body">
-            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:12px;">These are the most frequent SPaG errors that cost students marks in the WLV exam. Learn to spot and fix them.</p>
-
-            <div class="aw-pitfall-list">
-                <div class="aw-pitfall-item">
-                    <h5>🔤 1. Its vs It's</h5>
-                    <p><strong>Its</strong> = possessive (belonging to it). <strong>It's</strong> = contraction of <em>it is</em> or <em>it has</em>. If you can replace it with <em>it is</em>, use an apostrophe. If not, do not.</p>
-                    <span class="fix-label">✅ Fix: <em>The dog wagged its tail.</em> / <em>It's raining outside.</em></span>
-                </div>
-
-                <div class="aw-pitfall-item">
-                    <h5>📝 2. There / Their / They're</h5>
-                    <p><strong>There</strong> = a place or existence. <strong>Their</strong> = belonging to them. <strong>They're</strong> = <em>they are</em>.</p>
-                    <span class="fix-label">✅ Fix: <em>They're putting their coats over there.</em></span>
-                </div>
-
-                <div class="aw-pitfall-item">
-                    <h5>📐 3. Your / You're</h5>
-                    <p><strong>Your</strong> = belonging to you. <strong>You're</strong> = <em>you are</em>.</p>
-                    <span class="fix-label">✅ Fix: <em>You're going to love your new course.</em></span>
-                </div>
-
-                <div class="aw-pitfall-item">
-                    <h5>🔗 4. To / Too / Two</h5>
-                    <p><strong>To</strong> = direction or infinitive. <strong>Too</strong> = also or excessively. <strong>Two</strong> = the number 2.</p>
-                    <span class="fix-label">✅ Fix: <em>I need to buy two tickets too.</em></span>
-                </div>
-
-                <div class="aw-pitfall-item">
-                    <h5>📖 5. Then vs Than</h5>
-                    <p><strong>Then</strong> = next in time or sequence. <strong>Than</strong> = used for comparisons.</p>
-                    <span class="fix-label">✅ Fix: <em>First we studied, then we ate. She is taller than him.</em></span>
-                </div>
-
-                <div class="aw-pitfall-item">
-                    <h5>🎯 6. Affect vs Effect</h5>
-                    <p><strong>Affect</strong> = verb (to influence). <strong>Effect</strong> = noun (the result).</p>
-                    <span class="fix-label">✅ Fix: <em>The weather affected the crops. The effect was devastating.</em></span>
-                </div>
-
-                <div class="aw-pitfall-item">
-                    <h5>✂️ 7. Comma Splices</h5>
-                    <p>Using a comma to join two complete sentences without a conjunction. This is one of the most common grammar errors in student writing.</p>
-                    <span class="fix-label">✅ Fix: Use a full stop, a semicolon, or add a conjunction (<em>and, but, so, because</em>).</span>
-                </div>
-
-                <div class="aw-pitfall-item">
-                    <h5>🔁 8. Apostrophes in Plurals</h5>
-                    <p>Do <strong>not</strong> use an apostrophe to form a plural. Apostrophes are for possession and contractions only.</p>
-                    <span class="fix-label">✅ Fix: <em>Apple's 50p</em> ❌ → <em>Apples 50p</em> ✅. <em>The 1990's</em> ❌ → <em>The 1990s</em> ✅.</span>
-                </div>
-
-                <div class="aw-pitfall-item">
-                    <h5>📏 9. Double Negatives</h5>
-                    <p>Using two negatives in the same clause creates a positive (or confusion). Avoid them in formal writing.</p>
-                    <span class="fix-label">✅ Fix: <em>I don't have nothing</em> ❌ → <em>I have nothing</em> ✅ or <em>I don't have anything</em> ✅.</span>
-                </div>
-
-                <div class="aw-pitfall-item">
-                    <h5>📚 10. Confusing Homophones</h5>
-                    <p>Words that sound the same but have different spellings and meanings are easy to mix up under exam pressure.</p>
-                    <span class="fix-label">✅ Watch for: <em>accept/except, advice/advise, practice/practise, licence/license, stationary/stationery, principal/principle, weather/whether, whose/who's.</em></span>
-                </div>
-            </div>
-
-            <div class="aw-tip">
-                <strong>💡 Tip:</strong> Create a personal checklist of the three SPaG errors you make most often. In the exam, save the last two minutes to check specifically for those errors.
-            </div>
-        </div>
-    </div>
-
-    <!-- Section 6: Exam Tips -->
-    <div class="aw-section">
-        <div class="aw-section-header" onclick="toggleLangSection(this)">
-            <span>🎯 Exam Tips for SPaG and Writing</span>
-            <span class="toggle-icon">▼</span>
-        </div>
-        <div class="aw-section-body">
-            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:12px;">These strategies will help you maximise your SPaG marks in the WLV English Equivalency exam, particularly in Question 5 (creative/descriptive writing).</p>
-
-            <h4 style="font-size:15px;color:var(--c-heading);margin-bottom:8px;">Before You Write — Planning (5 minutes)</h4>
-            <ol class="aw-steps">
-                <li data-step="1"><strong>Read the prompt carefully:</strong> Identify whether it is a <strong>descriptive</strong> (describe a scene) or <strong>narrative</strong> (tell a story) task. Each requires a different approach.</li>
-                <li data-step="2"><strong>Brainstorm vocabulary:</strong> Jot down 5–10 ambitious words and phrases you want to use. Think about sensory details, figurative language, and precise verbs.</li>
-                <li data-step="3"><strong>Plan your structure:</strong> Opening (set the scene) → Build (develop the atmosphere or action) → Ending (resolution or final image). A clear structure helps the examiner follow your writing.</li>
-                <li data-step="4"><strong>Decide on your tone:</strong> Will it be sinister, joyful, tense, or reflective? Choose vocabulary and sentence structures that match.</li>
-            </ol>
-
-            <h4 style="font-size:15px;color:var(--c-heading);margin:16px 0 8px;">While You Write (30–35 minutes)</h4>
-            <table class="aw-table">
-                <thead>
-                    <tr>
-                        <th style="width:5%;">✓</th>
-                        <th style="width:95%;">Check</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>☐</td><td><strong>Start strong:</strong> Your opening sentence should hook the reader. Use imagery, a striking detail, or an unusual perspective.</td></tr>
-                    <tr><td>☐</td><td><strong>Show, don't tell:</strong> Instead of <em>"He was scared"</em>, describe what fear looks like: <em>"His hands trembled; cold sweat beaded on his forehead."</em></td></tr>
-                    <tr><td>☐</td><td><strong>Vary sentence length:</strong> Mix short, punchy sentences with longer, flowing ones to create rhythm.</td></tr>
-                    <tr><td>☐</td><td><strong>Use a range of punctuation:</strong> Aim for at least four different punctuation marks (full stops, commas, colons, dashes, semicolons, speech marks).</td></tr>
-                    <tr><td>☐</td><td><strong>Stay in one tense:</strong> If you start in the past tense, stay in the past tense. Only shift tense for a deliberate effect (e.g. a flashback).</td></tr>
-                    <tr><td>☐</td><td><strong>Keep paragraphs focused:</strong> Start a new paragraph when you move to a new idea, time, or place. Each paragraph should have one main focus.</td></tr>
-                    <tr><td>☐</td><td><strong>Use dialogue sparingly:</strong> If you include speech, punctuate it correctly with speech marks and new lines for each speaker.</td></tr>
-                </tbody>
-            </table>
-
-            <h4 style="font-size:15px;color:var(--c-heading);margin:16px 0 8px;">After You Write — Proofreading (5 minutes)</h4>
-            <ol class="aw-steps">
-                <li data-step="1"><strong>Read your work aloud</strong> — you will hear errors that your eyes skip over.</li>
-                <li data-step="2"><strong>Check for capital letters:</strong> Start of sentences, proper nouns (names, places, titles), and the pronoun <em>I</em>.</li>
-                <li data-step="3"><strong>Check apostrophes:</strong> Are they in the right place? Is it <em>its</em> or <em>it's</em>? Is it <em>student's</em> or <em>students'</em>?</li>
-                <li data-step="4"><strong>Check for full stops:</strong> Does every sentence end with a full stop, question mark, or exclamation mark? No run-on sentences?</li>
-                <li data-step="5"><strong>Check UK spelling:</strong> <em>colour</em> not <em>color</em>, <em>organise</em> not <em>organize</em>, <em>centre</em> not <em>center</em>.</li>
-                <li data-step="6"><strong>Check your personal error list:</strong> Look specifically for the three mistakes you know you make most often.</li>
-            </ol>
-
-            <h4 style="font-size:15px;color:var(--c-heading);margin:16px 0 8px;">Quick Reference — SPaG Mark Scheme</h4>
-            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:8px;">In the WLV exam, SPaG is marked across three levels. Understanding what the examiner is looking for helps you target your efforts.</p>
-            <table class="aw-table">
-                <thead>
-                    <tr>
-                        <th style="width:15%;">Level</th>
-                        <th style="width:40%;">What the Examiner Sees</th>
-                        <th style="width:45%;">How to Achieve It</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><span class="tag tag-green">High</span></td>
-                        <td>Consistently accurate spelling and punctuation. Wide range of punctuation used effectively. Grammatical control throughout. Precise, ambitious vocabulary.</td>
-                        <td>Use 4+ punctuation marks. Vary sentence types. Use figurative language. No spelling errors. UK English throughout.</td>
-                    </tr>
-                    <tr>
-                        <td><span class="tag tag-amber">Middle</span></td>
-                        <td>Generally accurate spelling and punctuation. Some range of punctuation. Occasional grammatical errors that do not impede meaning. Some ambitious vocabulary.</td>
-                        <td>Use 2–3 punctuation marks. Mostly correct sentences. A few spelling errors but not in key words. Some attempt at ambitious vocabulary.</td>
-                    </tr>
-                    <tr>
-                        <td><span class="tag tag-red">Low</span></td>
-                        <td>Frequent spelling and punctuation errors. Limited range of punctuation. Grammatical errors that sometimes impede meaning. Simple vocabulary.</td>
-                        <td>Focus on getting the basics right: full stops, capital letters, simple sentences. Use words you can spell confidently.</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="aw-example">
-                <strong>✅ Model Opening — High Level:</strong><br>
-                <em>The market square was a symphony of chaos. Stalls overflowed with vibrant produce — crimson tomatoes, emerald peppers, golden lemons piled high. The air hummed with the chatter of vendors, the clatter of crates, and the rich, earthy aroma of fresh bread. An old woman, her face weathered like ancient leather, beckoned me closer with a gnarled finger. \"Taste this,\" she whispered, pressing a sun-warmed fig into my palm.</em>
-            </div>
-
-            <div class="aw-tip">
-                <strong>💡 Key Advice:</strong> The WLV exam rewards <strong>quality over quantity</strong>. A well-crafted, carefully proofread response of two sides will score higher than a rushed, error-filled response of three sides. Take the time to plan, write with care, and proofread thoroughly.
-            </div>
         </div>
     </div>
 
 </div>
 
 <!-- ── Key Terminology ── -->
-<div class="aw-terms-section">
-    <h2>📖 Key SPaG Terminology</h2>
-    <p style="font-size:13px;color:var(--c-text-secondary);margin-bottom:4px;">Essential terms you need to know for the WLV English Equivalency exam.</p>
-    <div class="aw-terms-grid">
-        <div class="aw-term-card"><span class="term-badge">Noun</span><div class="term-def">A naming word for a person, place, thing, or idea (e.g. <em>student, city, courage, book</em>).</div></div>
-        <div class="aw-term-card"><span class="term-badge">Verb</span><div class="term-def">A doing or being word (e.g. <em>run, exist, think, become</em>). Every sentence needs at least one.</div></div>
-        <div class="aw-term-card"><span class="term-badge">Adjective</span><div class="term-def">A word that describes a noun (e.g. <em>dark, enormous, fragile, silent</em>).</div></div>
-        <div class="aw-term-card"><span class="term-badge">Adverb</span><div class="term-def">A word that describes a verb, adjective, or another adverb (e.g. <em>slowly, very, carefully, almost</em>).</div></div>
-        <div class="aw-term-card"><span class="term-badge">Conjunction</span><div class="term-def">A word that joins clauses or sentences (e.g. <em>and, but, because, although, so</em>).</div></div>
-        <div class="aw-term-card"><span class="term-badge">Preposition</span><div class="term-def">A word that shows position, time, or direction (e.g. <em>in, on, at, under, between, through</em>).</div></div>
-        <div class="aw-term-card"><span class="term-badge">Clause</span><div class="term-def">A group of words containing a subject and a verb. An independent clause can stand alone as a sentence.</div></div>
-        <div class="aw-term-card"><span class="term-badge">Homophone</span><div class="term-def">Words that sound the same but have different spellings and meanings (e.g. <em>there/their/they're, to/too/two</em>).</div></div>
-        <div class="aw-term-card"><span class="term-badge">Register</span><div class="term-def">The level of formality in language. Exam writing requires a formal or semi-formal register.</div></div>
-        <div class="aw-term-card"><span class="term-badge">Tense</span><div class="term-def">The time of the action or state of being — past, present, or future. Keep tense consistent within your writing.</div></div>
-        <div class="aw-term-card"><span class="term-badge">Figurative Language</span><div class="term-def">Language that uses comparison or association for effect — similes, metaphors, personification, and symbolism.</div></div>
-        <div class="aw-term-card"><span class="term-badge">Syntax</span><div class="term-def">The arrangement of words and phrases to create well-formed sentences. Good syntax makes your meaning clear.</div></div>
+<div class="lang-terms-section">
+    <h2>📖 Key Terminology for This Topic</h2>
+    <p style="font-size:13px;color:var(--c-text-secondary);margin-bottom:4px;">These are the exam-grade terms for Topic 2.5. Make sure you can define and use each one.</p>
+    <div class="lang-terms-grid">
+        <div class="lang-term-card"><span class="term-badge">High-Level Language</span><div class="term-def">A programming language that uses English-like syntax (IF, FOR, PRINT) and is portable across different hardware. Examples: Python, Java, C#.</div></div>
+        <div class="lang-term-card"><span class="term-badge">Low-Level Language</span><div class="term-def">A programming language that is closer to machine code, using mnemonics (MOV, ADD, LOAD). Hardware-specific and faster. Example: Assembly.</div></div>
+        <div class="lang-term-card"><span class="term-badge">Compiler</span><div class="term-def">Translates ALL high-level source code into machine code at once, producing an executable file. Reports all errors after compilation.</div></div>
+        <div class="lang-term-card"><span class="term-badge">Interpreter</span><div class="term-def">Translates and executes high-level code line by line. Stops at the first error — easier for debugging but slower at runtime.</div></div>
+        <div class="lang-term-card"><span class="term-badge">Assembler</span><div class="term-def">Translates assembly language (low-level) into machine code. One assembly instruction equals one machine instruction.</div></div>
+        <div class="lang-term-card"><span class="term-badge">Machine Code</span><div class="term-def">The lowest-level programming language, consisting of binary (1s and 0s) that the CPU executes directly. Hardware-specific.</div></div>
+        <div class="lang-term-card"><span class="term-badge">Syntax</span><div class="term-def">The set of rules that defines the structure of a programming language. Each language has its own syntax for statements, loops, and conditions.</div></div>
+        <div class="lang-term-card"><span class="term-badge">IDE</span><div class="term-def">Integrated Development Environment — a software application that combines an editor, debugger, and other tools to help programmers write code.</div></div>
+        <div class="lang-term-card"><span class="term-badge">Debugger</span><div class="term-def">An IDE tool that lets you step through code line by line, set breakpoints, and inspect variable values to find logic errors.</div></div>
+        <div class="lang-term-card"><span class="term-badge">Breakpoint</span><div class="term-def">A marker set on a specific line of code where execution will pause, allowing the programmer to examine the program state at that point.</div></div>
+        <div class="lang-term-card"><span class="term-badge">Variable Watch</span><div class="term-def">An IDE feature that displays the current values of selected variables in real-time as the program executes.</div></div>
+        <div class="lang-term-card"><span class="term-badge">Call Stack</span><div class="term-def">Shows which subprograms (functions/procedures) are currently active and how they were called — useful for tracing program flow.</div></div>
     </div>
+</div>
+
+<!-- ── Match the Translator ── -->
+<div class="lang-match-section">
+    <h2>🧩 Match the Translator</h2>
+    <p style="font-size:13px;color:var(--c-text-secondary);margin-bottom:4px;">Click a description on the left, then click the correct translator on the right.</p>
+    <div class="lang-match-grid" id="matchGrid">
+        <div class="lang-match-item" data-pair="0" onclick="matchSelect('desc', 0)">Translates ALL code at once, produces an .exe file<div class="lang-match-desc">Click me, then click the matching translator</div></div>
+        <div class="lang-match-item" data-pair="0" onclick="matchSelect('trans', 0)">Compiler<div class="lang-match-desc">Translates high-level to machine code all at once</div></div>
+        <div class="lang-match-item" data-pair="1" onclick="matchSelect('desc', 1)">Executes code line by line, stops at first error<div class="lang-match-desc">Click me, then click the matching translator</div></div>
+        <div class="lang-match-item" data-pair="1" onclick="matchSelect('trans', 1)">Interpreter<div class="lang-match-desc">Translates and runs one line at a time</div></div>
+        <div class="lang-match-item" data-pair="2" onclick="matchSelect('desc', 2)">Converts assembly mnemonics to machine code<div class="lang-match-desc">Click me, then click the matching translator</div></div>
+        <div class="lang-match-item" data-pair="2" onclick="matchSelect('trans', 2)">Assembler<div class="lang-match-desc">Assembly → machine code, 1:1</div></div>
+    </div>
+    <div id="matchFeedback" style="margin-top:12px;font-size:14px;font-weight:600;text-align:center;display:none;"></div>
+</div>
+
+<!-- ── Quiz: Check Your Understanding ── -->
+<div class="lang-quiz-section">
+    <h2>🧠 Check Your Understanding</h2>
+    <p class="quiz-sub">Test your knowledge of programming languages, translators, and IDE features.</p>
+
+    <div class="quiz-header">
+        <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="langProgressFill" style="width:0%"></div></div>
+        <span class="quiz-score-running" id="langRunningScore">❓ 0/6 answered</span>
+    </div>
+
+    <div class="quiz-counter" id="langQuizCounter">1 / 6</div>
+
+    <div id="langQuizQuestions">
+        <div class="lang-quiz-question quiz-tab active" data-qid="1">
+            <div class="lang-quiz-q">1. Which of the following is an advantage of a high-level language over a low-level language?</div>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 1, 0)">Faster execution speed</button>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 1, 1)">Direct hardware control</button>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 1, 2)">Easier to read, write, and debug</button>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 1, 3)">Smaller memory footprint</button>
+            <div class="lang-quiz-exp" id="langExp1">✅ Correct! High-level languages use English-like syntax, making them easier to read, write, and debug. They are also portable across different hardware.</div>
+        </div>
+        <div class="lang-quiz-question quiz-tab" data-qid="2">
+            <div class="lang-quiz-q">2. A compiler translates source code into machine code. How does it differ from an interpreter?</div>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 2, 0)">It translates one line at a time</button>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 2, 1)">It translates ALL code at once, producing an executable</button>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 2, 2)">It only works with low-level languages</button>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 2, 3)">It does not report errors</button>
+            <div class="lang-quiz-exp" id="langExp2">✅ Correct! A compiler translates all the source code at once into machine code and produces a standalone executable file (.exe).</div>
+        </div>
+        <div class="lang-quiz-question quiz-tab" data-qid="3">
+            <div class="lang-quiz-q">3. Which translator is used to convert assembly language into machine code?</div>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 3, 0)">Compiler</button>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 3, 1)">Interpreter</button>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 3, 2)">Assembler</button>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 3, 3)">Linker</button>
+            <div class="lang-quiz-exp" id="langExp3">✅ Correct! An assembler translates assembly language (low-level) into machine code. One assembly instruction equals one machine instruction.</div>
+        </div>
+        <div class="lang-quiz-question quiz-tab" data-qid="4">
+            <div class="lang-quiz-q">4. Which IDE feature lets you pause execution at a specific line to inspect variable values?</div>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 4, 0)">Syntax highlighting</button>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 4, 1)">Auto-complete</button>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 4, 2)">Breakpoint</button>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 4, 3)">File management</button>
+            <div class="lang-quiz-exp" id="langExp4">✅ Correct! A breakpoint marks a specific line where execution pauses, allowing you to inspect variables, the call stack, and program state.</div>
+        </div>
+        <div class="lang-quiz-question quiz-tab" data-qid="5">
+            <div class="lang-quiz-q">5. Why might a programmer choose to use an interpreter instead of a compiler?</div>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 5, 0)">Faster execution speed at runtime</button>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 5, 1)">Easier debugging — stops at the first error</button>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 5, 2)">Produces a standalone executable file</button>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 5, 3)">More secure — source code is hidden</button>
+            <div class="lang-quiz-exp" id="langExp5">✅ Correct! An interpreter stops at the first error, making it easier to debug. It also lets you test changes without recompiling.</div>
+        </div>
+        <div class="lang-quiz-question quiz-tab" data-qid="6">
+            <div class="lang-quiz-q">6. Which of these is NOT a feature of an IDE?</div>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 6, 0)">Debugger with breakpoints</button>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 6, 1)">Syntax highlighting editor</button>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 6, 2)">Automatic code optimisation</button>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 6, 3)">Variable watch and call stack</button>
+            <div class="lang-quiz-exp" id="langExp6">✅ Correct! IDEs provide editors, debuggers, breakpoints, variable watches, and call stacks — but they do not automatically optimise your code.</div>
+        </div>
+    </div>
+
+    <div class="quiz-nav">
+        <button type="button" class="quiz-nav-btn" id="langQuizPrevBtn" onclick="langQuizGoTo(-1)">◀ Previous</button>
+        <div class="quiz-dots" id="langQuizDots">
+            <span class="quiz-dot active" data-idx="0" onclick="langQuizGoTo(0)">1</span>
+            <span class="quiz-dot" data-idx="1" onclick="langQuizGoTo(1)">2</span>
+            <span class="quiz-dot" data-idx="2" onclick="langQuizGoTo(2)">3</span>
+            <span class="quiz-dot" data-idx="3" onclick="langQuizGoTo(3)">4</span>
+            <span class="quiz-dot" data-idx="4" onclick="langQuizGoTo(4)">5</span>
+            <span class="quiz-dot" data-idx="5" onclick="langQuizGoTo(5)">6</span>
+        </div>
+        <button type="button" class="quiz-nav-btn" id="langQuizNextBtn" onclick="langQuizGoTo(1)">Next ▶</button>
+    </div>
+
+    <div style="text-align:center;margin-top:16px;">
+        <button type="button" class="btn btn-primary" id="langSubmitBtn" onclick="langSubmitQuiz()">📊 Show My Score</button>
+    </div>
+    <div class="lang-quiz-score" id="langQuizScore"></div>
 </div>
 
 <script>
 function toggleLangSection(header) {
     header.classList.toggle('open');
     header.nextElementSibling.classList.toggle('open');
+}
+
+// ── Tabbed Quiz ──
+const langAnswers = {1:2, 2:1, 3:2, 4:2, 5:1, 6:2};
+const langSelected = {};
+let langCurrentIdx = 0;
+const langTotal = 6;
+
+function langSelect(btn, qid, idx) {
+    const parent = btn.closest('.lang-quiz-question');
+    parent.querySelectorAll('.lang-quiz-opt').forEach(b => b.classList.remove('selected', 'correct', 'incorrect'));
+    btn.classList.add('selected');
+    langSelected[qid] = idx;
+    document.getElementById('langExp' + qid).classList.remove('show');
+    updateLangDots();
+}
+
+function updateLangDots() {
+    let answered = 0;
+    for (let i = 0; i < langTotal; i++) {
+        const qid = i + 1;
+        const dot = document.querySelectorAll('#langQuizDots .quiz-dot')[i];
+        dot.classList.remove('answered', 'missing');
+        if (langSelected[qid] !== undefined) {
+            dot.classList.add('answered');
+            answered++;
+        }
+    }
+    document.getElementById('langRunningScore').textContent = '❓ ' + answered + '/' + langTotal + ' answered';
+    document.getElementById('langProgressFill').style.width = Math.round(answered / langTotal * 100) + '%';
+}
+
+function langQuizGoTo(target) {
+    const tabs = document.querySelectorAll('#langQuizQuestions .quiz-tab');
+    const dots = document.querySelectorAll('#langQuizDots .quiz-dot');
+    if (typeof target === 'number') {
+        langCurrentIdx = target;
+    } else {
+        langCurrentIdx = Math.max(0, Math.min(langTotal - 1, langCurrentIdx + target));
+    }
+    tabs.forEach((t, i) => t.classList.toggle('active', i === langCurrentIdx));
+    dots.forEach((d, i) => d.classList.toggle('active', i === langCurrentIdx));
+    document.getElementById('langQuizCounter').textContent = (langCurrentIdx + 1) + ' / ' + langTotal;
+    document.getElementById('langQuizPrevBtn').disabled = langCurrentIdx === 0;
+    document.getElementById('langQuizNextBtn').disabled = langCurrentIdx === langTotal - 1;
+}
+
+function langSubmitQuiz() {
+    let correct = 0, total = Object.keys(langAnswers).length;
+    for (let qid in langAnswers) {
+        const exp = document.getElementById('langExp' + qid);
+        const opts = document.querySelectorAll(`.lang-quiz-question[data-qid="${qid}"] .lang-quiz-opt`);
+        opts.forEach(b => b.classList.remove('correct', 'incorrect'));
+        if (langSelected[qid] === undefined) continue;
+        if (langSelected[qid] === langAnswers[qid]) {
+            opts[langAnswers[qid]].classList.add('correct');
+            correct++;
+        } else {
+            opts[langSelected[qid]].classList.add('incorrect');
+            opts[langAnswers[qid]].classList.add('correct');
+        }
+        exp.classList.add('show');
+    }
+    const scoreEl = document.getElementById('langQuizScore');
+    scoreEl.textContent = '🎯 You scored ' + correct + ' / ' + total + ' (' + Math.round(correct/total*100) + '%)';
+    scoreEl.className = 'lang-quiz-score show';
+    if (correct === total) scoreEl.style.borderColor = 'var(--c-green)';
+    else if (correct >= 4) scoreEl.style.borderColor = '#facc15';
+    else scoreEl.style.borderColor = 'var(--c-rose)';
+}
+
+// ── Match Exercise ──
+let matchSelected = null;
+
+function matchSelect(type, pair) {
+    const items = document.querySelectorAll('.lang-match-item');
+    if (matchSelected === null) {
+        items.forEach(i => i.classList.remove('selected', 'wrong'));
+        const el = document.querySelector(`.lang-match-item[data-pair="${pair}"][onclick*="'${type}'"]`);
+        if (el && !el.classList.contains('matched')) {
+            el.classList.add('selected');
+            matchSelected = {type, pair, el};
+        }
+    } else {
+        const el = document.querySelector(`.lang-match-item[data-pair="${pair}"][onclick*="'${type}'"]`);
+        if (!el || el.classList.contains('matched')) { matchSelected = null; return; }
+        if (matchSelected.type === type) { matchSelected.el.classList.remove('selected'); matchSelected = null; return; }
+        if (matchSelected.pair === pair) {
+            matchSelected.el.classList.remove('selected');
+            matchSelected.el.classList.add('matched');
+            el.classList.add('matched');
+            document.getElementById('matchFeedback').textContent = '✅ Correct!';
+            document.getElementById('matchFeedback').style.display = 'block';
+            document.getElementById('matchFeedback').style.color = 'var(--c-green)';
+        } else {
+            el.classList.add('wrong');
+            matchSelected.el.classList.add('wrong');
+            document.getElementById('matchFeedback').textContent = '❌ Not quite — try again!';
+            document.getElementById('matchFeedback').style.display = 'block';
+            document.getElementById('matchFeedback').style.color = 'var(--c-rose)';
+            setTimeout(() => { el.classList.remove('wrong'); matchSelected.el.classList.remove('wrong'); }, 500);
+        }
+        matchSelected = null;
+    }
 }
 </script>
 {% endblock %}

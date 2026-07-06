@@ -87,7 +87,7 @@ def _render_device_stats(device_stats, all_names, entries=None):
 @router.get("/log/raw", response_class=PlainTextResponse)
 async def raw_log():
     """Raw unfiltered log as plain text."""
-    log_path = Path("/var/log/activity/wlv-cs.log")
+    log_path = Path("/var/log/activity/wlv.log")
     if not log_path.exists():
         return PlainTextResponse("No log entries yet.")
     lines = log_path.read_text().strip().splitlines()
@@ -288,8 +288,8 @@ async def clear_activity_log():
     """Truncate the activity log file and SQLite DB. Device names are preserved."""
     from activity_dashboard import _load_device_names, _save_device_names
     names = _load_device_names()
-    log_path = Path("/var/log/activity/wlv-cs.log")
-    db_path = Path("/var/log/activity/wlv-cs.db")
+    log_path = Path("/var/log/activity/wlv.log")
+    db_path = Path("/var/log/activity/wlv.db")
     if log_path.exists():
         log_path.write_text("")
     if db_path.exists():
@@ -305,7 +305,7 @@ async def clear_activity_log():
 @router.get("/log", response_class=HTMLResponse)
 async def activity_log_page():
     """Colourised log viewer - event types highlighted."""
-    log_path = Path("/var/log/activity/wlv-cs.log")
+    log_path = Path("/var/log/activity/wlv.log")
     if not log_path.exists():
         return HTMLResponse("<html><body><h1>Activity Log</h1><p>No log entries yet.</p></body></html>")
     lines = log_path.read_text().strip().splitlines()

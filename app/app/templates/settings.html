@@ -134,7 +134,7 @@
 // Sync radio on page load — read from cookie (same as getMode() in app.js)
 // Use setTimeout to ensure defer scripts (app.js) have loaded first
 setTimeout(function() {
-  var m = document.cookie.match(/(?:^|;\s*)wlvcs_qmode=([^;]*)/);
+  var m = document.cookie.match(/(?:^|;\s*)wlv_qmode=([^;]*)/);
   var cur = m ? m[1] : 'soft';
   var radio = document.querySelector('.settings-page input[name="qmode"][value="' + cur + '"]');
   if (radio) radio.checked = true;
