@@ -1,0 +1,465 @@
+{% extends "base.html" %}
+{% block title %}Exam History | WLV Computer Science{% endblock %}
+{% block head %}
+<style>
+.hist-header { text-align: center; padding: 24px 0 16px; }
+.hist-header h1 { font-size: 28px; margin-bottom: 4px; }
+.hist-header p { color: var(--c-text-secondary); font-size: 15px; }
+
+/* ─── Tabs ─── */
+.tab-bar { display: flex; gap: 0; justify-content: center; margin: 16px 0 20px; border-bottom: 2px solid var(--c-border); }
+.tab-btn {
+    padding: 10px 28px; font-size: 15px; font-weight: 600; cursor: pointer;
+    background: none; border: none; color: var(--c-text-muted);
+    border-bottom: 2px solid transparent; margin-bottom: -2px;
+    transition: all 0.2s;
+}
+.tab-btn:hover { color: var(--c-text); }
+.tab-btn.active { color: var(--c-accent); border-bottom-color: var(--c-accent); }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; animation: fadeIn 0.3s ease; }
+
+.trend-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 16px 0; }
+.trend-card {
+    background: rgba(17,24,39,0.88);
+    backdrop-filter: blur(2px);
+    border: 1px solid rgba(34,211,238,0.10);
+    border-radius: var(--r-lg);
+    padding: 16px 24px;
+    text-align: center;
+    min-width: 100px;
+    transition: all 0.3s;
+}
+.light-theme .trend-card { background: rgba(255,255,255,0.88); }
+.trend-card:hover { border-color: var(--c-accent); box-shadow: 0 4px 16px var(--c-accent-glow); }
+.trend-card .num { font-size: 28px; font-weight: 700; }
+.trend-card .num.up { color: var(--c-green); }
+.trend-card .num.down { color: var(--c-rose); }
+.trend-card .num.flat { color: var(--c-text-secondary); }
+.trend-card .label { font-size: 13px; color: var(--c-text-muted); margin-top: 2px; }
+
+.section-title { font-size: 20px; font-weight: 700; margin: 28px 0 14px; display: flex; align-items: center; gap: 8px; }
+.section-title::after { content: ""; flex: 1; height: 1px; margin-left: 12px; background: linear-gradient(90deg, rgba(34,211,238,0.3), transparent); }
+
+.exam-list { display: flex; flex-direction: column; gap: 10px; }
+.exam-card {
+    background: rgba(17,24,39,0.88);
+    backdrop-filter: blur(2px);
+    border: 1px solid rgba(34,211,238,0.10);
+    border-radius: var(--r-lg);
+    padding: 16px 20px;
+    cursor: pointer;
+    transition: all 0.25s;
+}
+.light-theme .exam-card { background: rgba(255,255,255,0.88); }
+.exam-card:hover { border-color: var(--c-accent); box-shadow: 0 4px 16px var(--c-accent-glow); }
+.exam-card .ec-row { display: flex; justify-content: space-between; align-items: center; }
+.exam-card .ec-score { font-size: 24px; font-weight: 700; color: var(--c-accent); }
+.exam-card .ec-meta { font-size: 14px; color: var(--c-text-secondary); }
+.exam-card .ec-date { font-size: 13px; color: var(--c-text-muted); }
+.exam-card .ec-toggle { font-size: 18px; transition: transform 0.3s; }
+.exam-card.expanded .ec-toggle { transform: rotate(180deg); }
+.exam-detail { display: none; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--c-border); }
+.exam-card.expanded .exam-detail { display: block; animation: fadeIn 0.3s ease; }
+
+/* ─── Written exam cards ─── */
+.written-card {
+    background: rgba(17,24,39,0.88);
+    backdrop-filter: blur(2px);
+    border: 1px solid rgba(34,211,238,0.10);
+    border-radius: var(--r-lg);
+    padding: 16px 20px;
+    cursor: pointer;
+    transition: all 0.25s;
+    margin-bottom: 10px;
+}
+.light-theme .written-card { background: rgba(255,255,255,0.88); }
+.written-card:hover { border-color: var(--c-accent); box-shadow: 0 4px 16px var(--c-accent-glow); }
+.written-card .wc-row { display: flex; justify-content: space-between; align-items: center; }
+.written-card .wc-score { font-size: 24px; font-weight: 700; }
+.written-card .wc-score.good { color: var(--c-green); }
+.written-card .wc-score.ok { color: var(--c-accent); }
+.written-card .wc-score.poor { color: var(--c-rose); }
+.written-card .wc-meta { font-size: 14px; color: var(--c-text-secondary); }
+.written-card .wc-date { font-size: 13px; color: var(--c-text-muted); }
+.written-card .wc-toggle { font-size: 18px; transition: transform 0.3s; }
+.written-card.expanded .wc-toggle { transform: rotate(180deg); }
+.written-detail { display: none; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--c-border); }
+.written-card.expanded .written-detail { display: block; animation: fadeIn 0.3s ease; }
+.written-detail .wd-label { font-size: 12px; font-weight: 600; color: var(--c-text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 12px; margin-bottom: 4px; }
+.written-detail .wd-question { font-size: 15px; padding: 8px 12px; background: rgba(13,18,37,0.6); border-radius: var(--r-md); border-left: 3px solid var(--c-accent); }
+.light-theme .written-detail .wd-question { background: rgba(243,244,246,0.6); }
+.written-detail .wd-answer { font-size: 14px; padding: 8px 12px; background: rgba(13,18,37,0.6); border-radius: var(--r-md); border-left: 3px solid var(--c-rose); white-space: pre-wrap; }
+.light-theme .written-detail .wd-answer { background: rgba(243,244,246,0.6); }
+.written-detail .wd-feedback { font-size: 14px; padding: 8px 12px; background: rgba(8,41,73,0.5); border-radius: var(--r-md); border-left: 3px solid var(--c-green); white-space: pre-wrap; }
+.light-theme .written-detail .wd-feedback { background: rgba(236,253,245,0.5); }
+
+.tp-bars { display: flex; flex-direction: column; gap: 8px; margin: 10px 0 16px; }
+.tp-bar-row { display: flex; align-items: center; gap: 10px; }
+.tp-bar-row .code { font-size: 12px; color: var(--c-accent); font-weight: 600; min-width: 30px; }
+.tp-bar-row .track { flex: 1; height: 10px; background: var(--c-border); border-radius: 99px; overflow: hidden; }
+.tp-bar-row .fill { height: 100%; border-radius: 99px; transition: width 0.5s; }
+.tp-bar-row .fill.good { background: var(--c-green); }
+.tp-bar-row .fill.ok { background: var(--c-accent); }
+.tp-bar-row .fill.poor { background: var(--c-rose); }
+.tp-bar-row .pct { font-size: 13px; font-weight: 600; min-width: 36px; text-align: right; color: var(--c-text-secondary); }
+
+.exam-qr {
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    border-radius: var(--r-md);
+    border-left: 3px solid var(--c-border);
+    font-size: 14px;
+    background: rgba(13,18,37,0.6);
+}
+.light-theme .exam-qr { background: rgba(243,244,246,0.6); }
+.exam-qr.correct { border-left-color: var(--c-green); }
+.exam-qr.wrong { border-left-color: var(--c-rose); }
+.exam-qr .qr-q { font-weight: 500; margin-bottom: 4px; }
+.exam-qr .qr-meta { font-size: 13px; color: var(--c-text-secondary); }
+
+.weak-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    background: rgba(69,10,10,0.3);
+    border: 1px solid rgba(251,113,133,0.2);
+    border-radius: var(--r-lg);
+    margin-bottom: 8px;
+    transition: all 0.25s;
+}
+.light-theme .weak-card { background: rgba(254,242,242,0.5); }
+.weak-card:hover { border-color: var(--c-rose); box-shadow: 0 3px 12px rgba(251,113,133,0.15); }
+.weak-card .wc-count {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--c-rose);
+    min-width: 32px;
+    text-align: center;
+}
+.weak-card .wc-question { font-size: 15px; flex: 1; line-height: 1.4; }
+.weak-card .wc-topic { font-size: 12px; color: var(--c-accent); font-weight: 600; }
+
+.topic-trend-section { margin: 20px 0; }
+.topic-trend-card {
+    background: rgba(17,24,39,0.88);
+    border: 1px solid rgba(34,211,238,0.10);
+    border-radius: var(--r-lg);
+    padding: 16px 20px;
+    margin-bottom: 10px;
+}
+.light-theme .topic-trend-card { background: rgba(255,255,255,0.88); }
+.tt-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; color: var(--c-heading); }
+.tt-dots { display: flex; gap: 6px; align-items: flex-end; margin: 8px 0; }
+.tt-dot {
+    width: 36px;
+    text-align: center;
+    font-size: 11px;
+    color: var(--c-text-muted);
+}
+.tt-dot .bar {
+    height: 40px;
+    width: 20px;
+    border-radius: 4px 4px 0 0;
+    margin: 0 auto 4px;
+    transition: height 0.5s;
+}
+.tt-dot .bar.good { background: var(--c-green); }
+.tt-dot .bar.ok { background: var(--c-accent); }
+.tt-dot .bar.poor { background: var(--c-rose); }
+.tt-dot .tt-label { font-size: 10px; }
+
+.empty-state { text-align: center; padding: 48px 20px; }
+.empty-state .big { font-size: 48px; margin-bottom: 12px; }
+.empty-state h3 { font-size: 20px; margin-bottom: 6px; }
+.empty-state p { color: var(--c-text-secondary); font-size: 15px; }
+
+@media (max-width: 500px) {
+    .exam-card .ec-score { font-size: 20px; }
+    .trend-card { padding: 12px 16px; min-width: 80px; }
+    .trend-card .num { font-size: 22px; }
+    .tab-btn { padding: 8px 16px; font-size: 14px; }
+    .hist-header h1 { font-size: 22px; }
+    .hist-header p { font-size: 14px; }
+    .section-title { font-size: 17px; margin: 20px 0 10px; }
+    .exam-card { padding: 12px 14px; }
+    .exam-card .ec-meta { font-size: 13px; }
+    .exam-card .ec-date { font-size: 12px; }
+    .written-card { padding: 12px 14px; }
+    .written-card .wc-score { font-size: 20px; }
+    .written-card .wc-meta { font-size: 13px; }
+    .written-card .wc-date { font-size: 12px; }
+    .written-detail .wd-question { font-size: 14px; }
+    .written-detail .wd-answer { font-size: 13px; }
+    .written-detail .wd-feedback { font-size: 13px; }
+    .written-detail .wd-label { font-size: 11px; }
+    .weak-card { padding: 10px 12px; }
+    .weak-card .wc-question { font-size: 14px; }
+    .weak-card .wc-count { font-size: 18px; min-width: 28px; }
+    .weak-card .wc-topic { font-size: 11px; }
+    .tp-bar-row .code { font-size: 11px; }
+    .tp-bar-row .pct { font-size: 12px; min-width: 30px; }
+    .tp-bar-row { font-size: 13px; }
+    .exam-qr { font-size: 13px; padding: 10px 12px; }
+    .exam-qr .qr-meta { font-size: 12px; }
+    .topic-trend-card { padding: 12px 14px; }
+    .tt-title { font-size: 14px; }
+    .tt-dot { width: 28px; }
+    .tt-dot .tt-label { font-size: 9px; }
+    .empty-state h3 { font-size: 17px; }
+    .empty-state p { font-size: 14px; }
+    .trend-row { gap: 8px; }
+    .trend-card .label { font-size: 12px; }
+    .tp-bar-row .track { max-width: 120px !important; }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="hist-header">
+    <h1>&#128202; Exam History</h1>
+    <p>Track your exam performance, review past mistakes, and identify weak spots</p>
+</div>
+
+{# ─── Tab Bar ─── #}
+<div class="tab-bar">
+    <button class="tab-btn active" data-tab="quiz">&#128221; Quiz Exams</button>
+    <button class="tab-btn" data-tab="written">&#9997;&#65039; Written Questions</button>
+</div>
+
+{# ─── Tab: Quiz Exams ─────────────────────────── #}
+<div class="tab-panel active" id="tab-quiz">
+{% if not exams %}
+<div class="empty-state">
+    <div class="big">&#128221;</div>
+    <h3>No exams taken yet</h3>
+    <p>Complete a practice exam to see your history here.</p>
+    <a href="/exam?new=1" class="btn btn-primary">&#128221; Take an Exam</a>
+</div>
+{% else %}
+
+{# ─── Overall Trend ─────────────────────────── #}
+<div class="trend-row">
+    <div class="trend-card">
+        <div class="num">{{ exams|length }}</div>
+        <div class="label">&#128221; Exams</div>
+    </div>
+    <div class="trend-card">
+        <div class="num {{ trend.direction if trend else '' }}">
+            {% if trend %}{{ '+' if trend.diff > 0 else '' }}{{ trend.diff }}%{% else %}--{% endif %}
+        </div>
+        <div class="label">&#8599;&#65039; Trend</div>
+    </div>
+    <div class="trend-card">
+        <div class="num up">{{ exams[0].percentage }}%</div>
+        <div class="label">&#127919; Latest</div>
+    </div>
+    <div class="trend-card">
+        <div class="num">{{ exams[-1].percentage }}%</div>
+        <div class="label">&#127919; First</div>
+    </div>
+</div>
+
+<div style="text-align:center;margin:16px 0 8px;">
+    <a href="/exam?new=1" class="btn btn-primary">&#128221; Take New Exam</a>
+</div>
+
+{# ─── Overall Topic Breakdown ────────────────── #}
+{% if agg_topics %}
+<h2 class="section-title">&#128202; Overall Topic Breakdown</h2>
+<p style="color:var(--c-text-secondary);font-size:14px;margin-bottom:12px;">Your combined performance across all exams &mdash; focuses revision where it matters most.</p>
+<div class="tp-bars" style="margin-bottom:24px;">
+    {% for t in agg_topics %}
+    {% set cls = 'good' if t.pct >= 70 else ('ok' if t.pct >= 40 else 'poor') %}
+    <div class="tp-bar-row">
+        <span class="code" style="min-width:32px;">{{ t.code }}</span>
+        <span style="flex:1;font-size:14px;color:var(--c-text);">{{ t.title }}</span>
+        <div class="track" style="max-width:200px;"><div class="fill {{ cls }}" style="width:{{ t.pct }}%"></div></div>
+        <span class="pct" style="min-width:50px;">{{ t.pct }}%</span>
+        <span style="font-size:12px;color:var(--c-text-muted);min-width:60px;text-align:right;">{{ t.correct }}/{{ t.total }}</span>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{# ─── Weak Spots ────────────────────────────── #}
+{% if weak_spots %}
+<h2 class="section-title">&#128293; Weak Spots</h2>
+<p style="color:var(--c-text-secondary);font-size:14px;margin-bottom:12px;">Questions you've got wrong multiple times &mdash; prioritise these topics.</p>
+{% for w in weak_spots %}
+<div class="weak-card">
+    <div class="wc-count">{{ w.count }}x</div>
+    <div>
+        <div class="wc-question">{{ w.question }}</div>
+        <div class="wc-topic">{{ w.topic_code }} &middot; {{ w.lesson }}</div>
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+
+{# ─── Exam Timeline ─────────────────────────── #}
+<h2 class="section-title">&#128197; All Exams</h2>
+<div class="exam-list">
+{% for exam in exams %}
+<div class="exam-card" onclick="this.classList.toggle('expanded')">
+    <div class="ec-row">
+        <div>
+            <div class="ec-score">{{ exam.percentage }}%</div>
+            <div class="ec-meta">{{ exam.score }} / {{ exam.total }} correct</div>
+        </div>
+        <div style="text-align:right;">
+            <div class="ec-date">{{ exam.taken_at.strftime('%d %b %Y') if exam.taken_at else '' }}</div>
+            <div class="ec-meta">{{ exam.taken_at.strftime('%H:%M') if exam.taken_at else '' }}</div>
+        </div>
+        <div style="margin-left:16px;"><span class="ec-toggle">&#9660;</span></div>
+    </div>
+
+    <div class="exam-detail">
+        {% if exam.topic_breakdown %}
+        <div class="tp-bars">
+            {% for t in exam.topic_breakdown %}
+            {% set cls = 'good' if t.pct >= 70 else ('ok' if t.pct >= 40 else 'poor') %}
+            <div class="tp-bar-row">
+                <span class="code">{{ t.code }}</span>
+                <div class="track"><div class="fill {{ cls }}" style="width:{{ t.pct }}%"></div></div>
+                <span class="pct">{{ t.pct }}%</span>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div style="text-align:right;margin-bottom:8px;">
+            <a href="/exam?review={{ exam.id }}" class="btn btn-sm" style="font-size:13px;">&#128269; View on Exam Page</a>
+        </div>
+        {% if exam.results %}
+        <div style="font-size:13px;font-weight:600;color:var(--c-text-secondary);margin-bottom:6px;">&#128269; Answer Review</div>
+        {% for r in exam.results %}
+        <div class="exam-qr {{ 'correct' if r.correct else 'wrong' }}">
+            <div class="qr-q">{{ r.question }}</div>
+            {% set ua = r.options[r.user_answer] if r.user_answer is not none else '&mdash; (unanswered)' %}
+            {% set ca = r.options[r.correct_index] if r.options and r.correct_index is not none else '' %}
+            <div class="qr-meta"><strong>You:</strong> {{ ua }}</div>
+            <div class="qr-meta"><strong>Correct:</strong> {{ ca }}</div>
+            {% if r.explanation %}<div class="qr-meta" style="margin-top:4px;padding:6px 8px;background:rgba(8,41,73,0.5);border-radius:6px;">&#128161; {{ r.explanation }}</div>{% endif %}
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endfor %}
+</div>
+
+{# ─── Topic Trends ──────────────────────────── #}
+{% if topic_trends %}
+<h2 class="section-title">&#128200; Topic Trends</h2>
+{% for code, tt in topic_trends.items() %}
+{% set last = tt.history[-1] %}
+{% set cls = 'good' if last.pct >= 70 else ('ok' if last.pct >= 40 else 'poor') %}
+<div class="topic-trend-card">
+    <div class="tt-title">{{ code }} &middot; {{ tt.title }}</div>
+    <div class="tt-dots">
+        {% for h in tt.history %}
+        {% set c = 'good' if h.pct >= 70 else ('ok' if h.pct >= 40 else 'poor') %}
+        <div class="tt-dot">
+            <div class="bar {{ c }}" style="height:{{ (h.pct / 100) * 40 }}px;"></div>
+            <div class="tt-label">{{ h.date.strftime('%d/%m') if h.date else '' }}</div>
+        </div>
+        {% endfor %}
+    </div>
+    <div style="font-size:13px;color:var(--c-text-secondary);">
+        Latest: <strong style="color:var(--c-accent);">{{ last.pct }}%</strong>
+        &middot; {{ last.correct }}/{{ last.total }} correct
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+
+{% endif %}
+</div>{# /tab-quiz #}
+
+{# ─── Tab: Written Questions ─────────────────── #}
+<div class="tab-panel" id="tab-written">
+{% if not written_exams %}
+<div class="empty-state">
+    <div class="big">&#9997;&#65039;</div>
+    <h3>No written questions answered yet</h3>
+    <p>Try the exam-style practice to get AI-marked feedback on your written answers.</p>
+    <a href="/exam-style" class="btn btn-primary">&#9997;&#65039; Try a Written Question</a>
+</div>
+{% else %}
+
+<div class="trend-row">
+    <div class="trend-card">
+        <div class="num">{{ written_exams|length }}</div>
+        <div class="label">&#9997;&#65039; Answered</div>
+    </div>
+    <div class="trend-card">
+        <div class="num">{{ (written_exams|sum(attribute='score') / written_exams|length)|round(1) }}</div>
+        <div class="label">&#127919; Avg Score</div>
+    </div>
+    <div class="trend-card">
+        <div class="num">{{ written_exams[0].score }}/{{ written_exams[0].marks }}</div>
+        <div class="label">&#128197; Latest</div>
+    </div>
+</div>
+
+<div style="text-align:center;margin:16px 0 8px;">
+    <a href="/exam-style" class="btn btn-primary">&#9997;&#65039; Try Another Question</a>
+</div>
+
+<h2 class="section-title">&#128197; Written Answer History</h2>
+<div class="exam-list">
+{% for w in written_exams %}
+{% set pct = (w.score / w.marks * 100)|round %}
+{% set cls = 'good' if pct >= 70 else ('ok' if pct >= 40 else 'poor') %}
+<div class="written-card" onclick="this.classList.toggle('expanded')">
+    <div class="wc-row">
+        <div>
+            <div class="wc-score {{ cls }}">{{ w.score }}/{{ w.marks }}</div>
+            <div class="wc-meta">Topic {{ w.topic }}</div>
+        </div>
+        <div style="text-align:right;">
+            <div class="wc-date">{{ w.taken_at.strftime('%d %b %Y') if w.taken_at else '' }}</div>
+            <div class="wc-meta">{{ w.taken_at.strftime('%H:%M') if w.taken_at else '' }}</div>
+        </div>
+        <div style="margin-left:16px;"><span class="wc-toggle">&#9660;</span></div>
+    </div>
+
+    <div class="written-detail">
+        <div class="wd-label">&#128196; Question</div>
+        <div class="wd-question">{{ w.question }}</div>
+
+        <div class="wd-label">&#128221; Your Answer</div>
+        <div class="wd-answer">{{ w.answer }}</div>
+
+        {% if w.feedback %}
+        <div class="wd-label">&#128161; AI Feedback</div>
+        <div class="wd-feedback">{{ w.feedback }}</div>
+        {% endif %}
+    </div>
+</div>
+{% endfor %}
+</div>
+{% endif %}
+</div>{# /tab-written #}
+
+<script>
+function switchTab(name) {
+    document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+    document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+    document.querySelector('.tab-btn[data-tab="' + name + '"]').classList.add('active');
+    document.getElementById('tab-' + name).classList.add('active');
+    try { localStorage.setItem('examHistoryTab', name); } catch(e) {}
+}
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.tab-btn').forEach(function(b) {
+        b.addEventListener('click', function() { switchTab(this.getAttribute('data-tab')); });
+    });
+    try {
+        var saved = localStorage.getItem('examHistoryTab');
+        if (saved && saved !== 'quiz') switchTab(saved);
+    } catch(e) {}
+});
+</script>
+{% endblock %}

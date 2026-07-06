@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Answer Wiki — WLV Computer Science</title>
+    <style>
+        .wiki-container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        .wiki-header { margin-bottom: 20px; }
+        .wiki-header h1 { font-size: 1.3rem; margin-bottom: 6px; }
+        .wiki-header p { color: var(--c-text-secondary, #94a3b8); font-size: 0.85rem; }
+        .wiki-search { margin-bottom: 20px; }
+        .wiki-search input {
+            width: 100%; padding: 10px 14px; border-radius: 8px;
+            border: 1px solid var(--c-border, #334155);
+            background: var(--c-surface, #1e293b);
+            color: var(--c-text, #e2e8f0); font-size: 0.85rem;
+        }
+        .wiki-search input:focus { outline: none; border-color: var(--c-accent, #06b6d4); }
+        .topic-filters { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+        .topic-filters button {
+            padding: 5px 12px; border-radius: 20px; border: 1px solid var(--c-border, #334155);
+            background: var(--c-surface, #1e293b); color: var(--c-text-secondary, #94a3b8);
+            font-size: 0.8rem; cursor: pointer; transition: all 0.2s;
+        }
+        .topic-filters button:hover { border-color: var(--c-accent, #06b6d4); color: var(--c-text, #e2e8f0); }
+        .topic-filters button.active { background: var(--c-accent, #06b6d4); color: #000; border-color: var(--c-accent, #06b6d4); }
+        .wiki-list { display: flex; flex-direction: column; gap: 10px; }
+        .wiki-card {
+            padding: 14px 18px; border-radius: 10px;
+            border: 1px solid var(--c-border, #334155);
+            background: var(--c-surface, #1e293b); cursor: pointer;
+            transition: all 0.2s;
+        }
+        .wiki-card:hover { border-color: var(--c-accent, #06b6d4); transform: translateY(-1px); }
+        .wiki-card .topic-badge {
+            display: inline-block; padding: 2px 8px; border-radius: 4px;
+            background: rgba(6, 182, 212, 0.15); color: #06b6d4;
+            font-size: 0.7rem; font-weight: 600; margin-right: 6px;
+        }
+        .wiki-card .marks-badge {
+            display: inline-block; padding: 2px 8px; border-radius: 4px;
+            background: rgba(251, 191, 36, 0.15); color: #fbbf24;
+            font-size: 0.7rem; font-weight: 600;
+        }
+        .wiki-card h3 { font-size: 0.9rem; margin-bottom: 4px; color: var(--c-text, #e2e8f0); line-height: 1.4; }
+        .wiki-card p { font-size: 0.8rem; color: var(--c-text-secondary, #94a3b8); line-height: 1.5; }
+        .wiki-detail { display: none; }
+        .wiki-detail.active { display: block; }
+        .wiki-list.hidden { display: none; }
+        .wiki-detail-header { margin-bottom: 16px; }
+        .wiki-detail-header .back-btn {
+            padding: 7px 14px; border-radius: 8px;
+            border: 1px solid var(--c-accent, #06b6d4);
+            background: transparent; color: var(--c-accent, #06b6d4);
+            cursor: pointer; font-size: 0.8rem; font-weight: 600;
+        }
+        .wiki-detail-header .back-btn:hover { background: rgba(6,182,212,0.1); }
+        .wiki-detail-content { line-height: 1.7; font-size: 0.85rem; }
+        .wiki-detail-content h2 { font-size: 1.05rem; margin: 18px 0 8px; color: var(--c-accent, #06b6d4); }
+        .wiki-detail-content h3 { font-size: 0.9rem; margin: 14px 0 6px; color: var(--c-heading, #f1f5f9); }
+        .wiki-detail-content p { margin: 8px 0; line-height: 1.7; }
+        .wiki-detail-content .question-box {
+            padding: 14px 16px; border-radius: 8px;
+            background: rgba(6, 182, 212, 0.06);
+            border-left: 3px solid var(--c-accent, #06b6d4); margin-bottom: 14px;
+            font-size: 0.85rem; line-height: 1.7;
+        }
+        .wiki-detail-content .model-answer {
+            padding: 14px 16px; border-radius: 8px;
+            background: rgba(34, 197, 94, 0.06);
+            border-left: 3px solid #22c55e; margin-bottom: 14px;
+            font-size: 0.85rem; line-height: 1.7;
+        }
+        .wiki-detail-content .mark-scheme {
+            padding: 14px 16px; border-radius: 8px;
+            background: rgba(251, 191, 36, 0.06);
+            border-left: 3px solid #fbbf24; margin-bottom: 14px;
+            font-size: 0.85rem; line-height: 1.7;
+        }
+        .wiki-detail-content .key-terms {
+            padding: 14px 16px; border-radius: 8px;
+            background: rgba(168, 85, 247, 0.06);
+            border-left: 3px solid #a855f7; margin-bottom: 14px;
+        }
+        .wiki-detail-content .key-term {
+            display: inline-block; padding: 2px 10px; margin: 3px;
+            border-radius: 12px; background: rgba(168, 85, 247, 0.15);
+            color: #a855f7; font-size: 0.8rem; font-weight: 500;
+        }
+        @media (max-width: 600px) {
+            .wiki-container { padding: 12px; }
+            .wiki-card { padding: 10px 14px; }
+            .wiki-card h3 { font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+    {% include '_nav.html' %}
+    <main class="wiki-container">
+        <div class="wiki-header">
+            <h1>Model Answer Wiki</h1>
+        </div>
+        <div class="wiki-search">
+            <input type="text" id="wikiSearch" placeholder="Search model answers, topics, or keywords..." oninput="filterWiki()">
+        </div>
+        <div class="topic-filters" id="topicFilters">
+            <button class="active" onclick="filterByTopic('all')">All Topics</button>
+            {% for t in topics %}
+            <button onclick="filterByTopic('{{ t }}')">Topic {{ t }}</button>
+            {% endfor %}
+        </div>
+        <div class="wiki-list" id="wikiList">
+            {% for page in pages %}
+            <div class="wiki-card" data-topic="{{ page.topic }}" data-search="{{ page.title }} {{ page.key_terms }}" onclick="showDetail({{ page.id }})">
+                <div>
+                    <span class="topic-badge">Topic {{ page.topic }}</span>
+                    <span class="marks-badge">{{ page.marks }} marks</span>
+                </div>
+                <h3>{{ page.title }}</h3>
+                <p>{{ page.question[:120] }}{% if page.question|length > 120 %}...{% endif %}</p>
+            </div>
+            {% endfor %}
+        </div>
+        {% for page in pages %}
+        <div class="wiki-detail" id="detail-{{ page.id }}">
+            <div class="wiki-detail-header">
+                <button class="back-btn" onclick="showList()">Back to wiki</button>
+            </div>
+            <div class="wiki-detail-content">
+                <h2>Question</h2>
+                <div class="question-box">{{ page.question }}</div>
+                <h2>Model Answer (Grade 9)</h2>
+                <div class="model-answer">{{ page.model_answer|replace('\n', '<br>')|safe }}</div>
+                <h2>Mark Scheme</h2>
+                <div class="mark-scheme">{{ page.mark_scheme|replace('\n', '<br>')|safe }}</div>
+                <h2>Key Terminology</h2>
+                <div class="key-terms">
+                    {% for term in page.key_terms.split(',') %}
+                    <span class="key-term">{{ term.strip() }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </main>
+    <script>
+        function filterWiki() {
+            var search = document.getElementById('wikiSearch').value.toLowerCase();
+            document.querySelectorAll('.wiki-card').forEach(function(card) {
+                var text = card.getAttribute('data-search').toLowerCase();
+                card.style.display = text.indexOf(search) > -1 ? '' : 'none';
+            });
+        }
+        function showDetail(id) {
+            document.getElementById('wikiList').classList.add('hidden');
+            document.querySelectorAll('.wiki-detail').forEach(function(d) { d.classList.remove('active'); });
+            document.getElementById('detail-' + id).classList.add('active');
+        }
+        function showList() {
+            document.getElementById('wikiList').classList.remove('hidden');
+            document.querySelectorAll('.wiki-detail').forEach(function(d) { d.classList.remove('active'); });
+        }
+        function filterByTopic(topic) {
+            document.querySelectorAll('.topic-filters button').forEach(function(b) { b.classList.remove('active'); });
+            event.target.classList.add('active');
+            document.querySelectorAll('.wiki-card').forEach(function(card) {
+                card.style.display = (topic === 'all' || card.getAttribute('data-topic') === topic) ? '' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>

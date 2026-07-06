@@ -1,0 +1,612 @@
+{% extends "base.html" %}
+{% block title %}Flashcards — WLV Computer Science{% endblock %}
+{% block head %}
+<style>
+/* ── Lesson List ── */
+.flashcard-page { max-width: 640px; margin: 0 auto; padding: 1.5rem 0; }
+.flashcard-page .subtitle { color: var(--c-text-muted, #94a3b8); font-size: 0.85rem; margin-bottom: 1.5rem; }
+.lesson-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.topic-header {
+  font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--c-accent, #22d3ee); padding: 0.75rem 0.25rem 0.25rem; margin-top: 0.5rem;
+  border-bottom: 1px solid var(--c-border, #334155);
+}
+.topic-header:first-child { margin-top: 0; }
+.lesson-row {
+  display: flex; align-items: center; gap: 0.75rem;
+  background: var(--c-surface, #1e293b); border: 1px solid var(--c-border, #334155); border-radius: 10px;
+  padding: 0.75rem 1rem; cursor: pointer;
+  transition: all 0.15s; text-decoration: none; color: inherit;
+}
+.lesson-row:hover { background: var(--c-surface-hover, #334155); border-color: var(--c-accent, #22d3ee); transform: translateX(6px); }
+.topic-badge {
+  font-size: 0.7rem; font-weight: 600; color: var(--c-accent, #22d3ee);
+  background: rgba(34,211,238,0.1); padding: 0.2rem 0.5rem;
+  border-radius: 4px; white-space: nowrap; min-width: 2.5rem; text-align: center;
+}
+.lesson-info { flex: 1; min-width: 0; }
+.lesson-title { font-size: 0.9rem; font-weight: 500; }
+.lesson-meta { font-size: 0.75rem; color: var(--c-text-muted, #64748b); margin-top: 0.15rem; }
+.lesson-stats { display: flex; align-items: center; gap: 0.75rem; flex-shrink: 0; }
+.stat-badge {
+  font-size: 0.75rem; font-weight: 600; padding: 0.2rem 0.5rem;
+  border-radius: 6px; white-space: nowrap;
+}
+.stat-known { color: #34d399; background: rgba(52,211,153,0.1); }
+.stat-review { color: #f87171; background: rgba(248,113,113,0.1); }
+.stat-total { color: var(--c-text-muted, #94a3b8); }
+.progress-bar {
+  width: 60px; height: 6px; background: var(--c-border, #334155); border-radius: 3px; overflow: hidden; flex-shrink: 0;
+  display: flex;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 0;
+  transition: width 0.3s, background 0.3s;
+}
+.progress-fill:first-child { border-radius: 3px 0 0 3px; }
+.progress-fill:last-child { border-radius: 0 3px 3px 0; }
+.progress-fill:only-child { border-radius: 3px; }
+.progress-fill.fc-known { background: linear-gradient(90deg, #34d399, #059669); }
+.progress-fill.fc-review { background: linear-gradient(90deg, #f87171, #dc2626); }
+
+/* ── View Filter Toggle ── */
+.view-filter {
+  display: flex; gap: 0.5rem; margin-bottom: 1rem;
+}
+.view-filter-btn {
+  padding: 0.4rem 1rem; border-radius: 8px; border: 1px solid var(--c-border, #334155);
+  background: var(--c-surface, #1e293b); color: var(--c-text-muted, #94a3b8);
+  font-size: 0.8rem; font-weight: 500; cursor: pointer; transition: all 0.15s;
+}
+.view-filter-btn:hover { border-color: var(--c-accent, #22d3ee); color: var(--c-text, #e2e8f0); }
+.view-filter-btn.active { background: var(--c-accent, #22d3ee); color: #000; border-color: var(--c-accent, #22d3ee); }
+
+/* ── Topic Category View ── */
+.topic-category {
+  background: var(--c-surface, #1e293b); border: 1px solid var(--c-border, #334155);
+  border-radius: 10px; margin-bottom: 0.5rem; overflow: hidden;
+}
+.topic-category-header {
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 0.75rem 1rem; cursor: pointer;
+  transition: all 0.15s;
+}
+.topic-category-header:hover { background: var(--c-surface-hover, #334155); }
+.topic-category-header .arrow {
+  font-size: 0.7rem; transition: transform 0.2s; color: var(--c-text-muted, #64748b);
+}
+.topic-category-header.open .arrow { transform: rotate(90deg); }
+.topic-category-header .tc-title { font-size: 0.9rem; font-weight: 600; color: var(--c-text, #e2e8f0); flex: 1; }
+.topic-category-header .tc-code { font-size: 0.7rem; font-weight: 600; color: var(--c-accent, #22d3ee); }
+.topic-category-header .tc-count { font-size: 0.75rem; color: var(--c-text-muted, #94a3b8); }
+.topic-category-body { display: none; padding: 0 0.5rem 0.5rem; }
+.topic-category-body.open { display: block; }
+.topic-category-body .lesson-row { margin-bottom: 0.35rem; }
+
+/* ── Card View ── */
+.back-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(34,211,238,0.08); border: 1px solid rgba(34,211,238,0.25);
+  color: var(--c-accent, #22d3ee); cursor: pointer; font-size: 0.85rem; font-weight: 600;
+  margin-bottom: 1rem; padding: 0.5rem 1rem; border-radius: 8px;
+  transition: all 0.15s;
+}
+.back-btn:hover { background: rgba(34,211,238,0.15); border-color: var(--c-accent, #22d3ee); color: var(--c-text, #e2e8f0); }
+.card-container {
+  perspective: 1000px; width: 100%; max-width: 480px;
+  height: 320px; cursor: pointer; margin: 0 auto; position: relative;
+}
+.card {
+  position: relative; width: 100%; height: 100%;
+  transition: transform 0.3s ease; transform-style: preserve-3d;
+}
+.card.flipped { transform: rotateY(180deg); }
+.card-face {
+  position: absolute; inset: 0; backface-visibility: hidden;
+  border-radius: 16px; padding: 2rem;
+  display: flex; flex-direction: column; justify-content: center;
+  align-items: center; text-align: center; font-size: 1.1rem; line-height: 1.6;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+.card-face::-webkit-scrollbar { width: 4px; }
+.card-face::-webkit-scrollbar-track { background: transparent; }
+.card-face::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 2px; }
+.card-front { background: linear-gradient(135deg, var(--c-surface, #1e293b), var(--c-surface-hover, #334155)); border: 1px solid var(--c-border, #475569); }
+.card-back {
+  background: linear-gradient(135deg, #0f3b3b, #1a4a4a);
+  border: 1px solid var(--c-accent, #22d3ee); transform: rotateY(180deg);
+}
+.light-theme .card-back {
+  background: linear-gradient(135deg, #e0f5f5, #cce8e8);
+  border: 1px solid #22d3ee;
+}
+.light-theme .card-back .label { color: #0d9488; }
+.light-theme .card-back .explanation { color: #1e293b; }
+.card-back .label {
+  font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--c-accent, #22d3ee); margin-bottom: 0.75rem;
+}
+.card-back .explanation {
+  font-size: 1rem; color: var(--c-text-muted, #94a3b8); margin-top: 1rem; max-width: 90%;
+}
+.tap-hint { font-size: 0.75rem; color: var(--c-text-muted, #64748b); margin-top: 0.75rem; text-align: center; }
+.fc-nav-bar {
+  display: flex; align-items: center; justify-content: center;
+  gap: 1rem; margin-top: 1.5rem;
+}
+.fc-nav-btn {
+  background: rgba(34,211,238,0.08); border: 1px solid rgba(34,211,238,0.25);
+  color: var(--c-accent, #22d3ee); padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer;
+  font-size: 0.9rem; font-weight: 600; transition: all 0.2s;
+}
+.fc-nav-btn:hover { background: rgba(34,211,238,0.15); border-color: var(--c-accent, #22d3ee); color: var(--c-text, #e2e8f0); }
+.fc-nav-btn:disabled { opacity: 0.3; cursor: default; background: var(--c-surface, #1e293b); border-color: var(--c-border, #475569); color: var(--c-text-muted, #94a3b8); }
+.fc-nav-btn:disabled:hover { background: var(--c-surface, #1e293b); border-color: var(--c-border, #475569); color: var(--c-text-muted, #94a3b8); }
+.fc-progress-text { color: var(--c-text-muted, #94a3b8); font-size: 0.85rem; min-width: 6rem; text-align: center; }
+.action-btns { display: flex; gap: 1rem; margin-top: 1rem; justify-content: center; }
+.action-btn {
+  padding: 0.6rem 1.5rem; border-radius: 10px; border: none;
+  font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+}
+.know-btn { background: #059669; color: #fff; }
+.know-btn:hover { background: #047857; }
+.review-btn { background: #dc2626; color: #fff; }
+.review-btn:hover { background: #b91c1c; }
+.card-stats { display: flex; gap: 1.5rem; margin-top: 1rem; justify-content: center; font-size: 0.85rem; }
+.card-stats span { color: var(--c-text-muted, #94a3b8); }
+.card-stats .known { color: #34d399; }
+.card-stats .review { color: #f87171; }
+.shuffle-btn {
+  background: rgba(34,211,238,0.08); border: 1px solid rgba(34,211,238,0.25);
+  color: var(--c-accent, #22d3ee); padding: 0.4rem 0.8rem; border-radius: 8px; cursor: pointer;
+  font-size: 0.8rem; font-weight: 600; transition: all 0.2s; margin-left: 0.5rem;
+}
+.shuffle-btn:hover { background: rgba(34,211,238,0.15); border-color: var(--c-accent, #22d3ee); color: var(--c-text, #e2e8f0); }
+
+/* ── Card Status Badge ── */
+.card-status-badge {
+  position: absolute; top: 12px; right: 12px;
+  font-size: 0.7rem; font-weight: 700; padding: 0.25rem 0.6rem;
+  border-radius: 999px; z-index: 2; pointer-events: none;
+  backdrop-filter: blur(4px);
+}
+.card-status-badge.known { background: rgba(5,150,105,0.85); color: #fff; }
+.card-status-badge.review { background: rgba(220,38,38,0.85); color: #fff; }
+
+.done-state {
+  display: none; text-align: center; padding: 3rem 1rem;
+}
+.done-state .emoji { font-size: 3rem; margin-bottom: 1rem; }
+.done-state .msg { font-size: 1.2rem; color: var(--c-text, #e2e8f0); margin-bottom: 0.5rem; }
+.done-state .sub { font-size: 0.85rem; color: var(--c-text-muted, #94a3b8); margin-bottom: 1.5rem; }
+.done-state .back-btn { display: inline-flex; }
+.shortcuts {
+  margin-top: 2rem; font-size: 0.75rem; color: var(--c-text-muted, #475569);
+  text-align: center; line-height: 1.8;
+}
+.shortcuts kbd {
+  background: var(--c-surface, #1e293b); border: 1px solid var(--c-border, #334155);
+  padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.7rem;
+}
+.empty-state { color: var(--c-text-muted, #64748b); text-align: center; padding: 3rem; font-size: 1.1rem; }
+.card-view { display: none; }
+.list-view { display: block; }
+
+/* ── Skeleton Loader ── */
+.skeleton {
+  background: linear-gradient(90deg, var(--c-surface, #1e293b) 25%, var(--c-surface-hover, #334155) 50%, var(--c-surface, #1e293b) 75%);
+  background-size: 200% 100%; animation: shimmer 1.5s infinite;
+  border-radius: 10px;
+}
+@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+.skeleton-row { height: 56px; margin-bottom: 0.5rem; }
+.skeleton-card { height: 320px; max-width: 480px; margin: 0 auto; }
+
+/* ── Mobile Responsive ── */
+@media (max-width: 480px) {
+  .card-container { height: 360px; }
+  .card-face { padding: 1.2rem; font-size: 1rem; }
+  .card-back .explanation { font-size: 0.85rem; }
+  .fc-nav-bar { gap: 0.5rem; }
+  .fc-nav-btn { padding: 0.5rem 0.9rem; font-size: 0.9rem; }
+  .action-btn { padding: 0.6rem 1.2rem; font-size: 0.9rem; }
+  .lesson-stats .stat-badge { font-size: 0.7rem; padding: 0.2rem 0.5rem; }
+  .progress-bar { width: 44px; }
+  .lesson-row { padding: 0.7rem 0.85rem; flex-wrap: wrap; }
+  .lesson-title { font-size: 0.95rem; }
+  .lesson-stats { width: 100%; justify-content: flex-end; margin-top: 0.3rem; gap: 0.5rem; }
+  .view-filter-btn { font-size: 0.75rem; padding: 0.35rem 0.8rem; }
+  .tap-hint { font-size: 0.8rem; }
+  .shortcuts { font-size: 0.8rem; }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="flashcard-page">
+  <div id="listView" class="list-view">
+    <h1>📇 Flashcards</h1>
+    <p class="subtitle">Pick a lesson to start revising</p>
+
+    <!-- View filter toggle -->
+    <div class="view-filter">
+      <button class="view-filter-btn active" id="viewAllBtn" onclick="setView('all')">📋 All Lessons</button>
+      <button class="view-filter-btn" id="viewTopicBtn" onclick="setView('topic')">📂 By Topic</button>
+    </div>
+
+    <div class="lesson-list" id="lessonList">
+      <div class="skeleton skeleton-row"></div>
+      <div class="skeleton skeleton-row"></div>
+      <div class="skeleton skeleton-row"></div>
+      <div class="skeleton skeleton-row"></div>
+      <div class="skeleton skeleton-row"></div>
+    </div>
+
+    <!-- Topic category view (hidden by default) -->
+    <div id="topicView" style="display:none;"></div>
+  </div>
+
+  <div id="cardView" class="card-view">
+    <button class="back-btn" onclick="showListView()">← Back to lessons</button>
+    <p class="subtitle" id="cardLessonTitle"></p>
+
+    <div id="cardArea">
+      <div class="card-container" onclick="flipCard()">
+        <div class="card" id="card">
+          <div class="card-face card-front" id="questionText">
+            <div class="skeleton skeleton-card"></div>
+          </div>
+          <div class="card-face card-back">
+            <div class="label">Answer</div>
+            <div id="answerText">...</div>
+            <div class="explanation" id="explanationText"></div>
+          </div>
+        </div>
+        <div class="card-status-badge" id="cardStatusBadge" style="display:none;"></div>
+      </div>
+      <div class="tap-hint">Tap card to flip</div>
+      <div class="fc-nav-bar">
+        <button class="fc-nav-btn" id="prevBtn" onclick="prevCard()">← Prev</button>
+        <span class="fc-progress-text" id="progressText">0 / 0</span>
+        <button class="fc-nav-btn" id="nextBtn" onclick="nextCard()">Next →</button>
+        <button class="shuffle-btn" onclick="shuffleCards()" title="Shuffle cards">🔀</button>
+      </div>
+      <div class="action-btns">
+        <button class="action-btn know-btn" onclick="markKnown()">✓ Know it</button>
+        <button class="action-btn review-btn" onclick="markReview()">✗ Review</button>
+      </div>
+      <div class="card-stats">
+        <span>Known: <strong class="known" id="knownCount">0</strong></span>
+        <span>To review: <strong class="review" id="reviewCount">0</strong></span>
+      </div>
+    </div>
+
+    <div class="done-state" id="doneState">
+      <div class="emoji">🎉</div>
+      <div class="msg">Lesson complete!</div>
+      <div class="sub">You've gone through all the cards. Great work!</div>
+      <button class="back-btn" onclick="showListView()">← Back to lessons</button>
+    </div>
+
+    <div class="shortcuts">
+      <kbd>←</kbd> / <kbd>→</kbd> Navigate &nbsp;·&nbsp; <kbd>Space</kbd> / <kbd>Enter</kbd> Flip &nbsp;·&nbsp; <kbd>K</kbd> Know &nbsp;·&nbsp; <kbd>R</kbd> Review &nbsp;·&nbsp; <kbd>Esc</kbd> Back
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+let cards = [];
+let currentIndex = 0;
+let known = {};
+let review = {};
+let currentLessonId = null;
+let savedScrollY = 0;
+let currentView = 'all';
+
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadLessonList();
+  document.addEventListener('keydown', function(e) {
+    if (document.getElementById('cardView').style.display !== 'block') return;
+    if (e.key === 'F1') { e.preventDefault(); toggleKbHelp(); return; }
+    if (e.key === 'F4') { e.preventDefault(); window.location.href = '/lessons'; return; }
+    if (e.key === 'F6') { e.preventDefault(); window.location.href = '/'; return; }
+    if (e.key === 'F7') { e.preventDefault(); window.location.href = '/review'; return; }
+    if (e.key === 'F8') { e.preventDefault(); window.location.href = '/progress'; return; }
+    if (e.key === 'ArrowLeft') prevCard();
+    else if (e.key === 'ArrowRight') nextCard();
+    else if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); flipCard(); }
+    else if (e.key === 'k' || e.key === 'K') markKnown();
+    else if (e.key === 'r' || e.key === 'R') markReview();
+    else if (e.key === 'Escape') showListView();
+  });
+});
+
+function setView(view) {
+  currentView = view;
+  document.getElementById('viewAllBtn').classList.toggle('active', view === 'all');
+  document.getElementById('viewTopicBtn').classList.toggle('active', view === 'topic');
+  document.getElementById('lessonList').style.display = view === 'all' ? 'flex' : 'none';
+  document.getElementById('topicView').style.display = view === 'topic' ? 'block' : 'none';
+  if (view === 'topic') renderTopicView();
+}
+
+async function loadLessonList() {
+  try {
+    const r = await fetch('/api/flashcard-progress');
+    const data = await r.json();
+    const list = document.getElementById('lessonList');
+    list.innerHTML = '';
+    var lastTopic = '';
+    for (const l of data) {
+      if (l.topic_code !== lastTopic) {
+        lastTopic = l.topic_code;
+        var hdr = document.createElement('div');
+        hdr.className = 'topic-header';
+        hdr.textContent = 'Topic ' + lastTopic;
+        list.appendChild(hdr);
+      }
+      const pct = l.total > 0 ? Math.round(((l.known + l.review) / l.total) * 100) : 0;
+      const row = document.createElement('a');
+      row.className = 'lesson-row';
+      row.href = '#';
+      row.onclick = (function(id, title) {
+        return function(e) { e.preventDefault(); openLesson(id, title); };
+      })(l.id, l.title);
+      row.innerHTML =
+        '<span class="topic-badge">' + l.topic_code + '</span>' +
+        '<div class="lesson-info">' +
+          '<div class="lesson-title">' + l.title + '</div>' +
+          '<div class="lesson-meta">' + l.total + ' questions</div>' +
+        '</div>' +
+        '<div class="lesson-stats">' +
+          '<div class="progress-bar">' +
+            (l.known > 0 && l.review > 0 ?
+              '<div class="progress-fill fc-known" style="width:' + Math.round((l.known / l.total) * 100) + '%"></div>' +
+              '<div class="progress-fill fc-review" style="width:' + Math.round((l.review / l.total) * 100) + '%"></div>'
+            : l.review > 0 ?
+              '<div class="progress-fill fc-review" style="width:' + pct + '%"></div>'
+            : l.known > 0 ?
+              '<div class="progress-fill fc-known" style="width:' + pct + '%"></div>'
+            : ''
+            ) +
+          '</div>' +
+          '<span class="stat-badge stat-known">' + l.known + ' ✓</span>' +
+          '<span class="stat-badge stat-review">' + l.review + ' ✗</span>' +
+        '</div>';
+      list.appendChild(row);
+    }
+    // Store data for topic view
+    window._flashcardData = data;
+  } catch (e) {
+    document.getElementById('lessonList').innerHTML = '<div class="empty-state">⚠️ Failed to load lessons. Is the server running?</div>';
+  }
+}
+
+function renderTopicView() {
+  var data = window._flashcardData || [];
+  if (!data.length) {
+    document.getElementById('topicView').innerHTML = '<div class="empty-state">No lessons loaded yet.</div>';
+    return;
+  }
+  // Group by topic_code
+  var topics = {};
+  for (var i = 0; i < data.length; i++) {
+    var l = data[i];
+    if (!topics[l.topic_code]) topics[l.topic_code] = [];
+    topics[l.topic_code].push(l);
+  }
+  var html = '';
+  var codes = Object.keys(topics).sort();
+  for (var t = 0; t < codes.length; t++) {
+    var code = codes[t];
+    var lessons = topics[code];
+    var totalKnown = 0, totalReview = 0, totalQ = 0;
+    for (var j = 0; j < lessons.length; j++) {
+      totalKnown += lessons[j].known;
+      totalReview += lessons[j].review;
+      totalQ += lessons[j].total;
+    }
+    var topicPct = totalQ > 0 ? Math.round(((totalKnown + totalReview) / totalQ) * 100) : 0;
+    html += '<div class="topic-category">' +
+      '<div class="topic-category-header" onclick="toggleTopic(this)">' +
+        '<span class="arrow">▶</span>' +
+        '<span class="tc-code">Topic ' + code + '</span>' +
+        '<span class="tc-title">' + getTopicTitle(code) + '</span>' +
+        '<span class="tc-count">' + totalKnown + ' ✓ / ' + totalReview + ' ✗</span>' +
+      '</div>' +
+      '<div class="topic-category-body">';
+    for (var j = 0; j < lessons.length; j++) {
+      var l = lessons[j];
+      var pct = l.total > 0 ? Math.round(((l.known + l.review) / l.total) * 100) : 0;
+      html += '<a href="#" class="lesson-row" onclick="(function(e){e.preventDefault();openLesson(' + l.id + ',\'' + l.title.replace(/'/g, "\\'") + '\')})(event)">' +
+        '<span class="topic-badge">' + l.topic_code + '</span>' +
+        '<div class="lesson-info">' +
+          '<div class="lesson-title">' + l.title + '</div>' +
+          '<div class="lesson-meta">' + l.total + ' questions</div>' +
+        '</div>' +
+        '<div class="lesson-stats">' +
+          '<div class="progress-bar">' +
+            (l.known > 0 && l.review > 0 ?
+              '<div class="progress-fill fc-known" style="width:' + Math.round((l.known / l.total) * 100) + '%"></div>' +
+              '<div class="progress-fill fc-review" style="width:' + Math.round((l.review / l.total) * 100) + '%"></div>'
+            : l.review > 0 ?
+              '<div class="progress-fill fc-review" style="width:' + pct + '%"></div>'
+            : l.known > 0 ?
+              '<div class="progress-fill fc-known" style="width:' + pct + '%"></div>'
+            : ''
+            ) +
+          '</div>' +
+          '<span class="stat-badge stat-known">' + l.known + ' ✓</span>' +
+          '<span class="stat-badge stat-review">' + l.review + ' ✗</span>' +
+        '</div></a>';
+    }
+    html += '</div></div>';
+  }
+  document.getElementById('topicView').innerHTML = html;
+}
+
+function getTopicTitle(code) {
+  var titles = {
+    '1.1': 'Systems Architecture',
+    '1.2': 'Memory and Storage',
+    '1.3': 'Networks and Protocols',
+    '1.4': 'Network Security',
+    '1.5': 'Systems Software',
+    '1.6': 'Ethical, Legal and Cultural',
+    '2.1': 'Algorithms',
+    '2.2': 'Programming Fundamentals',
+    '2.3': 'Robust Programs',
+    '2.4': 'Boolean Logic',
+    '2.5': 'Languages and IDEs'
+  };
+  return titles[code] || '';
+}
+
+function toggleTopic(header) {
+  header.classList.toggle('open');
+  var body = header.nextElementSibling;
+  body.classList.toggle('open');
+}
+
+async function openLesson(lessonId, title) {
+  // Save scroll position
+  savedScrollY = window.scrollY;
+  document.getElementById('cardLessonTitle').textContent = title;
+  currentLessonId = lessonId;
+  // Show skeleton while loading
+  document.getElementById('questionText').innerHTML = '<div class="skeleton skeleton-card"></div>';
+  document.getElementById('answerText').textContent = '...';
+  document.getElementById('explanationText').textContent = '';
+  try {
+    const r = await fetch('/api/flashcards/' + lessonId);
+    const data = await r.json();
+    cards = data.cards || data;
+    currentIndex = 0;
+    known = {};
+    review = {};
+    try {
+      const sr = await fetch('/api/flashcard-status/' + lessonId);
+      const statuses = await sr.json();
+      for (const [qid, st] of Object.entries(statuses)) {
+        if (st === 'known') known[parseInt(qid)] = true;
+        else if (st === 'review') review[parseInt(qid)] = true;
+      }
+    } catch (e) { }
+    showCard();
+    showCardView();
+  } catch (e) {
+    alert('Failed to load cards');
+  }
+}
+
+function showCardView() {
+  document.getElementById('listView').style.display = 'none';
+  document.getElementById('cardView').style.display = 'block';
+}
+
+function showListView() {
+  document.getElementById('cardView').style.display = 'none';
+  document.getElementById('listView').style.display = 'block';
+  loadLessonList();
+  // Restore scroll position
+  if (savedScrollY > 0) {
+    setTimeout(function() { window.scrollTo(0, savedScrollY); }, 50);
+  }
+}
+
+function showCard() {
+  if (cards.length === 0) return;
+  if (currentIndex >= cards.length) {
+    document.getElementById('cardArea').style.display = 'none';
+    document.getElementById('doneState').style.display = 'block';
+    return;
+  }
+  document.getElementById('cardArea').style.display = 'block';
+  document.getElementById('doneState').style.display = 'none';
+  const card = cards[currentIndex];
+  document.getElementById('questionText').innerHTML = card.question;
+  document.getElementById('answerText').textContent = card.options[card.answer];
+  document.getElementById('explanationText').innerHTML = card.explanation || '';
+  document.getElementById('progressText').textContent = (currentIndex + 1) + ' / ' + cards.length;
+  document.getElementById('card').classList.remove('flipped');
+  document.getElementById('prevBtn').disabled = currentIndex === 0;
+  document.getElementById('nextBtn').disabled = currentIndex === cards.length - 1;
+  updateStats();
+  updateCardStatusBadge();
+}
+
+function updateCardStatusBadge() {
+  var badge = document.getElementById('cardStatusBadge');
+  var id = cards[currentIndex].id;
+  if (known[id]) {
+    badge.textContent = '✓ Known';
+    badge.className = 'card-status-badge known';
+    badge.style.display = '';
+  } else if (review[id]) {
+    badge.textContent = '✗ Review';
+    badge.className = 'card-status-badge review';
+    badge.style.display = '';
+  } else {
+    badge.style.display = 'none';
+  }
+}
+
+function flipCard() { document.getElementById('card').classList.toggle('flipped'); }
+function prevCard() { if (currentIndex > 0) { currentIndex--; showCard(); } }
+function nextCard() { if (currentIndex < cards.length - 1) { currentIndex++; showCard(); } }
+
+function shuffleCards() {
+  for (var i = cards.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = cards[i]; cards[i] = cards[j]; cards[j] = tmp;
+  }
+  currentIndex = 0;
+  showCard();
+}
+
+function markKnown() {
+  const id = cards[currentIndex].id;
+  known[id] = true;
+  delete review[id];
+  updateStats();
+  updateCardStatusBadge();
+  fetch('/api/flashcard-status', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({question_id: id, status: 'known'})
+  }).catch(function() {});
+  if (currentIndex < cards.length - 1) setTimeout(function() { nextCard(); }, 200);
+  else setTimeout(function() { showCard(); }, 200);
+}
+
+function markReview() {
+  const id = cards[currentIndex].id;
+  review[id] = true;
+  delete known[id];
+  updateStats();
+  updateCardStatusBadge();
+  fetch('/api/flashcard-status', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({question_id: id, status: 'review'})
+  }).catch(function() {});
+  if (currentIndex < cards.length - 1) setTimeout(function() { nextCard(); }, 200);
+  else setTimeout(function() { showCard(); }, 200);
+}
+
+function updateStats() {
+  document.getElementById('knownCount').textContent = Object.keys(known).length;
+  document.getElementById('reviewCount').textContent = Object.keys(review).length;
+}
+</script>
+{% endblock %}

@@ -1,0 +1,7 @@
+*.bak
+*.db
+*.db-shm
+*.db-wal
+*.pyc
+__pycache__/
+gcsecs.db

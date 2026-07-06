@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Page Not Found — WLV Computer Science{% endblock %}
+{% block content %}
+<main>
+  <div style="text-align:center;padding:80px 20px;max-width:500px;margin:0 auto;">
+    <div style="font-size:64px;margin-bottom:16px;">🔍</div>
+    <h1 style="font-size:28px;margin-bottom:8px;color:var(--c-heading);">Page Not Found</h1>
+    <p style="color:var(--c-text-secondary);font-size:15px;margin-bottom:24px;line-height:1.6;">
+      The page you're looking for doesn't exist or has been moved.<br>
+      Try searching or head back to the homepage.
+    </p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a href="/" class="btn btn-primary">🏠 Home</a>
+      <a href="/lessons" class="btn">📖 Browse Lessons</a>
+      <a href="/search" class="btn">🔍 Search</a>
+    </div>
+  </div>
+</main>
+{% endblock %}

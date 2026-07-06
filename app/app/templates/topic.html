@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+{% block title %}{{ icon }} {{ topic.title }} &mdash; WLV Computer Science{% endblock %}
+{% block content %}
+<style>
+/* Progress bar inside lesson cards */
+.lesson-progress-bar { height: 5px; background: var(--c-border); border-radius: 3px; width: 100%; margin: 6px 0; }
+.lesson-progress-fill { height: 100%; background: var(--c-accent); border-radius: 3px; transition: width 0.3s; }
+.lesson-progress-fill.complete { background: var(--c-green); }
+.lesson-mastery-text { font-size: 12px; color: var(--c-text-muted); margin-top: 2px; }
+@media (max-width: 640px) {
+  .btn-desktop { display: none !important; }
+}
+/* ── Match Exercise ── */
+.match-section { margin-top: 40px; padding-top: 32px; border-top: 2px solid var(--c-border); }
+.match-section h2 { font-size: 22px; color: var(--c-heading); margin-bottom: 4px; }
+.match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+@media (max-width: 600px) { .match-grid { grid-template-columns: 1fr; } }
+.match-item { padding: 12px 16px; border-radius: var(--r-lg); border: 2px solid var(--c-border); background: rgba(13,18,37,0.8); cursor: pointer; transition: all 0.15s; text-align: center; font-size: 14px; font-weight: 600; }
+.light-theme .match-item { background: rgba(243,244,246,0.8); }
+.match-item:hover { border-color: var(--c-accent); }
+.match-item.selected { border-color: var(--c-accent); background: rgba(8,41,73,0.85); }
+.match-item.matched { border-color: var(--c-green); background: rgba(2,44,34,0.5); color: var(--c-green); cursor: default; }
+.match-item.wrong { border-color: var(--c-rose); background: rgba(69,10,10,0.5); color: var(--c-rose); animation: shake 0.3s; }
+.match-desc { font-size: 12px; color: var(--c-text-secondary); margin-top: 4px; font-weight: 400; }
+@keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
+</style>
+<div class="breadcrumb">
+    <a href="/">&#127968; Home</a> <span class="sep">&#8250;</span>
+    <span>{{ icon }} {{ topic.title }}</span>
+</div>
+<div class="topic-header">
+    <h1>{{ icon }} {{ topic.title }}</h1>
+    <p class="topic-desc">{{ topic.description }}</p>
+    <div class="topic-badges">
+        <span class="badge">&#128194; Component {{ topic.component }}</span>
+        <span class="badge">&#128214; {{ lessons|length }} lessons</span>
+    </div>
+</div>
+<h2 class="section-title">&#128214; Lessons</h2>
+<div class="lesson-list">
+{% for lesson in lessons %}
+{% set lp = lesson_progress.get(lesson.id|string, {'mastered': 0, 'attempted': 0, 'total': lesson.question_count}) %}
+<a href="/lesson/{{ lesson.id }}" class="lesson-card">
+    <div class="lesson-info">
+        <h3>{{ lesson.title }}</h3>
+        <div class="lesson-meta">{{ lesson.question_count }} questions</div>
+        {% if lesson.question_count > 0 %}
+        <div class="lesson-progress-bar"><div class="lesson-progress-fill {% if lp.mastered >= lp.total %}complete{% endif %}" style="width:{% if lp.total > 0 %}{{ (lp.mastered / lp.total * 100)|round }}%{% else %}0%{% endif %}"></div></div>
+        <div class="lesson-mastery-text">&#127919; {{ lp.mastered }}/{{ lp.total }} mastered{% if lp.attempted > 0 %} &middot; &#128221; {{ lp.attempted }} attempted{% endif %}</div>
+        {% endif %}
+    </div>
+    <span class="btn-desktop btn btn-primary btn-sm">Start &rarr;</span>
+</a>
+{% else %}
+<p>No lessons yet for this topic.</p>
+{% endfor %}
+</div>
+
+{% if topic.code == '1.2' %}
+<!-- ── Match: Storage Type → Characteristic ── -->
+<div class="match-section">
+    <h2>🧩 Match the Storage Type to Its Characteristic</h2>
+    <p style="font-size:13px;color:var(--c-text-secondary);margin-bottom:12px;">Click a storage type on the left, then click its characteristic on the right.</p>
+    <div class="match-grid" id="matchStorage">
+        <div class="match-item" data-pair="0" onclick="topicMatchSelect('desc', 0)">HDD (Hard Disk Drive)<div class="match-desc">Click me, then click its characteristic</div></div>
+        <div class="match-item" data-pair="0" onclick="topicMatchSelect('trans', 0)">Magnetic spinning platters, large capacity, low cost per GB<div class="match-desc">Traditional storage in desktops</div></div>
+        <div class="match-item" data-pair="1" onclick="topicMatchSelect('desc', 1)">SSD (Solid State Drive)<div class="match-desc">Click me, then click its characteristic</div></div>
+        <div class="match-item" data-pair="1" onclick="topicMatchSelect('trans', 1)">Flash memory, no moving parts, fast and durable<div class="match-desc">Modern storage in laptops</div></div>
+        <div class="match-item" data-pair="2" onclick="topicMatchSelect('desc', 2)">Optical Disc (CD/DVD/BD)<div class="match-desc">Click me, then click its characteristic</div></div>
+        <div class="match-item" data-pair="2" onclick="topicMatchSelect('trans', 2)">Laser-read pits and lands, cheap to produce, portable<div class="match-desc">Used for media distribution</div></div>
+        <div class="match-item" data-pair="3" onclick="topicMatchSelect('desc', 3)">Magnetic Tape<div class="match-desc">Click me, then click its characteristic</div></div>
+        <div class="match-item" data-pair="3" onclick="topicMatchSelect('trans', 3)">Very high capacity, very slow, best for backup/archiving<div class="match-desc">Enterprise backup solution</div></div>
+        <div class="match-item" data-pair="4" onclick="topicMatchSelect('desc', 4)">RAM<div class="match-desc">Click me, then click its characteristic</div></div>
+        <div class="match-item" data-pair="4" onclick="topicMatchSelect('trans', 4)">Volatile, stores running programs and data<div class="match-desc">Temporary working memory</div></div>
+        <div class="match-item" data-pair="5" onclick="topicMatchSelect('desc', 5)">ROM<div class="match-desc">Click me, then click its characteristic</div></div>
+        <div class="match-item" data-pair="5" onclick="topicMatchSelect('trans', 5)">Non-volatile, stores boot instructions (BIOS/UEFI)<div class="match-desc">Permanent startup firmware</div></div>
+    </div>
+    <div id="topicMatchFeedback" style="margin-top:12px;font-size:14px;font-weight:600;text-align:center;display:none;"></div>
+</div>
+
+<!-- ── Key Terminology: Storage ── -->
+<div class="match-section">
+    <h2>📖 Key Terminology for This Topic</h2>
+    <p style="font-size:13px;color:var(--c-text-secondary);margin-bottom:12px;">Exam-grade terms for Memory and Storage.</p>
+    <div class="ref-terms-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-top:16px;">
+        <div class="ref-term-card" style="padding:14px 16px;border-radius:var(--r-lg);border:1px solid rgba(34,211,238,0.1);background:rgba(8,11,20,0.4);"><span class="term-badge" style="display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;background:rgba(168,85,247,0.12);color:#a855f7;border:1px solid rgba(168,85,247,0.15);margin-bottom:6px;">Volatile</span><div class="term-def" style="font-size:13px;color:var(--c-text-secondary);line-height:1.5;">Memory that loses its contents when power is turned off. RAM is volatile.</div></div>
+        <div class="ref-term-card" style="padding:14px 16px;border-radius:var(--r-lg);border:1px solid rgba(34,211,238,0.1);background:rgba(8,11,20,0.4);"><span class="term-badge" style="display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;background:rgba(168,85,247,0.12);color:#a855f7;border:1px solid rgba(168,85,247,0.15);margin-bottom:6px;">Non-Volatile</span><div class="term-def" style="font-size:13px;color:var(--c-text-secondary);line-height:1.5;">Memory that retains data when power is off. ROM, HDD, and SSD are non-volatile.</div></div>
+        <div class="ref-term-card" style="padding:14px 16px;border-radius:var(--r-lg);border:1px solid rgba(34,211,238,0.1);background:rgba(8,11,20,0.4);"><span class="term-badge" style="display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;background:rgba(168,85,247,0.12);color:#a855f7;border:1px solid rgba(168,85,247,0.15);margin-bottom:6px;">Defragmentation</span><div class="term-def" style="font-size:13px;color:var(--c-text-secondary);line-height:1.5;">Reorganising data on an HDD so related data is stored contiguously, improving read speed.</div></div>
+        <div class="ref-term-card" style="padding:14px 16px;border-radius:var(--r-lg);border:1px solid rgba(34,211,238,0.1);background:rgba(8,11,20,0.4);"><span class="term-badge" style="display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;background:rgba(168,85,247,0.12);color:#a855f7;border:1px solid rgba(168,85,247,0.15);margin-bottom:6px;">Flash Memory</span><div class="term-def" style="font-size:13px;color:var(--c-text-secondary);line-height:1.5;">A type of non-volatile memory used in SSDs. No moving parts, fast access times.</div></div>
+        <div class="ref-term-card" style="padding:14px 16px;border-radius:var(--r-lg);border:1px solid rgba(34,211,238,0.1);background:rgba(8,11,20,0.4);"><span class="term-badge" style="display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;background:rgba(168,85,247,0.12);color:#a855f7;border:1px solid rgba(168,85,247,0.15);margin-bottom:6px;">Firmware</span><div class="term-def" style="font-size:13px;color:var(--c-text-secondary);line-height:1.5;">Software permanently stored in ROM, such as BIOS/UEFI. Provides low-level hardware control.</div></div>
+        <div class="ref-term-card" style="padding:14px 16px;border-radius:var(--r-lg);border:1px solid rgba(34,211,238,0.1);background:rgba(8,11,20,0.4);"><span class="term-badge" style="display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;background:rgba(168,85,247,0.12);color:#a855f7;border:1px solid rgba(168,85,247,0.15);margin-bottom:6px;">Virtual Memory</span><div class="term-def" style="font-size:13px;color:var(--c-text-secondary);line-height:1.5;">Using part of the HDD/SSD as extra RAM when physical RAM is full. Slower than real RAM.</div></div>
+    </div>
+</div>
+{% endif %}
+
+{% if topic.code == '1.4' %}
+<!-- ── Match: Threat → Prevention ── -->
+<div class="match-section">
+    <h2>🧩 Match the Security Threat to Its Prevention</h2>
+    <p style="font-size:13px;color:var(--c-text-secondary);margin-bottom:12px;">Click a threat on the left, then click its prevention method on the right.</p>
+    <div class="match-grid" id="matchThreats">
+        <div class="match-item" data-pair="0" onclick="topicMatchSelect('desc', 0)">Malware (virus, worm, trojan)<div class="match-desc">Click me, then click its prevention</div></div>
+        <div class="match-item" data-pair="0" onclick="topicMatchSelect('trans', 0)">Anti-malware software, regular updates<div class="match-desc">Protects against malicious software</div></div>
+        <div class="match-item" data-pair="1" onclick="topicMatchSelect('desc', 1)">Phishing (fake emails)<div class="match-desc">Click me, then click its prevention</div></div>
+        <div class="match-item" data-pair="1" onclick="topicMatchSelect('trans', 1)">User training, awareness, email filtering<div class="match-desc">Don't click suspicious links</div></div>
+        <div class="match-item" data-pair="2" onclick="topicMatchSelect('desc', 2)">Brute-force attack<div class="match-desc">Click me, then click its prevention</div></div>
+        <div class="match-item" data-pair="2" onclick="topicMatchSelect('trans', 2)">Strong passwords, account lockout policy<div class="match-desc">Prevents guessing passwords</div></div>
+        <div class="match-item" data-pair="3" onclick="topicMatchSelect('desc', 3)">DoS / DDoS attack<div class="match-desc">Click me, then click its prevention</div></div>
+        <div class="match-item" data-pair="3" onclick="topicMatchSelect('trans', 3)">Firewall, traffic filtering, load balancing<div class="match-desc">Prevents overwhelming the server</div></div>
+        <div class="match-item" data-pair="4" onclick="topicMatchSelect('desc', 4)">Data interception (packet sniffing)<div class="match-desc">Click me, then click its prevention</div></div>
+        <div class="match-item" data-pair="4" onclick="topicMatchSelect('trans', 4)">Encryption (HTTPS, VPN)<div class="match-desc">Scrambles data so it can't be read</div></div>
+        <div class="match-item" data-pair="5" onclick="topicMatchSelect('desc', 5)">SQL injection<div class="match-desc">Click me, then click its prevention</div></div>
+        <div class="match-item" data-pair="5" onclick="topicMatchSelect('trans', 5)">Input validation, parameterised queries<div class="match-desc">Prevents database manipulation</div></div>
+        <div class="match-item" data-pair="6" onclick="topicMatchSelect('desc', 6)">Unauthorised access<div class="match-desc">Click me, then click its prevention</div></div>
+        <div class="match-item" data-pair="6" onclick="topicMatchSelect('trans', 6)">User access levels, authentication<div class="match-desc">Only authorised users get access</div></div>
+    </div>
+    <div id="topicMatchFeedback" style="margin-top:12px;font-size:14px;font-weight:600;text-align:center;display:none;"></div>
+</div>
+
+<!-- ── Key Terminology: Security ── -->
+<div class="match-section">
+    <h2>📖 Key Terminology for This Topic</h2>
+    <p style="font-size:13px;color:var(--c-text-secondary);margin-bottom:12px;">Exam-grade terms for Network Security.</p>
+    <div class="ref-terms-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-top:16px;">
+        <div class="ref-term-card" style="padding:14px 16px;border-radius:var(--r-lg);border:1px solid rgba(34,211,238,0.1);background:rgba(8,11,20,0.4);"><span class="term-badge" style="display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;background:rgba(168,85,247,0.12);color:#a855f7;border:1px solid rgba(168,85,247,0.15);margin-bottom:6px;">Malware</span><div class="term-def" style="font-size:13px;color:var(--c-text-secondary);line-height:1.5;">Malicious software designed to harm a computer system. Includes viruses, worms, and trojans.</div></div>
+        <div class="ref-term-card" style="padding:14px 16px;border-radius:var(--r-lg);border:1px solid rgba(34,211,238,0.1);background:rgba(8,11,20,0.4);"><span class="term-badge" style="display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;background:rgba(168,85,247,0.12);color:#a855f7;border:1px solid rgba(168,85,247,0.15);margin-bottom:6px;">Phishing</span><div class="term-def" style="font-size:13px;color:var(--c-text-secondary);line-height:1.5;">A social engineering attack where fake emails trick users into revealing personal information.</div></div>
+        <div class="ref-term-card" style="padding:14px 16px;border-radius:var(--r-lg);border:1px solid rgba(34,211,238,0.1);background:rgba(8,11,20,0.4);"><span class="term-badge" style="display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;background:rgba(168,85,247,0.12);color:#a855f7;border:1px solid rgba(168,85,247,0.15);margin-bottom:6px;">Firewall</span><div class="term-def" style="font-size:13px;color:var(--c-text-secondary);line-height:1.5;">Software or hardware that monitors and controls incoming and outgoing network traffic based on security rules.</div></div>
+        <div class="ref-term-card" style="padding:14px 16px;border-radius:var(--r-lg);border:1px solid rgba(34,211,238,0.1);background:rgba(8,11,20,0.4);"><span class="term-badge" style="display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;background:rgba(168,85,247,0.12);color:#a855f7;border:1px solid rgba(168,85,247,0.15);margin-bottom:6px;">Encryption</span><div class="term-def" style="font-size:13px;color:var(--c-text-secondary);line-height:1.5;">Scrambling data so it can only be read by someone with the correct decryption key.</div></div>
+        <div class="ref-term-card" style="padding:14px 16px;border-radius:var(--r-lg);border:1px solid rgba(34,211,238,0.1);background:rgba(8,11,20,0.4);"><span class="term-badge" style="display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;background:rgba(168,85,247,0.12);color:#a855f7;border:1px solid rgba(168,85,247,0.15);margin-bottom:6px;">SQL Injection</span><div class="term-def" style="font-size:13px;color:var(--c-text-secondary);line-height:1.5;">An attack where malicious SQL code is inserted into input fields to manipulate a database.</div></div>
+        <div class="ref-term-card" style="padding:14px 16px;border-radius:var(--r-lg);border:1px solid rgba(34,211,238,0.1);background:rgba(8,11,20,0.4);"><span class="term-badge" style="display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;background:rgba(168,85,247,0.12);color:#a855f7;border:1px solid rgba(168,85,247,0.15);margin-bottom:6px;">Penetration Testing</span><div class="term-def" style="font-size:13px;color:var(--c-text-secondary);line-height:1.5;">Authorised simulated attacks on a system to identify security vulnerabilities before criminals do.</div></div>
+    </div>
+</div>
+{% endif %}
+
+<script>
+let topicMatchSelected = null;
+function topicMatchSelect(type, pair) {
+    const items = document.querySelectorAll('.match-item');
+    if (topicMatchSelected === null) {
+        items.forEach(i => i.classList.remove('selected', 'wrong'));
+        const el = document.querySelector(`.match-item[data-pair="${pair}"][onclick*="'${type}'"]`);
+        if (el && !el.classList.contains('matched')) {
+            el.classList.add('selected');
+            topicMatchSelected = {type, pair, el};
+        }
+    } else {
+        const el = document.querySelector(`.match-item[data-pair="${pair}"][onclick*="'${type}'"]`);
+        if (!el || el.classList.contains('matched')) { topicMatchSelected = null; return; }
+        if (topicMatchSelected.type === type) { topicMatchSelected.el.classList.remove('selected'); topicMatchSelected = null; return; }
+        if (topicMatchSelected.pair === pair) {
+            topicMatchSelected.el.classList.remove('selected');
+            topicMatchSelected.el.classList.add('matched');
+            el.classList.add('matched');
+            const fb = document.getElementById('topicMatchFeedback');
+            fb.textContent = '✅ Correct!';
+            fb.style.display = 'block';
+            fb.style.color = 'var(--c-green)';
+        } else {
+            el.classList.add('wrong');
+            topicMatchSelected.el.classList.add('wrong');
+            const fb = document.getElementById('topicMatchFeedback');
+            fb.textContent = '❌ Not quite — try again!';
+            fb.style.display = 'block';
+            fb.style.color = 'var(--c-rose)';
+            setTimeout(() => { el.classList.remove('wrong'); topicMatchSelected.el.classList.remove('wrong'); }, 500);
+        }
+        topicMatchSelected = null;
+    }
+}
+</script>
+{% endblock %}

@@ -1,0 +1,628 @@
+{% extends "base.html" %}
+{% block title %}Languages & IDEs | WLV Computer Science{% endblock %}
+{% block content %}
+<div class="hero" style="padding: 30px 0 15px;">
+    <h1>🔤 Programming Languages & IDEs</h1>
+</div>
+
+<style>
+    .lang-intro {
+        max-width: 960px; margin: 0 auto 20px; padding: 20px 24px;
+        background: rgba(17, 24, 39, 0.7); border: 1px solid rgba(34, 211, 238, 0.12);
+        border-radius: var(--r-xl); line-height: 1.7; font-size: 14px;
+    }
+    .light-theme .lang-intro {
+        background: rgba(255, 255, 255, 0.8); border-color: rgba(8, 145, 178, 0.15);
+    }
+    .lang-intro h3 { color: var(--c-heading); margin-bottom: 8px; font-size: 17px; }
+    .lang-container { max-width: 960px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+
+    .lang-section {
+        background: rgba(17, 24, 39, 0.85); border: 1px solid rgba(34, 211, 238, 0.12);
+        border-radius: var(--r-xl); overflow: hidden;
+    }
+    .light-theme .lang-section { background: rgba(255, 255, 255, 0.9); border-color: rgba(8, 145, 178, 0.12); }
+    .lang-section-header {
+        padding: 14px 20px; background: rgba(8, 11, 20, 0.4);
+        border-bottom: 1px solid rgba(34, 211, 238, 0.08);
+        font-size: 17px; font-weight: 700; color: var(--c-heading);
+        cursor: pointer; user-select: none;
+        display: flex; justify-content: space-between; align-items: center;
+    }
+    .light-theme .lang-section-header { background: rgba(0, 0, 0, 0.03); }
+    .lang-section-header .toggle-icon { font-size: 14px; color: var(--c-text-secondary); transition: transform 0.2s; }
+    .lang-section-header.open .toggle-icon { transform: rotate(180deg); }
+    .lang-section-body { padding: 20px; display: none; }
+    .lang-section-body.open { display: block; }
+
+    .lang-table { width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 16px; }
+    .lang-table:last-child { margin-bottom: 0; }
+    .lang-table th {
+        background: rgba(34, 211, 238, 0.06); color: var(--c-accent);
+        padding: 10px 14px; text-align: left; border-bottom: 2px solid var(--c-border); font-weight: 700;
+    }
+    .lang-table td {
+        padding: 10px 14px; border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        color: var(--c-text); line-height: 1.5;
+    }
+    .light-theme .lang-table td { border-color: rgba(0, 0, 0, 0.04); }
+    .lang-table tr:hover td { background: rgba(34, 211, 238, 0.02); }
+    .lang-table .tag {
+        display: inline-block; font-size: 11px; font-weight: 700;
+        padding: 2px 8px; border-radius: 99px; margin-right: 4px;
+    }
+    .lang-table .tag-green { background: rgba(52, 211, 153, 0.12); color: #34d399; }
+    .lang-table .tag-amber { background: rgba(250, 204, 21, 0.12); color: #facc15; }
+    .lang-table .tag-red { background: rgba(244, 63, 94, 0.12); color: #f43f5e; }
+    .lang-table .tag-purple { background: rgba(168, 85, 247, 0.12); color: #a855f7; }
+
+    .lang-card-grid {
+        display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px;
+    }
+    .lang-card {
+        padding: 16px; border-radius: var(--r-lg);
+        border: 1px solid rgba(34, 211, 238, 0.1); background: rgba(8, 11, 20, 0.4);
+    }
+    .light-theme .lang-card { background: rgba(0, 0, 0, 0.03); }
+    .lang-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+    .lang-card p { font-size: 13px; line-height: 1.5; color: var(--c-text-secondary); }
+    .lang-card .card-icon { font-size: 28px; margin-bottom: 6px; display: block; }
+
+    .lang-mnemonic {
+        margin-top: 12px; padding: 10px 14px;
+        background: rgba(250, 204, 21, 0.06); border-left: 3px solid #facc15;
+        border-radius: 0 var(--r-md) var(--r-md) 0; font-size: 13px; line-height: 1.6;
+    }
+    .lang-mnemonic strong { color: #facc15; }
+
+    /* ── Quiz Section ── */
+    .lang-quiz-section { margin-top: 40px; padding-top: 32px; border-top: 2px solid var(--c-border); max-width: 960px; margin-left: auto; margin-right: auto; }
+    .lang-quiz-section h2 { font-size: 22px; color: var(--c-heading); margin-bottom: 4px; }
+    .lang-quiz-section .quiz-sub { font-size: 13px; color: var(--c-text-secondary); margin-bottom: 20px; }
+    .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 8px; }
+    .quiz-progress-bar { height: 6px; background: var(--c-border); border-radius: 3px; flex: 1; min-width: 100px; max-width: 400px; }
+    .quiz-progress-fill { height: 100%; background: var(--c-accent); border-radius: 3px; transition: width 0.3s ease; }
+    .quiz-score-running { font-size: 14px; color: var(--c-text-secondary); font-weight: 500; }
+    .quiz-tab { display: none; }
+    .quiz-tab.active { display: block; }
+    .quiz-counter { text-align: center; font-size: 14px; font-weight: 700; color: var(--c-accent); margin: 8px 0 16px; letter-spacing: 1px; }
+    .quiz-nav { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 20px 0 12px; }
+    .quiz-nav-btn { padding: 8px 16px; border-radius: 8px; border: 1px solid var(--c-border); background: rgba(17,24,39,0.88); color: var(--c-text); font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.15s; white-space: nowrap; }
+    .light-theme .quiz-nav-btn { background: rgba(243,244,246,0.88); }
+    .quiz-nav-btn:hover { border-color: var(--c-accent); }
+    .quiz-nav-btn:disabled { opacity: 0.3; cursor: default; }
+    .quiz-dots { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+    .quiz-dot { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; cursor: pointer; background: rgba(17,24,39,0.6); border: 2px solid var(--c-border); color: var(--c-text-secondary); transition: all 0.15s; }
+    .light-theme .quiz-dot { background: rgba(243,244,246,0.6); }
+    .quiz-dot:hover { border-color: var(--c-accent); color: var(--c-text); }
+    .quiz-dot.active { border-color: var(--c-accent); background: var(--c-accent); color: #000; }
+    .quiz-dot.answered { border-color: var(--c-green); background: rgba(52,211,153,0.15); color: var(--c-green); }
+    .lang-quiz-question { margin-bottom: 20px; padding: 18px 20px; background: rgba(13,18,37,0.8); border-radius: var(--r-xl); border: 1px solid rgba(34,211,238,0.10); }
+    .light-theme .lang-quiz-question { background: rgba(243,244,246,0.8); }
+    .lang-quiz-q { font-weight: 600; font-size: 15px; margin-bottom: 12px; color: var(--c-text); }
+    .lang-quiz-opt { display: block; width: 100%; text-align: left; padding: 10px 14px; margin: 5px 0; background: rgba(17,24,39,0.88); color: var(--c-text); border: 2px solid var(--c-border); border-radius: 10px; font-size: 14px; cursor: pointer; transition: all 0.15s; }
+    .light-theme .lang-quiz-opt { background: rgba(255,255,255,0.88); }
+    .lang-quiz-opt:hover { border-color: var(--c-accent); }
+    .lang-quiz-opt.selected { border-color: var(--c-accent); background: rgba(8,41,73,0.85); }
+    .light-theme .lang-quiz-opt.selected { background: rgba(236,254,255,0.85); }
+    .lang-quiz-opt.correct { border-color: var(--c-green); background: rgba(2,44,34,0.75); color: var(--c-green); }
+    .lang-quiz-opt.incorrect { border-color: var(--c-rose); background: rgba(69,10,10,0.75); color: var(--c-rose); }
+    .lang-quiz-exp { display: none; margin-top: 10px; padding: 10px 14px; background: rgba(8,41,73,0.7); border-radius: 8px; font-size: 13px; border-left: 3px solid var(--c-accent); line-height: 1.5; }
+    .light-theme .lang-quiz-exp { background: rgba(236,254,255,0.7); }
+    .lang-quiz-exp.show { display: block; }
+    .lang-quiz-score { margin-top: 20px; padding: 16px; border-radius: 12px; text-align: center; border: 2px solid var(--c-green); background: rgba(2,44,34,0.3); font-size: 18px; font-weight: 700; display: none; }
+    .light-theme .lang-quiz-score { background: rgba(240,253,244,0.5); }
+    .lang-quiz-score.show { display: block; }
+
+    /* ── Key Terminology ── */
+    .lang-terms-section { margin-top: 40px; padding-top: 32px; border-top: 2px solid var(--c-border); max-width: 960px; margin-left: auto; margin-right: auto; }
+    .lang-terms-section h2 { font-size: 22px; color: var(--c-heading); margin-bottom: 4px; }
+    .lang-terms-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; margin-top: 16px; }
+    .lang-term-card { padding: 14px 16px; border-radius: var(--r-lg); border: 1px solid rgba(34,211,238,0.1); background: rgba(8,11,20,0.4); }
+    .light-theme .lang-term-card { background: rgba(0,0,0,0.03); }
+    .lang-term-card .term-badge { display: inline-block; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 99px; background: rgba(168,85,247,0.12); color: #a855f7; border: 1px solid rgba(168,85,247,0.15); margin-bottom: 6px; }
+    .lang-term-card .term-def { font-size: 13px; color: var(--c-text-secondary); line-height: 1.5; }
+
+    /* ── Podcast ── */
+    .lang-podcast { max-width: 960px; margin: 32px auto 0; padding: 16px 20px; background: rgba(34,211,238,0.04); border: 1px solid rgba(34,211,238,0.12); border-radius: 12px; }
+    .lang-podcast .podcast-header { font-size: 15px; font-weight: 600; color: var(--c-accent); margin-bottom: 10px; }
+    .lang-podcast audio { border-radius: 8px; background: rgba(17,24,39,0.6); width: 100%; }
+    .light-theme .lang-podcast audio { background: rgba(243,244,246,0.6); }
+
+    /* ── Match Exercise ── */
+    .lang-match-section { margin-top: 40px; padding-top: 32px; border-top: 2px solid var(--c-border); max-width: 960px; margin-left: auto; margin-right: auto; }
+    .lang-match-section h2 { font-size: 22px; color: var(--c-heading); margin-bottom: 4px; }
+    .lang-match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+    @media (max-width: 600px) { .lang-match-grid { grid-template-columns: 1fr; } }
+    .lang-match-item { padding: 12px 16px; border-radius: var(--r-lg); border: 2px solid var(--c-border); background: rgba(13,18,37,0.8); cursor: pointer; transition: all 0.15s; text-align: center; font-size: 14px; font-weight: 600; }
+    .light-theme .lang-match-item { background: rgba(243,244,246,0.8); }
+    .lang-match-item:hover { border-color: var(--c-accent); }
+    .lang-match-item.selected { border-color: var(--c-accent); background: rgba(8,41,73,0.85); }
+    .lang-match-item.matched { border-color: var(--c-green); background: rgba(2,44,34,0.5); color: var(--c-green); cursor: default; }
+    .lang-match-item.wrong { border-color: var(--c-rose); background: rgba(69,10,10,0.5); color: var(--c-rose); animation: shake 0.3s; }
+    @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
+    .lang-match-desc { font-size: 12px; color: var(--c-text-secondary); margin-top: 4px; font-weight: 400; }
+
+    @media (max-width: 768px) {
+        .lang-table { font-size: 12px; }
+        .lang-table th, .lang-table td { padding: 6px 8px; }
+    }
+</style>
+
+<div class="lang-intro">
+    <h3>🔤 Programming Languages and IDEs</h3>
+    <p>Topic 2.5 covers the differences between high-level and low-level languages, how translators (compilers, interpreters, assemblers) work, and the features of Integrated Development Environments (IDEs).</p>
+</div>
+
+<div class="lang-podcast">
+    <div class="podcast-header">🎧 Audio Revision: Programming Languages & IDEs</div>
+    <audio controls preload="metadata" style="width:100%;">
+        <source src="/static/audio/languages_podcast.ogg" type="audio/ogg">
+    </audio>
+</div>
+
+<div class="lang-container">
+
+    <!-- Section 1: High-Level vs Low-Level -->
+    <div class="lang-section">
+        <div class="lang-section-header open" onclick="toggleLangSection(this)">
+            <span>📊 High-Level vs Low-Level Languages</span>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="lang-section-body open">
+            <table class="lang-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>High-Level Language</th>
+                        <th>Low-Level Language (Assembly)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Readability</strong></td>
+                        <td><span class="tag tag-green">Easy</span> — English-like syntax (IF, FOR, PRINT)</td>
+                        <td><span class="tag tag-red">Hard</span> — Mnemonics (MOV, ADD, LOAD)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Portability</strong></td>
+                        <td><span class="tag tag-green">Portable</span> — runs on different hardware</td>
+                        <td><span class="tag tag-red">Hardware-specific</span> — tied to one CPU type</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Lines of code</strong></td>
+                        <td>1 line = many machine code instructions</td>
+                        <td>1 line = 1 machine instruction</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Speed</strong></td>
+                        <td><span class="tag tag-amber">Slower</span> — needs translation first</td>
+                        <td><span class="tag tag-green">Faster</span> — closer to machine code</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ease of debugging</strong></td>
+                        <td><span class="tag tag-green">Easier</span> — meaningful error messages</td>
+                        <td><span class="tag tag-red">Harder</span> — low-level errors</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Examples</strong></td>
+                        <td>Python, Java, C#, JavaScript</td>
+                        <td>Assembly, LMC (Little Man Computer)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Translator needed</strong></td>
+                        <td>Compiler or Interpreter</td>
+                        <td>Assembler</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="lang-mnemonic">
+                <strong>🧠 Mnemonic:</strong> High-level = Human-friendly but needs translation. Low-level = Machine-friendly, hardware-specific, but faster.
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 2: Translators -->
+    <div class="lang-section">
+        <div class="lang-section-header" onclick="toggleLangSection(this)">
+            <span>🔄 Compiler vs Interpreter vs Assembler</span>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="lang-section-body">
+            <table class="lang-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Compiler</th>
+                        <th>Interpreter</th>
+                        <th>Assembler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Input</strong></td>
+                        <td>High-level code (e.g. Python, Java)</td>
+                        <td>High-level code (e.g. Python, JavaScript)</td>
+                        <td>Assembly code</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Method</strong></td>
+                        <td>Translates ALL code at once</td>
+                        <td>Executes code line by line</td>
+                        <td>Translates assembly to machine code</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Output</strong></td>
+                        <td>Executable file (.exe)</td>
+                        <td>No file — runs directly</td>
+                        <td>Object code / machine code</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Error reporting</strong></td>
+                        <td>Shows ALL errors after compilation</td>
+                        <td>Stops at FIRST error</td>
+                        <td>Shows syntax errors</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Execution speed</strong></td>
+                        <td><span class="tag tag-green">Fast</span> — already translated</td>
+                        <td><span class="tag tag-red">Slower</span> — translates each time</td>
+                        <td><span class="tag tag-green">Fast</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ease of debugging</strong></td>
+                        <td><span class="tag tag-amber">Harder</span> — all errors at once</td>
+                        <td><span class="tag tag-green">Easier</span> — stops at first error</td>
+                        <td><span class="tag tag-red">Hard</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Used for</strong></td>
+                        <td>Production software, apps</td>
+                        <td>Scripting, web development</td>
+                        <td>Hardware drivers, embedded systems</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Examples</strong></td>
+                        <td>GCC (C), javac (Java)</td>
+                        <td>Python, Node.js, browser JS</td>
+                        <td>NASM, MASM</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="lang-mnemonic">
+                <strong>🧠 Mnemonic:</strong> Compiler = converts all at once. Interpreter = interprets line by line. Assembler = assembly to machine code.
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 3: IDE Features -->
+    <div class="lang-section">
+        <div class="lang-section-header" onclick="toggleLangSection(this)">
+            <span>🛠️ IDE Features</span>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="lang-section-body">
+            <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:12px;">An <strong>Integrated Development Environment (IDE)</strong> combines all the tools a programmer needs in one application. Know these features for the exam:</p>
+            <div class="lang-card-grid">
+                <div class="lang-card">
+                    <span class="card-icon">✏️</span>
+                    <h4>Editor</h4>
+                    <p>Write and edit code with syntax highlighting, line numbers, and auto-indentation to make code easier to read.</p>
+                </div>
+                <div class="lang-card">
+                    <span class="card-icon">🔍</span>
+                    <h4>Error Diagnostics</h4>
+                    <p>Highlights syntax errors as you type — underlines mistakes in red so you can fix them immediately.</p>
+                </div>
+                <div class="lang-card">
+                    <span class="card-icon">🐛</span>
+                    <h4>Debugger</h4>
+                    <p>Step through code line by line, set breakpoints to pause execution, and inspect variable values at any point.</p>
+                </div>
+                <div class="lang-card">
+                    <span class="card-icon">⏸️</span>
+                    <h4>Breakpoints</h4>
+                    <p>Mark specific lines where execution should pause, allowing you to examine the program state at that moment.</p>
+                </div>
+                <div class="lang-card">
+                    <span class="card-icon">👁️</span>
+                    <h4>Variable Watch</h4>
+                    <p>Display the current values of selected variables in real-time as the program executes — essential for finding logic errors.</p>
+                </div>
+                <div class="lang-card">
+                    <span class="card-icon">📚</span>
+                    <h4>Call Stack</h4>
+                    <p>Shows which subprograms (functions/procedures) are currently active and how they were called — useful for tracing program flow.</p>
+                </div>
+                <div class="lang-card">
+                    <span class="card-icon">💡</span>
+                    <h4>Auto-Complete</h4>
+                    <p>Suggests code completions, variable names, and function parameters as you type — speeds up coding and reduces typos.</p>
+                </div>
+                <div class="lang-card">
+                    <span class="card-icon">📁</span>
+                    <h4>File Management</h4>
+                    <p>Browse project files, organise code into folders, and manage multiple source files within the same project.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 4: Knowledge Check -->
+    <div class="lang-section">
+        <div class="lang-section-header" onclick="toggleLangSection(this)">
+            <span>❓ Common Exam Questions</span>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="lang-section-body">
+            <table class="lang-table">
+                <thead>
+                    <tr>
+                        <th>Question</th>
+                        <th>Answer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Why use a high-level language?</td>
+                        <td>Easier to read, write, debug. Portable across different hardware. More productive for complex programs.</td>
+                    </tr>
+                    <tr>
+                        <td>Why use a low-level language?</td>
+                        <td>Faster execution, direct hardware control, smaller memory footprint. Used for device drivers and embedded systems.</td>
+                    </tr>
+                    <tr>
+                        <td>Advantage of a compiler over an interpreter?</td>
+                        <td>Faster execution after compilation, produces standalone executable, source code not needed at runtime.</td>
+                    </tr>
+                    <tr>
+                        <td>Advantage of an interpreter over a compiler?</td>
+                        <td>Easier to debug (stops at first error), no need to recompile after changes, better for rapid development.</td>
+                    </tr>
+                    <tr>
+                        <td>What is an assembler used for?</td>
+                        <td>Translating assembly language (low-level) into machine code. One assembly instruction = one machine instruction.</td>
+                    </tr>
+                    <tr>
+                        <td>How does a debugger help?</td>
+                        <td>Lets you step through code, set breakpoints, inspect variable values, and trace the call stack to find logic errors.</td>
+                    </tr>
+                    <tr>
+                        <td>What is syntax highlighting?</td>
+                        <td>An IDE feature that colours different parts of code (keywords, strings, comments) to make it easier to read and spot errors.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<!-- ── Key Terminology ── -->
+<div class="lang-terms-section">
+    <h2>📖 Key Terminology for This Topic</h2>
+    <p style="font-size:13px;color:var(--c-text-secondary);margin-bottom:4px;">These are the exam-grade terms for Topic 2.5. Make sure you can define and use each one.</p>
+    <div class="lang-terms-grid">
+        <div class="lang-term-card"><span class="term-badge">High-Level Language</span><div class="term-def">A programming language that uses English-like syntax (IF, FOR, PRINT) and is portable across different hardware. Examples: Python, Java, C#.</div></div>
+        <div class="lang-term-card"><span class="term-badge">Low-Level Language</span><div class="term-def">A programming language that is closer to machine code, using mnemonics (MOV, ADD, LOAD). Hardware-specific and faster. Example: Assembly.</div></div>
+        <div class="lang-term-card"><span class="term-badge">Compiler</span><div class="term-def">Translates ALL high-level source code into machine code at once, producing an executable file. Reports all errors after compilation.</div></div>
+        <div class="lang-term-card"><span class="term-badge">Interpreter</span><div class="term-def">Translates and executes high-level code line by line. Stops at the first error — easier for debugging but slower at runtime.</div></div>
+        <div class="lang-term-card"><span class="term-badge">Assembler</span><div class="term-def">Translates assembly language (low-level) into machine code. One assembly instruction equals one machine instruction.</div></div>
+        <div class="lang-term-card"><span class="term-badge">Machine Code</span><div class="term-def">The lowest-level programming language, consisting of binary (1s and 0s) that the CPU executes directly. Hardware-specific.</div></div>
+        <div class="lang-term-card"><span class="term-badge">Syntax</span><div class="term-def">The set of rules that defines the structure of a programming language. Each language has its own syntax for statements, loops, and conditions.</div></div>
+        <div class="lang-term-card"><span class="term-badge">IDE</span><div class="term-def">Integrated Development Environment — a software application that combines an editor, debugger, and other tools to help programmers write code.</div></div>
+        <div class="lang-term-card"><span class="term-badge">Debugger</span><div class="term-def">An IDE tool that lets you step through code line by line, set breakpoints, and inspect variable values to find logic errors.</div></div>
+        <div class="lang-term-card"><span class="term-badge">Breakpoint</span><div class="term-def">A marker set on a specific line of code where execution will pause, allowing the programmer to examine the program state at that point.</div></div>
+        <div class="lang-term-card"><span class="term-badge">Variable Watch</span><div class="term-def">An IDE feature that displays the current values of selected variables in real-time as the program executes.</div></div>
+        <div class="lang-term-card"><span class="term-badge">Call Stack</span><div class="term-def">Shows which subprograms (functions/procedures) are currently active and how they were called — useful for tracing program flow.</div></div>
+    </div>
+</div>
+
+<!-- ── Match the Translator ── -->
+<div class="lang-match-section">
+    <h2>🧩 Match the Translator</h2>
+    <p style="font-size:13px;color:var(--c-text-secondary);margin-bottom:4px;">Click a description on the left, then click the correct translator on the right.</p>
+    <div class="lang-match-grid" id="matchGrid">
+        <div class="lang-match-item" data-pair="0" onclick="matchSelect('desc', 0)">Translates ALL code at once, produces an .exe file<div class="lang-match-desc">Click me, then click the matching translator</div></div>
+        <div class="lang-match-item" data-pair="0" onclick="matchSelect('trans', 0)">Compiler<div class="lang-match-desc">Translates high-level to machine code all at once</div></div>
+        <div class="lang-match-item" data-pair="1" onclick="matchSelect('desc', 1)">Executes code line by line, stops at first error<div class="lang-match-desc">Click me, then click the matching translator</div></div>
+        <div class="lang-match-item" data-pair="1" onclick="matchSelect('trans', 1)">Interpreter<div class="lang-match-desc">Translates and runs one line at a time</div></div>
+        <div class="lang-match-item" data-pair="2" onclick="matchSelect('desc', 2)">Converts assembly mnemonics to machine code<div class="lang-match-desc">Click me, then click the matching translator</div></div>
+        <div class="lang-match-item" data-pair="2" onclick="matchSelect('trans', 2)">Assembler<div class="lang-match-desc">Assembly → machine code, 1:1</div></div>
+    </div>
+    <div id="matchFeedback" style="margin-top:12px;font-size:14px;font-weight:600;text-align:center;display:none;"></div>
+</div>
+
+<!-- ── Quiz: Check Your Understanding ── -->
+<div class="lang-quiz-section">
+    <h2>🧠 Check Your Understanding</h2>
+    <p class="quiz-sub">Test your knowledge of programming languages, translators, and IDE features.</p>
+
+    <div class="quiz-header">
+        <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="langProgressFill" style="width:0%"></div></div>
+        <span class="quiz-score-running" id="langRunningScore">❓ 0/6 answered</span>
+    </div>
+
+    <div class="quiz-counter" id="langQuizCounter">1 / 6</div>
+
+    <div id="langQuizQuestions">
+        <div class="lang-quiz-question quiz-tab active" data-qid="1">
+            <div class="lang-quiz-q">1. Which of the following is an advantage of a high-level language over a low-level language?</div>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 1, 0)">Faster execution speed</button>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 1, 1)">Direct hardware control</button>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 1, 2)">Easier to read, write, and debug</button>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 1, 3)">Smaller memory footprint</button>
+            <div class="lang-quiz-exp" id="langExp1">✅ Correct! High-level languages use English-like syntax, making them easier to read, write, and debug. They are also portable across different hardware.</div>
+        </div>
+        <div class="lang-quiz-question quiz-tab" data-qid="2">
+            <div class="lang-quiz-q">2. A compiler translates source code into machine code. How does it differ from an interpreter?</div>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 2, 0)">It translates one line at a time</button>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 2, 1)">It translates ALL code at once, producing an executable</button>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 2, 2)">It only works with low-level languages</button>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 2, 3)">It does not report errors</button>
+            <div class="lang-quiz-exp" id="langExp2">✅ Correct! A compiler translates all the source code at once into machine code and produces a standalone executable file (.exe).</div>
+        </div>
+        <div class="lang-quiz-question quiz-tab" data-qid="3">
+            <div class="lang-quiz-q">3. Which translator is used to convert assembly language into machine code?</div>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 3, 0)">Compiler</button>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 3, 1)">Interpreter</button>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 3, 2)">Assembler</button>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 3, 3)">Linker</button>
+            <div class="lang-quiz-exp" id="langExp3">✅ Correct! An assembler translates assembly language (low-level) into machine code. One assembly instruction equals one machine instruction.</div>
+        </div>
+        <div class="lang-quiz-question quiz-tab" data-qid="4">
+            <div class="lang-quiz-q">4. Which IDE feature lets you pause execution at a specific line to inspect variable values?</div>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 4, 0)">Syntax highlighting</button>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 4, 1)">Auto-complete</button>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 4, 2)">Breakpoint</button>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 4, 3)">File management</button>
+            <div class="lang-quiz-exp" id="langExp4">✅ Correct! A breakpoint marks a specific line where execution pauses, allowing you to inspect variables, the call stack, and program state.</div>
+        </div>
+        <div class="lang-quiz-question quiz-tab" data-qid="5">
+            <div class="lang-quiz-q">5. Why might a programmer choose to use an interpreter instead of a compiler?</div>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 5, 0)">Faster execution speed at runtime</button>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 5, 1)">Easier debugging — stops at the first error</button>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 5, 2)">Produces a standalone executable file</button>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 5, 3)">More secure — source code is hidden</button>
+            <div class="lang-quiz-exp" id="langExp5">✅ Correct! An interpreter stops at the first error, making it easier to debug. It also lets you test changes without recompiling.</div>
+        </div>
+        <div class="lang-quiz-question quiz-tab" data-qid="6">
+            <div class="lang-quiz-q">6. Which of these is NOT a feature of an IDE?</div>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 6, 0)">Debugger with breakpoints</button>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 6, 1)">Syntax highlighting editor</button>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 6, 2)">Automatic code optimisation</button>
+            <button type="button" class="lang-quiz-opt" onclick="langSelect(this, 6, 3)">Variable watch and call stack</button>
+            <div class="lang-quiz-exp" id="langExp6">✅ Correct! IDEs provide editors, debuggers, breakpoints, variable watches, and call stacks — but they do not automatically optimise your code.</div>
+        </div>
+    </div>
+
+    <div class="quiz-nav">
+        <button type="button" class="quiz-nav-btn" id="langQuizPrevBtn" onclick="langQuizGoTo(-1)">◀ Previous</button>
+        <div class="quiz-dots" id="langQuizDots">
+            <span class="quiz-dot active" data-idx="0" onclick="langQuizGoTo(0)">1</span>
+            <span class="quiz-dot" data-idx="1" onclick="langQuizGoTo(1)">2</span>
+            <span class="quiz-dot" data-idx="2" onclick="langQuizGoTo(2)">3</span>
+            <span class="quiz-dot" data-idx="3" onclick="langQuizGoTo(3)">4</span>
+            <span class="quiz-dot" data-idx="4" onclick="langQuizGoTo(4)">5</span>
+            <span class="quiz-dot" data-idx="5" onclick="langQuizGoTo(5)">6</span>
+        </div>
+        <button type="button" class="quiz-nav-btn" id="langQuizNextBtn" onclick="langQuizGoTo(1)">Next ▶</button>
+    </div>
+
+    <div style="text-align:center;margin-top:16px;">
+        <button type="button" class="btn btn-primary" id="langSubmitBtn" onclick="langSubmitQuiz()">📊 Show My Score</button>
+    </div>
+    <div class="lang-quiz-score" id="langQuizScore"></div>
+</div>
+
+<script>
+function toggleLangSection(header) {
+    header.classList.toggle('open');
+    header.nextElementSibling.classList.toggle('open');
+}
+
+// ── Tabbed Quiz ──
+const langAnswers = {1:2, 2:1, 3:2, 4:2, 5:1, 6:2};
+const langSelected = {};
+let langCurrentIdx = 0;
+const langTotal = 6;
+
+function langSelect(btn, qid, idx) {
+    const parent = btn.closest('.lang-quiz-question');
+    parent.querySelectorAll('.lang-quiz-opt').forEach(b => b.classList.remove('selected', 'correct', 'incorrect'));
+    btn.classList.add('selected');
+    langSelected[qid] = idx;
+    document.getElementById('langExp' + qid).classList.remove('show');
+    updateLangDots();
+}
+
+function updateLangDots() {
+    let answered = 0;
+    for (let i = 0; i < langTotal; i++) {
+        const qid = i + 1;
+        const dot = document.querySelectorAll('#langQuizDots .quiz-dot')[i];
+        dot.classList.remove('answered', 'missing');
+        if (langSelected[qid] !== undefined) {
+            dot.classList.add('answered');
+            answered++;
+        }
+    }
+    document.getElementById('langRunningScore').textContent = '❓ ' + answered + '/' + langTotal + ' answered';
+    document.getElementById('langProgressFill').style.width = Math.round(answered / langTotal * 100) + '%';
+}
+
+function langQuizGoTo(target) {
+    const tabs = document.querySelectorAll('#langQuizQuestions .quiz-tab');
+    const dots = document.querySelectorAll('#langQuizDots .quiz-dot');
+    if (typeof target === 'number') {
+        langCurrentIdx = target;
+    } else {
+        langCurrentIdx = Math.max(0, Math.min(langTotal - 1, langCurrentIdx + target));
+    }
+    tabs.forEach((t, i) => t.classList.toggle('active', i === langCurrentIdx));
+    dots.forEach((d, i) => d.classList.toggle('active', i === langCurrentIdx));
+    document.getElementById('langQuizCounter').textContent = (langCurrentIdx + 1) + ' / ' + langTotal;
+    document.getElementById('langQuizPrevBtn').disabled = langCurrentIdx === 0;
+    document.getElementById('langQuizNextBtn').disabled = langCurrentIdx === langTotal - 1;
+}
+
+function langSubmitQuiz() {
+    let correct = 0, total = Object.keys(langAnswers).length;
+    for (let qid in langAnswers) {
+        const exp = document.getElementById('langExp' + qid);
+        const opts = document.querySelectorAll(`.lang-quiz-question[data-qid="${qid}"] .lang-quiz-opt`);
+        opts.forEach(b => b.classList.remove('correct', 'incorrect'));
+        if (langSelected[qid] === undefined) continue;
+        if (langSelected[qid] === langAnswers[qid]) {
+            opts[langAnswers[qid]].classList.add('correct');
+            correct++;
+        } else {
+            opts[langSelected[qid]].classList.add('incorrect');
+            opts[langAnswers[qid]].classList.add('correct');
+        }
+        exp.classList.add('show');
+    }
+    const scoreEl = document.getElementById('langQuizScore');
+    scoreEl.textContent = '🎯 You scored ' + correct + ' / ' + total + ' (' + Math.round(correct/total*100) + '%)';
+    scoreEl.className = 'lang-quiz-score show';
+    if (correct === total) scoreEl.style.borderColor = 'var(--c-green)';
+    else if (correct >= 4) scoreEl.style.borderColor = '#facc15';
+    else scoreEl.style.borderColor = 'var(--c-rose)';
+}
+
+// ── Match Exercise ──
+let matchSelected = null;
+
+function matchSelect(type, pair) {
+    const items = document.querySelectorAll('.lang-match-item');
+    if (matchSelected === null) {
+        items.forEach(i => i.classList.remove('selected', 'wrong'));
+        const el = document.querySelector(`.lang-match-item[data-pair="${pair}"][onclick*="'${type}'"]`);
+        if (el && !el.classList.contains('matched')) {
+            el.classList.add('selected');
+            matchSelected = {type, pair, el};
+        }
+    } else {
+        const el = document.querySelector(`.lang-match-item[data-pair="${pair}"][onclick*="'${type}'"]`);
+        if (!el || el.classList.contains('matched')) { matchSelected = null; return; }
+        if (matchSelected.type === type) { matchSelected.el.classList.remove('selected'); matchSelected = null; return; }
+        if (matchSelected.pair === pair) {
+            matchSelected.el.classList.remove('selected');
+            matchSelected.el.classList.add('matched');
+            el.classList.add('matched');
+            document.getElementById('matchFeedback').textContent = '✅ Correct!';
+            document.getElementById('matchFeedback').style.display = 'block';
+            document.getElementById('matchFeedback').style.color = 'var(--c-green)';
+        } else {
+            el.classList.add('wrong');
+            matchSelected.el.classList.add('wrong');
+            document.getElementById('matchFeedback').textContent = '❌ Not quite — try again!';
+            document.getElementById('matchFeedback').style.display = 'block';
+            document.getElementById('matchFeedback').style.color = 'var(--c-rose)';
+            setTimeout(() => { el.classList.remove('wrong'); matchSelected.el.classList.remove('wrong'); }, 500);
+        }
+        matchSelected = null;
+    }
+}
+</script>
+{% endblock %}

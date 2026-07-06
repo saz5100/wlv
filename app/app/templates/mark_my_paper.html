@@ -1,0 +1,309 @@
+{% extends "base.html" %}
+{% block title %}Mark My Paper — WLV Computer Science{% endblock %}
+{% block head %}
+<style>
+.mmp-landing { max-width: 720px; margin: 0 auto; padding: 24px 0; }
+.mmp-landing h1 { font-size: 32px; margin-bottom: 6px; }
+.mmp-landing p.sub { color: var(--c-text-secondary); font-size: 15px; margin-bottom: 24px; }
+
+/* Paper selector grid */
+.paper-grid { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+.paper-card {
+  display: flex; align-items: center; gap: 16px;
+  background: rgba(17,24,39,0.88); border: 1px solid rgba(34,211,238,0.10);
+  border-radius: var(--r-xl); padding: 18px 22px;
+  cursor: pointer; transition: all 0.2s;
+}
+.light-theme .paper-card { background: rgba(255,255,255,0.88); }
+.paper-card:hover { border-color: var(--c-accent); box-shadow: 0 4px 20px var(--c-accent-glow); transform: translateY(-2px); }
+.paper-card.selected { border-color: var(--c-accent); box-shadow: 0 0 0 3px var(--c-accent-glow); }
+.paper-card .pc-icon { font-size: 28px; }
+.paper-card .pc-info { flex: 1; }
+.paper-card .pc-title { font-weight: 700; font-size: 16px; }
+.paper-card .pc-meta { font-size: 13px; color: var(--c-text-secondary); }
+.paper-card .pc-radio { width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--c-border); flex-shrink: 0; transition: all 0.2s; }
+.paper-card.selected .pc-radio { border-color: var(--c-accent); background: var(--c-accent); box-shadow: 0 0 8px var(--c-accent-glow); }
+.paper-card.inactive { opacity: 0.5; cursor: default; }
+.paper-card.inactive:hover { border-color: var(--c-border); box-shadow: none; transform: none; }
+.pc-radio.inactive { border-color: var(--c-text-muted); opacity: 0.3; }
+
+/* Upload zone */
+.upload-zone {
+  border: 2px dashed var(--c-border); border-radius: var(--r-xl);
+  padding: 40px 20px; text-align: center; cursor: pointer;
+  transition: all 0.2s; margin-bottom: 20px;
+}
+.upload-zone:hover, .upload-zone.dragover { border-color: var(--c-accent); background: rgba(34,211,238,0.05); }
+.upload-zone .uz-icon { font-size: 48px; margin-bottom: 12px; }
+.upload-zone .uz-title { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+.upload-zone .uz-desc { font-size: 14px; color: var(--c-text-secondary); }
+.upload-zone .uz-hint { font-size: 12px; color: var(--c-text-muted); margin-top: 8px; }
+
+/* Review pane */
+.review-pane { margin-top: 20px; }
+.review-pane h2 { font-size: 20px; margin-bottom: 16px; }
+.review-q {
+  background: rgba(17,24,39,0.88); border: 1px solid var(--c-border);
+  border-radius: var(--r-lg); padding: 16px 18px; margin-bottom: 12px;
+}
+.light-theme .review-q { background: rgba(255,255,255,0.88); }
+.review-q .rq-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.review-q .rq-num { font-weight: 700; font-size: 14px; color: var(--c-accent); }
+.review-q .rq-status { font-size: 12px; color: var(--c-text-muted); }
+.review-q textarea {
+  width: 100%; min-height: 80px; padding: 10px 12px;
+  background: rgba(13,18,37,0.8); border: 1px solid var(--c-border);
+  border-radius: 8px; color: var(--c-text); font-size: 14px; line-height: 1.5;
+  resize: vertical; outline: none; font-family: inherit;
+}
+.light-theme .review-q textarea { background: rgba(243,244,246,0.8); }
+.review-q textarea:focus { border-color: var(--c-accent); box-shadow: 0 0 0 3px var(--c-accent-glow); }
+
+/* Progress indicator */
+.progress-overlay {
+  display: none; position: fixed; inset: 0; z-index: 9999;
+  background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
+  align-items: center; justify-content: center;
+}
+.progress-box {
+  background: var(--c-bg); border: 1px solid var(--c-accent);
+  border-radius: var(--r-xl); padding: 40px; text-align: center;
+  max-width: 400px; width: 90%;
+}
+.light-theme .progress-box { background: #fff; }
+.progress-box .pb-icon { font-size: 48px; margin-bottom: 12px; }
+.progress-box .pb-title { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+.progress-box .pb-step { font-size: 14px; color: var(--c-text-secondary); margin-bottom: 16px; }
+.progress-box .pb-bar-track { height: 6px; background: var(--c-border); border-radius: 3px; overflow: hidden; }
+.progress-box .pb-bar-fill { height: 100%; background: var(--c-accent); border-radius: 3px; transition: width 0.5s; width: 0%; }
+
+/* Previous attempts */
+.attempts-list { margin-top: 24px; }
+.attempts-list h3 { font-size: 18px; margin-bottom: 12px; }
+.attempt-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px; background: rgba(17,24,39,0.88);
+  border: 1px solid var(--c-border); border-radius: var(--r-lg);
+  margin-bottom: 8px; text-decoration: none; color: inherit;
+  transition: all 0.15s;
+}
+.light-theme .attempt-row { background: rgba(255,255,255,0.88); }
+.attempt-row:hover { border-color: var(--c-accent); transform: translateX(4px); }
+.attempt-row .ar-score { font-size: 24px; font-weight: 800; color: var(--c-accent); min-width: 60px; }
+.attempt-row .ar-info { flex: 1; }
+.attempt-row .ar-paper { font-weight: 600; font-size: 14px; }
+.attempt-row .ar-meta { font-size: 12px; color: var(--c-text-muted); }
+.attempt-row .ar-grade {
+  padding: 4px 12px; border-radius: 99px; font-weight: 700; font-size: 14px;
+  background: rgba(34,211,238,0.15); color: var(--c-accent);
+}
+
+/* Manual entry toggle */
+.manual-toggle {
+  text-align: center; margin: 16px 0;
+}
+.manual-toggle button {
+  background: none; border: 1px solid var(--c-border); color: var(--c-text-secondary);
+  padding: 8px 20px; border-radius: 8px; cursor: pointer; font-size: 14px;
+  transition: all 0.15s;
+}
+.manual-toggle button:hover { border-color: var(--c-accent); color: var(--c-accent); }
+
+@media (max-width: 500px) {
+  .paper-card { padding: 14px 16px; }
+  .upload-zone { padding: 24px 16px; }
+  .review-q textarea { min-height: 60px; }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="mmp-landing">
+  <h1>📄✏️ Mark My Paper</h1>
+
+  {% if mode == "review" %}
+    {# ─── REVIEW & VERIFY ─── #}
+    <div class="review-pane">
+      <h2>📋 Review Your Answers — {{ paper.label }}</h2>
+      <p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:16px;">
+        Check the extracted text below. Edit any answers that were missing or incorrect, then click "Submit for Marking".
+      </p>
+
+      <form id="reviewForm">
+        <input type="hidden" name="paper_id" value="{{ paper.id }}">
+        {% for q in questions %}
+        <div class="review-q">
+          <div class="rq-header">
+            <span class="rq-num">Question {{ q.number }}</span>
+            <span class="rq-status">
+              {% if q.text %}✅ Extracted{% else %}✏️ Enter manually{% endif %}
+            </span>
+          </div>
+          <textarea
+            name="q_{{ q.number }}"
+            placeholder="Type or paste your answer for Question {{ q.number }}..."
+            data-qnum="{{ q.number }}"
+          >{{ q.text }}</textarea>
+        </div>
+        {% endfor %}
+      </form>
+
+      <div style="text-align:center;margin-top:20px;">
+        <button class="btn btn-primary" onclick="submitForMarking()" style="font-size:18px;padding:16px 40px;">
+          🤖 Submit for Marking
+        </button>
+      </div>
+    </div>
+
+  {% else %}
+    {# ─── LANDING ─── #}
+
+    <!-- Previous attempts -->
+    {% if attempts %}
+    <div class="attempts-list">
+      <h3>📊 Previous Attempts</h3>
+      {% for a in attempts %}
+      <a href="/mark-my-paper/report/{{ a.id }}" class="attempt-row">
+        <div class="ar-score">{{ a.percentage }}%</div>
+        <div class="ar-info">
+          <div class="ar-paper">{{ a.paper_label }}</div>
+          <div class="ar-meta">{{ a.total_marks }}/{{ a.max_marks }} marks · {{ a.created_at.strftime('%d %b %Y') if a.created_at else '' }}</div>
+        </div>
+        <div class="ar-grade">Grade {{ a.grade }}</div>
+      </a>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Paper selection -->
+    <h3 style="font-size:18px;margin-bottom:12px;">📌 Select a Past Paper</h3>
+    <div class="paper-grid" id="paperGrid">
+      {% for p in papers %}
+      <div class="paper-card{% if not p.active %} inactive{% endif %}" data-paper="{{ p.id }}" onclick="{% if p.active %}selectPaper(this){% endif %}">
+        <div class="pc-icon">📄</div>
+        <div class="pc-info">
+          <div class="pc-title">{{ p.label }}</div>
+          <div class="pc-meta">Paper {{ p.paper }} · {{ p.month }} {{ p.year }}{% if not p.active %} · 🔨 Coming soon{% endif %}</div>
+        </div>
+        {% if p.active %}
+        <div class="pc-radio{% if not p.active %} inactive{% endif %}"></div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Upload zone -->
+    <form id="uploadForm" enctype="multipart/form-data" method="post" action="/mark-my-paper/upload">
+      <input type="hidden" name="paper_id" id="selectedPaper" value="">
+      <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
+        <div class="uz-icon">📤</div>
+        <div class="uz-title">Upload your completed PDF</div>
+        <div class="uz-desc">Drag & drop or click to browse</div>
+        <div class="uz-hint">Supports digital PDFs (handwritten? type answers in the review step)</div>
+      </div>
+      <input type="file" id="fileInput" name="file" accept=".pdf" style="display:none" onchange="onFileSelected(this)">
+    </form>
+
+    <!-- Manual entry fallback -->
+    <div class="manual-toggle">
+      <button onclick="startManualEntry()">✏️ Or type answers directly</button>
+    </div>
+  {% endif %}
+</div>
+
+<script>
+let selectedPaper = '';
+
+function selectPaper(el) {
+  document.querySelectorAll('.paper-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedPaper = el.dataset.paper;
+  document.getElementById('selectedPaper').value = selectedPaper;
+}
+
+function onFileSelected(input) {
+  if (!selectedPaper) {
+    alert('Please select a past paper first.');
+    input.value = '';
+    return;
+  }
+  if (!input.files || !input.files[0]) return;
+  document.getElementById('uploadForm').submit();
+}
+
+// Drag & drop
+const zone = document.getElementById('uploadZone');
+if (zone) {
+  zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+  zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
+  zone.addEventListener('drop', e => {
+    e.preventDefault();
+    zone.classList.remove('dragover');
+    if (!selectedPaper) { alert('Please select a past paper first.'); return; }
+    const files = e.dataTransfer.files;
+    if (files.length && files[0].type === 'application/pdf') {
+      document.getElementById('fileInput').files = files;
+      document.getElementById('uploadForm').submit();
+    }
+  });
+}
+
+function startManualEntry() {
+  if (!selectedPaper) { alert('Please select a past paper first.'); return; }
+  // Submit with no file — server returns blank questions
+  document.getElementById('uploadForm').submit();
+}
+
+function submitForMarking() {
+  const paperId = document.querySelector('input[name="paper_id"]')?.value || '';
+  if (!paperId) { alert('No paper selected.'); return; }
+  const textareas = document.querySelectorAll('textarea[data-qnum]');
+  const answers = [];
+  textareas.forEach(ta => {
+    answers.push({
+      number: parseInt(ta.dataset.qnum),
+      text: ta.value.trim()
+    });
+  });
+
+  // Show progress overlay
+  const overlay = document.createElement('div');
+  overlay.className = 'progress-overlay';
+  overlay.style.display = 'flex';
+  overlay.innerHTML = `
+    <div class="progress-box">
+      <div class="pb-icon">🤖</div>
+      <div class="pb-title">AI Examiner at Work</div>
+      <div class="pb-step" id="pbStep">📄 Parsing answers...</div>
+      <div class="pb-bar-track"><div class="pb-bar-fill" id="pbBar" style="width:10%"></div></div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+
+  const setStep = (step, pct) => {
+    document.getElementById('pbStep').textContent = step;
+    document.getElementById('pbBar').style.width = pct + '%';
+  };
+
+  setStep('📄 Parsing answers...', 15);
+
+  fetch('/mark-my-paper/submit', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ paper_id: paperId, answers: answers })
+  })
+  .then(r => r.json())
+  .then(data => {
+    setStep('✅ Marking complete!', 100);
+    setTimeout(() => {
+      window.location.href = '/mark-my-paper/report/' + data.attempt_id;
+    }, 800);
+  })
+  .catch(err => {
+    setStep('❌ Error: ' + err.message, 0);
+    setTimeout(() => overlay.remove(), 3000);
+  });
+}
+</script>
+{% endblock %}
+

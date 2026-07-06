@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% block title %}Search Lessons | WLV Computer Science{% endblock %}
+{% block content %}
+<div class="hero">
+    <h1>🔍 Search Lessons</h1>
+    <p class="hero-sub">Find what you need across all {{ results|length if query else '...' }} lessons</p>
+</div>
+<style>
+.search-box {
+    max-width: 600px; margin: 0 auto 32px; padding: 0 20px;
+}
+.search-form {
+    display: flex; gap: 10px;
+}
+.search-input {
+    flex: 1; padding: 14px 18px; border-radius: var(--r-md);
+    border: 1px solid var(--c-border);
+    background: var(--c-surface); color: var(--c-text);
+    font-size: 17px; outline: none;
+    transition: border-color 0.2s;
+}
+.search-input:focus {
+    border-color: var(--c-accent);
+    box-shadow: 0 0 0 3px var(--c-accent-glow);
+}
+.search-form .btn-primary {
+    padding: 14px 28px;
+    font-size: 17px;
+    min-height: 52px;
+    min-width: 60px;
+}
+.search-results {
+    max-width: 700px; margin: 0 auto; padding: 0 20px 40px;
+}
+.search-result-item {
+    display: block;
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-lg);
+    padding: 18px 22px;
+    margin-bottom: 12px;
+    text-decoration: none;
+    transition: all 0.2s;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+.search-result-item:hover {
+    border-color: var(--c-accent);
+    box-shadow: 0 4px 16px var(--c-accent-glow);
+}
+.search-result-item h3 {
+    margin: 0 0 6px; font-size: 18px; color: var(--c-heading);
+    word-break: break-word; overflow-wrap: break-word;
+}
+.search-result-item .topic-tag {
+    display: inline-block; font-size: 12px;
+    background: var(--c-accent-light); color: var(--c-accent);
+.search-section-title {    font-size: 18px; font-weight: 700; color: var(--c-heading);    margin: 8px 0 12px; padding-bottom: 6px;    border-bottom: 2px solid var(--c-accent);    display: inline-block;}.resource-emoji-tag {    font-size: 14px; margin-right: 4px;}
+    padding: 2px 10px; border-radius: 20px; margin-bottom: 8px;
+}
+.search-result-item p {
+    margin: 0; font-size: 14px; color: var(--c-text-secondary);
+    line-height: 1.5; word-break: break-word; overflow-wrap: break-word;
+}
+.search-empty {
+    text-align: center; padding: 60px 20px;
+    color: var(--c-text-muted); font-size: 16px;
+}
+mark { background: rgba(34,211,238,0.25); color: inherit; padding: 0 2px; border-radius: 2px; }
+</style>
+
+<div class="search-box">
+    <form class="search-form" method="get" action="/search" role="search">
+        <input type="search" name="q" class="search-input"
+               placeholder="Search lesson titles and content..."
+               value="{{ query }}" autocomplete="off" autofocus
+               aria-label="Search lessons">
+        <button type="submit" class="btn btn-primary">🔍</button>
+    </form>
+</div>
+
+<div class="search-results">
+{% if query %}
+    {% if results %}
+        {% set lesson_results = results|selectattr("type", "equalto", "lesson")|list %}
+        {% set resource_results = results|selectattr("type", "equalto", "resource")|list %}
+
+        <p style="color:var(--c-text-secondary);margin-bottom:16px;font-size:14px">
+            Found {{ results|length }} result{{ 's' if results|length != 1 else '' }} for "{{ query }}"
+        </p>
+
+        {% if lesson_results %}
+        <h3 class="search-section-title">📚 Lessons</h3>
+        {% for r in lesson_results %}
+        <a href="{{ r.url }}" class="search-result-item">
+            <span class="topic-tag">{{ r.topic_code }}</span>
+            <h3>{{ r.title }}</h3>
+            <p>{{ r.content_preview }}</p>
+        </a>
+        {% endfor %}
+        {% endif %}
+
+        {% if resource_results %}
+        <h3 class="search-section-title" style="margin-top:24px;">📦 Resources</h3>
+        {% for r in resource_results %}
+        <a href="{{ r.url }}" class="search-result-item">
+            <span class="resource-emoji-tag">📦</span>
+            <h3>{{ r.title }}</h3>
+            <p>{{ r.content_preview }}</p>
+        </a>
+        {% endfor %}
+        {% endif %}
+    {% else %}
+        <div class="search-empty">
+            <p style="font-size:48px;margin-bottom:16px">🔍</p>
+            <p>No results found for "{{ query }}"</p>
+            <p style="font-size:14px;margin-top:8px">Try different keywords or browse lessons from the home page.</p>
+        </div>
+    {% endif %}
+{% else %}
+    <div class="search-empty">
+        <p style="font-size:48px;margin-bottom:16px">🔍</p>
+        <p>Type a keyword above to search lessons.</p>
+        <p style="font-size:14px;margin-top:8px">Searches lesson titles and content across all {{ results|length if query else '' }} topics.</p>
+    </div>
+{% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% block title %}Settings — WLV Computer Science{% endblock %}
+{% block head %}
+<style>
+.settings-page {
+  max-width: 600px;
+  margin: 0 auto;
+  animation: pageIn 0.3s ease-out;
+}
+.settings-page h1 {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--c-heading);
+  margin-bottom: 4px;
+}
+.settings-page .subtitle {
+  font-size: 14px;
+  color: var(--c-text-secondary);
+  margin-bottom: 28px;
+}
+.settings-card {
+  background: rgba(13,18,37,0.6);
+  border: 1px solid rgba(34,211,238,0.08);
+  border-radius: var(--r-xl);
+  padding: 20px 24px;
+  margin-bottom: 16px;
+}
+.light-theme .settings-card {
+  background: rgba(243,244,246,0.6);
+}
+.settings-card h2 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--c-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 4px;
+}
+.settings-card .desc {
+  font-size: 13px;
+  color: var(--c-text-muted);
+  margin: -2px 0 14px;
+  line-height: 1.5;
+}
+.settings-theme-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s;
+  font-size: 14px;
+  font-weight: 500;
+}
+.settings-theme-row:hover { background: var(--c-surface-hover); }
+.settings-theme-toggle {
+  font-size: 18px;
+  color: var(--c-accent);
+}
+.settings-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 0;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1.4;
+}
+.settings-option input[type="radio"] {
+  accent-color: var(--c-accent);
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+.settings-option span { color: var(--c-text); }
+.settings-divider {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  margin: 12px 0;
+}
+.light-theme .settings-divider {
+  border-top: 1px solid rgba(0,0,0,0.08);
+}
+.settings-reset-btn {
+  width: 100%;
+  text-align: center;
+}
+.settings-hint {
+  font-size: 12px;
+  color: var(--c-text-muted);
+  margin: 4px 0 0;
+  text-align: center;
+}
+</style>
+{% endblock %}
+{% block content %}
+<div class="settings-page">
+  <h1>⚙️ Settings</h1>
+  <p class="subtitle">Theme, question mode, and data management.</p>
+
+  {# ── Theme ── #}
+  <div class="settings-card">
+    <h2>🎨 Appearance</h2>
+    <p class="desc">Switch between dark and light mode.</p>
+    <div class="settings-theme-row" onclick="toggleThemeBase()">
+      <span id="settingsThemeLabel">🌙 Dark Mode</span>
+      <span class="settings-theme-toggle" id="settingsThemeToggle">◉</span>
+    </div>
+  </div>
+
+  {# ── Question Mode ── #}
+  <div class="settings-card">
+    <h2>❓ Question Mode</h2>
+    <p class="desc">Controls which questions you see during lessons and review sessions.</p>
+    <label class="settings-option"><input type="radio" name="qmode" value="random" onchange="setMode('random')"> <span>Random — equal chance for all questions</span></label>
+    <label class="settings-option"><input type="radio" name="qmode" value="weighted" onchange="setMode('weighted')"> <span>Weighted — gradual reduction after correct answers</span></label>
+    <label class="settings-option"><input type="radio" name="qmode" value="soft" onchange="setMode('soft')"> <span>Soft Retire — 3+ correct = almost never, but possible</span></label>
+    <label class="settings-option"><input type="radio" name="qmode" value="strict" onchange="setMode('strict')"> <span>Strict Retire — 3+ correct = eliminated completely</span></label>
+  </div>
+
+  {# ── Reset Data ── #}
+  <div class="settings-card">
+    <h2>🗑️ Reset Data</h2>
+    <p class="desc">Clear your progress. These actions cannot be undone.</p>
+    <button class="btn btn-sm settings-reset-btn" onclick="resetLessons()">📖 Reset Lessons</button>
+    <p class="settings-hint">Clears streaks, quiz attempts, and review schedule. Keeps exam history.</p>
+    <button class="btn btn-sm settings-reset-btn" onclick="resetExams()" style="margin-top:10px;">📊 Reset Exams</button>
+    <p class="settings-hint">Deletes all exam results and grades. Keeps lesson progress.</p>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+// Sync radio on page load — read from cookie (same as getMode() in app.js)
+// Use setTimeout to ensure defer scripts (app.js) have loaded first
+setTimeout(function() {
+  var m = document.cookie.match(/(?:^|;\s*)wlvcs_qmode=([^;]*)/);
+  var cur = m ? m[1] : 'soft';
+  var radio = document.querySelector('.settings-page input[name="qmode"][value="' + cur + '"]');
+  if (radio) radio.checked = true;
+}, 500);
+</script>
+{% endblock %}

@@ -1,0 +1,653 @@
+{% extends "base.html" %}
+{% block title %}Online Paper — WLV Computer Science{% endblock %}
+{% block head %}
+<style>
+.online-paper { max-width: 800px; margin: 0 auto; padding: 16px 0; }
+.online-paper .paper-header {
+  background: rgba(17,24,39,0.88); border: 1px solid var(--c-border);
+  border-radius: var(--r-xl); padding: 20px 24px; margin-bottom: 20px;
+}
+.light-theme .online-paper .paper-header { background: rgba(255,255,255,0.88); }
+.online-paper .paper-header h1 { font-size: 24px; margin-bottom: 4px; }
+.online-paper .paper-header .ph-meta { font-size: 14px; color: var(--c-text-secondary); }
+
+/* Timer row */
+.ph-timer-row {
+  display: flex; align-items: center; gap: 10px; margin-top: 10px; flex-wrap: wrap;
+}
+.ph-timer-row .ph-timer {
+  font-size: 22px; font-weight: 800; color: var(--c-accent);
+  font-variant-numeric: tabular-nums; min-width: 100px;
+}
+.ph-timer-row .ph-timer.warning { color: var(--c-rose); }
+.ph-timer-row .ph-timer.urgent { color: var(--c-rose); animation: pulse 1s infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+/* Timer mode toggle */
+.timer-mode-toggle {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 4px 12px; border-radius: 999px; font-size: 12px; font-weight: 600;
+  border: 1px solid var(--c-border); background: rgba(17,24,39,0.6);
+  color: var(--c-text-secondary); cursor: pointer; transition: all 0.2s;
+  user-select: none;
+}
+.light-theme .timer-mode-toggle { background: rgba(255,255,255,0.6); }
+.timer-mode-toggle:hover { border-color: var(--c-accent); color: var(--c-accent); }
+
+/* Timer reset button */
+.timer-reset-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 1px solid var(--c-border); background: rgba(17,24,39,0.6);
+  color: var(--c-text-secondary); cursor: pointer; font-size: 16px;
+  transition: all 0.2s; user-select: none;
+}
+.light-theme .timer-reset-btn { background: rgba(255,255,255,0.6); }
+.timer-reset-btn:hover { border-color: var(--c-accent); color: var(--c-accent); transform: rotate(60deg); }
+
+/* Back button row */
+.ph-back-row { margin-bottom: 12px; }
+.ph-back-row .btn { padding: 6px 16px; font-size: 13px; min-height: 36px; }
+
+/* Coming soon */
+.coming-soon-box {
+  text-align: center; padding: 60px 20px;
+  background: rgba(17,24,39,0.88); border: 1px solid var(--c-border);
+  border-radius: var(--r-xl);
+}
+.light-theme .coming-soon-box { background: rgba(255,255,255,0.88); }
+.coming-soon-box .cs-icon { font-size: 64px; margin-bottom: 16px; }
+.coming-soon-box h2 { font-size: 22px; margin-bottom: 8px; }
+.coming-soon-box p { font-size: 15px; color: var(--c-text-secondary); }
+
+/* Question card */
+.q-card {
+  background: rgba(17,24,39,0.88); border: 1px solid var(--c-border);
+  border-radius: var(--r-xl); padding: 20px 24px; margin-bottom: 16px;
+  transition: border-color 0.2s;
+}
+.light-theme .q-card { background: rgba(255,255,255,0.88); }
+.q-card.answered { border-color: rgba(34,211,238,0.3); }
+.q-card .q-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+.q-card .q-num { font-weight: 700; font-size: 15px; color: var(--c-accent); white-space: nowrap; }
+.q-card .q-marks { font-size: 13px; color: var(--c-text-secondary); white-space: nowrap; margin-left: 12px; }
+.q-card .q-text { font-size: 15px; line-height: 1.6; margin-bottom: 14px; color: var(--c-text); }
+.q-card .q-text strong { color: var(--c-accent); }
+
+/* Textarea */
+.q-card textarea, .q-card input[type="text"] {
+  width: 100%; padding: 12px 14px;
+  background: rgba(0,0,0,0.3); border: 1px solid var(--c-border);
+  border-radius: var(--r-lg); color: var(--c-text); font-size: 15px;
+  font-family: inherit; line-height: 1.5; resize: vertical;
+  transition: border-color 0.2s; box-sizing: border-box;
+}
+.light-theme .q-card textarea, .light-theme .q-card input[type="text"] { background: rgba(0,0,0,0.04); }
+.q-card textarea:focus, .q-card input[type="text"]:focus { outline: none; border-color: var(--c-accent); box-shadow: 0 0 0 2px var(--c-accent-glow); }
+.q-card .q-word-count { font-size: 12px; color: var(--c-text-muted); text-align: right; margin-top: 4px; }
+
+/* MCQ */
+.mcq-options { display: flex; flex-direction: column; gap: 8px; }
+.mcq-option {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; background: rgba(0,0,0,0.2);
+  border: 1px solid var(--c-border); border-radius: var(--r-lg);
+  cursor: pointer; transition: all 0.15s; font-size: 14px;
+}
+.light-theme .mcq-option { background: rgba(0,0,0,0.03); }
+.mcq-option:hover { border-color: var(--c-accent); }
+.mcq-option.selected { border-color: var(--c-accent); background: rgba(34,211,238,0.1); }
+.mcq-option input[type="radio"] { accent-color: var(--c-accent); width: 18px; height: 18px; flex-shrink: 0; }
+
+/* Table input */
+.q-table { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
+.q-table th, .q-table td {
+  border: 1px solid var(--c-border); padding: 8px 10px;
+  font-size: 14px; text-align: left;
+}
+.q-table th { background: rgba(34,211,238,0.1); color: var(--c-accent); font-weight: 600; }
+.q-table td { background: rgba(0,0,0,0.15); }
+.light-theme .q-table td { background: rgba(0,0,0,0.03); }
+.q-table td input {
+  width: 100%; background: transparent; border: none;
+  color: var(--c-text); font-size: 14px; font-family: inherit;
+  padding: 4px 0; box-sizing: border-box;
+}
+.q-table td input:focus { outline: none; color: var(--c-accent); }
+
+/* Split fields */
+.split-fields { display: flex; flex-direction: column; gap: 10px; }
+.split-field { display: flex; flex-direction: column; gap: 4px; }
+.split-field label { font-size: 13px; font-weight: 600; color: var(--c-text-secondary); }
+
+/* Diagram hint */
+.diagram-hint {
+  background: rgba(255,183,0,0.08); border: 1px solid rgba(255,183,0,0.3);
+  border-radius: var(--r-lg); padding: 12px 16px; margin-bottom: 10px;
+  font-size: 13px; color: var(--c-text-secondary);
+}
+
+/* Submit bar */
+.submit-bar {
+  position: sticky; bottom: 0; z-index: 10;
+  background: rgba(11,15,25,0.95); backdrop-filter: blur(8px);
+  border-top: 1px solid var(--c-border); padding: 14px 24px;
+  display: flex; justify-content: space-between; align-items: center;
+  margin: 0 -24px -16px; border-radius: 0 0 var(--r-xl) var(--r-xl);
+}
+.light-theme .submit-bar { background: rgba(255,255,255,0.95); }
+.submit-bar .sb-info { font-size: 14px; }
+.submit-bar .sb-info strong { color: var(--c-accent); }
+.submit-bar .sb-btn {
+  background: var(--c-accent); color: #000; font-weight: 700;
+  padding: 12px 28px; border: none; border-radius: var(--r-lg);
+  font-size: 16px; cursor: pointer; transition: all 0.2s;
+}
+.submit-bar .sb-btn:hover { box-shadow: 0 0 20px var(--c-accent-glow); transform: translateY(-1px); }
+.submit-bar .sb-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
+
+/* Progress overlay */
+.progress-overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(0,0,0,0.7); display: none;
+  align-items: center; justify-content: center;
+}
+.progress-box {
+  background: var(--c-surface); border: 1px solid var(--c-border);
+  border-radius: var(--r-xl); padding: 40px; text-align: center; max-width: 400px;
+}
+.progress-box .pb-icon { font-size: 48px; margin-bottom: 12px; }
+.progress-box .pb-title { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+.progress-box .pb-desc { font-size: 14px; color: var(--c-text-secondary); }
+.progress-box .pb-steps { margin-top: 16px; text-align: left; }
+.progress-box .pb-step { padding: 6px 0; font-size: 14px; color: var(--c-text-muted); }
+.progress-box .pb-step.active { color: var(--c-accent); font-weight: 600; }
+.progress-box .pb-step.done { color: #22c55e; }
+.progress-box .pb-spinner { margin: 16px auto; width: 32px; height: 32px; border: 3px solid var(--c-border); border-top-color: var(--c-accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 600px) {
+  .online-paper { padding: 8px 0; }
+  .q-card { padding: 14px 16px; }
+  .q-card .q-text { font-size: 14px; }
+  .submit-bar { flex-direction: column; gap: 10px; padding: 12px 16px; }
+  .submit-bar .sb-btn { width: 100%; text-align: center; }
+}
+</style>
+{% endblock %}
+{% block content %}
+<div class="online-paper">
+  <div class="paper-header">
+    <div class="ph-back-row">
+      <a href="/past-papers" class="btn">← Back to Past Papers</a>
+    </div>
+    <h1>📝 {{ paper.label }}</h1>
+    <div class="ph-meta">
+      {% if coming_soon %}
+        ⏳ Coming soon — being built
+      {% else %}
+        {{ questions|length }} questions · {{ total_marks }} marks
+      {% endif %}
+    </div>
+    {% if not coming_soon %}
+    <div class="ph-timer-row">
+      <span class="ph-timer" id="timerDisplay">⏱️ 0:00</span>
+      <button class="timer-mode-toggle" id="timerModeBtn" onclick="toggleTimerMode()">⬆ Count Up</button>
+      <button class="timer-reset-btn" id="timerResetBtn" onclick="resetTimer()" title="Reset timer">↻</button>
+      <button class="btn" id="clearPaperBtn" onclick="clearPaper()" style="padding:4px 12px;font-size:12px;min-height:32px;margin-left:4px;">🗑️ Clear Paper</button>
+    </div>
+    {% endif %}
+  </div>
+
+  {% if coming_soon %}
+  <div class="coming-soon-box">
+    <div class="cs-icon">🔨</div>
+    <h2>This paper is being built</h2>
+    <p>We're adding structured questions with tick boxes, tables, and more. Check back soon!</p>
+    <p style="margin-top:16px;"><a href="/past-papers" style="color:var(--c-accent);">← Back to papers</a></p>
+  </div>
+  {% else %}
+  <form id="onlinePaperForm">
+    <input type="hidden" name="paper_id" value="{{ paper.id }}">
+    {% for q in questions %}
+    <div class="q-card" id="qcard-{{ q.id }}">
+      <div class="q-header">
+        <span class="q-num">Question {{ q.number }}{% if q.part %} ({{ q.part }}){% endif %}</span>
+        <span class="q-marks">{{ q.marks }} mark{% if q.marks > 1 %}s{% endif %}</span>
+      </div>
+      <div class="q-text">{{ q.question|replace('\n', '<br>')|safe }}</div>
+
+      {# ─── MCQ ─── #}
+      {% if q.type == "mcq" %}
+      <div class="mcq-options" data-qid="{{ q.id }}" data-qnum="{{ q.number }}" data-part="{{ q.part }}" data-marks="{{ q.marks }}">
+        {% for opt in q.options %}
+        <label class="mcq-option">
+          <input type="radio" name="mcq-{{ q.id }}" value="{{ loop.index0 }}" onchange="onMcqChange(this, '{{ q.id }}')">
+          <span>{{ opt }}</span>
+        </label>
+        {% endfor %}
+      </div>
+
+      {# ─── Table ─── #}
+      {% elif q.type == "table" %}
+      <table class="q-table">
+        <thead><tr>
+          {% for h in q.table.headers %}<th>{{ h }}</th>{% endfor %}
+        </tr></thead>
+        <tbody>
+          {% for row in q.table.rows %}
+          <tr>
+            {% for cell in row.cells %}
+            <td>
+              {% if cell == "" %}
+              <input type="text" data-qid="{{ q.id }}" data-qnum="{{ q.number }}" data-part="{{ q.part }}" data-marks="{{ q.marks }}" oninput="onTableInput(this, '{{ q.id }}')" placeholder="...">
+              {% else %}
+              {{ cell }}
+              {% endif %}
+            </td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      {# ─── Split fields (benefit/drawback, working/answer) ─── #}
+      {% elif q.type == "split" or q.type == "calculation" %}
+      <div class="split-fields">
+        {% for sf in q.sub_fields %}
+        <div class="split-field">
+          <label>{{ sf.label }}</label>
+          {% if sf.type == "textarea" %}
+          <textarea data-qid="{{ q.id }}" data-qnum="{{ q.number }}" data-part="{{ q.part }}" data-marks="{{ q.marks }}" data-sf="{{ sf.key }}" oninput="onSplitInput(this, '{{ q.id }}')" placeholder="Type your {{ sf.label|lower }} here..."></textarea>
+          {% else %}
+          <input type="text" data-qid="{{ q.id }}" data-qnum="{{ q.number }}" data-part="{{ q.part }}" data-marks="{{ q.marks }}" data-sf="{{ sf.key }}" oninput="onSplitInput(this, '{{ q.id }}')" placeholder="Type your {{ sf.label|lower }} here...">
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+
+      {# ─── Diagram ─── #}
+      {% elif q.type == "diagram" %}
+      <div class="diagram-hint">📐 {{ q.diagram_hint }}</div>
+      <textarea data-qid="{{ q.id }}" data-qnum="{{ q.number }}" data-part="{{ q.part }}" data-marks="{{ q.marks }}" oninput="onTextInput(this, '{{ q.id }}')" placeholder="Describe your diagram here, or upload a photo/scan using the Mark My Paper upload flow..."></textarea>
+
+      {# ─── Extended / Written / Short ─── #}
+      {% else %}
+      <textarea data-qid="{{ q.id }}" data-qnum="{{ q.number }}" data-part="{{ q.part }}" data-marks="{{ q.marks }}" oninput="onTextInput(this, '{{ q.id }}')" placeholder="Type your answer here..."></textarea>
+      <div class="q-word-count">0 words</div>
+      {% endif %}
+    </div>
+    {% endfor %}
+
+    <div class="submit-bar">
+      <div class="sb-info">
+        <span id="answeredCount">0</span>/{{ questions|length }} answered · <strong id="totalPossible">{{ total_marks }}</strong> marks
+      </div>
+      <button type="button" class="sb-btn" id="submitBtn" onclick="submitOnlinePaper()" disabled>
+        🚀 Submit for Marking
+      </button>
+    </div>
+  </form>
+  {% endif %}
+</div>
+
+{% if not coming_soon %}
+<!-- Progress overlay -->
+<div class="progress-overlay" id="progressOverlay">
+  <div class="progress-box">
+    <div class="pb-icon">🤖</div>
+    <div class="pb-title">Marking Your Paper</div>
+    <div class="pb-desc">AI examiner is reviewing your answers against the official mark scheme...</div>
+    <div class="pb-spinner"></div>
+    <div class="pb-steps">
+      <div class="pb-step" id="step1">📄 Reading your answers</div>
+      <div class="pb-step" id="step2">🔍 Checking against mark scheme</div>
+      <div class="pb-step" id="step3">📊 Calculating your grade</div>
+      <div class="pb-step" id="step4">📋 Generating your report</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── Timer state ───
+let timerSeconds = 0;
+let timerInterval = null;
+let timerMode = 'up'; // 'up' = count up, 'down' = count down
+const examDurationMinutes = {{ paper.duration_minutes|default(90) }};
+const examDurationSeconds = examDurationMinutes * 60;
+
+const paperId = document.querySelector('input[name="paper_id"]')?.value || '';
+
+// ─── Timer functions ───
+function formatTime(seconds) {
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  return m + ':' + (s < 10 ? '0' : '') + s;
+}
+
+function updateTimerDisplay() {
+  const el = document.getElementById('timerDisplay');
+  if (timerMode === 'up') {
+    el.textContent = '⏱️ ' + formatTime(timerSeconds);
+    el.className = 'ph-timer';
+  } else {
+    const remaining = Math.max(0, examDurationSeconds - timerSeconds);
+    el.textContent = '⏳ ' + formatTime(remaining);
+    if (remaining <= 60) {
+      el.className = 'ph-timer urgent';
+    } else if (remaining <= 300) {
+      el.className = 'ph-timer warning';
+    } else {
+      el.className = 'ph-timer';
+    }
+  }
+}
+
+function saveTimerState() {
+  localStorage.setItem('op_timer_' + paperId, timerSeconds);
+  localStorage.setItem('op_timer_mode_' + paperId, timerMode);
+}
+
+function loadTimerState() {
+  const saved = localStorage.getItem('op_timer_' + paperId);
+  if (saved) timerSeconds = parseInt(saved) || 0;
+  const savedMode = localStorage.getItem('op_timer_mode_' + paperId);
+  if (savedMode === 'up' || savedMode === 'down') timerMode = savedMode;
+}
+
+function toggleTimerMode() {
+  timerMode = (timerMode === 'up') ? 'down' : 'up';
+  const btn = document.getElementById('timerModeBtn');
+  btn.textContent = timerMode === 'up' ? '⬆ Count Up' : '⏳ Count Down (' + examDurationMinutes + 'm)';
+  updateTimerDisplay();
+  saveTimerState();
+}
+
+function resetTimer() {
+  if (confirm('Reset timer to 0?')) {
+    timerSeconds = 0;
+    updateTimerDisplay();
+    saveTimerState();
+  }
+}
+
+function clearPaper() {
+  if (confirm('Clear all answers and reset timer? This cannot be undone.')) {
+    // Clear all saved data
+    localStorage.removeItem('op_answers_' + paperId);
+    localStorage.removeItem('op_timer_' + paperId);
+    localStorage.removeItem('op_timer_mode_' + paperId);
+    // Reset timer
+    timerSeconds = 0;
+    updateTimerDisplay();
+    saveTimerState();
+    // Clear all inputs
+    document.querySelectorAll('textarea[data-qid]').forEach(ta => ta.value = '');
+    document.querySelectorAll('.q-card input[type="text"]').forEach(inp => inp.value = '');
+    document.querySelectorAll('.mcq-options input[type="radio"]').forEach(r => { r.checked = false; r.closest('.mcq-option').classList.remove('selected'); });
+    // Reset answer state
+    answerState = {};
+    document.querySelectorAll('.q-card').forEach(c => c.classList.remove('answered'));
+    updateAnsweredCount();
+    // Reset word counts
+    document.querySelectorAll('.q-word-count').forEach(el => el.textContent = '0 words');
+  }
+}
+
+function tickTimer() {
+  timerSeconds++;
+  updateTimerDisplay();
+  // Save every 5 seconds
+  if (timerSeconds % 5 === 0) saveTimerState();
+}
+
+// ─── Init ───
+document.addEventListener('DOMContentLoaded', function() {
+  // Restore saved answers from localStorage
+  restoreAllAnswers();
+
+  // Load timer state
+  loadTimerState();
+
+  // Set mode button text
+  const modeBtn = document.getElementById('timerModeBtn');
+  modeBtn.textContent = timerMode === 'up' ? '⬆ Count Up' : '⏳ Count Down (' + examDurationMinutes + 'm)';
+
+  // Start timer
+  updateTimerDisplay();
+  timerInterval = setInterval(tickTimer, 1000);
+});
+
+// ─── Persistence ───
+function saveAllAnswers() {
+  const data = {};
+
+  // Textareas
+  document.querySelectorAll('textarea[data-qid]').forEach(ta => {
+    data['ta_' + ta.dataset.qid] = ta.value;
+  });
+
+  // Text inputs (table cells, split fields)
+  document.querySelectorAll('.q-card input[type="text"]').forEach(inp => {
+    const card = inp.closest('.q-card');
+    const qid = card?.id?.replace('qcard-', '') || '';
+    const siblings = card?.querySelectorAll('input[type="text"]') || [];
+    const idx = Array.from(siblings).indexOf(inp);
+    data['inp_' + qid + '_' + idx] = inp.value;
+  });
+
+  // MCQ selections
+  document.querySelectorAll('.mcq-options').forEach(group => {
+    const selected = group.querySelector('input[type="radio"]:checked');
+    if (selected) {
+      data['mcq_' + group.dataset.qid] = selected.value;
+    }
+  });
+
+  localStorage.setItem('op_answers_' + paperId, JSON.stringify(data));
+}
+
+function restoreAllAnswers() {
+  const saved = localStorage.getItem('op_answers_' + paperId);
+  if (!saved) return;
+
+  try {
+    const data = JSON.parse(saved);
+
+    // Restore textareas
+    document.querySelectorAll('textarea[data-qid]').forEach(ta => {
+      const key = 'ta_' + ta.dataset.qid;
+      if (data[key]) {
+        ta.value = data[key];
+        onTextInput(ta, ta.dataset.qid);
+      }
+    });
+
+    // Restore text inputs
+    document.querySelectorAll('.q-card input[type="text"]').forEach(inp => {
+      const card = inp.closest('.q-card');
+      const qid = card?.id?.replace('qcard-', '') || '';
+      const siblings = card?.querySelectorAll('input[type="text"]') || [];
+      const idx = Array.from(siblings).indexOf(inp);
+      const key = 'inp_' + qid + '_' + idx;
+      if (data[key]) {
+        inp.value = data[key];
+        const handler = inp.oninput;
+        if (handler) handler.call(inp, { target: inp });
+      }
+    });
+
+    // Restore MCQ
+    document.querySelectorAll('.mcq-options').forEach(group => {
+      const key = 'mcq_' + group.dataset.qid;
+      if (data[key] !== undefined) {
+        const radio = group.querySelector('input[value="' + data[key] + '"]');
+        if (radio) {
+          radio.checked = true;
+          onMcqChange(radio, group.dataset.qid);
+        }
+      }
+    });
+  } catch (e) {
+    // Ignore corrupt data
+  }
+}
+
+// ─── Answer tracking ───
+let answerState = {};
+
+function markAnswered(qid) {
+  answerState[qid] = true;
+  const card = document.getElementById('qcard-' + qid);
+  if (card) card.classList.add('answered');
+  updateAnsweredCount();
+}
+
+function unmarkAnswered(qid) {
+  delete answerState[qid];
+  const card = document.getElementById('qcard-' + qid);
+  if (card) card.classList.remove('answered');
+  updateAnsweredCount();
+}
+
+function updateAnsweredCount() {
+  const count = Object.keys(answerState).length;
+  document.getElementById('answeredCount').textContent = count;
+  document.getElementById('submitBtn').disabled = (count === 0);
+}
+
+// ─── Text input ───
+function onTextInput(el, qid) {
+  const words = el.value.trim() ? el.value.trim().split(/\s+/).length : 0;
+  const wc = el.parentElement.querySelector('.q-word-count');
+  if (wc) wc.textContent = words + ' word' + (words !== 1 ? 's' : '');
+  if (el.value.trim()) markAnswered(qid);
+  else unmarkAnswered(qid);
+  saveAllAnswers();
+}
+
+// ─── MCQ ───
+function onMcqChange(el, qid) {
+  document.querySelectorAll('input[name="mcq-' + qid + '"]').forEach(r => {
+    r.closest('.mcq-option').classList.remove('selected');
+  });
+  el.closest('.mcq-option').classList.add('selected');
+  markAnswered(qid);
+  saveAllAnswers();
+}
+
+// ─── Table input ───
+function onTableInput(el, qid) {
+  const inputs = document.querySelectorAll('#qcard-' + qid + ' input[type="text"]');
+  let anyFilled = false;
+  inputs.forEach(inp => { if (inp.value.trim()) anyFilled = true; });
+  if (anyFilled) markAnswered(qid);
+  else unmarkAnswered(qid);
+  saveAllAnswers();
+}
+
+// ─── Split input ───
+function onSplitInput(el, qid) {
+  const inputs = document.querySelectorAll('#qcard-' + qid + ' textarea, #qcard-' + qid + ' input[type="text"]');
+  let anyFilled = false;
+  inputs.forEach(inp => { if (inp.value.trim()) anyFilled = true; });
+  if (anyFilled) markAnswered(qid);
+  else unmarkAnswered(qid);
+  saveAllAnswers();
+}
+
+// ─── Submit ───
+async function submitOnlinePaper() {
+  const overlay = document.getElementById('progressOverlay');
+  overlay.style.display = 'flex';
+  document.getElementById('step1').classList.add('active');
+
+  const answers = [];
+  const paperId = document.querySelector('input[name="paper_id"]').value;
+
+  // Collect all answers
+  document.querySelectorAll('.q-card').forEach(card => {
+    const qid = card.id.replace('qcard-', '');
+    const qnum = parseInt(card.querySelector('[data-qnum]')?.dataset.qnum || 0);
+    const part = card.querySelector('[data-part]')?.dataset.part || '';
+    const marks = parseInt(card.querySelector('[data-marks]')?.dataset.marks || 0);
+    const qtext = card.querySelector('.q-text')?.innerText || '';
+
+    // Check for MCQ
+    const mcqSelected = card.querySelector('.mcq-option.selected');
+    if (mcqSelected) {
+      const val = mcqSelected.querySelector('input')?.value || '';
+      answers.push({ number: qnum, part: part, question_text: qtext, text: 'Option ' + (parseInt(val) + 1) + ': ' + mcqSelected.querySelector('span')?.innerText, marks: marks });
+      return;
+    }
+
+    // Check for table
+    const tableInputs = card.querySelectorAll('.q-table input[type="text"]');
+    if (tableInputs.length > 0) {
+      let tableText = '';
+      tableInputs.forEach(inp => {
+        if (inp.value.trim()) tableText += (tableText ? ', ' : '') + inp.value.trim();
+      });
+      if (tableText) answers.push({ number: qnum, part: part, question_text: qtext, text: tableText, marks: marks });
+      return;
+    }
+
+    // Check for split fields
+    const splitInputs = card.querySelectorAll('.split-field input, .split-field textarea');
+    if (splitInputs.length > 0) {
+      let splitText = '';
+      splitInputs.forEach(inp => {
+        const label = inp.closest('.split-field')?.querySelector('label')?.innerText || '';
+        if (inp.value.trim()) splitText += (splitText ? '\n' : '') + label + ': ' + inp.value.trim();
+      });
+      if (splitText) answers.push({ number: qnum, part: part, question_text: qtext, text: splitText, marks: marks });
+      return;
+    }
+
+    // Regular textarea
+    const ta = card.querySelector('textarea');
+    if (ta && ta.value.trim()) {
+      answers.push({ number: qnum, part: part, question_text: qtext, text: ta.value.trim(), marks: marks });
+    }
+  });
+
+  document.getElementById('step1').classList.remove('active');
+  document.getElementById('step1').classList.add('done');
+  document.getElementById('step2').classList.add('active');
+
+  try {
+    const resp = await fetch('/mark-my-paper/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ paper_id: paperId, answers: answers })
+    });
+
+    document.getElementById('step2').classList.remove('active');
+    document.getElementById('step2').classList.add('done');
+    document.getElementById('step3').classList.add('active');
+
+    if (!resp.ok) {
+      const err = await resp.text();
+      overlay.innerHTML = '<div class="progress-box"><div class="pb-icon">❌</div><div class="pb-title">Error</div><div class="pb-desc">' + err + '</div></div>';
+      return;
+    }
+
+    const result = await resp.json();
+    document.getElementById('step3').classList.remove('active');
+    document.getElementById('step3').classList.add('done');
+    document.getElementById('step4').classList.add('active');
+
+    if (result.attempt_id) {
+      // Clear saved answers on successful submit
+      localStorage.removeItem('op_answers_' + paperId);
+      localStorage.removeItem('op_timer_' + paperId);
+      localStorage.removeItem('op_timer_mode_' + paperId);
+      window.location.href = '/mark-my-paper/report/' + result.attempt_id;
+    }
+  } catch (e) {
+    overlay.innerHTML = '<div class="progress-box"><div class="pb-icon">❌</div><div class="pb-title">Network Error</div><div class="pb-desc">' + e.message + '</div></div>';
+  }
+}
+</script>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,426 @@
+{% extends "base.html" %}
+{% block title %}Test Data Generator | WLV Computer Science{% endblock %}
+{% block content %}
+<div class="hero" style="padding: 30px 0 15px;">
+    <h1>🧪 Test Data Generator</h1>
+    <p class="hero-sub">Practise identifying normal, boundary, invalid, and erroneous test data</p>
+</div>
+
+<style>
+.td-intro {
+    max-width: 900px;
+    margin: 0 auto 20px;
+    padding: 20px 24px;
+    background: rgba(17, 24, 39, 0.7);
+    border: 1px solid rgba(34, 211, 238, 0.12);
+    border-radius: var(--r-xl);
+    line-height: 1.7;
+    font-size: 14px;
+}
+.light-theme .td-intro {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(8, 145, 178, 0.15);
+}
+.td-intro h3 { color: var(--c-heading); margin-bottom: 8px; font-size: 17px; }
+
+.td-layout {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* ── Scenario Card ── */
+.td-scenario {
+    padding: 18px 22px;
+    background: rgba(17, 24, 39, 0.85);
+    border: 1px solid rgba(34, 211, 238, 0.18);
+    border-left: 4px solid var(--c-accent);
+    border-radius: var(--r-xl);
+}
+.light-theme .td-scenario {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(8, 145, 178, 0.18);
+}
+.td-scenario h3 { font-size: 17px; color: var(--c-heading); margin-bottom: 4px; }
+.td-scenario p { font-size: 14px; line-height: 1.65; color: var(--c-text); }
+.td-scenario code {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 13px;
+    color: var(--c-accent);
+}
+.light-theme .td-scenario code { background: rgba(0, 0, 0, 0.06); }
+
+/* ── Controls ── */
+.td-controls {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.td-controls select, .td-controls button {
+    padding: 8px 14px;
+    border-radius: var(--r-md);
+    border: 1px solid var(--c-border);
+    background: rgba(17, 24, 39, 0.8);
+    color: var(--c-text);
+    font-size: 13px;
+    font-weight: 600;
+}
+.light-theme .td-controls select, .light-theme .td-controls button {
+    background: rgba(255, 255, 255, 0.8);
+}
+.td-controls button.btn-primary {
+    background: var(--c-accent);
+    color: #000;
+    border-color: var(--c-accent);
+}
+
+/* ── Category Legend ── */
+.td-legend {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    font-weight: 600;
+}
+.td-legend span {
+    padding: 4px 10px;
+    border-radius: 99px;
+}
+.td-legend .normal { background: rgba(52, 211, 153, 0.12); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.2); }
+.td-legend .boundary { background: rgba(250, 204, 21, 0.12); color: #facc15; border: 1px solid rgba(250, 204, 21, 0.2); }
+.td-legend .invalid { background: rgba(244, 63, 94, 0.12); color: #f43f5e; border: 1px solid rgba(244, 63, 94, 0.2); }
+.td-legend .erroneous { background: rgba(168, 85, 247, 0.12); color: #a855f7; border: 1px solid rgba(168, 85, 247, 0.2); }
+
+/* ── Test Data Grid ── */
+.td-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+}
+.td-card {
+    padding: 12px 14px;
+    border-radius: var(--r-lg);
+    border: 2px solid var(--c-border);
+    background: rgba(17, 24, 39, 0.7);
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: center;
+}
+.light-theme .td-card { background: rgba(255, 255, 255, 0.7); }
+.td-card:hover { transform: translateY(-2px); }
+.td-card .td-value {
+    font-family: monospace;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+.td-card .td-category {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.td-card.selected { border-width: 3px; }
+.td-card.correct { border-color: #34d399 !important; }
+.td-card.wrong { border-color: #f43f5e !important; }
+.td-card.revealed .td-category { display: block; }
+
+/* Category colours */
+.td-card.cat-normal { border-color: rgba(52, 211, 153, 0.3); }
+.td-card.cat-normal .td-category { color: #34d399; }
+.td-card.cat-boundary { border-color: rgba(250, 204, 21, 0.3); }
+.td-card.cat-boundary .td-category { color: #facc15; }
+.td-card.cat-invalid { border-color: rgba(244, 63, 94, 0.3); }
+.td-card.cat-invalid .td-category { color: #f43f5e; }
+.td-card.cat-erroneous { border-color: rgba(168, 85, 247, 0.3); }
+.td-card.cat-erroneous .td-category { color: #a855f7; }
+
+/* ── Score ── */
+.td-score {
+    text-align: center;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 12px;
+    background: rgba(17, 24, 39, 0.5);
+    border-radius: var(--r-lg);
+    border: 1px solid var(--c-border);
+}
+.light-theme .td-score { background: rgba(0, 0, 0, 0.03); }
+.td-score .score-num { color: var(--c-accent); font-size: 20px; }
+
+/* ── Explanation ── */
+.td-explanation {
+    padding: 14px 18px;
+    background: rgba(8, 11, 20, 0.5);
+    border: 1px solid rgba(34, 211, 238, 0.08);
+    border-radius: var(--r-lg);
+    font-size: 13px;
+    line-height: 1.6;
+    display: none;
+}
+.td-explanation.show { display: block; }
+</style>
+
+<!-- ── Intro ── -->
+<div class="td-intro">
+    <h3>🧪 Test Data Generator</h3>
+</div>
+
+<div class="td-layout">
+    <!-- Scenario -->
+    <div class="td-scenario" id="tdScenario">
+        <h3 id="tdScenarioTitle">Loading...</h3>
+        <p id="tdScenarioDesc"></p>
+    </div>
+
+    <!-- Controls -->
+    <div class="td-controls">
+        <select id="tdScenarioSelect" onchange="loadTdScenario()">
+            <option value="0">Age Validator (1-120)</option>
+            <option value="1">Exam Score (0-100)</option>
+            <option value="2">Password Length (8+)</option>
+            <option value="3">Temperature Check (-10 to 40)</option>
+            <option value="4">Menu Choice (1-5)</option>
+        </select>
+        <button class="btn-primary" onclick="revealAll()">👁️ Reveal All</button>
+        <button onclick="resetTd()">🔄 New Set</button>
+    </div>
+
+    <!-- Legend -->
+    <div class="td-legend">
+        <span class="normal">🟢 Normal</span>
+        <span class="boundary">🟡 Boundary</span>
+        <span class="invalid">🔴 Invalid</span>
+        <span class="erroneous">🟣 Erroneous</span>
+    </div>
+
+    <!-- Score -->
+    <div class="td-score">
+        Score: <span class="score-num" id="tdScore">0</span> / <span id="tdTotal">0</span>
+        <span id="tdPercent" style="font-size:13px;color:var(--c-text-secondary);margin-left:8px;"></span>
+    </div>
+
+    <!-- Test Data Grid -->
+    <div class="td-grid" id="tdGrid"></div>
+
+    <!-- Explanation -->
+    <div class="td-explanation" id="tdExplanation"></div>
+</div>
+
+<script>
+// ─── Scenarios ───
+const tdScenarios = [
+    {
+        title: "Age Validator",
+        desc: "A program asks the user to enter their age. Valid ages are between <code>1</code> and <code>120</code> (inclusive). Classify each test data value.",
+        generate: () => {
+            const data = [];
+            // Normal
+            data.push({ value: "25", category: "normal" });
+            data.push({ value: "50", category: "normal" });
+            data.push({ value: "100", category: "normal" });
+            // Boundary
+            data.push({ value: "1", category: "boundary" });
+            data.push({ value: "120", category: "boundary" });
+            data.push({ value: "0", category: "boundary" });
+            data.push({ value: "121", category: "boundary" });
+            // Invalid
+            data.push({ value: "-5", category: "invalid" });
+            data.push({ value: "200", category: "invalid" });
+            // Erroneous
+            data.push({ value: "abc", category: "erroneous" });
+            data.push({ value: "12.5", category: "erroneous" });
+            return shuffle(data);
+        },
+        explanation: "Normal: valid values within range. Boundary: values at the edges (1, 120) and just outside (0, 121). Invalid: values outside the valid range. Erroneous: wrong data type (text, decimal for integer input)."
+    },
+    {
+        title: "Exam Score Checker",
+        desc: "A program asks for an exam score. Valid scores are <code>0</code> to <code>100</code> (inclusive). Classify each test value.",
+        generate: () => {
+            const data = [];
+            data.push({ value: "50", category: "normal" });
+            data.push({ value: "0", category: "boundary" });
+            data.push({ value: "100", category: "boundary" });
+            data.push({ value: "75", category: "normal" });
+            data.push({ value: "-1", category: "boundary" });
+            data.push({ value: "101", category: "boundary" });
+            data.push({ value: "150", category: "invalid" });
+            data.push({ value: "-50", category: "invalid" });
+            data.push({ value: "hello", category: "erroneous" });
+            data.push({ value: "9.5", category: "erroneous" });
+            return shuffle(data);
+        },
+        explanation: "Normal: valid scores (50, 75). Boundary: at the limits (0, 100) and just outside (-1, 101). Invalid: far outside range (150, -50). Erroneous: wrong data type (text, decimal)."
+    },
+    {
+        title: "Password Validator",
+        desc: "A program checks that a password is at least <code>8</code> characters long. Classify each test value.",
+        generate: () => {
+            const data = [];
+            data.push({ value: '"abcdefgh"', category: "boundary" });
+            data.push({ value: '"password123"', category: "normal" });
+            data.push({ value: '"short"', category: "boundary" });
+            data.push({ value: '"a1b2c3d4e5"', category: "normal" });
+            data.push({ value: '"abc"', category: "invalid" });
+            data.push({ value: '"1234567"', category: "boundary" });
+            data.push({ value: '""', category: "invalid" });
+            data.push({ value: "null", category: "erroneous" });
+            data.push({ value: "12345", category: "erroneous" });
+            return shuffle(data);
+        },
+        explanation: "Boundary: exactly 8 chars and 7 chars (just below). Normal: well above minimum. Invalid: too short. Erroneous: wrong data type (number instead of string, null)."
+    },
+    {
+        title: "Temperature Monitor",
+        desc: "A weather station records temperatures between <code>-10</code> and <code>40</code> °C (inclusive). Classify each test value.",
+        generate: () => {
+            const data = [];
+            data.push({ value: "0", category: "normal" });
+            data.push({ value: "25", category: "normal" });
+            data.push({ value: "-10", category: "boundary" });
+            data.push({ value: "40", category: "boundary" });
+            data.push({ value: "-11", category: "boundary" });
+            data.push({ value: "41", category: "boundary" });
+            data.push({ value: "-100", category: "invalid" });
+            data.push({ value: "100", category: "invalid" });
+            data.push({ value: "cold", category: "erroneous" });
+            data.push({ value: "25.5", category: "erroneous" });
+            return shuffle(data);
+        },
+        explanation: "Normal: within range (0, 25). Boundary: at edges (-10, 40) and just outside (-11, 41). Invalid: far outside (-100, 100). Erroneous: wrong type (text, decimal for integer)."
+    },
+    {
+        title: "Menu Choice",
+        desc: "A program displays a menu with options <code>1</code> to <code>5</code>. Classify each test value.",
+        generate: () => {
+            const data = [];
+            data.push({ value: "3", category: "normal" });
+            data.push({ value: "1", category: "boundary" });
+            data.push({ value: "5", category: "boundary" });
+            data.push({ value: "2", category: "normal" });
+            data.push({ value: "0", category: "boundary" });
+            data.push({ value: "6", category: "boundary" });
+            data.push({ value: "10", category: "invalid" });
+            data.push({ value: "-1", category: "invalid" });
+            data.push({ value: "two", category: "erroneous" });
+            data.push({ value: "2.5", category: "erroneous" });
+            return shuffle(data);
+        },
+        explanation: "Normal: valid menu options (2, 3). Boundary: at edges (1, 5) and just outside (0, 6). Invalid: far outside range (10, -1). Erroneous: wrong data type (text, decimal)."
+    }
+];
+
+let tdData = [];
+let tdRevealed = [];
+let tdCorrect = [];
+let tdScore = 0;
+
+// ─── Shuffle ───
+function shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+}
+
+// ─── Load Scenario ───
+function loadTdScenario() {
+    const idx = parseInt(document.getElementById('tdScenarioSelect').value);
+    const scenario = tdScenarios[idx];
+    document.getElementById('tdScenarioTitle').textContent = scenario.title;
+    document.getElementById('tdScenarioDesc').innerHTML = scenario.desc;
+    
+    tdData = scenario.generate();
+    tdRevealed = new Array(tdData.length).fill(false);
+    tdCorrect = new Array(tdData.length).fill(false);
+    tdScore = 0;
+    
+    renderTdGrid();
+    document.getElementById('tdExplanation').classList.remove('show');
+}
+
+// ─── Render Grid ───
+function renderTdGrid() {
+    const grid = document.getElementById('tdGrid');
+    grid.innerHTML = '';
+    document.getElementById('tdScore').textContent = tdScore;
+    document.getElementById('tdTotal').textContent = tdData.length;
+    const pct = tdData.length > 0 ? Math.round((tdScore / tdData.length) * 100) : 0;
+    document.getElementById('tdPercent').textContent = pct > 0 ? `(${pct}%)` : '';
+    
+    tdData.forEach((item, i) => {
+        const card = document.createElement('div');
+        card.className = 'td-card';
+        if (tdRevealed[i]) {
+            card.classList.add('revealed', `cat-${item.category}`);
+            if (tdCorrect[i]) card.classList.add('correct');
+            else card.classList.add('wrong');
+        }
+        card.onclick = () => classifyTd(i);
+        
+        card.innerHTML = `
+            <div class="td-value">${item.value}</div>
+            <div class="td-category">${tdRevealed[i] ? item.category : '???'}</div>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+// ─── Classify ───
+function classifyTd(idx) {
+    if (tdRevealed[idx]) return;
+    
+    const item = tdData[idx];
+    const userCategory = prompt(`What type of test data is "${item.value}"?\n\nTypes: normal, boundary, invalid, erroneous`).toLowerCase().trim();
+    
+    const validTypes = ['normal', 'boundary', 'invalid', 'erroneous'];
+    if (!validTypes.includes(userCategory)) {
+        alert('Please enter one of: normal, boundary, invalid, erroneous');
+        return;
+    }
+    
+    tdRevealed[idx] = true;
+    if (userCategory === item.category) {
+        tdCorrect[idx] = true;
+        tdScore++;
+    }
+    
+    renderTdGrid();
+    
+    // Check if all revealed
+    if (tdRevealed.every(r => r)) {
+        const pct = Math.round((tdScore / tdData.length) * 100);
+        const explanation = document.getElementById('tdExplanation');
+        explanation.innerHTML = `<strong>${pct >= 80 ? '🎉 Great job!' : '📚 Keep practising!'}</strong> ${tdScenarios[parseInt(document.getElementById('tdScenarioSelect').value)].explanation}`;
+        explanation.classList.add('show');
+    }
+}
+
+// ─── Reveal All ───
+function revealAll() {
+    for (let i = 0; i < tdData.length; i++) {
+        tdRevealed[i] = true;
+    }
+    renderTdGrid();
+    const explanation = document.getElementById('tdExplanation');
+    explanation.innerHTML = `<strong>📚 Answer Key</strong> ${tdScenarios[parseInt(document.getElementById('tdScenarioSelect').value)].explanation}`;
+    explanation.classList.add('show');
+}
+
+// ─── Reset ───
+function resetTd() {
+    loadTdScenario();
+}
+
+// ─── Init ───
+document.addEventListener('DOMContentLoaded', loadTdScenario);
+</script>
+{% endblock %}

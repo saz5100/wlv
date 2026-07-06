@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}Online Papers — WLV Computer Science{% endblock %}
+{% block head %}
+<style>
+.op-landing { max-width: 720px; margin: 0 auto; padding: 24px 0; }
+.op-landing h1 { font-size: 32px; margin-bottom: 6px; }
+.op-landing p.sub { color: var(--c-text-secondary); font-size: 15px; margin-bottom: 24px; }
+.op-grid { display: flex; flex-direction: column; gap: 12px; }
+.op-card {
+  display: flex; align-items: center; gap: 16px;
+  background: rgba(17,24,39,0.88); border: 1px solid rgba(34,211,238,0.10);
+  border-radius: var(--r-xl); padding: 18px 22px;
+  transition: all 0.2s;
+}
+.light-theme .op-card { background: rgba(255,255,255,0.88); }
+.op-card:hover { border-color: var(--c-accent); box-shadow: 0 4px 20px var(--c-accent-glow); transform: translateY(-2px); }
+.op-card .op-icon { font-size: 28px; }
+.op-card .op-info { flex: 1; }
+.op-card .op-title { font-weight: 700; font-size: 16px; }
+.op-card .op-meta { font-size: 13px; color: var(--c-text-secondary); }
+.op-card.inactive { opacity: 0.5; }
+.op-card.inactive:hover { border-color: var(--c-border); box-shadow: none; transform: none; }
+.op-card.inactive .btn { opacity: 0.4; pointer-events: none; }
+.btn-disabled {
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  color: var(--c-text-secondary);
+  border-radius: var(--r-lg);
+  padding: 6px 12px;
+  font-size: 12px;
+  display: inline-block;
+  text-decoration: none;
+  user-select: none;
+}
+@media (max-width: 500px) {
+  .op-card { flex-direction: column; align-items: flex-start; gap: 10px; }
+}
+</style>
+{% endblock %}
+{% block content %}
+<div class="op-landing">
+  <h1>✏️ Online Papers</h1>
+  <div class="op-grid">
+    {% for p in papers %}
+    <div class="op-card{% if not p.active %} inactive{% endif %}">
+      <div class="op-icon">📄</div>
+      <div class="op-info">
+        <div class="op-title">{{ p.label }}</div>
+        <div class="op-meta">Paper {{ p.paper }} · {{ p.month }} {{ p.year }}{% if not p.active %} · 🔨 Coming soon{% endif %}</div>
+      </div>
+      <div>
+        {% if p.active %}
+        <a href="/online-paper/{{ p.id }}" class="btn btn-primary">✏️ Fill Online</a>
+        {% else %}
+        <span class="btn btn-disabled">✏️ Fill Online</span>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <div style="margin-top: 24px; text-align: center;">
+    <a href="/exam" class="btn">← Back to Exam Modes</a>
+  </div>
+</div>
+{% endblock %}

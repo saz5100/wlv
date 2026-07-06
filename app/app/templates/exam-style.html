@@ -1,0 +1,479 @@
+{% extends "base.html" %}
+{% block title %}Exam-Style Questions — WLV Computer Science{% endblock %}
+{% block head %}
+<style>
+.es-page { max-width: 720px; margin: 0 auto; padding: 24px 0; }
+.es-page h1 { font-size: 26px; margin-bottom: 4px; }
+.es-page .sub { color: var(--c-text-secondary); font-size: 14px; margin-bottom: 24px; }
+
+/* Question card */
+.es-card {
+  background: rgba(13,18,37,0.8); border: 1px solid rgba(34,211,238,0.10);
+  border-radius: var(--r-xl); padding: 24px; margin-bottom: 20px;
+}
+.light-theme .es-card { background: rgba(243,244,246,0.8); }
+.es-card .q-meta { font-size: 12px; color: var(--c-text-muted); margin-bottom: 8px; }
+.es-card .q-meta span { margin-right: 12px; }
+.es-card .q-text { font-size: 17px; font-weight: 600; line-height: 1.6; margin-bottom: 16px; }
+.es-card .q-hint { font-size: 13px; color: var(--c-text-secondary); background: rgba(34,211,238,0.06); border-left: 3px solid var(--c-accent); padding: 10px 14px; border-radius: 6px; margin-bottom: 16px; }
+.es-card textarea {
+  width: 100%; min-height: 180px; padding: 14px; font-size: 15px; line-height: 1.7;
+  background: rgba(17,24,39,0.88); border: 2px solid var(--c-border); border-radius: 10px;
+  color: var(--c-text); outline: none; resize: vertical; font-family: inherit;
+  transition: border-color 0.15s;
+}
+.light-theme .es-card textarea { background: rgba(255,255,255,0.88); }
+.es-card textarea:focus { border-color: var(--c-accent); box-shadow: 0 0 0 3px var(--c-accent-glow); }
+.es-card .word-count { font-size: 12px; color: var(--c-text-muted); text-align: right; margin-top: 4px; }
+.es-card .submit-row { text-align: center; margin-top: 16px; }
+
+/* Loading state */
+.es-loading { text-align: center; padding: 40px; }
+.es-loading .spinner { font-size: 40px; animation: spin 1s linear infinite; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+.es-loading p { color: var(--c-text-secondary); margin-top: 12px; }
+
+/* Results */
+.es-result {
+  background: rgba(13,18,37,0.8); border: 1px solid rgba(34,211,238,0.10);
+  border-radius: var(--r-xl); padding: 24px; margin-bottom: 20px;
+}
+.light-theme .es-result { background: rgba(243,244,246,0.8); }
+.es-result .score-big { font-size: 48px; font-weight: 800; text-align: center; }
+.es-result .score-big .out-of { font-size: 20px; font-weight: 400; color: var(--c-text-muted); }
+.es-result .grade-label { text-align: center; font-size: 18px; font-weight: 700; margin: 4px 0 16px; }
+.es-result .grade-label.good { color: var(--c-green); }
+.es-result .grade-label.ok { color: #fbbf24; }
+.es-result .grade-label.poor { color: var(--c-rose); }
+.es-result .feedback-section { margin: 16px 0; }
+.es-result .feedback-section h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; color: var(--c-accent); }
+.es-result .feedback-section p, .es-result .feedback-section li { font-size: 14px; line-height: 1.7; color: var(--c-text); }
+.es-result .feedback-section ul { padding-left: 20px; }
+.es-result .feedback-section .strength { color: var(--c-green); }
+.es-result .feedback-section .weakness { color: var(--c-rose); }
+.es-result .model-answer { margin-top: 16px; padding: 14px; background: rgba(8,41,73,0.7); border-radius: 8px; }
+.light-theme .es-result .model-answer { background: rgba(236,254,255,0.7); }
+.es-result .model-answer h3 { font-size: 14px; font-weight: 700; margin-bottom: 6px; color: var(--c-accent); }
+.es-result .model-answer p { font-size: 14px; line-height: 1.7; color: var(--c-text); }
+
+.es-actions { text-align: center; margin-top: 20px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+.es-action-link {
+  color: var(--c-accent, #22d3ee);
+  text-decoration: none;
+  font-size: 12px;
+  white-space: nowrap;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(34,211,238,0.06);
+  transition: background 0.15s;
+}
+.es-action-link:hover { background: rgba(34,211,238,0.15); text-decoration: underline; }
+
+/* Marking progress bar */
+.es-progress { margin: 24px 0; text-align: center; }
+.es-progress .prog-bar { width: 100%; height: 8px; background: var(--c-border); border-radius: 4px; overflow: hidden; margin-top: 8px; }
+.es-progress .prog-fill { height: 100%; background: linear-gradient(90deg, var(--c-accent), #a78bfa); border-radius: 4px; transition: width 0.4s ease; width: 0%; }
+.es-progress .prog-stage { font-size: 14px; color: var(--c-text-secondary); margin-top: 4px; }
+.es-progress .prog-pct { font-size: 12px; color: var(--c-text-muted); }
+
+/* Error */
+.es-error { text-align: center; padding: 40px; }
+.es-error .big { font-size: 48px; margin-bottom: 12px; }
+.es-error p { color: var(--c-text-secondary); margin-bottom: 20px; }
+
+/* Key terminology cards */
+.key-terms-list { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+.key-term-item {
+  background: rgba(34, 211, 238, 0.03);
+  border: 1px dashed rgba(34, 211, 238, 0.25);
+  border-radius: 10px;
+  padding: 12px 16px;
+  transition: all 0.2s ease;
+}
+.light-theme .key-term-item {
+  background: rgba(8, 41, 73, 0.02);
+  border-color: rgba(8, 41, 73, 0.15);
+}
+.key-term-item:hover {
+  border-color: var(--c-accent);
+  background: rgba(34, 211, 238, 0.08);
+  transform: translateX(6px);
+  box-shadow: 0 2px 10px rgba(34, 211, 238, 0.08);
+}
+.key-term-name {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--c-accent, #22d3ee);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.key-term-name::before {
+  content: "⚡";
+  font-size: 12px;
+  opacity: 0.85;
+}
+.key-term-desc {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--c-text-secondary);
+}
+
+/* AO Breakdown pills */
+.ao-pill {
+  flex: 1;
+  min-width: 140px;
+  background: rgba(13,18,37,0.6);
+  border: 1px solid rgba(34,211,238,0.10);
+  border-radius: 10px;
+  padding: 12px 16px;
+  text-align: center;
+}
+.light-theme .ao-pill { background: rgba(243,244,246,0.6); }
+.ao-pill .ao-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+.ao-pill .ao-score { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+.ao-pill.ao1 .ao-label { color: #60a5fa; }
+.ao-pill.ao1 .ao-score { color: #60a5fa; }
+.ao-pill.ao2 .ao-label { color: #34d399; }
+.ao-pill.ao2 .ao-score { color: #34d399; }
+.ao-pill.ao3 .ao-label { color: #fbbf24; }
+.ao-pill.ao3 .ao-score { color: #fbbf24; }
+.ao-bar { height: 4px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; }
+.ao-fill { height: 100%; border-radius: 2px; transition: width 0.6s ease; }
+.ao-pill.ao1 .ao-fill { background: #60a5fa; }
+.ao-pill.ao2 .ao-fill { background: #34d399; }
+.ao-pill.ao3 .ao-fill { background: #fbbf24; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="es-page">
+  {% if error %}
+  <div class="es-error">
+    <div class="big">😕</div>
+    <p>{{ error }}</p>
+    <a href="/exam" class="btn">← Back to Exam Modes</a>
+  </div>
+
+  {% elif landing %}
+  {# ─── LANDING PAGE: pick marks first, then topic ─── #}
+  <h1>✍️ Exam-Style Questions</h1>
+  <p class="sub">Choose a mark value and topic to practise written exam questions with AI marking</p>
+
+  <div class="es-card">
+  <h3 style="font-size:18px;font-weight:700;margin-bottom:12px;">📊 Mark Value</h3>
+  <div style="display:flex;gap:12px;flex-direction:column;">
+    <a href="/exam-style?marks=6" class="btn {% if marks == 6 %}btn-primary{% endif %}" style="text-align:center;padding:12px;">
+      <div style="font-weight:700;">6 marks — Explain</div>
+      <div style="font-size:12px;color:var(--c-text-muted);margin-top:2px;">Define, describe, show sequence. AO1 + AO2 focus.</div>
+    </a>
+    <a href="/exam-style?marks=8" class="btn {% if marks == 8 %}btn-primary{% endif %}" style="text-align:center;padding:12px;">
+      <div style="font-weight:700;">8 marks — Evaluate</div>
+      <div style="font-size:12px;color:var(--c-text-muted);margin-top:2px;">Advantages AND disadvantages, compare, conclude. AO1 + AO2 + AO3 focus.</div>
+    </a>
+  </div>
+  </div>
+
+  <div class="es-card" style="margin-top:16px;">
+    <h3 style="font-size:18px;font-weight:700;margin-bottom:16px;">📂 Select a Topic</h3>
+    {% if topics %}
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      {% for t in topics %}
+      <a href="/exam-style?marks={{ marks }}&topic={{ t.code }}" class="topic-card" style="padding:16px;border-radius:var(--r-lg);background:rgba(13,18,37,0.6);border:1px solid rgba(34,211,238,0.08);text-decoration:none;transition:all 0.15s;">
+        <div style="font-size:13px;font-weight:700;color:var(--c-accent);margin-bottom:4px;">{{ t.code }}</div>
+        <div style="font-size:14px;font-weight:600;color:var(--c-heading);">{{ t.title }}</div>
+      </a>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p style="color:var(--c-text-secondary);text-align:center;padding:20px;">No {{ marks }}-mark questions available. Try a different mark value.</p>
+    {% endif %}
+  </div>
+
+  <div class="es-actions">
+    <a href="/exam" class="btn">← Back to Exam Modes</a>
+  </div>
+
+  {% elif result %}
+  {# ─── RESULTS ─── #}
+  <h1>📝 Your Result</h1>
+  <p class="sub">{{ topic_name }} · {{ marks }}-mark {{ command_word }}</p>
+
+  <div class="es-result">
+    <div class="score-big">{{ result.score }}<span class="out-of">/{{ marks }}</span></div>
+    {% set pct = (result.score / marks * 100)|round|int %}
+    <div class="grade-label {% if pct >= 70 %}good{% elif pct >= 40 %}ok{% else %}poor{% endif %}">
+      {% if pct >= 80 %}🌟 Excellent{% elif pct >= 60 %}👍 Good{% elif pct >= 40 %}💪 Getting There{% else %}📚 Keep Practising{% endif %}
+    </div>
+
+    <div class="feedback-section">
+      <h3>💬 Feedback</h3>
+      <p>{{ result.feedback }}</p>
+    </div>
+
+    {% if result.ao_breakdown %}
+    <div class="feedback-section">
+      <h3>🎯 Assessment Objective Breakdown</h3>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;">
+        {% set ao = result.ao_breakdown %}
+        {% if ao.ao1 is defined %}
+        <div class="ao-pill ao1">
+          <div class="ao-label">AO1 — Knowledge</div>
+          <div class="ao-score">{{ ao.ao1 }}/{{ (marks * 0.4)|round|int if command_word == 'Explain' else (marks * 0.25)|round|int }}</div>
+          <div class="ao-bar"><div class="ao-fill" style="width:{{ (ao.ao1 / ((marks * 0.4)|round|int if command_word == 'Explain' else (marks * 0.25)|round|int) * 100)|round|int if ((marks * 0.4)|round|int if command_word == 'Explain' else (marks * 0.25)|round|int) > 0 else 0 }}%"></div></div>
+        </div>
+        {% endif %}
+        {% if ao.ao2 is defined %}
+        <div class="ao-pill ao2">
+          <div class="ao-label">AO2 — Explanation</div>
+          <div class="ao-score">{{ ao.ao2 }}/{{ (marks * 0.6)|round|int if command_word == 'Explain' else (marks * 0.35)|round|int }}</div>
+          <div class="ao-bar"><div class="ao-fill" style="width:{{ (ao.ao2 / ((marks * 0.6)|round|int if command_word == 'Explain' else (marks * 0.35)|round|int) * 100)|round|int if ((marks * 0.6)|round|int if command_word == 'Explain' else (marks * 0.35)|round|int) > 0 else 0 }}%"></div></div>
+        </div>
+        {% endif %}
+        {% if ao.ao3 is defined and command_word == 'Evaluate' %}
+        <div class="ao-pill ao3">
+          <div class="ao-label">AO3 — Evaluation</div>
+          <div class="ao-score">{{ ao.ao3 }}/{{ (marks * 0.4)|round|int }}</div>
+          <div class="ao-bar"><div class="ao-fill" style="width:{{ (ao.ao3 / ((marks * 0.4)|round|int) * 100)|round|int if (marks * 0.4)|round|int > 0 else 0 }}%"></div></div>
+        </div>
+        {% endif %}
+      </div>
+      <div style="font-size:12px;color:var(--c-text-muted);margin-top:8px;">
+        <strong>Command word: {{ command_word }}</strong>
+        {% if command_word == 'Explain' %}
+        — Define key terms, describe processes step by step, give examples. Focus on AO1 (knowledge) and AO2 (explanation/causation).
+        {% elif command_word == 'Evaluate' %}
+        — Give advantages AND disadvantages, compare them, reach a justified conclusion. Focus on AO1, AO2, and AO3 (evaluation/judgement).
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if result.strengths %}
+    <div class="feedback-section">
+      <h3>✅ Strengths</h3>
+      <ul>
+        {% for s in result.strengths %}
+        <li class="strength">{{ s }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    {% if result.weaknesses %}
+    <div class="feedback-section">
+      <h3>📈 Areas to Improve</h3>
+      <ul>
+        {% for w in result.weaknesses %}
+        <li class="weakness">{{ w }} <a href="/tutor?q={{ w|urlencode }}&amp;ctx={{ context_b64 }}" class="es-action-link" target="_blank" rel="noopener">🤖 Ask AI Tutor</a></li>
+        {% endfor %}
+      </ul>
+      <div style="margin-top:10px;font-size:13px;">
+        <a href="/topic/{{ topic }}" class="es-action-link" target="_blank" rel="noopener">📖 Review {{ topic_name }} lessons</a>
+        &nbsp;·&nbsp;
+        <a href="/tutor?q=Help me improve on: {{ result.weaknesses[0]|urlencode if result.weaknesses else topic_name }}&amp;ctx={{ context_b64 }}" class="es-action-link" target="_blank" rel="noopener">🤖 Discuss with AI Tutor</a>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if result.key_terms_missed %}
+    <div class="feedback-section">
+      <h3>🔑 Key Terminology to Include</h3>
+      <div class="key-terms-list">
+        {% for t in result.key_terms_missed %}
+        <div class="key-term-item">
+          <div class="key-term-name">{{ t if t is string else t.term }}</div>
+          {% if t is not string %}<div class="key-term-desc">{{ t.explanation }}</div>{% endif %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if result.model_answer %}
+    <div class="model-answer">
+      <h3>📖 Model Answer</h3>
+      <p>{{ result.model_answer }}</p>
+    </div>
+    {% endif %}
+
+    {% if mark_scheme_text %}
+    <div class="feedback-section" style="margin-top:16px;">
+      <details>
+        <summary style="cursor:pointer;font-size:14px;font-weight:700;color:var(--c-accent);">📋 View Official Mark Scheme</summary>
+        <div style="margin-top:10px;padding:14px;background:rgba(8,41,73,0.5);border-radius:8px;font-size:13px;line-height:1.7;white-space:pre-wrap;word-break:break-word;color:var(--c-text-secondary);">
+          {{ mark_scheme_text }}
+        </div>
+      </details>
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="es-actions">
+    <a href="/exam-style?marks={{ marks }}{% if topic %}&topic={{ topic }}{% endif %}{% if question_id %}&skip_id={{ question_id }}{% endif %}" class="btn btn-primary">✍️ Try Another</a>
+    <a href="/exam" class="btn">📝 Other Modes</a>
+    <a href="/" class="btn">🏠 Home</a>
+  </div>
+
+  {% else %}
+  {# ─── QUESTION ─── #}
+  <h1>✍️ Exam-Style Question</h1>
+  <p class="sub">{{ topic_name }} · {{ marks }}-mark {{ command_word }}</p>
+
+  <div class="es-card">
+    <div class="q-meta">
+      <span>📊 {{ marks }} marks</span>
+      <span id="timerDisplay"><span style="margin-right:4px;">⏱</span> <span id="timerMinutes">{{ '6' if marks == 6 else '10' }}:00</span> remaining</span>
+      <span>📝 Aim for {{ '75-120' if marks == 6 else '150-250' }} words</span>
+    </div>
+    <div class="q-text">{{ question }}</div>
+    <div class="q-hint">💡 <strong>Tip:</strong> {{ 'Explain: define key terms, give examples, show sequence of events. Structure with clear paragraphs.' if marks == 6 else 'Evaluate: give advantages AND disadvantages, compare them, reach a justified conclusion. Use PEEL paragraphs.' }}</div>
+
+    <form id="esForm" method="post" action="/exam-style/submit" onsubmit="return submitES(event)">
+      <input type="hidden" name="question_id" value="{{ question_id }}">
+      <input type="hidden" name="question" value="{{ question|e }}">
+      <input type="hidden" name="marks" value="{{ marks }}">
+      <input type="hidden" name="topic" value="{{ topic }}">
+      <input type="hidden" name="command_word" value="{{ command_word }}">
+      <input type="hidden" name="topic_name" value="{{ topic_name }}">
+      <textarea name="answer" id="esAnswer" placeholder="Type your answer here..." oninput="updateWordCount()"></textarea>
+      <div class="word-count">Words: <span id="wordCount">0</span></div>
+      <div class="submit-row">
+        <button type="submit" class="btn btn-primary" id="esSubmitBtn" style="font-size:16px;padding:12px 32px;">✅ Submit for Marking</button>
+        <div class="es-progress" id="esProgress" style="display:none;">
+          <div class="prog-bar"><div class="prog-fill" id="progFill"></div></div>
+          <div class="prog-stage" id="progStage">Preparing...</div>
+          <div class="prog-pct" id="progPct">0%</div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="es-actions">
+    <a href="/exam" class="btn">← Back to Exam Modes</a>
+  </div>
+
+  <script>
+  // ── Timer countdown ──
+  var timerSeconds = {{ '360' if marks == 6 else '600' }};
+  var timerInterval = setInterval(function() {
+    timerSeconds--;
+    if (timerSeconds <= 0) {
+      clearInterval(timerInterval);
+      document.getElementById('timerDisplay').innerHTML = '<span style="margin-right:4px;">⏱</span> <span style="color:var(--c-rose);">Time\'s up!</span>';
+      document.getElementById('esSubmitBtn').click();
+      return;
+    }
+    var mins = Math.floor(timerSeconds / 60);
+    var secs = timerSeconds % 60;
+    var minEl = document.getElementById('timerMinutes');
+    if (minEl) minEl.textContent = mins;
+    var secStr = secs < 10 ? '0' + secs : secs;
+    document.getElementById('timerDisplay').innerHTML = '<span style="margin-right:4px;">⏱</span> <span id="timerMinutes">' + mins + ':' + secStr + '</span> remaining';
+    // Warning at 1 min
+    if (timerSeconds <= 60) {
+      document.getElementById('timerDisplay').style.color = 'var(--c-rose)';
+    }
+  }, 1000);
+
+  function updateWordCount() {
+    var text = document.getElementById('esAnswer').value;
+    var words = text.trim() ? text.trim().split(/\s+/).length : 0;
+    document.getElementById('wordCount').textContent = words;
+  }
+  // ── Marking progress stages ──
+  var MARKING_STAGES = [
+    { pct: 15, label: 'Looking up mark scheme...' },
+    { pct: 35, label: 'Reading your answer...' },
+    { pct: 55, label: 'Checking key terminology...' },
+    { pct: 75, label: 'Writing feedback...' },
+    { pct: 90, label: 'Finalising results...' }
+  ];
+  var progTimers = [];
+
+  function showProgress() {
+    var el = document.getElementById('esProgress');
+    if (el) el.style.display = 'block';
+  }
+
+  function updateProgress(pct, label) {
+    var fill = document.getElementById('progFill');
+    var stage = document.getElementById('progStage');
+    var pctEl = document.getElementById('progPct');
+    if (fill) fill.style.width = pct + '%';
+    if (stage) stage.textContent = label;
+    if (pctEl) pctEl.textContent = pct + '%';
+  }
+
+  function startProgressSim() {
+    showProgress();
+    for (var i = 0; i < progTimers.length; i++) clearTimeout(progTimers[i]);
+    progTimers = [];
+    MARKING_STAGES.forEach(function(stage, idx) {
+      var delay = (idx + 1) * 2800;
+      var t = setTimeout(function() {
+        updateProgress(stage.pct, stage.label);
+      }, delay);
+      progTimers.push(t);
+    });
+  }
+
+  function finishProgress(success) {
+    for (var i = 0; i < progTimers.length; i++) clearTimeout(progTimers[i]);
+    progTimers = [];
+    if (success) {
+      updateProgress(100, 'Done!');
+    } else {
+      var fill = document.getElementById('progFill');
+      if (fill) fill.style.background = 'var(--c-rose, #fb7185)';
+    }
+  }
+
+  function submitES(e) {
+    e.preventDefault();
+    var btn = document.getElementById('esSubmitBtn');
+    btn.disabled = true;
+    btn.innerHTML = '⏳ Marking...';
+    startProgressSim();
+    var form = document.getElementById('esForm');
+    var data = new URLSearchParams(new FormData(form));
+    fetch('/exam-style/submit', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: data
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      finishProgress(true);
+      if (d.error) {
+        showAlert(d.error, '❌');
+        btn.disabled = false;
+        btn.innerHTML = '✅ Submit for Marking';
+        var el = document.getElementById('esProgress');
+        if (el) el.style.display = 'none';
+        return;
+      }
+      // Clear timer
+      if (typeof timerInterval !== 'undefined') clearInterval(timerInterval);
+      // Small delay so user sees 'Done! 100%' before swap
+      setTimeout(function() {
+        document.body.innerHTML = d.html;
+      }, 600);
+    })
+    .catch(function(err) {
+      finishProgress(false);
+      showAlert('Error: ' + err, '❌');
+      btn.disabled = false;
+      btn.innerHTML = '✅ Submit for Marking';
+      var el = document.getElementById('esProgress');
+      if (el) el.style.display = 'none';
+    });
+    return false;
+  }
+  </script>
+  {% endif %}
+</div>
+{% endblock %}
+

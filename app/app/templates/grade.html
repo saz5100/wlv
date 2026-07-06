@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% block title %}Working Grade — WLV Computer Science{% endblock %}
+{% block content %}
+<style>
+.grade-hero { max-width: 720px; margin: 0 auto 24px; text-align: center; }
+.grade-hero h1 { font-size: 28px; margin-bottom: 4px; }
+.grade-hero p { color: var(--c-text-secondary); font-size: 14px; }
+.grade-container { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+
+.grade-card {
+    background: rgba(17,24,39,0.85); border: 1px solid rgba(34,211,238,0.12);
+    border-radius: var(--r-xl); padding: 24px; text-align: center;
+}
+.light-theme .grade-card { background: rgba(255,255,255,0.9); }
+.grade-number {
+    font-size: 72px; font-weight: 800; line-height: 1;
+    background: linear-gradient(135deg, var(--c-accent), #a855f7);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.grade-label { font-size: 16px; color: var(--c-text-secondary); margin-top: 4px; font-weight: 600; }
+.grade-pct { font-size: 20px; font-weight: 700; color: var(--c-heading); margin-top: 8px; }
+.grade-next { font-size: 14px; color: var(--c-text-secondary); margin-top: 4px; }
+.grade-next strong { color: var(--c-accent); }
+.grade-attempts { font-size: 13px; color: var(--c-text-muted); margin-top: 8px; }
+
+.grade-progress-track { height: 12px; background: var(--c-border); border-radius: 99px; margin: 16px 0 8px; overflow: hidden; }
+.grade-progress-fill { height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--c-accent), #a855f7); transition: width 0.5s; }
+
+.section-title { font-size: 18px; font-weight: 700; color: var(--c-heading); margin-bottom: 12px; }
+
+.topic-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+.topic-card {
+    padding: 16px; border-radius: var(--r-lg); border: 1px solid rgba(34,211,238,0.1);
+    background: rgba(13,18,37,0.6); text-align: center;
+}
+.light-theme .topic-card { background: rgba(243,244,246,0.6); }
+.topic-card .topic-code { font-size: 11px; font-weight: 700; color: var(--c-accent); text-transform: uppercase; }
+.topic-card .topic-title { font-size: 13px; font-weight: 600; color: var(--c-heading); margin: 4px 0; }
+.topic-card .topic-grade { font-size: 28px; font-weight: 800; color: var(--c-accent); }
+.topic-card .topic-pct { font-size: 12px; color: var(--c-text-secondary); }
+.topic-card .topic-attempts { font-size: 11px; color: var(--c-text-muted); margin-top: 4px; }
+
+.history-chart { display: flex; gap: 6px; align-items: flex-end; height: 100px; padding: 16px 0; justify-content: center; }
+.history-bar {
+    width: 32px; border-radius: 4px 4px 0 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: flex-end; padding-bottom: 4px;
+    font-size: 10px; font-weight: 700; color: #000; transition: height 0.3s;
+    position: relative;
+}
+.history-bar .bar-date { position: absolute; top: -18px; font-size: 9px; color: var(--c-text-muted); white-space: nowrap; }
+.history-bar .bar-grade { font-size: 11px; margin-top: 2px; color: var(--c-text); }
+
+.empty-state { text-align: center; padding: 40px 20px; color: var(--c-text-secondary); }
+.empty-state .empty-icon { font-size: 48px; margin-bottom: 12px; }
+.empty-state h3 { font-size: 18px; color: var(--c-heading); margin-bottom: 6px; }
+</style>
+
+<div class="grade-hero">
+    <h1>📊 Working Grade</h1>
+    <p>Your current WLV 9-1 grade based on exam-style question performance</p>
+</div>
+
+<div class="grade-container">
+{% if has_data and grade %}
+    <div class="grade-card">
+        <div class="grade-number">{{ grade.overall_grade }}</div>
+        <div class="grade-label">Current Working Grade</div>
+        <div class="grade-pct">{{ grade.overall_pct }}% average</div>
+        {% if grade.next_grade %}
+        <div class="grade-next">Need <strong>{{ grade.marks_to_next }}% more</strong> to reach Grade {{ grade.next_grade }}</div>
+        {% endif %}
+        <div class="grade-attempts">Based on {{ grade.total_attempts }} exam-style question attempts</div>
+        <div class="grade-progress-track">
+            <div class="grade-progress-fill" style="width:{{ grade.overall_pct }}%"></div>
+        </div>
+    </div>
+
+    {% if grade_history and grade_history|length > 1 %}
+    <div>
+        <h2 class="section-title">📈 Grade History</h2>
+        <div class="grade-card">
+            <div class="history-chart">
+            {% for h in grade_history %}
+                <div class="history-bar" style="height:{{ h.pct }}px;background:hsla(190,70%,55%,{{ 0.3 + loop.index / grade_history|length * 0.5 }});">
+                    <span class="bar-date">{{ h.date }}</span>
+                    {{ h.pct }}%
+                    <span class="bar-grade">G{{ h.grade }}</span>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <div>
+        <h2 class="section-title">📚 Per-Topic Breakdown</h2>
+        <div class="topic-grid">
+        {% for t in grade.topics %}
+            <div class="topic-card">
+                <div class="topic-code">Topic {{ t.topic }}</div>
+                <div class="topic-title">{{ t.topic }}</div>
+                <div class="topic-grade">{{ t.grade }}</div>
+                <div class="topic-pct">{{ t.avg_pct }}%</div>
+                <div class="topic-attempts">{{ t.attempts }} attempts</div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+{% else %}
+    <div class="empty-state">
+        <div class="empty-icon">📝</div>
+        <h3>No grade data yet</h3>
+        <p>Complete some exam-style questions to see your working grade.</p>
+        <a href="/exam-style" class="btn btn-primary" style="margin-top:16px;">✍️ Start Exam-Style Questions</a>
+    </div>
+{% endif %}
+</div>
+{% endblock %}

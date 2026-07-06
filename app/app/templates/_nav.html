@@ -1,0 +1,117 @@
+{% macro nav_btn(href, label, active_page) %}
+  <a href="{{ href }}" class="nav-bar-btn{% if active == active_page %} active{% endif %}">{{ label }}</a>
+{% endmacro %}
+
+{% macro menu_link(href, label, active_page, extra_active, extra_active2) %}
+  <li><a href="{{ href }}" class="{% if active == active_page or active == extra_active or active == extra_active2 %}active{% endif %}" onclick="closeNav()">{{ label }}</a></li>
+{% endmacro %}
+
+{% macro sub_link(href, label, active_page) %}
+  <li class="nav-sub-link"><a href="{{ href }}" class="{% if active == active_page %}active{% endif %}" onclick="closeNav()">{{ label }}</a></li>
+{% endmacro %}
+
+<nav class="nav" aria-label="Main navigation">
+  <div class="nav-inner">
+
+    {# ── Logo row with date and emoji group ── #}
+    <div class="nav-top">
+      <a href="/" class="nav-logo">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        <span class="logo-text-stack"><span class="logo-line-top">WLV</span><span class="logo-line-bottom">Computer Science</span></span>
+      </a>
+      <span class="nav-date" id="navDate"></span>
+      <div class="nav-emoji-group">
+        <a href="/admin" class="nav-emoji-btn" title="Admin Dashboard">🛠️</a>
+        <a href="/settings" class="nav-emoji-btn" title="Settings">⚙️</a>
+        <button class="nav-emoji-btn" onclick="openErrorFeedback()" title="Report an issue" aria-label="Report an issue">🚩</button>
+        <button class="nav-emoji-btn nav-theme-toggle" id="navThemeToggle" onclick="toggleThemeBase()" aria-label="Toggle theme">🌙</button>
+      </div>
+    </div>
+
+    {# Row 2: Main Nav Bar — 6 items, grouped by spec structure #}
+    <div class="nav-bottom">
+      <div class="nav-bar" id="navBar">
+        {{ nav_btn("/", "🏠 Home", "home") }}
+
+        {# ── Learn dropdown (Lessons + study tools) ── #}
+        <div class="nav-dropdown" aria-label="Learn submenu">
+          <a href="/lessons" class="nav-bar-btn{% if active == 'lessons' or active == 'review' or active == 'flashcards' or active == 'resources' or active == 'search' or active == 'languages' or active == 'reference' or active == 'grade' %} active{% endif %}">📖 Learn ▾</a>
+          <div class="nav-dropdown-content">
+            <a href="/lessons" class="{% if active == 'lessons' %}active{% endif %}">📖 Lessons</a>
+            <a href="/review" class="{% if active == 'review' %}active{% endif %}">🔁 Review</a>
+            <a href="/flashcards" class="{% if active == 'flashcards' %}active{% endif %}">🗂️ Flashcards</a>
+            <a href="/resources" class="{% if active == 'resources' %}active{% endif %}">📦 Resources</a>
+            <a href="/search" class="{% if active == 'search' %}active{% endif %}">🔍 Search</a>
+            <a href="/languages" class="{% if active == 'languages' %}active{% endif %}">🔤 Languages & IDEs</a>
+            <a href="/reference" class="{% if active == 'reference' %}active{% endif %}">📖 Reference</a>
+          </div>
+        </div>
+
+        {{ nav_btn("/progress", "📈 Progress", "progress") }}
+        {{ nav_btn("/grade", "🎯 Grade", "grade") }}
+
+        {# ── Practise dropdown (Paper 2 — Section A, Section B, tools) ── #}
+        <div class="nav-dropdown" aria-label="Practise submenu">
+          <a href="/exam-style" class="nav-bar-btn{% if active == 'exam' or active == 'exam-history' or active == 'past-papers' or active == 'exam-style' or active == 'section-b' or active == 'trace-tables' or active == 'test-data' %} active{% endif %}">📝 Practise ▾</a>
+          <div class="nav-dropdown-content">
+            <a href="/exam" class="{% if active == 'exam' %}active{% endif %}">⚡ Exam Hub</a>
+            <a href="/exam-style" class="{% if active == 'exam-style' %}active{% endif %}">🏛️ Section A — Written</a>
+            <a href="/section-b" class="{% if active == 'section-b' %}active{% endif %}">✏️ Section B — Programming</a>
+            <a href="/past-papers" class="{% if active == 'past-papers' %}active{% endif %}">📄 Past Papers</a>
+            <a href="/exam-history" class="{% if active == 'exam-history' %}active{% endif %}">🕐 History</a>
+            <a href="/trace-tables" class="{% if active == 'trace-tables' %}active{% endif %}">📊 Trace Tables</a>
+            <a href="/test-data" class="{% if active == 'test-data' %}active{% endif %}">🧪 Test Data</a>
+          </div>
+        </div>
+
+        {{ nav_btn("/codelab", "💻 Code Lab", "codelab") }}
+        {{ nav_btn("/tutor", "🤖 AI Tutor", "tutor") }}
+      </div>
+    </div>
+
+    <div class="nav-backdrop" id="navBackdrop" role="presentation" aria-label="Close navigation menu"></div>
+
+    {# ── Hamburger hidden menu ── #}
+    <ul class="nav-links" id="navLinks" aria-label="Mobile navigation menu">
+      <li class="nav-close-item"><button class="nav-close-btn" id="navClose" aria-label="Close">✕</button></li>
+      {{ menu_link("/", "🏠 Home", "home") }}
+      <li class="nav-section-toggle" onclick="toggleNavSection(this)">
+        <span class="nav-section-label">📖 Learn <span class="nav-section-arrow">▾</span></span>
+      </li>
+      <ul class="nav-section-items" style="display:none;">
+        {{ sub_link("/lessons", "📖 Lessons", "lessons") }}
+        {{ sub_link("/review", "🔁 Review", "review") }}
+        {{ sub_link("/flashcards", "🗂️ Flashcards", "flashcards") }}
+        {{ sub_link("/resources", "📦 Resources", "resources") }}
+        {{ sub_link("/search", "🔍 Search", "search") }}
+        {{ sub_link("/languages", "🔤 Languages & IDEs", "languages") }}
+        {{ sub_link("/reference", "📖 Reference", "reference") }}
+      </ul>
+      {{ menu_link("/progress", "📈 Progress", "progress") }}
+      {{ menu_link("/grade", "🎯 Grade", "grade") }}
+      <li class="nav-section-toggle" onclick="toggleNavSection(this)">
+        <span class="nav-section-label">📝 Practise <span class="nav-section-arrow">▾</span></span>
+      </li>
+      <ul class="nav-section-items" style="display:none;">
+        {{ sub_link("/exam", "⚡ Exam Hub", "exam") }}
+        {{ sub_link("/exam-style", "🏛️ Section A — Written", "exam-style") }}
+        {{ sub_link("/section-b", "✏️ Section B — Programming", "section-b") }}
+        {{ sub_link("/past-papers", "📄 Past Papers", "past-papers") }}
+        {{ sub_link("/exam-history", "🕐 History", "exam-history") }}
+        {{ sub_link("/trace-tables", "📊 Trace Tables", "trace-tables") }}
+        {{ sub_link("/test-data", "🧪 Test Data", "test-data") }}
+      </ul>
+      {{ menu_link("/codelab", "💻 Code Lab", "codelab") }}
+      {{ menu_link("/tutor", "🤖 AI Tutor", "tutor") }}
+      <li><hr class="nav-divider"></li>
+      <li><button class="nav-slide-theme-btn" onclick="closeNav(); openErrorFeedback();" style="text-align:left;width:calc(100% - 8px);">🚩 Report an Issue</button></li>
+      <li><hr class="nav-divider"></li>
+      {{ menu_link("/admin", "🛠️ Admin Dashboard", "admin") }}
+      <li><hr class="nav-divider"></li>
+      <li><a href="/settings" class="{% if active == 'settings' %}active{% endif %}" onclick="closeNav()">⚙️ Settings</a></li>
+      <li><hr class="nav-divider"></li>
+      <li><button class="nav-slide-theme-btn" id="navSlideThemeToggle" onclick="toggleThemeBase()">🌙 Theme</button></li>
+    </ul>
+
+  </div>
+</nav>

@@ -1,0 +1,2076 @@
+<!-- wlv-cs.lan LESSON TEMPLATE: displays lesson content, quiz questions, Mermaid diagrams, table of contents (ToC), and previous/next lesson navigation. Extends base.html. -->
+{% extends "base.html" %}
+{% block title %}{{ icon }} {{ lesson.title }} &mdash; WLV Computer Science{% endblock %}
+{% block head %}
+<!-- ── Inline styles: lesson content typography, quiz options, lesson-nav cards, ToC panel, order/sequence question styles ── -->
+<style>
+.lesson-content h2 { font-size: 20px; margin: 28px 0 12px; color: var(--c-heading); }
+.lesson-content h3 { font-size: 17px; margin: 22px 0 10px; color: var(--c-heading); }
+.lesson-content h4 { font-size: 15px; font-weight: 600; margin: 22px 0 8px; color: var(--c-heading); }
+.lesson-content p { margin: 12px 0; line-height: 1.8; }
+.lesson-content ul, .lesson-content ol { margin: 12px 0; padding-left: 24px; }
+.lesson-content li { margin: 6px 0; line-height: 1.7; }
+.lesson-content table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13px; }
+.lesson-content table.truth-table { width: 100%; max-width: 380px; margin: 14px auto; border-radius: 8px; overflow: hidden; }
+.lesson-content table.truth-table th,
+.lesson-content table.truth-table td { text-align: center; padding: 8px 14px; }
+.lesson-content table.truth-table thead th { background: var(--c-accent); color: #fff; border: none; }
+.lesson-content table.truth-table tbody td { border: none; }
+.lesson-content table.truth-table tbody tr:nth-child(even) { background: rgba(255,255,255,0.04); }
+.lesson-content table.truth-table tbody tr:nth-child(odd) { background: rgba(255,255,255,0.01); }
+.lesson-content table.truth-table tbody td:last-child { font-weight: 700; color: var(--c-accent); }
+.light-theme .lesson-content table.truth-table thead th { background: #2563eb; }
+.light-theme .lesson-content table.truth-table tbody tr:nth-child(even) { background: rgba(0,0,0,0.03); }
+.light-theme .lesson-content table.truth-table tbody tr:nth-child(odd) { background: transparent; }
+.light-theme .lesson-content table.truth-table tbody td:last-child { color: #2563eb; }
+.lesson-content th, .lesson-content td { border: 1px solid var(--c-border); padding: 8px 12px; text-align: left; }
+.lesson-content th { background: var(--c-accent-light); font-weight: 600; }
+.lesson-content code { background: var(--c-accent-light); padding: 2px 5px; border-radius: 3px; font-size: 13px; }
+.lesson-content pre { background: var(--c-accent-light); padding: 14px; border-radius: 8px; overflow-x: auto; font-size: 13px; line-height: 1.5; text-align: center; }
+.podcast-player {
+    margin: 20px 0; padding: 16px 20px;
+    background: rgba(34,211,238,0.04);
+    border: 1px solid rgba(34,211,238,0.12);
+    border-radius: 12px;
+}
+.podcast-player .podcast-header {
+    font-size: 15px; font-weight: 600;
+    color: var(--c-accent); margin-bottom: 10px;
+}
+.podcast-player audio {
+    border-radius: 8px; background: rgba(17,24,39,0.6); width: 100%;
+}
+.light-theme .podcast-player audio {
+    background: rgba(243,244,246,0.6);
+}
+.lesson-content blockquote { border-left: 4px solid #818cf8; margin: 16px 0; padding: 8px 16px; background: var(--c-accent-light); border-radius: 0 8px 8px 0; }
+
+/* ── Wiki Concepts Section ── */
+.wiki-concepts-section {
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 2px solid var(--c-border);
+}
+.wiki-concepts-section h3 {
+    font-size: 20px;
+    color: var(--c-heading);
+    margin-bottom: 4px;
+}
+.wiki-concepts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+}
+.wiki-concept-card {
+    background: rgba(17, 24, 39, 0.7);
+    border: 1px solid rgba(34, 211, 238, 0.1);
+    border-radius: var(--r-lg);
+    padding: 14px 16px;
+    transition: border-color 0.15s;
+}
+.light-theme .wiki-concept-card {
+    background: rgba(255, 255, 255, 0.7);
+    border-color: rgba(8, 145, 178, 0.12);
+}
+.wiki-concept-card:hover {
+    border-color: var(--c-accent);
+}
+.wiki-concept-terms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 8px;
+}
+.wiki-term-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 99px;
+    background: rgba(168, 85, 247, 0.12);
+    color: #a855f7;
+    border: 1px solid rgba(168, 85, 247, 0.15);
+}
+.wiki-concept-preview {
+    font-size: 12px;
+    color: var(--c-text-secondary);
+    line-height: 1.5;
+    margin-bottom: 6px;
+}
+.wiki-concept-link {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--c-accent);
+    text-decoration: none;
+}
+.wiki-concept-link:hover {
+    text-decoration: underline;
+}
+.lesson-content .mermaid-rendered {
+  margin: 20px auto;
+  overflow-x: auto;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.lesson-content .mermaid-rendered svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── Quiz question styles: header, question text, MCQ options, order/sequence questions, multi-select, wrong-answer review ── */
+/* ─── Quiz Section ─── */
+.quiz-section { margin-top: 56px; padding-top: 40px; border-top: 2px solid var(--c-border); }
+
+/* Quiz header */
+.quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 8px; }
+.quiz-progress-bar { height: 6px; background: var(--c-border); border-radius: 3px; flex: 1; min-width: 100px; max-width: 400px; }
+.quiz-progress-fill { height: 100%; background: var(--c-accent); border-radius: 3px; transition: width 0.3s ease; }
+.quiz-score-running { font-size: 14px; color: var(--c-text-secondary); font-weight: 500; }
+
+/* Question card */
+.quiz-question {
+  margin-bottom: 24px; margin-top: 20px; padding: 20px; background: rgba(13,18,37,0.8);
+  border-radius: var(--r-xl); border: 1px solid rgba(34,211,238,0.10);
+  backdrop-filter: blur(2px); position: relative;
+}
+.light-theme .quiz-question { background: rgba(243,244,246,0.8); }
+
+/* Difficulty badge */
+.diff-badge { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; margin-left: 8px; vertical-align: middle; text-transform: uppercase; letter-spacing: 0.5px; }
+.diff-badge.easy { background: rgba(52,211,153,0.15); color: #34d399; border: 1px solid rgba(52,211,153,0.3); }
+.diff-badge.medium { background: rgba(251,191,36,0.15); color: #fbbf24; border: 1px solid rgba(251,191,36,0.3); }
+.diff-badge.hard { background: rgba(251,113,133,0.15); color: #fb7185; border: 1px solid rgba(251,113,133,0.3); }
+
+/* Type badge */
+.type-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; margin-left: 6px; background: rgba(34,211,238,0.1); color: var(--c-accent); border: 1px solid rgba(34,211,238,0.2); vertical-align: middle; }
+
+.quiz-q-text { font-weight: 600; font-size: 16px; margin-bottom: 12px; color: var(--c-text); }
+
+/* MCQ options */
+.quiz-option { display: block; width: 100%; text-align: left; padding: 12px 14px; margin: 6px 0; background: rgba(17,24,39,0.88); color: var(--c-text); border: 2px solid var(--c-border); border-radius: 10px; font-size: 15px; cursor: pointer; transition: all 0.15s; backdrop-filter: blur(2px); }
+.light-theme .quiz-option { background: rgba(255,255,255,0.88); }
+.quiz-option:hover { border-color: var(--c-accent); background: rgba(8,41,73,0.7); }
+.light-theme .quiz-option:hover { background: rgba(236,254,255,0.7); }
+.quiz-option:active { transform: scale(0.98); }
+.quiz-option.selected { border-color: var(--c-accent); background: rgba(8,41,73,0.85); box-shadow: 0 0 0 3px var(--c-accent-glow), 0 0 12px var(--c-accent-glow); transform: translateX(4px); }
+.light-theme .quiz-option.selected { background: rgba(236,254,255,0.85); box-shadow: 0 0 0 3px var(--c-accent-glow); }
+.quiz-option.correct { border-color: var(--c-green); background: rgba(2,44,34,0.75); color: var(--c-green); }
+.light-theme .quiz-option.correct { background: rgba(240,253,244,0.8); }
+.quiz-option.incorrect { border-color: var(--c-rose); background: rgba(69,10,10,0.75); color: var(--c-rose); }
+.light-theme .quiz-option.incorrect { background: rgba(254,242,242,0.8); }
+
+/* T/F buttons */
+.tf-container { display: flex; gap: 12px; margin: 8px 0; }
+.tf-btn { flex: 1; padding: 16px 20px; border-radius: 12px; border: 2px solid var(--c-border); background: rgba(17,24,39,0.88); color: var(--c-text); font-size: 18px; font-weight: 700; cursor: pointer; transition: all 0.15s; text-align: center; backdrop-filter: blur(2px); }
+.light-theme .tf-btn { background: rgba(255,255,255,0.88); }
+.tf-btn:hover { transform: translateY(-2px); }
+.tf-btn.true-btn:hover { border-color: #34d399; background: rgba(2,44,34,0.5); }
+.tf-btn.false-btn:hover { border-color: #fb7185; background: rgba(69,10,10,0.5); }
+.tf-btn.selected-true { border-color: #34d399; background: rgba(2,44,34,0.75); color: #34d399; box-shadow: 0 0 0 3px rgba(52,211,153,0.3); transform: translateY(-2px); }
+.light-theme .tf-btn.selected-true { background: rgba(240,253,244,0.8); }
+.tf-btn.selected-false { border-color: #fb7185; background: rgba(69,10,10,0.75); color: #fb7185; box-shadow: 0 0 0 3px rgba(251,113,133,0.3); transform: translateY(-2px); }
+.light-theme .tf-btn.selected-false { background: rgba(254,242,242,0.8); }
+.tf-btn.correct { border-color: var(--c-green) !important; background: rgba(2,44,34,0.75) !important; color: var(--c-green) !important; }
+.tf-btn.incorrect { border-color: var(--c-rose) !important; background: rgba(69,10,10,0.75) !important; color: var(--c-rose) !important; }
+
+/* Multiple-select checkbox */
+.ms-option { display: flex; align-items: center; gap: 10px; padding: 10px 14px; margin: 5px 0; background: rgba(17,24,39,0.88); border: 2px solid var(--c-border); border-radius: 10px; cursor: pointer; transition: all 0.15s; }
+.light-theme .ms-option { background: rgba(255,255,255,0.88); }
+.ms-option:hover { border-color: var(--c-accent); }
+.ms-option .ms-checkbox { width: 20px; height: 20px; border: 2px solid var(--c-border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; transition: all 0.15s; }
+.ms-option .ms-label { flex: 1; font-size: 15px; }
+.ms-option.selected { border-color: var(--c-accent); background: rgba(8,41,73,0.7); box-shadow: 0 0 0 2px var(--c-accent-glow); }
+.light-theme .ms-option.selected { background: rgba(236,254,255,0.7); }
+.ms-option.selected .ms-checkbox { background: var(--c-accent); border-color: var(--c-accent); color: #000; }
+.ms-option.correct { border-color: var(--c-green) !important; background: rgba(2,44,34,0.75) !important; }
+.ms-option.incorrect { border-color: var(--c-rose) !important; background: rgba(69,10,10,0.75) !important; }
+
+/* Ordering (Drag & Drop) */
+.order-list { list-style: none; padding: 0; margin: 8px 0; }
+.order-item { display: flex; align-items: center; gap: 10px; padding: 10px 14px; margin: 5px 0; background: rgba(17,24,39,0.88); border: 2px solid var(--c-border); border-radius: 10px; cursor: grab; transition: all 0.15s, opacity 0.2s, transform 0.2s; user-select: none; }
+.light-theme .order-item { background: rgba(255,255,255,0.88); }
+.order-item:hover { border-color: var(--c-accent); }
+.order-item.dragging { opacity: 0.5; transform: scale(0.97); border-style: dashed; }
+.order-item.drag-over-top { border-top: 3px solid var(--c-accent); margin-top: 8px; }
+.order-item.drag-over-bottom { border-bottom: 3px solid var(--c-accent); margin-bottom: 8px; }
+.order-item .order-handle { color: var(--c-text-muted); font-size: 16px; cursor: grab; flex-shrink: 0; padding: 4px; }
+.order-item .order-num { width: 28px; height: 28px; border-radius: 50%; background: rgba(34,211,238,0.15); color: var(--c-accent); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+.order-item .order-label { flex: 1; font-size: 14px; }
+.order-item.correct-pos { border-color: var(--c-green) !important; background: rgba(2,44,34,0.5) !important; }
+.order-item.wrong-pos { border-color: var(--c-rose) !important; background: rgba(69,10,10,0.5) !important; }
+
+/* Cloze */
+.cloze-input { width: 100%; max-width: 500px; padding: 12px 16px; font-size: 16px; background: rgba(17,24,39,0.88); border: 2px solid var(--c-border); border-radius: 10px; color: var(--c-text); outline: none; transition: all 0.15s; }
+.light-theme .cloze-input { background: rgba(255,255,255,0.88); }
+.cloze-input:focus { border-color: var(--c-accent); box-shadow: 0 0 0 3px var(--c-accent-glow); }
+.cloze-input.correct { border-color: var(--c-green); background: rgba(2,44,34,0.4); }
+.cloze-input.incorrect { border-color: var(--c-rose); background: rgba(69,10,10,0.4); }
+
+/* Explanation */
+.quiz-explanation { display: none; margin-top: 12px; padding: 12px 16px; background: rgba(8,41,73,0.7); border-radius: 10px; font-size: 14px; border-left: 4px solid var(--c-accent); line-height: 1.6; }
+.light-theme .quiz-explanation { background: rgba(236,254,255,0.7); }
+.quiz-explanation.show { display: block; }
+
+/* Command word & Misconceptions */
+.cmd-badge { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; margin-left: 8px; vertical-align: middle; text-transform: uppercase; letter-spacing: 0.5px; background: rgba(236,72,153,0.15); color: #f472b6; border: 1px solid rgba(236,72,153,0.3); }
+.misconception-box { margin-top: 12px; padding: 12px 16px; background: rgba(244,63,94,0.1); border-left: 4px solid var(--c-rose); border-radius: 6px; font-size: 14px; color: var(--c-text); }
+.light-theme .misconception-box { background: rgba(254,242,242,0.7); }
+
+/* Results card */
+.quiz-results { margin-top: 24px; }
+
+/* Score card (theme-aware) */
+.quiz-score-card { padding: 20px; border-radius: 12px; text-align: center; border: 2px solid var(--c-green); background: var(--c-green-dim); }
+/* Wrong-answer review */
+.wrong-review-section { margin-top: 20px; border-top: 1px solid var(--c-border); padding-top: 16px; }
+.wrong-review-toggle { background: none; border: 2px solid var(--c-border); border-radius: 10px; padding: 12px 18px; color: var(--c-text); font-size: 15px; font-weight: 600; cursor: pointer; width: 100%; text-align: left; transition: all 0.15s; display: flex; justify-content: space-between; align-items: center; }
+.wrong-review-toggle:hover { border-color: var(--c-accent); background: rgba(8,41,73,0.4); }
+.wrong-review-toggle .toggle-arrow { transition: transform 0.2s; }
+.wrong-review-toggle.open .toggle-arrow { transform: rotate(180deg); }
+.wrong-review-content { display: none; margin-top: 12px; }
+.wrong-review-content.open { display: block; }
+.wrong-item { padding: 14px; margin: 10px 0; background: var(--c-rose-dim); border-radius: 10px; border: 1px solid rgba(251,113,133,0.2); }
+.light-theme .wrong-item { background: rgba(254,242,242,0.5); }
+.wrong-item .wrong-q { font-weight: 600; margin-bottom: 6px; color: var(--c-text); }
+.wrong-item .wrong-answer { font-size: 13px; color: var(--c-rose); }
+.wrong-item .correct-answer { font-size: 13px; color: var(--c-green); }
+.wrong-item .wrong-explanation { font-size: 13px; color: var(--c-text-secondary); margin-top: 6px; padding-left: 8px; border-left: 2px solid var(--c-accent); }
+
+/* ── Lesson navigation: Previous/Next lesson cards at bottom of page. .nav-primary = gradient "Next Lesson" button ── */
+.lesson-nav {
+  display: flex; justify-content: space-between; gap: 12px;
+  margin-top: 24px; padding-top: 16px;
+  border-top: 1px solid var(--c-border);
+}
+.lesson-nav a {
+  flex: 1; min-width: 0;
+  display: flex; flex-direction: column;
+  align-items: flex-start;
+  padding: 14px 18px;
+  border-radius: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s;
+  border: 2px solid rgba(34,211,238,0.15);
+  background: rgba(17,24,39,0.88);
+  color: var(--c-text);
+  min-height: 54px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.light-theme .lesson-nav a { background: var(--c-bg-alt); border-color: var(--c-border-light); }
+.lesson-nav a:hover { border-color: var(--c-accent); box-shadow: 0 3px 14px var(--c-accent-glow); }
+.lesson-nav .nav-primary { background: linear-gradient(135deg, var(--c-accent), #a855f7); color: #000; border-color: transparent; font-weight: 700; }
+.light-theme .lesson-nav .nav-primary { background: linear-gradient(135deg, var(--c-accent), #a855f7); color: #fff; }
+.lesson-nav .nav-primary:hover { background: linear-gradient(135deg, var(--c-accent-hover), #9333ea); }
+.lesson-nav .nav-label { font-size: 11px; font-weight: 500; opacity: 0.7; letter-spacing: 0.3px; text-transform: uppercase; }
+.lesson-nav .nav-title { font-size: 14px; line-height: 1.3; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.lesson-nav .nav-right { align-items: flex-end; text-align: right; }
+
+/* Section nav: amber/orange to distinguish from lesson nav */
+.lesson-nav-section { margin-top: 8px; }
+.lesson-nav-section a {
+  border-color: rgba(251,146,60,0.2) !important;
+  background: rgba(20,12,4,0.88) !important;
+}
+.light-theme .lesson-nav-section a {
+  background: var(--c-bg-alt) !important;
+  border-color: rgba(251,146,60,0.3) !important;
+}
+.lesson-nav-section a:hover {
+  border-color: #f97316 !important;
+  box-shadow: 0 3px 14px rgba(251,146,60,0.25) !important;
+}
+.lesson-nav .nav-section-btn {
+  background: linear-gradient(135deg, #f97316, #d97706) !important;
+  color: #000 !important;
+  border-color: transparent !important;
+  font-weight: 700 !important;
+}
+.light-theme .lesson-nav .nav-section-btn {
+  color: #0f172a !important;
+}
+.lesson-nav .nav-section-btn:hover {
+  background: linear-gradient(135deg, #ea580c, #b45309) !important;
+}
+
+@media (max-width: 600px) {
+  .lesson-nav { flex-direction: column; }
+  .lesson-nav a { width: 100%; border-radius: 10px; padding: 12px 16px; min-height: 48px; }
+  .lesson-nav .nav-title { font-size: 13px; }
+}
+
+/* ── Tabbed quiz: one question at a time ── */
+.quiz-tab { display: none; }
+.quiz-tab.active { display: block; }
+
+.quiz-counter {
+  text-align: center; font-size: 14px; font-weight: 700;
+  color: var(--c-accent); margin: 8px 0 16px;
+  letter-spacing: 1px;
+}
+
+.quiz-nav {
+  display: flex; align-items: center; justify-content: center;
+  gap: 8px; margin: 20px 0 12px;
+}
+.quiz-nav-btn {
+  padding: 8px 16px; border-radius: 8px; border: 1px solid var(--c-border);
+  background: rgba(17,24,39,0.88); color: var(--c-text);
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  transition: all 0.15s; white-space: nowrap;
+}
+.light-theme .quiz-nav-btn { background: rgba(243,244,246,0.88); }
+.quiz-nav-btn:hover { border-color: var(--c-accent); }
+.quiz-nav-btn:disabled { opacity: 0.3; cursor: default; }
+
+.quiz-dots {
+  display: flex; gap: 6px; flex-wrap: wrap; justify-content: center;
+}
+.quiz-dot {
+  width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; cursor: pointer;
+  background: rgba(17,24,39,0.6); border: 2px solid var(--c-border);
+  color: var(--c-text-secondary); transition: all 0.15s;
+}
+.light-theme .quiz-dot { background: rgba(243,244,246,0.6); }
+.quiz-dot:hover { border-color: var(--c-accent); color: var(--c-text); }
+.quiz-dot.active { border-color: var(--c-accent); background: var(--c-accent); color: #000; }
+.quiz-dot.answered { border-color: var(--c-green); background: rgba(52,211,153,0.15); color: var(--c-green); }
+.quiz-dot.active.answered { border-color: var(--c-accent); background: var(--c-accent); color: #000; }
+.quiz-dot.missing { border-color: #f87171; background: rgba(248,113,113,0.15); color: #f87171; }
+.quiz-dot.active.missing { border-color: var(--c-accent); background: var(--c-accent); color: #000; }
+
+@media (max-width: 480px) {
+  .quiz-dot { width: 28px; height: 28px; font-size: 11px; }
+  .quiz-nav-btn { padding: 6px 12px; font-size: 12px; }
+}
+
+/* ── Boss Battle ── */
+.boss-banner {
+  margin-top: 20px; border-radius: 14px; padding: 18px 22px;
+  border: 2px solid; animation: bossPulse 2.5s ease-in-out infinite;
+}
+.boss-available {
+  border-color: #f59e0b; background: rgba(245,158,11,0.08);
+}
+.boss-defeated {
+  border-color: #fbbf24; background: rgba(251,191,36,0.1);
+  animation: none;
+}
+@keyframes bossPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(245,158,11,0); }
+  50% { box-shadow: 0 0 0 8px rgba(245,158,11,0.18); }
+}
+.boss-challenge-content, .boss-badge-won {
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+}
+.boss-skull, .boss-trophy { font-size: 2.2rem; flex-shrink: 0; }
+.boss-badge-title { font-size: 1.05rem; font-weight: 700; color: #f59e0b; }
+.boss-badge-sub { font-size: 13px; color: var(--c-text-secondary); margin-top: 2px; }
+.boss-btn {
+  margin-left: auto; background: linear-gradient(135deg,#f59e0b,#d97706);
+  color: #000; font-weight: 700; border: none; padding: 10px 22px;
+  border-radius: 8px; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s;
+  white-space: nowrap;
+}
+.boss-btn:hover { transform: scale(1.04); box-shadow: 0 4px 16px rgba(245,158,11,0.35); }
+
+/* Boss modal */
+.boss-modal-overlay {
+  position: fixed; inset: 0; z-index: 3000;
+  background: rgba(0,0,0,0.82); backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center; padding: 16px;
+}
+.boss-modal {
+  background: #0f172a; border: 2px solid #f59e0b;
+  border-radius: 18px; max-width: 640px; width: 100%;
+  box-shadow: 0 0 60px rgba(245,158,11,0.25), 0 24px 48px rgba(0,0,0,0.5);
+  overflow: hidden;
+}
+.boss-modal-header {
+  background: linear-gradient(135deg,#1c1400,#1a1a2e);
+  padding: 22px 24px; display: flex; align-items: center; gap: 14px;
+  border-bottom: 1px solid rgba(245,158,11,0.25);
+}
+.boss-modal-icon { font-size: 2rem; }
+.boss-modal-title { font-size: 1.1rem; font-weight: 800; color: #f59e0b; letter-spacing: 0.5px; }
+.boss-modal-sub { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+.boss-timer-wrap {
+  margin-left: auto; position: relative; width: 60px; height: 60px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.boss-timer-ring { position: absolute; inset: 0; width: 100%; height: 100%; }
+.boss-timer-num { font-size: 1rem; font-weight: 800; color: #f59e0b; z-index: 1; position: relative; }
+.boss-modal-question {
+  padding: 24px 24px 0; font-size: 1.02rem; line-height: 1.65;
+  color: var(--c-text, #f1f5f9);
+}
+.boss-modal-question pre.code {
+  background: rgba(255,255,255,0.06); padding: 12px 16px; border-radius: 8px;
+  font-family: 'Fira Code', monospace; font-size: 0.88rem;
+  border-left: 3px solid #f59e0b; margin-top: 10px; overflow-x: auto;
+}
+.boss-modal-options {
+  padding: 16px 24px; display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+@media (max-width: 500px) { .boss-modal-options { grid-template-columns: 1fr; } }
+.boss-option {
+  padding: 12px 16px; border-radius: 10px; border: 2px solid rgba(245,158,11,0.25);
+  background: rgba(245,158,11,0.06); color: var(--c-text, #f1f5f9);
+  text-align: left; cursor: pointer; font-size: 0.92rem; transition: all 0.18s;
+  font-family: inherit;
+}
+.boss-option:hover:not(.selected):not(:disabled) {
+  border-color: #f59e0b; background: rgba(245,158,11,0.15);
+}
+.boss-option.selected { border-color: #f59e0b; background: rgba(245,158,11,0.25); font-weight: 600; }
+.boss-option.correct { border-color: #34d399; background: rgba(52,211,153,0.2); color: #34d399; }
+.boss-option.wrong { border-color: #fb7185; background: rgba(251,113,133,0.15); color: #fb7185; }
+.boss-modal-result {
+  margin: 0 24px 8px; padding: 14px 18px; border-radius: 10px;
+  font-weight: 600; font-size: 0.95rem; text-align: center;
+}
+.boss-result-win { background: rgba(52,211,153,0.15); border: 1px solid rgba(52,211,153,0.4); color: #34d399; }
+.boss-result-lose { background: rgba(251,113,133,0.1); border: 1px solid rgba(251,113,133,0.3); color: #fb7185; }
+.boss-modal-actions { padding: 16px 24px 22px; display: flex; justify-content: center; }
+.boss-submit-btn {
+  background: linear-gradient(135deg,#f59e0b,#d97706); color: #000;
+  font-weight: 700; border: none; padding: 12px 32px;
+  border-radius: 10px; font-size: 1rem; cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+}
+.boss-submit-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+.boss-submit-btn:hover:not(:disabled) { transform: scale(1.03); }
+
+/* Confetti burst */
+@keyframes confettiFall {
+  0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(120px) rotate(720deg); opacity: 0; }
+}
+.confetti-piece {
+  position: fixed; width: 10px; height: 10px; border-radius: 2px;
+  animation: confettiFall 1.2s ease-in forwards; pointer-events: none; z-index: 4000;
+}
+
+/* ── Match Exercise ── */
+.match-section { margin-top: 40px; padding-top: 32px; border-top: 2px solid var(--c-border); max-width: 960px; margin-left: auto; margin-right: auto; }
+.match-section h2 { font-size: 22px; color: var(--c-heading); margin-bottom: 4px; }
+.match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+@media (max-width: 600px) { .match-grid { grid-template-columns: 1fr; } }
+.match-item { padding: 12px 16px; border-radius: var(--r-lg); border: 2px solid var(--c-border); background: rgba(13,18,37,0.8); cursor: pointer; transition: all 0.15s; text-align: center; font-size: 14px; font-weight: 600; }
+.light-theme .match-item { background: rgba(243,244,246,0.8); }
+.match-item:hover { border-color: var(--c-accent); }
+.match-item.selected { border-color: var(--c-accent); background: rgba(8,41,73,0.85); }
+.match-item.matched { border-color: var(--c-green); background: rgba(2,44,34,0.5); color: var(--c-green); cursor: default; }
+.match-item.wrong { border-color: var(--c-rose); background: rgba(69,10,10,0.5); color: var(--c-rose); animation: shake 0.3s; }
+.match-desc { font-size: 12px; color: var(--c-text-secondary); margin-top: 4px; font-weight: 400; }
+@keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
+</style>
+{% endblock %}
+{% block content %}
+<div class="breadcrumb">
+    <a href="/">&#127968; Home</a> <span class="sep">&#8250;</span>
+    <a href="/topic/{{ lesson.topic_code }}">{{ icon }} {{ lesson.topic_title }}</a> <span class="sep">&#8250;</span>
+    <span>{{ lesson.title }}</span>
+</div>
+<!-- ── Lesson content: HTML from SQLite ── -->
+<div class="lesson-content">{{ content_rendered|safe }}</div>
+
+{% if wiki_terms %}
+<!-- ── Related Wiki Concepts ── -->
+<div class="wiki-concepts-section">
+    <h3>📖 Key Terminology for This Topic</h3>
+    <p style="font-size:13px;color:var(--c-text-secondary);margin-bottom:12px;">These are the exam-grade terms and concepts from the Model Answer Wiki for this topic. Make sure you can define and use each one.</p>
+    <div class="wiki-concepts-grid">
+    {% for entry in wiki_terms %}
+        <div class="wiki-concept-card">
+            <div class="wiki-concept-terms">
+                {% for term in entry.terms %}
+                <span class="wiki-term-badge">{{ term }}</span>
+                {% endfor %}
+            </div>
+            {% if entry.preview %}
+            <div class="wiki-concept-preview">{{ entry.preview }}</div>
+            {% endif %}
+            <a href="/wiki#page-{{ entry.id }}" class="wiki-concept-link" target="_blank">📄 View full model answer →</a>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+{% if lesson and lesson.id in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30] %}
+<div class="podcast-player">
+    <div class="podcast-header">🎧 Audio Revision: {{ lesson.title }}</div>
+    <audio controls preload="metadata" style="width:100%;">
+        <source src="/static/audio/lesson{{ lesson.id }}_podcast.ogg" type="audio/ogg">
+    </audio>
+</div>
+{% endif %}
+
+{% if lesson.id == 1 %}
+<!-- ── Diagram: Label the CPU ── -->
+<div class="match-section">
+    <h2>🏗️ Label the CPU Components</h2>
+    <p class="match-desc">Click on each highlighted area of the CPU diagram to reveal its label. Try to name them before clicking!</p>
+    <div class="match-diagram">
+        <svg viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg">
+            <rect x="20" y="20" width="460" height="280" rx="12" fill="rgba(34,211,238,0.06)" stroke="#22d3ee" stroke-width="2"/>
+            <text x="250" y="50" text-anchor="middle" fill="#22d3ee" font-weight="700" font-size="16">CPU (Central Processing Unit)</text>
+            <g class="match-clickable" onclick="labelCPU(this,'cu')">
+                <rect x="100" y="70" width="160" height="60" rx="8" fill="rgba(34,211,238,0.12)" stroke="#22d3ee" stroke-width="2"/>
+                <text id="cpuLbl_cu" x="180" y="100" text-anchor="middle" fill="#e2e8f0" font-weight="600" font-size="14" pointer-events="none">❓ Click to label</text>
+                <text x="180" y="120" text-anchor="middle" fill="#94a3b8" font-size="12" pointer-events="none">Decodes instructions</text>
+            </g>
+            <g class="match-clickable" onclick="labelCPU(this,'alu')">
+                <rect x="270" y="70" width="140" height="60" rx="8" fill="rgba(168,85,247,0.12)" stroke="#a855f7" stroke-width="2"/>
+                <text id="cpuLbl_alu" x="340" y="100" text-anchor="middle" fill="#e2e8f0" font-weight="600" font-size="14" pointer-events="none">❓ Click to label</text>
+                <text x="340" y="120" text-anchor="middle" fill="#94a3b8" font-size="12" pointer-events="none">Calculations</text>
+            </g>
+            <g class="match-clickable" onclick="labelCPU(this,'regs')">
+                <rect x="100" y="150" width="300" height="50" rx="8" fill="rgba(250,204,21,0.08)" stroke="#facc15" stroke-width="2"/>
+                <text id="cpuLbl_regs" x="250" y="172" text-anchor="middle" fill="#e2e8f0" font-weight="600" font-size="14" pointer-events="none">❓ Click to label</text>
+                <text x="250" y="192" text-anchor="middle" fill="#94a3b8" font-size="12" pointer-events="none">Temporary storage inside CPU</text>
+            </g>
+            <g class="match-clickable" onclick="labelCPU(this,'cache')">
+                <rect x="100" y="215" width="300" height="35" rx="8" fill="rgba(52,211,153,0.08)" stroke="#34d399" stroke-width="2"/>
+                <text id="cpuLbl_cache" x="250" y="238" text-anchor="middle" fill="#e2e8f0" font-weight="600" font-size="14" pointer-events="none">❓ Click to label</text>
+            </g>
+            <line x1="100" y1="290" x2="400" y2="290" stroke="#64748b" stroke-width="2" stroke-dasharray="4,3"/>
+            <line x1="250" y1="250" x2="250" y2="290" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,2"/>
+            <text x="250" y="280" text-anchor="middle" fill="#94a3b8" font-size="12">Buses → Memory</text>
+            <text id="cpuStatus" x="250" y="320" text-anchor="middle" fill="#94a3b8" class="match-status">Click a component above to label it</text>
+        </svg>
+    </div>
+</div>
+<script>
+var cpuDone = {};
+var cpuNames = {cu:'Control Unit (CU)', alu:'ALU', regs:'Registers', cache:'Cache'};
+function labelCPU(el, part) {
+    if (cpuDone[part]) return;
+    cpuDone[part] = true;
+    var lbl = document.getElementById('cpuLbl_' + part);
+    if (lbl) lbl.textContent = '✅ ' + cpuNames[part];
+    var st = document.getElementById('cpuStatus');
+    st.textContent = '✅ ' + cpuNames[part];
+    st.setAttribute('fill', '#34d399');
+    var allDone = true;
+    for (var k in {cu:1,alu:1,regs:1,cache:1}) { if (!cpuDone[k]) { allDone = false; break; } }
+    if (allDone) st.textContent = '🎉 All components labelled! Great work.';
+}
+</script>
+
+<!-- ── Diagram: Label the Fetch-Decode-Execute Cycle ── -->
+<div class="match-section">
+    <h2>🔄 Label the Fetch-Decode-Execute Cycle</h2>
+    <p class="match-desc">Click each stage to reveal its name and what happens.</p>
+    <div class="match-diagram">
+        <svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+            <g class="match-clickable" onclick="labelFDE(this,'fetch')">
+                <rect x="50" y="20" width="400" height="60" rx="10" fill="rgba(34,211,238,0.12)" stroke="#22d3ee" stroke-width="2"/>
+                <text id="fdeLbl_fetch" x="250" y="45" text-anchor="middle" fill="#e2e8f0" font-weight="700" font-size="14" pointer-events="none">❓ Click to label</text>
+                <text id="fdeSub_fetch" x="250" y="65" text-anchor="middle" fill="#94a3b8" font-size="12" pointer-events="none">Stage 1</text>
+            </g>
+            <line x1="250" y1="80" x2="250" y2="100" stroke="#64748b" stroke-width="2" marker-end="url(#arrowFDE)"/>
+            <g class="match-clickable" onclick="labelFDE(this,'decode')">
+                <rect x="50" y="100" width="400" height="60" rx="10" fill="rgba(168,85,247,0.12)" stroke="#a855f7" stroke-width="2"/>
+                <text id="fdeLbl_decode" x="250" y="125" text-anchor="middle" fill="#e2e8f0" font-weight="700" font-size="14" pointer-events="none">❓ Click to label</text>
+                <text id="fdeSub_decode" x="250" y="145" text-anchor="middle" fill="#94a3b8" font-size="12" pointer-events="none">Stage 2</text>
+            </g>
+            <line x1="250" y1="160" x2="250" y2="180" stroke="#64748b" stroke-width="2" marker-end="url(#arrowFDE)"/>
+            <g class="match-clickable" onclick="labelFDE(this,'execute')">
+                <rect x="50" y="180" width="400" height="60" rx="10" fill="rgba(52,211,153,0.12)" stroke="#34d399" stroke-width="2"/>
+                <text id="fdeLbl_execute" x="250" y="205" text-anchor="middle" fill="#e2e8f0" font-weight="700" font-size="14" pointer-events="none">❓ Click to label</text>
+                <text id="fdeSub_execute" x="250" y="225" text-anchor="middle" fill="#94a3b8" font-size="12" pointer-events="none">Stage 3</text>
+            </g>
+            <line x1="50" y1="210" x2="20" y2="210" stroke="#64748b" stroke-width="2"/>
+            <line x1="20" y1="210" x2="20" y2="50" stroke="#64748b" stroke-width="2"/>
+            <line x1="20" y1="50" x2="50" y2="50" stroke="#64748b" stroke-width="2" marker-end="url(#arrowFDE)"/>
+            <text x="10" y="130" text-anchor="middle" fill="#94a3b8" font-size="12" transform="rotate(-90,10,130)">Repeats</text>
+            <text id="fdeStatus" x="250" y="280" text-anchor="middle" fill="#94a3b8" class="match-status">Click a stage above to label it</text>
+            <defs><marker id="arrowFDE" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#64748b"/></marker></defs>
+        </svg>
+    </div>
+</div>
+<script>
+var fdeDone = {};
+var fdeNames = {fetch:'Fetch', decode:'Decode', execute:'Execute'};
+var fdeDescs = {fetch:'PC to MAR, instruction copied to MDR', decode:'CU works out what the instruction means', execute:'ALU calculates, result stored in ACC'};
+function labelFDE(el, part) {
+    if (fdeDone[part]) return;
+    fdeDone[part] = true;
+    var lbl = document.getElementById('fdeLbl_' + part);
+    if (lbl) lbl.textContent = '✅ ' + fdeNames[part];
+    var st = document.getElementById('fdeStatus');
+    st.textContent = '✅ ' + fdeNames[part] + ' — ' + fdeDescs[part];
+    st.setAttribute('fill', '#34d399');
+    var allDone = true;
+    for (var k in {fetch:1,decode:1,execute:1}) { if (!fdeDone[k]) { allDone = false; break; } }
+    if (allDone) st.textContent = '🎉 All stages labelled! Great work.';
+}
+</script>
+{% endif %}
+
+{% if lesson.id == 8 %}
+<!-- ── Diagram: Label Network Topologies ── -->
+<div class="match-section">
+    <h2>🌐 Label the Network Topologies</h2>
+    <p class="match-desc">Click each topology diagram to reveal its name and key feature.</p>
+    <div class="match-diagram">
+        <svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg">
+            <g class="match-clickable" onclick="labelTopo(this,'star')">
+                <rect x="10" y="10" width="150" height="120" rx="8" fill="rgba(34,211,238,0.06)" stroke="#22d3ee" stroke-width="1.5"/>
+                <circle cx="85" cy="35" r="12" fill="#22d3ee"/>
+                <circle cx="50" cy="80" r="8" fill="rgba(34,211,238,0.3)" stroke="#22d3ee" stroke-width="1"/>
+                <circle cx="120" cy="80" r="8" fill="rgba(34,211,238,0.3)" stroke="#22d3ee" stroke-width="1"/>
+                <circle cx="50" cy="110" r="8" fill="rgba(34,211,238,0.3)" stroke="#22d3ee" stroke-width="1"/>
+                <circle cx="120" cy="110" r="8" fill="rgba(34,211,238,0.3)" stroke="#22d3ee" stroke-width="1"/>
+                <line x1="85" y1="47" x2="50" y2="80" stroke="#22d3ee" stroke-width="1"/>
+                <line x1="85" y1="47" x2="120" y2="80" stroke="#22d3ee" stroke-width="1"/>
+                <line x1="85" y1="47" x2="50" y2="110" stroke="#22d3ee" stroke-width="1"/>
+                <line x1="85" y1="47" x2="120" y2="110" stroke="#22d3ee" stroke-width="1"/>
+                <text id="topoLbl_star" x="85" y="145" text-anchor="middle" fill="#e2e8f0" font-weight="600" font-size="11" pointer-events="none">❓ Click to label</text>
+            </g>
+            <g class="match-clickable" onclick="labelTopo(this,'mesh')">
+                <rect x="175" y="10" width="150" height="120" rx="8" fill="rgba(168,85,247,0.06)" stroke="#a855f7" stroke-width="1.5"/>
+                <circle cx="210" cy="40" r="8" fill="rgba(168,85,247,0.3)" stroke="#a855f7" stroke-width="1"/>
+                <circle cx="290" cy="40" r="8" fill="rgba(168,85,247,0.3)" stroke="#a855f7" stroke-width="1"/>
+                <circle cx="210" cy="100" r="8" fill="rgba(168,85,247,0.3)" stroke="#a855f7" stroke-width="1"/>
+                <circle cx="290" cy="100" r="8" fill="rgba(168,85,247,0.3)" stroke="#a855f7" stroke-width="1"/>
+                <line x1="210" y1="40" x2="290" y2="40" stroke="#a855f7" stroke-width="1"/>
+                <line x1="210" y1="40" x2="210" y2="100" stroke="#a855f7" stroke-width="1"/>
+                <line x1="210" y1="40" x2="290" y2="100" stroke="#a855f7" stroke-width="1"/>
+                <line x1="290" y1="40" x2="210" y2="100" stroke="#a855f7" stroke-width="1"/>
+                <line x1="290" y1="40" x2="290" y2="100" stroke="#a855f7" stroke-width="1"/>
+                <line x1="210" y1="100" x2="290" y2="100" stroke="#a855f7" stroke-width="1"/>
+                <text id="topoLbl_mesh" x="250" y="145" text-anchor="middle" fill="#e2e8f0" font-weight="600" font-size="11" pointer-events="none">❓ Click to label</text>
+            </g>
+            <g class="match-clickable" onclick="labelTopo(this,'bus')">
+                <rect x="340" y="10" width="150" height="120" rx="8" fill="rgba(250,204,21,0.06)" stroke="#facc15" stroke-width="1.5"/>
+                <line x1="355" y1="70" x2="475" y2="70" stroke="#facc15" stroke-width="2"/>
+                <line x1="370" y1="70" x2="370" y2="40" stroke="#facc15" stroke-width="1"/>
+                <circle cx="370" cy="40" r="6" fill="rgba(250,204,21,0.3)" stroke="#facc15" stroke-width="1"/>
+                <line x1="400" y1="70" x2="400" y2="100" stroke="#facc15" stroke-width="1"/>
+                <circle cx="400" cy="100" r="6" fill="rgba(250,204,21,0.3)" stroke="#facc15" stroke-width="1"/>
+                <line x1="440" y1="70" x2="440" y2="40" stroke="#facc15" stroke-width="1"/>
+                <circle cx="440" cy="40" r="6" fill="rgba(250,204,21,0.3)" stroke="#facc15" stroke-width="1"/>
+                <text id="topoLbl_bus" x="415" y="145" text-anchor="middle" fill="#e2e8f0" font-weight="600" font-size="11" pointer-events="none">❓ Click to label</text>
+            </g>
+            <text id="topoStatus" x="250" y="180" text-anchor="middle" fill="#94a3b8" class="match-status">Click a topology diagram to label it</text>
+        </svg>
+    </div>
+</div>
+<script>
+var topoDone = {};
+var topoNames = {star:'Star', mesh:'Mesh', bus:'Bus'};
+var topoDescs = {star:'central switch, one cable fails = only that device affected', mesh:'every device connects to every other, no single point of failure', bus:'single backbone cable, cheap but backbone failure takes down whole network'};
+function labelTopo(el, part) {
+    if (topoDone[part]) return;
+    topoDone[part] = true;
+    var lbl = document.getElementById('topoLbl_' + part);
+    if (lbl) lbl.textContent = '✅ ' + topoNames[part];
+    var st = document.getElementById('topoStatus');
+    st.textContent = '✅ ' + topoNames[part] + ' — ' + topoDescs[part];
+    st.setAttribute('fill', '#34d399');
+    var allDone = true;
+    for (var k in {star:1,mesh:1,bus:1}) { if (!topoDone[k]) { allDone = false; break; } }
+    if (allDone) st.textContent = '🎉 All topologies labelled! Great work.';
+}
+</script>
+{% endif %}
+
+{% if lesson.id == 9 %}
+<!-- ── Diagram: Label the TCP/IP Model ── -->
+<div class="match-section">
+    <h2>📦 Label the TCP/IP Model Layers</h2>
+    <p style="font-size:13px;color:var(--c-text-secondary);margin-bottom:12px;">Click each layer to reveal its name and what it does. Remember: ATIL (Apple Tarts In London).</p>
+    <div style="text-align:center;background:#0d1225;border:1px solid rgba(34,211,238,0.1);border-radius:var(--r-lg);padding:20px;overflow-x:auto;margin-bottom:16px;">
+        <svg viewBox="0 0 300 280" xmlns="http://www.w3.org/2000/svg" style="max-width:300px;width:100%;">
+            <g style="cursor:pointer;" onclick="labelTCP(this,'app')">
+                <rect x="20" y="10" width="260" height="50" rx="8" fill="rgba(34,211,238,0.12)" stroke="#22d3ee" stroke-width="2"/>
+                <text id="tcpLbl_app" x="150" y="40" text-anchor="middle" fill="#e2e8f0" font-weight="700" font-size="14" pointer-events="none">❓ Click to label</text>
+            </g>
+            <g style="cursor:pointer;" onclick="labelTCP(this,'transport')">
+                <rect x="20" y="70" width="260" height="50" rx="8" fill="rgba(168,85,247,0.12)" stroke="#a855f7" stroke-width="2"/>
+                <text id="tcpLbl_transport" x="150" y="100" text-anchor="middle" fill="#e2e8f0" font-weight="700" font-size="14" pointer-events="none">❓ Click to label</text>
+            </g>
+            <g style="cursor:pointer;" onclick="labelTCP(this,'internet')">
+                <rect x="20" y="130" width="260" height="50" rx="8" fill="rgba(250,204,21,0.12)" stroke="#facc15" stroke-width="2"/>
+                <text id="tcpLbl_internet" x="150" y="160" text-anchor="middle" fill="#e2e8f0" font-weight="700" font-size="14" pointer-events="none">❓ Click to label</text>
+            </g>
+            <g style="cursor:pointer;" onclick="labelTCP(this,'link')">
+                <rect x="20" y="190" width="260" height="50" rx="8" fill="rgba(52,211,153,0.12)" stroke="#34d399" stroke-width="2"/>
+                <text id="tcpLbl_link" x="150" y="220" text-anchor="middle" fill="#e2e8f0" font-weight="700" font-size="14" pointer-events="none">❓ Click to label</text>
+            </g>
+            <text id="tcpStatus" x="150" y="270" text-anchor="middle" fill="#94a3b8" font-size="13">Click a layer to label it</text>
+        </svg>
+    </div>
+</div>
+<script>
+var tcpDone = {};
+var tcpNames = {app:'Application', transport:'Transport', internet:'Internet', link:'Link'};
+var tcpDescs = {app:'your data (HTTP, HTTPS, FTP, SMTP)', transport:'splits data into packets, adds port numbers (TCP/UDP)', internet:'adds IP addresses, routes packets across networks (IP)', link:'physical transmission, adds MAC addresses (Ethernet/Wi-Fi)'};
+function labelTCP(el, part) {
+    if (tcpDone[part]) return;
+    tcpDone[part] = true;
+    var lbl = document.getElementById('tcpLbl_' + part);
+    if (lbl) lbl.textContent = '✅ ' + tcpNames[part];
+    var st = document.getElementById('tcpStatus');
+    st.textContent = '✅ ' + tcpNames[part] + ' — ' + tcpDescs[part];
+    st.setAttribute('fill', '#34d399');
+    var allDone = true;
+    for (var k in {app:1,transport:1,internet:1,link:1}) { if (!tcpDone[k]) { allDone = false; break; } }
+    if (allDone) st.textContent = '🎉 All layers labelled! Remember: ATIL (Apple Tarts In London).';
+}
+</script>
+{% endif %}
+
+{% if lesson.id == 23 or lesson.id == 29 or lesson.id == 35 %}
+<!-- ── Diagram: Label Logic Gates ── -->
+<div class="match-section">
+    <h2>🔘 Label the Logic Gates</h2>
+    <p style="font-size:13px;color:var(--c-text-secondary);margin-bottom:12px;">Click each gate symbol to reveal its name and behaviour.</p>
+    <div style="text-align:center;background:#0d1225;border:1px solid rgba(34,211,238,0.1);border-radius:var(--r-lg);padding:20px;overflow-x:auto;margin-bottom:16px;">
+        <svg viewBox="0 0 900 160" xmlns="http://www.w3.org/2000/svg" style="max-width:900px;width:100%;">
+            <!-- AND: center 75 -->
+            <g style="cursor:pointer;" onclick="labelGate(this,'and')">
+                <path d="M45,30 L45,70 Q85,70 85,50 Q85,30 45,30 Z" fill="rgba(34,211,238,0.12)" stroke="#22d3ee" stroke-width="2"/>
+                <line x1="25" y1="40" x2="45" y2="40" stroke="#22d3ee" stroke-width="1.5"/>
+                <line x1="25" y1="60" x2="45" y2="60" stroke="#22d3ee" stroke-width="1.5"/>
+                <line x1="85" y1="50" x2="100" y2="50" stroke="#22d3ee" stroke-width="1.5"/>
+                <text id="gateLbl_and" x="75" y="95" text-anchor="middle" fill="#e2e8f0" font-weight="600" font-size="10" pointer-events="none">❓ Click</text>
+            </g>
+            <!-- OR: center 225 -->
+            <g style="cursor:pointer;" onclick="labelGate(this,'or')">
+                <rect x="195" y="25" width="60" height="75" fill="transparent" pointer-events="all"/>
+                <path d="M215,30 Q235,30 235,50 Q235,70 215,70 L235,50 Z" fill="rgba(168,85,247,0.12)" stroke="#a855f7" stroke-width="2"/>
+                <path d="M215,30 Q205,50 215,70" fill="none" stroke="#a855f7" stroke-width="2"/>
+                <line x1="195" y1="40" x2="215" y2="40" stroke="#a855f7" stroke-width="1.5"/>
+                <line x1="195" y1="60" x2="215" y2="60" stroke="#a855f7" stroke-width="1.5"/>
+                <line x1="235" y1="50" x2="250" y2="50" stroke="#a855f7" stroke-width="1.5"/>
+                <text id="gateLbl_or" x="225" y="95" text-anchor="middle" fill="#e2e8f0" font-weight="600" font-size="10" pointer-events="none">❓ Click</text>
+            </g>
+            <!-- NOT: center 375 -->
+            <g style="cursor:pointer;" onclick="labelGate(this,'not')">
+                <polygon points="345,30 385,50 345,70" fill="rgba(250,204,21,0.12)" stroke="#facc15" stroke-width="2"/>
+                <circle cx="387" cy="50" r="4" fill="none" stroke="#facc15" stroke-width="1.5"/>
+                <line x1="330" y1="50" x2="345" y2="50" stroke="#facc15" stroke-width="1.5"/>
+                <line x1="393" y1="50" x2="405" y2="50" stroke="#facc15" stroke-width="1.5"/>
+                <text id="gateLbl_not" x="375" y="95" text-anchor="middle" fill="#e2e8f0" font-weight="600" font-size="10" pointer-events="none">❓ Click</text>
+            </g>
+            <!-- NAND: center 525 -->
+            <g style="cursor:pointer;" onclick="labelGate(this,'nand')">
+                <path d="M495,30 L495,70 Q535,70 535,50 Q535,30 495,30 Z" fill="rgba(52,211,153,0.12)" stroke="#34d399" stroke-width="2"/>
+                <circle cx="537" cy="50" r="4" fill="none" stroke="#34d399" stroke-width="1.5"/>
+                <line x1="475" y1="40" x2="495" y2="40" stroke="#34d399" stroke-width="1.5"/>
+                <line x1="475" y1="60" x2="495" y2="60" stroke="#34d399" stroke-width="1.5"/>
+                <line x1="543" y1="50" x2="555" y2="50" stroke="#34d399" stroke-width="1.5"/>
+                <text id="gateLbl_nand" x="525" y="95" text-anchor="middle" fill="#e2e8f0" font-weight="600" font-size="10" pointer-events="none">❓ Click</text>
+            </g>
+            <!-- NOR: center 675 -->
+            <g style="cursor:pointer;" onclick="labelGate(this,'nor')">
+                <rect x="645" y="25" width="65" height="75" fill="transparent" pointer-events="all"/>
+                <path d="M665,30 Q685,30 685,50 Q685,70 665,70 L685,50 Z" fill="rgba(244,63,94,0.12)" stroke="#f43f5e" stroke-width="2"/>
+                <path d="M665,30 Q655,50 665,70" fill="none" stroke="#f43f5e" stroke-width="2"/>
+                <circle cx="687" cy="50" r="4" fill="none" stroke="#f43f5e" stroke-width="1.5"/>
+                <line x1="645" y1="40" x2="665" y2="40" stroke="#f43f5e" stroke-width="1.5"/>
+                <line x1="645" y1="60" x2="665" y2="60" stroke="#f43f5e" stroke-width="1.5"/>
+                <line x1="693" y1="50" x2="705" y2="50" stroke="#f43f5e" stroke-width="1.5"/>
+                <text id="gateLbl_nor" x="675" y="95" text-anchor="middle" fill="#e2e8f0" font-weight="600" font-size="10" pointer-events="none">❓ Click</text>
+            </g>
+            <!-- XOR: center 825 -->
+            <g style="cursor:pointer;" onclick="labelGate(this,'xor')">
+                <rect x="795" y="25" width="55" height="75" fill="transparent" pointer-events="all"/>
+                <path d="M815,30 Q835,30 835,50 Q835,70 815,70 L835,50 Z" fill="rgba(251,191,36,0.12)" stroke="#fbbf24" stroke-width="2"/>
+                <path d="M815,30 Q805,50 815,70" fill="none" stroke="#fbbf24" stroke-width="2"/>
+                <path d="M805,30 Q795,50 805,70" fill="none" stroke="#fbbf24" stroke-width="1.5"/>
+                <line x1="795" y1="40" x2="805" y2="40" stroke="#fbbf24" stroke-width="1.5"/>
+                <line x1="795" y1="60" x2="805" y2="60" stroke="#fbbf24" stroke-width="1.5"/>
+                <line x1="835" y1="50" x2="850" y2="50" stroke="#fbbf24" stroke-width="1.5"/>
+                <text id="gateLbl_xor" x="825" y="95" text-anchor="middle" fill="#e2e8f0" font-weight="600" font-size="10" pointer-events="none">❓ Click</text>
+            </g>
+            <text id="gateStatus" x="450" y="140" text-anchor="middle" fill="#94a3b8" font-size="13">Click a gate symbol to label it</text>
+        </svg>
+    </div>
+</div>
+<script>
+var gateDone = {};
+var gateNames = {and:'AND', or:'OR', not:'NOT', nand:'NAND', nor:'NOR', xor:'XOR'};
+var gateDescs = {and:'output is 1 only when BOTH inputs are 1', or:'output is 1 when AT LEAST ONE input is 1', not:'output is the opposite of the input (inverts)', nand:'output is 0 only when BOTH inputs are 1 (opposite of AND)', nor:'output is 1 only when BOTH inputs are 0 (opposite of OR)', xor:'output is 1 when inputs are DIFFERENT'};
+function labelGate(el, part) {
+    if (gateDone[part]) return;
+    gateDone[part] = true;
+    var lbl = document.getElementById('gateLbl_' + part);
+    if (lbl) lbl.textContent = '✅ ' + gateNames[part];
+    var st = document.getElementById('gateStatus');
+    st.textContent = '✅ ' + gateNames[part] + ' — ' + gateDescs[part];
+    st.setAttribute('fill', '#34d399');
+    var allDone = true;
+    for (var k in {and:1,or:1,not:1,nand:1,nor:1,xor:1}) { if (!gateDone[k]) { allDone = false; break; } }
+    if (allDone) st.textContent = '🎉 All gates labelled! Great work.';
+}
+</script>
+{% endif %}
+
+{% if lesson.id == 5 or lesson.id == 7 or lesson.id == 27 %}
+<!-- ── Diagram: Label Storage Media ── -->
+<div class="match-section">
+    <h2>💾 Label the Storage Media</h2>
+    <p style="font-size:13px;color:var(--c-text-secondary);margin-bottom:12px;">Click each storage device to reveal its name and technology.</p>
+    <div style="text-align:center;background:#0d1225;border:1px solid rgba(34,211,238,0.1);border-radius:var(--r-lg);padding:20px;overflow-x:auto;margin-bottom:16px;">
+        <svg viewBox="0 0 500 180" xmlns="http://www.w3.org/2000/svg" style="max-width:500px;width:100%;">
+            <g style="cursor:pointer;" onclick="labelStorage(this,'hdd')">
+                <rect x="20" y="10" width="100" height="80" rx="8" fill="rgba(34,211,238,0.08)" stroke="#22d3ee" stroke-width="2"/>
+                <circle cx="70" cy="50" r="25" fill="none" stroke="#22d3ee" stroke-width="1.5"/>
+                <circle cx="70" cy="50" r="10" fill="none" stroke="#22d3ee" stroke-width="1"/>
+                <line x1="70" y1="25" x2="70" y2="75" stroke="#22d3ee" stroke-width="0.5"/>
+                <line x1="45" y1="50" x2="95" y2="50" stroke="#22d3ee" stroke-width="0.5"/>
+                <text id="storLbl_hdd" x="70" y="115" text-anchor="middle" fill="#e2e8f0" font-weight="600" font-size="11" pointer-events="none">❓ Click</text>
+            </g>
+            <g style="cursor:pointer;" onclick="labelStorage(this,'ssd')">
+                <rect x="150" y="10" width="100" height="80" rx="8" fill="rgba(168,85,247,0.08)" stroke="#a855f7" stroke-width="2"/>
+                <rect x="165" y="25" width="70" height="50" rx="4" fill="rgba(168,85,247,0.1)" stroke="#a855f7" stroke-width="1"/>
+                <line x1="175" y1="35" x2="225" y2="35" stroke="#a855f7" stroke-width="1"/>
+                <line x1="175" y1="45" x2="225" y2="45" stroke="#a855f7" stroke-width="1"/>
+                <line x1="175" y1="55" x2="225" y2="55" stroke="#a855f7" stroke-width="1"/>
+                <line x1="175" y1="65" x2="225" y2="65" stroke="#a855f7" stroke-width="1"/>
+                <text id="storLbl_ssd" x="200" y="115" text-anchor="middle" fill="#e2e8f0" font-weight="600" font-size="11" pointer-events="none">❓ Click</text>
+            </g>
+            <g style="cursor:pointer;" onclick="labelStorage(this,'optical')">
+                <rect x="280" y="10" width="100" height="80" rx="8" fill="rgba(250,204,21,0.08)" stroke="#facc15" stroke-width="2"/>
+                <circle cx="330" cy="50" r="30" fill="none" stroke="#facc15" stroke-width="1.5"/>
+                <circle cx="330" cy="50" r="20" fill="none" stroke="#facc15" stroke-width="0.5" stroke-dasharray="3,3"/>
+                <circle cx="330" cy="50" r="8" fill="rgba(250,204,21,0.2)" stroke="#facc15" stroke-width="1"/>
+                <text id="storLbl_optical" x="330" y="115" text-anchor="middle" fill="#e2e8f0" font-weight="600" font-size="11" pointer-events="none">❓ Click</text>
+            </g>
+            <g style="cursor:pointer;" onclick="labelStorage(this,'tape')">
+                <rect x="410" y="10" width="80" height="80" rx="8" fill="rgba(52,211,153,0.08)" stroke="#34d399" stroke-width="2"/>
+                <circle cx="430" cy="40" r="12" fill="rgba(52,211,153,0.1)" stroke="#34d399" stroke-width="1.5"/>
+                <circle cx="470" cy="40" r="12" fill="rgba(52,211,153,0.1)" stroke="#34d399" stroke-width="1.5"/>
+                <line x1="442" y1="40" x2="458" y2="40" stroke="#34d399" stroke-width="1.5"/>
+                <text id="storLbl_tape" x="450" y="115" text-anchor="middle" fill="#e2e8f0" font-weight="600" font-size="11" pointer-events="none">❓ Click</text>
+            </g>
+            <text id="storStatus" x="250" y="160" text-anchor="middle" fill="#94a3b8" font-size="13">Click a storage device to label it</text>
+        </svg>
+    </div>
+</div>
+<script>
+var storDone = {};
+var storNames = {hdd:'HDD', ssd:'SSD', optical:'Optical', tape:'Magnetic Tape'};
+var storDescs = {hdd:'magnetic spinning platters, large capacity, cheap per GB', ssd:'flash memory, no moving parts, fast and durable', optical:'laser-read pits and lands, cheap to produce, portable', tape:'very high capacity, very slow, best for backup'};
+function labelStorage(el, part) {
+    if (storDone[part]) return;
+    storDone[part] = true;
+    var lbl = document.getElementById('storLbl_' + part);
+    if (lbl) lbl.textContent = '✅ ' + storNames[part];
+    var st = document.getElementById('storStatus');
+    st.textContent = '✅ ' + storNames[part] + ' — ' + storDescs[part];
+    st.setAttribute('fill', '#34d399');
+    var allDone = true;
+    for (var k in {hdd:1,ssd:1,optical:1,tape:1}) { if (!storDone[k]) { allDone = false; break; } }
+    if (allDone) st.textContent = '🎉 All storage devices labelled! Great work.';
+}
+</script>
+{% endif %}
+
+{% if lesson.id == 9 %}
+<!-- ── Match: Network Protocol → Purpose ── -->
+<div class="match-section">
+    <h2>🧩 Match the Protocol to Its Purpose</h2>
+    <p style="font-size:13px;color:var(--c-text-secondary);margin-bottom:12px;">Click a protocol on the left, then click its purpose on the right.</p>
+    <div class="match-grid" id="matchProtocols">
+        <div class="match-item" data-pair="0" onclick="matchSelect('desc', 0)">TCP/IP<div class="match-desc">Click me, then click its purpose</div></div>
+        <div class="match-item" data-pair="0" onclick="matchSelect('trans', 0)">Governs internet communication, splits data into packets<div class="match-desc">The foundation of internet data transfer</div></div>
+        <div class="match-item" data-pair="1" onclick="matchSelect('desc', 1)">HTTP<div class="match-desc">Click me, then click its purpose</div></div>
+        <div class="match-item" data-pair="1" onclick="matchSelect('trans', 1)">Transfers web pages between servers and browsers<div class="match-desc">Used for viewing websites</div></div>
+        <div class="match-item" data-pair="2" onclick="matchSelect('desc', 2)">HTTPS<div class="match-desc">Click me, then click its purpose</div></div>
+        <div class="match-item" data-pair="2" onclick="matchSelect('trans', 2)">Secure version of HTTP with TLS/SSL encryption<div class="match-desc">Encrypted web traffic</div></div>
+        <div class="match-item" data-pair="3" onclick="matchSelect('desc', 3)">FTP<div class="match-desc">Click me, then click its purpose</div></div>
+        <div class="match-item" data-pair="3" onclick="matchSelect('trans', 3)">Transfers files between computers<div class="match-desc">Uploading/downloading files</div></div>
+        <div class="match-item" data-pair="4" onclick="matchSelect('desc', 4)">DNS<div class="match-desc">Click me, then click its purpose</div></div>
+        <div class="match-item" data-pair="4" onclick="matchSelect('trans', 4)">Converts domain names to IP addresses<div class="match-desc">The internet's phonebook</div></div>
+        <div class="match-item" data-pair="5" onclick="matchSelect('desc', 5)">SMTP<div class="match-desc">Click me, then click its purpose</div></div>
+        <div class="match-item" data-pair="5" onclick="matchSelect('trans', 5)">Sends emails between mail servers<div class="match-desc">Outgoing email</div></div>
+    </div>
+    <div id="matchFeedback" style="margin-top:12px;font-size:14px;font-weight:600;text-align:center;display:none;"></div>
+</div>
+{% endif %}
+
+{% if lesson.id == 12 or lesson.id == 13 %}
+<!-- ── Match: OS Function → Description ── -->
+<div class="match-section">
+    <h2>🧩 Match the OS Function to Its Description</h2>
+    <p style="font-size:13px;color:var(--c-text-secondary);margin-bottom:12px;">Click a function on the left, then click its description on the right.</p>
+    <div class="match-grid" id="matchOS">
+        <div class="match-item" data-pair="0" onclick="matchSelect('desc', 0)">Memory Management<div class="match-desc">Click me, then click its description</div></div>
+        <div class="match-item" data-pair="0" onclick="matchSelect('trans', 0)">Allocates RAM to running programs, uses virtual memory<div class="match-desc">Controls how programs share memory</div></div>
+        <div class="match-item" data-pair="1" onclick="matchSelect('desc', 1)">File Management<div class="match-desc">Click me, then click its description</div></div>
+        <div class="match-item" data-pair="1" onclick="matchSelect('trans', 1)">Organises files into folders, manages permissions<div class="match-desc">Controls how data is stored and accessed</div></div>
+        <div class="match-item" data-pair="2" onclick="matchSelect('desc', 2)">Peripheral Management<div class="match-desc">Click me, then click its description</div></div>
+        <div class="match-item" data-pair="2" onclick="matchSelect('trans', 2)">Controls I/O devices via device drivers<div class="match-desc">Manages printers, keyboards, etc.</div></div>
+        <div class="match-item" data-pair="3" onclick="matchSelect('desc', 3)">User Interface<div class="match-desc">Click me, then click its description</div></div>
+        <div class="match-item" data-pair="3" onclick="matchSelect('trans', 3)">Provides GUI or CLI for user interaction<div class="match-desc">How the user interacts with the computer</div></div>
+        <div class="match-item" data-pair="4" onclick="matchSelect('desc', 4)">Multitasking<div class="match-desc">Click me, then click its description</div></div>
+        <div class="match-item" data-pair="4" onclick="matchSelect('trans', 4)">Rapidly switches between programs to run them simultaneously<div class="match-desc">Running multiple apps at once</div></div>
+    </div>
+    <div id="matchFeedback" style="margin-top:12px;font-size:14px;font-weight:600;text-align:center;display:none;"></div>
+</div>
+{% endif %}
+
+{% if lesson.id == 14 %}
+<!-- ── Match: Legislation → What It Covers ── -->
+<div class="match-section">
+    <h2>🧩 Match the Legislation to What It Covers</h2>
+    <p style="font-size:13px;color:var(--c-text-secondary);margin-bottom:12px;">Click a law on the left, then click what it covers on the right.</p>
+    <div class="match-grid" id="matchLegislation">
+        <div class="match-item" data-pair="0" onclick="matchSelect('desc', 0)">Data Protection Act 2018<div class="match-desc">Click me, then click what it covers</div></div>
+        <div class="match-item" data-pair="0" onclick="matchSelect('trans', 0)">Controls how personal data is collected, stored, and used<div class="match-desc">Protects individuals' personal information</div></div>
+        <div class="match-item" data-pair="1" onclick="matchSelect('desc', 1)">Computer Misuse Act 1990<div class="match-desc">Click me, then click what it covers</div></div>
+        <div class="match-item" data-pair="1" onclick="matchSelect('trans', 1)">Makes unauthorised computer access and hacking illegal<div class="match-desc">Covers hacking and malware creation</div></div>
+        <div class="match-item" data-pair="2" onclick="matchSelect('desc', 2)">Copyright, Designs and Patents Act 1988<div class="match-desc">Click me, then click what it covers</div></div>
+        <div class="match-item" data-pair="2" onclick="matchSelect('trans', 2)">Protects intellectual property from copying/distribution<div class="match-desc">Covers music, software, films</div></div>
+        <div class="match-item" data-pair="3" onclick="matchSelect('desc', 3)">Open Source Licence<div class="match-desc">Click me, then click what it covers</div></div>
+        <div class="match-item" data-pair="3" onclick="matchSelect('trans', 3)">Source code freely available to view, modify, distribute<div class="match-desc">Free to use and modify</div></div>
+        <div class="match-item" data-pair="4" onclick="matchSelect('desc', 4)">Proprietary Licence<div class="match-desc">Click me, then click what it covers</div></div>
+        <div class="match-item" data-pair="4" onclick="matchSelect('trans', 4)">Source code kept secret, purchased licence to use<div class="match-desc">Paid software, cannot modify</div></div>
+    </div>
+    <div id="matchFeedback" style="margin-top:12px;font-size:14px;font-weight:600;text-align:center;display:none;"></div>
+</div>
+{% endif %}
+
+{% if lesson.id == 15 or lesson.id == 16 or lesson.id == 17 %}
+<!-- ── Match: Computational Thinking → Definition ── -->
+<div class="match-section">
+    <h2>🧩 Match the Computational Thinking Pillar to Its Definition</h2>
+    <p style="font-size:13px;color:var(--c-text-secondary);margin-bottom:12px;">Click a pillar on the left, then click its definition on the right.</p>
+    <div class="match-grid" id="matchCT">
+        <div class="match-item" data-pair="0" onclick="matchSelect('desc', 0)">Decomposition<div class="match-desc">Click me, then click its definition</div></div>
+        <div class="match-item" data-pair="0" onclick="matchSelect('trans', 0)">Breaking a complex problem into smaller sub-problems<div class="match-desc">Divide and conquer</div></div>
+        <div class="match-item" data-pair="1" onclick="matchSelect('desc', 1)">Pattern Recognition<div class="match-desc">Click me, then click its definition</div></div>
+        <div class="match-item" data-pair="1" onclick="matchSelect('trans', 1)">Identifying similarities within and between problems<div class="match-desc">Spotting what repeats</div></div>
+        <div class="match-item" data-pair="2" onclick="matchSelect('desc', 2)">Abstraction<div class="match-desc">Click me, then click its definition</div></div>
+        <div class="match-item" data-pair="2" onclick="matchSelect('trans', 2)">Removing unnecessary detail to focus on essentials<div class="match-desc">Ignoring irrelevant details</div></div>
+        <div class="match-item" data-pair="3" onclick="matchSelect('desc', 3)">Algorithm Design<div class="match-desc">Click me, then click its definition</div></div>
+        <div class="match-item" data-pair="3" onclick="matchSelect('trans', 3)">Creating step-by-step instructions to solve a problem<div class="match-desc">Writing the solution steps</div></div>
+    </div>
+    <div id="matchFeedback" style="margin-top:12px;font-size:14px;font-weight:600;text-align:center;display:none;"></div>
+</div>
+{% endif %}
+
+{% if lesson.id == 23 %}
+<!-- ── Match: Boolean Logic Gate → Behaviour ── -->
+<div class="match-section">
+    <h2>🧩 Match the Logic Gate to Its Behaviour</h2>
+    <p style="font-size:13px;color:var(--c-text-secondary);margin-bottom:12px;">Click a gate on the left, then click its behaviour on the right.</p>
+    <div class="match-grid" id="matchGates">
+        <div class="match-item" data-pair="0" onclick="matchSelect('desc', 0)">AND<div class="match-desc">Click me, then click its behaviour</div></div>
+        <div class="match-item" data-pair="0" onclick="matchSelect('trans', 0)">Output is 1 only when BOTH inputs are 1<div class="match-desc">Both must be true</div></div>
+        <div class="match-item" data-pair="1" onclick="matchSelect('desc', 1)">OR<div class="match-desc">Click me, then click its behaviour</div></div>
+        <div class="match-item" data-pair="1" onclick="matchSelect('trans', 1)">Output is 1 when AT LEAST ONE input is 1<div class="match-desc">At least one must be true</div></div>
+        <div class="match-item" data-pair="2" onclick="matchSelect('desc', 2)">NOT<div class="match-desc">Click me, then click its behaviour</div></div>
+        <div class="match-item" data-pair="2" onclick="matchSelect('trans', 2)">Output is the opposite of the input (inverts)<div class="match-desc">Flips the input</div></div>
+        <div class="match-item" data-pair="3" onclick="matchSelect('desc', 3)">NAND<div class="match-desc">Click me, then click its behaviour</div></div>
+        <div class="match-item" data-pair="3" onclick="matchSelect('trans', 3)">Output is 0 only when BOTH inputs are 1 (opposite of AND)<div class="match-desc">Not AND</div></div>
+        <div class="match-item" data-pair="4" onclick="matchSelect('desc', 4)">NOR<div class="match-desc">Click me, then click its behaviour</div></div>
+        <div class="match-item" data-pair="4" onclick="matchSelect('trans', 4)">Output is 1 only when BOTH inputs are 0 (opposite of OR)<div class="match-desc">Not OR</div></div>
+        <div class="match-item" data-pair="5" onclick="matchSelect('desc', 5)">XOR<div class="match-desc">Click me, then click its behaviour</div></div>
+        <div class="match-item" data-pair="5" onclick="matchSelect('trans', 5)">Output is 1 when inputs are DIFFERENT<div class="match-desc">Exclusive OR</div></div>
+    </div>
+    <div id="matchFeedback" style="margin-top:12px;font-size:14px;font-weight:600;text-align:center;display:none;"></div>
+</div>
+{% endif %}
+
+{% if lesson.id == 18 or lesson.id == 19 or lesson.id == 20 %}
+<!-- ── Match: Data Type → Example ── -->
+<div class="match-section">
+    <h2>🧩 Match the Data Type to Its Example</h2>
+    <p style="font-size:13px;color:var(--c-text-secondary);margin-bottom:12px;">Click a data type on the left, then click its example on the right.</p>
+    <div class="match-grid" id="matchDataTypes">
+        <div class="match-item" data-pair="0" onclick="matchSelect('desc', 0)">Integer<div class="match-desc">Click me, then click its example</div></div>
+        <div class="match-item" data-pair="0" onclick="matchSelect('trans', 0)">42, -7, 0<div class="match-desc">Whole numbers only</div></div>
+        <div class="match-item" data-pair="1" onclick="matchSelect('desc', 1)">Real / Float<div class="match-desc">Click me, then click its example</div></div>
+        <div class="match-item" data-pair="1" onclick="matchSelect('trans', 1)">3.14, -0.5, 2.0<div class="match-desc">Numbers with decimal points</div></div>
+        <div class="match-item" data-pair="2" onclick="matchSelect('desc', 2)">Character<div class="match-desc">Click me, then click its example</div></div>
+        <div class="match-item" data-pair="2" onclick="matchSelect('trans', 2)">'A', '7', '$'<div class="match-desc">A single letter, digit, or symbol</div></div>
+        <div class="match-item" data-pair="3" onclick="matchSelect('desc', 3)">String<div class="match-desc">Click me, then click its example</div></div>
+        <div class="match-item" data-pair="3" onclick="matchSelect('trans', 3)">"Hello", "WLV CS"<div class="match-desc">A sequence of characters</div></div>
+        <div class="match-item" data-pair="4" onclick="matchSelect('desc', 4)">Boolean<div class="match-desc">Click me, then click its example</div></div>
+        <div class="match-item" data-pair="4" onclick="matchSelect('trans', 4)">True, False<div class="match-desc">Only two possible values</div></div>
+    </div>
+    <div id="matchFeedback" style="margin-top:12px;font-size:14px;font-weight:600;text-align:center;display:none;"></div>
+</div>
+{% endif %}
+
+{% if questions %}
+{% set q_count = questions|length %}
+<div class="quiz-section">
+    <h2>&#129504; Check Your Understanding</h2>
+    <p>&#128221; Answer one question at a time. Use <strong>1-4</strong> to pick an option, <strong>← →</strong> to navigate, <strong>Enter</strong> to submit.</p>
+    
+    <div class="quiz-header">
+        <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="progressFill" style="width:0%"></div></div>
+        <span class="quiz-score-running" id="quizRunningScore">&#10067; 0/{{ q_count }} answered</span>
+    </div>
+    
+    <!-- Question counter -->
+    <div class="quiz-counter" id="quizCounter">1 / {{ q_count }}</div>
+    
+    <form id="quiz-form">
+    {% for q in questions %}
+    {% set diff_label = 'Easy' if q.difficulty == 1 else ('Medium' if q.difficulty == 2 else 'Hard') %}
+    {% set diff_icon = '🟢' if q.difficulty == 1 else ('🟡' if q.difficulty == 2 else '🔴') %}
+    {% set qtype = q.question_type if q.question_type else 'mcq' %}
+    {% set qtype_label = {'mcq': 'MCQ', 'true_false': 'T/F', 'multiple_select': 'Multi', 'ordering': 'Order', 'cloze': 'Fill'}[qtype] %}
+    <div class="quiz-question quiz-tab" data-qid="{{ q.id }}" data-qtype="{{ qtype }}" data-idx="{{ loop.index0 }}">
+        <div class="quiz-q-text">
+            {{ loop.index }}. {{ q.question|safe }}
+            <span class="diff-badge {{ 'easy' if q.difficulty == 1 else ('medium' if q.difficulty == 2 else 'hard') }}">{{ diff_icon }} {{ diff_label }}</span>
+            <span class="type-badge">{{ qtype_label }}</span>
+            {% if q.command_word %}
+            <span class="cmd-badge">{{ q.command_word }}</span>
+            {% endif %}
+        </div>
+        
+        {% if qtype == 'true_false' %}
+        {# ── True/False ── #}
+        <div class="tf-container">
+            <button type="button" class="tf-btn true-btn" data-value="0" onclick="selectTF(this, {{ q.id }})" aria-label="True">&#10004; True</button>
+            <button type="button" class="tf-btn false-btn" data-value="1" onclick="selectTF(this, {{ q.id }})" aria-label="False">&#10008; False</button>
+        </div>
+        
+        {% elif qtype == 'multiple_select' %}
+        {# ── Multiple Select ── #}
+        {% for opt in q.options %}
+        <div class="ms-option" data-index="{{ loop.index0 }}" onclick="toggleMulti(this, {{ q.id }})">
+            <div class="ms-checkbox" id="ms-cb-{{ q.id }}-{{ loop.index0 }}"></div>
+            <span class="ms-label">{{ opt }}</span>
+        </div>
+        {% endfor %}
+        
+        {% elif qtype == 'ordering' %}
+        {# ── Ordering (Drag & Drop) ── #}
+        <p style="font-size:13px;color:var(--c-text-muted);margin-bottom:8px;">&#128259; Drag items — on mobile, long-press then drag to reorder.</p>
+        <div class="order-list" id="order-list-{{ q.id }}" data-items='{{ q.options|tojson }}'></div>
+        
+        {% elif qtype == 'cloze' %}
+        {# ── Cloze / Fill in the Blank ── #}
+        <input type="text" class="cloze-input" id="cloze-{{ q.id }}" placeholder="Type your answer here..." oninput="updateCloze({{ q.id }})">
+        
+        {% else %}
+        {# ── MCQ (default) ── #}
+        {% for opt in q.options %}
+            <button type="button" class="quiz-option" data-index="{{ loop.index0 }}" onclick="selectOption(this, {{ q.id }})">{{ opt }}</button>
+        {% endfor %}
+        {% endif %}
+        
+        <div class="quiz-explanation" id="exp-{{ q.id }}"></div>
+    </div>
+    {% endfor %}
+    
+    <!-- Question navigation -->
+    <div class="quiz-nav">
+        <button type="button" class="quiz-nav-btn" id="quizPrevBtn" onclick="quizGoTo(-1)" aria-label="Previous question">&#9664; Previous</button>
+        <div class="quiz-dots" id="quizDots" role="tablist" aria-label="Question navigation">
+        {% for q in questions %}
+            <span class="quiz-dot" data-idx="{{ loop.index0 }}" onclick="quizGoTo({{ loop.index0 }})" role="tab" aria-label="Question {{ loop.index }}" aria-selected="false">{{ loop.index }}</span>
+        {% endfor %}
+        </div>
+        <button type="button" class="quiz-nav-btn" id="quizNextBtn" onclick="quizGoTo(1)" aria-label="Next question">Next &#9654;</button>
+    </div>
+    
+    <div style="text-align:center;margin-top:16px;">
+        <button type="button" class="btn btn-primary" id="submit-quiz" onclick="submitQuiz({{ lesson.id }})" style="display:none;">&#10004; Submit Answers</button>
+    </div>
+    </form>
+    
+    <div id="quiz-score" class="quiz-results" style="display:none;"></div>
+
+    {# ── Boss Battle Banner ── #}
+    {% if boss_unlocked %}
+    <div id="bossBanner" class="boss-banner {% if boss_passed %}boss-defeated{% else %}boss-available{% endif %}">
+        {% if boss_passed %}
+            <div class="boss-badge-won">
+                <span class="boss-trophy">🏆</span>
+                <div>
+                    <div class="boss-badge-title">Boss Defeated!</div>
+                    <div class="boss-badge-sub">You have mastered every question in this lesson.</div>
+                </div>
+            </div>
+        {% else %}
+            <div class="boss-challenge-content">
+                <span class="boss-skull">⚔️</span>
+                <div>
+                    <div class="boss-badge-title">Boss Battle Unlocked!</div>
+                    <div class="boss-badge-sub">You have mastered all questions — face the final challenge!</div>
+                </div>
+                <button class="btn boss-btn" id="startBossBtn" onclick="startBossBattle({{ lesson.id }})">
+                    ⚔️ Accept Challenge
+                </button>
+            </div>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+
+{# ── Boss Battle Modal ── #}
+<div id="bossModal" class="boss-modal-overlay" style="display:none;" role="dialog" aria-modal="true" aria-label="Boss Battle">
+    <div class="boss-modal">
+        <div class="boss-modal-header">
+            <span class="boss-modal-icon">⚔️</span>
+            <div>
+                <div class="boss-modal-title">Boss Battle</div>
+                <div class="boss-modal-sub" id="bossLessonTitle"></div>
+            </div>
+            <div class="boss-timer-wrap">
+                <svg class="boss-timer-ring" viewBox="0 0 60 60">
+                    <circle cx="30" cy="30" r="26" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="5"/>
+                    <circle cx="30" cy="30" r="26" fill="none" stroke="#f59e0b" stroke-width="5"
+                        stroke-dasharray="163.4" stroke-dashoffset="0"
+                        stroke-linecap="round" id="bossTimerArc" transform="rotate(-90 30 30)"/>
+                </svg>
+                <span class="boss-timer-num" id="bossTimerNum">90</span>
+            </div>
+        </div>
+        <div class="boss-modal-question" id="bossQuestion"></div>
+        <div class="boss-modal-options" id="bossOptions"></div>
+        <div class="boss-modal-result" id="bossResult" style="display:none;"></div>
+        <div class="boss-modal-actions">
+            <button class="btn boss-submit-btn" id="bossSubmitBtn" onclick="submitBossBattle()" disabled>Submit Answer</button>
+        </div>
+    </div>
+</div>
+{% endif %}
+<!-- ── Previous/Next lesson navigation cards ── -->
+<div class="lesson-nav">
+    {% if prev_lesson %}
+    <a href="/lesson/{{ prev_lesson.id }}">
+        <span class="nav-label">&#9664;&#65039; Previous Lesson</span>
+        <span class="nav-title">{{ prev_lesson.title }}</span>
+    </a>
+    {% else %}<span></span>{% endif %}
+    {% if next_lesson %}
+    <a href="/lesson/{{ next_lesson.id }}" class="nav-primary nav-right">
+        <span class="nav-label">Next Lesson &#9654;&#65039;</span>
+        <span class="nav-title">{{ next_lesson.title }}</span>
+    </a>
+    {% else %}<span></span>{% endif %}
+</div>
+
+{% if prev_section or next_section %}
+<div class="lesson-nav lesson-nav-section">
+    {% if prev_section %}
+    <a href="/lesson/{{ prev_section.id }}">
+        <span class="nav-label">&#9664;&#65039; Previous Section</span>
+        <span class="nav-title">{{ prev_section.topic_title }}</span>
+    </a>
+    {% else %}<span></span>{% endif %}
+    {% if next_section %}
+    <a href="/lesson/{{ next_section.id }}" class="nav-section-btn nav-right">
+        <span class="nav-label">Next Section &#9654;&#65039;</span>
+        <span class="nav-title">{{ next_section.topic_title }}</span>
+    </a>
+    {% else %}<span></span>{% endif %}
+</div>
+{% endif %}
+{% if questions %}
+
+<!-- ─── Mobile Table of Contents ─── -->
+<style>
+/* ── Floating Table of Contents button: 📋 fixed bottom-right, 3D gradient matching hamburger ── */
+.toc-toggle {
+  position: fixed; bottom: 40px; right: 16px; z-index: 500;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: linear-gradient(145deg, #2dd4bf, #0d9488);
+  color: #021a19; border: none;
+  font-size: 20px; cursor: pointer;
+  box-shadow:
+    3px 4px 10px rgba(0,0,0,0.35),
+    -1px -1px 4px rgba(45,212,191,0.15),
+    inset 1px 1px 2px rgba(255,255,255,0.2),
+    inset -2px -2px 4px rgba(0,0,0,0.25);
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity 0.15s, transform 0.15s; opacity: 1; pointer-events: auto;
+}
+.toc-toggle.visible { opacity: 1; pointer-events: auto; }
+.toc-toggle:hover {
+  transform: scale(1.08);
+  box-shadow: 4px 5px 14px rgba(0,0,0,0.4), -1px -1px 4px rgba(45,212,191,0.2), inset 1px 1px 2px rgba(255,255,255,0.25), inset -2px -2px 4px rgba(0,0,0,0.3);
+}
+.toc-toggle:active {
+  transform: scale(0.92);
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.3), inset 2px 2px 6px rgba(0,0,0,0.3), inset -1px -1px 2px rgba(255,255,255,0.1);
+}
+/* Desktop: move toggle higher so it doesn't overlap bottom nav */
+
+
+/* ── ToC slide-in panel: slides from right, lists all h2/h3 headings on the page ── */
+.toc-panel {
+  position: fixed; top: 0; right: -360px; width: 340px; height: 100vh;
+  z-index: 6000; background: var(--c-surface);
+  border-left: 1px solid var(--c-border);
+  box-shadow: -8px 0 24px rgba(0,0,0,0.3);
+  transition: right 0.25s ease;
+  display: flex; flex-direction: column;
+  overflow-y: auto;
+}
+@media (min-width: 1200px) {
+  .toc-panel { right: -420px; width: 400px; }
+}
+.toc-panel.open { right: 0; }
+.toc-panel-header {
+  padding: 16px 20px; font-weight: 700; font-size: 18px;
+  border-bottom: 1px solid var(--c-border);
+  display: flex; justify-content: space-between; align-items: center;
+  position: sticky; top: 0; background: var(--c-surface); z-index: 1;
+}
+.toc-close {
+  width: 32px; height: 32px; border-radius: 50%; border: none;
+  background: transparent; color: var(--c-text); font-size: 18px;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+}
+.toc-close:hover { background: var(--c-surface-hover); }
+.toc-list { padding: 8px 0; flex: 1; }
+.toc-item {
+  display: block; padding: 8px 20px; text-decoration: none;
+  color: var(--c-text-secondary); font-size: 14px; line-height: 1.4;
+  transition: all 0.15s; border-left: 3px solid transparent;
+}
+.toc-item:hover, .toc-item:focus-visible {
+  color: var(--c-accent); background: var(--c-accent-light);
+  border-left-color: var(--c-accent);
+}
+.toc-item.l3 { padding-left: 36px; font-size: 13px; }
+.toc-item.active {
+  color: var(--c-accent); border-left-color: var(--c-accent);
+  background: var(--c-accent-light); font-weight: 600;
+}
+.toc-overlay {
+  position: fixed; inset: 0; z-index: 5999;
+  background: rgba(0,0,0,0.4); opacity: 0; pointer-events: none;
+  transition: opacity 0.2s;
+}
+.toc-overlay.visible { opacity: 1; pointer-events: auto; }
+
+
+</style>
+<!-- ── ToC panel HTML: overlay + panel + toggle button ── -->
+<div class="toc-overlay" id="tocOverlay"></div>
+<div class="toc-panel" id="tocPanel">
+  <div class="toc-panel-header">
+    <span>📋 On This Page</span>
+    <button class="toc-close" id="tocClose" aria-label="Close table of contents">✕</button>
+  </div>
+  <div class="toc-list" id="tocList"></div>
+</div>
+<button class="toc-toggle" id="tocToggle" aria-label="Table of contents" title="Table of contents (Ctrl+\)">📋</button>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var content = document.querySelector('.lesson-content');
+  if (!content) return;
+  
+  // Get all h2 and h3 headings
+  var headings = content.querySelectorAll('h2, h3');
+  if (headings.length < 2) {
+    document.getElementById('tocToggle').style.display = 'none';
+    return; // No need for TOC
+  }
+  
+  var tocList = document.getElementById('tocList');
+  var tocToggle = document.getElementById('tocToggle');
+  var tocPanel = document.getElementById('tocPanel');
+  var tocOverlay = document.getElementById('tocOverlay');
+  var tocClose = document.getElementById('tocClose');
+  var items = [];
+  
+  // Assign IDs and build TOC
+  headings.forEach(function(h, i) {
+    var id = 'section-' + i;
+    h.id = id;
+    var level = h.tagName === 'H3' ? 'l3' : 'l2';
+    var text = h.textContent.trim();
+    if (!text) return;
+    
+    var a = document.createElement('a');
+    a.href = '#' + id;
+    a.className = 'toc-item ' + level;
+    a.textContent = text;
+    a.addEventListener('click', function(e) {
+      e.preventDefault();
+      closeTOC();
+      var target = document.getElementById(id);
+      if (target) {
+        var y = target.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({top: y, behavior: 'smooth'});
+      }
+    });
+    tocList.appendChild(a);
+    items.push({el: a, id: id});
+  });
+  
+  // Show TOC button
+  tocToggle.classList.add('visible');
+  
+  // Toggle
+  function openTOC() {
+    tocPanel.classList.add('open');
+    tocOverlay.classList.add('visible');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeTOC() {
+    tocPanel.classList.remove('open');
+    tocOverlay.classList.remove('visible');
+    document.body.style.overflow = '';
+  }
+  
+  // Keyboard shortcut: Ctrl+\ or Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && tocPanel.classList.contains('open')) {
+      closeTOC();
+    }
+    if ((e.ctrlKey || e.metaKey) && e.key === '\\') {
+      e.preventDefault();
+      if (tocPanel.classList.contains('open')) closeTOC();
+      else openTOC();
+    }
+  });
+  
+  tocToggle.addEventListener('click', openTOC);
+  tocClose.addEventListener('click', closeTOC);
+  tocOverlay.addEventListener('click', closeTOC);
+  
+  // Highlight active section
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        items.forEach(function(item) {
+          item.el.classList.toggle('active', item.id === entry.target.id);
+        });
+      }
+    });
+  }, {rootMargin: '-80px 0px -60% 0px'});
+  headings.forEach(function(h) { observer.observe(h); });
+});
+</script>
+
+<script>
+// ─── Quiz State ───
+let answers = {};
+let answeredCount = 0;
+const totalQuestions = {{ questions|length }};
+let quizCurrentIndex = 0;
+
+// ─── Tab navigation: show one question at a time ───
+function quizGoTo(target) {
+    const tabs = document.querySelectorAll('.quiz-tab');
+    if (tabs.length === 0) return;
+    let idx;
+    if (typeof target === 'number' && target < 0) {
+        // Relative: previous
+        idx = quizCurrentIndex - 1;
+    } else if (typeof target === 'number' && target === 1) {
+        // Relative: next
+        idx = quizCurrentIndex + 1;
+    } else {
+        // Absolute index
+        idx = parseInt(target);
+    }
+    if (idx < 0 || idx >= tabs.length) return;
+    quizCurrentIndex = idx;
+    showQuestion(idx);
+}
+
+function showQuestion(idx, noScroll) {
+    const tabs = document.querySelectorAll('.quiz-tab');
+    tabs.forEach(function(t, i) {
+        t.classList.toggle('active', i === idx);
+    });
+    document.getElementById('quizPrevBtn').disabled = (idx === 0);
+    document.getElementById('quizNextBtn').disabled = (idx === tabs.length - 1);
+    // Show submit button only on last question
+    const isLast = (idx === tabs.length - 1);
+    document.getElementById('submit-quiz').style.display = isLast ? '' : 'none';
+    document.getElementById('quizCounter').textContent = (idx + 1) + ' / ' + tabs.length;
+    updateQuizDots();
+    // Scroll into view (skip on initial page load)
+    if (noScroll) return;
+    var qSection = document.querySelector('.quiz-section');
+    if (qSection) qSection.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+}
+
+function updateQuizDots() {
+    document.querySelectorAll('.quiz-dot').forEach(function(dot) {
+        var i = parseInt(dot.dataset.idx);
+        dot.classList.toggle('active', i === quizCurrentIndex);
+        dot.classList.toggle('answered', answers[i] !== undefined && answers[i] !== null);
+    });
+}
+
+// ─── MCQ ───
+function selectOption(btn, qid) {
+    const container = btn.closest('.quiz-question');
+    container.querySelectorAll('.quiz-option').forEach(el => el.classList.remove('selected'));
+    btn.classList.add('selected');
+    const idx = parseInt(container.dataset.idx);
+    answers[idx] = parseInt(btn.dataset.index);
+    updateProgress(idx);
+}
+
+// ─── True/False ───
+function selectTF(btn, qid) {
+    const container = btn.closest('.tf-container');
+    container.querySelectorAll('.tf-btn').forEach(el => el.classList.remove('selected-true', 'selected-false'));
+    const val = btn.dataset.value;
+    btn.classList.add(val === '0' ? 'selected-true' : 'selected-false');
+    const idx = parseInt(container.closest('.quiz-question').dataset.idx);
+    answers[idx] = parseInt(val);
+    updateProgress(idx);
+}
+
+// ─── Multiple Select ───
+function toggleMulti(el, qid) {
+    el.classList.toggle('selected');
+    const checked = el.classList.contains('selected');
+    const cb = el.querySelector('.ms-checkbox');
+    cb.textContent = checked ? '✓' : '';
+    // Collect all selected indices
+    const container = el.closest('.quiz-question');
+    const selected = [];
+    container.querySelectorAll('.ms-option').forEach(opt => {
+        if (opt.classList.contains('selected')) selected.push(opt.dataset.index);
+    });
+    const idx = parseInt(container.dataset.idx);
+    answers[idx] = selected.length > 0 ? selected.join(',') : null;
+    updateProgress(idx);
+}
+
+// ─── Ordering (Drag & Drop + Touch) ───
+let dragItem = null;
+let touchItem = null;
+let touchClone = null;
+let touchOffsetY = 0;
+
+// Desktop drag handlers
+function onDragStart(e) {
+    dragItem = this;
+    this.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', this.dataset.origIndex);
+}
+
+function onDragEnd(e) {
+    this.classList.remove('dragging');
+    document.querySelectorAll('.order-list .order-item').forEach(el => {
+        el.classList.remove('drag-over-top', 'drag-over-bottom');
+    });
+    if (dragItem) {
+        const list = dragItem.closest('.order-list');
+        const idx = parseInt(list.closest('.quiz-question').dataset.idx);
+        const ordered = [...list.children].map(el => parseInt(el.dataset.origIndex));
+        answers[idx] = ordered.join(',');
+        updateProgress(idx);
+        updateOrderNumbers(list);
+    }
+    dragItem = null;
+}
+
+function onDragOver(e) {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    const target = this;
+    if (target === dragItem) return;
+    const rect = target.getBoundingClientRect();
+    const midY = rect.top + rect.height / 2;
+    target.classList.remove('drag-over-top', 'drag-over-bottom');
+    if (e.clientY < midY) target.classList.add('drag-over-top');
+    else target.classList.add('drag-over-bottom');
+}
+
+function onDrop(e) {
+    e.preventDefault();
+    this.classList.remove('drag-over-top', 'drag-over-bottom');
+    const target = this;
+    if (!dragItem || target === dragItem) return;
+    const list = target.closest('.order-list');
+    const rect = target.getBoundingClientRect();
+    if (e.clientY < rect.top + rect.height / 2) {
+        list.insertBefore(dragItem, target);
+    } else {
+        list.insertBefore(dragItem, target.nextSibling);
+    }
+}
+
+// Mobile touch handlers
+function getTouchTargetY(e) {
+    // Find the order item under the touch point
+    const touch = e.touches[0];
+    const elements = document.elementsFromPoint(touch.clientX, touch.clientY);
+    for (const el of elements) {
+        if (el.classList && el.classList.contains('order-item') && el !== touchItem) return el;
+    }
+    return null;
+}
+
+function onTouchStart(e) {
+    if (e.touches.length > 1) return; // Ignore multi-touch
+    touchItem = this;
+    const touch = e.touches[0];
+    const rect = this.getBoundingClientRect();
+    touchOffsetY = touch.clientY - rect.top;
+    
+    // Add visual feedback after a short delay (long-press feel)
+    this._touchTimer = setTimeout(() => {
+        if (!touchItem) return;
+        touchItem.classList.add('dragging');
+        // Create a visual clone that follows the finger
+        // (the original stays in place as a placeholder)
+    }, 150);
+}
+
+function onTouchMove(e) {
+    if (!touchItem) return;
+    e.preventDefault(); // Prevent page scroll while dragging
+    
+    // Cancel the long-press timer if they moved too fast
+    if (touchItem._touchTimer) {
+        clearTimeout(touchItem._touchTimer);
+        touchItem._touchTimer = null;
+    }
+    
+    touchItem.classList.add('dragging');
+    
+    // Find which item the touch is over
+    const target = getTouchTargetY(e);
+    if (!target || target === touchItem) {
+        // Clear indicators if not over any other item
+        document.querySelectorAll('.order-list .order-item').forEach(el => {
+            el.classList.remove('drag-over-top', 'drag-over-bottom');
+        });
+        return;
+    }
+    
+    const touch = e.touches[0];
+    const rect = target.getBoundingClientRect();
+    const midY = rect.top + rect.height / 2;
+    
+    target.classList.remove('drag-over-top', 'drag-over-bottom');
+    if (touch.clientY < midY) target.classList.add('drag-over-top');
+    else target.classList.add('drag-over-bottom');
+}
+
+function onTouchEnd(e) {
+    if (!touchItem) return;
+    
+    if (touchItem._touchTimer) {
+        clearTimeout(touchItem._touchTimer);
+        touchItem._touchTimer = null;
+    }
+    
+    touchItem.classList.remove('dragging');
+    
+    // Find where to drop
+    const list = touchItem.closest('.order-list');
+    const items = list.querySelectorAll('.order-item');
+    let dropTarget = null;
+    let insertAfter = false;
+    
+    items.forEach(el => {
+        el.classList.remove('drag-over-top', 'drag-over-bottom');
+        const rect = el.getBoundingClientRect();
+        const touch = e.changedTouches[0];
+        if (touch.clientX >= rect.left && touch.clientX <= rect.right &&
+            touch.clientY >= rect.top && touch.clientY <= rect.bottom) {
+            dropTarget = el;
+            insertAfter = touch.clientY > rect.top + rect.height / 2;
+        }
+    });
+    
+    // If touch ended over a target, move the item
+    if (dropTarget && dropTarget !== touchItem) {
+        if (insertAfter) {
+            list.insertBefore(touchItem, dropTarget.nextSibling);
+        } else {
+            list.insertBefore(touchItem, dropTarget);
+        }
+    }
+    
+    // Save order
+    const idx = parseInt(list.closest('.quiz-question').dataset.idx);
+    const ordered = [...list.children].map(el => parseInt(el.dataset.origIndex));
+    answers[idx] = ordered.join(',');
+    updateProgress(idx);
+    updateOrderNumbers(list);
+    
+    touchItem = null;
+    touchClone = null;
+}
+
+function updateOrderNumbers(list) {
+    const items = list.children;
+    for (let i = 0; i < items.length; i++) {
+        const numEl = items[i].querySelector('.order-num');
+        if (numEl) numEl.textContent = i + 1;
+    }
+}
+
+// ─── Cloze ───
+function updateCloze(qid) {
+    const input = document.getElementById('cloze-' + qid);
+    const idx = parseInt(input.closest('.quiz-question').dataset.idx);
+    answers[idx] = input.value.trim() || null;
+    updateProgress(idx);
+}
+
+// ─── Progress bar ───
+function updateProgress(qid) {
+    if (!window._answeredTracker) window._answeredTracker = new Set();
+    window._answeredTracker.add(qid);
+    const count = window._answeredTracker.size;
+    document.getElementById('quizRunningScore').innerHTML = '&#10067; ' + count + '/' + totalQuestions + ' answered';
+    document.getElementById('progressFill').style.width = (count / totalQuestions * 100) + '%';
+    updateQuizDots();
+}
+
+// ─── Submit ───
+function submitQuiz(lessonId) {
+    const submitBtn = document.getElementById('submit-quiz');
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '&#9203; Submitting...';
+    // Convert display-index answers back to DB question IDs
+    const serverAnswers = {};
+    document.querySelectorAll('.quiz-tab').forEach(function(tab) {
+        var idx = parseInt(tab.dataset.idx);
+        var qid = parseInt(tab.dataset.qid);
+        if (answers[idx] !== undefined) {
+            serverAnswers[qid] = answers[idx];
+        } else if (window._orderDefaults && window._orderDefaults[idx] !== undefined) {
+            serverAnswers[qid] = window._orderDefaults[idx];
+        }
+    });
+    fetch('/quiz/submit', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({lesson_id: lessonId, answers: serverAnswers})
+    })
+    .then(r => r.json())
+    .then(data => {
+        const wrongAnswers = [];
+        data.results.forEach(r => {
+            const container = document.querySelector('.quiz-question[data-qid="' + r.question_id + '"]');
+            if (!container) return;
+            const qtype = r.question_type || 'mcq';
+            
+            // Mark answers based on type
+            if (qtype === 'true_false') {
+                const btns = container.querySelectorAll('.tf-btn');
+                btns.forEach((el, i) => {
+                    if (i === parseInt(r.correct_index)) el.classList.add('correct');
+                    if (i === r.user_answer && !r.correct) el.classList.add('incorrect');
+                    el.disabled = true;
+                    el.style.cursor = 'default';
+                });
+            } else if (qtype === 'multiple_select') {
+                const opts = container.querySelectorAll('.ms-option');
+                opts.forEach(el => {
+                    el.classList.remove('selected');
+                    el.style.cursor = 'default';
+                    el.onclick = null;
+                });
+                // Highlight correct ones
+                const correctList = JSON.parse(r.correct_index);
+                opts.forEach((el, i) => {
+                    if (correctList.includes(i)) el.classList.add('correct');
+                });
+                // Highlight wrong user answers
+                if (r.user_answer && !r.correct) {
+                    // Could include correct ones that were partially wrong
+                }
+            } else if (qtype === 'ordering') {
+                const correctOrder = JSON.parse(r.correct_index);
+                const items = container.querySelectorAll('.order-item');
+                items.forEach(el => {
+                    el.draggable = false;
+                    el.style.cursor = 'default';
+                });
+                // Mark each item's correct position
+                if (Array.isArray(r.options)) {
+                    items.forEach((el, currentPos) => {
+                        const origIdx = parseInt(el.dataset.origIndex);
+                        const correctPos = correctOrder.indexOf(origIdx);
+                        el.classList.add(currentPos === correctPos ? 'correct-pos' : 'wrong-pos');
+                    });
+                }
+            } else if (qtype === 'cloze') {
+                const input = document.getElementById('cloze-' + r.question_id);
+                if (input) {
+                    input.disabled = true;
+                    input.classList.add(r.correct ? 'correct' : 'incorrect');
+                    if (!r.correct) {
+                        // Show the correct answer
+                        const options = r.options;
+                        let correctText = 'correct answer';
+                        try {
+                            const ci = parseInt(r.correct_index);
+                            correctText = options[ci];
+                        } catch(e) {}
+                        input.placeholder = 'Answer: ' + correctText;
+                    }
+                }
+            } else {
+                // MCQ
+                const opts = container.querySelectorAll('.quiz-option');
+                opts.forEach((el, i) => {
+                    el.classList.remove('selected');
+                    if (i === r.correct_index) el.classList.add('correct');
+                    if (i === r.user_answer && !r.correct) el.classList.add('incorrect');
+                    el.disabled = true;
+                    el.style.cursor = 'default';
+                });
+            }
+            
+            // Show explanation
+            const expDiv = document.getElementById('exp-' + r.question_id);
+            let expHtml = '<strong>Explanation:</strong> ' + (r.explanation || 'No explanation available.');
+            if (r.common_mistake) {
+                expHtml += '<div class="misconception-box">⚠️ <strong>Common Mistake:</strong> ' + r.common_mistake + '</div>';
+            }
+            expDiv.innerHTML = expHtml;
+            expDiv.classList.add('show');
+            
+            // Track wrong answers
+            if (!r.correct) {
+                wrongAnswers.push({
+                    question: r.question,
+                    user_answer: r.user_answer,
+                    correct_index: r.correct_index,
+                    options: r.options,
+                    explanation: r.explanation
+                });
+            }
+        });
+        
+        // Mark unanswered quiz dots as missing
+        document.querySelectorAll('.quiz-dot').forEach(function(dot) {
+            var i = parseInt(dot.dataset.idx);
+            if (answers[i] === undefined || answers[i] === null) {
+                dot.classList.add('missing');
+            }
+        });
+        
+        // Score display
+        const scoreDiv = document.getElementById('quiz-score');
+        const s = data.score;
+        const passed = s.percentage >= 70;
+        const emoji = passed ? '&#127881;' : '&#128170;';
+        const passBadge = passed
+            ? '<span style="display:inline-block;padding:3px 12px;border-radius:999px;font-size:13px;font-weight:700;background:rgba(52,211,153,0.2);color:#34d399;border:1px solid rgba(52,211,153,0.4);margin-left:8px;">&#10004; Passed</span>'
+            : '<span style="display:inline-block;padding:3px 12px;border-radius:999px;font-size:13px;font-weight:700;background:rgba(251,113,133,0.2);color:#fb7185;border:1px solid rgba(251,113,133,0.4);margin-left:8px;">&#8635; Try Again</span>';
+        
+        let reviewHtml = '';
+        if (wrongAnswers.length > 0) {
+            reviewHtml = '<div class="wrong-review-section">';
+            reviewHtml += '<button type="button" class="wrong-review-toggle" id="wrongToggle" onclick="toggleWrongReview()">&#128203; Review ' + wrongAnswers.length + ' incorrect answer(s) <span class="toggle-arrow">&#9660;</span></button>';
+            reviewHtml += '<div class="wrong-review-content" id="wrongReviewContent">';
+            wrongAnswers.forEach((w, i) => {
+                let userAns = w.user_answer;
+                let correctAns = w.correct_index;
+                let options = w.options;
+                // Format answer display
+                if (Array.isArray(options)) {
+                    try {
+                        const ci = typeof correctAns === 'string' ? JSON.parse(correctAns) : correctAns;
+                        if (Array.isArray(ci)) {
+                            correctAns = ci.map(idx => options[idx] || '?').join(', ');
+                        } else if (typeof ci === 'number' && options[ci]) {
+                            correctAns = options[ci];
+                        }
+                    } catch(e) {}
+                    if (typeof userAns === 'string') {
+                        try {
+                            const ui = userAns.split(',').map(x => parseInt(x.trim()));
+                            if (ui.every(idx => !isNaN(idx) && options[idx] !== undefined)) {
+                                userAns = ui.map(idx => options[idx]).join(', ');
+                            }
+                        } catch(e) {}
+                    } else if (typeof userAns === 'number' && options[userAns]) {
+                        userAns = options[userAns];
+                    }
+                }
+                reviewHtml += '<div class="wrong-item">';
+                reviewHtml += '<div class="wrong-q">' + (i+1) + '. ' + w.question + '</div>';
+                reviewHtml += '<div class="wrong-answer">&#10060; Your answer: ' + (userAns !== null && userAns !== undefined ? userAns : 'unanswered') + '</div>';
+                reviewHtml += '<div class="correct-answer">&#10004; Correct answer: ' + correctAns + '</div>';
+                if (w.explanation) {
+                    reviewHtml += '<div class="wrong-explanation">' + w.explanation + '</div>';
+                }
+                reviewHtml += '</div>';
+            });
+            reviewHtml += '</div></div>';
+        }
+        
+        scoreDiv.innerHTML = '<div class="quiz-score-card">'
+            + '<h3 style="margin:0 0 8px;color:var(--c-green);">' + emoji + ' Score: ' + s.correct + '/' + s.total + ' (' + s.percentage + '%) ' + passBadge + '</h3>'
+            + '<p style="color:var(--c-text-secondary);margin:0;">&#10004; Results saved for spaced repetition review.</p>'
+            + (data.xp_earned ? '<p style="color:var(--c-accent);margin:6px 0 0;font-size:0.9rem;">&#127942; +' + data.xp_earned + ' XP earned!</p>' : '')
+            + '</div>'
+            + reviewHtml;
+        scoreDiv.style.display = 'block';
+        submitBtn.innerHTML = '&#10004; Submitted';
+        if (typeof recordStudyStreak === 'function') {
+            recordStudyStreak(s.percentage);
+        }
+        
+        // Scroll to score
+        scoreDiv.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+    })
+    .catch(err => {
+        showAlert('Error submitting quiz: ' + err, '&#10060;');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '&#10004; Submit Answers';
+    });
+}
+
+// ─── Wrong Answer Review Toggle ───
+function toggleWrongReview() {
+    const btn = document.getElementById('wrongToggle');
+    const content = document.getElementById('wrongReviewContent');
+    btn.classList.toggle('open');
+    content.classList.toggle('open');
+}
+
+// ─── Check if ordering questions have initial answers ───
+document.addEventListener('DOMContentLoaded', function() {
+    // Show first question tab (no scroll on page load)
+    showQuestion(0, true);
+    
+    // Initialize ordering: create draggable items from data-items attribute
+    // ── Ordering (Drag & Drop + Touch support) ──
+    document.querySelectorAll('.order-list[data-items]').forEach(container => {
+        const qid = parseInt(container.closest('.quiz-question').dataset.qid);
+        const items = JSON.parse(container.dataset.items);
+        const shuffled = [...items.keys()].sort(() => Math.random() - 0.5);
+        shuffled.forEach(idx => {
+            const div = document.createElement('div');
+            div.className = 'order-item';
+            div.draggable = true;
+            div.dataset.origIndex = idx;
+            div.innerHTML = '<span class="order-handle">&#9776;</span><span class="order-num">' + (shuffled.indexOf(idx) + 1) + '</span><span class="order-label">' + items[idx] + '</span>';
+            div.addEventListener('dragstart', onDragStart);
+            div.addEventListener('dragend', onDragEnd);
+            div.addEventListener('dragover', onDragOver);
+            div.addEventListener('drop', onDrop);
+            // Touch support for mobile
+            div.addEventListener('touchstart', onTouchStart, {passive: true});
+            div.addEventListener('touchmove', onTouchMove, {passive: true});
+            div.addEventListener('touchend', onTouchEnd, {passive: true});
+            container.appendChild(div);
+        });
+        // Save initial order (don't mark as answered — user hasn't interacted yet)
+        const ordered = [...container.children].map(el => parseInt(el.dataset.origIndex));
+        const idx = parseInt(container.closest('.quiz-question').dataset.idx);
+        // Store in a separate map so it doesn't trigger the answered state
+        if (!window._orderDefaults) window._orderDefaults = {};
+        window._orderDefaults[idx] = ordered.join(',');
+    });
+    
+    // Prevent page scroll while dragging an order item
+    document.querySelectorAll('.order-list').forEach(list => {
+        list.addEventListener('touchmove', function(e) {
+            if (this.querySelector('.order-item.touching')) e.preventDefault();
+        }, {passive: false});
+    });
+});
+
+// ── Boss Battle ──
+var _bossLessonId = null;
+var _bossQuestionId = null;
+var _bossSelectedAnswer = null;
+var _bossTimerInterval = null;
+var _bossTimeLeft = 90;
+
+function startBossBattle(lessonId) {
+    _bossLessonId = lessonId;
+    _bossSelectedAnswer = null;
+    _bossTimeLeft = 90;
+    document.getElementById('bossResult').style.display = 'none';
+    document.getElementById('bossResult').innerHTML = '';
+    document.getElementById('bossSubmitBtn').disabled = true;
+    document.getElementById('bossSubmitBtn').textContent = 'Submit Answer';
+    document.getElementById('bossQuestion').innerHTML = '<p style="color:#94a3b8;text-align:center;">Loading challenge…</p>';
+    document.getElementById('bossOptions').innerHTML = '';
+    document.getElementById('bossLessonTitle').textContent = document.title.replace(' — WLV Computer Science', '');
+    document.getElementById('bossModal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+
+    fetch('/api/boss/' + lessonId)
+        .then(r => r.json())
+        .then(data => {
+            if (!data.eligible || data.already_passed) {
+                document.getElementById('bossModal').style.display = 'none';
+                document.body.style.overflow = '';
+                return;
+            }
+            var q = data.question;
+            _bossQuestionId = q.id;
+            document.getElementById('bossQuestion').innerHTML = q.question;
+            var optHtml = '';
+            (q.options || []).forEach(function(opt, i) {
+                optHtml += '<button class="boss-option" onclick="selectBossOption(this,' + i + ')">' + opt + '</button>';
+            });
+            document.getElementById('bossOptions').innerHTML = optHtml;
+            _startBossTimer();
+        })
+        .catch(function() {
+            document.getElementById('bossQuestion').innerHTML = '<p style="color:#fb7185;">Failed to load challenge. Please try again.</p>';
+        });
+}
+
+function selectBossOption(el, idx) {
+    document.querySelectorAll('.boss-option').forEach(function(b) { b.classList.remove('selected'); });
+    el.classList.add('selected');
+    _bossSelectedAnswer = idx.toString();
+    document.getElementById('bossSubmitBtn').disabled = false;
+}
+
+function _startBossTimer() {
+    clearInterval(_bossTimerInterval);
+    var totalTime = 90;
+    var arc = document.getElementById('bossTimerArc');
+    var numEl = document.getElementById('bossTimerNum');
+    var circumference = 163.4;
+    function tick() {
+        _bossTimeLeft--;
+        numEl.textContent = _bossTimeLeft;
+        var pct = _bossTimeLeft / totalTime;
+        var offset = circumference * (1 - pct);
+        arc.setAttribute('stroke-dashoffset', offset.toFixed(1));
+        arc.setAttribute('stroke', _bossTimeLeft <= 15 ? '#fb7185' : '#f59e0b');
+        numEl.style.color = _bossTimeLeft <= 15 ? '#fb7185' : '#f59e0b';
+        if (_bossTimeLeft <= 0) {
+            clearInterval(_bossTimerInterval);
+            // Time's up — auto-submit with no answer
+            _bossSelectedAnswer = '-1';
+            submitBossBattle();
+        }
+    }
+    _bossTimerInterval = setInterval(tick, 1000);
+}
+
+function submitBossBattle() {
+    clearInterval(_bossTimerInterval);
+    if (_bossSelectedAnswer === null) _bossSelectedAnswer = '-1';
+    var submitBtn = document.getElementById('bossSubmitBtn');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Checking…';
+    document.querySelectorAll('.boss-option').forEach(function(b) { b.disabled = true; });
+
+    fetch('/api/boss/' + _bossLessonId + '/submit', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({question_id: _bossQuestionId, answer: _bossSelectedAnswer})
+    })
+    .then(r => r.json())
+    .then(function(data) {
+        var resultEl = document.getElementById('bossResult');
+        if (data.passed) {
+            resultEl.className = 'boss-modal-result boss-result-win';
+            resultEl.innerHTML = '🏆 Boss Defeated! Outstanding work — you have mastered this lesson!';
+            resultEl.style.display = 'block';
+            _launchConfetti();
+            submitBtn.textContent = '✅ Done!';
+            setTimeout(function() {
+                document.getElementById('bossModal').style.display = 'none';
+                document.body.style.overflow = '';
+                // Update banner on page to show defeated state without reload
+                var banner = document.getElementById('bossBanner');
+                if (banner) {
+                    banner.classList.remove('boss-available');
+                    banner.classList.add('boss-defeated');
+                    banner.innerHTML = '<div class="boss-badge-won"><span class="boss-trophy">🏆</span><div><div class="boss-badge-title">Boss Defeated!</div><div class="boss-badge-sub">You have mastered every question in this lesson.</div></div></div>';
+                }
+            }, 3500);
+        } else {
+            // Show correct option highlighted
+            var correctIdx = -1;
+            if (data.explanation && data.correct_index !== undefined) {
+                correctIdx = parseInt(data.correct_index);
+            }
+            var opts = document.querySelectorAll('.boss-option');
+            opts.forEach(function(b, i) {
+                if (b.classList.contains('selected')) b.classList.add('wrong');
+            });
+            resultEl.className = 'boss-modal-result boss-result-lose';
+            resultEl.innerHTML = '💀 The boss won this round!' + (data.explanation ? ' <span style="display:block;font-size:13px;font-weight:400;margin-top:6px;opacity:0.85;">' + data.explanation + '</span>' : '');
+            resultEl.style.display = 'block';
+            submitBtn.textContent = 'Close';
+            submitBtn.disabled = false;
+            submitBtn.onclick = function() {
+                document.getElementById('bossModal').style.display = 'none';
+                document.body.style.overflow = '';
+            };
+        }
+    })
+    .catch(function() {
+        document.getElementById('bossResult').innerHTML = '<span style="color:#fb7185;">Error submitting. Please try again.</span>';
+        document.getElementById('bossResult').style.display = 'block';
+    });
+}
+
+function _launchConfetti() {
+    var colours = ['#f59e0b','#fbbf24','#34d399','#22d3ee','#a78bfa','#fb7185'];
+    for (var i = 0; i < 48; i++) {
+        (function(i) {
+            setTimeout(function() {
+                var el = document.createElement('div');
+                el.className = 'confetti-piece';
+                el.style.left = (Math.random() * 100) + 'vw';
+                el.style.top = (Math.random() * 40 + 20) + 'vh';
+                el.style.background = colours[Math.floor(Math.random() * colours.length)];
+                el.style.animationDuration = (0.8 + Math.random() * 0.8) + 's';
+                el.style.animationDelay = (Math.random() * 0.4) + 's';
+                document.body.appendChild(el);
+                setTimeout(function() { el.remove(); }, 2000);
+            }, i * 25);
+        })(i);
+    }
+}
+</script>
+{% endif %}
+
+<!-- ── SVG normalisation: force Mermaid diagrams to scale to viewport on narrow screens ── -->
+<script>
+(function() {
+  function normaliseDiagramSVGs() {
+    // Only normalise pre.mermaid fallback SVGs (not server-rendered ones)
+    // Server-rendered SVGs use natural viewBox size with horizontal scroll
+    document.querySelectorAll('.lesson-content pre.mermaid svg, .lesson-content .mermaid svg, .lesson-content svg.mermaid').forEach(function(svg) {
+      svg.setAttribute('width', '100%');
+      svg.removeAttribute('height');
+      svg.style.width = '100%';
+      svg.style.height = 'auto';
+      svg.style.maxWidth = '100%';
+      svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    });
+    // Ensure pre.mermaid containers are scrollable
+    document.querySelectorAll('.lesson-content pre.mermaid, .lesson-content .mermaid').forEach(function(el) {
+      el.style.overflowX = 'auto';
+      el.style.maxWidth = '100%';
+      el.style.WebkitOverflowScrolling = 'touch';
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', normaliseDiagramSVGs);
+  } else {
+    normaliseDiagramSVGs();
+  }
+})();
+</script>
+{% endblock %}
+<!-- ── MERMAID DIAGRAM RENDERING removed — now server-side via beautiful-mermaid ── -->
+{% block scripts %}{% endblock %}

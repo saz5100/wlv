@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>{{ friendly }} - Profile</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0e1a;color:#e2e8f0;font:14px/1.5 -apple-system,sans-serif;padding:24px;max-width:1000px;margin:0 auto}
+h1{color:#22d3ee;font-size:22px;margin-bottom:4px}
+h2{font-size:16px;color:#e2e8f0;margin-bottom:12px;margin-top:28px}
+.sub{color:#64748b;font-size:13px;margin-bottom:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:24px}
+.card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:16px}
+.card .num{font-size:28px;font-weight:700;color:#f1f5f9}
+.card .lbl{font-size:12px;color:#94a3b8;margin-top:2px}
+.tag{display:inline-block;padding:0 6px;border-radius:3px;font-size:13px}
+.tag-quiz{color:#818cf8}
+.tag-exam{color:#facc15}
+table{width:100%;border-collapse:collapse;margin-top:8px}
+th{text-align:left;padding:6px 8px;font-size:11px;color:#64748b;border-bottom:1px solid rgba(255,255,255,0.08);font-weight:600}
+td{padding:6px 8px;border-bottom:1px solid rgba(255,255,255,0.04);font-size:13px}
+.time{color:#64748b;font-family:monospace;font-size:12px;width:80px}
+.pct{color:#94a3b8;font-family:monospace;font-size:12px;text-align:right;width:40px}
+.empty{color:#64748b;text-align:center;padding:24px}
+.bar{height:6px;border-radius:3px}
+.bar-sm{height:6px;border-radius:3px;margin-top:4px}
+.nav-link{color:#64748b;font-size:12px;text-decoration:none;margin-right:16px}
+.nav-link:hover{color:#22d3ee}
+.q-cell{max-width:350px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.count-cell{color:#f87171;font-weight:600;width:40px;text-align:center}
+.ans-cell{color:#34d399;font-size:12px;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wrong-ans{color:#f87171;font-size:12px}
+.badge{display:inline-block;padding:1px 10px;border-radius:4px;font-size:12px;font-weight:600}
+.badge-up{background:rgba(52,211,153,0.15);color:#34d399}
+.badge-down{background:rgba(248,113,113,0.15);color:#f87171}
+.badge-flat{background:rgba(100,116,139,0.15);color:#94a3b8}
+.streak-badge{display:inline-block;background:rgba(250,204,21,0.15);color:#facc15;padding:2px 10px;border-radius:6px;font-size:13px;font-weight:600}
+.avg-badge{display:inline-block;background:rgba(129,140,248,0.15);color:#818cf8;padding:2px 10px;border-radius:6px;font-size:13px;font-weight:600}
+.rename-btn{background:rgba(34,211,238,0.1);color:#22d3ee;border:1px solid rgba(34,211,238,0.2);border-radius:4px;padding:2px 8px;cursor:pointer;font-size:12px;vertical-align:middle}
+.rename-btn:hover{background:rgba(34,211,238,0.2)}
+.hidden-row{display:none}
+.show-all-btn{background:none;border:1px solid rgba(34,211,238,0.2);color:#22d3ee;cursor:pointer;font-size:12px;padding:4px 12px;border-radius:4px;margin:6px 0 0 0;display:inline-block}
+.show-all-btn:hover{background:rgba(34,211,238,0.1)}
+@media(max-width:600px){
+  body{padding:12px}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .q-cell{max-width:140px}
+  .ans-cell{max-width:100px}
+}
+</style></head>
+<body>
+<div style="margin-bottom:16px;display:flex;align-items:center;gap:4px;flex-wrap:wrap">
+<a href="/" class="nav-link">🏠 Home</a>
+<a href="/log/raw" class="nav-link">📄 Raw Log</a>
+<a href="/activity" class="nav-link">📊 Dashboard</a>
+</div>
+<h1>👤 {{ friendly }} <button onclick="showRename()" class="rename-btn">✏️ Rename</button></h1>
+<div id="rename-form" style="display:none;margin-bottom:12px">
+<form method="post" action="/activity/device/{{ device_id }}/rename" style="display:flex;gap:8px;align-items:center">
+<input type="text" name="name" value="{{ friendly }}" placeholder="Device name" required
+  style="background:rgba(255,255,255,0.06);color:#e2e8f0;border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:6px 10px;font-size:13px;flex:1;max-width:300px">
+<button type="submit" class="rename-btn">Save</button>
+<button type="button" onclick="hideRename()" class="rename-btn" style="background:rgba(248,113,113,0.1);color:#f87171;border-color:rgba(248,113,113,0.2)">Cancel</button>
+</form>
+</div>
+<script>
+function showRename(){document.getElementById("rename-form").style.display="block"}
+function hideRename(){document.getElementById("rename-form").style.display="none"}
+</script>
+<div class="sub">
+<span class="badge {{ trend_badge }}">{{ trend_icon }}</span>
+First seen: {{ first }} · Last seen: {{ last }} · <span class="streak-badge">🔥 {{ days_active }} day{% if days_active != 1 %}s{% endif %} active</span>
+<br><span class="sub" style="font-size:12px">IP{% if ips|length != 1 %}s{% endif %}: {{ ips|join(", ") }}</span>
+</div>
+
+<div class="grid">
+<div class="card"><div class="num">{{ total_events }}</div><div class="lbl">Total events</div></div>
+<div class="card"><div class="num"><span class="avg-badge">{{ avg_str }}</span></div><div class="lbl">Overall avg — {{ avg_grade_str }}</div></div>
+<div class="card"><div class="num" style="color:#818cf8">{{ avg_quiz_str }}</div><div class="lbl">Quiz avg — {{ avg_quiz_grade_str }}</div></div>
+<div class="card"><div class="num" style="color:#facc15">{{ avg_exam_str }}</div><div class="lbl">Exam avg — {{ avg_exam_grade_str }}</div></div>
+<div class="card"><div class="num">{{ mistake_count }}</div><div class="lbl">Repeated mistakes</div></div>
+<div class="card"><div class="num">{{ topic_count }}</div><div class="lbl">Topics studied</div></div>
+</div>
+
+{% if week_compare %}
+<h2>📊 This Week vs Last Week</h2>
+{{ week_compare }}
+{% endif %}
+
+<h2>📊 Score Trend</h2>
+{{ svg_graph }}
+<table><tr><th>Date</th><th></th><th>Score</th><th>Grade</th><th></th><th>%</th></tr>{{ score_rows }}</table>
+
+<h2>📚 Topic Breakdown</h2>
+<table><tr><th>Topic</th><th>Lessons</th><th>Questions</th><th>Accuracy</th><th></th><th>Last seen</th></tr>{{ topic_rows }}</table>
+
+<h2>📖 Recent Lessons</h2>
+<table><tr><th>Time</th><th>Topic</th><th>Lesson</th></tr>{{ lesson_rows }}</table>
+
+<h2>⚠️ Repeated Mistakes</h2>
+<p class="sub" style="margin-bottom:4px">Questions wrong 2+ times. Clears when answered correctly 2 times in a row. <span style="color:var(--sub);font-size:12px">— click a question to see attempt history</span></p>
+<table id="mistakes-table"><tr><th>Question</th><th>Your Answer</th><th>Correct Answer</th><th>❌</th><th>Topic</th></tr>{{ mistake_rows }}</table>
+
+<script id="qhistory-data" type="application/json">{{ qhistory_json }}</script>
+<script>
+(function() {
+  var historyData = JSON.parse(document.getElementById("qhistory-data").textContent);
+  var rows = document.querySelectorAll(".mistake-row");
+  rows.forEach(function(row) {
+    var question = row.getAttribute("data-question");
+    row.style.cursor = "pointer";
+    row.addEventListener("click", function() {
+      var next = this.nextElementSibling;
+      if (next && next.classList.contains("history-row")) {
+        next.remove();
+        this.classList.remove("expanded");
+        return;
+      }
+      document.querySelectorAll(".history-row").forEach(function(hr) { hr.remove(); });
+      document.querySelectorAll(".mistake-row.expanded").forEach(function(mr) { mr.classList.remove("expanded"); });
+      var attempts = historyData[question];
+      if (!attempts || attempts.length === 0) return;
+      var html = '<tr class="history-row"><td colspan="5"><div style="margin:6px 0 4px 0;font-size:12px;color:var(--sub)">Attempt history:</div><table style="width:100%;font-size:12px">';
+      html += '<tr style="color:var(--sub)"><th style="text-align:left;padding:2px 6px">Time</th><th style="text-align:left;padding:2px 6px">Answer</th><th style="text-align:left;padding:2px 6px">Correct?</th></tr>';
+      attempts.forEach(function(a) {
+        var ans = a.student_answer || "-";
+        var c = a.was_correct ? '<span style="color:#34d399">✅ Correct</span>' : '<span style="color:#f87171">❌ Wrong</span>';
+        html += '<tr><td style="padding:2px 6px">'+a.timestamp+'</td><td style="padding:2px 6px;max-width:200px;overflow:hidden;text-overflow:ellipsis">'+ans+'</td><td style="padding:2px 6px">'+c+'</td></tr>';
+      });
+      html += '</table></div></td></tr>';
+      this.classList.add("expanded");
+      this.insertAdjacentHTML("afterend", html);
+    });
+  });
+})();
+</script>
+
+<h2>📅 Study Days</h2>
+<p class="sub" style="margin-bottom:4px">Last 14 days — cell colour shows activity level</p>
+<div style="display:flex;gap:2px;flex-wrap:wrap">{{ day_grid }}</div>
+
+<script>
+(function() {
+  var MAX = 20;
+  document.querySelectorAll("table").forEach(function(table) {
+    if (table.id === "qhistory-data" || table.id === "mistakes-table") return;
+    var rows = table.querySelectorAll("tr");
+    if (rows.length <= MAX + 1) return;
+    for (var i = MAX + 1; i < rows.length; i++) {
+      rows[i].classList.add("hidden-row");
+    }
+    var total = rows.length - 1;
+    var btn = document.createElement("div");
+    btn.className = "show-all-btn";
+    btn.textContent = "Show all " + total + " \u2193";
+    btn.onclick = function() {
+      var hidden = table.querySelectorAll(".hidden-row");
+      hidden.forEach(function(r) { r.classList.remove("hidden-row"); });
+      btn.textContent = "Show less \u2191";
+      btn.onclick = function() {
+        for (var i = MAX + 1; i < rows.length; i++) rows[i].classList.add("hidden-row");
+        btn.textContent = "Show all " + total + " \u2193";
+        btn.onclick = arguments.callee;
+      };
+    };
+    table.parentNode.insertBefore(btn, table.nextSibling);
+  });
+})();
+</script>
+</body></html>

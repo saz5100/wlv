@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block title %}Past Papers — WLV Computer Science{% endblock %}
+{% block head %}
+<style>
+.pp-landing { max-width: 720px; margin: 0 auto; padding: 24px 0; }
+.pp-landing h1 { font-size: 32px; margin-bottom: 6px; }
+.pp-landing p.sub { color: var(--c-text-secondary); font-size: 15px; margin-bottom: 24px; }
+.pp-grid { display: flex; flex-direction: column; gap: 12px; }
+.pp-card {
+  display: flex; align-items: center; gap: 16px;
+  background: rgba(17,24,39,0.88); border: 1px solid rgba(34,211,238,0.10);
+  border-radius: var(--r-xl); padding: 18px 22px;
+  transition: all 0.2s;
+}
+.light-theme .pp-card { background: rgba(255,255,255,0.88); }
+.pp-card:hover { border-color: var(--c-accent); box-shadow: 0 4px 20px var(--c-accent-glow); transform: translateY(-2px); }
+.pp-card .pp-icon { font-size: 28px; }
+.pp-card .pp-info { flex: 1; }
+.pp-card .pp-title { font-weight: 700; font-size: 16px; }
+.pp-card .pp-meta { font-size: 13px; color: var(--c-text-secondary); }
+.pp-card .pp-actions { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.pp-card .pp-actions .btn, .pp-card .pp-actions .btn-disabled { font-size: 12px; padding: 6px 12px; text-align: center; }
+@media (max-width: 800px) {
+  .pp-card .pp-actions { grid-template-columns: repeat(2, 1fr); }
+}
+.pp-card.inactive { opacity: 0.5; }
+.pp-card.inactive:hover { border-color: var(--c-border); box-shadow: none; transform: none; }
+.pp-card.inactive .pp-actions .btn { opacity: 0.4; pointer-events: none; }
+.btn-disabled {
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  color: var(--c-text-secondary);
+  border-radius: var(--r-lg);
+  padding: 6px 12px;
+  font-size: 12px;
+  display: inline-block;
+  text-decoration: none;
+  user-select: none;
+}
+@media (max-width: 500px) {
+  .pp-card { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .pp-card .pp-actions { width: 100%; }
+}
+</style>
+{% endblock %}
+{% block content %}
+<div class="pp-landing">
+  <h1>📄 Past Papers</h1>
+
+  <div class="pp-grid">
+    {% for p in papers %}
+    {% set pf = paper_files.get(p.id, {"qp": None, "ms": None}) %}
+    <div class="pp-card{% if not p.active %} inactive{% endif %}">
+      <div class="pp-icon">📄</div>
+      <div class="pp-info">
+        <div class="pp-title">{{ p.label }}</div>
+        <div class="pp-meta">Paper {{ p.paper }} · {{ p.month }} {{ p.year }}{% if not p.active %} · 🔨 Coming soon{% endif %}</div>
+      </div>
+      <div class="pp-actions">
+        {% if pf.qp %}
+        <a href="/static/past-papers/{{ pf.qp }}.pdf" class="btn btn-outline" download>📥 Download QP</a>
+        {% endif %}
+        {% if pf.ms %}
+        <a href="/static/past-papers/{{ pf.ms }}.pdf" class="btn btn-outline" download>📥 Download MS</a>
+        {% endif %}
+        {% if p.active %}
+        <a href="/mark-my-paper?paper={{ p.id }}" class="btn btn-primary">📤 Mark My Paper</a>
+        <a href="/online-paper/{{ p.id }}" class="btn btn-primary">✏️ Fill Online</a>
+        {% else %}
+        <span class="btn btn-disabled">📤 Mark My Paper</span>
+        <span class="btn btn-disabled">✏️ Fill Online</span>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div style="margin-top: 24px; text-align: center;">
+    <a href="/exam" class="btn">← Back to Exam Modes</a>
+  </div>
+</div>
+{% endblock %}

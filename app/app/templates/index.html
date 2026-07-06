@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}WLV — University of Wolverhampton{% endblock %}
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12 text-center py-4">
+        <h1 class="display-5 fw-bold">Welcome to WLV — University of Wolverhampton</h1>
+        <p class="lead text-muted">Select a topic to start revising</p>
+    </div>
+</div>
+
+<div class="row">
+            <div class="col-md-4 col-lg-3 mb-3">
+                <a href="/academic-skills" class="text-decoration-none">
+                    <div class="card topic-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center py-4">
+                            <h5 class="card-title mb-0">Academic Skills</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 col-lg-3 mb-3">
+                <a href="/subject-knowledge" class="text-decoration-none">
+                    <div class="card topic-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center py-4">
+                            <h5 class="card-title mb-0">Subject Knowledge</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 col-lg-3 mb-3">
+                <a href="/professional-practice" class="text-decoration-none">
+                    <div class="card topic-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center py-4">
+                            <h5 class="card-title mb-0">Professional Practice</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+</div>
+{% endblock %}

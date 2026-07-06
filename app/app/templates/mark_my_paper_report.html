@@ -1,0 +1,202 @@
+{% extends "base.html" %}
+{% block title %}Mark My Paper — Report | WLV Computer Science{% endblock %}
+{% block head %}
+<style>
+.mmp-report { max-width: 720px; margin: 0 auto; padding: 24px 0; }
+
+/* Score hero */
+.score-hero {
+  text-align: center; padding: 32px 20px;
+  background: linear-gradient(135deg, rgba(34,211,238,0.08), rgba(168,85,247,0.08));
+  border: 1px solid rgba(34,211,238,0.15);
+  border-radius: var(--r-xl); margin-bottom: 24px;
+}
+.score-hero .sh-big { font-size: 72px; font-weight: 800; color: var(--c-accent); line-height: 1; }
+.score-hero .sh-grade {
+  display: inline-block; margin-top: 8px;
+  padding: 6px 24px; border-radius: 99px;
+  background: linear-gradient(135deg, var(--c-accent), #a855f7);
+  color: #000; font-size: 24px; font-weight: 800;
+}
+.score-hero .sh-meta { font-size: 14px; color: var(--c-text-secondary); margin-top: 8px; }
+.score-hero .sh-paper { font-size: 16px; font-weight: 600; margin-top: 4px; }
+
+/* Summary bar */
+.summary-bar {
+  display: flex; gap: 16px; margin-bottom: 24px; flex-wrap: wrap;
+}
+.summary-item {
+  flex: 1; min-width: 120px;
+  background: rgba(17,24,39,0.88); border: 1px solid var(--c-border);
+  border-radius: var(--r-lg); padding: 16px 20px; text-align: center;
+}
+.light-theme .summary-item { background: rgba(255,255,255,0.88); }
+.summary-item .si-val { font-size: 28px; font-weight: 800; color: var(--c-accent); }
+.summary-item .si-lbl { font-size: 12px; color: var(--c-text-muted); margin-top: 2px; }
+
+/* Question accordion */
+.q-accordion { margin-bottom: 12px; }
+.q-accordion .qa-header {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 18px;
+  background: rgba(17,24,39,0.88); border: 1px solid var(--c-border);
+  border-radius: var(--r-lg); cursor: pointer;
+  transition: all 0.15s;
+}
+.light-theme .q-accordion .qa-header { background: rgba(255,255,255,0.88); }
+.q-accordion .qa-header:hover { border-color: var(--c-accent); }
+.q-accordion .qa-header .qa-arrow { font-size: 12px; transition: transform 0.2s; color: var(--c-text-muted); }
+.q-accordion.open .qa-header .qa-arrow { transform: rotate(90deg); }
+.q-accordion .qa-header .qa-num { font-weight: 700; font-size: 14px; color: var(--c-accent); min-width: 80px; }
+.q-accordion .qa-header .qa-score {
+  font-weight: 700; font-size: 16px;
+  padding: 2px 12px; border-radius: 99px;
+}
+.q-accordion .qa-header .qa-score.good { background: rgba(52,211,153,0.15); color: #34d399; }
+.q-accordion .qa-header .qa-score.ok { background: rgba(251,191,36,0.15); color: #fbbf24; }
+.q-accordion .qa-header .qa-score.poor { background: rgba(251,113,133,0.15); color: #fb7185; }
+.q-accordion .qa-body {
+  display: none; padding: 16px 18px;
+  background: rgba(13,18,37,0.6); border: 1px solid var(--c-border);
+  border-top: none; border-radius: 0 0 var(--r-lg) var(--r-lg);
+}
+.light-theme .q-accordion .qa-body { background: rgba(243,244,246,0.6); }
+.q-accordion.open .qa-body { display: block; }
+
+.qa-body .qa-section { margin-bottom: 12px; }
+.qa-body .qa-section h4 { font-size: 13px; font-weight: 700; color: var(--c-accent); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+.qa-body .qa-section p, .qa-body .qa-section li { font-size: 14px; line-height: 1.6; color: var(--c-text); }
+.qa-body .qa-section ul { list-style: none; padding: 0; }
+.qa-body .qa-section li { padding: 2px 0; }
+.qa-body .qa-section li::before { content: "• "; color: var(--c-accent); }
+.qa-body .qa-section .qa-answer {
+  background: rgba(34,211,238,0.05); border: 1px solid rgba(34,211,238,0.1);
+  border-radius: 8px; padding: 10px 14px; font-size: 14px; line-height: 1.6;
+  white-space: pre-wrap;
+}
+.qa-body .qa-section .qa-feedback {
+  background: rgba(251,191,36,0.08); border-left: 3px solid #fbbf24;
+  padding: 10px 14px; border-radius: 0 8px 8px 0; font-size: 14px; line-height: 1.6;
+}
+.qa-body .qa-section .qa-missed {
+  background: rgba(251,113,133,0.08); border-left: 3px solid #fb7185;
+  padding: 10px 14px; border-radius: 0 8px 8px 0; font-size: 14px;
+}
+.qa-body .qa-section .qa-missed span {
+  display: inline-block; padding: 2px 8px; margin: 2px 4px 2px 0;
+  background: rgba(251,113,133,0.15); border-radius: 4px; font-size: 13px;
+}
+
+/* Action buttons */
+.report-actions { text-align: center; margin: 24px 0; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+@media (max-width: 500px) {
+  .score-hero .sh-big { font-size: 48px; }
+  .summary-bar { gap: 8px; }
+  .summary-item { min-width: 80px; padding: 12px; }
+  .summary-item .si-val { font-size: 22px; }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="mmp-report">
+  <!-- Score hero -->
+  <div class="score-hero">
+    <div class="sh-big">{{ attempt.percentage }}%</div>
+    <div class="sh-grade">Grade {{ attempt.grade }}</div>
+    <div class="sh-meta">{{ attempt.total_marks }} / {{ attempt.max_marks }} marks</div>
+    <div class="sh-paper">{{ attempt.paper_label }}</div>
+  </div>
+
+  <!-- Summary bar -->
+  <div class="summary-bar">
+    <div class="summary-item">
+      <div class="si-val">{{ results|length }}</div>
+      <div class="si-lbl">Questions</div>
+    </div>
+    <div class="summary-item">
+      <div class="si-val">{{ attempt.total_marks }}</div>
+      <div class="si-lbl">Marks Awarded</div>
+    </div>
+    <div class="summary-item">
+      <div class="si-val">{{ attempt.max_marks }}</div>
+      <div class="si-lbl">Maximum Marks</div>
+    </div>
+    <div class="summary-item">
+      <div class="si-val" style="color:{% if attempt.percentage >= 65 %}#34d399{% elif attempt.percentage >= 40 %}#fbbf24{% else %}#fb7185{% endif %}">
+        {{ attempt.grade }}
+      </div>
+      <div class="si-lbl">Grade</div>
+    </div>
+  </div>
+
+  <!-- Question accordion -->
+  <h3 style="font-size:18px;margin-bottom:12px;">📋 Question Breakdown</h3>
+
+  {% for r in results %}
+  {% set pct = (r.score / r.max_marks * 100) if r.max_marks > 0 else 0 %}
+  {% set score_class = 'good' if pct >= 65 else ('ok' if pct >= 40 else 'poor') %}
+  <div class="q-accordion" onclick="toggleQA(this)">
+    <div class="qa-header">
+      <span class="qa-arrow">▶</span>
+      <span class="qa-num">Q{{ r.number }}</span>
+      <span style="flex:1;font-size:14px;color:var(--c-text-secondary);">{{ r.question_text[:80] }}{% if r.question_text|length > 80 %}...{% endif %}</span>
+      <span class="qa-score {{ score_class }}">{{ r.score }}/{{ r.max_marks }}</span>
+    </div>
+    <div class="qa-body">
+      <div class="qa-section">
+        <h4>Your Answer</h4>
+        <div class="qa-answer">{{ r.student_answer or 'No answer provided' }}</div>
+      </div>
+
+      {% if r.feedback %}
+      <div class="qa-section">
+        <h4>Examiner Feedback</h4>
+        <div class="qa-feedback">{{ r.feedback }}</div>
+      </div>
+      {% endif %}
+
+      {% if r.strengths %}
+      <div class="qa-section">
+        <h4>✅ Strengths</h4>
+        <ul>
+          {% for s in r.strengths %}<li>{{ s }}</li>{% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+
+      {% if r.weaknesses %}
+      <div class="qa-section">
+        <h4>📈 Areas to Improve</h4>
+        <ul>
+          {% for w in r.weaknesses %}<li>{{ w }}</li>{% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+
+      {% if r.key_terms_missed %}
+      <div class="qa-section">
+        <h4>🔑 Key Terms Missed</h4>
+        <div class="qa-missed">
+          {% for k in r.key_terms_missed %}<span>{{ k }}</span>{% endfor %}
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+
+  <!-- Actions -->
+  <div class="report-actions">
+    <a href="/mark-my-paper" class="btn btn-primary">📄 Mark Another Paper</a>
+    <a href="/exam" class="btn btn-outline">📝 Back to Exams</a>
+  </div>
+</div>
+
+<script>
+function toggleQA(el) {
+  el.classList.toggle('open');
+}
+</script>
+{% endblock %}

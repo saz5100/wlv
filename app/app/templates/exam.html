@@ -1,0 +1,1323 @@
+{% extends "base.html" %}
+{% block title %}Practice Exams &mdash; WLV Computer Science{% endblock %}
+{% block head %}
+<style>
+/* ─── Landing Page ─── */
+.exam-landing { max-width: 720px; margin: 0 auto; text-align: center; padding: 24px 0; }
+.exam-landing h1 { font-size: 32px; margin-bottom: 6px; }
+.exam-landing p.sub { color: var(--c-text-secondary); font-size: 15px; margin-bottom: 32px; }
+.mode-grid { display: flex; flex-direction: column; gap: 16px; align-items: center; }
+.mode-card {
+    width: 100%; max-width: 480px;
+    background: rgba(17,24,39,0.88); backdrop-filter: blur(2px);
+    border: 1px solid rgba(34,211,238,0.10); border-radius: var(--r-xl);
+    padding: 24px 28px; text-align: left;
+    transition: all 0.25s; cursor: default;
+}
+.light-theme .mode-card { background: rgba(255,255,255,0.88); }
+.mode-card:hover { border-color: var(--c-accent); box-shadow: 0 4px 20px var(--c-accent-glow); transform: translateY(-2px); }
+
+/* Disabled card for future features */
+.mode-card.disabled { opacity: 0.45; cursor: not-allowed; filter: grayscale(0.6); }
+.mode-card.disabled:hover { border-color: rgba(34,211,238,0.10); box-shadow: none; transform: none; }
+.btn-disabled { display: inline-block; padding: 10px 24px; border-radius: 10px; font-size: 15px; font-weight: 700; background: var(--c-border); color: var(--c-text-muted); border: none; cursor: not-allowed; }
+
+.mode-card .mode-icon { font-size: 36px; margin-bottom: 8px; }
+.mode-card .mode-title { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+.mode-card .mode-desc { font-size: 14px; color: var(--c-text-secondary); line-height: 1.6; margin-bottom: 16px; }
+.mode-card .mode-features { font-size: 13px; color: var(--c-text-muted); margin-bottom: 16px; line-height: 1.7; }
+/* Custom stepper */
+.stepper { display: inline-flex; align-items: center; gap: 0; }
+.stepper-btn {
+    width: 44px; height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; font-weight: 700; cursor: pointer; user-select: none;
+    border: 2px solid var(--c-border); background: rgba(17,24,39,0.88);
+    color: var(--c-accent); transition: all 0.15s;
+}
+.light-theme .stepper-btn { background: rgba(255,255,255,0.88); }
+.stepper-btn:active { transform: scale(0.92); }
+.stepper-btn:hover { border-color: var(--c-accent); background: rgba(8,41,73,0.7); }
+.stepper-btn.minus { border-radius: 10px 0 0 10px; }
+.stepper-btn.plus { border-radius: 0 10px 10px 0; }
+.stepper-val {
+    width: 70px; height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; font-weight: 700;
+    border-top: 2px solid var(--c-border); border-bottom: 2px solid var(--c-border);
+    background: rgba(13,18,37,0.8); color: var(--c-text);
+}
+.light-theme .stepper-val { background: rgba(243,244,246,0.8); }
+.exam-error { color: var(--c-rose); font-size: 14px; margin: 12px 0; padding: 10px 16px; background: rgba(69,10,10,0.5); border-radius: 8px; }
+
+/* ─── Custom Mode Form ─── */
+.custom-form { display: none; margin-top: 16px; padding: 20px; background: rgba(13,18,37,0.6); border-radius: var(--r-lg); }
+.light-theme .custom-form { background: rgba(243,244,246,0.6); }
+.custom-form.show { display: block; }
+.custom-form .form-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; gap: 12px; }
+.custom-form label { font-size: 14px; font-weight: 600; min-width: 120px; color: var(--c-text); }
+.custom-form input[type="number"] { width: 80px; padding: 8px 12px; background: rgba(17,24,39,0.88); border: 2px solid var(--c-border); border-radius: 8px; color: var(--c-text); font-size: 15px; outline: none; }
+.light-theme .custom-form input[type="number"] { background: rgba(255,255,255,0.88); }
+.custom-form input[type="number"]:focus { border-color: var(--c-accent); box-shadow: 0 0 0 3px var(--c-accent-glow); }
+.custom-form select { padding: 8px 12px; background: rgba(17,24,39,0.88); border: 2px solid var(--c-border); border-radius: 8px; color: var(--c-text); font-size: 15px; outline: none; max-width: 65%; text-overflow: ellipsis; }
+.light-theme .custom-form select { background: rgba(255,255,255,0.88); }
+.custom-form select:focus { border-color: var(--c-accent); box-shadow: 0 0 0 3px var(--c-accent-glow); }
+
+/* ─── Exam Running ─── */
+.exam-header { text-align: center; margin-bottom: 20px; }
+.exam-header h1 { font-size: 26px; margin-bottom: 4px; }
+.exam-header .exam-meta { font-size: 14px; color: var(--c-text-secondary); }
+.exam-timer { font-size: 32px; font-weight: 800; color: var(--c-accent); margin: 6px 0; font-variant-numeric: tabular-nums; }
+.exam-timer.warning { color: var(--c-rose); animation: pulse 1s infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+.exam-progress { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; gap: 12px; flex-wrap: wrap; }
+.exam-progress .bar-track { flex: 1; height: 6px; background: var(--c-border); border-radius: 3px; min-width: 80px; }
+.exam-progress .bar-fill { height: 100%; background: var(--c-accent); border-radius: 3px; transition: width 0.3s; }
+.exam-progress .pct { font-size: 14px; color: var(--c-text-secondary); font-weight: 500; white-space: nowrap; }
+
+/* Question card */
+.exam-q {
+    margin-bottom: 20px; padding: 20px; background: rgba(13,18,37,0.8);
+    border-radius: var(--r-xl); border: 1px solid rgba(34,211,238,0.10);
+    backdrop-filter: blur(2px);
+}
+.light-theme .exam-q { background: rgba(243,244,246,0.8); }
+.exam-q .q-num { font-size: 13px; font-weight: 600; color: var(--c-accent); margin-bottom: 4px; }
+.exam-q .q-text { font-weight: 600; font-size: 16px; margin-bottom: 12px; }
+
+/* Type + diff badges */
+.q-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; }
+.q-badge.type { background: rgba(34,211,238,0.1); color: var(--c-accent); border: 1px solid rgba(34,211,238,0.2); }
+.q-badge.easy { background: rgba(52,211,153,0.15); color: #34d399; border: 1px solid rgba(52,211,153,0.3); }
+.q-badge.medium { background: rgba(251,191,36,0.15); color: #fbbf24; border: 1px solid rgba(251,191,36,0.3); }
+.q-badge.hard { background: rgba(251,113,133,0.15); color: #fb7185; border: 1px solid rgba(251,113,133,0.3); }
+.q-badge.cmd-badge { background: rgba(236,72,153,0.15); color: #f472b6; border: 1px solid rgba(236,72,153,0.3); }
+.misconception-box { margin-top: 12px; padding: 12px 16px; background: rgba(244,63,94,0.1); border-left: 4px solid var(--c-rose); border-radius: 6px; font-size: 14px; color: var(--c-text); }
+.light-theme .misconception-box { background: rgba(254,242,242,0.7); }
+.nav-bubble:hover { border-color: var(--c-accent); color: var(--c-accent); }
+.nav-bubble.active { border-color: var(--c-accent) !important; background: var(--c-accent) !important; color: #000 !important; }
+.nav-bubble.answered { border-color: var(--c-green); color: var(--c-green); }
+.nav-bubble.answered.active { border-color: var(--c-green) !important; background: var(--c-green) !important; color: #000 !important; }
+
+/* MCQ options */
+.q-option { display: block; width: 100%; text-align: left; padding: 12px 14px; margin: 6px 0; background: rgba(17,24,39,0.88); color: var(--c-text); border: 2px solid var(--c-border); border-radius: 10px; font-size: 15px; cursor: pointer; transition: all 0.15s; }
+.light-theme .q-option { background: rgba(255,255,255,0.88); }
+.q-option:hover { border-color: var(--c-accent); background: rgba(8,41,73,0.7); }
+.q-option.selected { border-color: var(--c-accent); background: rgba(8,41,73,0.85); box-shadow: 0 0 0 3px var(--c-accent-glow), 0 0 12px var(--c-accent-glow); transform: translateX(4px); }
+.light-theme .q-option.selected { background: rgba(236,254,255,0.85); }
+.q-option.correct { border-color: var(--c-green) !important; background: rgba(2,44,34,0.75) !important; color: var(--c-green) !important; }
+.q-option.incorrect { border-color: var(--c-rose) !important; background: rgba(69,10,10,0.75) !important; color: var(--c-rose) !important; }
+
+/* T/F */
+.tf-row { display: flex; gap: 12px; }
+.tf-btn { flex: 1; padding: 14px 20px; border-radius: 12px; border: 2px solid var(--c-border); background: rgba(17,24,39,0.88); color: var(--c-text); font-size: 17px; font-weight: 700; cursor: pointer; transition: all 0.15s; text-align: center; }
+.light-theme .tf-btn { background: rgba(255,255,255,0.88); }
+.tf-btn:hover { transform: translateY(-2px); }
+.tf-btn.t-true:hover { border-color: #34d399; background: rgba(2,44,34,0.5); }
+.tf-btn.t-false:hover { border-color: #fb7185; background: rgba(69,10,10,0.5); }
+.tf-btn.sel-true { border-color: #34d399; background: rgba(2,44,34,0.75); color: #34d399; box-shadow: 0 0 0 3px rgba(52,211,153,0.3); }
+.tf-btn.sel-false { border-color: #fb7185; background: rgba(69,10,10,0.75); color: #fb7185; box-shadow: 0 0 0 3px rgba(251,113,133,0.3); }
+.tf-btn.correct { border-color: var(--c-green) !important; background: rgba(2,44,34,0.75) !important; color: var(--c-green) !important; }
+.tf-btn.incorrect { border-color: var(--c-rose) !important; background: rgba(69,10,10,0.75) !important; color: var(--c-rose) !important; }
+
+/* Multi-select */
+.ms-opt { display: flex; align-items: center; gap: 10px; padding: 10px 14px; margin: 5px 0; background: rgba(17,24,39,0.88); border: 2px solid var(--c-border); border-radius: 10px; cursor: pointer; transition: all 0.15s; }
+.light-theme .ms-opt { background: rgba(255,255,255,0.88); }
+.ms-opt:hover { border-color: var(--c-accent); }
+.ms-opt .ms-cb { width: 20px; height: 20px; border: 2px solid var(--c-border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; transition: all 0.15s; }
+.ms-opt .ms-lbl { flex: 1; font-size: 15px; }
+.ms-opt.sel { border-color: var(--c-accent); background: rgba(8,41,73,0.7); box-shadow: 0 0 0 2px var(--c-accent-glow); }
+.light-theme .ms-opt.sel { background: rgba(236,254,255,0.7); }
+.ms-opt.sel .ms-cb { background: var(--c-accent); border-color: var(--c-accent); color: #000; }
+.ms-opt.correct { border-color: var(--c-green) !important; background: rgba(2,44,34,0.75) !important; }
+.ms-opt.incorrect { border-color: var(--c-rose) !important; background: rgba(69,10,10,0.75) !important; }
+
+/* Ordering */
+.ord-list { list-style: none; padding: 0; margin: 8px 0; }
+.ord-item { display: flex; align-items: center; gap: 10px; padding: 10px 14px; margin: 5px 0; background: rgba(17,24,39,0.88); border: 2px solid var(--c-border); border-radius: 10px; cursor: grab; transition: all 0.15s; user-select: none; }
+.light-theme .ord-item { background: rgba(255,255,255,0.88); }
+.ord-item:hover { border-color: var(--c-accent); }
+.ord-item.dragging { opacity: 0.5; transform: scale(0.97); border-style: dashed; }
+.ord-item.drag-over-top { border-top: 3px solid var(--c-accent); margin-top: 8px; }
+.ord-item.drag-over-bot { border-bottom: 3px solid var(--c-accent); margin-bottom: 8px; }
+.ord-item .ord-num { width: 28px; height: 28px; border-radius: 50%; background: rgba(34,211,238,0.15); color: var(--c-accent); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+.ord-item .ord-lbl { flex: 1; font-size: 14px; }
+.ord-item.correct-pos { border-color: var(--c-green) !important; background: rgba(2,44,34,0.5) !important; }
+.ord-item.wrong-pos { border-color: var(--c-rose) !important; background: rgba(69,10,10,0.5) !important; }
+
+/* Cloze */
+.cloze-inp { width: 100%; max-width: 500px; padding: 12px 16px; font-size: 16px; background: rgba(17,24,39,0.88); border: 2px solid var(--c-border); border-radius: 10px; color: var(--c-text); outline: none; transition: all 0.15s; }
+.light-theme .cloze-inp { background: rgba(255,255,255,0.88); }
+.cloze-inp:focus { border-color: var(--c-accent); box-shadow: 0 0 0 3px var(--c-accent-glow); }
+.cloze-inp.correct { border-color: var(--c-green); background: rgba(2,44,34,0.4); }
+.cloze-inp.incorrect { border-color: var(--c-rose); background: rgba(69,10,10,0.4); }
+
+/* Submit row */
+.exam-submit-row { text-align: center; margin: 24px 0; }
+
+/* ─── Results ─── */
+.score-hero { text-align: center; padding: 24px 0 16px; }
+.score-num { font-size: 64px; font-weight: 800; color: var(--c-accent); }
+.score-label { font-size: 18px; color: var(--c-text-secondary); }
+.score-date { font-size: 14px; color: var(--c-text-muted); margin-top: 4px; }
+.score-mode { font-size: 13px; color: var(--c-text-secondary); }
+.topic-bars { margin: 20px 0; display: flex; flex-direction: column; gap: 10px; }
+.tp-bar { display: flex; align-items: center; gap: 12px; }
+.tp-bar .code { font-size: 13px; color: var(--c-accent); font-weight: 600; min-width: 32px; }
+.tp-bar .track { flex: 1; height: 12px; background: var(--c-border); border-radius: 99px; overflow: hidden; }
+.tp-bar .fill { height: 100%; border-radius: 99px; background: var(--c-accent); transition: width .5s; }
+.tp-bar .fill.good { background: var(--c-green); }
+.tp-bar .fill.ok { background: var(--c-accent); }
+.tp-bar .fill.poor { background: var(--c-rose); }
+.tp-bar .pct { font-size: 14px; font-weight: 600; min-width: 40px; text-align: right; }
+
+/* Result cards */
+.qr-card { padding: 14px 18px; margin-bottom: 10px; border-radius: var(--r-lg); border-left: 4px solid var(--c-border); background: rgba(17,24,39,0.88); transition: all 0.15s; }
+.light-theme .qr-card { background: rgba(255,255,255,0.88); }
+.qr-card.pass { border-left-color: var(--c-green); }
+.qr-card.fail { border-left-color: var(--c-rose); }
+.qr-card .qr-q { font-weight: 500; margin-bottom: 4px; font-size: 15px; display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.qr-card .qr-marker { display: inline-flex; align-items: center; gap: 3px; padding: 2px 8px; border-radius: 99px; font-size: 12px; font-weight: 600; }
+.qr-card .qr-marker.p { background: rgba(2,44,34,0.75); color: var(--c-green); }
+.qr-card .qr-marker.f { background: rgba(69,10,10,0.75); color: var(--c-rose); }
+.qr-card .qr-meta { font-size: 14px; color: var(--c-text-secondary); margin: 2px 0; }
+.qr-card .qr-exp { font-size: 14px; color: var(--c-text-secondary); margin-top: 8px; padding: 10px; background: rgba(8,41,73,0.7); border-radius: 8px; }
+.light-theme .qr-card .qr-exp { background: rgba(236,254,255,0.7); }
+
+.results-actions { text-align: center; margin: 20px 0; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.empty-state { text-align: center; padding: 48px 16px; }
+.empty-state .big { font-size: 48px; margin-bottom: 12px; }
+
+@media (max-width: 500px) {
+    .mode-card { padding: 18px 20px; }
+    .score-num { font-size: 48px; }
+    .tf-row { flex-direction: column; gap: 8px; }
+    .custom-form .form-row { flex-direction: column; align-items: flex-start; gap: 6px; }
+    .custom-form select { max-width: 100%; width: 100%; }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+{% if mode == "landing" %}
+{# ─── LANDING PAGE ─────────────────────────────────────────── #}
+<div class="exam-landing">
+    <h1>📝 Practice Exams</h1>
+    <p class="sub">Test your knowledge with random questions from all topics</p>
+
+    {% if error %}
+    <div class="exam-error">{{ error }}</div>
+    {% endif %}
+
+    {# Saved Presets #}
+    <div id="savedPresets" style="display:none;margin-bottom:24px;">
+        <h3 style="font-size:18px;font-weight:700;margin-bottom:10px;">⭐ Saved Presets</h3>
+        <div id="presetList" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;"></div>
+    </div>
+
+    {% if last_5 and last_5|length > 1 %}
+<div class="score-trend">
+    <div class="trend-label">📈 Recent Scores</div>
+    <div class="trend-bubbles">
+        {% for e in last_5 %}
+        <div class="trend-bubble" style="opacity:{{ 0.4 + loop.index / last_5|length * 0.6 }};">
+            <div class="trend-val">{{ e.percentage }}%</div>
+            <div class="trend-score">{{ e.score }}/{{ e.total }}</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<style>
+.score-trend { text-align: center; margin-bottom: 20px; }
+.trend-label { font-size: 14px; font-weight: 600; color: var(--c-text-secondary); margin-bottom: 10px; }
+.trend-bubbles { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.trend-bubble {
+    width: 56px; height: 56px; border-radius: 50%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: var(--c-accent); color: #000; font-weight: 700;
+    border: 2px solid rgba(34,211,238,0.3); transition: transform 0.2s;
+}
+.trend-bubble:hover { transform: scale(1.1); }
+.trend-bubble .trend-val { font-size: 14px; line-height: 1.2; }
+.trend-bubble .trend-score { font-size: 9px; opacity: 0.8; line-height: 1.2; }
+</style>
+{% endif %}
+<div class="mode-grid">
+        {# Quick Fire 20 #}
+        <div class="mode-card">
+            <div class="mode-icon">⚡</div>
+            <div class="mode-title">Quick Fire 20</div>
+            <div class="mode-desc">20 random questions across all topics. No timer — just pure revision.</div>
+            <div class="mode-features">✓ All question types · ✓ Instant results · ✓ Saved to history</div>
+            <div class="qf-options" style="display:flex;gap:8px;justify-content:flex-start;margin-bottom:12px;flex-wrap:wrap;">
+                <select id="qfTopic" style="padding:6px 10px;border-radius:8px;border:1px solid var(--c-border);background:var(--c-bg);color:var(--c-text);font-size:13px;">
+                    <option value="">All Topics</option>
+                    <option value="1.1">1.1 Systems Architecture</option>
+                    <option value="1.2">1.2 Memory &amp; Storage</option>
+                    <option value="1.3">1.3 Networks</option>
+                    <option value="1.4">1.4 Network Security</option>
+                    <option value="1.5">1.5 Systems Software</option>
+                    <option value="1.6">1.6 Ethical &amp; Legal</option>
+                    <option value="2.1">2.1 Algorithms</option>
+                    <option value="2.2">2.2 Programming</option>
+                    <option value="2.3">2.3 Robust Programs</option>
+                    <option value="2.4">2.4 Boolean Logic</option>
+                    <option value="2.5">2.5 Languages &amp; IDEs</option>
+                </select>
+                <select id="qfDiff" style="padding:6px 10px;border-radius:8px;border:1px solid var(--c-border);background:var(--c-bg);color:var(--c-text);font-size:13px;">
+                    <option value="">All Difficulties</option>
+                    <option value="1">Easy</option>
+                    <option value="2">Medium</option>
+                    <option value="3">Hard</option>
+                </select>
+            </div>
+            <a href="/exam?mode=quickfire" class="btn btn-primary" id="qfStart" onclick="return startQF()">⚡ Start Quick Fire</a>
+        </div>
+<script>
+function startQF() {
+    var t = document.getElementById('qfTopic').value;
+    var d = document.getElementById('qfDiff').value;
+    var url = '/exam?mode=quickfire';
+    if (t) url += '&topic=' + t;
+    if (d) url += '&diff=' + d;
+    window.location.href = url;
+    return false;
+}
+</script>
+
+        {# Mark My Paper #}
+        <div class="mode-card">
+            <div class="mode-icon">📄✏️</div>
+            <div class="mode-title">Mark My Paper</div>
+            <div class="mode-desc">Upload a completed past paper (PDF) — the system marks it, checks your answers, gives you a grade, and flags weak topics.</div>
+            <div class="mode-features">✓ Upload PDF · ✓ Automatic marking · ✓ Grade + feedback · ✓ Weak spot analysis</div>
+            <a href="/mark-my-paper" class="btn btn-primary">📤 Upload &amp; Mark</a>
+        </div>
+
+
+        {# Exam-Style Written Questions #}
+        <div class="mode-card">
+            <div class="mode-icon">✍️</div>
+            <div class="mode-title">Exam-Style Questions</div>
+            <div class="mode-desc">Practice 6-mark "Explain" and 8-mark "Evaluate" questions. Write a short answer and get AI feedback with a mark and improvement tips.</div>
+            <div class="mode-features">✓ Real exam command words · ✓ AI marking with feedback · ✓ Mark-scheme aligned · ✓ XP rewards</div>
+            <div style="display:flex;gap:8px;justify-content:center;margin-bottom:12px;flex-wrap:wrap;">
+                <select id="esTopic" style="padding:6px 10px;border-radius:8px;border:1px solid var(--c-border);background:var(--c-bg);color:var(--c-text);font-size:13px;">
+                    <option value="">All Topics</option>
+                    <option value="1.1">1.1 Systems Architecture</option>
+                    <option value="1.2">1.2 Memory u0026 Storage</option>
+                    <option value="1.3">1.3 Networks</option>
+                    <option value="1.4">1.4 Network Security</option>
+                    <option value="1.5">1.5 Systems Software</option>
+                    <option value="1.6">1.6 Ethical u0026 Legal</option>
+                    <option value="2.1">2.1 Algorithms</option>
+                    <option value="2.2">2.2 Programming</option>
+                    <option value="2.3">2.3 Robust Programs</option>
+                    <option value="2.4">2.4 Boolean Logic</option>
+                    <option value="2.5">2.5 Languages u0026 IDEs</option>
+                </select>
+                <select id="esMarks" style="padding:6px 10px;border-radius:8px;border:1px solid var(--c-border);background:var(--c-bg);color:var(--c-text);font-size:13px;">
+                    <option value="6">6-mark Explain</option>
+                    <option value="8">8-mark Evaluate</option>
+                </select>
+            </div>
+            <a href="/exam-style" class="btn btn-primary" id="esStart" onclick="return startExamStyle()">✍️ Start Practice</a>
+        </div>
+        <script>
+        function startExamStyle() {
+            var t = document.getElementById("esTopic").value;
+            var m = document.getElementById("esMarks").value;
+            var url = "/exam-style?marks=" + m;
+            if (t) url += "u0026topic=" + t;
+            window.location.href = url;
+            return false;
+        }
+        </script>
+
+        {# Custom #}
+        <div class="mode-card">
+            <div class="mode-icon">🎯</div>
+            <div class="mode-title">Custom Exam</div>
+            <div class="mode-desc">Set your own challenge — choose how many questions and whether to time yourself.</div>
+            <div class="mode-features">✓ 5–50 questions · ✓ Timed or untimed · ✓ Practice under pressure</div>
+            <button class="btn btn-primary" onclick="document.getElementById('customForm').classList.toggle('show'); this.style.display='none';">🎯 Configure</button>
+
+            <div class="custom-form" id="customForm">
+                <div class="form-row">
+                    <label for="cq">Questions:</label>
+                    <div class="stepper">
+                        <button type="button" class="stepper-btn minus" onclick="stepper('cq',-5,5,50)">−</button>
+                        <span class="stepper-val" id="cqDisplay">20</span>
+                        <button type="button" class="stepper-btn plus" onclick="stepper('cq',5,5,50)">+</button>
+                    </div>
+                    <input type="hidden" id="cq" value="20">
+                </div>
+                <div class="form-row">
+                    <label for="cp">Paper:</label>
+                    <select id="cp">
+                        <option value="0">Both Papers</option>
+                        <option value="1">Paper 1 — Computer Systems</option>
+                        <option value="2">Paper 2 — Computational Thinking</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label for="ct">Timer:</label>
+                    <select id="ct" onchange="document.getElementById('durRow').style.display=this.value==='1'?'flex':'none'">
+                        <option value="0">No timer</option>
+                        <option value="1">Timed</option>
+                    </select>
+                </div>
+                <div class="form-row" id="durRow" style="display:none;">
+                    <label for="cd">Duration (min):</label>
+                    <div class="stepper">
+                        <button type="button" class="stepper-btn minus" onclick="stepper('cd',-5,5,120)">−</button>
+                        <span class="stepper-val" id="cdDisplay">15</span>
+                        <button type="button" class="stepper-btn plus" onclick="stepper('cd',5,5,120)">+</button>
+                    </div>
+                    <input type="hidden" id="cd" value="15">
+                </div>
+                <button class="btn btn-primary" onclick="startCustom()">🚀 Start Custom Exam</button>
+                <button class="btn btn-sm" onclick="savePreset()" style="margin-top:8px;">💾 Save Preset</button>
+            </div>
+    </div>
+
+    {# Past Papers #}
+    <div class="mode-card">
+        <div class="mode-icon">📄</div>
+        <div class="mode-title">Past Papers</div>
+        <div class="mode-features">✓ Real exam questions · ✓ Mark schemes · ✓ Examiner reports</div>
+        <div class="past-paper-links" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-start;">
+            <a href="https://www.physicsandmathstutor.com/computer-science-wlv/past-papers/" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:13px;padding:8px 14px;">🔗 PMT</a>
+            <a href="https://www.savemyexams.com/wlv/computer-science/ocr/past-papers/" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:13px;padding:8px 14px;">🔗 Save My Exams</a>
+        </div>
+    </div>
+</div>
+
+<script>
+function stepper(id, delta, min, max) {
+    var hidden = document.getElementById(id);
+    var display = document.getElementById(id + 'Display');
+    var val = parseInt(hidden.value) || 0;
+    val = Math.max(min, Math.min(max, val + delta));
+    // Snap to step of 5
+    val = Math.round(val / 5) * 5;
+    val = Math.max(min, Math.min(max, val));
+    hidden.value = val;
+    display.textContent = val;
+}
+function getCustomConfig() {
+    return {
+        count: parseInt(document.getElementById('cq').value) || 20,
+        paper: document.getElementById('cp').value || '0',
+        timed: document.getElementById('ct').value === '1',
+        dur: parseInt(document.getElementById('cd').value) || 15
+    };
+}
+function startCustom() {
+    var cfg = getCustomConfig();
+    var params = 'mode=custom&count=' + cfg.count;
+    if (cfg.paper !== '0') params += '&paper=' + cfg.paper;
+    if (cfg.timed) params += '&timed=1&duration=' + cfg.dur;
+    else params += '&timed=0';
+    window.location.href = '/exam?' + params;
+}
+function savePreset() {
+    var cfg = getCustomConfig();
+    var presets = JSON.parse(localStorage.getItem('wlvcs_exam_presets') || '[]');
+    var name = prompt('Name this preset:', cfg.count + ' Q' + (cfg.paper !== '0' ? ' P' + cfg.paper : '') + (cfg.timed ? ' ' + cfg.dur + 'min' : ''));
+    if (!name) return;
+    presets.push({name: name, count: cfg.count, paper: cfg.paper, timed: cfg.timed, dur: cfg.dur});
+    if (presets.length > 10) presets.shift();
+    localStorage.setItem('wlvcs_exam_presets', JSON.stringify(presets));
+    renderPresets();
+    showAlert('Preset saved: ' + name, '💾');
+}
+function deletePreset(idx) {
+    var presets = JSON.parse(localStorage.getItem('wlvcs_exam_presets') || '[]');
+    presets.splice(idx, 1);
+    localStorage.setItem('wlvcs_exam_presets', JSON.stringify(presets));
+    renderPresets();
+}
+function loadPreset(idx) {
+    var presets = JSON.parse(localStorage.getItem('wlvcs_exam_presets') || '[]');
+    var p = presets[idx];
+    if (!p) return;
+    document.getElementById('cq').value = p.count;
+    document.getElementById('cqDisplay').textContent = p.count;
+    document.getElementById('cp').value = p.paper;
+    document.getElementById('ct').value = p.timed ? '1' : '0';
+    document.getElementById('cd').value = p.dur;
+    document.getElementById('cdDisplay').textContent = p.dur;
+    document.getElementById('durRow').style.display = p.timed ? 'flex' : 'none';
+    document.getElementById('customForm').classList.add('show');
+}
+function renderPresets() {
+    var presets = JSON.parse(localStorage.getItem('wlvcs_exam_presets') || '[]');
+    var container = document.getElementById('presetList');
+    var section = document.getElementById('savedPresets');
+    if (!container) return;
+    if (presets.length === 0) { section.style.display = 'none'; return; }
+    section.style.display = 'block';
+    container.innerHTML = presets.map(function(p, i) {
+        var label = p.name;
+        return '<div style="background:rgba(17,24,39,0.88);border:1px solid rgba(34,211,238,0.15);border-radius:12px;padding:10px 16px;display:flex;align-items:center;gap:8px;cursor:pointer;transition:all 0.15s;" onclick="loadPreset(' + i + ')" onmouseover="this.style.borderColor=\'var(--c-accent)\'" onmouseout="this.style.borderColor=\'rgba(34,211,238,0.15)\'">' +
+            '<span style="font-weight:600;font-size:14px;">' + label + '</span>' +
+            '<span style="font-size:11px;color:var(--c-text-muted);margin:0 4px;">·</span>' +
+            '<span style="font-size:12px;color:var(--c-text-secondary);">' + p.count + ' Q' + (p.paper !== '0' ? ' P' + p.paper : '') + (p.timed ? ' ' + p.dur + 'm' : '') + '</span>' +
+            '<button onclick="event.stopPropagation();deletePreset(' + i + ')" style="background:none;border:none;color:var(--c-rose);cursor:pointer;font-size:16px;padding:2px 6px;margin-left:4px;" title="Delete">✕</button>' +
+        '</div>';
+    }).join('');
+}
+document.addEventListener('DOMContentLoaded', renderPresets);
+</script>
+
+{% elif mode == "exam" %}
+{# ─── EXAM RUNNING ─────────────────────────────────────────── #}
+<div class="exam-header">
+    <h1>{{ display_label }}</h1>
+    <div class="exam-meta">{{ total }} question{% if total != 1 %}s{% endif %}
+        {% if timed %} · <span id="timerDisplay" class="exam-timer"><span class="timer-ring" id="timerRing"><svg viewBox="0 0 36 36"><circle class="timer-bg" cx="18" cy="18" r="15.5"/><circle class="timer-fg normal" id="timerFg" cx="18" cy="18" r="15.5" stroke-dasharray="97.4" stroke-dashoffset="0"/></svg><span class="timer-text" id="timerText">{{ "%02d:%02d" | format(duration_seconds // 60, duration_seconds % 60) }}</span></span></span>{% endif %}
+    </div>
+    <div style="font-size:12px;color:var(--c-text-muted);margin-top:4px;">⌨️ <kbd>1</kbd>–<kbd>4</kbd> MCQ · <kbd>T</kbd>/<kbd>F</kbd> True/False · <kbd>Enter</kbd> submit</div>
+</div>
+
+<div class="exam-progress">
+    <div class="bar-track"><div class="bar-fill" id="progFill" style="width:0%"></div></div>
+    <span class="pct" id="progLabel">0/{{ total }} answered</span>
+</div>
+
+<div class="question-navigator" id="questionNavigator" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;justify-content:center;">
+    {% for q in questions %}
+    <button type="button" class="nav-bubble" id="bubble-{{ loop.index0 }}" onclick="jumpToQuestion({{ loop.index0 }})" style="width:36px;height:36px;border-radius:50%;border:2px solid var(--c-border);background:var(--c-bg-alt);color:var(--c-text-secondary);font-weight:700;cursor:pointer;transition:all 0.15s;outline:none;">{{ loop.index }}</button>
+    {% endfor %}
+</div>
+
+<form id="examForm">
+{% for q in questions %}
+{% set qtype = q.question_type if q.question_type else 'mcq' %}
+{% set qtype_lbl = {'mcq': 'MCQ', 'true_false': 'T/F', 'multiple_select': 'Multi', 'ordering': 'Order', 'cloze': 'Fill'}[qtype] %}
+{% set diff_lbl = 'Easy' if q.difficulty == 1 else ('Medium' if q.difficulty == 2 else 'Hard') %}
+{% set diff_cls = 'easy' if q.difficulty == 1 else ('medium' if q.difficulty == 2 else 'hard') %}
+{% set diff_emoji = '🟢' if q.difficulty == 1 else ('🟡' if q.difficulty == 2 else '🔴') %}
+<div class="exam-q" data-qid="{{ q.id }}" data-qtype="{{ qtype }}" style="display:none;">
+    <div class="q-num">Question {{ loop.index }}
+        <span class="q-badge type">{{ qtype_lbl }}</span>
+        <span class="q-badge {{ diff_cls }}">{{ diff_emoji }} {{ diff_lbl }}</span>
+        {% if q.command_word %}
+        <span class="q-badge cmd-badge">{{ q.command_word }}</span>
+        {% endif %}
+    </div>
+    <div class="q-text">{{ q.question|safe }}</div>
+
+    {% if qtype == 'true_false' %}
+    <div class="tf-row">
+        <button type="button" class="tf-btn t-true" data-val="0" onclick="selTF(this, {{ q.id }})">✅ True</button>
+        <button type="button" class="tf-btn t-false" data-val="1" onclick="selTF(this, {{ q.id }})">❌ False</button>
+    </div>
+
+    {% elif qtype == 'multiple_select' %}
+    {% for opt in q.options %}
+    <div class="ms-opt" data-idx="{{ loop.index0 }}" onclick="toggleMS(this, {{ q.id }})">
+        <div class="ms-cb"></div>
+        <span class="ms-lbl">{{ opt }}</span>
+    </div>
+    {% endfor %}
+
+    {% elif qtype == 'ordering' %}
+    <p style="font-size:13px;color:var(--c-text-muted);margin-bottom:8px;">🔄 Drag to reorder. On mobile, long-press then drag.</p>
+    <div class="ord-list" id="ord-{{ q.id }}" data-items='{{ q.options|tojson }}'></div>
+
+    {% elif qtype == 'cloze' %}
+    <input type="text" class="cloze-inp" id="cloze-{{ q.id }}" placeholder="Type your answer..." oninput="updCloze({{ q.id }})">
+
+    {% else %}
+    {# MCQ #}
+    {% for opt in q.options %}
+    <button type="button" class="q-option" data-idx="{{ loop.index0 }}" onclick="selMCQ(this, {{ q.id }})">{{ opt }}</button>
+    {% endfor %}
+    {% endif %}
+</div>
+{% endfor %}
+</form>
+
+<div class="exam-nav-row" style="display:flex;justify-content:space-between;margin-top:20px;gap:12px;">
+    <button type="button" class="btn" id="prevQBtn" onclick="changeQuestion(-1)" disabled>⬅️ Previous Question</button>
+    <span id="questionNumLabel" style="align-self:center;font-weight:600;font-size:15px;color:var(--c-text-secondary);">Question 1 of {{ total }}</span>
+    <button type="button" class="btn btn-primary" id="nextQBtn" onclick="changeQuestion(1)">Next Question ➡️</button>
+</div>
+
+<div class="exam-submit-row" id="submitRow" style="display:none;margin-top:20px;text-align:center;">
+    <button class="btn btn-primary" id="submitBtn" onclick="submitExam()" style="font-size:18px;padding:14px 40px;width:100%;">✅ Submit Exam</button>
+</div>
+
+<div id="examResults" style="display:none;"></div>
+
+<script>
+// ─── State ───
+const answers = {};
+const answered = new Set();
+const questionStartTimes = {};
+const timestamps = {};
+const totalQ = {{ total }};
+const isTimed = {{ 'true' if timed else 'false' }};
+let submitted = false;
+let currentQuestionIdx = 0;
+
+function showQuestion(idx) {
+    const questions = document.querySelectorAll('.exam-q');
+    questions.forEach((q, i) => {
+        q.style.display = (i === idx) ? 'block' : 'none';
+    });
+    currentQuestionIdx = idx;
+    const prevBtn = document.getElementById('prevQBtn');
+    const nextBtn = document.getElementById('nextQBtn');
+    const submitRow = document.getElementById('submitRow');
+    if (prevBtn) prevBtn.disabled = (idx === 0);
+    if (nextBtn) {
+        if (idx === totalQ - 1) {
+            nextBtn.style.display = 'none';
+            if (submitRow) submitRow.style.display = 'block';
+        } else {
+            nextBtn.style.display = 'inline-flex';
+            if (submitRow) submitRow.style.display = 'none';
+        }
+    }
+    const label = document.getElementById('questionNumLabel');
+    if (label) {
+        label.textContent = `Question ${idx + 1} of ${totalQ}`;
+    }
+    const bubbles = document.querySelectorAll('.nav-bubble');
+    bubbles.forEach((b, i) => {
+        b.classList.remove('active');
+        if (i === idx) b.classList.add('active');
+    });
+}
+
+function changeQuestion(dir) {
+    let nextIdx = currentQuestionIdx + dir;
+    if (nextIdx >= 0 && nextIdx < totalQ) {
+        showQuestion(nextIdx);
+    }
+}
+
+function jumpToQuestion(idx) {
+    showQuestion(idx);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    showQuestion(0);
+});
+
+// ─── MCQ ───
+function selMCQ(btn, qid) {
+    trackTime(qid);
+    const container = btn.closest('.exam-q');
+    container.querySelectorAll('.q-option').forEach(el => el.classList.remove('selected'));
+    btn.classList.add('selected');
+    answers[qid] = btn.dataset.idx;
+    answered.add(qid);
+    updateProg();
+}
+
+// ─── True/False ───
+function selTF(btn, qid) {
+    trackTime(qid);
+    const container = btn.closest('.tf-row');
+    container.querySelectorAll('.tf-btn').forEach(el => {
+        el.classList.remove('sel-true', 'sel-false');
+    });
+    const v = btn.dataset.val;
+    btn.classList.add(v === '0' ? 'sel-true' : 'sel-false');
+    answers[qid] = v;
+    answered.add(qid);
+    updateProg();
+}
+
+// ─── Multiple Select ───
+function toggleMS(el, qid) {
+    trackTime(qid);
+    el.classList.toggle('sel');
+    const cb = el.querySelector('.ms-cb');
+    cb.textContent = el.classList.contains('sel') ? '✓' : '';
+    const container = el.closest('.exam-q');
+    const selected = [];
+    container.querySelectorAll('.ms-opt').forEach(opt => {
+        if (opt.classList.contains('sel')) selected.push(opt.dataset.idx);
+    });
+    answers[qid] = selected.length > 0 ? selected.join(',') : null;
+    if (selected.length > 0) answered.add(qid); else answered.delete(qid);
+    updateProg();
+}
+
+// ─── Ordering ───
+let dragItem = null;
+function initOrdering() {
+    document.querySelectorAll('.ord-list').forEach(list => {
+        const qid = parseInt(list.closest('.exam-q').dataset.qid);
+        const items = JSON.parse(list.dataset.items || '[]');
+        list.innerHTML = '';
+        items.forEach((label, i) => {
+            const div = document.createElement('div');
+            div.className = 'ord-item';
+            div.draggable = true;
+            div.dataset.origIdx = i;
+            div.innerHTML = '<span class="ord-num">' + (i + 1) + '</span><span class="ord-lbl">' + label + '</span>';
+            div.addEventListener('dragstart', onOrdDragStart);
+            div.addEventListener('dragend', onOrdDragEnd);
+            div.addEventListener('dragover', onOrdDragOver);
+            div.addEventListener('drop', onOrdDrop);
+            // touch
+            div.addEventListener('touchstart', onOrdTouchStart, {passive:true});
+            div.addEventListener('touchmove', onOrdTouchMove, {passive:false});
+            div.addEventListener('touchend', onOrdTouchEnd);
+            list.appendChild(div);
+        });
+        saveOrder(list);
+    });
+}
+function onOrdDragStart(e) {
+    dragItem = this; this.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
+}
+function onOrdDragEnd(e) {
+    this.classList.remove('dragging');
+    document.querySelectorAll('.ord-item').forEach(el => el.classList.remove('drag-over-top', 'drag-over-bot'));
+    if (dragItem) { saveOrder(dragItem.closest('.ord-list')); dragItem = null; }
+}
+function onOrdDragOver(e) {
+    e.preventDefault(); if (this === dragItem) return;
+    this.classList.remove('drag-over-top', 'drag-over-bot');
+    const rect = this.getBoundingClientRect();
+    this.classList.add(e.clientY < rect.top + rect.height/2 ? 'drag-over-top' : 'drag-over-bot');
+}
+function onOrdDrop(e) {
+    e.preventDefault(); this.classList.remove('drag-over-top', 'drag-over-bot');
+    if (!dragItem || this === dragItem) return;
+    const list = this.closest('.ord-list');
+    const rect = this.getBoundingClientRect();
+    if (e.clientY < rect.top + rect.height/2) list.insertBefore(dragItem, this);
+    else list.insertBefore(dragItem, this.nextSibling);
+    saveOrder(list);
+}
+let touchItem = null;
+function onOrdTouchStart(e) {
+    if (e.touches.length > 1) return;
+    touchItem = this;
+    this._touchTimer = setTimeout(() => { if (touchItem) touchItem.classList.add('dragging'); }, 150);
+}
+function onOrdTouchMove(e) {
+    if (!touchItem) return; e.preventDefault();
+    if (touchItem._touchTimer) { clearTimeout(touchItem._touchTimer); touchItem._touchTimer = null; }
+    touchItem.classList.add('dragging');
+    const touch = e.touches[0]; const list = touchItem.closest('.ord-list');
+    list.querySelectorAll('.ord-item').forEach(el => el.classList.remove('drag-over-top', 'drag-over-bot'));
+    const target = [...list.children].find(el => {
+        const r = el.getBoundingClientRect();
+        return touch.clientX >= r.left && touch.clientX <= r.right && touch.clientY >= r.top && touch.clientY <= r.bottom;
+    });
+    if (!target || target === touchItem) return;
+    const r = target.getBoundingClientRect();
+    target.classList.add(touch.clientY < r.top + r.height/2 ? 'drag-over-top' : 'drag-over-bot');
+}
+function onOrdTouchEnd(e) {
+    if (!touchItem) return;
+    if (touchItem._touchTimer) { clearTimeout(touchItem._touchTimer); touchItem._touchTimer = null; }
+    touchItem.classList.remove('dragging');
+    const list = touchItem.closest('.ord-list');
+    list.querySelectorAll('.ord-item').forEach(el => el.classList.remove('drag-over-top', 'drag-over-bot'));
+    const touch = e.changedTouches[0];
+    let dropTarget = null, insertAfter = false;
+    [...list.children].forEach(el => {
+        const r = el.getBoundingClientRect();
+        if (touch.clientX >= r.left && touch.clientX <= r.right && touch.clientY >= r.top && touch.clientY <= r.bottom) {
+            dropTarget = el; insertAfter = touch.clientY > r.top + r.height/2;
+        }
+    });
+    if (dropTarget && dropTarget !== touchItem) {
+        if (insertAfter) list.insertBefore(touchItem, dropTarget.nextSibling);
+        else list.insertBefore(touchItem, dropTarget);
+    }
+    saveOrder(list);
+    touchItem = null;
+}
+function saveOrder(list) {
+    const qid = parseInt(list.closest('.exam-q').dataset.qid);
+    trackTime(qid);
+    const ordered = [...list.children].map(el => parseInt(el.dataset.origIdx));
+    answers[qid] = ordered.join(',');
+    answered.add(qid);
+    // update numbers
+    list.querySelectorAll('.ord-num').forEach((el, i) => el.textContent = i + 1);
+    updateProg();
+}
+
+// ─── Cloze ───
+function updCloze(qid) {
+    trackTime(qid);
+    const inp = document.getElementById('cloze-' + qid);
+    answers[qid] = inp.value.trim() || null;
+    if (inp.value.trim()) answered.add(qid); else answered.delete(qid);
+    updateProg();
+}
+
+// ─── Progress ───
+function updateProg() {
+    const c = answered.size;
+    document.getElementById('progFill').style.width = (c / totalQ * 100) + '%';
+    document.getElementById('progLabel').textContent = c + '/' + totalQ + ' answered';
+    for (let i = 0; i < totalQ; i++) {
+        const bubble = document.getElementById('bubble-' + i);
+        if (bubble) {
+            const qid = parseInt(document.querySelectorAll('.exam-q')[i].dataset.qid);
+            if (answered.has(qid)) {
+                bubble.classList.add('answered');
+            } else {
+                bubble.classList.remove('answered');
+            }
+        }
+    }
+}
+
+// ─── Time Tracking ───
+function trackTime(qid) {
+    if (!(qid in questionStartTimes)) {
+        questionStartTimes[qid] = Date.now();
+    }
+}
+// Call trackTime in each answer handler — wrap existing functions
+function withTime(fn, qid) {
+    return function() {
+        trackTime(qid);
+        return fn.apply(this, arguments);
+    };
+}
+
+// ─── Keyboard Shortcuts ───
+document.addEventListener('keydown', function(e) {
+    if (submitted) return;
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    const key = e.key;
+    if (key >= '1' && key <= '4') {
+        const idx = parseInt(key) - 1;
+        const activeCard = document.querySelectorAll('.exam-q')[currentQuestionIdx];
+        if (activeCard) {
+            const opts = activeCard.querySelectorAll('.q-option');
+            if (opts && opts[idx]) {
+                opts[idx].click();
+                e.preventDefault();
+            }
+            const tfBtns = activeCard.querySelectorAll('.tf-btn');
+            if (tfBtns && tfBtns[idx]) {
+                tfBtns[idx].click();
+                e.preventDefault();
+            }
+        }
+    }
+    else if (key === 'ArrowLeft') {
+        changeQuestion(-1);
+        e.preventDefault();
+    }
+    else if (key === 'ArrowRight') {
+        changeQuestion(1);
+        e.preventDefault();
+    }
+    else if (key === 'Enter') {
+        if (currentQuestionIdx === totalQ - 1) {
+            const submitBtn = document.getElementById('submitBtn');
+            if (submitBtn && !submitBtn.disabled) {
+                submitBtn.click();
+            }
+        } else {
+            changeQuestion(1);
+        }
+        e.preventDefault();
+    }
+});
+
+// ─── Timer ───
+if (isTimed) {
+    const endTime = Date.now() + ({{ duration_seconds }} * 1000);
+    const timerText = document.getElementById('timerText');
+    const timerRing = document.getElementById('timerRing');
+    const timerFg = document.getElementById('timerFg');
+    const circumference = 97.4;
+    const durationMs = {{ duration_seconds }} * 1000;
+    function tickTimer() {
+        if (submitted) return;
+        const rem = Math.max(0, endTime - Date.now());
+        const m = Math.floor(rem / 60000);
+        const s = Math.floor((rem % 60000) / 1000);
+        if (timerText) timerText.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+        if (timerFg) {
+            const offset = circumference * (rem / durationMs);
+            timerFg.style.strokeDashoffset = offset;
+        }
+        if (timerRing) {
+            timerRing.className = 'timer-ring' + (rem < 300000 ? ' urgent' : rem < 600000 ? ' warning' : ' normal');
+        }
+        if (rem <= 0) { submitExam(); return; }
+        requestAnimationFrame(tickTimer);
+    }
+    requestAnimationFrame(tickTimer);
+}
+
+// ─── Submit ───
+async function submitExam() {
+    if (submitted) return;
+    const total = totalQ;
+    const answeredCount = answered.size;
+    if (answeredCount < total) {
+        const ok = await showConfirm('You\'ve answered ' + answeredCount + ' of ' + total + ' questions. Submit anyway?');
+        if (!ok) return;
+    }
+    submitted = true;
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true; btn.innerHTML = '⏳ Submitting...';
+
+    const allQids = [...document.querySelectorAll('.exam-q')].map(el => el.dataset.qid);
+    // Include unanswered Qs
+    allQids.forEach(qid => { if (!(qid in answers)) answers[qid] = null; });
+
+    // Build ordering lists data if not already set
+    document.querySelectorAll('.ord-list').forEach(list => {
+        const qid = parseInt(list.closest('.exam-q').dataset.qid);
+        if (!(qid in answers) || answers[qid] === null) {
+            const ordered = [...list.children].map(el => parseInt(el.dataset.origIdx));
+            answers[qid] = ordered.join(',');
+        }
+    });
+
+    // Build timestamps
+    const timestampsData = {};
+    allQids.forEach(function(qid) {
+        if (qid in questionStartTimes) {
+            timestampsData[qid] = Math.round((Date.now() - questionStartTimes[qid]) / 1000);
+        }
+    });
+
+    fetch('/exam/submit', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            answers: answers,
+            question_ids: allQids,
+            timestamps: timestampsData,
+            exam_mode: '{{ exam_mode }}',
+            question_count: totalQ,
+            duration_seconds: isTimed ? {{ duration_seconds }} : null
+        })
+    })
+    .then(r => r.json())
+    .then(data => {
+        showResults(data);
+        if (typeof recordStudyStreak === 'function') {
+            recordStudyStreak(data.score.percentage);
+        }
+        // Scroll to results
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    })
+    .catch(err => { showAlert('Error: ' + err, '❌'); submitted = false; btn.disabled = false; btn.innerHTML = '✅ Submit Exam'; });
+}
+</script>
+
+{% elif mode == "results" %}
+{# ─── RESULTS ──────────────────────────────────────────────── #}
+<div class="score-hero">
+    <div class="score-num">{{ last_exam.percentage }}%</div>
+    <div class="score-label">{{ last_exam.score }} / {{ last_exam.total }} correct</div>
+    <div style="margin:6px 0;font-size:28px;font-weight:800;color:var(--c-accent);">
+        Grade {{ grade }}
+        {% if grade >= 7 %}🎉{% elif grade >= 4 %}👍{% else %}💪{% endif %}
+    </div>
+    <div class="score-mode">{{ last_exam.mode or 'quickfire' }}</div>
+    {% if last_exam.taken_at %}<div class="score-date">Taken {{ last_exam.taken_at.strftime('%A %d %B %Y at %H:%M') }}</div>{% endif %}
+</div>
+
+<h2>📊 Topic Breakdown</h2>
+<div class="topic-bars">
+{% for t in last_exam.topic_breakdown %}
+{% set cls = 'good' if t.pct >= 70 else ('ok' if t.pct >= 40 else 'poor') %}
+<div class="tp-bar">
+    <span class="code">{{ t.code }}</span>
+    <span style="flex:1;font-size:14px;">{{ t.title }}</span>
+    <div class="track"><div class="fill {{ cls }}" style="width:{{ t.pct }}%"></div></div>
+    <span class="pct">{{ t.pct }}%</span>
+</div>
+{% endfor %}
+</div>
+
+<h2>📋 Type Breakdown</h2>
+<div class="topic-bars">
+{% if last_exam.type_breakdown %}
+{% for t in last_exam.type_breakdown %}
+{% set cls = 'good' if t.pct >= 70 else ('ok' if t.pct >= 40 else 'poor') %}
+<div class="tp-bar">
+    <span class="code">{{ t.type|capitalize }}</span>
+    <span style="flex:1;font-size:14px;">{{ t.count }} questions</span>
+    <div class="track"><div class="fill {{ cls }}" style="width:{{ t.pct }}%"></div></div>
+    <span class="pct">{{ t.pct }}%</span>
+</div>
+{% endfor %}
+{% else %}
+<div class="tp-bar"><span style="color:var(--text-muted);">No type breakdown data</span></div>
+{% endif %}
+</div>
+
+<h2>📊 Difficulty Distribution</h2>
+<div class="topic-bars">
+{% if last_exam.difficulty_breakdown %}
+{% for d in last_exam.difficulty_breakdown %}
+{% set cls = 'good' if d.pct >= 70 else ('ok' if d.pct >= 40 else 'poor') %}
+<div class="tp-bar">
+    <span class="code">{{ d.difficulty|capitalize }}</span>
+    <span style="flex:1;font-size:14px;">{{ d.count }} questions</span>
+    <div class="track"><div class="fill {{ cls }}" style="width:{{ d.pct }}%"></div></div>
+    <span class="pct">{{ d.pct }}%</span>
+</div>
+{% endfor %}
+{% else %}
+<div class="tp-bar"><span style="color:var(--text-muted);">No difficulty breakdown data</span></div>
+{% endif %}
+</div>
+
+<h2>⏱ Time per Question</h2>
+<div class="topic-bars">
+{% if last_exam.avg_time_per_question or (last_exam.question_times and last_exam.question_times is not none) %}
+<div class="tp-bar">
+    <span style="flex:1;font-size:14px;">Average time</span>
+    <span class="pct">{{ '%.1f'|format(last_exam.avg_time_per_question|float) if last_exam.avg_time_per_question else '—' }}s</span>
+</div>
+{% if last_exam.question_times and last_exam.question_times is not none %}
+{% set times = last_exam.question_times %}
+{% if times is string %}{% set times = times|fromjson %}{% endif %}
+{% if times and times|length > 1 %}
+<div style="display:flex;gap:2px;align-items:flex-end;height:60px;margin-top:8px;">
+    {% for t in times %}
+    {% set bar_h = (t / 120 * 100)|round|int %}
+    {% if bar_h > 100 %}{% set bar_h = 100 %}{% endif %}
+    {% if bar_h < 2 %}{% set bar_h = 2 %}{% endif %}
+    <div style="flex:1;background:var(--c-accent);height:{{ bar_h }}px;border-radius:2px 2px 0 0;opacity:{{ 0.3 + (loop.index / times|length * 0.7) }};" title="Q{{ loop.index }}: {{ '%.1f'|format(t|float) }}s"></div>
+    {% endfor %}
+</div>
+<div style="display:flex;justify-content:space-between;font-size:10px;color:var(--c-text-secondary);">
+    <span>Q1</span><span>Q{{ times|length }}</span>
+</div>
+{% endif %}
+{% endif %}
+{% else %}
+<div class="tp-bar"><span style="color:var(--text-muted);">No time data available</span></div>
+{% endif %}
+</div>
+
+{% if last_exam_compare %}
+<h2>🔄 Comparison — Previous Attempt</h2>
+<div class="topic-bars">
+<div class="tp-bar">
+    <span class="code">This</span>
+    <span style="flex:1;font-size:14px;">{{ last_exam.percentage }}% ({{ last_exam.score }}/{{ last_exam.total }})</span>
+    <div class="track"><div class="fill {% if last_exam.percentage >= 70 %}good{% elif last_exam.percentage >= 40 %}ok{% else %}poor{% endif %}" style="width:{{ last_exam.percentage }}%"></div></div>
+    <span class="pct">{{ last_exam.percentage }}%</span>
+</div>
+<div class="tp-bar">
+    <span class="code">Previous</span>
+    <span style="flex:1;font-size:14px;">{{ last_exam_compare.percentage }}% ({{ last_exam_compare.score }}/{{ last_exam_compare.total }})</span>
+    <div class="track"><div class="fill {% if last_exam_compare.percentage >= 70 %}good{% elif last_exam_compare.percentage >= 40 %}ok{% else %}poor{% endif %}" style="width:{{ last_exam_compare.percentage }}%"></div></div>
+    <span class="pct">{{ last_exam_compare.percentage }}%</span>
+</div>
+{% set diff = last_exam.percentage - last_exam_compare.percentage %}
+<div class="tp-bar" style="margin-top:8px;">
+    <span style="flex:1;font-weight:700;">Change</span>
+    <span style="font-weight:800;font-size:18px;color:{% if diff > 0 %}var(--c-green){% elif diff < 0 %}var(--c-rose){% else %}var(--c-text-secondary){% endif %};">{{ '%+d'|format(diff) }}pp</span>
+</div>
+</div>
+{% endif %}
+
+<h2>🔍 Answer Review</h2>
+{% for r in last_exam.results %}
+<div class="qr-card {{ 'pass' if r.correct else 'fail' }}">
+    <div class="qr-q">
+        {{ r.question }}
+        {% if r.correct %}<span class="qr-marker p">✅ Correct</span>{% else %}<span class="qr-marker f">❌ Wrong</span>{% endif %}
+    </div>
+    <div class="qr-meta"><strong>Your answer:</strong> {{ r.user_answer_text }}</div>
+    <div class="qr-meta"><strong>Correct answer:</strong> {{ r.correct_answer_text }}</div>
+    {% if r.explanation %}<div class="qr-exp">💡 {{ r.explanation }}</div>{% endif %}
+    {% if r.common_mistake %}<div class="misconception-box">⚠️ <strong>Common Mistake:</strong> {{ r.common_mistake }}</div>{% endif %}
+</div>
+{% endfor %}
+
+<div class="results-actions">
+    <a href="/exam?mode=quickfire" class="btn btn-primary">⚡ Quick Fire Again</a>
+    <a href="/exam" class="btn">📝 Other Modes</a>
+    <a href="/exam-history" class="btn">📜 History</a>
+    <a href="/" class="btn">🏠 Home</a>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+{% if mode == "exam" %}
+<script>
+// ─── Init ordering lists ───
+document.addEventListener('DOMContentLoaded', function() {
+    initOrdering();
+});
+
+// ─── Results display ───
+function showResults(data) {
+    document.querySelector('.exam-header').style.display = 'none';
+    document.getElementById('examForm').style.display = 'none';
+    document.getElementById('submitBtn').style.display = 'none';
+    document.querySelector('.exam-progress').style.display = 'none';
+    if (isTimed) document.querySelector('.exam-timer').style.display = 'none';
+
+    const container = document.getElementById('examResults');
+    container.style.display = 'block';
+
+    // Mark each question correct/incorrect
+    data.results.forEach(r => {
+        const card = document.querySelector('.exam-q[data-qid="' + r.question_id + '"]');
+        if (!card) return;
+        const qtype = r.question_type || 'mcq';
+
+        // Highlight in-place
+        if (qtype === 'mcq') {
+            card.querySelectorAll('.q-option').forEach(el => {
+                if (el.dataset.idx == r.user_answer) {
+                    el.classList.add(r.correct ? 'correct' : 'incorrect');
+                }
+                if (el.dataset.idx == r.correct_index) {
+                    if (!r.correct) el.classList.add('correct'); // show correct answer
+                }
+            });
+        } else if (qtype === 'true_false') {
+            card.querySelectorAll('.tf-btn').forEach(el => {
+                if (el.dataset.val == r.user_answer) el.classList.add(r.correct ? 'correct' : 'incorrect');
+                if (el.dataset.val == r.correct_index && !r.correct) el.classList.add('correct');
+            });
+        } else if (qtype === 'multiple_select') {
+            card.querySelectorAll('.ms-opt').forEach(el => {
+                const idx = el.dataset.idx;
+                const userIndices = r.user_answer ? r.user_answer.toString().split(',').map(x => x.trim()) : [];
+                if (userIndices.includes(idx)) el.classList.add(r.correct ? 'correct' : 'incorrect');
+                const correctIndices = r.correct_index ? JSON.parse(r.correct_index).map(String) : [];
+                if (correctIndices.includes(idx) && !r.correct) el.classList.add('correct');
+            });
+        } else if (qtype === 'ordering') {
+            const correctOrder = r.correct_index ? JSON.parse(r.correct_index) : [];
+            const userOrder = r.user_answer ? r.user_answer.toString().split(',').map(x => parseInt(x.trim())) : [];
+            card.querySelectorAll('.ord-item').forEach((el, i) => {
+                const origIdx = parseInt(el.dataset.origIdx);
+                const correctPos = correctOrder.indexOf(origIdx);
+                const userPos = userOrder.indexOf(origIdx);
+                if (correctPos === userPos) el.classList.add('correct-pos');
+                else el.classList.add('wrong-pos');
+            });
+        } else if (qtype === 'cloze') {
+            const inp = card.querySelector('.cloze-inp');
+            if (inp) inp.classList.add(r.correct ? 'correct' : 'incorrect');
+        }
+
+        // Add explanation marker
+        if (r.explanation) {
+            const exp = document.createElement('div');
+            exp.className = 'qr-exp';
+            exp.innerHTML = '💡 ' + r.explanation;
+            exp.style.marginTop = '12px';
+            exp.style.padding = '10px 14px';
+            exp.style.background = 'rgba(8,41,73,0.7)';
+            exp.style.borderRadius = '8px';
+            exp.style.fontSize = '14px';
+            exp.style.color = 'var(--c-text-secondary)';
+            card.appendChild(exp);
+        }
+
+        // Add marker badge
+        const marker = document.createElement('div');
+        marker.style.cssText = 'position:absolute;top:12px;right:14px;font-size:13px;font-weight:700;';
+        marker.textContent = r.correct ? '✅' : '❌';
+        card.style.position = 'relative';
+        card.appendChild(marker);
+    });
+
+    // Score hero
+    const hero = document.createElement('div');
+    hero.className = 'score-hero';
+    const g = data.score.grade || '—';
+    const emoji = g >= 7 ? '🎉' : g >= 4 ? '👍' : '💪';
+    var savedNote = data.score.correct === 0
+        ? '<p style="font-size:13px;color:var(--c-rose);margin:8px 0 0;">ⓘ No correct answers — result not saved. Answer at least one question correctly to record it in your history.</p>'
+        : '<p style="font-size:12px;color:var(--c-text-muted);margin:8px 0 0;">&#10004; Result saved to exam history.</p>';
+    hero.innerHTML = '<div class="score-num">' + data.score.percentage + '%</div>' +
+        '<div class="score-label">' + data.score.correct + ' / ' + data.score.total + ' correct</div>' +
+        '<div style="margin:6px 0;font-size:28px;font-weight:800;color:var(--c-accent);">Grade ' + g + ' ' + emoji + '</div>' +
+        savedNote;
+    container.appendChild(hero);
+
+    // Topic breakdown
+    if (data.topic_breakdown && data.topic_breakdown.length > 0) {
+        const tbTitle = document.createElement('h2');
+        tbTitle.textContent = '📊 Topic Breakdown';
+        container.appendChild(tbTitle);
+        const tbDiv = document.createElement('div');
+        tbDiv.className = 'topic-bars';
+        data.topic_breakdown.forEach(t => {
+            const cls = t.pct >= 70 ? 'good' : t.pct >= 40 ? 'ok' : 'poor';
+            tbDiv.innerHTML += '<div class="tp-bar"><span class="code">' + t.code + '</span>' +
+                '<span style="flex:1;font-size:14px;">' + t.title + '</span>' +
+                '<div class="track"><div class="fill ' + cls + '" style="width:' + t.pct + '%"></div></div>' +
+                '<span class="pct">' + t.pct + '%</span></div>';
+        });
+        container.appendChild(tbDiv);
+
+        // ─── Weak area recommendations ───
+        var weakTopics = data.topic_breakdown.filter(function(t) { return t.pct < 60 && t.total >= 2; });
+        if (weakTopics.length > 0) {
+            var weakDiv = document.createElement('div');
+            weakDiv.style.cssText = 'margin:16px 0 20px;padding:14px 18px;border-radius:12px;background:rgba(251,113,133,0.06);border:1px solid rgba(251,113,133,0.15);';
+            weakDiv.innerHTML = '<div style="font-size:14px;font-weight:700;color:var(--c-accent);margin-bottom:8px;">&#128204; Focus Your Revision</div>';
+            weakTopics.forEach(function(t) {
+                weakDiv.innerHTML += '<a href="/topic/' + t.code + '" style="display:inline-block;padding:4px 12px;margin:3px 4px;border-radius:999px;font-size:12px;font-weight:600;text-decoration:none;background:rgba(251,113,133,0.15);color:#fb7185;border:1px solid rgba(251,113,133,0.3);transition:all 0.15s;">' + t.title + ' (' + t.pct + '%)</a>';
+            });
+            weakDiv.innerHTML += '<p style="font-size:12px;color:var(--c-text-muted);margin:8px 0 0;">Tap a topic to review the lessons</p>';
+            container.appendChild(weakDiv);
+        }
+    }
+
+    // ─── Question Type Breakdown ───
+    if (data.type_breakdown && data.type_breakdown.length > 0) {
+        const tyTitle = document.createElement('h2');
+        tyTitle.textContent = '🔤 Question Type Breakdown';
+        container.appendChild(tyTitle);
+        const tyDiv = document.createElement('div');
+        tyDiv.style.cssText = 'display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px;';
+        data.type_breakdown.forEach(t => {
+            const cls = t.pct >= 70 ? 'good' : t.pct >= 40 ? 'ok' : 'poor';
+            tyDiv.innerHTML += '<div style="flex:1;min-width:130px;background:rgba(17,24,39,0.88);border:1px solid rgba(34,211,238,0.10);border-radius:12px;padding:14px 16px;text-align:center;">' +
+                '<div style="font-size:13px;font-weight:600;color:var(--c-text-secondary);margin-bottom:4px;">' + t.label + '</div>' +
+                '<div style="font-size:24px;font-weight:800;color:' + (t.pct >= 70 ? 'var(--c-green)' : t.pct >= 40 ? 'var(--c-accent)' : 'var(--c-rose)') + ';">' + t.pct + '%</div>' +
+                '<div style="font-size:12px;color:var(--c-text-muted);">' + t.correct + '/' + t.total + '</div></div>';
+        });
+        container.appendChild(tyDiv);
+    }
+
+    // ─── Difficulty Breakdown ───
+    if (data.difficulty_breakdown && data.difficulty_breakdown.length > 0) {
+        const dfTitle = document.createElement('h2');
+        dfTitle.textContent = '📈 Difficulty Breakdown';
+        container.appendChild(dfTitle);
+        const dfDiv = document.createElement('div');
+        dfDiv.style.cssText = 'display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px;';
+        data.difficulty_breakdown.forEach(t => {
+            const cls = t.pct >= 70 ? 'good' : t.pct >= 40 ? 'ok' : 'poor';
+            dfDiv.innerHTML += '<div style="flex:1;min-width:130px;background:rgba(17,24,39,0.88);border:1px solid rgba(34,211,238,0.10);border-radius:12px;padding:14px 16px;text-align:center;">' +
+                '<div style="font-size:13px;font-weight:600;color:var(--c-text-secondary);margin-bottom:4px;">' + t.label + '</div>' +
+                '<div style="font-size:24px;font-weight:800;color:' + (t.pct >= 70 ? 'var(--c-green)' : t.pct >= 40 ? 'var(--c-accent)' : 'var(--c-rose)') + ';">' + t.pct + '%</div>' +
+                '<div style="font-size:12px;color:var(--c-text-muted);">' + t.correct + '/' + t.total + '</div></div>';
+        });
+        container.appendChild(dfDiv);
+    }
+
+    // ─── Time Stats ───
+    const times = data.results.filter(r => r.time_spent != null).map(r => r.time_spent);
+    if (times.length > 0) {
+        const avgTime = Math.round(times.reduce((a,b) => a+b, 0) / times.length);
+        const maxTime = Math.max(...times);
+        const minTime = Math.min(...times);
+        const timeTitle = document.createElement('h2');
+        timeTitle.textContent = '⏱ Time Per Question';
+        container.appendChild(timeTitle);
+        const timeDiv = document.createElement('div');
+        timeDiv.style.cssText = 'display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px;';
+        const timeStats = [
+            {label: '⏳ Average', val: avgTime + 's'},
+            {label: '🏃 Fastest', val: minTime + 's'},
+            {label: '🐢 Slowest', val: maxTime + 's'},
+        ];
+        timeStats.forEach(t => {
+            timeDiv.innerHTML += '<div style="flex:1;min-width:100px;background:rgba(17,24,39,0.88);border:1px solid rgba(34,211,238,0.10);border-radius:12px;padding:14px 16px;text-align:center;">' +
+                '<div style="font-size:12px;color:var(--c-text-secondary);margin-bottom:4px;">' + t.label + '</div>' +
+                '<div style="font-size:22px;font-weight:800;color:var(--c-accent);">' + t.val + '</div></div>';
+        });
+        // Show slowest questions
+        const slowOnes = data.results
+            .filter(r => r.time_spent != null)
+            .sort((a,b) => b.time_spent - a.time_spent)
+            .slice(0, 3);
+        timeDiv.innerHTML += '<div style="width:100%;margin-top:4px;">';
+        timeDiv.innerHTML += '<div style="font-size:13px;color:var(--c-text-muted);margin-bottom:6px;">🐌 Slowest questions:</div>';
+        slowOnes.forEach(r => {
+            timeDiv.innerHTML += '<div style="font-size:13px;color:var(--c-text-secondary);padding:2px 0;">' +
+                '• ' + r.time_spent + 's — ' + r.question.substring(0, 60) + '...</div>';
+        });
+        timeDiv.innerHTML += '</div>';
+        container.appendChild(timeDiv);
+    }
+
+    // ─── Comparison Mode ───
+    if (data.last_exam_compare && data.last_exam_compare !== null) {
+        const prev = data.last_exam_compare;
+        const compTitle = document.createElement('h2');
+        compTitle.textContent = '📊 vs Previous Exam';
+        container.appendChild(compTitle);
+        const diff = data.score.percentage - prev.percentage;
+        const direction = diff > 0 ? '📈 up' : diff < 0 ? '📉 down' : '➡️ flat';
+        const compDiv = document.createElement('div');
+        compDiv.style.cssText = 'display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;';
+        const compData = [
+            {label: 'This', val: data.score.percentage + '%', cls: ''},
+            {label: 'Previous', val: prev.percentage + '%', cls: ''},
+            {label: 'Change', val: (diff > 0 ? '+' : '') + diff + '%', cls: diff > 0 ? 'up' : diff < 0 ? 'down' : ''},
+        ];
+        compData.forEach(t => {
+            compDiv.innerHTML += '<div style="flex:1;min-width:100px;background:rgba(17,24,39,0.88);border:1px solid rgba(34,211,238,0.10);border-radius:12px;padding:14px 16px;text-align:center;">' +
+                '<div style="font-size:12px;color:var(--c-text-secondary);margin-bottom:4px;">' + t.label + '</div>' +
+                '<div style="font-size:22px;font-weight:800;color:' + (t.cls === 'up' ? 'var(--c-green)' : t.cls === 'down' ? 'var(--c-rose)' : 'var(--c-accent)') + ';">' + t.val + '</div></div>';
+        });
+        container.appendChild(compDiv);
+    }
+
+    // Full review
+    const reviewTitle = document.createElement('h2');
+    reviewTitle.textContent = '🔍 Answer Review';
+    container.appendChild(reviewTitle);
+
+    data.results.forEach(r => {
+        const card = document.createElement('div');
+        card.className = 'qr-card ' + (r.correct ? 'pass' : 'fail');
+        card.innerHTML = '<div class="qr-q">' + r.question +
+            (r.correct ? '<span class="qr-marker p">✅ Correct</span>' : '<span class="qr-marker f">❌ Wrong</span>') +
+            '</div>' +
+            '<div class="qr-meta"><strong>Your answer:</strong> ' + r.user_answer_text + '</div>' +
+            '<div class="qr-meta"><strong>Correct answer:</strong> ' + r.correct_answer_text + '</div>' +
+            (r.explanation ? '<div class="qr-exp">💡 ' + r.explanation + '</div>' : '') +
+            (r.common_mistake ? '<div class="misconception-box">⚠️ <strong>Common Mistake:</strong> ' + r.common_mistake + '</div>' : '');
+        container.appendChild(card);
+    });
+
+    // Actions
+    const actions = document.createElement('div');
+    actions.className = 'results-actions';
+    actions.innerHTML = '<a href="/exam?mode=quickfire" class="btn btn-primary">⚡ Quick Fire Again</a>' +
+        '<a href="/exam" class="btn">📝 Other Modes</a>' +
+        '<a href="/exam-history" class="btn">📜 History</a>' +
+        '<a href="/" class="btn">🏠 Home</a>';
+    container.appendChild(actions);
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Override showConfirm from base template
+async function showConfirm(msg) {
+    // Simple promise-based confirm
+    return new Promise(resolve => {
+        if (typeof window.confirm === 'function') {
+            resolve(window.confirm(msg));
+        } else {
+            resolve(true);
+        }
+    });
+}
+</script>
+{% endif %}
+{% endblock %}

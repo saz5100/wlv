@@ -1,0 +1,718 @@
+{% extends "base.html" %}
+{% block title %}Section B Practice | WLV Computer Science{% endblock %}
+{% block content %}
+<div class="hero" style="padding: 30px 0 15px;">
+    <h1>📝 Section B Practice</h1>
+    <p class="hero-sub">Design → Write → Test → Refine — the Paper 2 structured workflow</p>
+</div>
+
+<style>
+.sb-intro {
+    max-width: 900px;
+    margin: 0 auto 20px;
+    padding: 20px 24px;
+    background: rgba(17, 24, 39, 0.7);
+    border: 1px solid rgba(34, 211, 238, 0.12);
+    border-radius: var(--r-xl);
+    line-height: 1.7;
+    font-size: 14px;
+}
+.light-theme .sb-intro {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(8, 145, 178, 0.15);
+}
+.sb-intro h3 {
+    color: var(--c-heading);
+    margin-bottom: 8px;
+    font-size: 17px;
+}
+.sb-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+}
+.sb-step {
+    background: rgba(8, 11, 20, 0.4);
+    border: 1px solid rgba(34, 211, 238, 0.08);
+    border-radius: var(--r-md);
+    padding: 10px 12px;
+    font-size: 13px;
+    text-align: center;
+}
+.light-theme .sb-step {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(8, 145, 178, 0.1);
+}
+.sb-step .step-num {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    border-radius: 50%;
+    background: var(--c-accent);
+    color: #000;
+    font-weight: 700;
+    font-size: 12px;
+    margin-bottom: 4px;
+}
+.sb-step .step-label {
+    display: block;
+    color: var(--c-text);
+    font-weight: 600;
+    margin-top: 4px;
+}
+
+/* ── Question Selector ── */
+.sb-question-selector {
+    max-width: 900px;
+    margin: 0 auto 16px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.sb-question-selector select, .sb-question-selector button {
+    padding: 8px 14px;
+    border-radius: var(--r-md);
+    border: 1px solid var(--c-border);
+    background: rgba(17, 24, 39, 0.8);
+    color: var(--c-text);
+    font-size: 13px;
+    font-weight: 600;
+}
+.light-theme .sb-question-selector select,
+.light-theme .sb-question-selector button {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+/* ── Pipeline Cards ── */
+.sb-pipeline {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.sb-card {
+    background: rgba(17, 24, 39, 0.85);
+    border: 1px solid rgba(34, 211, 238, 0.15);
+    border-left: 4px solid var(--c-accent);
+    border-radius: var(--r-xl);
+    overflow: hidden;
+}
+.light-theme .sb-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(8, 145, 178, 0.15);
+}
+.sb-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 18px;
+    background: rgba(8, 11, 20, 0.4);
+    border-bottom: 1px solid rgba(34, 211, 238, 0.08);
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--c-heading);
+    cursor: pointer;
+    user-select: none;
+}
+.light-theme .sb-card-header {
+    background: rgba(0, 0, 0, 0.03);
+}
+.sb-card-header .sb-step-badge {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 99px;
+    background: rgba(34, 211, 238, 0.1);
+    color: var(--c-accent);
+}
+.sb-card-body {
+    padding: 16px 18px;
+    display: none;
+}
+.sb-card-body.open {
+    display: block;
+}
+.sb-card-body textarea {
+    width: 100%;
+    min-height: 120px;
+    background: rgba(8, 11, 20, 0.6);
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-md);
+    color: var(--c-text);
+    padding: 12px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    resize: vertical;
+    outline: none;
+}
+.light-theme .sb-card-body textarea {
+    background: rgba(0, 0, 0, 0.03);
+    color: #1f2937;
+}
+.sb-card-body .sb-hint {
+    font-size: 12px;
+    color: var(--c-text-secondary);
+    margin-top: 6px;
+    font-style: italic;
+}
+.sb-card-body .sb-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+.sb-card-body .sb-actions button {
+    padding: 7px 14px;
+    border-radius: var(--r-md);
+    border: 1px solid var(--c-border);
+    background: rgba(8, 11, 20, 0.6);
+    color: var(--c-text);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.sb-card-body .sb-actions button:hover {
+    border-color: var(--c-accent);
+    background: rgba(8, 41, 73, 0.4);
+}
+.sb-card-body .sb-actions button.btn-primary {
+    background: var(--c-accent);
+    color: #000;
+    border-color: var(--c-accent);
+}
+.sb-card-body .sb-actions button.btn-primary:hover {
+    background: var(--c-accent-hover);
+}
+
+/* ── Phase-specific colours ── */
+.sb-card.design { border-left-color: #38bdf8; }
+.sb-card.design .sb-step-badge { background: rgba(56, 189, 248, 0.1); color: #38bdf8; }
+.sb-card.write { border-left-color: #34d399; }
+.sb-card.write .sb-step-badge { background: rgba(52, 211, 153, 0.1); color: #34d399; }
+.sb-card.test { border-left-color: #facc15; }
+.sb-card.test .sb-step-badge { background: rgba(250, 204, 21, 0.1); color: #facc15; }
+.sb-card.refine { border-left-color: #a855f7; }
+.sb-card.refine .sb-step-badge { background: rgba(168, 85, 247, 0.1); color: #a855f7; }
+
+/* ── Test Results ── */
+.sb-test-results {
+    margin-top: 10px;
+    padding: 12px;
+    background: rgba(8, 11, 20, 0.4);
+    border-radius: var(--r-md);
+    font-family: monospace;
+    font-size: 13px;
+    white-space: pre-wrap;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+}
+.sb-test-results.show { display: block; }
+
+/* ── Feedback ── */
+.sb-feedback {
+    margin-top: 10px;
+    padding: 12px 16px;
+    border-radius: var(--r-md);
+    font-size: 13px;
+    font-weight: 600;
+    display: none;
+}
+.sb-feedback.show { display: block; }
+.sb-feedback.success {
+    background: rgba(52, 211, 153, 0.1);
+    border: 1px solid var(--c-green);
+    color: var(--c-green);
+}
+.sb-feedback.error {
+    background: rgba(244, 63, 94, 0.1);
+    border: 1px solid var(--c-rose);
+    color: var(--c-rose);
+}
+
+/* ── Question Description ── */
+.sb-question-card {
+    max-width: 900px;
+    margin: 0 auto 16px;
+    padding: 18px 22px;
+    background: rgba(17, 24, 39, 0.85);
+    border: 1px solid rgba(34, 211, 238, 0.18);
+    border-left: 4px solid var(--c-accent);
+    border-radius: var(--r-xl);
+}
+.light-theme .sb-question-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(8, 145, 178, 0.18);
+}
+.sb-question-card .sb-q-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--c-heading);
+    margin-bottom: 6px;
+}
+.sb-question-card .sb-q-meta {
+    font-size: 12px;
+    color: var(--c-text-secondary);
+    margin-bottom: 8px;
+}
+.sb-question-card .sb-q-desc {
+    font-size: 14px;
+    line-height: 1.65;
+}
+.sb-question-card .sb-q-desc code {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 13px;
+    color: var(--c-accent);
+}
+.light-theme .sb-question-card .sb-q-desc code {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+@media (max-width: 768px) {
+    .sb-steps { grid-template-columns: 1fr 1fr; }
+}
+</style>
+
+<!-- ── Intro ── -->
+<div class="sb-intro">
+    <h3>📋 Paper 2 Section B — Structured Programming Practice</h3>
+    <p>Section B of Paper 2 is worth <strong>30 marks</strong> and follows a structured workflow. Practise each phase below to build exam-ready programming skills.</p>
+    <div class="sb-steps">
+        <div class="sb-step">
+            <span class="step-num">1</span>
+            <span class="step-label">🎯 Design</span>
+            <span style="font-size:11px;color:var(--c-text-secondary);display:block;margin-top:2px;">Plan your solution</span>
+        </div>
+        <div class="sb-step">
+            <span class="step-num">2</span>
+            <span class="step-label">✏️ Write</span>
+            <span style="font-size:11px;color:var(--c-text-secondary);display:block;margin-top:2px;">Implement the code</span>
+        </div>
+        <div class="sb-step">
+            <span class="step-num">3</span>
+            <span class="step-label">🧪 Test</span>
+            <span style="font-size:11px;color:var(--c-text-secondary);display:block;margin-top:2px;">Run and verify</span>
+        </div>
+        <div class="sb-step">
+            <span class="step-num">4</span>
+            <span class="step-label">🔄 Refine</span>
+            <span style="font-size:11px;color:var(--c-text-secondary);display:block;margin-top:2px;">Improve your code</span>
+        </div>
+    </div>
+</div>
+
+<!-- ── Question Selector ── -->
+<div class="sb-question-selector">
+    <select id="sbTopicFilter" onchange="loadSectionBQuestions()">
+        <option value="">All Topics</option>
+        <option value="2.1">2.1 Algorithms</option>
+        <option value="2.2">2.2 Programming Fundamentals</option>
+        <option value="2.3">2.3 Producing Robust Programs</option>
+        <option value="2.5">2.5 Languages & IDEs</option>
+    </select>
+    <button onclick="loadSectionBQuestions()">📋 Load Questions</button>
+    <span id="sbCount" style="font-size:13px;color:var(--c-text-secondary);"></span>
+</div>
+
+<!-- ── Question Card ── -->
+<div class="sb-question-card" id="sbQuestionCard" style="display:none;">
+    <div class="sb-q-title" id="sbQTitle">Question Title</div>
+    <div class="sb-q-meta" id="sbQMeta">Topic · Marks</div>
+    <div class="sb-q-desc" id="sbQDesc">Question description goes here.</div>
+</div>
+
+<!-- ── Pipeline Cards ── -->
+<div class="sb-pipeline" id="sbPipeline" style="display:none;">
+
+    <!-- Phase 1: Design -->
+    <div class="sb-card design">
+        <div class="sb-card-header" onclick="toggleCard(this)">
+            <span>🎯 Phase 1: Design</span>
+            <span class="sb-step-badge">Plan your solution</span>
+        </div>
+        <div class="sb-card-body open">
+            <p style="font-size:13px;color:var(--c-text-secondary);margin-bottom:8px;">Write a brief plan: identify inputs, outputs, processes, and the algorithm structure (sequence, selection, iteration).</p>
+            <textarea id="sbDesignInput" placeholder="e.g.&#10;INPUT: user enters a number&#10;OUTPUT: whether the number is even or odd&#10;PROCESS: use MOD 2 to check remainder&#10;STRUCTURE: IF/ELSE selection"></textarea>
+            <div class="sb-hint">💡 In the exam, this is worth ~4 marks. Show you understand the problem before coding.</div>
+            <div class="sb-actions">
+                <button class="btn-primary" onclick="saveDesign()">💾 Save Design</button>
+                <button onclick="document.getElementById('sbDesignInput').value = ''">🗑️ Clear</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Phase 2: Write -->
+    <div class="sb-card write">
+        <div class="sb-card-header" onclick="toggleCard(this)">
+            <span>✏️ Phase 2: Write Code</span>
+            <span class="sb-step-badge">Implement</span>
+        </div>
+        <div class="sb-card-body">
+            <p style="font-size:13px;color:var(--c-text-secondary);margin-bottom:8px;">Write your Python solution. Use the Code Lab to test it, then paste your final code here.</p>
+            <textarea id="sbCodeInput" placeholder="# Write your Python solution here&#10;def solution():&#10;    pass"></textarea>
+            <div class="sb-hint">💡 In the exam, this is worth ~12 marks. Use meaningful variable names and comment your logic.</div>
+            <div class="sb-actions">
+                <button class="btn-primary" onclick="saveCode()">💾 Save Code</button>
+                <button onclick="document.getElementById('sbCodeInput').value = ''">🗑️ Clear</button>
+                <button onclick="window.open('/codelab','_blank')">🚀 Open Code Lab</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Phase 3: Test -->
+    <div class="sb-card test">
+        <div class="sb-card-header" onclick="toggleCard(this)">
+            <span>🧪 Phase 3: Test Your Solution</span>
+            <span class="sb-step-badge">Verify</span>
+        </div>
+        <div class="sb-card-body">
+            <p style="font-size:13px;color:var(--c-text-secondary);margin-bottom:8px;">Run your code against the test cases below. Check normal, boundary, and error conditions.</p>
+            <div id="sbTestCases" style="margin-bottom:10px;">
+                <p style="font-size:13px;color:var(--c-text-secondary);">Select a question to see test cases.</p>
+            </div>
+            <div class="sb-actions">
+                <button class="btn-primary" onclick="runTests()">🧪 Run Tests</button>
+                <button onclick="document.getElementById('sbTestResults').classList.remove('show')">🗑️ Clear Results</button>
+            </div>
+            <div class="sb-test-results" id="sbTestResults"></div>
+        </div>
+    </div>
+
+    <!-- Phase 4: Refine -->
+    <div class="sb-card refine">
+        <div class="sb-card-header" onclick="toggleCard(this)">
+            <span>🔄 Phase 4: Refine & Improve</span>
+            <span class="sb-step-badge">Polish</span>
+        </div>
+        <div class="sb-card-body">
+            <p style="font-size:13px;color:var(--c-text-secondary);margin-bottom:8px;">Review your solution. Can you make it more efficient? Add validation? Handle edge cases?</p>
+            <textarea id="sbRefineInput" placeholder="e.g.&#10;- Add input validation for negative numbers&#10;- Use a function to avoid repetition&#10;- Add comments explaining each section"></textarea>
+            <div class="sb-hint">💡 In the exam, this shows the examiner you can evaluate and improve your own code — worth ~4 marks.</div>
+            <div class="sb-actions">
+                <button class="btn-primary" onclick="saveRefine()">💾 Save Refinement</button>
+                <button onclick="document.getElementById('sbRefineInput').value = ''">🗑️ Clear</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+// ─── Section B Questions ───
+const sbQuestions = [
+    {
+        id: 1,
+        title: "Temperature Converter",
+        topic: "2.2",
+        marks: 12,
+        desc: "Write a program that asks the user to enter a temperature in Celsius. If the temperature is below 0, print <code>Freezing</code>. If it is between 0 and 100 (inclusive), print <code>Liquid</code>. If it is above 100, print <code>Boiling</code>.",
+        testCases: [
+            { input: "-5", expected: "Freezing" },
+            { input: "0", expected: "Liquid" },
+            { input: "50", expected: "Liquid" },
+            { input: "100", expected: "Liquid" },
+            { input: "101", expected: "Boiling" }
+        ],
+        designHint: "Identify: input (Celsius), output (state), decision structure (IF/ELIF/ELSE with 3 ranges)."
+    },
+    {
+        id: 2,
+        title: "Exam Grade Calculator",
+        topic: "2.2",
+        marks: 15,
+        desc: "Write a program that asks the user to enter their exam score (0-100). Calculate and print the grade: <code>A</code> (80+), <code>B</code> (60-79), <code>C</code> (40-59), <code>D</code> (20-39), <code>U</code> (below 20). If the score is outside 0-100, print <code>Invalid score</code>.",
+        testCases: [
+            { input: "85", expected: "A" },
+            { input: "60", expected: "B" },
+            { input: "45", expected: "C" },
+            { input: "25", expected: "D" },
+            { input: "10", expected: "U" },
+            { input: "150", expected: "Invalid score" },
+            { input: "-5", expected: "Invalid score" }
+        ],
+        designHint: "Identify: input (score), validation (0-100), output (grade). Use IF/ELIF/ELSE chain from highest to lowest."
+    },
+    {
+        id: 3,
+        title: "Number Analysis",
+        topic: "2.2",
+        marks: 18,
+        desc: "Write a program that asks the user to enter 5 numbers (one at a time). Store them in a list. Then calculate and print: the sum, the average, the largest number, and the smallest number.",
+        testCases: [
+            { input: "10\n20\n30\n40\n50", expected: "Sum: 150\nAverage: 30.0\nLargest: 50\nSmallest: 10" },
+            { input: "5\n15\n3\n8\n12", expected: "Sum: 43\nAverage: 8.6\nLargest: 15\nSmallest: 3" }
+        ],
+        designHint: "Identify: 5 inputs, list storage, loop for accumulation, min/max tracking. Output 4 values."
+    },
+    {
+        id: 4,
+        title: "Password Validator",
+        topic: "2.3",
+        marks: 15,
+        desc: "Write a program that asks the user to enter a password. The password must be at least 8 characters long and contain at least one digit. Validate the password and print <code>Valid</code> or <code>Invalid</code> with a reason. Keep asking until a valid password is entered.",
+        testCases: [
+            { input: "short\nabc12345", expected: "Invalid: too short\nValid" },
+            { input: "nodigitshere\npass1234", expected: "Invalid: no digit\nValid" },
+            { input: "valid123", expected: "Valid" }
+        ],
+        designHint: "Use a WHILE loop. Check len() >= 8 and any(c.isdigit() for c in password). Print specific error messages."
+    },
+    {
+        id: 5,
+        title: "Linear Search Implementation",
+        topic: "2.1",
+        marks: 20,
+        desc: "Write a program that defines a list <code>data = [15, 8, 42, 23, 4, 16, 31, 7]</code>. Ask the user to enter a number to search for. Implement a linear search algorithm that prints the index if found, or <code>Not found</code> if the number is not in the list.",
+        testCases: [
+            { input: "23", expected: "Found at index: 3" },
+            { input: "99", expected: "Not found" },
+            { input: "15", expected: "Found at index: 0" }
+        ],
+        designHint: "Use a FOR loop with range(len(data)). Compare each element. Use a flag or early return. Remember 0-indexing."
+    },
+    {
+        id: 6,
+        title: "Bubble Sort",
+        topic: "2.1",
+        marks: 20,
+        desc: "Write a program that defines a list <code>nums = [64, 34, 25, 12, 22, 11, 90]</code>. Implement a full bubble sort algorithm to sort the list in ascending order. Print the sorted list.",
+        testCases: [
+            { input: "", expected: "[11, 12, 22, 25, 34, 64, 90]" }
+        ],
+        designHint: "Use nested loops. Outer loop for passes, inner loop for comparisons. Use a swap flag to exit early if already sorted."
+    },
+    {
+        id: 7,
+        title: "Input Validation Loop",
+        topic: "2.3",
+        marks: 12,
+        desc: "Write a program that asks the user to enter a number between 1 and 10 (inclusive). Use a WHILE loop to keep asking until a valid number is entered. Then print the number squared.",
+        testCases: [
+            { input: "0\n15\n7", expected: "7 squared is 49" },
+            { input: "3", expected: "3 squared is 9" }
+        ],
+        designHint: "Use a WHILE True loop with break when valid. Check 1 <= num <= 10. Use int() for conversion."
+    },
+    {
+        id: 8,
+        title: "Student Record (Dictionary)",
+        topic: "2.2",
+        marks: 15,
+        desc: "Write a program that creates a dictionary for a student with keys: <code>name</code>, <code>age</code>, <code>subjects</code> (a list of 3 subjects). Ask the user to enter values for each field, then print the dictionary in a formatted way: one key-value pair per line.",
+        testCases: [
+            { input: "Alice\n16\nMaths\nCS\nEnglish", expected: "name: Alice\nage: 16\nsubjects: ['Maths', 'CS', 'English']" }
+        ],
+        designHint: "Use input() for each field. Build the dict with {} syntax. Loop with for key, value in student.items(): to print."
+    }
+];
+
+let currentSbQuestion = null;
+
+// ─── Load Questions ───
+function loadSectionBQuestions() {
+    const filter = document.getElementById('sbTopicFilter').value;
+    const filtered = filter ? sbQuestions.filter(q => q.topic === filter) : sbQuestions;
+    document.getElementById('sbCount').textContent = `${filtered.length} questions available`;
+    
+    if (filtered.length === 0) {
+        document.getElementById('sbQuestionCard').style.display = 'none';
+        document.getElementById('sbPipeline').style.display = 'none';
+        return;
+    }
+    
+    // Show first question
+    selectSbQuestion(filtered[0].id);
+}
+
+// ─── Select Question ───
+function selectSbQuestion(id) {
+    const q = sbQuestions.find(q => q.id === id);
+    if (!q) return;
+    currentSbQuestion = q;
+    
+    document.getElementById('sbQTitle').textContent = q.title;
+    document.getElementById('sbQMeta').textContent = `Topic ${q.topic} · ${q.marks} marks`;
+    document.getElementById('sbQDesc').innerHTML = q.desc;
+    document.getElementById('sbQuestionCard').style.display = 'block';
+    document.getElementById('sbPipeline').style.display = 'flex';
+    
+    // Update design hint
+    const designHint = document.querySelector('.sb-card.design .sb-hint');
+    if (q.designHint) {
+        designHint.textContent = '💡 ' + q.designHint;
+    }
+    
+    // Load saved work
+    const savedDesign = localStorage.getItem(`sb_design_${q.id}`);
+    if (savedDesign) document.getElementById('sbDesignInput').value = savedDesign;
+    
+    const savedCode = localStorage.getItem(`sb_code_${q.id}`);
+    if (savedCode) document.getElementById('sbCodeInput').value = savedCode;
+    
+    const savedRefine = localStorage.getItem(`sb_refine_${q.id}`);
+    if (savedRefine) document.getElementById('sbRefineInput').value = savedRefine;
+    
+    // Show test cases
+    renderTestCases(q);
+}
+
+// ─── Render Test Cases ───
+function renderTestCases(q) {
+    const container = document.getElementById('sbTestCases');
+    let html = '<table style="width:100%;border-collapse:collapse;font-size:13px;">';
+    html += '<tr style="border-bottom:1px solid var(--c-border);"><th style="padding:6px 8px;text-align:left;">Test</th><th style="padding:6px 8px;text-align:left;">Input</th><th style="padding:6px 8px;text-align:left;">Expected Output</th><th style="padding:6px 8px;text-align:left;">Result</th></tr>';
+    q.testCases.forEach((tc, i) => {
+        html += `<tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+            <td style="padding:6px 8px;">${i + 1}</td>
+            <td style="padding:6px 8px;font-family:monospace;font-size:12px;">${tc.input.replace(/\n/g, '\\n')}</td>
+            <td style="padding:6px 8px;font-family:monospace;font-size:12px;">${tc.expected.replace(/\n/g, '\\n')}</td>
+            <td style="padding:6px 8px;" id="sbTestResult_${i}">⏳</td>
+        </tr>`;
+    });
+    html += '</table>';
+    container.innerHTML = html;
+}
+
+// ─── Toggle Card ───
+function toggleCard(header) {
+    const body = header.nextElementSibling;
+    body.classList.toggle('open');
+}
+
+// ─── Save Functions ───
+function saveDesign() {
+    if (!currentSbQuestion) return;
+    localStorage.setItem(`sb_design_${currentSbQuestion.id}`, document.getElementById('sbDesignInput').value);
+    showSbFeedback('design', 'Design saved! ✅', 'success');
+}
+function saveCode() {
+    if (!currentSbQuestion) return;
+    localStorage.setItem(`sb_code_${currentSbQuestion.id}`, document.getElementById('sbCodeInput').value);
+    showSbFeedback('write', 'Code saved! ✅', 'success');
+}
+function saveRefine() {
+    if (!currentSbQuestion) return;
+    localStorage.setItem(`sb_refine_${currentSbQuestion.id}`, document.getElementById('sbRefineInput').value);
+    showSbFeedback('refine', 'Refinement saved! ✅', 'success');
+}
+
+// ─── Show Feedback ───
+function showSbFeedback(cardClass, msg, type) {
+    const card = document.querySelector(`.sb-card.${cardClass}`);
+    if (!card) return;
+    let fb = card.querySelector('.sb-feedback');
+    if (!fb) {
+        fb = document.createElement('div');
+        fb.className = 'sb-feedback';
+        card.querySelector('.sb-card-body').appendChild(fb);
+    }
+    fb.textContent = msg;
+    fb.className = `sb-feedback show ${type}`;
+    setTimeout(() => fb.classList.remove('show'), 3000);
+}
+
+// ─── Run Tests ───
+async function runTests() {
+    if (!currentSbQuestion) return;
+    const code = document.getElementById('sbCodeInput').value;
+    const resultsDiv = document.getElementById('sbTestResults');
+    resultsDiv.textContent = 'Running tests...\n';
+    resultsDiv.classList.add('show');
+    
+    // Check if Pyodide is available (loaded from codelab)
+    if (typeof loadPyodide === 'undefined') {
+        resultsDiv.textContent = '⚠️ Pyodide not loaded. Open the Code Lab first to load the Python compiler, then return here.\n\nAlternatively, test your code manually in the Code Lab.';
+        return;
+    }
+    
+    try {
+        const pyodide = await loadPyodide({ indexURL: "/static/pyodide/" });
+        let allPassed = true;
+        let output = '';
+        
+        for (let i = 0; i < currentSbQuestion.testCases.length; i++) {
+            const tc = currentSbQuestion.testCases[i];
+            const cell = document.getElementById(`sbTestResult_${i}`);
+            cell.textContent = '⏳';
+            
+            // Wrap the user code to inject input
+            const inputLines = tc.input.split('\n');
+            let inputIdx = 0;
+            const wrappedCode = `
+import sys
+from io import StringIO
+
+# Mock input
+_input_iter = iter(${JSON.stringify(inputLines)})
+def mock_input(prompt=''):
+    val = next(_input_iter)
+    sys.stdout.write(prompt)
+    return val
+
+# Save original
+_real_input = __builtins__.input
+__builtins__.input = mock_input
+
+# Capture output
+_captured = StringIO()
+_real_stdout = sys.stdout
+sys.stdout = _captured
+
+# User code
+${code}
+
+# Restore
+sys.stdout = _real_stdout
+__builtins__.input = _real_input
+result = _captured.getvalue().strip()
+`;
+            
+            try {
+                await pyodide.runPythonAsync(wrappedCode);
+                const actualOutput = pyodide.globals.get('result');
+                const expected = tc.expected;
+                
+                if (actualOutput === expected) {
+                    cell.textContent = '✅ PASS';
+                    cell.style.color = '#34d399';
+                    output += `Test ${i + 1}: PASS ✅\n`;
+                } else {
+                    cell.textContent = '❌ FAIL';
+                    cell.style.color = '#f43f5e';
+                    allPassed = false;
+                    output += `Test ${i + 1}: FAIL ❌\n  Expected: ${expected}\n  Got: ${actualOutput}\n`;
+                }
+            } catch(e) {
+                cell.textContent = '❌ ERROR';
+                cell.style.color = '#f43f5e';
+                allPassed = false;
+                output += `Test ${i + 1}: ERROR ❌\n  ${e.message}\n`;
+            }
+        }
+        
+        if (allPassed) {
+            output += '\n🎉 All tests passed! Great work!';
+        } else {
+            output += '\n⚠️ Some tests failed. Review your code and try again.';
+        }
+        resultsDiv.textContent = output;
+    } catch(err) {
+        resultsDiv.textContent = '❌ Failed to load Python compiler: ' + err.message;
+    }
+}
+
+// ─── Init on load ───
+document.addEventListener('DOMContentLoaded', () => {
+    loadSectionBQuestions();
+});
+</script>
+{% endblock %}

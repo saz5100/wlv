@@ -1,0 +1,244 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard — WLV Computer Science{% endblock %}
+{% block head %}
+<style>
+.admin-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 28px; }
+.admin-card { padding: 20px; border-radius: var(--r-xl); background: rgba(13,18,37,0.6); border: 1px solid rgba(34,211,238,0.08); }
+.light-theme .admin-card { background: rgba(243,244,246,0.6); }
+.admin-card h3 { font-size: 14px; font-weight: 600; color: var(--c-text-secondary); margin: 0 0 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+.admin-card .stat { font-size: 32px; font-weight: 800; color: var(--c-heading); }
+.admin-card .stat-sub { font-size: 13px; color: var(--c-text-muted); margin-top: 2px; }
+.admin-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.admin-table th { text-align: left; padding: 8px 12px; font-weight: 600; color: var(--c-text-secondary); border-bottom: 1px solid var(--c-border); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+.admin-table td { padding: 8px 12px; border-bottom: 1px solid rgba(34,211,238,0.06); color: var(--c-text); }
+.admin-table tr:hover td { background: rgba(34,211,238,0.04); }
+.admin-section { margin-bottom: 28px; }
+.admin-section h2 { font-size: 18px; font-weight: 700; color: var(--c-heading); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; }
+.badge-green { background: rgba(34,197,94,0.15); color: #22c55e; }
+.badge-yellow { background: rgba(234,179,8,0.15); color: #eab308; }
+.badge-red { background: rgba(239,68,68,0.15); color: #ef4444; }
+.badge-blue { background: rgba(59,130,246,0.15); color: #3b82f6; }
+</style>
+{% endblock %}
+{% block content %}
+<h1 style="font-size:24px;font-weight:800;color:var(--c-heading);margin-bottom:4px;">🛠️ Admin Dashboard</h1>
+<p style="font-size:14px;color:var(--c-text-secondary);margin-bottom:24px;">System overview, content health, and user activity at a glance.</p>
+
+<div class="admin-grid">
+  <div class="admin-card">
+    <h3>📚 Lessons</h3>
+    <div class="stat">{{ stats.total_lessons }}</div>
+    <div class="stat-sub">{{ stats.lessons_per_topic }} per topic avg</div>
+  </div>
+  <div class="admin-card">
+    <h3>❓ Questions</h3>
+    <div class="stat">{{ stats.total_questions }}</div>
+    <div class="stat-sub">{{ stats.mcq_count }} MCQ · {{ stats.tf_count }} T/F · {{ stats.fill_count }} Fill</div>
+  </div>
+  <div class="admin-card">
+    <h3>👥 Users</h3>
+    <div class="stat">{{ stats.total_users }}</div>
+    <div class="stat-sub">{{ stats.active_today }} active today · {{ stats.active_week }} this week</div>
+  </div>
+  <div class="admin-card">
+    <h3>📝 Quiz Attempts</h3>
+    <div class="stat">{{ stats.total_attempts }}</div>
+    <div class="stat-sub">{{ stats.exam_results }} exam results</div>
+  </div>
+  <div class="admin-card">
+    <h3>🧠 Mastery</h3>
+    <div class="stat">{{ stats.mastered_questions }}</div>
+    <div class="stat-sub">{{ stats.mastery_pct }}% of attempted questions mastered</div>
+  </div>
+  <div class="admin-card">
+    <h3>🔄 Review Schedule</h3>
+    <div class="stat">{{ stats.review_entries }}</div>
+    <div class="stat-sub">{{ stats.review_due }} due now</div>
+  </div>
+  <div class="admin-card" style="cursor:pointer;" onclick="window.location.href='/admin/error-feedback'">
+    <h3>🚩 Error Feedback</h3>
+    <div class="stat">{{ stats.error_feedback_count }}</div>
+    <div class="stat-sub">Click to view reports</div>
+  </div>
+</div>
+
+<div class="admin-section">
+  <h2>📋 Content by Topic</h2>
+  <table class="admin-table">
+    <thead>
+      <tr><th>Topic</th><th>Title</th><th>Lessons</th><th>Questions</th><th>Difficulty Balance</th></tr>
+    </thead>
+    <tbody>
+      {% for t in topic_stats %}
+      <tr>
+        <td><strong>{{ t.code }}</strong></td>
+        <td>{{ t.title }}</td>
+        <td>{{ t.lesson_count }}</td>
+        <td>{{ t.q_count }}</td>
+        <td>
+          {% if t.easy_count > 0 %}<span class="badge badge-green">{{ t.easy_count }} Easy</span> {% endif %}
+          {% if t.med_count > 0 %}<span class="badge badge-yellow">{{ t.med_count }} Med</span> {% endif %}
+          {% if t.hard_count > 0 %}<span class="badge badge-red">{{ t.hard_count }} Hard</span> {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div class="admin-section">
+  <h2>👥 Users</h2>
+  <table class="admin-table">
+    <thead>
+      <tr><th>ID</th><th>Username</th><th>Display Name</th><th>IP</th><th>Created</th><th>Attempts</th><th>Mastered</th></tr>
+    </thead>
+    <tbody>
+      {% for u in users %}
+      <tr>
+        <td>{{ u.id }}</td>
+        <td><strong>{{ u.username }}</strong></td>
+        <td>{{ u.display_name or '—' }} <a href="javascript:void(0)" onclick="renameDevice('{{ u.id }}','{{ u.display_name or u.username }}')" title="Rename" style="text-decoration:none;font-size:14px">✏️</a></td>
+        <td>{{ u.last_ip or '—' }}</td>
+        <td>{{ u.created_at.strftime("%Y-%m-%d") }}</td>
+        <td>{{ u.attempt_count }}</td>
+        <td>{{ u.mastered_count }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div class="admin-section">
+  <h2>⚙️ System</h2>
+  <table class="admin-table">
+    <tbody>
+      <tr><td><strong>Database</strong></td><td>{{ system.db_size_mb }} MB</td><td>{% if system.db_ok %}<span class="badge badge-green">Connected</span>{% else %}<span class="badge badge-red">Error</span>{% endif %}</td></tr>
+      <tr><td><strong>Memory</strong></td><td>{{ system.memory_used_mb }} MB / {{ system.memory_total_mb }} MB</td><td>{% if system.memory_pct < 70 %}<span class="badge badge-green">{{ system.memory_pct }}%</span>{% elif system.memory_pct < 90 %}<span class="badge badge-yellow">{{ system.memory_pct }}%</span>{% else %}<span class="badge badge-red">{{ system.memory_pct }}%</span>{% endif %}</td></tr>
+      <tr><td><strong>Disk</strong></td><td>{{ system.disk_used_gb }} GB / {{ system.disk_total_gb }} GB</td><td>{% if system.disk_pct < 70 %}<span class="badge badge-green">{{ system.disk_pct }}%</span>{% elif system.disk_pct < 90 %}<span class="badge badge-yellow">{{ system.disk_pct }}%</span>{% else %}<span class="badge badge-red">{{ system.disk_pct }}%</span>{% endif %}</td></tr>
+      <tr><td><strong>Uptime</strong></td><td>{{ system.uptime }}</td><td><span class="badge badge-blue">{{ system.service_status }}</span></td></tr>
+    </tbody>
+  </table>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<style>
+.rename-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+.rename-modal-overlay.active {
+  display: flex;
+}
+.rename-modal-card {
+  background: var(--c-bg-alt, #0d1225);
+  border: 1px solid var(--c-border, #1e293b);
+  border-radius: var(--r-lg, 16px);
+  padding: 28px 32px;
+  width: 360px;
+  max-width: 90vw;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+.rename-modal-card h3 {
+  margin: 0 0 6px 0;
+  color: var(--c-heading, #f1f5f9);
+  font-size: 18px;
+}
+.rename-modal-card p {
+  margin: 0 0 16px 0;
+  color: var(--c-text-secondary, #94a3b8);
+  font-size: 14px;
+}
+.rename-modal-card input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 14px;
+  background: var(--c-bg, #080b14);
+  border: 1px solid var(--c-border-light, #334155);
+  border-radius: var(--r-md, 12px);
+  color: var(--c-text, #e2e8f0);
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.rename-modal-card input:focus {
+  border-color: var(--c-accent, #22d3ee);
+  box-shadow: 0 0 0 3px var(--c-accent-glow, rgba(34,211,238,0.08));
+}
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  justify-content: flex-end;
+}
+.modal-actions button {
+  padding: 8px 20px;
+  border-radius: var(--r-md, 12px);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+}
+.btn-cancel {
+  background: transparent;
+  color: var(--c-text-secondary, #94a3b8);
+  border: 1px solid var(--c-border, #1e293b) !important;
+}
+.btn-cancel:hover {
+  background: var(--c-surface-hover, #1e293b);
+  color: var(--c-text, #e2e8f0);
+}
+.btn-save {
+  background: var(--c-accent, #22d3ee);
+  color: #000;
+}
+.btn-save:hover {
+  filter: brightness(1.15);
+}
+</style>
+
+<div class="rename-modal-overlay" id="renameModal" onclick="closeRenameModal(event)">
+  <div class="rename-modal-card" onclick="event.stopPropagation()">
+    <h3>Rename Device</h3>
+    <p>Give this device a friendly name so you can recognise it.</p>
+    <input type="text" id="renameInput" placeholder="e.g. Kitchen Tablet" onkeydown="if(event.key==='Enter')confirmRename()">
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeRenameModal()">Cancel</button>
+      <button class="btn-save" onclick="confirmRename()">Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+var _renameId = null;
+
+function renameDevice(id, currentName) {
+    _renameId = id;
+    document.getElementById('renameInput').value = currentName;
+    document.getElementById('renameModal').classList.add('active');
+    setTimeout(function() { document.getElementById('renameInput').focus(); }, 100);
+}
+
+function closeRenameModal(e) {
+    document.getElementById("renameModal").classList.remove("active");
+    _renameId = null;
+}
+function confirmRename() {
+    var newName = document.getElementById('renameInput').value.trim();
+    if (!newName || !_renameId) return;
+    var formData = new FormData();
+    formData.append('user_id', _renameId);
+    formData.append('name', newName);
+    fetch('/admin/rename', { method: 'POST', body: formData })
+        .then(function(r) { if (r.ok) location.reload(); });
+}
+</script>
+{% endblock %}

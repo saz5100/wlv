@@ -1,0 +1,236 @@
+{% extends "base.html" %}
+{% block title %}Spaced Review — WLV Computer Science{% endblock %}
+{% block head %}
+<style>
+.review-header { margin-bottom: 28px; }
+.review-header h1 { margin-bottom: 8px; }
+.review-header p { color: var(--c-text-secondary); font-size: 15px; margin: 0; }
+.review-stats { display: flex; gap: 16px; margin-top: 12px; flex-wrap: wrap; }
+.review-stats .stat { font-size: 14px; color: var(--c-text-secondary); }
+
+.review-list { display: flex; flex-direction: column; gap: 12px; }
+
+.review-card {
+  display: flex; align-items: center; gap: 16px;
+  padding: 16px 20px;
+  background: rgba(13,18,37,0.8); border-radius: var(--r-lg);
+  border: 1px solid rgba(34,211,238,0.08);
+  backdrop-filter: blur(2px);
+  transition: all 0.15s;
+}
+.light-theme .review-card { background: rgba(243,244,246,0.8); }
+.review-card:hover { border-color: rgba(34,211,238,0.25); transform: translateX(4px); }
+.review-card.overdue { border-left: 4px solid var(--c-rose); }
+.review-card.due-today { border-left: 4px solid #fbbf24; }
+
+.review-info { flex: 1; min-width: 0; }
+.review-topic-badge {
+  display: inline-block; font-size: 11px; font-weight: 600;
+  padding: 2px 10px; border-radius: 999px;
+  background: rgba(34,211,238,0.1); color: var(--c-accent);
+  border: 1px solid rgba(34,211,238,0.2);
+  margin-bottom: 6px;
+}
+.review-card h3 { font-size: 16px; font-weight: 600; margin: 0 0 8px; color: var(--c-heading); }
+.review-card h3 a { color: inherit; text-decoration: none; }
+.review-card h3 a:hover { color: var(--c-accent); }
+
+.review-questions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 6px; }
+.review-q-stat { font-size: 13px; color: var(--c-text-secondary); }
+.review-q-stat strong { color: var(--c-text); }
+.review-q-stat .mastered { color: var(--c-green); }
+.review-q-stat .needs-review { color: var(--c-rose); }
+
+.review-progress { height: 5px; background: var(--c-border); border-radius: 3px; width: 100%; max-width: 300px; }
+.review-progress-fill { height: 100%; border-radius: 3px; transition: width 0.3s; }
+.review-progress-fill.mastered { background: var(--c-green); }
+.review-progress-fill.partial { background: var(--c-accent); }
+.review-progress-fill.low { background: var(--c-rose); }
+
+.review-meta { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; color: var(--c-text-muted); margin-top: 4px; }
+.review-meta span { display: inline-flex; align-items: center; gap: 3px; }
+.review-due-tag { font-weight: 600; padding: 1px 8px; border-radius: 999px; font-size: 11px; }
+.review-due-tag.overdue { background: rgba(251,113,133,0.15); color: var(--c-rose); }
+.review-due-tag.today { background: rgba(251,191,36,0.15); color: #fbbf24; }
+.review-due-tag.tomorrow { background: rgba(34,211,238,0.1); color: var(--c-accent); }
+.review-due-tag.upcoming { background: rgba(148,163,184,0.1); color: var(--c-text-muted); }
+
+.review-btn { flex-shrink: 0; }
+
+.empty-state { text-align: center; padding: 60px 20px; }
+.empty-state .empty-icon { font-size: 48px; margin-bottom: 16px; }
+.empty-state h3 { font-size: 20px; margin-bottom: 8px; }
+.empty-state p { color: var(--c-text-secondary); font-size: 15px; margin-bottom: 20px; }
+
+.section-title { font-size: 14px; font-weight: 600; color: var(--c-text-muted); text-transform: uppercase; letter-spacing: 1px; margin: 24px 0 12px; display: flex; align-items: center; gap: 8px; }
+.section-title::after { content: ''; flex: 1; height: 1px; background: var(--c-border); }
+.review-help { margin-top: 20px; margin-bottom: 24px; }
+.review-help-toggle {
+  background: none; border: 1px dashed var(--c-border); border-radius: 10px;
+  padding: 10px 16px; color: var(--c-text-secondary); font-size: 14px;
+  cursor: pointer; width: 100%; text-align: left;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: all 0.15s;
+}
+.review-help-toggle:hover { border-color: var(--c-accent); color: var(--c-text); background: rgba(34,211,238,0.05); }
+.review-help-toggle .toggle-arrow { transition: transform 0.2s; font-size: 12px; }
+.review-help-toggle.open .toggle-arrow { transform: rotate(180deg); }
+.review-help-content { display: none; margin-top: 12px; }
+.review-help-content.open { display: block; }
+.help-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 640px) { .help-grid { grid-template-columns: 1fr; } }
+.help-item {
+  display: flex; gap: 10px; padding: 12px; border-radius: 10px;
+  background: rgba(13,18,37,0.6); border: 1px solid rgba(34,211,238,0.06);
+}
+.light-theme .help-item { background: rgba(243,244,246,0.6); }
+.help-item .help-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+.help-item strong { font-size: 14px; color: var(--c-heading); }
+.help-item p { font-size: 13px; color: var(--c-text-secondary); margin: 2px 0 0; line-height: 1.5; }
+</style>
+{% endblock %}
+{% block content %}
+<div class="review-header">
+    <h1>&#129504; Spaced Repetition Review</h1>
+    <p>&#128221; Lessons due for review strengthen long-term memory. Tackle overdue items first.</p>
+    <div class="review-stats">
+        <span class="stat">&#128218; {{ reviews|length }} lesson{% if reviews|length != 1 %}s{% endif %} due</span>
+        {% if overdue %}<span class="stat" style="color:var(--c-rose);">&#9200; {{ overdue|length }} overdue</span>{% endif %}
+    </div>
+</div>
+
+<div class="review-help">
+    <button class="review-help-toggle" onclick="toggleReviewHelp()">
+        &#10067; How does review work?
+        <span class="toggle-arrow" id="helpArrow">&#9660;</span>
+    </button>
+    <div class="review-help-content" id="reviewHelpContent">
+        <div class="help-grid">
+            <div class="help-item">
+                <span class="help-icon">&#9200;</span>
+                <div>
+                    <strong>Overdue (red cards)</strong>
+                    <p>You haven't reviewed this recently. The longer it's overdue, the more likely you are to forget — tackle these first!</p>
+                </div>
+            </div>
+            <div class="help-item">
+                <span class="help-icon">&#128197;</span>
+                <div>
+                    <strong>Due Today / Tomorrow</strong>
+                    <p>The system calculates the perfect time to review. A quick refresher now locks it into long-term memory before you forget it.</p>
+                </div>
+            </div>
+            <div class="help-item">
+                <span class="help-icon">&#127919;</span>
+                <div>
+                    <strong>Mastered vs Need Review</strong>
+                    <p><strong>Mastered</strong> = got it right 3+ times in a row. <strong>Need review</strong> = attempted but not yet nailed. Keep going!</p>
+                </div>
+            </div>
+            <div class="help-item">
+                <span class="help-icon">&#128202;</span>
+                <div>
+                    <strong>Easiness &amp; Intervals</strong>
+                    <p>Easy lessons get longer gaps between reviews (1 day → 6 days → weeks). Harder ones come back sooner so you don't forget.</p>
+                </div>
+            </div>
+            <div class="help-item">
+                <span class="help-icon">&#128221;</span>
+                <div>
+                    <strong>What should I do?</strong>
+                    <p>Click <strong>Review &rarr;</strong> on any card to redo the lesson quiz. Start with overdue items, then work through the rest.</p>
+                </div>
+            </div>
+            <div class="help-item">
+                <span class="help-icon">&#129504;</span>
+                <div>
+                    <strong>Why does this work?</strong>
+                    <p>Spaced repetition (SM-2) moves knowledge from short-term to long-term memory. You remember more with less effort by reviewing at the right moment.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% macro review_card(r, card_class) %}
+<div class="review-card {{ card_class }}">
+    <div class="review-info">
+        <div class="review-topic-badge">{{ r.topic_code }} &middot; {{ r.topic_title }}</div>
+        <h3><a href="/lesson/{{ r.lesson_id }}">{{ r.lesson_title }}</a></h3>
+        
+        <div class="review-questions">
+            {% if r.total_questions > 0 %}
+            <span class="review-q-stat">&#10067; <strong>{{ r.total_questions }}</strong> questions</span>
+            <span class="review-q-stat"><span class="mastered">&#10004; <strong>{{ r.mastered }}</strong> mastered</span></span>
+            {% if r.needs_review > 0 %}
+            <span class="review-q-stat"><span class="needs-review">&#128221; <strong>{{ r.needs_review }}</strong> need review</span></span>
+            {% endif %}
+            {% set pct = (r.mastered / r.total_questions * 100)|round if r.total_questions > 0 else 0 %}
+            {% set prog_class = 'mastered' if pct >= 90 else ('partial' if pct >= 50 else 'low') %}
+            <div class="review-progress"><div class="review-progress-fill {{ prog_class }}" style="width:{{ pct }}%"></div></div>
+            {% endif %}
+        </div>
+        
+        <div class="review-meta">
+            {% if r.last_reviewed %}<span>&#128337; Last: {{ r.last_reviewed[:10] }}</span>{% endif %}
+            <span>&#128202; {{ r.repetitions }} review{% if r.repetitions != 1 %}s{% endif %}</span>
+            <span>&#127919; Easiness: {{ '%.1f'|format(r.easiness) }}</span>
+            
+            {% if r.next_review %}
+                {% set days_diff = (r.next_review.date() - now).days %}
+                {% if days_diff < 0 %}
+                <span class="review-due-tag overdue">&#9200; {{ -days_diff }} day{% if -days_diff != 1 %}s{% endif %} overdue</span>
+                {% elif days_diff == 0 %}
+                <span class="review-due-tag today">&#128197; Due today</span>
+                {% elif days_diff == 1 %}
+                <span class="review-due-tag tomorrow">&#128197; Due tomorrow</span>
+                {% else %}
+                <span class="review-due-tag upcoming">&#128197; Due in {{ days_diff }} days</span>
+                {% endif %}
+            {% else %}
+                <span class="review-due-tag today">&#128197; Due now</span>
+            {% endif %}
+        </div>
+    </div>
+    <a href="/lesson/{{ r.lesson_id }}" class="btn btn-primary btn-sm review-btn">Review &#8594;</a>
+</div>
+{% endmacro %}
+
+{% if reviews %}
+    {% if overdue %}
+    <div class="section-title">&#9200; Overdue</div>
+    <div class="review-list">
+    {% for r in overdue %}{{ review_card(r, 'overdue') }}{% endfor %}
+    </div>
+    {% endif %}
+    
+    {% if due_today %}
+    <div class="section-title">&#128197; Due Today</div>
+    <div class="review-list">
+    {% for r in due_today %}{{ review_card(r, 'due-today') }}{% endfor %}
+    </div>
+    {% endif %}
+    
+    {% if upcoming %}
+    <div class="section-title">&#128197; Upcoming</div>
+    <div class="review-list">
+    {% for r in upcoming %}{{ review_card(r, '') }}{% endfor %}
+    </div>
+    {% endif %}
+{% else %}
+<div class="empty-state">
+    <div class="empty-icon">&#9989;</div>
+    <h3>Nothing Due For Review</h3>
+    <p>Complete some lessons and quizzes first. New lessons to review will appear here.</p>
+    <a href="/" class="btn btn-primary">Browse Lessons</a>
+</div>
+{% endif %}
+<script>
+function toggleReviewHelp() {
+    var btn = document.querySelector('.review-help-toggle');
+    var content = document.getElementById('reviewHelpContent');
+    if (btn) btn.classList.toggle('open');
+    if (content) content.classList.toggle('open');
+}
+</script>
+{% endblock %}

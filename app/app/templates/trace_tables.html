@@ -1,0 +1,751 @@
+{% extends "base.html" %}
+{% block title %}Trace Tables | WLV Computer Science{% endblock %}
+{% block content %}
+<div class="hero" style="padding: 30px 0 15px;">
+    <h1>📊 Trace Table Practice</h1>
+    <p class="hero-sub">Step through algorithms and track variable changes — essential for Paper 2</p>
+</div>
+
+<style>
+.tt-intro {
+    max-width: 960px;
+    margin: 0 auto 20px;
+    padding: 20px 24px;
+    background: rgba(17, 24, 39, 0.7);
+    border: 1px solid rgba(34, 211, 238, 0.12);
+    border-radius: var(--r-xl);
+    line-height: 1.7;
+    font-size: 14px;
+}
+.light-theme .tt-intro {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(8, 145, 178, 0.15);
+}
+.tt-intro h3 { color: var(--c-heading); margin-bottom: 8px; font-size: 17px; }
+
+.tt-layout {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.tt-sidebar {
+    flex: 1 1 220px;
+    max-width: 260px;
+    background: rgba(17, 24, 39, 0.85);
+    border: 1px solid rgba(34, 211, 238, 0.15);
+    border-radius: var(--r-xl);
+    padding: 16px;
+}
+.light-theme .tt-sidebar {
+    background: rgba(255, 255, 255, 0.85);
+    border-color: rgba(8, 145, 178, 0.15);
+}
+.tt-main {
+    flex: 2 1 650px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* ── Algorithm Display ── */
+.tt-algo-card {
+    background: #0d1225;
+    border: 1px solid rgba(34, 211, 238, 0.15);
+    border-radius: var(--r-xl);
+    overflow: hidden;
+}
+.light-theme .tt-algo-card {
+    background: #fafafa;
+    border-color: rgba(8, 145, 178, 0.15);
+}
+.tt-algo-header {
+    background: rgba(17, 24, 39, 0.8);
+    padding: 10px 16px;
+    border-bottom: 1px solid rgba(34, 211, 238, 0.12);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 600;
+}
+.tt-algo-code {
+    padding: 16px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #e2e8f0;
+    white-space: pre-wrap;
+    min-height: 120px;
+}
+.light-theme .tt-algo-code { color: #1e293b; }
+.tt-algo-code .highlight-line {
+    background: rgba(34, 211, 238, 0.15);
+    border-left: 3px solid var(--c-accent);
+    padding-left: 8px;
+    display: block;
+}
+.tt-algo-code .line-num {
+    display: inline-block;
+    width: 28px;
+    color: #64748b;
+    user-select: none;
+}
+
+/* ── Trace Table ── */
+.tt-table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-lg);
+}
+.tt-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 13px;
+}
+.tt-table th {
+    background: rgba(17, 24, 39, 0.8);
+    color: var(--c-accent);
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 2px solid var(--c-border);
+    white-space: nowrap;
+    font-weight: 700;
+}
+.light-theme .tt-table th { background: rgba(0, 0, 0, 0.05); }
+.tt-table td {
+    padding: 6px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    color: var(--c-text);
+    white-space: nowrap;
+}
+.light-theme .tt-table td { border-color: rgba(0, 0, 0, 0.04); }
+.tt-table tr.current-step td {
+    background: rgba(34, 211, 238, 0.08);
+}
+.tt-table td.new-value {
+    color: #34d399;
+    font-weight: 700;
+}
+.tt-table td.output-cell {
+    color: #a855f7;
+    font-style: italic;
+}
+
+/* ── Controls ── */
+.tt-controls {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.tt-controls button {
+    padding: 8px 16px;
+    border-radius: var(--r-md);
+    border: 1px solid var(--c-border);
+    background: rgba(8, 11, 20, 0.6);
+    color: var(--c-text);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.tt-controls button:hover {
+    border-color: var(--c-accent);
+    background: rgba(8, 41, 73, 0.4);
+}
+.tt-controls button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+.tt-controls button.btn-primary {
+    background: var(--c-accent);
+    color: #000;
+    border-color: var(--c-accent);
+}
+.tt-controls button.btn-primary:hover {
+    background: var(--c-accent-hover);
+}
+.tt-step-info {
+    font-size: 13px;
+    color: var(--c-text-secondary);
+    margin-left: auto;
+}
+
+/* ── Exercise List ── */
+.tt-exercise-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+.tt-exercise-list::-webkit-scrollbar { width: 5px; }
+.tt-exercise-list::-webkit-scrollbar-track { background: transparent; }
+.tt-exercise-list::-webkit-scrollbar-thumb { background: rgba(34, 211, 238, 0.2); border-radius: 99px; }
+.tt-exercise-btn {
+    text-align: left;
+    padding: 8px 10px;
+    background: rgba(13, 18, 37, 0.8);
+    border: 2px solid var(--c-border);
+    border-radius: var(--r-md);
+    color: var(--c-text);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.tt-exercise-btn:hover {
+    border-color: var(--c-accent);
+    background: rgba(8, 41, 73, 0.4);
+}
+.tt-exercise-btn.active {
+    border-color: var(--c-accent);
+    background: rgba(8, 41, 73, 0.7);
+    box-shadow: 0 0 10px var(--c-accent-glow);
+}
+.tt-exercise-btn .status-icon { float: right; font-size: 12px; }
+
+/* ── Output ── */
+.tt-output-card {
+    background: #090b11;
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-xl);
+    overflow: hidden;
+}
+.light-theme .tt-output-card { background: #f3f4f6; }
+.tt-output-header {
+    padding: 8px 16px;
+    background: rgba(17, 24, 39, 0.5);
+    border-bottom: 1px solid var(--c-border);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--c-text-secondary);
+}
+.tt-output-body {
+    padding: 12px 16px;
+    font-family: monospace;
+    font-size: 14px;
+    color: #a855f7;
+    min-height: 40px;
+    white-space: pre-wrap;
+}
+.light-theme .tt-output-body { color: #7c3aed; }
+
+@media (max-width: 768px) {
+    .tt-sidebar { max-width: 100%; }
+}
+</style>
+
+<!-- ── Intro ── -->
+<div class="tt-intro">
+    <h3>📊 Trace Table Practice</h3>
+</div>
+
+<div class="tt-layout">
+    <!-- ── Sidebar ── -->
+    <div class="tt-sidebar">
+        <h3 style="color:var(--c-heading);font-size:16px;margin-bottom:8px;">🎯 Algorithms</h3>
+        <div class="tt-exercise-list" id="ttExerciseList"></div>
+    </div>
+
+    <!-- ── Main ── -->
+    <div class="tt-main">
+        <!-- Algorithm Display -->
+        <div class="tt-algo-card">
+            <div class="tt-algo-header">
+                <span id="ttAlgoTitle">Select an Algorithm</span>
+                <span id="ttAlgoMeta" style="font-size:12px;color:var(--c-text-secondary);"></span>
+            </div>
+            <div class="tt-algo-code" id="ttAlgoCode"></div>
+        </div>
+
+        <!-- Controls -->
+        <div class="tt-controls">
+            <button class="btn-primary" id="ttBtnStart" onclick="ttStart()">▶️ Start Trace</button>
+            <button id="ttBtnStep" onclick="ttStep()" disabled>⏭️ Step</button>
+            <button id="ttBtnReset" onclick="ttReset()" disabled>🔄 Reset</button>
+            <button id="ttBtnAuto" onclick="ttAutoRun()" disabled>⚡ Auto-Run</button>
+            <span class="tt-step-info" id="ttStepInfo">Ready</span>
+        </div>
+
+        <!-- Trace Table -->
+        <div class="tt-table-wrap">
+            <table class="tt-table" id="ttTable">
+                <thead id="ttTableHead"></thead>
+                <tbody id="ttTableBody"></tbody>
+            </table>
+        </div>
+
+        <!-- Output -->
+        <div class="tt-output-card">
+            <div class="tt-output-header">📤 Program Output</div>
+            <div class="tt-output-body" id="ttOutput">—</div>
+        </div>
+    </div>
+</div>
+
+<script>
+// ─── Trace Table Exercises ───
+const ttExercises = [
+    {
+        id: 1,
+        title: "Simple Counter",
+        desc: "A FOR loop that counts from 1 to 3.",
+        code: `01  total <- 0
+02  FOR i <- 1 TO 3
+03      total <- total + i
+04  NEXT i
+05  OUTPUT total`,
+        variables: ["i", "total"],
+        steps: [
+            // [line, {var: val, ...}, output?]
+            [1, {total: 0}],
+            [2, {i: 1, total: 0}],
+            [3, {i: 1, total: 1}],
+            [2, {i: 2, total: 1}],
+            [3, {i: 2, total: 3}],
+            [2, {i: 3, total: 3}],
+            [3, {i: 3, total: 6}],
+            [5, {i: 3, total: 6}, "6"]
+        ]
+    },
+    {
+        id: 2,
+        title: "Countdown",
+        desc: "A WHILE loop that counts down from 5.",
+        code: `01  count <- 5
+02  WHILE count >= 1 DO
+03      OUTPUT count
+04      count <- count - 1
+05  ENDWHILE`,
+        variables: ["count"],
+        steps: [
+            [1, {count: 5}],
+            [2, {count: 5}],
+            [3, {count: 5}, "5"],
+            [4, {count: 4}],
+            [2, {count: 4}],
+            [3, {count: 4}, "4"],
+            [4, {count: 3}],
+            [2, {count: 3}],
+            [3, {count: 3}, "3"],
+            [4, {count: 2}],
+            [2, {count: 2}],
+            [3, {count: 2}, "2"],
+            [4, {count: 1}],
+            [2, {count: 1}],
+            [3, {count: 1}, "1"],
+            [4, {count: 0}],
+            [2, {count: 0}]
+        ]
+    },
+    {
+        id: 3,
+        title: "Linear Search",
+        desc: "Search for value 23 in [15, 8, 42, 23, 4].",
+        code: `01  data <- [15, 8, 42, 23, 4]
+02  target <- 23
+03  found <- FALSE
+04  index <- 1
+05  WHILE index <= 5 AND found = FALSE DO
+06      IF data[index] = target THEN
+07          found <- TRUE
+08      ENDIF
+09      index <- index + 1
+10  ENDWHILE
+11  IF found = TRUE THEN
+12      OUTPUT index - 1
+13  ELSE
+14      OUTPUT -1
+15  ENDIF`,
+        variables: ["index", "found", "data[1]", "data[2]", "data[3]", "data[4]", "data[5]"],
+        steps: [
+            [1, {index: null, found: null, "data[1]": 15, "data[2]": 8, "data[3]": 42, "data[4]": 23, "data[5]": 4}],
+            [3, {index: null, found: false}],
+            [4, {index: 1, found: false}],
+            [5, {index: 1, found: false}],
+            [6, {index: 1, found: false}],
+            [9, {index: 2, found: false}],
+            [5, {index: 2, found: false}],
+            [6, {index: 2, found: false}],
+            [9, {index: 3, found: false}],
+            [5, {index: 3, found: false}],
+            [6, {index: 3, found: false}],
+            [9, {index: 4, found: false}],
+            [5, {index: 4, found: false}],
+            [6, {index: 4, found: false}],
+            [7, {index: 4, found: true}],
+            [10, {index: 4, found: true}],
+            [5, {index: 4, found: true}],
+            [11, {index: 4, found: true}],
+            [12, {index: 4, found: true}, "3"]
+        ]
+    },
+    {
+        id: 4,
+        title: "Bubble Sort (One Pass)",
+        desc: "One pass of bubble sort on [64, 34, 25, 12].",
+        code: `01  nums <- [64, 34, 25, 12]
+02  FOR i <- 1 TO 3
+03      IF nums[i] > nums[i+1] THEN
+04          temp <- nums[i]
+05          nums[i] <- nums[i+1]
+06          nums[i+1] <- temp
+07      ENDIF
+08  NEXT i`,
+        variables: ["i", "temp", "nums[1]", "nums[2]", "nums[3]", "nums[4]"],
+        steps: [
+            [1, {i: null, temp: null, "nums[1]": 64, "nums[2]": 34, "nums[3]": 25, "nums[4]": 12}],
+            [2, {i: 1, temp: null, "nums[1]": 64, "nums[2]": 34}],
+            [3, {i: 1, temp: null}],
+            [4, {i: 1, temp: 64}],
+            [5, {i: 1, temp: 64, "nums[1]": 34}],
+            [6, {i: 1, temp: 64, "nums[1]": 34, "nums[2]": 64}],
+            [8, {i: 1, temp: 64, "nums[1]": 34, "nums[2]": 64}],
+            [2, {i: 2, temp: 64, "nums[2]": 64, "nums[3]": 25}],
+            [3, {i: 2, temp: 64}],
+            [4, {i: 2, temp: 64}],
+            [5, {i: 2, temp: 64, "nums[2]": 25}],
+            [6, {i: 2, temp: 64, "nums[2]": 25, "nums[3]": 64}],
+            [8, {i: 2, temp: 64, "nums[2]": 25, "nums[3]": 64}],
+            [2, {i: 3, temp: 64, "nums[3]": 64, "nums[4]": 12}],
+            [3, {i: 3, temp: 64}],
+            [4, {i: 3, temp: 64}],
+            [5, {i: 3, temp: 64, "nums[3]": 12}],
+            [6, {i: 3, temp: 64, "nums[3]": 12, "nums[4]": 64}],
+            [8, {i: 3, temp: 64, "nums[3]": 12, "nums[4]": 64}]
+        ]
+    },
+    {
+        id: 5,
+        title: "Find Maximum",
+        desc: "Find the largest number in [12, 45, 7, 89].",
+        code: `01  nums <- [12, 45, 7, 89]
+02  largest <- nums[1]
+03  FOR i <- 2 TO 4
+04      IF nums[i] > largest THEN
+05          largest <- nums[i]
+06      ENDIF
+07  NEXT i
+08  OUTPUT largest`,
+        variables: ["i", "largest", "nums[1]", "nums[2]", "nums[3]", "nums[4]"],
+        steps: [
+            [1, {i: null, largest: null, "nums[1]": 12, "nums[2]": 45, "nums[3]": 7, "nums[4]": 89}],
+            [2, {i: null, largest: 12}],
+            [3, {i: 2, largest: 12}],
+            [4, {i: 2, largest: 12}],
+            [5, {i: 2, largest: 45}],
+            [7, {i: 2, largest: 45}],
+            [3, {i: 3, largest: 45}],
+            [4, {i: 3, largest: 45}],
+            [7, {i: 3, largest: 45}],
+            [3, {i: 4, largest: 45}],
+            [4, {i: 4, largest: 45}],
+            [5, {i: 4, largest: 89}],
+            [7, {i: 4, largest: 89}],
+            [8, {i: 4, largest: 89}, "89"]
+        ]
+    },
+    {
+        id: 6,
+        title: "Accumulator Pattern",
+        desc: "Sum the numbers [3, 7, 2, 9] using a loop.",
+        code: `01  nums <- [3, 7, 2, 9]
+02  total <- 0
+03  FOR i <- 1 TO 4
+04      total <- total + nums[i]
+05  NEXT i
+06  OUTPUT total`,
+        variables: ["i", "total", "nums[1]", "nums[2]", "nums[3]", "nums[4]"],
+        steps: [
+            [1, {i: null, total: null, "nums[1]": 3, "nums[2]": 7, "nums[3]": 2, "nums[4]": 9}],
+            [2, {i: null, total: 0}],
+            [3, {i: 1, total: 0}],
+            [4, {i: 1, total: 3}],
+            [5, {i: 1, total: 3}],
+            [3, {i: 2, total: 3}],
+            [4, {i: 2, total: 10}],
+            [5, {i: 2, total: 10}],
+            [3, {i: 3, total: 10}],
+            [4, {i: 3, total: 12}],
+            [5, {i: 3, total: 12}],
+            [3, {i: 4, total: 12}],
+            [4, {i: 4, total: 21}],
+            [5, {i: 4, total: 21}],
+            [6, {i: 4, total: 21}, "21"]
+        ]
+    },
+    {
+        id: 7,
+        title: "Count Even Numbers",
+        desc: "Count how many even numbers are in [2, 5, 8, 3].",
+        code: `01  nums <- [2, 5, 8, 3]
+02  count <- 0
+03  FOR i <- 1 TO 4
+04      IF nums[i] MOD 2 = 0 THEN
+05          count <- count + 1
+06      ENDIF
+07  NEXT i
+08  OUTPUT count`,
+        variables: ["i", "count", "nums[1]", "nums[2]", "nums[3]", "nums[4]"],
+        steps: [
+            [1, {i: null, count: null, "nums[1]": 2, "nums[2]": 5, "nums[3]": 8, "nums[4]": 3}],
+            [2, {i: null, count: 0}],
+            [3, {i: 1, count: 0}],
+            [4, {i: 1, count: 0}],
+            [5, {i: 1, count: 1}],
+            [7, {i: 1, count: 1}],
+            [3, {i: 2, count: 1}],
+            [4, {i: 2, count: 1}],
+            [7, {i: 2, count: 1}],
+            [3, {i: 3, count: 1}],
+            [4, {i: 3, count: 1}],
+            [5, {i: 3, count: 2}],
+            [7, {i: 3, count: 2}],
+            [3, {i: 4, count: 2}],
+            [4, {i: 4, count: 2}],
+            [7, {i: 4, count: 2}],
+            [8, {i: 4, count: 2}, "2"]
+        ]
+    },
+    {
+        id: 8,
+        title: "Binary Search (Found)",
+        desc: "Binary search for 42 in [3, 8, 12, 23, 42, 55, 71].",
+        code: `01  data <- [3, 8, 12, 23, 42, 55, 71]
+02  target <- 42
+03  low <- 1
+04  high <- 7
+05  found <- FALSE
+06  WHILE low <= high AND found = FALSE DO
+07      mid <- (low + high) DIV 2
+08      IF data[mid] = target THEN
+09          found <- TRUE
+10      ELIF data[mid] < target THEN
+11          low <- mid + 1
+12      ELSE
+13          high <- mid - 1
+14      ENDIF
+15  ENDWHILE
+16  IF found = TRUE THEN
+17      OUTPUT mid
+18  ELSE
+19      OUTPUT -1
+20  ENDIF`,
+        variables: ["low", "high", "mid", "found"],
+        steps: [
+            [3, {low: 1, high: null, mid: null, found: null}],
+            [4, {low: 1, high: 7, mid: null, found: null}],
+            [5, {low: 1, high: 7, mid: null, found: false}],
+            [6, {low: 1, high: 7, mid: null, found: false}],
+            [7, {low: 1, high: 7, mid: 4, found: false}],
+            [8, {low: 1, high: 7, mid: 4, found: false}],
+            [10, {low: 1, high: 7, mid: 4, found: false}],
+            [11, {low: 5, high: 7, mid: 4, found: false}],
+            [15, {low: 5, high: 7, mid: 4, found: false}],
+            [6, {low: 5, high: 7, mid: 4, found: false}],
+            [7, {low: 5, high: 7, mid: 6, found: false}],
+            [8, {low: 5, high: 7, mid: 6, found: false}],
+            [10, {low: 5, high: 7, mid: 6, found: false}],
+            [12, {low: 5, high: 7, mid: 6, found: false}],
+            [13, {low: 5, high: 5, mid: 6, found: false}],
+            [15, {low: 5, high: 5, mid: 6, found: false}],
+            [6, {low: 5, high: 5, mid: 6, found: false}],
+            [7, {low: 5, high: 5, mid: 5, found: false}],
+            [8, {low: 5, high: 5, mid: 5, found: false}],
+            [9, {low: 5, high: 5, mid: 5, found: true}],
+            [15, {low: 5, high: 5, mid: 5, found: true}],
+            [6, {low: 5, high: 5, mid: 5, found: true}],
+            [16, {low: 5, high: 5, mid: 5, found: true}],
+            [17, {low: 5, high: 5, mid: 5, found: true}, "5"]
+        ]
+    }
+];
+
+let currentTtIdx = 0;
+let currentStep = -1;
+let autoRunning = false;
+let autoTimer = null;
+
+// ─── Render Exercise List ───
+function renderTtExercises() {
+    const list = document.getElementById('ttExerciseList');
+    list.innerHTML = '';
+    ttExercises.forEach((ex, i) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'tt-exercise-btn';
+        if (i === currentTtIdx) btn.classList.add('active');
+        btn.onclick = () => selectTtExercise(i);
+        btn.innerHTML = `<span>${ex.id}. ${ex.title}</span>`;
+        list.appendChild(btn);
+    });
+}
+
+// ─── Select Exercise ───
+function selectTtExercise(idx) {
+    currentTtIdx = idx;
+    currentStep = -1;
+    autoRunning = false;
+    if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+    renderTtExercises();
+    renderTtCode();
+    renderTtTable();
+    document.getElementById('ttOutput').textContent = '—';
+    document.getElementById('ttStepInfo').textContent = 'Ready';
+    document.getElementById('ttBtnStart').disabled = false;
+    document.getElementById('ttBtnStep').disabled = true;
+    document.getElementById('ttBtnReset').disabled = true;
+    document.getElementById('ttBtnAuto').disabled = true;
+}
+
+// ─── Render Code with Highlighting ───
+function renderTtCode() {
+    const ex = ttExercises[currentTtIdx];
+    document.getElementById('ttAlgoTitle').textContent = `${ex.id}. ${ex.title}`;
+    document.getElementById('ttAlgoMeta').textContent = ex.desc;
+    
+    const codeEl = document.getElementById('ttAlgoCode');
+    const lines = ex.code.split('\n');
+    let html = '';
+    lines.forEach((line, i) => {
+        const lineNum = line.match(/^(\d+)/)?.[1] || '';
+        const code = line.replace(/^\d+\s+/, '');
+        const isHighlight = currentStep >= 0 && parseInt(lineNum) === ttExercises[currentTtIdx].steps[currentStep][0];
+        html += `<span class="${isHighlight ? 'highlight-line' : ''}"><span class="line-num">${lineNum}</span>${code}</span>\n`;
+    });
+    codeEl.innerHTML = html;
+}
+
+// ─── Render Trace Table ───
+function renderTtTable() {
+    const ex = ttExercises[currentTtIdx];
+    const head = document.getElementById('ttTableHead');
+    const body = document.getElementById('ttTableBody');
+    
+    // Header
+    let hHtml = '<tr><th>Step</th><th>Line</th>';
+    ex.variables.forEach(v => { hHtml += `<th>${v}</th>`; });
+    hHtml += '<th>Output</th></tr>';
+    head.innerHTML = hHtml;
+    
+    // Body
+    let bHtml = '';
+    for (let s = 0; s <= currentStep; s++) {
+        const step = ex.steps[s];
+        const isCurrent = s === currentStep;
+        bHtml += `<tr class="${isCurrent ? 'current-step' : ''}">`;
+        bHtml += `<td>${s + 1}</td>`;
+        bHtml += `<td>${step[0]}</td>`;
+        
+        ex.variables.forEach(v => {
+            const val = step[1][v] !== undefined ? step[1][v] : '';
+            // Check if this value changed from previous step
+            const prevVal = s > 0 ? ex.steps[s-1][1][v] : undefined;
+            const isNew = prevVal !== undefined && val !== '' && val !== prevVal;
+            bHtml += `<td class="${isNew ? 'new-value' : ''}">${val !== null ? val : ''}</td>`;
+        });
+        
+        bHtml += `<td class="output-cell">${step[2] || ''}</td>`;
+        bHtml += '</tr>';
+    }
+    body.innerHTML = bHtml;
+    
+    // Scroll to bottom
+    const wrap = document.querySelector('.tt-table-wrap');
+    if (wrap) wrap.scrollTop = wrap.scrollHeight;
+}
+
+// ─── Start Trace ───
+function ttStart() {
+    currentStep = 0;
+    document.getElementById('ttBtnStart').disabled = true;
+    document.getElementById('ttBtnStep').disabled = false;
+    document.getElementById('ttBtnReset').disabled = false;
+    document.getElementById('ttBtnAuto').disabled = false;
+    document.getElementById('ttStepInfo').textContent = `Step 1 of ${ttExercises[currentTtIdx].steps.length}`;
+    renderTtCode();
+    renderTtTable();
+    updateOutput();
+}
+
+// ─── Step Forward ───
+function ttStep() {
+    const ex = ttExercises[currentTtIdx];
+    if (currentStep < ex.steps.length - 1) {
+        currentStep++;
+        document.getElementById('ttStepInfo').textContent = `Step ${currentStep + 1} of ${ex.steps.length}`;
+        renderTtCode();
+        renderTtTable();
+        updateOutput();
+        
+        if (currentStep >= ex.steps.length - 1) {
+            document.getElementById('ttBtnStep').disabled = true;
+            document.getElementById('ttBtnAuto').disabled = true;
+            document.getElementById('ttStepInfo').textContent += ' ✅ Complete';
+        }
+    }
+}
+
+// ─── Reset ───
+function ttReset() {
+    currentStep = -1;
+    autoRunning = false;
+    if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+    document.getElementById('ttBtnStart').disabled = false;
+    document.getElementById('ttBtnStep').disabled = true;
+    document.getElementById('ttBtnReset').disabled = true;
+    document.getElementById('ttBtnAuto').disabled = true;
+    document.getElementById('ttStepInfo').textContent = 'Ready';
+    document.getElementById('ttOutput').textContent = '—';
+    renderTtCode();
+    renderTtTable();
+}
+
+// ─── Auto-Run ───
+function ttAutoRun() {
+    if (autoRunning) {
+        autoRunning = false;
+        if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+        document.getElementById('ttBtnAuto').textContent = '⚡ Auto-Run';
+        return;
+    }
+    
+    autoRunning = true;
+    document.getElementById('ttBtnAuto').textContent = '⏸️ Pause';
+    autoTimer = setInterval(() => {
+        const ex = ttExercises[currentTtIdx];
+        if (currentStep < ex.steps.length - 1) {
+            ttStep();
+        } else {
+            autoRunning = false;
+            clearInterval(autoTimer);
+            autoTimer = null;
+            document.getElementById('ttBtnAuto').textContent = '⚡ Auto-Run';
+        }
+    }, 600);
+}
+
+// ─── Update Output ───
+function updateOutput() {
+    const ex = ttExercises[currentTtIdx];
+    const outputs = [];
+    for (let s = 0; s <= currentStep; s++) {
+        if (ex.steps[s][2]) {
+            outputs.push(ex.steps[s][2]);
+        }
+    }
+    document.getElementById('ttOutput').textContent = outputs.length ? outputs.join('\n') : '(no output yet)';
+}
+
+// ─── Init ───
+document.addEventListener('DOMContentLoaded', () => {
+    renderTtExercises();
+    selectTtExercise(0);
+});
+</script>
+{% endblock %}

@@ -1,0 +1,237 @@
+{% extends "base.html" %}
+{% block title %}Home — WLV Computer Science{% endblock %}
+{% block head %}
+<style>
+.home-greeting { font-size: 30px; font-weight: 800; color: var(--c-heading); margin-bottom: 4px; }
+.home-greeting-sub { font-size: 16px; color: var(--c-text-secondary); margin-bottom: 24px; }
+
+.home-section { margin-bottom: 28px; }
+.home-section-title { font-size: 18px; font-weight: 700; color: var(--c-heading); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+
+.streak-card {
+  display: flex; align-items: center; gap: 16px;
+  padding: 20px 24px; border-radius: var(--r-xl);
+  background: linear-gradient(135deg, rgba(236,72,153,0.08), rgba(168,85,247,0.08));
+  border: 1px solid rgba(236,72,153,0.2);
+}
+.streak-emoji { font-size: 40px; }
+.streak-count { font-size: 34px; font-weight: 800; color: var(--c-heading); line-height: 1; }
+.streak-label { font-size: 15px; color: var(--c-text-secondary); }
+
+.quick-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 640px) { .quick-grid { grid-template-columns: 1fr; } }
+.quick-card {
+  padding: 18px; border-radius: var(--r-lg);
+  background: rgba(13,18,37,0.6); border: 1px solid rgba(34,211,238,0.08);
+  text-decoration: none; display: flex; align-items: center; gap: 14px;
+  transition: all 0.15s;
+}
+.light-theme .quick-card { background: rgba(243,244,246,0.6); }
+.quick-card:hover { border-color: var(--c-accent); transform: translateY(-1px); }
+.quick-card-icon { font-size: 30px; flex-shrink: 0; }
+.quick-card-text h4 { font-size: 16px; font-weight: 700; color: var(--c-heading); margin: 0 0 2px; }
+.quick-card-text p { font-size: 14px; color: var(--c-text-secondary); margin: 0; line-height: 1.4; }
+
+.home-action-bar {
+  display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px;
+}
+.home-action-bar .btn { flex: 1; min-width: 140px; justify-content: center; }
+
+@media (max-width: 800px) {
+  .home-action-bar { flex-direction: column; }
+  .home-action-bar .btn { width: 100%; }
+}
+
+.due-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px; border-radius: var(--r-lg);
+  background: rgba(13,18,37,0.4); border: 1px solid rgba(34,211,238,0.06);
+  margin-bottom: 8px; text-decoration: none;
+}
+.light-theme .due-item { background: rgba(243,244,246,0.4); }
+.due-item:hover { border-color: var(--c-accent); }
+.due-item-icon { font-size: 22px; flex-shrink: 0; }
+.due-item-text { flex: 1; }
+.due-item-text h4 { font-size: 16px; font-weight: 600; color: var(--c-heading); margin: 0; }
+.due-item-text p { font-size: 14px; color: var(--c-text-secondary); margin: 2px 0 0; }
+.due-item-badge {
+  font-size: 14px; font-weight: 700; padding: 3px 10px; border-radius: 999px;
+  flex-shrink: 0;
+}
+.due-item-badge.overdue { background: rgba(239,68,68,0.15); color: #ef4444; }
+.due-item-badge.today { background: rgba(234,179,8,0.15); color: #eab308; }
+
+.empty-state { padding: 24px; text-align: center; color: var(--c-text-muted); font-size: 15px; border-radius: var(--r-lg); background: rgba(13,18,37,0.3); }
+.light-theme .empty-state { background: rgba(243,244,246,0.3); }
+
+@media (max-width: 600px) {
+  .home-greeting { font-size: 24px; }
+  .streak-count { font-size: 28px; }
+  .home-greeting-sub { font-size: 16px; }
+  .home-section-title { font-size: 18px; }
+  .streak-label { font-size: 15px; }
+  .quick-card-text h4 { font-size: 16px; }
+  .quick-card-text p { font-size: 14px; }
+  .due-item-text h4 { font-size: 16px; }
+  .due-item-text p { font-size: 14px; }
+  .empty-state { font-size: 15px; }
+}
+</style>
+{% endblock %}
+{% block content %}
+
+{# ── Greeting ── #}
+<div class="home-greeting">👋 Welcome back</div>
+<p class="home-greeting-sub">Pick up where you left off, or explore something new.</p>
+
+{# ── Quick actions ── #}
+<div class="home-action-bar">
+  <a href="/lessons" class="btn btn-primary">📖 Browse Lessons</a>
+  <a href="/review" class="btn btn-secondary">🔁 Review</a>
+  <a href="/exam?mode=quickfire" class="btn btn-secondary">⚡ Quick Fire</a>
+</div>
+
+{# ── Streak ── #}
+{% if streak and streak > 0 %}
+<div class="streak-card home-section">
+  <div class="streak-emoji">🔥</div>
+  <div>
+    <div class="streak-count">{{ streak }}</div>
+    <div class="streak-label">day study streak — keep it going!</div>
+  </div>
+</div>
+{% endif %}
+
+{# ── Grade Card ── #}
+{% if grade_summary and grade_summary.overall_grade %}
+<div class="grade-card home-section" style="display:flex;align-items:center;gap:16px;padding:16px 20px;border-radius:var(--r-xl);background:linear-gradient(135deg,rgba(34,211,238,0.06),rgba(6,182,212,0.06));border:1px solid rgba(34,211,238,0.15);">
+  <div style="font-size:38px;font-weight:800;color:var(--c-accent,#22d3ee);min-width:50px;text-align:center;">{{ grade_summary.overall_grade }}</div>
+  <div style="flex:1;">
+    <div style="font-size:16px;font-weight:700;color:var(--c-heading);">Current Working Grade</div>
+    <div style="font-size:15px;color:var(--c-text-secondary);">{{ grade_summary.overall_pct }}% average — {{ grade_summary.total_attempts }} exam-style questions answered</div>
+    {% if grade_summary.next_grade %}
+    <div style="margin-top:6px;height:6px;background:var(--c-border,#334155);border-radius:3px;overflow:hidden;">
+      <div style="height:100%;width:{{ grade_summary.overall_pct }}%;background:linear-gradient(90deg,#22d3ee,#06b6d4);border-radius:3px;transition:width 0.5s;"></div>
+    </div>
+    <div style="font-size:14px;color:var(--c-text-muted);margin-top:2px;">{{ grade_summary.marks_to_next }}% improvement needed for Grade {{ grade_summary.next_grade }}</div>
+    {% endif %}
+  </div>
+  <a href="/progress" style="font-size:15px;color:var(--c-accent);text-decoration:none;white-space:nowrap;">Details →</a>
+</div>
+{% endif %}
+
+{# ── Due Reviews ── #}
+<div class="home-section">
+  <div class="home-section-title">🔁 Due for Review</div>
+  {% if due_reviews and due_reviews|length > 0 %}
+    {% for r in due_reviews[:5] %}
+    <a href="/review" class="due-item">
+      <div class="due-item-icon">📖</div>
+      <div class="due-item-text">
+        <h4>{{ r.lesson_title }}</h4>
+        <p>{{ r.topic_title }} — {{ r.needs_review }} questions need practice</p>
+      </div>
+      {% if r.overdue %}
+      <span class="due-item-badge overdue">Overdue</span>
+      {% else %}
+      <span class="due-item-badge today">Due today</span>
+      {% endif %}
+    </a>
+    {% endfor %}
+  {% else %}
+    <div class="empty-state">✅ Nothing due — great job! Check back after your next quiz.</div>
+  {% endif %}
+</div>
+
+{# ── Quick links ── #}
+<div class="home-section">
+  <div class="home-section-title">🚀 Jump To</div>
+  <div class="quick-grid">
+    <a href="/progress" class="quick-card">
+      <div class="quick-card-icon">📈</div>
+      <div class="quick-card-text">
+        <h4>Your Progress</h4>
+        <p>View mastery, streaks, and stats across all topics</p>
+      </div>
+    </a>
+    <a href="/codelab" class="quick-card">
+      <div class="quick-card-icon">💻</div>
+      <div class="quick-card-text">
+        <h4>Code Lab</h4>
+        <p>Write and run Python code in your browser</p>
+      </div>
+    </a>
+    <a href="/tutor" class="quick-card">
+      <div class="quick-card-icon">🤖</div>
+      <div class="quick-card-text">
+        <h4>AI Tutor</h4>
+        <p>Ask questions and get help with any topic</p>
+      </div>
+    </a>
+    <a href="/resources" class="quick-card">
+      <div class="quick-card-icon">📦</div>
+      <div class="quick-card-text">
+        <h4>Resources</h4>
+        <p>Cheat sheets, past papers, mnemonics, and more</p>
+      </div>
+    </a>
+  </div>
+</div>
+
+{# ── Advise Me ── #}
+<div class="home-section">
+  <div class="home-section-title">📋 Personalised Advice</div>
+  <button class="btn btn-primary" style="width:100%;padding:16px;font-size:16px;" onclick="openAdviseModal()">📋 Advise Me 🧰</button>
+  <p style="font-size:14px;color:var(--c-text-muted);margin-top:6px;">Get customised study recommendations based on your progress and weak spots.</p>
+</div>
+
+{# ── Advise Me Modal ── #}
+<div id="adviseModal" class="modal-overlay" style="display:none;" onclick="closeAdviseModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <div class="modal-header">
+            <span class="modal-title">📋 Your Personal Study Advice</span>
+            <button class="modal-close" onclick="closeAdviseModal()">&times;</button>
+        </div>
+        <div id="adviseBody" class="modal-body">
+            <div class="advise-loading">Analysing your progress...</div>
+        </div>
+    </div>
+</div>
+
+<script>
+function openAdviseModal() {
+    var modal = document.getElementById('adviseModal');
+    var body = document.getElementById('adviseBody');
+    modal.style.display = 'flex';
+    body.innerHTML = '<div class="advise-loading">Analysing your progress...</div>';
+    fetch('/advise-me')
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (!data.advice || data.advice.length === 0) {
+                body.innerHTML = '<div class="advise-empty"><div class="advise-emoji">✅</div><div class="advise-empty-text">' + data.summary + '</div></div>';
+                return;
+            }
+            var html = '<div class="advise-summary">' + data.summary + '</div>';
+            for (var i = 0; i < data.advice.length; i++) {
+                var a = data.advice[i];
+                html += '<div class="advise-item advise-' + a.type + '">';
+                html += '  <div class="advise-icon">' + a.icon + '</div>';
+                html += '  <div class="advise-text">';
+                html += '    <div class="advise-title">' + a.title + '</div>';
+                html += '    <div class="advise-body">' + a.body + '</div>';
+                html += '    <a href="' + a.action + '" class="advise-action">' + a.action_label + '</a>';
+                html += '  </div>';
+                html += '</div>';
+            }
+            body.innerHTML = html;
+        })
+        .catch(function(err) {
+            body.innerHTML = '<div class="advise-empty"><div class="advise-emoji">⚠️</div><div class="advise-empty-text">Could not load advice. Try again later.</div></div>';
+        });
+}
+function closeAdviseModal(e) {
+    if (e && e.target !== e.currentTarget) return;
+    document.getElementById('adviseModal').style.display = 'none';
+}
+</script>
+{% endblock %}

@@ -1,0 +1,434 @@
+{% extends "base.html" %}
+{% block title %}Progress &mdash; WLV Computer Science{% endblock %}
+{% block head %}
+<style>
+.progress-header { text-align: center; margin-bottom: 28px; }
+.progress-header h1 { font-size: 28px; margin-bottom: 4px; }
+.progress-header p { color: var(--c-text-secondary); font-size: 15px; }
+
+.stat-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 16px 0; }
+.stat-card {
+    background: rgba(17,24,39,0.88);
+    backdrop-filter: blur(2px);
+    border: 1px solid rgba(34,211,238,0.10);
+    border-radius: var(--r-lg);
+    padding: 18px 22px;
+    text-align: center;
+    min-width: 110px;
+    transition: all 0.3s;
+}
+.light-theme .stat-card { background: rgba(255,255,255,0.88); }
+.stat-card:hover { border-color: var(--c-accent); box-shadow: 0 4px 16px var(--c-accent-glow); }
+.stat-card .num { font-size: 30px; font-weight: 700; color: var(--c-accent); }
+.stat-card .label { font-size: 12px; color: var(--c-text-muted); margin-top: 2px; }
+@media (max-width: 800px) {
+  .stat-card { min-width: 0; width: calc(50% - 6px); }
+}
+
+/* Streak dots */
+.streak-section { margin: 16px 0; }
+.streak-label { font-size: 13px; color: var(--c-text-muted); margin-bottom: 8px; }
+.streak-dots { display: flex; gap: 4px; flex-wrap: wrap; }
+.streak-dot { width: 16px; height: 16px; border-radius: 4px; background: var(--c-border); transition: all 0.15s; position: relative; cursor: default; }
+.streak-dot:hover { transform: scale(1.2); }
+.streak-dot.studied { background: var(--c-accent); box-shadow: 0 0 6px var(--c-accent-glow); }
+.streak-dot.today { border: 2px solid var(--c-accent); }
+.streak-dot .dot-tip { display: none; position: absolute; bottom: 120%; left: 50%; transform: translateX(-50%); background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 6px; padding: 3px 8px; font-size: 11px; white-space: nowrap; z-index: 10; }
+.streak-dot:hover .dot-tip { display: block; }
+
+/* Section titles */
+.section-title { font-size: 16px; font-weight: 700; color: var(--c-heading); margin: 28px 0 14px; display: flex; align-items: center; gap: 8px; }
+
+/* Topic progress heat map cards */
+.topic-progress-card {
+    background: rgba(17,24,39,0.88);
+    backdrop-filter: blur(2px);
+    border: 1px solid rgba(34,211,238,0.08);
+    border-radius: var(--r-lg);
+    padding: 16px;
+    margin-bottom: 10px;
+    transition: all 0.2s;
+}
+.light-theme .topic-progress-card { background: rgba(255,255,255,0.88); }
+.topic-progress-card:hover { border-color: var(--c-accent); box-shadow: 0 4px 16px var(--c-accent-glow); }
+.tp-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; }
+.tp-title-info { display: flex; align-items: center; gap: 8px; }
+.tp-code { font-size: 12px; color: var(--c-accent); font-weight: 600; }
+.tp-title { font-weight: 600; color: var(--c-text); }
+.tp-stats { font-size: 13px; color: var(--c-text-muted); }
+.tp-badge { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; }
+.tp-badge.gold { background: rgba(234,179,8,0.15); color: #eab308; border: 1px solid rgba(234,179,8,0.3); }
+.tp-badge.silver { background: rgba(148,163,184,0.15); color: #94a3b8; border: 1px solid rgba(148,163,184,0.3); }
+.tp-badge.bronze { background: rgba(205,127,50,0.15); color: #cd7f32; border: 1px solid rgba(205,127,50,0.3); }
+.tp-badge.none { background: rgba(100,116,139,0.1); color: #64748b; border: 1px solid rgba(100,116,139,0.2); }
+
+.progress-bar-track { height: 6px; background: var(--c-border); border-radius: 99px; overflow: hidden; margin: 6px 0; }
+.progress-bar-fill { height: 100%; border-radius: 99px; transition: width 0.5s; }
+.progress-bar-fill.gold { background: linear-gradient(90deg, #eab308, #facc15); }
+.progress-bar-fill.silver { background: linear-gradient(90deg, #94a3b8, #cbd5e1); }
+.progress-bar-fill.bronze { background: linear-gradient(90deg, #cd7f32, #d97706); }
+.progress-bar-fill.none { background: var(--c-text-muted); }
+
+.tp-footer { display: flex; justify-content: space-between; font-size: 12px; color: var(--c-text-muted); margin-top: 4px; }
+
+/* Review health row */
+.review-health { display: flex; gap: 10px; flex-wrap: wrap; }
+.health-card {
+    flex: 1; min-width: 100px; padding: 14px 16px; border-radius: var(--r-lg);
+    background: rgba(17,24,39,0.88); border: 1px solid rgba(34,211,238,0.08);
+    text-align: center;
+}
+.light-theme .health-card { background: rgba(255,255,255,0.88); }
+.health-card .num { font-size: 24px; font-weight: 700; }
+.health-card .label { font-size: 12px; color: var(--c-text-muted); margin-top: 2px; }
+.health-card.overdue { border-left: 3px solid var(--c-rose); }
+.health-card.overdue .num { color: var(--c-rose); }
+.health-card.today { border-left: 3px solid #fbbf24; }
+.health-card.today .num { color: #fbbf24; }
+.health-card.upcoming { border-left: 3px solid var(--c-accent); }
+.health-card.upcoming .num { color: var(--c-accent); }
+.health-card.done { border-left: 3px solid var(--c-green); }
+.health-card.done .num { color: var(--c-green); }
+.health-card .health-icon { font-size: 20px; }
+
+/* Weakest lessons */
+.weak-item {
+    display: flex; justify-content: space-between; align-items: center; padding: 10px 14px;
+    background: rgba(17,24,39,0.6); border: 1px solid rgba(34,211,238,0.06); border-radius: var(--r-md);
+    margin-bottom: 6px;
+}
+.light-theme .weak-item { background: rgba(243,244,246,0.6); }
+.weak-item .wi-title { font-size: 14px; font-weight: 500; }
+.weak-item .wi-topic { font-size: 11px; color: var(--c-text-muted); }
+.weak-item .wi-acc { font-size: 14px; font-weight: 700; min-width: 48px; text-align: right; }
+.wi-acc.low { color: var(--c-rose); }
+.wi-acc.med { color: #fbbf24; }
+.wi-acc.high { color: var(--c-green); }
+
+/* Type breakdown */
+.type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+@media (max-width: 540px) { .type-grid { grid-template-columns: 1fr; } }
+.streak-count {
+  font-size: 14px; font-weight: 600; color: #f97316; margin-top: 8px;
+}
+.component-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px;
+}
+@media (max-width: 500px) { .component-grid { grid-template-columns: 1fr; } }
+.component-card {
+  padding: 16px; border-radius: 12px; background: rgba(13,18,37,0.8);
+  border: 1px solid rgba(34,211,238,0.1); text-align: center;
+}
+.light-theme .component-card { background: rgba(243,244,246,0.8); }
+.component-card .comp-header {
+  font-size: 16px; font-weight: 700; color: var(--c-heading); margin-bottom: 4px;
+}
+.component-card .comp-sub {
+  font-size: 13px; color: var(--c-text-secondary); margin-bottom: 12px;
+}
+.component-card .comp-bar { margin-bottom: 8px; }
+.component-card .comp-pct {
+  font-size: 14px; font-weight: 700; color: var(--c-accent);
+}
+
+.type-card {
+    display: flex; justify-content: space-between; align-items: center; padding: 10px 14px;
+    background: rgba(17,24,39,0.6); border: 1px solid rgba(34,211,238,0.06); border-radius: var(--r-md);
+}
+.light-theme .type-card { background: rgba(243,244,246,0.6); }
+.type-card .tc-label { font-size: 13px; font-weight: 500; }
+.type-card .tc-acc { font-size: 15px; font-weight: 700; }
+
+/* Mini progress bar in topic card */
+.tp-mini-bar { display: flex; gap: 3px; margin: 4px 0; }
+.tp-mini-block { height: 6px; border-radius: 2px; flex: 1; }
+.tp-mini-block.mastered { background: var(--c-green); }
+.tp-mini-block.needs-work { background: var(--c-rose); }
+.tp-mini-block.unattempted { background: var(--c-border); }
+/* Progress help section */
+.progress-help { margin-bottom: 24px; }
+.progress-help-toggle {
+  background: none; border: 1px dashed var(--c-border); border-radius: 10px;
+  padding: 10px 16px; color: var(--c-text-secondary); font-size: 14px;
+  cursor: pointer; width: 100%; text-align: left;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: all 0.15s;
+}
+.progress-help-toggle:hover { border-color: var(--c-accent); color: var(--c-text); background: rgba(34,211,238,0.05); }
+.progress-help-toggle .toggle-arrow { transition: transform 0.2s; font-size: 12px; }
+.progress-help-toggle.open .toggle-arrow { transform: rotate(180deg); }
+.progress-help-content { display: none; margin-top: 12px; }
+.progress-help-content.open { display: block; }
+.help-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 640px) { .help-grid { grid-template-columns: 1fr; } }
+.help-item {
+  display: flex; gap: 10px; padding: 12px; border-radius: 10px;
+  background: rgba(13,18,37,0.6); border: 1px solid rgba(34,211,238,0.06);
+}
+.light-theme .help-item { background: rgba(243,244,246,0.6); }
+.help-item .help-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+.help-item strong { font-size: 14px; color: var(--c-heading); }
+.help-item p { font-size: 13px; color: var(--c-text-secondary); margin: 2px 0 0; line-height: 1.5; }
+
+
+/* Icon stat cards */
+.stat-icon { font-size: 28px; margin-bottom: 4px; }
+
+/* Empty state */
+.empty-state { text-align: center; padding: 60px 20px; }
+.empty-state .empty-icon { font-size: 48px; margin-bottom: 16px; }
+.empty-state h3 { font-size: 20px; margin-bottom: 8px; }
+.empty-state p { color: var(--c-text-secondary); font-size: 15px; margin-bottom: 20px; }
+</style>
+
+<script>
+function toggleProgressHelp() {
+    var btn = document.querySelector('.progress-help-toggle');
+    var content = document.getElementById('progressHelpContent');
+    if (btn) btn.classList.toggle('open');
+    if (content) content.classList.toggle('open');
+}
+</script>
+
+{% endblock %}
+{% block content %}
+<div class="progress-header">
+    <h1>&#128202; Your Progress</h1>
+    <p>Track your learning across all topics &mdash; 5 question types, mastery tracking, and spaced review</p>
+</div>
+
+
+<div class="progress-help">
+    <button class="progress-help-toggle" onclick="toggleProgressHelp()">
+        &#10067; What does Progress track?
+        <span class="toggle-arrow" id="progressHelpArrow">&#9660;</span>
+    </button>
+    <div class="progress-help-content" id="progressHelpContent">
+        <div class="help-grid">
+            <div class="help-item">
+                <span class="help-icon">&#128218;</span>
+                <div>
+                    <strong>Lesson Quizzes</strong>
+                    <p>Progress tracks your <strong>lesson quiz</strong> results only &mdash; not exams. Every time you complete a lesson quiz, your answers update these stats.</p>
+                </div>
+            </div>
+            <div class="help-item">
+                <span class="help-icon">&#127919;</span>
+                <div>
+                    <strong>Accuracy (Latest Attempt)</strong>
+                    <p>Shows the percentage of unique questions where your <strong>most recent</strong> attempt was correct. Multiple attempts on the same question count once.</p>
+                </div>
+            </div>
+            <div class="help-item">
+                <span class="help-icon">&#127942;</span>
+                <div>
+                    <strong>Mastery</strong>
+                    <p>A question is <strong>mastered</strong> when you get it right 3+ times in a row. Topics show badges: &#127942; Gold (90%+), &#129352; Silver (75%+), &#129353; Bronze (50%+).</p>
+                </div>
+            </div>
+            <div class="help-item">
+                <span class="help-icon">&#129504;</span>
+                <div>
+                    <strong>Review Health</strong>
+                    <p>Overdue / Due Today / Upcoming counts from the spaced repetition system. These are based on your lesson quiz scores and SM-2 scheduling.</p>
+                </div>
+            </div>
+            <div class="help-item">
+                <span class="help-icon">&#128220;</span>
+                <div>
+                    <strong>Question Types</strong>
+                    <p>Accuracy broken down by question type &mdash; Multiple Choice, True/False, Ordering, Fill in the Blank, and Multi-Select. Shows which types need more practice.</p>
+                </div>
+            </div>
+            <div class="help-item">
+                <span class="help-icon">&#128200;</span>
+                <div>
+                    <strong>Not included</strong>
+                    <p><strong>Exam results</strong> are kept separate &mdash; go to the <strong>Exam</strong> or <strong>History</strong> tab to review those. Exams are a simulated test environment and don't affect mastery tracking.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if overall and overall.unique_questions > 0 %}
+{# ─── Overall Stats ─── #}
+<div class="stat-row">
+    <div class="stat-card">
+        <div class="num">{{ overall.unique_questions }}</div>
+        <div class="label">&#10067; Questions Tried</div>
+    </div>
+    <div class="stat-card">
+        <div class="num">{{ overall.correct_latest }}</div>
+        <div class="label">&#9989; Correct (latest)</div>
+    </div>
+    <div class="stat-card">
+        <div class="num">{{ overall.accuracy_pct }}%</div>
+        <div class="label">&#127919; Latest Accuracy</div>
+    </div>
+    <div class="stat-card">
+        <div class="num">{{ overall.mastered }}</div>
+        <div class="label">&#127942; Mastered</div>
+    </div>
+</div>
+
+{# ─── Streak dots ─── #}
+{% if last_14_days %}
+<div class="streak-section">
+    <div class="streak-label">&#128198; Last 14 days:</div>
+    <div class="streak-dots">
+        {% for day in last_14_days %}
+        <div class="streak-dot {% if day.studied %}studied{% endif %} {% if loop.last %}today{% endif %}">
+            <span class="dot-tip">{{ day.label }}</span>
+        </div>
+        {% endfor %}
+    </div>
+    {% if streak > 0 %}
+    <div class="streak-count">&#128293; {{ streak }}-day streak{% if streak >= 7 %} &mdash; on fire!{% endif %}</div>
+    {% endif %}
+</div>
+{% endif %}
+
+{# ─── Review Health ─── #}
+<div class="section-title">&#129504; Spaced Review Health</div>
+<div class="review-health">
+    {% set r = review_stats %}
+    <div class="health-card overdue">
+        <div class="health-icon">&#9200;</div>
+        <div class="num">{{ r.overdue if r.overdue else 0 }}</div>
+        <div class="label">Overdue</div>
+    </div>
+    <div class="health-card today">
+        <div class="health-icon">&#128197;</div>
+        <div class="num">{{ r.due_today if r.due_today else 0 }}</div>
+        <div class="label">Due Today</div>
+    </div>
+    <div class="health-card upcoming">
+        <div class="health-icon">&#128200;</div>
+        <div class="num">{{ r.upcoming if r.upcoming else 0 }}</div>
+        <div class="label">Due in 7 Days</div>
+    </div>
+    {% set total_reviews = (r.overdue|default(0)) + (r.due_today|default(0)) + (r.upcoming|default(0)) %}
+    {% if total_reviews == 0 %}
+    <div class="health-card done">
+        <div class="health-icon">&#9989;</div>
+        <div class="num">0</div>
+        <div class="label">All Caught Up</div>
+    </div>
+    {% endif %}
+</div>
+
+{# ─── Component Summary ─── #}
+{% if component_data and component_data|length > 0 %}
+<div class="section-title">&#128202; Component Overview</div>
+<div class="component-grid">
+    {% for c in component_data %}
+    {% set c_pct = (c.mastered / c.total_questions * 100)|round if c.total_questions > 0 else 0 %}
+    <div class="component-card">
+        <div class="comp-header">Component {{ c.component }}</div>
+        <div class="comp-sub">{{ c.mastered }} / {{ c.total_questions }} mastered</div>
+        <div class="progress-bar-track comp-bar">
+            <div class="progress-bar-fill {% if c_pct >= 75 %}gold{% elif c_pct >= 50 %}silver{% else %}bronze{% endif %}" style="width:{{ c_pct }}%"></div>
+        </div>
+        <div class="comp-pct">{{ c_pct }}%</div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{# ─── By Topic with Mastery Badges & Heatmaps ─── #}
+<div class="section-title">&#128218; Topic Breakdown</div>
+{% for t in topics_data %}
+    {% set md = mastery_data.get(t.code, {'mastered': 0, 'total': 0}) %}
+    {% set pct = (md.mastered / md.total * 100)|round if md.total > 0 else 0 %}
+    {% set badge_class = 'gold' if pct >= 90 else ('silver' if pct >= 75 else ('bronze' if pct >= 50 else 'none')) %}
+    {% set badge_icon = '&#127942;' if pct >= 90 else ('&#129352;' if pct >= 75 else ('&#129353;' if pct >= 50 else '')) %}
+    {% set progress_class = 'gold' if pct >= 90 else ('silver' if pct >= 75 else ('bronze' if pct >= 50 else 'none')) %}
+    {% set total_q = t.total_questions|default(0) %}
+    {% set mastered_q = t.mastered|default(0) %}
+    {% set needs_work_q = t.needs_work|default(0) %}
+    {% set unattempted_q = total_q - mastered_q - needs_work_q %}
+<div class="topic-progress-card">
+    <div class="tp-header">
+        <div class="tp-title-info">
+            <span class="tp-code">{{ t.code }} &middot;</span>
+            <span class="tp-title">{{ t.title }}</span>
+            <span class="tp-badge {{ badge_class }}">{{ badge_icon }} {{ md.mastered }}/{{ md.total }}</span>
+        </div>
+        <span class="tp-stats">{{ t.attempted }}/{{ total_q }} tried</span>
+    </div>
+    {% if total_q > 0 %}
+    <div class="tp-mini-bar">
+        {% if mastered_q > 0 %}
+        <div class="tp-mini-block mastered" style="flex:{{ mastered_q }}" title="Mastered: {{ mastered_q }}"></div>
+        {% endif %}
+        {% if needs_work_q > 0 %}
+        <div class="tp-mini-block needs-work" style="flex:{{ needs_work_q }}" title="Needs work: {{ needs_work_q }}"></div>
+        {% endif %}
+        {% if unattempted_q > 0 %}
+        <div class="tp-mini-block unattempted" style="flex:{{ unattempted_q }}" title="Unattempted: {{ unattempted_q }}"></div>
+        {% endif %}
+    </div>
+    <div class="progress-bar-track">
+        <div class="progress-bar-fill {{ progress_class }}" style="width:{{ pct }}%"></div>
+    </div>
+    <div class="tp-footer">
+        <span>{{ mastered_q }} mastered &middot; {{ needs_work_q }} need work &middot; {{ unattempted_q }} not tried</span>
+        <span>{{ pct }}%</span>
+    </div>
+    {% else %}
+    <div style="font-size:12px;color:#94a3b8;margin-top:4px;">No questions in this topic yet</div>
+    {% endif %}
+</div>
+{% endfor %}
+
+{# ─── Weakest Lessons ─── #}
+{% if weakest_lessons %}
+<div class="section-title">&#128293; Toughest Lessons</div>
+<p style="font-size:13px;color:var(--c-text-muted);margin:-10px 0 12px;">Lessons with the lowest accuracy &mdash; focus your revision here</p>
+{% for w in weakest_lessons %}
+{% set acc_class = 'low' if w.accuracy < 40 else ('med' if w.accuracy < 70 else 'high') %}
+<a href="/lesson/{{ w.id }}" class="weak-item" style="text-decoration:none;color:inherit;">
+    <div>
+        <div class="wi-title">{{ w.title }}</div>
+        <div class="wi-topic">{{ w.topic_code }} &middot; {{ w.topic_title }}</div>
+    </div>
+    <div class="wi-acc {{ acc_class }}">{{ w.accuracy }}%</div>
+</a>
+{% endfor %}
+{% endif %}
+
+{# ─── Question Type Breakdown ─── #}
+{% if type_breakdown %}
+<div class="section-title">&#128220; Accuracy by Question Type</div>
+<div class="type-grid">
+{% for tb in type_breakdown %}
+    {% set acc_class = 'low' if tb.accuracy < 40 else ('med' if tb.accuracy < 70 else 'high') %}
+    <div class="type-card">
+        <span class="tc-label">{{ tb.label }} <span style="font-size:11px;color:var(--c-text-muted);">({{ tb.attempted }} tried)</span></span>
+        <span class="tc-acc" style="color:{% if tb.accuracy < 40 %}var(--c-rose){% elif tb.accuracy < 70 %}#fbbf24{% else %}var(--c-green){% endif %};">{{ tb.accuracy }}%</span>
+    </div>
+{% endfor %}
+</div>
+{% endif %}
+
+{% else %}
+{# ─── Empty State ─── #}
+<div class="empty-state">
+    <div class="empty-icon">&#127919;</div>
+    <h3>Start Learning to See Progress</h3>
+    <p>Complete some lessons and quizzes first. Your progress tracks questions attempted, mastery, accuracy, and review health.</p>
+    <a href="/" class="btn btn-primary">Browse Lessons &rarr;</a>
+</div>
+{% endif %}
+
+<script>
+function toggleProgressHelp() {
+    var btn = document.querySelector('.progress-help-toggle');
+    var content = document.getElementById('progressHelpContent');
+    if (btn) btn.classList.toggle('open');
+    if (content) content.classList.toggle('open');
+}
+</script>
+
+{% endblock %}
